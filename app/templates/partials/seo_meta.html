@@ -1,0 +1,12 @@
+{% set page_meta = meta if meta is defined else seo if seo is defined else {} %}
+<title>{{ page_meta.title }}</title>
+<meta name="description" content="{{ page_meta.description }}">
+<link rel="canonical" href="{{ page_meta.canonical }}">
+<meta property="og:title" content="{{ page_meta.title }}">
+<meta property="og:description" content="{{ page_meta.description }}">
+<meta property="og:type" content="{{ page_meta.og_type }}">
+<meta property="og:image" content="{{ page_meta.og_image }}">
+<meta name="twitter:card" content="{{ page_meta.twitter_card }}">
+<meta name="twitter:title" content="{{ page_meta.title }}">
+<meta name="twitter:description" content="{{ page_meta.description }}">
+<meta name="twitter:image" content="{{ page_meta.og_image }}">

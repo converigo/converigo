@@ -4,12 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ seo.title }}</title>
-    <meta name="description" content="{{ seo.description }}">
-    <meta name="keywords" content="{{ seo.keywords }}">
+    {% include "partials/seo_meta.html" %}
     <link rel="stylesheet" href="/static/css/style.css">
     <script defer src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/lucide.min.js"></script>
     <script defer src="/static/js/app.js"></script>
+    {% include "partials/structured_data.html" %}
 </head>
 
 <body>
@@ -19,47 +18,98 @@
             <nav id="primaryNav" class="primary-nav" role="navigation" aria-label="Primary">
                 <ul class="nav-list">
                     <li><a href="/">Home</a></li>
-                    <li><a href="/tools/mp4-to-mp3">Tools</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#related">Related</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <main class="main" role="main">
-        <section class="section">
-            <div class="container">
-                <h1>{{ title }}</h1>
-                <p>{{ description }}</p>
-                <form action="{{ upload_form.action }}" method="{{ upload_form.method }}" enctype="multipart/form-data">
-                    <label for="fileInput">Upload file</label>
-                    <input id="fileInput" name="file" type="file" accept="{{ upload_form.accept }}" required>
-                    <button type="submit">{{ upload_form.button_text }}</button>
-                </form>
-            </div>
-        </section>
-
-        <section class="section section-white">
-            <div class="container">
-                <h2>Frequently Asked Questions</h2>
-                <div class="faq-grid">
-                    {% for item in faq %}
-                    <div class="faq-item">
-                        <h3>{{ item.question }}</h3>
-                        <p>{{ item.answer }}</p>
+        <section class="hero section">
+            <div class="container hero-inner">
+                <div class="hero-copy">
+                    <span class="eyebrow">Converter tool</span>
+                    <h1 class="hero-title">{{ tool.title }}</h1>
+                    <p class="hero-sub">{{ tool.description }}</p>
+                    <div class="hero-cta">
+                        <a href="#convert" class="btn btn-primary">Convert now</a>
+                        <a href="#faq" class="btn btn-outline">Read FAQs</a>
                     </div>
-                    {% endfor %}
+                </div>
+                <div class="hero-panel">
+                    <div class="panel-head">
+                        <p class="panel-label">Ready to convert</p>
+                        <h2 class="panel-title">Upload one file and get your converted result.</h2>
+                    </div>
+                    <div id="convert" class="upload-card">
+                        <form action="{{ upload_form.action }}" method="{{ upload_form.method }}" enctype="multipart/form-data">
+                            <label for="fileInput" class="sr-only">Upload file</label>
+                            <input id="fileInput" name="file" type="file" accept="{{ upload_form.accept }}" required>
+                            <button class="btn btn-primary" type="submit">{{ upload_form.button_text }}</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="section">
-            <div class="container">
-                <h2>Related tools</h2>
-                <ul class="related-tools">
-                    {% for related in related_tools %}
-                    <li><a href="/tools/{{ related.slug }}">{{ related.title }}</a></li>
-                    {% endfor %}
-                </ul>
+        <section class="section section-white">
+            <div class="container section-heading">
+                <span class="eyebrow">How it works</span>
+                <h2>Simple conversion in three steps</h2>
+            </div>
+            <div class="grid features-grid">
+                <article class="feature-card hover-card">
+                    <i data-lucide="upload"></i>
+                    <h3>Upload your file</h3>
+                    <p>Select a supported file and send it to Convertin.</p>
+                </article>
+                <article class="feature-card hover-card">
+                    <i data-lucide="settings"></i>
+                    <h3>Choose output</h3>
+                    <p>Pick the output type and review your settings.</p>
+                </article>
+                <article class="feature-card hover-card">
+                    <i data-lucide="download"></i>
+                    <h3>Download instantly</h3>
+                    <p>Receive your converted file without installing software.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="faq" class="section">
+            <div class="container section-heading">
+                <span class="eyebrow">FAQ</span>
+                <h2>Frequently asked questions</h2>
+            </div>
+            <div class="faq-grid">
+                {% for item in faq %}
+                <div class="faq-item">
+                    <button class="faq-question" type="button">
+                        {{ item.question }}
+                        <span class="faq-toggle">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>{{ item.answer }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section id="related" class="section section-white">
+            <div class="container section-heading">
+                <span class="eyebrow">Related Tools</span>
+                <h2>Other converters you may need</h2>
+            </div>
+            <div class="grid popular-grid">
+                {% for related in related_tools %}
+                <article class="card card-lg hover-card">
+                    <div class="card-icon"><i data-lucide="layers"></i></div>
+                    <h3><a href="/tools/{{ related.slug }}">{{ related.title }}</a></h3>
+                    <p>{{ related.description or "Discover another useful conversion flow." }}</p>
+                </article>
+                {% endfor %}
             </div>
         </section>
     </main>
