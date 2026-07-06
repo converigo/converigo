@@ -1,0 +1,36 @@
+{
+  "slug": "png-to-jpg",
+  "title": "PNG to JPG Converter",
+  "description": "Convert PNG images into JPG format with browser-friendly optimization.",
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".png",
+    "button_text": "Upload PNG"
+  },
+  "faq": [
+    {
+      "question": "Can I convert transparent PNGs?",
+      "answer": "Yes, transparent PNGs are supported, but transparency becomes a white background in JPG format."
+    },
+    {
+      "question": "How do I get the converted image?",
+      "answer": "You will receive a downloadable JPG file after conversion."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "mp4-to-mp3",
+      "title": "MP4 to MP3"
+    },
+    {
+      "slug": "pdf-to-word",
+      "title": "PDF to Word"
+    }
+  ],
+  "seo": {
+    "title": "PNG to JPG | Convertin",
+    "description": "Convert PNG images to JPG format.",
+    "keywords": "png to jpg, image converter, photo converter"
+  }
+}

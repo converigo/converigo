@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ seo.title }}</title>
+    <meta name="description" content="{{ seo.description }}">
+    <meta name="keywords" content="{{ seo.keywords }}">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/lucide.min.js"></script>
+    <script defer src="/static/js/app.js"></script>
+</head>
+
+<body>
+    <header class="site-header" role="banner">
+        <div class="container nav-wrap">
+            <a class="brand" href="/">Convertin</a>
+            <nav id="primaryNav" class="primary-nav" role="navigation" aria-label="Primary">
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/tools/mp4-to-mp3">Tools</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main" role="main">
+        <section class="section">
+            <div class="container">
+                <h1>{{ title }}</h1>
+                <p>{{ description }}</p>
+                <form action="{{ upload_form.action }}" method="{{ upload_form.method }}" enctype="multipart/form-data">
+                    <label for="fileInput">Upload file</label>
+                    <input id="fileInput" name="file" type="file" accept="{{ upload_form.accept }}" required>
+                    <button type="submit">{{ upload_form.button_text }}</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="section section-white">
+            <div class="container">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-grid">
+                    {% for item in faq %}
+                    <div class="faq-item">
+                        <h3>{{ item.question }}</h3>
+                        <p>{{ item.answer }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <h2>Related tools</h2>
+                <ul class="related-tools">
+                    {% for related in related_tools %}
+                    <li><a href="/tools/{{ related.slug }}">{{ related.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

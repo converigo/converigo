@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }}</title>
+    <meta name="description" content="{{ description }}">
+    <link rel="canonical" href="{{ canonical }}">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <header class="site-header" role="banner">
+        <div class="container nav-wrap">
+            <a class="brand" href="/">Convertin</a>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="section">
+            <div class="container">
+                <h1>{{ tool.title }}</h1>
+                <p>{{ tool.description }}</p>
+
+                <form action="{{ upload_form.action }}" method="{{ upload_form.method }}" enctype="multipart/form-data">
+                    <label for="fileInput">Upload file</label>
+                    <input id="fileInput" name="file" type="file" accept="{{ upload_form.accept }}" required>
+                    <button type="submit">{{ upload_form.button_text }}</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="section section-white">
+            <div class="container">
+                <h2>Frequently Asked Questions</h2>
+                {% for item in faq %}
+                <div class="faq-item">
+                    <h3>{{ item.question }}</h3>
+                    <p>{{ item.answer }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <h2>Related tools</h2>
+                <ul>
+                    {% for related in related_tools %}
+                    <li><a href="/tools/{{ related.slug }}">{{ related.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+{
+  "slug": "mp4-to-mp3",
+  "title": "MP4 to MP3 Converter",
+  "description": "Convert MP4 video files into MP3 audio quickly and reliably.",
+  "upload_form": {
+    "action": "/convert",
+    "method": "post",
+    "accept": ".mp4",
+    "button_text": "Convert MP4 to MP3"
+  },
+  "faq": [
+    {
+      "question": "What file types can I upload?",
+      "answer": "Upload MP4 video files only."
+    },
+    {
+      "question": "What output do I get?",
+      "answer": "A high-quality MP3 audio file."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "png-to-jpg",
+      "title": "PNG to JPG"
+    },
+    {
+      "slug": "pdf-to-word",
+      "title": "PDF to Word"
+    }
+  ],
+  "seo": {
+    "title": "MP4 to MP3 | Convertin",
+    "description": "Convert MP4 video to MP3 audio with Convertin.",
+    "keywords": "mp4 to mp3, video to audio, file converter"
+  }
+}

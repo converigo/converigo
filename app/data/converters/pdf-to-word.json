@@ -1,0 +1,36 @@
+{
+  "slug": "pdf-to-word",
+  "title": "PDF to Word Converter",
+  "description": "Transform PDF documents into editable Word files in seconds.",
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".pdf",
+    "button_text": "Upload PDF"
+  },
+  "faq": [
+    {
+      "question": "Does this preserve layout?",
+      "answer": "The converter preserves basic layout and text formatting."
+    },
+    {
+      "question": "What file formats are allowed?",
+      "answer": "Upload PDF files to receive DOCX output."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "mp4-to-mp3",
+      "title": "MP4 to MP3"
+    },
+    {
+      "slug": "png-to-jpg",
+      "title": "PNG to JPG"
+    }
+  ],
+  "seo": {
+    "title": "PDF to Word | Convertin",
+    "description": "Convert PDF to Word documents with ease.",
+    "keywords": "pdf to word, document converter, docx converter"
+  }
+}

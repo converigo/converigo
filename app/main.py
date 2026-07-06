@@ -11,6 +11,7 @@ from fastapi.staticfiles import StaticFiles
 
 from app.routers.convert import router as convert_router
 from app.routers.home import router as home_router
+from app.routers.tools import router as tools_router
 from app.routers.upload import router as upload_router
 
 OUTPUT_DIR = Path("outputs")
@@ -37,3 +38,4 @@ app.mount(
 app.include_router(home_router)
 app.include_router(upload_router)
 app.include_router(convert_router)
+app.include_router(tools_router)
