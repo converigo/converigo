@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Convertin | Premium File Converter</title>
+    <meta name="description" content="Convertin is a modern landing page for file conversion services including video, audio, and document formats.">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/lucide.min.js"></script>
+    <script defer src="/static/js/app.js"></script>
+</head>
+
+<body>
+
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <span class="floating-glow glow-one"></span>
+    <span class="floating-glow glow-two"></span>
+
+    <header class="site-header" role="banner">
+        <div class="container nav-wrap">
+            <a class="brand" href="/">Convertin</a>
+
+            <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="primaryNav">
+                <i data-lucide="menu"></i>
+                <span class="visually-hidden">Toggle navigation</span>
+            </button>
+
+            <nav id="primaryNav" class="primary-nav" role="navigation" aria-label="Primary">
+                <ul class="nav-list">
+                    <li><a href="#popular">Popular</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#stats">Stats</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+                <a class="btn btn-cta" href="#upload">Upload</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main" class="main" role="main">
+
+        <section class="hero">
+            <div class="container hero-inner">
+                <div class="hero-copy">
+                    <span class="eyebrow">Premium File Converter</span>
+                    <h1 class="hero-title">Convert files faster with premium simplicity.</h1>
+                    <p class="hero-sub">Convertin brings secure, responsive, and polished file conversion for students, creators, and office professionals.</p>
+                    <div class="hero-cta">
+                        <a href="#upload" class="btn btn-primary btn-hero">Start converting</a>
+                        <a href="#features" class="btn btn-outline">Explore features</a>
+                    </div>
+                    <div class="hero-details">
+                        <div class="hero-stat-card">
+                            <strong>120+</strong>
+                            supported formats
+                        </div>
+                        <div class="hero-stat-card">
+                            <strong>99.9%</strong>
+                            uptime reliability
+                        </div>
+                        <div class="hero-stat-card">
+                            <strong>0.7s</strong>
+                            average conversion
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-panel">
+                    <div class="panel-head">
+                        <p class="panel-label">Upload Center</p>
+                        <h2 class="panel-title">Sleek upload experience without the default file input.</h2>
+                    </div>
+                    <div class="upload-card" role="region" aria-labelledby="upload-label">
+                        <div class="upload-info-row">
+                            <div>
+                                <p id="upload-label" class="upload-label">Upload Your File</p>
+                                <p class="upload-sub">Drag, drop or browse to select your file.</p>
+                            </div>
+                            <span class="upload-badge">Instant</span>
+                        </div>
+
+                        <div id="dropzone" class="dropzone" tabindex="0" aria-describedby="upload-desc">
+                            <div class="drop-content">
+                                <i data-lucide="cloud-upload" class="drop-icon"></i>
+                                <div>
+                                    <p id="upload-desc" class="drop-title">Drop your file here</p>
+                                    <p class="drop-text">or <button id="fileSelect" type="button" class="link-btn">browse</button></p>
+                                </div>
+                            </div>
+                            <div class="file-meta">
+                                <p class="muted small" id="fileName">No file selected yet</p>
+                                <span class="file-status" id="uploadStatus">Waiting for your file</span>
+                            </div>
+                            <input id="fileInput" type="file" class="file-input" aria-hidden="true">
+                        </div>
+
+                        <div class="upload-actions">
+                            <div class="upload-controls">
+                                <span class="upload-label-sm" id="fileSize">0 KB</span>
+                                <button id="clearFile" class="link-btn clear-btn" type="button" hidden>Clear</button>
+                            </div>
+                            <div class="progress" aria-hidden="true"><div class="progress-bar" style="width: 0%"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="stats" class="section">
+            <div class="container stats-grid">
+                <article class="stat-card">
+                    <p class="stat-value">120+</p>
+                    <p class="stat-label">Supported formats</p>
+                </article>
+                <article class="stat-card">
+                    <p class="stat-value">24/7</p>
+                    <p class="stat-label">Conversion availability</p>
+                </article>
+                <article class="stat-card">
+                    <p class="stat-value">4.9/5</p>
+                    <p class="stat-label">User satisfaction</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="popular" class="section section-white">
+            <div class="container section-heading">
+                <span class="eyebrow">Popular Conversion</span>
+                <h2>Most requested conversion flows</h2>
+                <p>Quick access to the formats people need most.</p>
+            </div>
+            <div class="grid popular-grid">
+                <article class="card card-lg hover-card">
+                    <div class="card-icon"><i data-lucide="video"></i></div>
+                    <h3>MP4 → MP3</h3>
+                    <p>Extract crisp audio from video in a single step.</p>
+                </article>
+                <article class="card card-lg hover-card">
+                    <div class="card-icon"><i data-lucide="music"></i></div>
+                    <h3>WAV → MP3</h3>
+                    <p>Compress audio without losing quality.</p>
+                </article>
+                <article class="card card-lg hover-card">
+                    <div class="card-icon"><i data-lucide="file-text"></i></div>
+                    <h3>DOCX → PDF</h3>
+                    <p>Generate clean, shareable PDF documents instantly.</p>
+                </article>
+                <article class="card card-lg hover-card">
+                    <div class="card-icon"><i data-lucide="image"></i></div>
+                    <h3>HEIC → JPG</h3>
+                    <p>Prepare high-quality images for the web.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="features" class="section">
+            <div class="container section-heading">
+                <span class="eyebrow">Features</span>
+                <h2>Everything you need to convert files effortlessly</h2>
+                <p>Reliable performance and polished details for daily use.</p>
+            </div>
+            <div class="grid features-grid">
+                <article class="feature-card hover-card">
+                    <i data-lucide="zap"></i>
+                    <h3>Fast Processing</h3>
+                    <p>Optimized workflows keep conversions quick and smooth.</p>
+                </article>
+                <article class="feature-card hover-card">
+                    <i data-lucide="shield-check"></i>
+                    <h3>Secure Transfers</h3>
+                    <p>File handling is designed with privacy and trust in mind.</p>
+                </article>
+                <article class="feature-card hover-card">
+                    <i data-lucide="layers"></i>
+                    <h3>Wide Format Support</h3>
+                    <p>Video, audio, and document conversions are all available.</p>
+                </article>
+                <article class="feature-card hover-card">
+                    <i data-lucide="smartphone"></i>
+                    <h3>Responsive Design</h3>
+                    <p>Built to look great on desktop, tablet, and mobile screens.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="faq" class="section section-white">
+            <div class="container section-heading">
+                <span class="eyebrow">FAQ</span>
+                <h2>Frequently asked questions</h2>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <button class="faq-question" type="button">
+                        What file formats can I convert?
+                        <span class="faq-toggle">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Convertin supports popular video, audio, and document formats including MP4, MP3, WAV, PDF, DOCX, and more.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" type="button">
+                        Is my data private?
+                        <span class="faq-toggle">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        All uploaded files are handled securely and the UI is designed to respect privacy during conversion tests.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" type="button">
+                        Will it work on mobile devices?
+                        <span class="faq-toggle">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Yes. The landing page is fully responsive and built for desktop, tablet, and mobile users.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-branding">
+                <a class="brand" href="/">Convertin</a>
+                <p class="muted">Modern file conversion for students, creators, and professionals.</p>
+            </div>
+            <div class="footer-links-columns">
+                <div class="footer-links-group">
+                    <p class="footer-heading">Product</p>
+                    <a href="#popular">Popular</a>
+                    <a href="#features">Features</a>
+                </div>
+                <div class="footer-links-group">
+                    <p class="footer-heading">Company</p>
+                    <a href="#faq">FAQ</a>
+                    <a href="#upload">Contact</a>
+                </div>
+            </div>
+        </div>
+        <p class="footer-note">© {{ year or "2026" }} Convertin. Built for elegant file conversion.</p>
+    </footer>
+
+</body>
+
+</html>
