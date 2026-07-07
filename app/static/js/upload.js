@@ -2,16 +2,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const chooseButton = document.getElementById("chooseFile");
     const fileInput = document.getElementById("fileInput");
+    const selectedFile = document.getElementById("selectedFile");
+    const convertButton = document.getElementById("convertButton");
 
-    const fileName = document.getElementById("fileName");
-    const fileSize = document.getElementById("fileSize");
-
-    if (!chooseButton || !fileInput) return;
+    if (!chooseButton || !fileInput || !selectedFile) return;
 
     chooseButton.addEventListener("click", () => {
-
         fileInput.click();
-
     });
 
     fileInput.addEventListener("change", () => {
@@ -20,10 +17,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!file) return;
 
-        fileName.textContent = file.name;
+        selectedFile.textContent =
+            `${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
 
-        fileSize.textContent =
-            (file.size / 1024 / 1024).toFixed(2) + " MB";
+        if (convertButton) {
+            convertButton.hidden = false;
+        }
 
     });
 
