@@ -5,7 +5,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const selectedFile = document.getElementById("selectedFile");
     const convertButton = document.getElementById("convertButton");
 
-    if (!chooseButton || !fileInput || !selectedFile) return;
+    if (!chooseButton || !fileInput) {
+        console.error("Upload elements not found.");
+        return;
+    }
 
     chooseButton.addEventListener("click", () => {
         fileInput.click();
@@ -17,8 +20,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!file) return;
 
-        selectedFile.textContent =
-            `${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
+        if (selectedFile) {
+            selectedFile.textContent =
+                `${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
+        }
 
         if (convertButton) {
             convertButton.hidden = false;
