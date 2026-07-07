@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ locale.lang_code or 'en' }}">
 
 <head>
     <meta charset="utf-8">
@@ -39,12 +39,12 @@
                 </div>
                 <div class="hero-panel">
                     <div class="panel-head">
-                        <p class="panel-label">Ready to convert</p>
-                        <h2 class="panel-title">Upload one file and get your converted result.</h2>
+                        <p class="panel-label">{{ t('tool_page.panel.label', 'Ready to convert') }}</p>
+                        <h2 class="panel-title">{{ t('tool_page.panel.title', 'Upload one file and get your converted result.') }}</h2>
                     </div>
                     <div id="convert" class="upload-card">
                         <form action="{{ upload_form.action }}" method="{{ upload_form.method }}" enctype="multipart/form-data">
-                            <label for="fileInput" class="sr-only">Upload file</label>
+                            <label for="fileInput" class="sr-only">{{ t('tool_page.upload_label', 'Upload file') }}</label>
                             <input id="fileInput" name="file" type="file" accept="{{ upload_form.accept }}" required>
                             <button class="btn btn-primary" type="submit">{{ upload_form.button_text }}</button>
                         </form>
@@ -55,32 +55,32 @@
 
         <section class="section section-white">
             <div class="container section-heading">
-                <span class="eyebrow">How it works</span>
-                <h2>Simple conversion in three steps</h2>
+                <span class="eyebrow">{{ t('tool_page.how_it_works.eyebrow', 'How it works') }}</span>
+                <h2>{{ t('tool_page.how_it_works.heading', 'Simple conversion in three steps') }}</h2>
             </div>
             <div class="grid features-grid">
                 <article class="feature-card hover-card">
                     <i data-lucide="upload"></i>
-                    <h3>Upload your file</h3>
-                    <p>Select a supported file and send it to Convertin.</p>
+                    <h3>{{ t('tool_page.how_it_works.step1.title', 'Upload your file') }}</h3>
+                    <p>{{ t('tool_page.how_it_works.step1.text', 'Select a supported file and send it to Convertin.') }}</p>
                 </article>
                 <article class="feature-card hover-card">
                     <i data-lucide="settings"></i>
-                    <h3>Choose output</h3>
-                    <p>Pick the output type and review your settings.</p>
+                    <h3>{{ t('tool_page.how_it_works.step2.title', 'Choose output') }}</h3>
+                    <p>{{ t('tool_page.how_it_works.step2.text', 'Pick the output type and review your settings.') }}</p>
                 </article>
                 <article class="feature-card hover-card">
                     <i data-lucide="download"></i>
-                    <h3>Download instantly</h3>
-                    <p>Receive your converted file without installing software.</p>
+                    <h3>{{ t('tool_page.how_it_works.step3.title', 'Download instantly') }}</h3>
+                    <p>{{ t('tool_page.how_it_works.step3.text', 'Receive your converted file without installing software.') }}</p>
                 </article>
             </div>
         </section>
 
         <section id="faq" class="section">
             <div class="container section-heading">
-                <span class="eyebrow">FAQ</span>
-                <h2>Frequently asked questions</h2>
+                <span class="eyebrow">{{ t('tool_page.faq.eyebrow', 'FAQ') }}</span>
+                <h2>{{ t('tool_page.faq.heading', 'Frequently asked questions') }}</h2>
             </div>
             <div class="faq-grid">
                 {% for item in faq %}
@@ -99,15 +99,15 @@
 
         <section id="related" class="section section-white">
             <div class="container section-heading">
-                <span class="eyebrow">Related Tools</span>
-                <h2>Other converters you may need</h2>
+                <span class="eyebrow">{{ t('tool_page.related.eyebrow', 'Related Tools') }}</span>
+                <h2>{{ t('tool_page.related.heading', 'Other converters you may need') }}</h2>
             </div>
             <div class="grid popular-grid">
                 {% for related in related_tools %}
                 <article class="card card-lg hover-card">
                     <div class="card-icon"><i data-lucide="layers"></i></div>
                     <h3><a href="/tools/{{ related.slug }}">{{ related.title }}</a></h3>
-                    <p>{{ related.description or "Discover another useful conversion flow." }}</p>
+                    <p>{{ related.description or t('tool_page.related.fallback', 'Discover another useful conversion flow.') }}</p>
                 </article>
                 {% endfor %}
             </div>

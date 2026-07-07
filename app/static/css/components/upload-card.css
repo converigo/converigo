@@ -1,0 +1,113 @@
+.upload-section{
+
+    margin-top:-10px;
+
+    padding-bottom:100px;
+
+}
+
+.upload-card{
+
+    width:min(900px,100%);
+
+    margin:auto;
+
+    background:white;
+
+    border-radius:var(--radius-xl);
+
+    border:1px solid var(--color-border);
+
+    box-shadow:var(--shadow-md);
+
+    padding:60px;
+
+    text-align:center;
+
+}
+
+.upload-icon{
+
+    width:96px;
+
+    height:96px;
+
+    border-radius:999px;
+
+    background:#EFF6FF;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin:auto;
+
+    margin-bottom:24px;
+
+    font-size:42px;
+
+}
+
+.upload-card h2{
+
+    font-size:40px;
+
+    margin-bottom:16px;
+
+}
+
+.upload-card p{
+
+    color:var(--color-text-light);
+
+    margin-bottom:28px;
+
+}
+
+.selected-file{
+
+    margin-top:24px;
+
+    font-weight:600;
+
+    color:var(--color-text);
+
+}
+
+.supported-formats{
+
+    margin-top:24px;
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+}
+
+.supported-formats span{
+
+    background:#EFF6FF;
+
+    color:var(--color-primary);
+
+    padding:8px 14px;
+
+    border-radius:999px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+#convertButton{
+
+    margin-top:32px;
+
+}

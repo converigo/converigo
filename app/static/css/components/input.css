@@ -1,0 +1,25 @@
+.input{
+
+    width:100%;
+
+    padding:16px;
+
+    border:1px solid var(--border);
+
+    border-radius:var(--radius-md);
+
+    outline:none;
+
+    transition:var(--transition);
+
+    font-size:15px;
+
+}
+
+.input:focus{
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 0 4px rgba(37,99,235,.12);
+
+}

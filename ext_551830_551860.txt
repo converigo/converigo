@@ -1,0 +1,32 @@
+﻿          if (!!message) {
+            if (message?.toolCalls && message.toolCalls?.length !== 0) {
+              let chunk = message;
+              if (!!chunk.toolCalls?.[0]?.id) {
+                toolCallId = chunk.toolCalls?.[0]?.id;
+              }
+              if (!!chunk.toolCalls?.[0]?.function?.name) {
+                accumulatedArgs = "";
+                toolName = chunk.toolCalls[0].function.name;
+                continue;
+              }
+              if (!!toolName) {
+                if (value2?.choices?.[0]?.finish_reason === "tool_calls") {
+                  let args2;
+                  try {
+                    accumulatedArgs += chunk.toolCalls?.[0]?.function?.arguments;
+                    args2 = JSON.stringify(JSON.parse(accumulatedArgs));
+                  } catch (e14) {
+                    args2 = chunk.toolCalls?.[0]?.function?.arguments;
+                  }
+                  const toolCall = {
+                    function: { name: toolName, arguments: args2 },
+                    id: toolCallId
+                  };
+                  chunk.toolCalls = [toolCall];
+                } else {
+                  if (!!chunk.toolCalls?.[0]?.function?.arguments)
+                    accumulatedArgs += chunk.toolCalls?.[0]?.function?.arguments;
+                  continue;
+                }
+              }
+              yield chunk;

@@ -1,0 +1,142 @@
+﻿            for await (const result2 of mistralResponse) {
+              yield result2;
+            }
+            break;
+          default:
+            throw new Error(`Unsupported model: ${body4.model}`);
+        }
+      }
+      async completionNonStream(body4, signal) {
+        const promptText = typeof body4.prompt === "string" ? body4.prompt : Array.isArray(body4.prompt) ? body4.prompt.join("") : "";
+        const chatBody = {
+          model: body4.model,
+          messages: [{ role: "user", content: promptText }],
+          max_tokens: body4.max_tokens,
+          temperature: body4.temperature,
+          top_p: body4.top_p,
+          stop: body4.stop,
+          stream: false
+        };
+        const chatResponse = await this.chatCompletionNonStream(chatBody, signal);
+        return {
+          id: chatResponse.id,
+          object: "text_completion",
+          created: chatResponse.created,
+          model: chatResponse.model,
+          choices: [
+            {
+              text: chatResponse.choices[0]?.message?.content || "",
+              index: 0,
+              logprobs: null,
+              finish_reason: chatResponse.choices[0]?.finish_reason || null
+            }
+          ],
+          usage: chatResponse.usage
+        };
+      }
+      async *completionStream(body4, signal) {
+        const promptText = typeof body4.prompt === "string" ? body4.prompt : Array.isArray(body4.prompt) ? body4.prompt.join("") : "";
+        const chatBody = {
+          model: body4.model,
+          messages: [{ role: "user", content: promptText }],
+          max_tokens: body4.max_tokens,
+          temperature: body4.temperature,
+          top_p: body4.top_p,
+          stop: body4.stop,
+          stream: true
+        };
+        for await (const chatChunk2 of this.chatCompletionStream(chatBody, signal)) {
+          yield {
+            id: chatChunk2.id,
+            object: "text_completion",
+            created: chatChunk2.created,
+            model: chatChunk2.model,
+            choices: [
+              {
+                text: chatChunk2.choices[0]?.delta?.content || "",
+                index: 0,
+                logprobs: null,
+                finish_reason: chatChunk2.choices[0]?.finish_reason || null
+              }
+            ]
+          };
+        }
+      }
+      async *fimStream(body4, signal) {
+        if (!body4.model.includes("codestral")) {
+          throw new Error(`FIM is only supported for Codestral models, got: ${body4.model}`);
+        }
+        const headers = await this.getAuthHeaders();
+        const url6 = this.buildUrl(`publishers/mistralai/models/${body4.model}:streamRawPredict`);
+        const requestBody = {
+          model: body4.model,
+          max_tokens: body4.max_tokens,
+          temperature: body4.temperature,
+          top_p: body4.top_p,
+          stream: body4.stream ?? true,
+          stop: body4.stop,
+          prompt: body4.prompt,
+          suffix: body4.suffix
+        };
+        const response = await customFetch(this.config.requestOptions)(url6.toString(), {
+          method: "POST",
+          headers,
+          body: JSON.stringify(requestBody),
+          signal
+        });
+        if (!response.ok) {
+          throw new Error(`VertexAI API error: ${response.status} ${response.statusText}`);
+        }
+        for await (const chunk of streamSse2(response)) {
+          if (chunk.choices?.[0]?.delta?.content) {
+            yield chatChunk({
+              content: chunk.choices[0].delta.content,
+              model: body4.model
+            });
+          }
+        }
+      }
+      async embed(body4) {
+        const headers = await this.getAuthHeaders();
+        const url6 = this.buildUrl(`publishers/google/models/${body4.model}:predict`);
+        const textInputs = Array.isArray(body4.input) ? body4.input.map((item) => typeof item === "string" ? item : JSON.stringify(item)) : [
+          typeof body4.input === "string" ? body4.input : JSON.stringify(body4.input)
+        ];
+        const requestBody = {
+          instances: textInputs.map((text5) => ({ content: text5 }))
+        };
+        const response = await customFetch(this.config.requestOptions)(url6.toString(), {
+          method: "POST",
+          headers,
+          body: JSON.stringify(requestBody)
+        });
+        if (!response.ok) {
+          throw new Error(`VertexAI API error: ${response.status} ${response.statusText}`);
+        }
+        const data4 = await response.json();
+        const embeddings = data4.predictions.map((prediction) => prediction.embeddings.values);
+        return embedding({
+          data: embeddings,
+          model: body4.model
+        });
+      }
+      async rerank(body4) {
+        throw new Error("Reranking is not supported by VertexAI");
+      }
+      async list() {
+        throw new Error("VertexAI provider does not support model listing.");
+      }
+    };
+  }
+});
+
+// ../../packages/openai-adapters/dist/apis/WatsonX.js
+var WatsonXApi;
+var init_WatsonX = __esm({
+  "../../packages/openai-adapters/dist/apis/WatsonX.js"() {
+    "use strict";
+    init_importMetaUrl();
+    init_dist13();
+    init_util5();
+    WatsonXApi = class {
+      config;

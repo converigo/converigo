@@ -1,0 +1,31 @@
+﻿    }
+    return data4;
+  } catch (e14) {
+    if (e14 instanceof Error && e14.message.startsWith("Error streaming response:")) {
+      throw e14;
+    }
+    throw new Error(`Malformed JSON sent from server: ${json3}`);
+  }
+}
+function parseSseLine(line) {
+  if (line.startsWith("data:[DONE]") || line.startsWith("data: [DONE]")) {
+    return { done: true, data: void 0 };
+  }
+  if (line.startsWith("data:")) {
+    return { done: false, data: parseDataLine(line) };
+  }
+  if (line.startsWith(": ping")) {
+    return { done: true, data: void 0 };
+  }
+  return { done: false, data: void 0 };
+}
+async function* streamSse(response) {
+  let buffer = "";
+  for await (const value2 of streamResponse(response)) {
+    buffer += value2;
+    let position;
+    while ((position = buffer.indexOf("\n")) >= 0) {
+      const line = buffer.slice(0, position);
+      buffer = buffer.slice(position + 1);
+      const { done, data: data4 } = parseSseLine(line);
+      if (done) {

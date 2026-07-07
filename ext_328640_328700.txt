@@ -1,0 +1,62 @@
+﻿        return finalizeChatCompletion2(snapshot, tslib_1.__classPrivateFieldGet(this, _ChatCompletionStream_params2, "f"));
+      }, _ChatCompletionStream_getAutoParseableResponseFormat2 = function _ChatCompletionStream_getAutoParseableResponseFormat3() {
+        const responseFormat = tslib_1.__classPrivateFieldGet(this, _ChatCompletionStream_params2, "f")?.response_format;
+        if ((0, parser_2.isAutoParsableResponseFormat)(responseFormat)) {
+          return responseFormat;
+        }
+        return null;
+      }, _ChatCompletionStream_accumulateChatCompletion2 = function _ChatCompletionStream_accumulateChatCompletion3(chunk) {
+        var _a35, _b17, _c11, _d;
+        let snapshot = tslib_1.__classPrivateFieldGet(this, _ChatCompletionStream_currentChatCompletionSnapshot2, "f");
+        const { choices, ...rest } = chunk;
+        if (!snapshot) {
+          snapshot = tslib_1.__classPrivateFieldSet(this, _ChatCompletionStream_currentChatCompletionSnapshot2, {
+            ...rest,
+            choices: []
+          }, "f");
+        } else {
+          Object.assign(snapshot, rest);
+        }
+        for (const { delta, finish_reason, index: index2, logprobs = null, ...other } of chunk.choices) {
+          let choice2 = snapshot.choices[index2];
+          if (!choice2) {
+            choice2 = snapshot.choices[index2] = { finish_reason, index: index2, message: {}, logprobs, ...other };
+          }
+          if (logprobs) {
+            if (!choice2.logprobs) {
+              choice2.logprobs = Object.assign({}, logprobs);
+            } else {
+              const { content: content2, refusal: refusal3, ...rest3 } = logprobs;
+              assertIsEmpty2(rest3);
+              Object.assign(choice2.logprobs, rest3);
+              if (content2) {
+                (_a35 = choice2.logprobs).content ?? (_a35.content = []);
+                choice2.logprobs.content.push(...content2);
+              }
+              if (refusal3) {
+                (_b17 = choice2.logprobs).refusal ?? (_b17.refusal = []);
+                choice2.logprobs.refusal.push(...refusal3);
+              }
+            }
+          }
+          if (finish_reason) {
+            choice2.finish_reason = finish_reason;
+            if (tslib_1.__classPrivateFieldGet(this, _ChatCompletionStream_params2, "f") && (0, parser_2.hasAutoParseableInput)(tslib_1.__classPrivateFieldGet(this, _ChatCompletionStream_params2, "f"))) {
+              if (finish_reason === "length") {
+                throw new error_1.LengthFinishReasonError();
+              }
+              if (finish_reason === "content_filter") {
+                throw new error_1.ContentFilterFinishReasonError();
+              }
+            }
+          }
+          Object.assign(choice2, other);
+          if (!delta)
+            continue;
+          const { content, refusal: refusal2, function_call, role, tool_calls, ...rest2 } = delta;
+          assertIsEmpty2(rest2);
+          Object.assign(choice2.message, rest2);
+          if (refusal2) {
+            choice2.message.refusal = (choice2.message.refusal || "") + refusal2;
+          }
+          if (role)

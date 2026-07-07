@@ -1,0 +1,101 @@
+{
+  "hero": {
+    "eyebrow": "Premium File Converter",
+    "title": "Convert files faster with premium simplicity.",
+    "subtitle": "Convertin brings secure, responsive, and polished file conversion for students, creators, and office professionals.",
+    "primary_cta": "Start converting",
+    "secondary_cta": "Explore features"
+  },
+  "upload": {
+    "label": "Upload Your File",
+    "subtext": "Drag, drop or browse to select your file.",
+    "badge": "Instant",
+    "drop_title": "Drop your file here",
+    "browse": "browse",
+    "empty_status": "No file selected yet",
+    "waiting_status": "Waiting for your file",
+    "size_label": "0 KB",
+    "clear": "Clear"
+  },
+  "stats": {
+    "formats": "Supported formats",
+    "availability": "Conversion availability",
+    "satisfaction": "User satisfaction"
+  },
+  "popular": {
+    "eyebrow": "Popular Conversion",
+    "heading": "Most requested conversion flows",
+    "description": "Quick access to the formats people need most."
+  },
+  "features": {
+    "eyebrow": "Features",
+    "heading": "Everything you need to convert files effortlessly",
+    "description": "Reliable performance and polished details for daily use.",
+    "cards": {
+      "fast": {"title": "Fast Processing", "text": "Optimized workflows keep conversions quick and smooth."},
+      "secure": {"title": "Secure Transfers", "text": "File handling is designed with privacy and trust in mind."},
+      "wide": {"title": "Wide Format Support", "text": "Video, audio, and document conversions are all available."},
+      "responsive": {"title": "Responsive Design", "text": "Built to look great on desktop, tablet, and mobile screens."}
+    }
+  },
+  "faq": {
+    "heading": "Frequently asked questions",
+    "items": [
+      {"question": "What file formats can I convert?", "answer": "Convertin supports popular video, audio, and document formats including MP4, MP3, WAV, PDF, DOCX, and more."},
+      {"question": "Is my data private?", "answer": "All uploaded files are handled securely and the UI is designed to respect privacy during conversion tests."},
+      {"question": "Will it work on mobile devices?", "answer": "Yes. The landing page is fully responsive and built for desktop, tablet, and mobile users."}
+    ]
+  },
+  "footer": {
+    "brand": "Convertin",
+    "description": "Modern file conversion for students, creators, and professionals.",
+    "product": "Product",
+    "company": "Company",
+    "popular": "Popular",
+    "features": "Features",
+    "faq": "FAQ",
+    "upload": "Upload",
+    "copyright": "© {year} Convertin. Built for elegant file conversion."
+  },
+  "nav": {
+    "home": "Home",
+    "popular": "Popular",
+    "features": "Features",
+    "stats": "Stats",
+    "faq": "FAQ",
+    "upload": "Upload",
+    "related": "Related"
+  },
+  "tool_page": {
+    "panel": {
+      "label": "Ready to convert",
+      "title": "Upload one file and get your converted result."
+    },
+    "upload_label": "Upload file",
+    "how_it_works": {
+      "eyebrow": "How it works",
+      "heading": "Simple conversion in three steps",
+      "step1": {
+        "title": "Upload your file",
+        "text": "Select a supported file and send it to Convertin."
+      },
+      "step2": {
+        "title": "Choose output",
+        "text": "Pick the output type and review your settings."
+      },
+      "step3": {
+        "title": "Download instantly",
+        "text": "Receive your converted file without installing software."
+      }
+    },
+    "faq": {
+      "eyebrow": "FAQ",
+      "heading": "Frequently asked questions"
+    },
+    "related": {
+      "eyebrow": "Related Tools",
+      "heading": "Other converters you may need",
+      "fallback": "Discover another useful conversion flow."
+    }
+  }
+}

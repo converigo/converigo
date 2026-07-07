@@ -1,0 +1,38 @@
+﻿        <section id="faq" class="section section-white">
+            <div class="container section-heading">
+                <span class="eyebrow">{{ t('faq.heading', 'FAQ') }}</span>
+                <h2>{{ t('faq.heading', 'Frequently asked questions') }}</h2>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <button class="faq-question" type="button">
+                        {{ locale.faq.items[0].question }}
+                        <span class="faq-toggle">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        {{ locale.faq.items[0].answer }}
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" type="button">
+                        {{ locale.faq.items[1].question }}
+                        <span class="faq-toggle">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        {{ locale.faq.items[1].answer }}
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" type="button">
+                        {{ locale.faq.items[2].question }}
+                        <span class="faq-toggle">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        {{ locale.faq.items[2].answer }}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+

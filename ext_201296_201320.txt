@@ -1,0 +1,26 @@
+﻿        }
+        return {
+          id: "",
+          object: "chat.completion",
+          model: body4.model,
+          created: Date.now(),
+          choices: [
+            {
+              index: 0,
+              logprobs: null,
+              finish_reason: "stop",
+              message: {
+                role: "assistant",
+                content: completion,
+                refusal: null
+              }
+            }
+          ],
+          usage
+        };
+      }
+      async *processStreamResponse(response, model) {
+        let usage = void 0;
+        for await (const chunk of response) {
+          if (chunk.usageMetadata) {
+            usage = {

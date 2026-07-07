@@ -1,0 +1,101 @@
+{
+  "hero": {
+    "eyebrow": "Convertidor de archivos premium",
+    "title": "Convierte archivos más rápido con simplicidad premium.",
+    "subtitle": "Convertin ofrece conversión de archivos segura, receptiva y pulida para estudiantes, creadores y profesionales.",
+    "primary_cta": "Comenzar conversión",
+    "secondary_cta": "Explorar características"
+  },
+  "upload": {
+    "label": "Sube tu archivo",
+    "subtext": "Arrastra, suelta o busca para seleccionar tu archivo.",
+    "badge": "Instantáneo",
+    "drop_title": "Suelta tu archivo aquí",
+    "browse": "buscar",
+    "empty_status": "No se ha seleccionado ningún archivo",
+    "waiting_status": "Esperando tu archivo",
+    "size_label": "0 KB",
+    "clear": "Borrar"
+  },
+  "stats": {
+    "formats": "Formatos compatibles",
+    "availability": "Disponibilidad de conversión",
+    "satisfaction": "Satisfacción del usuario"
+  },
+  "popular": {
+    "eyebrow": "Conversiones Populares",
+    "heading": "Los flujos de conversión más solicitados",
+    "description": "Acceso rápido a los formatos que más necesita la gente."
+  },
+  "features": {
+    "eyebrow": "Características",
+    "heading": "Todo lo que necesitas para convertir archivos sin esfuerzo",
+    "description": "Rendimiento confiable y detalles refinados para el uso diario.",
+    "cards": {
+      "fast": {"title": "Procesamiento rápido", "text": "Los flujos de trabajo optimizados mantienen las conversiones rápidas y fluidas."},
+      "secure": {"title": "Transferencias seguras", "text": "El manejo de archivos está diseñado con privacidad y confianza en mente."},
+      "wide": {"title": "Amplio soporte de formatos", "text": "Las conversiones de video, audio y documentos están todas disponibles."},
+      "responsive": {"title": "Diseño responsivo", "text": "Diseñado para verse bien en escritorio, tablet y móvil."}
+    }
+  },
+  "faq": {
+    "heading": "Preguntas frecuentes",
+    "items": [
+      {"question": "¿Qué formatos de archivo puedo convertir?", "answer": "Convertin admite formatos de video, audio y documentos populares como MP4, MP3, WAV, PDF, DOCX y más."},
+      {"question": "¿Mis datos son privados?", "answer": "Todos los archivos cargados se manejan de forma segura y la interfaz está diseñada para respetar la privacidad durante las pruebas de conversión."},
+      {"question": "¿Funciona en dispositivos móviles?", "answer": "Sí. La página de destino es totalmente receptiva en escritorio, tablet y móvil."}
+    ]
+  },
+  "footer": {
+    "brand": "Convertin",
+    "description": "Conversión moderna de archivos para estudiantes, creadores y profesionales.",
+    "product": "Producto",
+    "company": "Empresa",
+    "popular": "Popular",
+    "features": "Características",
+    "faq": "FAQ",
+    "upload": "Subir",
+    "copyright": "© {year} Convertin. Construido para una conversión de archivos elegante."
+  },
+  "nav": {
+    "home": "Inicio",
+    "popular": "Popular",
+    "features": "Características",
+    "stats": "Estadísticas",
+    "faq": "FAQ",
+    "upload": "Subir",
+    "related": "Relacionado"
+  },
+  "tool_page": {
+    "panel": {
+      "label": "Listo para convertir",
+      "title": "Sube un archivo y obtén tu resultado convertido."
+    },
+    "upload_label": "Subir archivo",
+    "how_it_works": {
+      "eyebrow": "Cómo funciona",
+      "heading": "Conversión simple en tres pasos",
+      "step1": {
+        "title": "Sube tu archivo",
+        "text": "Selecciona un archivo compatible y envíalo a Convertin."
+      },
+      "step2": {
+        "title": "Elige salida",
+        "text": "Elige el tipo de salida y revisa tus ajustes."
+      },
+      "step3": {
+        "title": "Descarga al instante",
+        "text": "Recibe tu archivo convertido sin instalar software."
+      }
+    },
+    "faq": {
+      "eyebrow": "FAQ",
+      "heading": "Preguntas frecuentes"
+    },
+    "related": {
+      "eyebrow": "Herramientas relacionadas",
+      "heading": "Otros convertidores que puede necesitar",
+      "fallback": "Descubre otro flujo de conversión útil."
+    }
+  }
+}

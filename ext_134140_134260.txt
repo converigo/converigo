@@ -1,0 +1,121 @@
+﻿      }, _ChatCompletionStream_getAutoParseableResponseFormat = function _ChatCompletionStream_getAutoParseableResponseFormat2() {
+        const responseFormat = __classPrivateFieldGet(this, _ChatCompletionStream_params, "f")?.response_format;
+        if (isAutoParsableResponseFormat(responseFormat)) {
+          return responseFormat;
+        }
+        return null;
+      }, _ChatCompletionStream_accumulateChatCompletion = function _ChatCompletionStream_accumulateChatCompletion2(chunk) {
+        var _a35, _b17, _c11, _d;
+        let snapshot = __classPrivateFieldGet(this, _ChatCompletionStream_currentChatCompletionSnapshot, "f");
+        const { choices, ...rest } = chunk;
+        if (!snapshot) {
+          snapshot = __classPrivateFieldSet(this, _ChatCompletionStream_currentChatCompletionSnapshot, {
+            ...rest,
+            choices: []
+          }, "f");
+        } else {
+          Object.assign(snapshot, rest);
+        }
+        for (const { delta, finish_reason, index: index2, logprobs = null, ...other } of chunk.choices) {
+          let choice2 = snapshot.choices[index2];
+          if (!choice2) {
+            choice2 = snapshot.choices[index2] = { finish_reason, index: index2, message: {}, logprobs, ...other };
+          }
+          if (logprobs) {
+            if (!choice2.logprobs) {
+              choice2.logprobs = Object.assign({}, logprobs);
+            } else {
+              const { content: content2, refusal: refusal3, ...rest3 } = logprobs;
+              assertIsEmpty(rest3);
+              Object.assign(choice2.logprobs, rest3);
+              if (content2) {
+                (_a35 = choice2.logprobs).content ?? (_a35.content = []);
+                choice2.logprobs.content.push(...content2);
+              }
+              if (refusal3) {
+                (_b17 = choice2.logprobs).refusal ?? (_b17.refusal = []);
+                choice2.logprobs.refusal.push(...refusal3);
+              }
+            }
+          }
+          if (finish_reason) {
+            choice2.finish_reason = finish_reason;
+            if (__classPrivateFieldGet(this, _ChatCompletionStream_params, "f") && hasAutoParseableInput(__classPrivateFieldGet(this, _ChatCompletionStream_params, "f"))) {
+              if (finish_reason === "length") {
+                throw new LengthFinishReasonError();
+              }
+              if (finish_reason === "content_filter") {
+                throw new ContentFilterFinishReasonError();
+              }
+            }
+          }
+          Object.assign(choice2, other);
+          if (!delta)
+            continue;
+          const { content, refusal: refusal2, function_call, role, tool_calls, ...rest2 } = delta;
+          assertIsEmpty(rest2);
+          Object.assign(choice2.message, rest2);
+          if (refusal2) {
+            choice2.message.refusal = (choice2.message.refusal || "") + refusal2;
+          }
+          if (role)
+            choice2.message.role = role;
+          if (function_call) {
+            if (!choice2.message.function_call) {
+              choice2.message.function_call = function_call;
+            } else {
+              if (function_call.name)
+                choice2.message.function_call.name = function_call.name;
+              if (function_call.arguments) {
+                (_c11 = choice2.message.function_call).arguments ?? (_c11.arguments = "");
+                choice2.message.function_call.arguments += function_call.arguments;
+              }
+            }
+          }
+          if (content) {
+            choice2.message.content = (choice2.message.content || "") + content;
+            if (!choice2.message.refusal && __classPrivateFieldGet(this, _ChatCompletionStream_instances, "m", _ChatCompletionStream_getAutoParseableResponseFormat).call(this)) {
+              choice2.message.parsed = partialParse(choice2.message.content);
+            }
+          }
+          if (tool_calls) {
+            if (!choice2.message.tool_calls)
+              choice2.message.tool_calls = [];
+            for (const { index: index3, id, type, function: fn, ...rest3 } of tool_calls) {
+              const tool_call = (_d = choice2.message.tool_calls)[index3] ?? (_d[index3] = {});
+              Object.assign(tool_call, rest3);
+              if (id)
+                tool_call.id = id;
+              if (type)
+                tool_call.type = type;
+              if (fn)
+                tool_call.function ?? (tool_call.function = { name: fn.name ?? "", arguments: "" });
+              if (fn?.name)
+                tool_call.function.name = fn.name;
+              if (fn?.arguments) {
+                tool_call.function.arguments += fn.arguments;
+                if (shouldParseToolCall(__classPrivateFieldGet(this, _ChatCompletionStream_params, "f"), tool_call)) {
+                  tool_call.function.parsed_arguments = partialParse(tool_call.function.arguments);
+                }
+              }
+            }
+          }
+        }
+        return snapshot;
+      }, Symbol.asyncIterator)]() {
+        const pushQueue = [];
+        const readQueue = [];
+        let done = false;
+        this.on("chunk", (chunk) => {
+          const reader = readQueue.shift();
+          if (reader) {
+            reader.resolve(chunk);
+          } else {
+            pushQueue.push(chunk);
+          }
+        });
+        this.on("end", () => {
+          done = true;
+          for (const reader of readQueue) {
+            reader.resolve(void 0);
+          }

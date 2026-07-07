@@ -1,0 +1,141 @@
+﻿    }),
+    created,
+    model,
+    object: "chat.completion",
+    ...system_fingerprint ? { system_fingerprint } : {}
+  };
+  return maybeParseChatCompletion(completion, params);
+}
+function str(x9) {
+  return JSON.stringify(x9);
+}
+function assertIsEmpty(obj) {
+  return;
+}
+function assertNever2(_x) {
+}
+var _ChatCompletionStream_instances, _ChatCompletionStream_params, _ChatCompletionStream_choiceEventStates, _ChatCompletionStream_currentChatCompletionSnapshot, _ChatCompletionStream_beginRequest, _ChatCompletionStream_getChoiceEventState, _ChatCompletionStream_addChunk, _ChatCompletionStream_emitToolCallDoneEvent, _ChatCompletionStream_emitContentDoneEvents, _ChatCompletionStream_endRequest, _ChatCompletionStream_getAutoParseableResponseFormat, _ChatCompletionStream_accumulateChatCompletion, ChatCompletionStream;
+var init_ChatCompletionStream = __esm({
+  "../../packages/openai-adapters/node_modules/openai/lib/ChatCompletionStream.mjs"() {
+    init_importMetaUrl();
+    init_tslib();
+    init_parser2();
+    init_error2();
+    init_parser();
+    init_streaming2();
+    init_AbstractChatCompletionRunner();
+    ChatCompletionStream = class _ChatCompletionStream extends AbstractChatCompletionRunner {
+      constructor(params) {
+        super();
+        _ChatCompletionStream_instances.add(this);
+        _ChatCompletionStream_params.set(this, void 0);
+        _ChatCompletionStream_choiceEventStates.set(this, void 0);
+        _ChatCompletionStream_currentChatCompletionSnapshot.set(this, void 0);
+        __classPrivateFieldSet(this, _ChatCompletionStream_params, params, "f");
+        __classPrivateFieldSet(this, _ChatCompletionStream_choiceEventStates, [], "f");
+      }
+      get currentChatCompletionSnapshot() {
+        return __classPrivateFieldGet(this, _ChatCompletionStream_currentChatCompletionSnapshot, "f");
+      }
+      /**
+       * Intended for use on the frontend, consuming a stream produced with
+       * `.toReadableStream()` on the backend.
+       *
+       * Note that messages sent to the model do not appear in `.on('message')`
+       * in this context.
+       */
+      static fromReadableStream(stream6) {
+        const runner = new _ChatCompletionStream(null);
+        runner._run(() => runner._fromReadableStream(stream6));
+        return runner;
+      }
+      static createChatCompletion(client, params, options) {
+        const runner = new _ChatCompletionStream(params);
+        runner._run(() => runner._runChatCompletion(client, { ...params, stream: true }, { ...options, headers: { ...options?.headers, "X-Stainless-Helper-Method": "stream" } }));
+        return runner;
+      }
+      async _createChatCompletion(client, params, options) {
+        super._createChatCompletion;
+        const signal = options?.signal;
+        if (signal) {
+          if (signal.aborted)
+            this.controller.abort();
+          signal.addEventListener("abort", () => this.controller.abort());
+        }
+        __classPrivateFieldGet(this, _ChatCompletionStream_instances, "m", _ChatCompletionStream_beginRequest).call(this);
+        const stream6 = await client.chat.completions.create({ ...params, stream: true }, { ...options, signal: this.controller.signal });
+        this._connected();
+        for await (const chunk of stream6) {
+          __classPrivateFieldGet(this, _ChatCompletionStream_instances, "m", _ChatCompletionStream_addChunk).call(this, chunk);
+        }
+        if (stream6.controller.signal?.aborted) {
+          throw new APIUserAbortError();
+        }
+        return this._addChatCompletion(__classPrivateFieldGet(this, _ChatCompletionStream_instances, "m", _ChatCompletionStream_endRequest).call(this));
+      }
+      async _fromReadableStream(readableStream, options) {
+        const signal = options?.signal;
+        if (signal) {
+          if (signal.aborted)
+            this.controller.abort();
+          signal.addEventListener("abort", () => this.controller.abort());
+        }
+        __classPrivateFieldGet(this, _ChatCompletionStream_instances, "m", _ChatCompletionStream_beginRequest).call(this);
+        this._connected();
+        const stream6 = Stream6.fromReadableStream(readableStream, this.controller);
+        let chatId;
+        for await (const chunk of stream6) {
+          if (chatId && chatId !== chunk.id) {
+            this._addChatCompletion(__classPrivateFieldGet(this, _ChatCompletionStream_instances, "m", _ChatCompletionStream_endRequest).call(this));
+          }
+          __classPrivateFieldGet(this, _ChatCompletionStream_instances, "m", _ChatCompletionStream_addChunk).call(this, chunk);
+          chatId = chunk.id;
+        }
+        if (stream6.controller.signal?.aborted) {
+          throw new APIUserAbortError();
+        }
+        return this._addChatCompletion(__classPrivateFieldGet(this, _ChatCompletionStream_instances, "m", _ChatCompletionStream_endRequest).call(this));
+      }
+      [(_ChatCompletionStream_params = /* @__PURE__ */ new WeakMap(), _ChatCompletionStream_choiceEventStates = /* @__PURE__ */ new WeakMap(), _ChatCompletionStream_currentChatCompletionSnapshot = /* @__PURE__ */ new WeakMap(), _ChatCompletionStream_instances = /* @__PURE__ */ new WeakSet(), _ChatCompletionStream_beginRequest = function _ChatCompletionStream_beginRequest2() {
+        if (this.ended)
+          return;
+        __classPrivateFieldSet(this, _ChatCompletionStream_currentChatCompletionSnapshot, void 0, "f");
+      }, _ChatCompletionStream_getChoiceEventState = function _ChatCompletionStream_getChoiceEventState2(choice2) {
+        let state3 = __classPrivateFieldGet(this, _ChatCompletionStream_choiceEventStates, "f")[choice2.index];
+        if (state3) {
+          return state3;
+        }
+        state3 = {
+          content_done: false,
+          refusal_done: false,
+          logprobs_content_done: false,
+          logprobs_refusal_done: false,
+          done_tool_calls: /* @__PURE__ */ new Set(),
+          current_tool_call_index: null
+        };
+        __classPrivateFieldGet(this, _ChatCompletionStream_choiceEventStates, "f")[choice2.index] = state3;
+        return state3;
+      }, _ChatCompletionStream_addChunk = function _ChatCompletionStream_addChunk2(chunk) {
+        if (this.ended)
+          return;
+        const completion = __classPrivateFieldGet(this, _ChatCompletionStream_instances, "m", _ChatCompletionStream_accumulateChatCompletion).call(this, chunk);
+        this._emit("chunk", chunk, completion);
+        for (const choice2 of chunk.choices) {
+          const choiceSnapshot = completion.choices[choice2.index];
+          if (choice2.delta.content != null && choiceSnapshot.message?.role === "assistant" && choiceSnapshot.message?.content) {
+            this._emit("content", choice2.delta.content, choiceSnapshot.message.content);
+            this._emit("content.delta", {
+              delta: choice2.delta.content,
+              snapshot: choiceSnapshot.message.content,
+              parsed: choiceSnapshot.message.parsed
+            });
+          }
+          if (choice2.delta.refusal != null && choiceSnapshot.message?.role === "assistant" && choiceSnapshot.message?.refusal) {
+            this._emit("refusal.delta", {
+              delta: choice2.delta.refusal,
+              snapshot: choiceSnapshot.message.refusal
+            });
+          }
+          if (choice2.logprobs?.content != null && choiceSnapshot.message?.role === "assistant") {
+            this._emit("logprobs.content.delta", {
+              content: choice2.logprobs?.content,

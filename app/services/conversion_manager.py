@@ -1,87 +1,125 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Dict, List, Optional, Type
+from typing import Dict, List, Optional, Type
 
-if TYPE_CHECKING:
-    from app.engines.base_engine import BaseEngine
-else:
-    BaseEngine = object
+from app.engines.base_engine import BaseEngine
+from app.plugins.base import ConverterPlugin
 
+
+# ==========================================================
+# ENGINE REGISTRY
+# ==========================================================
 
 class EngineRegistry:
     def __init__(self) -> None:
         self._registry: Dict[str, Type[BaseEngine]] = {}
 
-    def register_engine(self, engine_class: Type[BaseEngine]) -> None:
-        engine_name = engine_class.ENGINE_NAME
-        if engine_name in self._registry:
-            raise ValueError(f"Engine '{engine_name}' is already registered.")
-        self._registry[engine_name] = engine_class
+    def register(self, engine: Type[BaseEngine]) -> None:
+        self._registry[engine.ENGINE_NAME] = engine
 
-    def get_engine_class(self, engine_name: str) -> Type[BaseEngine]:
-        try:
-            return self._registry[engine_name]
-        except KeyError as exc:
-            raise ValueError(f"Engine '{engine_name}' is not registered.") from exc
+    def get(self, name: str) -> Type[BaseEngine]:
+        if name not in self._registry:
+            raise ValueError(f"Engine '{name}' is not registered.")
+        return self._registry[name]
 
-    def create_engine(self, engine_name: str, metadata: Optional[dict] = None) -> BaseEngine:
-        engine_class = self.get_engine_class(engine_name)
-        return engine_class(metadata=metadata)
-
-    def find_engine_for_format(self, file_format: str) -> Type[BaseEngine]:
-        normalized_format = file_format.lower().lstrip(".")
-        for engine_class in self._registry.values():
-            if engine_class.supports_format(normalized_format):
-                return engine_class
-
-        raise ValueError(f"No engine supports format '{file_format}'.")
-
-    def list_engines(self) -> List[str]:
+    def list(self) -> List[str]:
         return sorted(self._registry.keys())
 
 
 ENGINE_REGISTRY = EngineRegistry()
 
 
+def register_engine(engine: Type[BaseEngine]) -> None:
+    ENGINE_REGISTRY.register(engine)
+
+
+# ==========================================================
+# PLUGIN REGISTRY
+# ==========================================================
+
+class PluginRegistry:
+    def __init__(self) -> None:
+        self._registry: Dict[str, Type[ConverterPlugin]] = {}
+
+    def register(self, plugin: Type[ConverterPlugin]) -> None:
+        self._registry[plugin.slug] = plugin
+
+    def get(self, slug: str) -> Type[ConverterPlugin]:
+        if slug not in self._registry:
+            raise ValueError(f"Plugin '{slug}' is not registered.")
+        return self._registry[slug]
+
+    def discover(self) -> None:
+        from app.plugins import discover_plugin_classes
+
+        for plugin in discover_plugin_classes():
+            self.register(plugin)
+
+    def resolve(
+        self,
+        source_format: str,
+        target_format: str,
+    ) -> Type[ConverterPlugin]:
+
+        source = source_format.lower().lstrip(".")
+        target = target_format.lower().lstrip(".")
+
+        for plugin in self._registry.values():
+            if plugin.supports(source, target):
+                return plugin
+
+        raise ValueError(
+            f"No plugin found for {source} -> {target}"
+        )
+
+    def list(self) -> List[str]:
+        return sorted(self._registry.keys())
+
+
+PLUGIN_REGISTRY = PluginRegistry()
+
+
+# ==========================================================
+# CONVERSION MANAGER
+# ==========================================================
+
 class ConversionManager:
-    def __init__(self, registry: EngineRegistry = ENGINE_REGISTRY) -> None:
-        self.registry = registry
 
-    def create_engine(self, engine_name: str, metadata: Optional[dict] = None) -> BaseEngine:
-        _ensure_builtin_engines_registered()
-        return self.registry.create_engine(engine_name, metadata)
+    def __init__(self) -> None:
 
-    def create_engine_for_format(self, file_format: str, metadata: Optional[dict] = None) -> BaseEngine:
-        _ensure_builtin_engines_registered()
-        engine_class = self.registry.find_engine_for_format(file_format)
-        return engine_class(metadata=metadata)
+        if not PLUGIN_REGISTRY.list():
+            PLUGIN_REGISTRY.discover()
 
-    def available_engines(self) -> List[str]:
-        _ensure_builtin_engines_registered()
-        return self.registry.list_engines()
+    # ---------- Plugin ----------
 
+    def create_converter(
+        self,
+        source_format: str,
+        target_format: str,
+    ) -> ConverterPlugin:
 
-def register_engine(engine_class: Type[BaseEngine]) -> None:
-    ENGINE_REGISTRY.register_engine(engine_class)
+        plugin = PLUGIN_REGISTRY.resolve(
+            source_format,
+            target_format,
+        )
 
+        return plugin()
 
-def _ensure_builtin_engines_registered() -> None:
-    if not ENGINE_REGISTRY._registry:
-        import importlib
+    # ---------- Engine ----------
 
-        importlib.import_module("app.engines")
+    def create_engine(
+        self,
+        engine_name: str,
+    ) -> BaseEngine:
 
+        engine = ENGINE_REGISTRY.get(engine_name)
 
-def _get_engine_class(engine_name: str) -> Type[BaseEngine]:
-    _ensure_builtin_engines_registered()
-    return ENGINE_REGISTRY.get_engine_class(engine_name)
+        return engine()
 
+    # ---------- Utilities ----------
 
-def _list_engines() -> List[str]:
-    _ensure_builtin_engines_registered()
-    return ENGINE_REGISTRY.list_engines()
+    def plugins(self) -> List[str]:
+        return PLUGIN_REGISTRY.list()
 
-
-# Backwards-compatibility helpers for internal module use.
-get_engine_class = _get_engine_class
-list_engines = _list_engines
+    def engines(self) -> List[str]:
+        return ENGINE_REGISTRY.list()

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ locale.lang_code or 'en' }}">
 
 <head>
     <meta charset="utf-8">
@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/static/css/style.css">
     <script defer src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/lucide.min.js"></script>
     <script defer src="/static/js/app.js"></script>
+    <script defer src="/static/js/converter.js"></script>
     {% include "partials/structured_data.html" %}
 </head>
 
@@ -29,12 +30,12 @@
 
             <nav id="primaryNav" class="primary-nav" role="navigation" aria-label="Primary">
                 <ul class="nav-list">
-                    <li><a href="#popular">Popular</a></li>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#stats">Stats</a></li>
-                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#popular">{{ t('nav.popular', 'Popular') }}</a></li>
+                    <li><a href="#features">{{ t('nav.features', 'Features') }}</a></li>
+                    <li><a href="#stats">{{ t('nav.stats', 'Stats') }}</a></li>
+                    <li><a href="#faq">{{ t('nav.faq', 'FAQ') }}</a></li>
                 </ul>
-                <a class="btn btn-cta" href="#upload">Upload</a>
+                <a class="btn btn-cta" href="#upload">{{ t('nav.upload', 'Upload') }}</a>
             </nav>
         </div>
     </header>
@@ -44,12 +45,12 @@
         <section class="hero">
             <div class="container hero-inner">
                 <div class="hero-copy">
-                    <span class="eyebrow">Premium File Converter</span>
-                    <h1 class="hero-title">Convert files faster with premium simplicity.</h1>
-                    <p class="hero-sub">Convertin brings secure, responsive, and polished file conversion for students, creators, and office professionals.</p>
+                    <span class="eyebrow">{{ t('hero.eyebrow', 'Premium File Converter') }}</span>
+                    <h1 class="hero-title">{{ t('hero.title', 'Convert files faster with premium simplicity.') }}</h1>
+                    <p class="hero-sub">{{ t('hero.subtitle', 'Convertin brings secure, responsive, and polished file conversion for students, creators, and office professionals.') }}</p>
                     <div class="hero-cta">
-                        <a href="#upload" class="btn btn-primary btn-hero">Start converting</a>
-                        <a href="#features" class="btn btn-outline">Explore features</a>
+                        <a href="#upload" class="btn btn-primary btn-hero">{{ t('hero.primary_cta', 'Start converting') }}</a>
+                        <a href="#features" class="btn btn-outline">{{ t('hero.secondary_cta', 'Explore features') }}</a>
                     </div>
                     <div class="hero-details">
                         <div class="hero-stat-card">
@@ -69,14 +70,14 @@
 
                 <div class="hero-panel">
                     <div class="panel-head">
-                        <p class="panel-label">Upload Center</p>
-                        <h2 class="panel-title">Sleek upload experience without the default file input.</h2>
+                        <p class="panel-label">{{ t('hero.panel.label', 'Upload Center') }}</p>
+                        <h2 class="panel-title">{{ t('hero.panel.title', 'Sleek upload experience without the default file input.') }}</h2>
                     </div>
                     <div class="upload-card" role="region" aria-labelledby="upload-label">
                         <div class="upload-info-row">
                             <div>
-                                <p id="upload-label" class="upload-label">Upload Your File</p>
-                                <p class="upload-sub">Drag, drop or browse to select your file.</p>
+                                <p id="upload-label" class="upload-label">{{ t('upload.label', 'Upload Your File') }}</p>
+                                <p class="upload-sub">{{ t('upload.subtext', 'Drag, drop or browse to select your file.') }}</p>
                             </div>
                             <span class="upload-badge">Instant</span>
                         </div>
@@ -85,23 +86,32 @@
                             <div class="drop-content">
                                 <i data-lucide="cloud-upload" class="drop-icon"></i>
                                 <div>
-                                    <p id="upload-desc" class="drop-title">Drop your file here</p>
-                                    <p class="drop-text">or <button id="fileSelect" type="button" class="link-btn">browse</button></p>
+                                    <p id="upload-desc" class="drop-title">{{ t('upload.drop_title', 'Drop your file here') }}</p>
+                                    <p class="drop-text">or <button id="fileSelect" type="button" class="link-btn">{{ t('upload.browse', 'browse') }}</button></p>
                                 </div>
                             </div>
                             <div class="file-meta">
-                                <p class="muted small" id="fileName">No file selected yet</p>
-                                <span class="file-status" id="uploadStatus">Waiting for your file</span>
+                                <p class="muted small" id="fileName">{{ t('upload.empty_status', 'No file selected yet') }}</p>
+                                <span class="file-status" id="uploadStatus">{{ t('upload.waiting_status', 'Waiting for your file') }}</span>
                             </div>
                             <input id="fileInput" type="file" class="file-input" aria-hidden="true">
                         </div>
 
                         <div class="upload-actions">
                             <div class="upload-controls">
-                                <span class="upload-label-sm" id="fileSize">0 KB</span>
-                                <button id="clearFile" class="link-btn clear-btn" type="button" hidden>Clear</button>
+                                <span class="upload-label-sm" id="fileSize">{{ t('upload.size_label', '0 KB') }}</span>
+                                <button id="clearFile" class="link-btn clear-btn" type="button" hidden>{{ t('upload.clear', 'Clear') }}</button>
                             </div>
                             <div class="progress" aria-hidden="true"><div class="progress-bar" style="width: 0%"></div></div>
+                            <div class="convert-actions">
+                                <button id="convertBtn" class="btn btn-primary" type="button">
+                                    {{ t('upload.convert', 'Convert') }}
+                                </button>
+                                <a id="downloadBtn" class="btn btn-outline" href="#" hidden download>
+                                    {{ t('upload.download', 'Download MP3') }}
+                                </a>
+                            </div>
+                            <p id="convertMessage" class="muted"></p>
                         </div>
                     </div>
                 </div>
@@ -112,24 +122,24 @@
             <div class="container stats-grid">
                 <article class="stat-card">
                     <p class="stat-value">120+</p>
-                    <p class="stat-label">Supported formats</p>
+                    <p class="stat-label">{{ t('stats.formats', 'Supported formats') }}</p>
                 </article>
                 <article class="stat-card">
                     <p class="stat-value">24/7</p>
-                    <p class="stat-label">Conversion availability</p>
+                    <p class="stat-label">{{ t('stats.availability', 'Conversion availability') }}</p>
                 </article>
                 <article class="stat-card">
                     <p class="stat-value">4.9/5</p>
-                    <p class="stat-label">User satisfaction</p>
+                    <p class="stat-label">{{ t('stats.satisfaction', 'User satisfaction') }}</p>
                 </article>
             </div>
         </section>
 
         <section id="popular" class="section section-white">
             <div class="container section-heading">
-                <span class="eyebrow">Popular Conversion</span>
-                <h2>Most requested conversion flows</h2>
-                <p>Quick access to the formats people need most.</p>
+                <span class="eyebrow">{{ t('popular.eyebrow', 'Popular Conversion') }}</span>
+                <h2>{{ t('popular.heading', 'Most requested conversion flows') }}</h2>
+                <p>{{ t('popular.description', 'Quick access to the formats people need most.') }}</p>
             </div>
             <div class="grid popular-grid">
                 <article class="card card-lg hover-card">
@@ -157,67 +167,53 @@
 
         <section id="features" class="section">
             <div class="container section-heading">
-                <span class="eyebrow">Features</span>
-                <h2>Everything you need to convert files effortlessly</h2>
-                <p>Reliable performance and polished details for daily use.</p>
+                <span class="eyebrow">{{ t('features.eyebrow', 'Features') }}</span>
+                <h2>{{ t('features.heading', 'Everything you need to convert files effortlessly') }}</h2>
+                <p>{{ t('features.description', 'Reliable performance and polished details for daily use.') }}</p>
             </div>
             <div class="grid features-grid">
                 <article class="feature-card hover-card">
                     <i data-lucide="zap"></i>
-                    <h3>Fast Processing</h3>
-                    <p>Optimized workflows keep conversions quick and smooth.</p>
+                    <h3>{{ t('features.cards.fast.title', 'Fast Processing') }}</h3>
+                    <p>{{ t('features.cards.fast.text', 'Optimized workflows keep conversions quick and smooth.') }}</p>
                 </article>
                 <article class="feature-card hover-card">
                     <i data-lucide="shield-check"></i>
-                    <h3>Secure Transfers</h3>
-                    <p>File handling is designed with privacy and trust in mind.</p>
+                    <h3>{{ t('features.cards.secure.title', 'Secure Transfers') }}</h3>
+                    <p>{{ t('features.cards.secure.text', 'File handling is designed with privacy and trust in mind.') }}</p>
                 </article>
                 <article class="feature-card hover-card">
                     <i data-lucide="layers"></i>
-                    <h3>Wide Format Support</h3>
-                    <p>Video, audio, and document conversions are all available.</p>
+                    <h3>{{ t('features.cards.wide.title', 'Wide Format Support') }}</h3>
+                    <p>{{ t('features.cards.wide.text', 'Video, audio, and document conversions are all available.') }}</p>
                 </article>
                 <article class="feature-card hover-card">
                     <i data-lucide="smartphone"></i>
-                    <h3>Responsive Design</h3>
-                    <p>Built to look great on desktop, tablet, and mobile screens.</p>
+                    <h3>{{ t('features.cards.responsive.title', 'Responsive Design') }}</h3>
+                    <p>{{ t('features.cards.responsive.text', 'Built to look great on desktop, tablet, and mobile screens.') }}</p>
                 </article>
             </div>
         </section>
 
         <section id="faq" class="section section-white">
             <div class="container section-heading">
-                <span class="eyebrow">FAQ</span>
-                <h2>Frequently asked questions</h2>
+                <span class="eyebrow">{{ t('faq.heading', 'FAQ') }}</span>
+                <h2>{{ t('faq.heading', 'Frequently asked questions') }}</h2>
             </div>
+
             <div class="faq-grid">
+                {% for item in locale.faq["items"] %}
                 <div class="faq-item">
                     <button class="faq-question" type="button">
-                        What file formats can I convert?
+                        {{ item.question }}
                         <span class="faq-toggle">+</span>
                     </button>
+
                     <div class="faq-answer">
-                        Convertin supports popular video, audio, and document formats including MP4, MP3, WAV, PDF, DOCX, and more.
+                        {{ item.answer }}
                     </div>
                 </div>
-                <div class="faq-item">
-                    <button class="faq-question" type="button">
-                        Is my data private?
-                        <span class="faq-toggle">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        All uploaded files are handled securely and the UI is designed to respect privacy during conversion tests.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question" type="button">
-                        Will it work on mobile devices?
-                        <span class="faq-toggle">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        Yes. The landing page is fully responsive and built for desktop, tablet, and mobile users.
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </section>
 
@@ -226,23 +222,23 @@
     <footer class="site-footer">
         <div class="container footer-inner">
             <div class="footer-branding">
-                <a class="brand" href="/">Convertin</a>
-                <p class="muted">Modern file conversion for students, creators, and professionals.</p>
+                <a class="brand" href="/">{{ t('footer.brand', 'Convertin') }}</a>
+                <p class="muted">{{ t('footer.description', 'Modern file conversion for students, creators, and professionals.') }}</p>
             </div>
             <div class="footer-links-columns">
                 <div class="footer-links-group">
-                    <p class="footer-heading">Product</p>
-                    <a href="#popular">Popular</a>
-                    <a href="#features">Features</a>
+                    <p class="footer-heading">{{ t('footer.product', 'Product') }}</p>
+                    <a href="#popular">{{ t('footer.popular', 'Popular') }}</a>
+                    <a href="#features">{{ t('footer.features', 'Features') }}</a>
                 </div>
                 <div class="footer-links-group">
-                    <p class="footer-heading">Company</p>
-                    <a href="#faq">FAQ</a>
-                    <a href="#upload">Contact</a>
+                    <p class="footer-heading">{{ t('footer.company', 'Company') }}</p>
+                    <a href="#faq">{{ t('footer.faq', 'FAQ') }}</a>
+                    <a href="#upload">{{ t('footer.upload', 'Upload') }}</a>
                 </div>
             </div>
         </div>
-        <p class="footer-note">© {{ year or "2026" }} Convertin. Built for elegant file conversion.</p>
+        <p class="footer-note">{{ t('footer.copyright', '© {year} Convertin. Built for elegant file conversion.').replace('{year}', year|string) }}</p>
     </footer>
 
 </body>

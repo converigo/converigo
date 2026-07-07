@@ -1,0 +1,9 @@
+﻿
+>         this._emit("chunk", chunk, completion);
+          for (const choice2 of chunk.choices) {
+            const choiceSnapshot = completion.choices[choice2.index];
+>         this._emit("chunk", chunk, completion);
+          for (const choice2 of chunk.choices) {
+            const choiceSnapshot = completion.choices[choice2.index];
+
+

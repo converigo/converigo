@@ -1,0 +1,81 @@
+﻿        }
+        if (choiceSnapshot.logprobs?.content && !state3.logprobs_content_done) {
+          state3.logprobs_content_done = true;
+          this._emit("logprobs.content.done", { content: choiceSnapshot.logprobs.content });
+        }
+        if (choiceSnapshot.logprobs?.refusal && !state3.logprobs_refusal_done) {
+          state3.logprobs_refusal_done = true;
+          this._emit("logprobs.refusal.done", { refusal: choiceSnapshot.logprobs.refusal });
+        }
+      }, _ChatCompletionStream_endRequest = function _ChatCompletionStream_endRequest2() {
+        if (this.ended) {
+          throw new OpenAIError(`stream has ended, this shouldn't happen`);
+        }
+        const snapshot = __classPrivateFieldGet(this, _ChatCompletionStream_currentChatCompletionSnapshot, "f");
+        if (!snapshot) {
+          throw new OpenAIError(`request ended without sending any chunks`);
+        }
+        __classPrivateFieldSet(this, _ChatCompletionStream_currentChatCompletionSnapshot, void 0, "f");
+        __classPrivateFieldSet(this, _ChatCompletionStream_choiceEventStates, [], "f");
+        return finalizeChatCompletion(snapshot, __classPrivateFieldGet(this, _ChatCompletionStream_params, "f"));
+      }, _ChatCompletionStream_getAutoParseableResponseFormat = function _ChatCompletionStream_getAutoParseableResponseFormat2() {
+        const responseFormat = __classPrivateFieldGet(this, _ChatCompletionStream_params, "f")?.response_format;
+        if (isAutoParsableResponseFormat(responseFormat)) {
+          return responseFormat;
+        }
+        return null;
+      }, _ChatCompletionStream_accumulateChatCompletion = function _ChatCompletionStream_accumulateChatCompletion2(chunk) {
+        var _a35, _b17, _c11, _d;
+        let snapshot = __classPrivateFieldGet(this, _ChatCompletionStream_currentChatCompletionSnapshot, "f");
+        const { choices, ...rest } = chunk;
+        if (!snapshot) {
+          snapshot = __classPrivateFieldSet(this, _ChatCompletionStream_currentChatCompletionSnapshot, {
+            ...rest,
+            choices: []
+          }, "f");
+        } else {
+          Object.assign(snapshot, rest);
+        }
+        for (const { delta, finish_reason, index: index2, logprobs = null, ...other } of chunk.choices) {
+          let choice2 = snapshot.choices[index2];
+          if (!choice2) {
+            choice2 = snapshot.choices[index2] = { finish_reason, index: index2, message: {}, logprobs, ...other };
+          }
+          if (logprobs) {
+            if (!choice2.logprobs) {
+              choice2.logprobs = Object.assign({}, logprobs);
+            } else {
+              const { content: content2, refusal: refusal3, ...rest3 } = logprobs;
+              assertIsEmpty(rest3);
+              Object.assign(choice2.logprobs, rest3);
+              if (content2) {
+                (_a35 = choice2.logprobs).content ?? (_a35.content = []);
+                choice2.logprobs.content.push(...content2);
+              }
+              if (refusal3) {
+                (_b17 = choice2.logprobs).refusal ?? (_b17.refusal = []);
+                choice2.logprobs.refusal.push(...refusal3);
+              }
+            }
+          }
+          if (finish_reason) {
+            choice2.finish_reason = finish_reason;
+            if (__classPrivateFieldGet(this, _ChatCompletionStream_params, "f") && hasAutoParseableInput(__classPrivateFieldGet(this, _ChatCompletionStream_params, "f"))) {
+              if (finish_reason === "length") {
+                throw new LengthFinishReasonError();
+              }
+              if (finish_reason === "content_filter") {
+                throw new ContentFilterFinishReasonError();
+              }
+            }
+          }
+          Object.assign(choice2, other);
+          if (!delta)
+            continue;
+          const { content, refusal: refusal2, function_call, role, tool_calls, ...rest2 } = delta;
+          assertIsEmpty(rest2);
+          Object.assign(choice2.message, rest2);
+          if (refusal2) {
+            choice2.message.refusal = (choice2.message.refusal || "") + refusal2;
+          }
+          if (role)

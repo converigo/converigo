@@ -1,0 +1,101 @@
+{
+  "hero": {
+    "eyebrow": "Premium File Converter",
+    "title": "Konversi file lebih cepat dengan kesederhanaan premium.",
+    "subtitle": "Convertin menghadirkan konversi file yang aman, responsif, dan rapi untuk pelajar, pembuat konten, dan profesional.",
+    "primary_cta": "Mulai mengonversi",
+    "secondary_cta": "Jelajahi fitur"
+  },
+  "upload": {
+    "label": "Unggah File Anda",
+    "subtext": "Seret, jatuhkan, atau telusuri untuk memilih file Anda.",
+    "badge": "Instan",
+    "drop_title": "Jatuhkan file Anda di sini",
+    "browse": "telusuri",
+    "empty_status": "Belum ada file yang dipilih",
+    "waiting_status": "Menunggu file Anda",
+    "size_label": "0 KB",
+    "clear": "Hapus"
+  },
+  "stats": {
+    "formats": "Format yang didukung",
+    "availability": "Ketersediaan konversi",
+    "satisfaction": "Kepuasan pengguna"
+  },
+  "popular": {
+    "eyebrow": "Konversi Populer",
+    "heading": "Alur konversi yang paling banyak diminta",
+    "description": "Akses cepat ke format yang paling dibutuhkan orang." 
+  },
+  "features": {
+    "eyebrow": "Fitur",
+    "heading": "Segala yang Anda butuhkan untuk mengonversi file dengan mudah",
+    "description": "Performa andal dan detail yang rapi untuk penggunaan sehari-hari.",
+    "cards": {
+      "fast": {"title": "Proses Cepat", "text": "Alur kerja yang dioptimalkan menjaga konversi tetap cepat dan lancar."},
+      "secure": {"title": "Transfer Aman", "text": "Penanganan file dirancang dengan privasi dan kepercayaan."},
+      "wide": {"title": "Dukungan Format Luas", "text": "Konversi video, audio, dan dokumen tersedia."},
+      "responsive": {"title": "Desain Responsif", "text": "Dirancang agar tampil baik di desktop, tablet, dan ponsel."}
+    }
+  },
+  "faq": {
+    "heading": "Pertanyaan yang Sering Diajukan",
+    "items": [
+      {"question": "Format file apa yang dapat saya konversi?", "answer": "Convertin mendukung format video, audio, dan dokumen populer termasuk MP4, MP3, WAV, PDF, DOCX, dan lainnya."},
+      {"question": "Apakah data saya privat?", "answer": "Semua file yang diunggah ditangani dengan aman dan UI dirancang untuk menghormati privasi selama pengujian konversi."},
+      {"question": "Apakah ini bekerja di perangkat seluler?", "answer": "Ya. Halaman ini sepenuhnya responsif untuk desktop, tablet, dan ponsel."}
+    ]
+  },
+  "footer": {
+    "brand": "Convertin",
+    "description": "Konversi file modern untuk pelajar, pembuat, dan profesional.",
+    "product": "Produk",
+    "company": "Perusahaan",
+    "popular": "Populer",
+    "features": "Fitur",
+    "faq": "FAQ",
+    "upload": "Unggah",
+    "copyright": "© {year} Convertin. Dibuat untuk konversi file yang elegan."
+  },
+  "nav": {
+    "home": "Beranda",
+    "popular": "Populer",
+    "features": "Fitur",
+    "stats": "Statistik",
+    "faq": "FAQ",
+    "upload": "Unggah",
+    "related": "Terkait"
+  },
+  "tool_page": {
+    "panel": {
+      "label": "Siap untuk mengonversi",
+      "title": "Unggah satu file dan dapatkan hasil konversi Anda."
+    },
+    "upload_label": "Unggah file",
+    "how_it_works": {
+      "eyebrow": "Cara kerjanya",
+      "heading": "Konversi sederhana dalam tiga langkah",
+      "step1": {
+        "title": "Unggah file Anda",
+        "text": "Pilih file yang didukung dan kirim ke Convertin."
+      },
+      "step2": {
+        "title": "Pilih output",
+        "text": "Pilih jenis output dan periksa pengaturan Anda."
+      },
+      "step3": {
+        "title": "Unduh secara instan",
+        "text": "Terima file konversi Anda tanpa menginstal perangkat lunak."
+      }
+    },
+    "faq": {
+      "eyebrow": "FAQ",
+      "heading": "Pertanyaan yang sering diajukan"
+    },
+    "related": {
+      "eyebrow": "Alat Terkait",
+      "heading": "Konverter lain yang mungkin Anda butuhkan",
+      "fallback": "Temukan alur konversi lain yang berguna."
+    }
+  }
+}

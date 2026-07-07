@@ -1,0 +1,33 @@
+.chip{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:10px 18px;
+
+    border-radius:999px;
+
+    background:var(--surface);
+
+    border:1px solid var(--border);
+
+    color:var(--text);
+
+    font-size:14px;
+
+    transition:var(--transition);
+
+    cursor:pointer;
+
+}
+
+.chip:hover{
+
+    background:var(--primary);
+
+    color:#fff;
+
+}

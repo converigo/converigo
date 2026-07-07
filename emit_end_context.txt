@@ -1,0 +1,55 @@
+﻿
+          setTimeout(() => {
+            executor().then(() => {
+              this._emitFinal();
+>             this._emit("end");
+            }, __classPrivateFieldGet(this, _EventStream_instances, "m", 
+_EventStream_handleError).bind(this));
+          }, 0);
+        }
+            }
+            __classPrivateFieldGet(this, _EventStream_rejectConnectedPromise, 
+"f").call(this, error43);
+            __classPrivateFieldGet(this, _EventStream_rejectEndPromise, 
+"f").call(this, error43);
+>           this._emit("end");
+            return;
+          }
+          if (event === "error") {
+            }
+            __classPrivateFieldGet(this, _EventStream_rejectConnectedPromise, 
+"f").call(this, error43);
+            __classPrivateFieldGet(this, _EventStream_rejectEndPromise, 
+"f").call(this, error43);
+>           this._emit("end");
+          }
+        }
+        _emitFinal() {
+          setTimeout(() => {
+            executor().then(() => {
+              this._emitFinal();
+>             this._emit("end");
+            }, tslib_1.__classPrivateFieldGet(this, _EventStream_instances2, 
+"m", _EventStream_handleError3).bind(this));
+          }, 0);
+        }
+            }
+            tslib_1.__classPrivateFieldGet(this, 
+_EventStream_rejectConnectedPromise2, "f").call(this, error43);
+            tslib_1.__classPrivateFieldGet(this, 
+_EventStream_rejectEndPromise2, "f").call(this, error43);
+>           this._emit("end");
+            return;
+          }
+          if (event === "error") {
+            }
+            tslib_1.__classPrivateFieldGet(this, 
+_EventStream_rejectConnectedPromise2, "f").call(this, error43);
+            tslib_1.__classPrivateFieldGet(this, 
+_EventStream_rejectEndPromise2, "f").call(this, error43);
+>           this._emit("end");
+          }
+        }
+        _emitFinal() {
+
+

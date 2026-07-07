@@ -1,0 +1,101 @@
+{
+  "hero": {
+    "eyebrow": "Convertisseur de fichiers premium",
+    "title": "Convertissez vos fichiers plus rapidement avec une simplicité premium.",
+    "subtitle": "Convertin offre une conversion de fichiers sécurisée, responsive et soignée pour les étudiants, créateurs et professionnels.",
+    "primary_cta": "Commencer la conversion",
+    "secondary_cta": "Découvrir les fonctionnalités"
+  },
+  "upload": {
+    "label": "Téléchargez votre fichier",
+    "subtext": "Glissez, déposez ou parcourez pour sélectionner votre fichier.",
+    "badge": "Instantané",
+    "drop_title": "Déposez votre fichier ici",
+    "browse": "parcourir",
+    "empty_status": "Aucun fichier sélectionné",
+    "waiting_status": "En attente de votre fichier",
+    "size_label": "0 Ko",
+    "clear": "Effacer"
+  },
+  "stats": {
+    "formats": "Formats pris en charge",
+    "availability": "Disponibilité de conversion",
+    "satisfaction": "Satisfaction des utilisateurs"
+  },
+  "popular": {
+    "eyebrow": "Conversions Populaires",
+    "heading": "Les flux de conversion les plus demandés",
+    "description": "Accès rapide aux formats les plus recherchés."
+  },
+  "features": {
+    "eyebrow": "Fonctionnalités",
+    "heading": "Tout ce dont vous avez besoin pour convertir des fichiers sans effort",
+    "description": "Des performances fiables et des détails soignés pour un usage quotidien.",
+    "cards": {
+      "fast": {"title": "Traitement rapide", "text": "Les flux de travail optimisés maintiennent les conversions rapides et fluides."},
+      "secure": {"title": "Transferts sécurisés", "text": "La gestion des fichiers est conçue avec la confidentialité et la confiance en tête."},
+      "wide": {"title": "Large prise en charge des formats", "text": "Les conversions vidéo, audio et document sont toutes disponibles."},
+      "responsive": {"title": "Design responsive", "text": "Conçu pour bien paraître sur bureau, tablette et mobile."}
+    }
+  },
+  "faq": {
+    "heading": "Questions fréquemment posées",
+    "items": [
+      {"question": "Quels formats de fichiers puis-je convertir ?", "answer": "Convertin prend en charge les formats vidéo, audio et document populaires tels que MP4, MP3, WAV, PDF, DOCX et plus."},
+      {"question": "Mes données sont-elles privées ?", "answer": "Tous les fichiers téléchargés sont traités en toute sécurité et l'interface est conçue pour respecter la confidentialité pendant les tests de conversion."},
+      {"question": "Est-ce que ça fonctionne sur mobile ?", "answer": "Oui. La page de destination est entièrement responsive sur desktop, tablette et mobile."}
+    ]
+  },
+  "footer": {
+    "brand": "Convertin",
+    "description": "Conversion de fichiers moderne pour les étudiants, créateurs et professionnels.",
+    "product": "Produit",
+    "company": "Entreprise",
+    "popular": "Populaire",
+    "features": "Fonctionnalités",
+    "faq": "FAQ",
+    "upload": "Télécharger",
+    "copyright": "© {year} Convertin. Construit pour une conversion de fichiers élégante."
+  },
+  "nav": {
+    "home": "Accueil",
+    "popular": "Populaire",
+    "features": "Fonctionnalités",
+    "stats": "Statistiques",
+    "faq": "FAQ",
+    "upload": "Télécharger",
+    "related": "Articles connexes"
+  },
+  "tool_page": {
+    "panel": {
+      "label": "Prêt à convertir",
+      "title": "Téléchargez un fichier et obtenez votre résultat converti."
+    },
+    "upload_label": "Télécharger un fichier",
+    "how_it_works": {
+      "eyebrow": "Comment ça marche",
+      "heading": "Conversion simple en trois étapes",
+      "step1": {
+        "title": "Téléchargez votre fichier",
+        "text": "Sélectionnez un fichier pris en charge et envoyez-le à Convertin."
+      },
+      "step2": {
+        "title": "Choisissez la sortie",
+        "text": "Choisissez le type de sortie et vérifiez vos paramètres."
+      },
+      "step3": {
+        "title": "Téléchargez instantanément",
+        "text": "Recevez votre fichier converti sans installer de logiciel."
+      }
+    },
+    "faq": {
+      "eyebrow": "FAQ",
+      "heading": "Questions fréquemment posées"
+    },
+    "related": {
+      "eyebrow": "Outils connexes",
+      "heading": "Autres convertisseurs dont vous pourriez avoir besoin",
+      "fallback": "Découvrez un autre flux de conversion utile."
+    }
+  }
+}

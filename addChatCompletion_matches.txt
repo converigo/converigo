@@ -1,0 +1,42 @@
+﻿
+C:\Users\level\.vscode\extensions\continue.continue-2.0.0-win32-x64\out\extensi
+on.js:133315:      _addChatCompletion(chatCompletion2) {
+C:\Users\level\.vscode\extensions\continue.continue-2.0.0-win32-x64\out\extensi
+on.js:133416:        return 
+this._addChatCompletion(parseChatCompletion(chatCompletion2, params));
+C:\Users\level\.vscode\extensions\continue.continue-2.0.0-win32-x64\out\extensi
+on.js:133974:        return 
+this._addChatCompletion(__classPrivateFieldGet(this, 
+_ChatCompletionStream_instances, "m", 
+_ChatCompletionStream_endRequest).call(this));
+C:\Users\level\.vscode\extensions\continue.continue-2.0.0-win32-x64\out\extensi
+on.js:133989:            this._addChatCompletion(__classPrivateFieldGet(this, 
+_ChatCompletionStream_instances, "m", 
+_ChatCompletionStream_endRequest).call(this));
+C:\Users\level\.vscode\extensions\continue.continue-2.0.0-win32-x64\out\extensi
+on.js:133997:        return 
+this._addChatCompletion(__classPrivateFieldGet(this, 
+_ChatCompletionStream_instances, "m", 
+_ChatCompletionStream_endRequest).call(this));
+C:\Users\level\.vscode\extensions\continue.continue-2.0.0-win32-x64\out\extensi
+on.js:327882:      _addChatCompletion(chatCompletion2) {
+C:\Users\level\.vscode\extensions\continue.continue-2.0.0-win32-x64\out\extensi
+on.js:327983:        return this._addChatCompletion((0, 
+parser_1.parseChatCompletion)(chatCompletion2, params));
+C:\Users\level\.vscode\extensions\continue.continue-2.0.0-win32-x64\out\extensi
+on.js:328474:        return 
+this._addChatCompletion(tslib_1.__classPrivateFieldGet(this, 
+_ChatCompletionStream_instances2, "m", 
+_ChatCompletionStream_endRequest2).call(this));
+C:\Users\level\.vscode\extensions\continue.continue-2.0.0-win32-x64\out\extensi
+on.js:328489:            
+this._addChatCompletion(tslib_1.__classPrivateFieldGet(this, 
+_ChatCompletionStream_instances2, "m", 
+_ChatCompletionStream_endRequest2).call(this));
+C:\Users\level\.vscode\extensions\continue.continue-2.0.0-win32-x64\out\extensi
+on.js:328497:        return 
+this._addChatCompletion(tslib_1.__classPrivateFieldGet(this, 
+_ChatCompletionStream_instances2, "m", 
+_ChatCompletionStream_endRequest2).call(this));
+
+

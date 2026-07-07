@@ -1,0 +1,65 @@
+.hero {
+
+    padding: 90px 0 40px;
+
+}
+
+.hero-content {
+
+    max-width: 760px;
+
+    margin: 0 auto;
+
+    text-align: center;
+
+}
+
+.hero-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 10px 18px;
+
+    border-radius: 999px;
+
+    background: rgba(37, 99, 235, .08);
+
+    color: var(--color-primary);
+
+    font-weight: 600;
+
+    margin-bottom: 24px;
+
+}
+
+.hero-title {
+
+    font-size: 64px;
+
+    line-height: 1.05;
+
+    font-weight: 800;
+
+    margin-bottom: 24px;
+
+    color: var(--color-text);
+
+}
+
+.hero-description {
+
+    max-width: 720px;
+
+    margin: auto;
+
+    font-size: 20px;
+
+    color: var(--color-text-light);
+
+}

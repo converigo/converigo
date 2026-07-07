@@ -1,0 +1,41 @@
+﻿    init_shims();
+    init_errors4();
+    init_bytes();
+    init_log();
+    init_error();
+    Stream6 = class _Stream {
+      constructor(iterator2, controller, client) {
+        this.iterator = iterator2;
+        _Stream_client.set(this, void 0);
+        this.controller = controller;
+        __classPrivateFieldSet(this, _Stream_client, client, "f");
+      }
+      static fromSSEResponse(response, controller, client) {
+        let consumed = false;
+        const logger3 = client ? loggerFor(client) : console;
+        async function* iterator2() {
+          if (consumed) {
+            throw new OpenAIError("Cannot iterate over a consumed stream, use `.tee()` to split the stream.");
+          }
+          consumed = true;
+          let done = false;
+          try {
+            for await (const sse of _iterSSEMessages(response, controller)) {
+              if (done)
+                continue;
+              if (sse.data.startsWith("[DONE]")) {
+                done = true;
+                continue;
+              }
+              if (sse.event === null || !sse.event.startsWith("thread.")) {
+                let data4;
+                try {
+                  data4 = JSON.parse(sse.data);
+                } catch (e14) {
+                  logger3.error(`Could not parse message into JSON:`, sse.data);
+                  logger3.error(`From chunk:`, sse.raw);
+                  throw e14;
+                }
+                if (data4 && data4.error) {
+                  throw new APIError(void 0, data4.error, void 0, response.headers);
+                }
