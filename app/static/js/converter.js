@@ -1,17 +1,24 @@
 /**
  * converter.js
  * Convertin
+ * DEBUG VERSION
  */
 
 class FileConverter {
 
     constructor() {
 
+        console.log("========== FileConverter ==========");
+
         this.convertBtn = document.getElementById("convertBtn");
         this.downloadBtn = document.getElementById("downloadBtn");
         this.convertMessage = document.getElementById("convertMessage");
         this.fileInput = document.getElementById("fileInput");
         this.progressBar = document.querySelector(".progress-bar");
+
+        console.log("convertBtn :", this.convertBtn);
+        console.log("downloadBtn :", this.downloadBtn);
+        console.log("fileInput :", this.fileInput);
 
         this.currentDownloadPath = null;
         this.isConverting = false;
@@ -23,8 +30,10 @@ class FileConverter {
     init() {
 
         if (!this.convertBtn) {
-            console.error("Convert button not found.");
+
+            console.error("convertBtn tidak ditemukan");
             return;
+
         }
 
         this.convertBtn.addEventListener("click", () => {
@@ -37,7 +46,8 @@ class FileConverter {
 
     async handleConvert() {
 
-        if (this.isConverting) return;
+        if (this.isConverting)
+            return;
 
         const file = this.fileInput.files[0];
 
@@ -54,7 +64,8 @@ class FileConverter {
 
         this.convertBtn.disabled = true;
 
-        this.progressBar.style.width = "15%";
+        if (this.progressBar)
+            this.progressBar.style.width = "10%";
 
         const formData = new FormData();
 
@@ -62,18 +73,18 @@ class FileConverter {
 
         try {
 
+            console.log("Uploading...");
+
             const response = await fetch("/convert", {
 
                 method: "POST",
-
                 body: formData
 
             });
 
-            this.progressBar.style.width = "60%";
-
             const data = await response.json();
 
+            console.log("Response:");
             console.log(data);
 
             if (!response.ok) {
@@ -84,24 +95,59 @@ class FileConverter {
 
             }
 
-            this.progressBar.style.width = "100%";
-
-            this.convertMessage.textContent =
-                data.message;
+            if (this.progressBar)
+                this.progressBar.style.width = "100%";
 
             this.currentDownloadPath =
                 data.download_path;
 
-            this.downloadBtn.hidden = false;
+            console.log("DOWNLOAD PATH :", this.currentDownloadPath);
 
-            this.downloadBtn.href =
-                data.download_path;
+            this.convertMessage.textContent =
+                data.message;
 
-            this.downloadBtn.download =
-                data.filename;
+            if (this.downloadBtn) {
 
-            this.downloadBtn.textContent =
-                "Download " + data.filename;
+                this.downloadBtn.hidden = false;
+
+                this.downloadBtn.href =
+                    data.download_path;
+
+                this.downloadBtn.download =
+                    data.filename;
+
+                this.downloadBtn.textContent =
+                    "Download " + data.filename;
+
+                console.log("Download Button:");
+                console.log(this.downloadBtn);
+
+                console.log("hidden =", this.downloadBtn.hidden);
+                console.log("href =", this.downloadBtn.href);
+                console.log("download =", this.downloadBtn.download);
+
+                this.downloadBtn.onclick = (e) => {
+
+                    console.log("DOWNLOAD DIKLIK");
+
+                    console.log("href =", this.downloadBtn.href);
+
+                    if (!this.downloadBtn.href) {
+
+                        e.preventDefault();
+
+                        alert("Download path kosong!");
+
+                        return;
+
+                    }
+
+                    window.location.href =
+                        this.downloadBtn.href;
+
+                };
+
+            }
 
         }
 
@@ -128,6 +174,10 @@ class FileConverter {
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    new FileConverter();
+    console.log("converter.js loaded");
+
+    window.converter = new FileConverter();
+
+    console.log(window.converter);
 
 });
