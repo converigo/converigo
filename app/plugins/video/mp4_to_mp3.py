@@ -10,35 +10,26 @@ class MP4ToMP3Plugin(ConverterPlugin):
     source_formats = ["mp4"]
     target_formats = ["mp3"]
 
-    async def convert(
-        self,
-        source_path: Path,
-        target_format: str,
-    ) -> Path:
+    async def convert(self, source_path: Path, target_format: str) -> Path:
 
-        if not self.supports(source_path.suffix, target_format):
+        ffmpeg_path = shutil.which("ffmpeg")
+
+        print("=" * 60)
+        print("FFMPEG PATH :", ffmpeg_path)
+        print("=" * 60)
+
+        if ffmpeg_path is None:
             raise RuntimeError(
-                "MP4ToMP3Plugin only supports mp4 to mp3 conversion."
+                "Python tidak menemukan binary ffmpeg pada PATH."
             )
 
         output_dir = Path("outputs") / "audio"
-        output_dir.mkdir(
-            parents=True,
-            exist_ok=True,
-        )
+        output_dir.mkdir(parents=True, exist_ok=True)
 
         output_path = output_dir / f"{source_path.stem}.mp3"
 
-        print("=" * 60)
-        print("MP4 TO MP3 DEBUG")
-        print("=" * 60)
-        print("SOURCE :", source_path)
-        print("TARGET :", output_path)
-        print("FFMPEG PATH :", shutil.which("ffmpeg"))
-        print("=" * 60)
-
         command = [
-            "ffmpeg",
+            ffmpeg_path,
             "-y",
             "-i",
             str(source_path),
@@ -48,55 +39,19 @@ class MP4ToMP3Plugin(ConverterPlugin):
             str(output_path),
         ]
 
-        print("COMMAND :")
-        print(" ".join(command))
-        print("=" * 60)
+        completed = subprocess.run(
+            command,
+            capture_output=True,
+            text=True,
+        )
 
-        try:
-
-            completed = subprocess.run(
-                command,
-                capture_output=True,
-                text=True,
-                check=False,
-            )
-
-            print("RETURN CODE :", completed.returncode)
-
-            if completed.stdout:
-                print("STDOUT")
-                print(completed.stdout)
-
-            if completed.stderr:
-                print("STDERR")
-                print(completed.stderr)
-
-        except FileNotFoundError as exc:
-
-            print("=" * 60)
-            print("FFMPEG TIDAK DITEMUKAN")
-            print("PATH :", shutil.which("ffmpeg"))
-            print("=" * 60)
-
-            raise RuntimeError(
-                "FFmpeg is not installed or not available on PATH."
-            ) from exc
+        print("RETURN CODE :", completed.returncode)
+        print("STDOUT")
+        print(completed.stdout)
+        print("STDERR")
+        print(completed.stderr)
 
         if completed.returncode != 0:
-
-            raise RuntimeError(
-                f"FFmpeg failed:\n\n{completed.stderr.strip() or completed.stdout.strip()}"
-            )
-
-        if not output_path.exists():
-
-            raise RuntimeError(
-                f"Output file was not created: {output_path}"
-            )
-
-        print("=" * 60)
-        print("SUCCESS")
-        print("OUTPUT :", output_path)
-        print("=" * 60)
+            raise RuntimeError(completed.stderr)
 
         return output_path
