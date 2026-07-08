@@ -1,14 +1,11 @@
 /**
- * DEBUG VERSION
  * converter.js
+ * Convertin
  */
 
 class FileConverter {
 
     constructor() {
-
-        console.log("========== CONVERTER ==========");
-        console.log("Constructor berjalan");
 
         this.convertBtn = document.getElementById("convertBtn");
         this.downloadBtn = document.getElementById("downloadBtn");
@@ -16,14 +13,8 @@ class FileConverter {
         this.fileInput = document.getElementById("fileInput");
         this.progressBar = document.querySelector(".progress-bar");
 
-        console.log("convertBtn :", this.convertBtn);
-        console.log("downloadBtn :", this.downloadBtn);
-        console.log("fileInput :", this.fileInput);
-        console.log("message :", this.convertMessage);
-        console.log("progress :", this.progressBar);
-
-        this.isConverting = false;
         this.currentDownloadPath = null;
+        this.isConverting = false;
 
         this.init();
 
@@ -31,22 +22,12 @@ class FileConverter {
 
     init() {
 
-        console.log("init() dipanggil");
-
         if (!this.convertBtn) {
-
-            console.error("convertBtn TIDAK DITEMUKAN");
-
+            console.error("Convert button not found.");
             return;
-
         }
 
-        console.log("Event click dipasang");
-
         this.convertBtn.addEventListener("click", () => {
-
-            console.log("=================================");
-            console.log("TOMBOL CONVERT DIKLIK");
 
             this.handleConvert();
 
@@ -56,39 +37,27 @@ class FileConverter {
 
     async handleConvert() {
 
-        console.log("handleConvert()");
-
-        alert("handleConvert dipanggil");
+        if (this.isConverting) return;
 
         const file = this.fileInput.files[0];
 
-        console.log(file);
-
         if (!file) {
 
-            alert("Tidak ada file");
-
-            console.error("Tidak ada file");
-
-            return;
-
-        }
-
-        alert("File ditemukan");
-
-        if (!file.name.toLowerCase().endsWith(".mp4")) {
-
-            alert("Bukan MP4");
-
-            console.error("Bukan MP4");
+            this.convertMessage.textContent =
+                "Please choose a file.";
 
             return;
 
         }
 
-        console.log("Memulai upload...");
+        this.isConverting = true;
+
+        this.convertBtn.disabled = true;
+
+        this.progressBar.style.width = "15%";
 
         const formData = new FormData();
+
         formData.append("file", file);
 
         try {
@@ -96,43 +65,60 @@ class FileConverter {
             const response = await fetch("/convert", {
 
                 method: "POST",
+
                 body: formData
 
             });
 
-            console.log("Status :", response.status);
+            this.progressBar.style.width = "60%";
 
             const data = await response.json();
 
             console.log(data);
 
-            if (response.ok) {
+            if (!response.ok) {
 
-                alert("BERHASIL");
-
-                console.log("SUCCESS");
-
-                this.convertMessage.textContent =
-                    "Conversion Success";
-
-            } else {
-
-                alert("ERROR");
-
-                console.error(data);
-
-                this.convertMessage.textContent =
-                    JSON.stringify(data);
+                throw new Error(
+                    data.detail || "Conversion failed."
+                );
 
             }
 
+            this.progressBar.style.width = "100%";
+
+            this.convertMessage.textContent =
+                data.message;
+
+            this.currentDownloadPath =
+                data.download_path;
+
+            this.downloadBtn.hidden = false;
+
+            this.downloadBtn.href =
+                data.download_path;
+
+            this.downloadBtn.download =
+                data.filename;
+
+            this.downloadBtn.textContent =
+                "Download " + data.filename;
+
         }
 
-        catch (e) {
+        catch (error) {
 
-            alert("FETCH ERROR");
+            console.error(error);
 
-            console.error(e);
+            this.convertMessage.textContent =
+                error.message;
+
+        }
+
+        finally {
+
+            this.convertBtn.disabled = false;
+
+            this.isConverting = false;
 
         }
 
@@ -142,8 +128,6 @@ class FileConverter {
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    console.log("converter.js berhasil dimuat");
-
-    window.converter = new FileConverter();
+    new FileConverter();
 
 });
