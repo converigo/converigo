@@ -1,0 +1,1 @@
+﻿C:\Users\level\.vscode\extensions\saoudrizwan.claude-dev-4.0.6\package.json:374:"configuration": {

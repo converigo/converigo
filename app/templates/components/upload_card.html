@@ -8,9 +8,13 @@
                 ☁
             </div>
 
-            <h2>Drag & Drop your file</h2>
+            <h2>
+                Drag & Drop your file
+            </h2>
 
-            <p>or choose a file from your computer</p>
+            <p>
+                or choose a file from your computer
+            </p>
 
             <button
                 id="chooseFile"
@@ -28,7 +32,9 @@
             <div class="selected-file">
 
                 <strong id="fileName">
+
                     No file selected
+
                 </strong>
 
                 <div id="fileSize"></div>
@@ -47,13 +53,35 @@
             </div>
 
             <button
-                id="convertButton"
+                id="convertBtn"
                 class="btn btn-success"
                 hidden>
 
                 Convert
 
             </button>
+
+            <p
+                id="convertMessage"
+                class="muted">
+
+            </p>
+
+            <a
+                id="downloadBtn"
+                class="btn btn-primary"
+                hidden
+                download>
+
+                Download
+
+            </a>
+
+            <div class="progress">
+
+                <div class="progress-bar"></div>
+
+            </div>
 
         </div>
 
