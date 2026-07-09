@@ -1,7 +1,9 @@
 """
 Project : Convertin
 Author  : Pico Lala & ChatGPT
-Version : 2.0.0
+Version : 1.0.0
+
+MP3 -> WAV Plugin
 """
 
 from pathlib import Path
@@ -10,16 +12,16 @@ from app.engines.ffmpeg_engine import FFmpegEngine
 from app.plugins.base import ConverterPlugin
 
 
-class MP4ToMP3Plugin(ConverterPlugin):
+class MP3ToWAVPlugin(ConverterPlugin):
 
-    slug = "mp4-to-mp3"
+    slug = "mp3-to-wav"
 
     source_formats = [
-        "mp4",
+        "mp3",
     ]
 
     target_formats = [
-        "mp3",
+        "wav",
     ]
 
     async def convert(
@@ -33,21 +35,20 @@ class MP4ToMP3Plugin(ConverterPlugin):
             target_format,
         ):
             raise RuntimeError(
-                "MP4ToMP3Plugin only supports MP4 -> MP3."
+                "MP3ToWAVPlugin only supports MP3 -> WAV."
             )
 
         output_path = (
             Path("outputs")
             / "audio"
-            / f"{source_path.stem}.mp3"
+            / f"{source_path.stem}.wav"
         )
 
         return await FFmpegEngine.convert(
             source_path=source_path,
             output_path=output_path,
             arguments=[
-                "-vn",
                 "-acodec",
-                "libmp3lame",
+                "pcm_s16le",
             ],
         )

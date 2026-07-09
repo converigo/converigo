@@ -1,0 +1,39 @@
+{
+  "slug": "jpg-to-webp",
+  "title": "JPG to WEBP Converter",
+  "description": "Convert JPG images to WEBP online with high quality.",
+  "category": "image",
+  "popular": true,
+  "featured": false,
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".jpg,.jpeg",
+    "button_text": "Upload JPG"
+  },
+  "faq": [
+    {
+      "question": "Why convert JPG to WEBP?",
+      "answer": "WEBP usually produces smaller file sizes while maintaining excellent image quality."
+    },
+    {
+      "question": "Will image quality be preserved?",
+      "answer": "Yes. The converter keeps high image quality during conversion."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "webp-to-jpg",
+      "title": "WEBP to JPG"
+    },
+    {
+      "slug": "png-to-jpg",
+      "title": "PNG to JPG"
+    }
+  ],
+  "seo": {
+    "title": "JPG to WEBP | Convertin",
+    "description": "Free online JPG to WEBP converter.",
+    "keywords": "jpg to webp, jpeg to webp, image converter"
+  }
+}

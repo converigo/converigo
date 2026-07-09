@@ -1,4 +1,16 @@
+"""
+Project : Convertin
+Author  : Pico Lala & ChatGPT
+Version : 2.0.0
+
+Image Engine
+"""
+
+from __future__ import annotations
+
 from pathlib import Path
+
+from PIL import Image
 
 from app.engines.base_engine import BaseEngine
 
@@ -21,6 +33,34 @@ class ImageEngine(BaseEngine):
         source_path: Path,
         target_format: str,
     ) -> Path:
-        raise NotImplementedError(
-            "Image conversion is not implemented yet."
+        target = target_format.lower().lstrip(".")
+
+        if target not in self.SUPPORTED_FORMATS:
+            raise ValueError(
+                f"Unsupported target format: {target}"
+            )
+
+        output_dir = Path("outputs") / "image"
+        output_dir.mkdir(
+            parents=True,
+            exist_ok=True,
         )
+
+        output_path = output_dir / (
+            f"{source_path.stem}.{target}"
+        )
+
+        with Image.open(source_path) as image:
+
+            if target in ("jpg", "jpeg"):
+
+                if image.mode in (
+                    "RGBA",
+                    "LA",
+                    "P",
+                ):
+                    image = image.convert("RGB")
+
+            image.save(output_path)
+
+        return output_path

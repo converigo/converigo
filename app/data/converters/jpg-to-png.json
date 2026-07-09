@@ -1,0 +1,35 @@
+{
+  "slug": "jpg-to-png",
+  "title": "JPG to PNG Converter",
+  "description": "Convert JPG images into PNG format with high quality.",
+  "category": "image",
+  "popular": true,
+  "featured": false,
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".jpg,.jpeg",
+    "button_text": "Upload JPG"
+  },
+  "faq": [
+    {
+      "question": "Will image quality change?",
+      "answer": "PNG uses lossless compression, so no additional quality loss occurs during conversion."
+    },
+    {
+      "question": "Can I upload JPEG files?",
+      "answer": "Yes. Both .jpg and .jpeg formats are supported."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "png-to-jpg",
+      "title": "PNG to JPG"
+    }
+  ],
+  "seo": {
+    "title": "JPG to PNG | Convertin",
+    "description": "Free online JPG to PNG converter.",
+    "keywords": "jpg to png, jpeg to png, image converter"
+  }
+}

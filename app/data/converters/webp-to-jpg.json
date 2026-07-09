@@ -1,0 +1,39 @@
+{
+  "slug": "webp-to-jpg",
+  "title": "WEBP to JPG Converter",
+  "description": "Convert WEBP images into JPG format online for free.",
+  "category": "image",
+  "popular": true,
+  "featured": false,
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".webp",
+    "button_text": "Upload WEBP"
+  },
+  "faq": [
+    {
+      "question": "Can I convert WEBP to JPG?",
+      "answer": "Yes. Your WEBP image will be converted to JPG with high quality."
+    },
+    {
+      "question": "Will transparency remain?",
+      "answer": "No. JPG does not support transparency. Transparent areas become a solid background."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "jpg-to-png",
+      "title": "JPG to PNG"
+    },
+    {
+      "slug": "png-to-jpg",
+      "title": "PNG to JPG"
+    }
+  ],
+  "seo": {
+    "title": "WEBP to JPG | Convertin",
+    "description": "Free online WEBP to JPG converter.",
+    "keywords": "webp to jpg, image converter, convert webp"
+  }
+}

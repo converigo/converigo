@@ -18,6 +18,11 @@ class ConverterPlugin(ABC):
     name: str = ""
     description: str = ""
 
+    # ---------- UI ----------
+    icon: str = "📄"
+    popular: bool = False
+    featured: bool = False
+
     # ---------- Classification ----------
     category: str = "general"
     engine: str = ""
@@ -53,6 +58,12 @@ class ConverterPlugin(ABC):
         target = target_format.lower().lstrip(".")
 
         return (
-            source in {fmt.lower().lstrip(".") for fmt in cls.source_formats}
-            and target in {fmt.lower().lstrip(".") for fmt in cls.target_formats}
+            source in {
+                fmt.lower().lstrip(".")
+                for fmt in cls.source_formats
+            }
+            and target in {
+                fmt.lower().lstrip(".")
+                for fmt in cls.target_formats
+            }
         )

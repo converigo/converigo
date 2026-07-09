@@ -1,90 +1,143 @@
-<section class="upload-section" id="upload">
+    <div class="upload-wrapper" id="upload">
 
-    <div class="container">
+        <div class="container">
 
-        <div class="upload-card">
+            <div class="upload-card">
 
-            <div class="upload-icon">
-                ☁
-            </div>
+                <div class="upload-icon">
+                    ☁
+                </div>
 
-            <h2>
-                Drag & Drop your file
-            </h2>
+                <h2>
+                    Drag & Drop your file
+                </h2>
 
-            <p>
-                or choose a file from your computer
-            </p>
+                <p>
+                    or choose a file from your computer
+                </p>
 
-            <button
-                id="chooseFile"
-                class="btn btn-primary">
+                <button
+                    id="chooseFile"
+                    class="btn btn-primary">
 
-                Choose File
+                    Choose File
 
-            </button>
+                </button>
 
-            <input
-                id="fileInput"
-                type="file"
-                hidden>
+                <input
+                    id="fileInput"
+                    type="file"
+                    hidden>
 
-            <div class="selected-file">
+                <div class="selected-file">
 
-                <strong id="fileName">
+                    <strong id="fileName">
 
-                    No file selected
+                        No file selected
 
-                </strong>
+                    </strong>
 
-                <div id="fileSize"></div>
+                    <div id="fileSize"></div>
 
-            </div>
+                </div>
 
-            <div class="supported-formats">
+                <h3 class="mt-4">
+                    Convert To
+                </h3>
 
-                <span>MP4</span>
-                <span>MP3</span>
-                <span>PDF</span>
-                <span>PNG</span>
-                <span>JPG</span>
-                <span>WEBP</span>
+                <div
+                    id="formatContainer"
+                    class="supported-formats">
 
-            </div>
+                    <button
+                        type="button"
+                        class="format-btn"
+                        data-format="mp3">
 
-            <button
-                id="convertBtn"
-                class="btn btn-success"
-                hidden>
+                        MP3
 
-                Convert
+                    </button>
 
-            </button>
+                    <button
+                        type="button"
+                        class="format-btn"
+                        data-format="wav">
 
-            <p
-                id="convertMessage"
-                class="muted">
+                        WAV
 
-            </p>
+                    </button>
 
-            <a
-                id="downloadBtn"
-                class="btn btn-primary"
-                hidden
-                download>
+                    <button
+                        type="button"
+                        class="format-btn"
+                        data-format="png">
 
-                Download
+                        PNG
 
-            </a>
+                    </button>
 
-            <div class="progress">
+                    <button
+                        type="button"
+                        class="format-btn"
+                        data-format="jpg">
 
-                <div class="progress-bar"></div>
+                        JPG
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="format-btn"
+                        data-format="webp">
+
+                        WEBP
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="format-btn"
+                        data-format="pdf">
+
+                        PDF
+
+                    </button>
+
+                </div>
+
+                <button
+                    id="convertBtn"
+                    class="btn btn-success"
+                    hidden>
+
+                    Convert
+
+                </button>
+
+                <p
+                    id="convertMessage"
+                    class="muted">
+
+                </p>
+
+                <a
+                    id="downloadBtn"
+                    class="btn btn-primary"
+                    hidden
+                    download>
+
+                    Download
+
+                </a>
+
+                <div class="progress">
+
+                    <div class="progress-bar"></div>
+
+                </div>
 
             </div>
 
         </div>
 
     </div>
-
-</section>

@@ -1,56 +1,56 @@
-body{
+    body{
 
-    font-family:"Inter",sans-serif;
+        font-family:"Inter",sans-serif;
 
-    background:var(--color-bg);
+        background:var(--color-bg);
 
-    color:var(--color-text);
+        color:var(--color-text);
 
-    line-height:1.6;
+        line-height:1.6;
 
-}
+    }
 
-.container{
+    .container{
 
-    width:min(
-        var(--container-width),
-        calc(100% - 48px)
-    );
+        width:min(
+            var(--container-width),
+            calc(100% - 48px)
+        );
 
-    margin-inline:auto;
+        margin-inline:auto;
 
-}
+    }
 
-section{
+    section{
 
-    padding:80px 0;
+        padding:80px 0;
 
-}
+    }
 
-.section-header{
+    .section-header{
 
-    text-align:center;
+        text-align:center;
 
-    margin-bottom:48px;
+        margin-bottom:48px;
 
-}
+    }
 
-.section-header h2{
+    .section-header h2{
 
-    font-size:42px;
+        font-size:42px;
 
-    font-weight:800;
+        font-weight:800;
 
-    margin-bottom:16px;
+        margin-bottom:16px;
 
-}
+    }
 
-.section-header p{
+    .section-header p{
 
-    color:var(--color-text-light);
+        color:var(--color-text-light);
 
-    max-width:680px;
+        max-width:680px;
 
-    margin:auto;
+        margin:auto;
 
-}
+    }

@@ -1,13 +1,25 @@
-import shutil
+"""
+Project : Convertin
+Author  : Pico Lala & ChatGPT
+Version : 2.2.0
+"""
+
+import hashlib
+import uuid
+from datetime import datetime
 from pathlib import Path
-from tempfile import NamedTemporaryFile
 
 from fastapi import UploadFile
 
-from app.utils.file_validator import FileValidationError, validate_upload_file
+from app.utils.file_validator import (
+    FileValidationError,
+    validate_upload_file,
+)
 
 UPLOAD_DIR = Path("uploads")
-UPLOAD_DIR.mkdir(exist_ok=True)
+UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+
+CHUNK_SIZE = 1024 * 1024  # 1 MB
 
 
 class UploadError(Exception):
@@ -15,20 +27,69 @@ class UploadError(Exception):
 
 
 class UploadService:
-    async def process_upload(self, file: UploadFile) -> Path:
-        validate_upload_file(file)
 
-        target_file = UPLOAD_DIR / Path(file.filename).name
+    async def process_upload(
+        self,
+        file: UploadFile,
+    ) -> Path:
 
         try:
-            with NamedTemporaryFile(delete=False, dir=UPLOAD_DIR, prefix="upload_", suffix=Path(file.filename).suffix) as tmp:
-                contents = await file.read()
-                tmp.write(contents)
-                tmp_path = Path(tmp.name)
 
-            shutil.move(str(tmp_path), str(target_file))
-            return target_file
+            validate_upload_file(file)
+
+            extension = Path(file.filename).suffix.lower()
+
+            filename = f"{uuid.uuid4().hex}{extension}"
+
+            target_path = UPLOAD_DIR / filename
+
+            sha256 = hashlib.sha256()
+            file_size = 0
+
+            uploaded_at = datetime.utcnow()
+
+            with open(target_path, "wb") as destination:
+
+                while True:
+
+                    chunk = await file.read(CHUNK_SIZE)
+
+                    if not chunk:
+                        break
+
+                    destination.write(chunk)
+
+                    file_size += len(chunk)
+
+                    sha256.update(chunk)
+
+            await file.close()
+
+            # Metadata sementara
+            metadata = {
+                "original_name": file.filename,
+                "stored_name": filename,
+                "extension": extension,
+                "path": str(target_path),
+                "size": file_size,
+                "sha256": sha256.hexdigest(),
+                "uploaded_at": uploaded_at.isoformat(),
+            }
+
+            # Sprint berikutnya metadata akan dikirim
+            # ke Logger / Database / Queue.
+            _ = metadata
+
+            return target_path
+
         except FileValidationError as exc:
-            raise UploadError(str(exc))
+
+            raise UploadError(
+                str(exc)
+            ) from exc
+
         except Exception as exc:
-            raise UploadError("Unable to save uploaded file.") from exc
+
+            raise UploadError(
+                "Unable to save uploaded file."
+            ) from exc

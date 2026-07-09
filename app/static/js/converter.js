@@ -1,55 +1,150 @@
 /**
- * converter.js
  * Convertin
- * DEBUG VERSION
+ * converter.js
+ * Version 3.1
  */
 
 class FileConverter {
 
     constructor() {
 
-        console.log("========== FileConverter ==========");
+        this.fileInput = document.getElementById("fileInput");
+        this.chooseFileBtn = document.getElementById("chooseFile");
 
         this.convertBtn = document.getElementById("convertBtn");
         this.downloadBtn = document.getElementById("downloadBtn");
-        this.convertMessage = document.getElementById("convertMessage");
-        this.fileInput = document.getElementById("fileInput");
-        this.progressBar = document.querySelector(".progress-bar");
 
-        console.log("convertBtn :", this.convertBtn);
-        console.log("downloadBtn :", this.downloadBtn);
-        console.log("fileInput :", this.fileInput);
+        this.convertMessage = document.getElementById("convertMessage");
+
+        this.fileName = document.getElementById("fileName");
+        this.fileSize = document.getElementById("fileSize");
+
+        this.progressBar =
+            document.querySelector(".progress-bar");
+
+        this.formatButtons =
+            document.querySelectorAll(".format-btn");
+
+        this.selectedFormat = null;
 
         this.currentDownloadPath = null;
-        this.isConverting = false;
 
-        this.init();
+        this.bindEvents();
 
     }
 
-    init() {
+    bindEvents() {
 
-        if (!this.convertBtn) {
+        if (this.chooseFileBtn) {
 
-            console.error("convertBtn tidak ditemukan");
-            return;
+            this.chooseFileBtn.addEventListener(
+                "click",
+                () => {
+
+                    this.fileInput.click();
+
+                }
+            );
 
         }
 
-        this.convertBtn.addEventListener("click", () => {
+        if (this.fileInput) {
 
-            this.handleConvert();
+            this.fileInput.addEventListener(
+                "change",
+                () => {
+
+                    this.handleFileSelected();
+
+                }
+            );
+
+        }
+
+        this.formatButtons.forEach((button) => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    this.formatButtons.forEach((btn) => {
+
+                        btn.classList.remove("active");
+
+                    });
+
+                    button.classList.add("active");
+
+                    this.selectedFormat =
+                        button.dataset.format;
+
+                }
+            );
 
         });
+
+        if (this.convertBtn) {
+
+            this.convertBtn.addEventListener(
+                "click",
+                () => {
+
+                    this.handleConvert();
+
+                }
+            );
+
+        }
+
+    }
+
+    handleFileSelected() {
+
+        const file =
+            this.fileInput.files[0];
+
+        if (!file)
+            return;
+
+        this.fileName.textContent =
+            file.name;
+
+        this.fileSize.textContent =
+            (file.size / 1024 / 1024).toFixed(2)
+            + " MB";
+
+        this.selectedFormat = null;
+
+        this.formatButtons.forEach((btn) => {
+
+            btn.classList.remove("active");
+
+        });
+
+        this.convertBtn.hidden = false;
+
+        this.convertBtn.disabled = false;
+
+        this.downloadBtn.hidden = true;
+
+        this.downloadBtn.removeAttribute("href");
+
+        this.downloadBtn.removeAttribute("download");
+
+        this.convertMessage.textContent = "";
+
+        if (this.progressBar) {
+
+            this.progressBar.style.width = "0%";
+
+        }
 
     }
 
     async handleConvert() {
 
-        if (this.isConverting)
-            return;
-
-        const file = this.fileInput.files[0];
+        const file =
+            this.fileInput.files[0];
 
         if (!file) {
 
@@ -60,94 +155,83 @@ class FileConverter {
 
         }
 
-        this.isConverting = true;
+        if (!this.selectedFormat) {
+
+            this.convertMessage.textContent =
+                "Please choose target format.";
+
+            return;
+
+        }
 
         this.convertBtn.disabled = true;
 
-        if (this.progressBar)
-            this.progressBar.style.width = "10%";
+        if (this.progressBar) {
 
-        const formData = new FormData();
+            this.progressBar.style.width = "20%";
 
-        formData.append("file", file);
+        }
+
+        const formData =
+            new FormData();
+
+        formData.append(
+            "file",
+            file
+        );
+
+        formData.append(
+            "target_format",
+            this.selectedFormat
+        );
 
         try {
 
-            console.log("Uploading...");
+            const response =
+                await fetch(
+                    "/convert",
+                    {
+                        method: "POST",
+                        body: formData
+                    }
+                );
 
-            const response = await fetch("/convert", {
-
-                method: "POST",
-                body: formData
-
-            });
-
-            const data = await response.json();
-
-            console.log("Response:");
-            console.log(data);
+            const data =
+                await response.json();
 
             if (!response.ok) {
 
                 throw new Error(
-                    data.detail || "Conversion failed."
+
+                    data.detail ||
+                    "Conversion failed."
+
                 );
 
             }
 
-            if (this.progressBar)
+            if (this.progressBar) {
+
                 this.progressBar.style.width = "100%";
 
-            this.currentDownloadPath =
-                data.download_path;
-
-            console.log("DOWNLOAD PATH :", this.currentDownloadPath);
+            }
 
             this.convertMessage.textContent =
                 data.message;
 
-            if (this.downloadBtn) {
+            this.currentDownloadPath =
+                data.download_path;
 
-                this.downloadBtn.hidden = false;
+            this.downloadBtn.hidden = false;
 
-                this.downloadBtn.href =
-                    data.download_path;
+            this.downloadBtn.href =
+                data.download_path;
 
-                this.downloadBtn.download =
-                    data.filename;
+            this.downloadBtn.download =
+                data.filename;
 
-                this.downloadBtn.textContent =
-                    "Download " + data.filename;
-
-                console.log("Download Button:");
-                console.log(this.downloadBtn);
-
-                console.log("hidden =", this.downloadBtn.hidden);
-                console.log("href =", this.downloadBtn.href);
-                console.log("download =", this.downloadBtn.download);
-
-                this.downloadBtn.onclick = (e) => {
-
-                    console.log("DOWNLOAD DIKLIK");
-
-                    console.log("href =", this.downloadBtn.href);
-
-                    if (!this.downloadBtn.href) {
-
-                        e.preventDefault();
-
-                        alert("Download path kosong!");
-
-                        return;
-
-                    }
-
-                    window.location.href =
-                        this.downloadBtn.href;
-
-                };
-
-            }
+            this.downloadBtn.textContent =
+                "Download " + data.filename;
 
         }
 
@@ -158,13 +242,17 @@ class FileConverter {
             this.convertMessage.textContent =
                 error.message;
 
+            if (this.progressBar) {
+
+                this.progressBar.style.width = "0%";
+
+            }
+
         }
 
         finally {
 
             this.convertBtn.disabled = false;
-
-            this.isConverting = false;
 
         }
 
@@ -172,12 +260,15 @@ class FileConverter {
 
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener(
 
-    console.log("converter.js loaded");
+    "DOMContentLoaded",
 
-    window.converter = new FileConverter();
+    () => {
 
-    console.log(window.converter);
+        window.converter =
+            new FileConverter();
 
-});
+    }
+
+);  
