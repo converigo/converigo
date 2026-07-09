@@ -1,0 +1,39 @@
+{
+  "slug": "png-to-webp",
+  "title": "PNG to WEBP Converter",
+  "description": "Convert PNG images to WEBP format online for free.",
+  "category": "image",
+  "popular": true,
+  "featured": false,
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".png",
+    "button_text": "Upload PNG"
+  },
+  "faq": [
+    {
+      "question": "Why convert PNG to WEBP?",
+      "answer": "WEBP provides smaller file sizes while maintaining excellent image quality."
+    },
+    {
+      "question": "Does WEBP support transparency?",
+      "answer": "Yes. WEBP supports transparent backgrounds just like PNG."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "png-to-jpg",
+      "title": "PNG to JPG"
+    },
+    {
+      "slug": "jpg-to-webp",
+      "title": "JPG to WEBP"
+    }
+  ],
+  "seo": {
+    "title": "PNG to WEBP | Convertin",
+    "description": "Free online PNG to WEBP converter.",
+    "keywords": "png to webp, image converter, convert png"
+  }
+}   

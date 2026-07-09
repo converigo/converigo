@@ -1,7 +1,7 @@
 """
 Project : Convertin
 Author  : Pico Lala & ChatGPT
-Version : 2.0.0
+Version : 2.1.0
 """
 
 import traceback
@@ -49,12 +49,12 @@ async def convert_file(
         )
 
         output_path = await ConversionService().convert_file(
-
             saved_path,
-
             target_format,
-
         )
+
+        # menghasilkan path relatif dari folder outputs
+        relative_path = output_path.relative_to("outputs")
 
         return {
 
@@ -62,7 +62,7 @@ async def convert_file(
 
             "filename": output_path.name,
 
-            "download_path": f"/outputs/audio/{output_path.name}",
+            "download_path": f"/outputs/{relative_path.as_posix()}",
 
             "message": "Conversion completed successfully.",
 
@@ -75,11 +75,8 @@ async def convert_file(
         traceback.print_exc()
 
         raise HTTPException(
-
             status_code=status.HTTP_400_BAD_REQUEST,
-
             detail=str(exc),
-
         )
 
     except ConversionError as exc:
@@ -87,11 +84,8 @@ async def convert_file(
         traceback.print_exc()
 
         raise HTTPException(
-
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-
             detail=str(exc),
-
         )
 
     except Exception as exc:
@@ -99,9 +93,6 @@ async def convert_file(
         traceback.print_exc()
 
         raise HTTPException(
-
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-
             detail=str(exc),
-
         )
