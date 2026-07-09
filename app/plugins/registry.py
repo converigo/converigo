@@ -1,10 +1,16 @@
 """
 Project : Convertin
 Author  : Pico Lala & ChatGPT
-Version : 2.0.0
+Version : 3.0.0
 
-Automatic Plugin Registry
+Plugin Registry
+
+Convertin Core Architecture
 """
+
+from __future__ import annotations
+
+from collections import defaultdict
 
 from app.plugins import discover_plugin_classes
 
@@ -13,7 +19,11 @@ class PluginRegistry:
 
     def __init__(self):
 
+        # (source,target) -> plugin
         self.plugins = {}
+
+        # source -> [plugin]
+        self.source_cache = defaultdict(list)
 
         self.load_plugins()
 
@@ -32,9 +42,7 @@ class PluginRegistry:
             self.register(plugin)
 
             print(
-                f"[OK] "
-                f"{plugin.slug} "
-                f"({plugin.source_formats} -> {plugin.target_formats})"
+                f"[OK] {plugin.slug}"
             )
 
         print("=" * 60)
@@ -47,6 +55,8 @@ class PluginRegistry:
 
         for source in plugin.source_formats:
 
+            self.source_cache[source.lower()].append(plugin)
+
             for target in plugin.target_formats:
 
                 key = (
@@ -57,44 +67,69 @@ class PluginRegistry:
                 self.plugins[key] = plugin
 
     def get_plugin(
-
         self,
-
         source_format: str,
-
         target_format: str,
-
     ):
 
         key = (
-
             source_format.lower(),
-
             target_format.lower(),
-
         )
 
         if key not in self.plugins:
 
-            available = []
-
-            for source, target in self.plugins.keys():
-
-                available.append(
-                    f"{source} -> {target}"
-                )
-
             raise ValueError(
-
-                "Converter "
-                f"{source_format} -> {target_format} "
-                "belum tersedia.\n\n"
-                "Converter yang tersedia:\n"
-                + "\n".join(available)
-
+                f"Converter {source_format} -> {target_format} tidak tersedia."
             )
 
         return self.plugins[key]
+
+    def get_plugins_by_source(
+        self,
+        source_format: str,
+    ):
+
+        return self.source_cache.get(
+            source_format.lower(),
+            [],
+        )
+
+    def get_metadata(
+        self,
+        source_format: str,
+    ):
+
+        plugins = self.get_plugins_by_source(
+            source_format
+        )
+
+        return [
+            plugin.metadata()
+            for plugin in plugins
+        ]
+
+    def get_best_plugin(
+        self,
+        source_format: str,
+    ):
+
+        plugins = self.get_plugins_by_source(
+            source_format
+        )
+
+        if not plugins:
+
+            return None
+
+        return max(
+            plugins,
+            key=lambda plugin: (
+                plugin.priority,
+                plugin.quality,
+                plugin.compatibility,
+            ),
+        )
 
 
 registry = PluginRegistry()

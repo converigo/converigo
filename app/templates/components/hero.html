@@ -4,25 +4,84 @@
 
         <div class="hero-content">
 
-            <span class="hero-badge">
-                🚀 Fast • Secure • Free
-            </span>
+            <div class="hero-top">
 
-            <h1 class="hero-title">
-                Convert Files
-                <br>
-                in Seconds
-            </h1>
+                <span class="hero-badge">
+                    🚀 Fast • Smart • Secure
+                </span>
 
-            <p class="hero-description">
-                Convert video, audio, documents and images with
-                high quality. No registration required.
-            </p>
+                <h1 class="hero-title">
+                    Convert Any File
+                    <br>
+                    In Seconds
+                </h1>
 
-            {% include "components/upload_card.html" %}
+                <p class="hero-description">
+                    Upload your file once.
+                    Convertin automatically detects the file type,
+                    recommends the best conversion,
+                    and lets you download the result in just a few clicks.
+                </p>
+
+            </div>
+
+            <div class="hero-workspace">
+
+                {% include "components/upload_card.html" %}
+
+                <div
+                    class="smart-panel"
+                    id="smartPanel"
+                    hidden>
+
+                    <div class="panel-section">
+
+                        <h3>
+                            📄 Detected File
+                        </h3>
+
+                        <div id="detectedFile">
+
+                            Waiting for file...
+
+                        </div>
+
+                    </div>
+
+                    <div class="panel-section">
+
+                        <h3>
+                            ⭐ Best Choice
+                        </h3>
+
+                        <div id="recommendedFormat">
+
+                            Recommendation will appear here.
+
+                        </div>
+
+                    </div>
+
+                    <div class="panel-section">
+
+                        <h3>
+                            Need another format?
+                        </h3>
+
+                        <div
+                            id="otherFormats"
+                            class="format-list">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
 
     </div>
 
-</section>  
+</section>

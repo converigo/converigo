@@ -1,0 +1,18 @@
+{
+    "slug": "png-to-ico",
+    "title": "PNG TO ICO",
+    "description": "Convert PNG images to ICO format online for free.",
+    "category": "image",
+    "engine": "image",
+    "icon": "🖼️",
+    "source": "png",
+    "target": "ico",
+    "popular": true,
+    "featured": true,
+    "keywords": [
+        "png to ico",
+        "convert png to ico",
+        "ico converter",
+        "favicon generator"
+    ]
+}

@@ -3,7 +3,7 @@ Project : Convertin
 Author  : Pico Lala & ChatGPT
 Version : 3.0.0
 
-WEBP -> JPG Plugin
+PNG -> ICO Plugin
 
 Convertin Smart Metadata Version
 """
@@ -14,19 +14,19 @@ from app.engines.image_engine import ImageEngine
 from app.plugins.base import ConverterPlugin
 
 
-class WEBPToJPGPlugin(ConverterPlugin):
+class PNGToICOPlugin(ConverterPlugin):
 
     # ==========================================
     # Identity
     # ==========================================
 
-    slug = "webp-to-jpg"
+    slug = "png-to-ico"
 
-    name = "WEBP to JPG"
+    name = "PNG to ICO"
 
     description = (
-        "Convert WEBP images to JPG "
-        "for wider device compatibility."
+        "Convert PNG images into ICO format "
+        "for website and application icons."
     )
 
     category = "image"
@@ -42,7 +42,7 @@ class WEBPToJPGPlugin(ConverterPlugin):
 
     popular = True
 
-    featured = False
+    featured = True
 
 
     # ==========================================
@@ -50,12 +50,11 @@ class WEBPToJPGPlugin(ConverterPlugin):
     # ==========================================
 
     source_formats = [
-        "webp",
+        "png",
     ]
 
     target_formats = [
-        "jpg",
-        "jpeg",
+        "ico",
     ]
 
 
@@ -63,25 +62,24 @@ class WEBPToJPGPlugin(ConverterPlugin):
     # Recommendation Metadata
     # ==========================================
 
-    goal = "compatibility"
+    goal = "icon"
 
     use_case = (
-        "Best when WEBP images need "
-        "support on more applications "
-        "and devices."
+        "Best for favicon, website icons, "
+        "and application shortcuts."
     )
 
 
-    priority = 85
+    priority = 70
 
-    quality = 90
+    quality = 85
 
-    compatibility = 100
+    compatibility = 85
 
     estimated_saving = 20
 
 
-    badge = "Universal Format"
+    badge = "For Icons"
 
 
     # ==========================================
@@ -89,12 +87,12 @@ class WEBPToJPGPlugin(ConverterPlugin):
     # ==========================================
 
     seo_title = (
-        "WEBP to JPG Converter | Convertin"
+        "PNG to ICO Converter | Convertin"
     )
 
     seo_description = (
-        "Convert WEBP images to JPG "
-        "for better compatibility."
+        "Convert PNG images to ICO icons "
+        "for websites and applications."
     )
 
 
@@ -106,7 +104,7 @@ class WEBPToJPGPlugin(ConverterPlugin):
         self,
         source_path: Path,
         target_format: str,
-    ):
+    ) -> Path:
 
 
         if not self.supports(
@@ -115,7 +113,7 @@ class WEBPToJPGPlugin(ConverterPlugin):
         ):
 
             raise RuntimeError(
-                "WEBPToJPGPlugin only supports WEBP -> JPG."
+                "PNGToICOPlugin only supports PNG -> ICO."
             )
 
 

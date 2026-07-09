@@ -1,0 +1,18 @@
+{
+    "slug": "bmp-to-jpg",
+    "title": "BMP TO JPG",
+    "description": "Convert BMP images to JPG online for free.",
+    "category": "image",
+    "engine": "image",
+    "icon": "🖼️",
+    "source": "bmp",
+    "target": "jpg",
+    "popular": true,
+    "featured": true,
+    "keywords": [
+        "bmp to jpg",
+        "convert bmp to jpg",
+        "bmp converter",
+        "image converter"
+    ]
+}

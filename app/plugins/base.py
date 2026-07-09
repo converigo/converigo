@@ -1,35 +1,138 @@
+"""
+Project : Convertin
+Author  : Pico Lala & ChatGPT
+Version : 3.0.0
+
+Plugin Base Class
+
+Convertin Core Architecture
+"""
+
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
 from pathlib import Path
-from typing import Iterable
 
 
 class ConverterPlugin(ABC):
     """
     Base class for every converter plugin.
 
-    A plugin describes WHAT conversion is supported.
-    The Engine describes HOW the conversion is executed.
+    Every plugin must inherit this class.
     """
 
-    # ---------- Identity ----------
-    slug: str = ""
-    name: str = ""
-    description: str = ""
+    # --------------------------------------------------
+    # Identity
+    # --------------------------------------------------
 
-    # ---------- UI ----------
-    icon: str = "📄"
-    popular: bool = False
-    featured: bool = False
+    slug = ""
 
-    # ---------- Classification ----------
-    category: str = "general"
-    engine: str = ""
+    name = ""
 
-    # ---------- Supported Formats ----------
-    source_formats: Iterable[str] = ()
-    target_formats: Iterable[str] = ()
+    description = ""
+
+    category = ""
+
+    engine = ""
+
+    # --------------------------------------------------
+    # Formats
+    # --------------------------------------------------
+
+    source_formats = []
+
+    target_formats = []
+
+    # --------------------------------------------------
+    # Recommendation Metadata
+    # --------------------------------------------------
+
+    goal = ""
+
+    use_case = ""
+
+    priority = 50
+
+    quality = 50
+
+    compatibility = 50
+
+    estimated_saving = 0
+
+    badge = ""
+
+    icon = "📄"
+
+    color = "blue"
+
+    # --------------------------------------------------
+    # SEO
+    # --------------------------------------------------
+
+    seo_title = ""
+
+    seo_description = ""
+
+    # --------------------------------------------------
+    # Helpers
+    # --------------------------------------------------
+
+    def supports(
+        self,
+        source_format: str,
+        target_format: str,
+    ) -> bool:
+
+        source = source_format.lower().replace(".", "")
+        target = target_format.lower().replace(".", "")
+
+        return (
+            source in self.source_formats
+            and
+            target in self.target_formats
+        )
+
+    def metadata(self) -> dict:
+
+        return {
+
+            "slug": self.slug,
+
+            "name": self.name,
+
+            "description": self.description,
+
+            "category": self.category,
+
+            "engine": self.engine,
+
+            "source_formats": self.source_formats,
+
+            "target_formats": self.target_formats,
+
+            "goal": self.goal,
+
+            "use_case": self.use_case,
+
+            "priority": self.priority,
+
+            "quality": self.quality,
+
+            "compatibility": self.compatibility,
+
+            "estimated_saving": self.estimated_saving,
+
+            "badge": self.badge,
+
+            "icon": self.icon,
+
+            "color": self.color,
+
+            "seo_title": self.seo_title,
+
+            "seo_description": self.seo_description,
+
+        }
 
     @abstractmethod
     async def convert(
@@ -38,32 +141,8 @@ class ConverterPlugin(ABC):
         target_format: str,
     ) -> Path:
         """
-        Execute conversion.
+        Convert file.
 
-        Returns
-        -------
-        Path
-            Output file.
+        Must return converted file path.
         """
         raise NotImplementedError
-
-    @classmethod
-    def supports(
-        cls,
-        source_format: str,
-        target_format: str,
-    ) -> bool:
-
-        source = source_format.lower().lstrip(".")
-        target = target_format.lower().lstrip(".")
-
-        return (
-            source in {
-                fmt.lower().lstrip(".")
-                for fmt in cls.source_formats
-            }
-            and target in {
-                fmt.lower().lstrip(".")
-                for fmt in cls.target_formats
-            }
-        )

@@ -1,143 +1,100 @@
-    <div class="upload-wrapper" id="upload">
+<div class="upload-wrapper" id="upload">
 
-        <div class="container">
+    <div class="container">
 
-            <div class="upload-card">
+        <div class="upload-card">
 
-                <div class="upload-icon">
-                    ☁
-                </div>
+            <div class="upload-icon">
+                ☁
+            </div>
 
-                <h2>
-                    Drag & Drop your file
-                </h2>
+            <h2>
+                Drag &amp; Drop your file
+            </h2>
 
-                <p>
-                    or choose a file from your computer
-                </p>
+            <p>
+                or choose a file from your computer
+            </p>
 
-                <button
-                    id="chooseFile"
-                    class="btn btn-primary">
+            <button
+                id="chooseFile"
+                class="btn btn-primary">
 
-                    Choose File
+                Choose File
 
-                </button>
+            </button>
 
-                <input
-                    id="fileInput"
-                    type="file"
-                    hidden>
+            <input
+                id="fileInput"
+                type="file"
+                hidden>
 
-                <div class="selected-file">
+            <div class="selected-file">
 
-                    <strong id="fileName">
+                <strong id="fileName">
 
-                        No file selected
+                    No file selected
 
-                    </strong>
+                </strong>
 
-                    <div id="fileSize"></div>
+                <div id="fileSize"></div>
 
-                </div>
+            </div>
 
-                <h3 class="mt-4">
-                    Convert To
-                </h3>
+            <h3 class="mt-4">
+                Convert To
+            </h3>
 
-                <div
-                    id="formatContainer"
-                    class="supported-formats">
+            <!--
+                Dynamic Plugin UI
 
-                    <button
-                        type="button"
-                        class="format-btn"
-                        data-format="mp3">
+                Format button akan dibuat otomatis
+                oleh converter.js berdasarkan:
 
-                        MP3
+                GET /api/plugins?source=<extension>
 
-                    </button>
+                Jangan menambahkan button manual lagi.
+            -->
 
-                    <button
-                        type="button"
-                        class="format-btn"
-                        data-format="wav">
+            <div
+                id="formatContainer"
+                class="supported-formats">
 
-                        WAV
+            </div>
 
-                    </button>
+            <button
+                id="convertBtn"
+                class="btn btn-success"
+                hidden>
 
-                    <button
-                        type="button"
-                        class="format-btn"
-                        data-format="png">
+                Convert
 
-                        PNG
+            </button>
 
-                    </button>
+            <p
+                id="convertMessage"
+                class="muted">
 
-                    <button
-                        type="button"
-                        class="format-btn"
-                        data-format="jpg">
+            </p>
 
-                        JPG
+            <a
+                id="downloadBtn"
+                class="btn btn-primary"
+                hidden
+                download>
 
-                    </button>
+                Download
 
-                    <button
-                        type="button"
-                        class="format-btn"
-                        data-format="webp">
+            </a>
 
-                        WEBP
+            <div class="progress">
 
-                    </button>
-
-                    <button
-                        type="button"
-                        class="format-btn"
-                        data-format="pdf">
-
-                        PDF
-
-                    </button>
-
-                </div>
-
-                <button
-                    id="convertBtn"
-                    class="btn btn-success"
-                    hidden>
-
-                    Convert
-
-                </button>
-
-                <p
-                    id="convertMessage"
-                    class="muted">
-
-                </p>
-
-                <a
-                    id="downloadBtn"
-                    class="btn btn-primary"
-                    hidden
-                    download>
-
-                    Download
-
-                </a>
-
-                <div class="progress">
-
-                    <div class="progress-bar"></div>
-
-                </div>
+                <div class="progress-bar"></div>
 
             </div>
 
         </div>
 
     </div>
+
+</div>

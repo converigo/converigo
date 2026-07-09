@@ -3,7 +3,7 @@ Project : Convertin
 Author  : Pico Lala & ChatGPT
 Version : 3.0.0
 
-WEBP -> JPG Plugin
+WEBP -> PNG Plugin
 
 Convertin Smart Metadata Version
 """
@@ -14,19 +14,19 @@ from app.engines.image_engine import ImageEngine
 from app.plugins.base import ConverterPlugin
 
 
-class WEBPToJPGPlugin(ConverterPlugin):
+class WEBPToPNGPlugin(ConverterPlugin):
 
     # ==========================================
     # Identity
     # ==========================================
 
-    slug = "webp-to-jpg"
+    slug = "webp-to-png"
 
-    name = "WEBP to JPG"
+    name = "WEBP to PNG"
 
     description = (
-        "Convert WEBP images to JPG "
-        "for wider device compatibility."
+        "Convert WEBP images to PNG "
+        "for editing and lossless quality."
     )
 
     category = "image"
@@ -40,7 +40,7 @@ class WEBPToJPGPlugin(ConverterPlugin):
     # Homepage Metadata
     # ==========================================
 
-    popular = True
+    popular = False
 
     featured = False
 
@@ -54,8 +54,7 @@ class WEBPToJPGPlugin(ConverterPlugin):
     ]
 
     target_formats = [
-        "jpg",
-        "jpeg",
+        "png",
     ]
 
 
@@ -63,25 +62,24 @@ class WEBPToJPGPlugin(ConverterPlugin):
     # Recommendation Metadata
     # ==========================================
 
-    goal = "compatibility"
+    goal = "quality"
 
     use_case = (
-        "Best when WEBP images need "
-        "support on more applications "
-        "and devices."
+        "Best for editing workflows, "
+        "design projects, and lossless images."
     )
 
 
-    priority = 85
+    priority = 75
 
-    quality = 90
+    quality = 100
 
-    compatibility = 100
+    compatibility = 90
 
-    estimated_saving = 20
+    estimated_saving = 10
 
 
-    badge = "Universal Format"
+    badge = "Lossless Quality"
 
 
     # ==========================================
@@ -89,12 +87,12 @@ class WEBPToJPGPlugin(ConverterPlugin):
     # ==========================================
 
     seo_title = (
-        "WEBP to JPG Converter | Convertin"
+        "WEBP to PNG Converter | Convertin"
     )
 
     seo_description = (
-        "Convert WEBP images to JPG "
-        "for better compatibility."
+        "Convert WEBP images to PNG "
+        "for editing and lossless quality."
     )
 
 
@@ -106,7 +104,7 @@ class WEBPToJPGPlugin(ConverterPlugin):
         self,
         source_path: Path,
         target_format: str,
-    ):
+    ) -> Path:
 
 
         if not self.supports(
@@ -115,7 +113,7 @@ class WEBPToJPGPlugin(ConverterPlugin):
         ):
 
             raise RuntimeError(
-                "WEBPToJPGPlugin only supports WEBP -> JPG."
+                "WEBPToPNGPlugin only supports WEBP -> PNG."
             )
 
 

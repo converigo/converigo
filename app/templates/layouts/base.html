@@ -9,6 +9,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
+
     <title>
 
         {% block title %}
@@ -17,93 +18,203 @@
 
     </title>
 
+
     <link
         rel="preconnect"
         href="https://fonts.googleapis.com">
+
 
     <link
         rel="preconnect"
         href="https://fonts.gstatic.com"
         crossorigin>
 
+
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
+
+
 
     <!-- ==========================
          CORE CSS
     =========================== -->
 
+
     <link
         rel="stylesheet"
         href="/static/css/core/variables.css">
+
 
     <link
         rel="stylesheet"
         href="/static/css/core/reset.css">
 
+
     <link
         rel="stylesheet"
         href="/static/css/core/base.css">
+
+
+
+
 
     <!-- ==========================
          COMPONENT CSS
     =========================== -->
 
+
     <link
         rel="stylesheet"
         href="/static/css/components/header.css">
+
 
     <link
         rel="stylesheet"
         href="/static/css/components/hero.css">
 
+
     <link
         rel="stylesheet"
         href="/static/css/components/button.css">
+
 
     <link
         rel="stylesheet"
         href="/static/css/components/card.css">
 
+
     <link
         rel="stylesheet"
         href="/static/css/components/upload-card.css">
+
 
     <link
         rel="stylesheet"
         href="/static/css/components/popular-tools.css">
 
+
     <link
         rel="stylesheet"
         href="/static/css/components/features.css">
+
 
     <link
         rel="stylesheet"
         href="/static/css/components/footer.css">
 
+
+
+
+
     <!-- ==========================
          PAGE CSS
     =========================== -->
+
 
     <link
         rel="stylesheet"
         href="/static/css/pages/home.css">
 
+
 </head>
+
+
 
 <body>
 
+
     {% block content %}
+
     {% endblock %}
 
+
+
+
+
     <!-- ==========================
-         JAVASCRIPT
+         CONFIG
     =========================== -->
+
+
+    <script src="/static/js/config.js"></script>
+
+
+
+
+
+    <!-- ==========================
+         CORE
+    =========================== -->
+
 
     <script src="/static/js/app.js"></script>
 
+
+
+
+
+    <!-- ==========================
+         API
+    =========================== -->
+
+
+    <script src="/static/js/api/plugin_api.js"></script>
+
+
+
+
+
+    <!-- ==========================
+         UI
+    =========================== -->
+
+
+    <script src="/static/js/ui/button_renderer.js"></script>
+
+
+
+
+
+    <!-- ==========================
+         MANAGERS
+    =========================== -->
+
+
+    <!-- Upload -->
+
+    <script src="/static/js/upload/upload_manager.js"></script>
+
+
+
+    <!-- Recommendation -->
+
+    <script src="/static/js/recommendation/recommendation_manager.js"></script>
+
+
+
+    <!-- Convert -->
+
+    <script src="/static/js/convert/convert_manager.js"></script>
+
+
+
+    <!-- Download -->
+
+    <script src="/static/js/download/download_manager.js"></script>
+
+
+
+
+
+    <!-- ==========================
+         BOOTSTRAP
+    =========================== -->
+
+
     <script src="/static/js/converter.js"></script>
+
+
 
 </body>
 

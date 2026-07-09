@@ -1,9 +1,11 @@
 """
 Project : Convertin
 Author  : Pico Lala & ChatGPT
-Version : 1.0.0
+Version : 3.0.0
 
 JPG -> PNG Plugin
+
+Convertin Smart Metadata Version
 """
 
 from pathlib import Path
@@ -14,11 +16,18 @@ from app.plugins.base import ConverterPlugin
 
 class JPGToPNGPlugin(ConverterPlugin):
 
+    # ==========================================
+    # Identity
+    # ==========================================
+
     slug = "jpg-to-png"
 
     name = "JPG to PNG"
 
-    description = "Convert JPG images to PNG."
+    description = (
+        "Convert JPG images to PNG format "
+        "for lossless quality and editing."
+    )
 
     category = "image"
 
@@ -26,9 +35,19 @@ class JPGToPNGPlugin(ConverterPlugin):
 
     icon = "🖼️"
 
+
+    # ==========================================
+    # Homepage Metadata
+    # ==========================================
+
     popular = True
 
     featured = False
+
+
+    # ==========================================
+    # Formats
+    # ==========================================
 
     source_formats = [
         "jpg",
@@ -39,21 +58,68 @@ class JPGToPNGPlugin(ConverterPlugin):
         "png",
     ]
 
+
+    # ==========================================
+    # Recommendation Metadata
+    # ==========================================
+
+    goal = "quality"
+
+    use_case = (
+        "Best for editing workflows, "
+        "design projects, and lossless images."
+    )
+
+
+    priority = 75
+
+    quality = 100
+
+    compatibility = 90
+
+    estimated_saving = 10
+
+
+    badge = "Lossless Quality"
+
+
+    # ==========================================
+    # SEO
+    # ==========================================
+
+    seo_title = (
+        "JPG to PNG Converter | Convertin"
+    )
+
+    seo_description = (
+        "Convert JPG images to PNG "
+        "with lossless quality."
+    )
+
+
+    # ==========================================
+    # Conversion
+    # ==========================================
+
     async def convert(
         self,
         source_path: Path,
         target_format: str,
     ) -> Path:
 
+
         if not self.supports(
             source_path.suffix,
             target_format,
         ):
+
             raise RuntimeError(
                 "JPGToPNGPlugin only supports JPG -> PNG."
             )
 
+
         engine = ImageEngine()
+
 
         return await engine.convert(
             source_path=source_path,

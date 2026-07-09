@@ -1,7 +1,7 @@
 """
 Project : Convertin
 Author  : Pico Lala & ChatGPT
-Version : 2.0.0
+Version : 2.1.0
 
 Image Engine
 """
@@ -16,6 +16,7 @@ from app.engines.base_engine import BaseEngine
 
 
 class ImageEngine(BaseEngine):
+
     ENGINE_NAME = "image"
 
     SUPPORTED_FORMATS = [
@@ -26,6 +27,7 @@ class ImageEngine(BaseEngine):
         "bmp",
         "tiff",
         "webp",
+        "ico",
     ]
 
     async def convert(
@@ -33,6 +35,7 @@ class ImageEngine(BaseEngine):
         source_path: Path,
         target_format: str,
     ) -> Path:
+
         target = target_format.lower().lstrip(".")
 
         if target not in self.SUPPORTED_FORMATS:
@@ -41,6 +44,7 @@ class ImageEngine(BaseEngine):
             )
 
         output_dir = Path("outputs") / "image"
+
         output_dir.mkdir(
             parents=True,
             exist_ok=True,
@@ -52,7 +56,10 @@ class ImageEngine(BaseEngine):
 
         with Image.open(source_path) as image:
 
-            if target in ("jpg", "jpeg"):
+            if target in (
+                "jpg",
+                "jpeg",
+            ):
 
                 if image.mode in (
                     "RGBA",
@@ -61,6 +68,36 @@ class ImageEngine(BaseEngine):
                 ):
                     image = image.convert("RGB")
 
-            image.save(output_path)
+                image.save(
+                    output_path,
+                    quality=95,
+                )
+
+            elif target == "ico":
+
+                if image.mode not in (
+                    "RGB",
+                    "RGBA",
+                ):
+                    image = image.convert("RGBA")
+
+                image.thumbnail(
+                    (
+                        256,
+                        256,
+                    ),
+                    Image.LANCZOS,
+                )
+
+                image.save(
+                    output_path,
+                    format="ICO",
+                )
+
+            else:
+
+                image.save(
+                    output_path,
+                )
 
         return output_path

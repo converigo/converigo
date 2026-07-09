@@ -3,7 +3,7 @@ Project : Convertin
 Author  : Pico Lala & ChatGPT
 Version : 3.0.0
 
-WEBP -> JPG Plugin
+BMP -> JPG Plugin
 
 Convertin Smart Metadata Version
 """
@@ -14,19 +14,19 @@ from app.engines.image_engine import ImageEngine
 from app.plugins.base import ConverterPlugin
 
 
-class WEBPToJPGPlugin(ConverterPlugin):
+class BMPToJPGPlugin(ConverterPlugin):
 
     # ==========================================
     # Identity
     # ==========================================
 
-    slug = "webp-to-jpg"
+    slug = "bmp-to-jpg"
 
-    name = "WEBP to JPG"
+    name = "BMP to JPG"
 
     description = (
-        "Convert WEBP images to JPG "
-        "for wider device compatibility."
+        "Convert BMP images to JPG "
+        "with smaller file size and wider support."
     )
 
     category = "image"
@@ -40,7 +40,7 @@ class WEBPToJPGPlugin(ConverterPlugin):
     # Homepage Metadata
     # ==========================================
 
-    popular = True
+    popular = False
 
     featured = False
 
@@ -50,7 +50,7 @@ class WEBPToJPGPlugin(ConverterPlugin):
     # ==========================================
 
     source_formats = [
-        "webp",
+        "bmp",
     ]
 
     target_formats = [
@@ -63,25 +63,24 @@ class WEBPToJPGPlugin(ConverterPlugin):
     # Recommendation Metadata
     # ==========================================
 
-    goal = "compatibility"
+    goal = "compress"
 
     use_case = (
-        "Best when WEBP images need "
-        "support on more applications "
-        "and devices."
+        "Best for reducing BMP file size "
+        "and improving compatibility."
     )
 
 
-    priority = 85
+    priority = 70
 
-    quality = 90
+    quality = 85
 
     compatibility = 100
 
-    estimated_saving = 20
+    estimated_saving = 80
 
 
-    badge = "Universal Format"
+    badge = "File Size Optimizer"
 
 
     # ==========================================
@@ -89,12 +88,12 @@ class WEBPToJPGPlugin(ConverterPlugin):
     # ==========================================
 
     seo_title = (
-        "WEBP to JPG Converter | Convertin"
+        "BMP to JPG Converter | Convertin"
     )
 
     seo_description = (
-        "Convert WEBP images to JPG "
-        "for better compatibility."
+        "Convert BMP images to JPG "
+        "with smaller file size."
     )
 
 
@@ -106,7 +105,7 @@ class WEBPToJPGPlugin(ConverterPlugin):
         self,
         source_path: Path,
         target_format: str,
-    ):
+    ) -> Path:
 
 
         if not self.supports(
@@ -115,7 +114,7 @@ class WEBPToJPGPlugin(ConverterPlugin):
         ):
 
             raise RuntimeError(
-                "WEBPToJPGPlugin only supports WEBP -> JPG."
+                "BMPToJPGPlugin only supports BMP -> JPG."
             )
 
 

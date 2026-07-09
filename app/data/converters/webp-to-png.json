@@ -1,0 +1,39 @@
+{
+  "slug": "webp-to-png",
+  "title": "WEBP to PNG Converter",
+  "description": "Convert WEBP images to PNG online for free.",
+  "category": "image",
+  "popular": true,
+  "featured": false,
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".webp",
+    "button_text": "Upload WEBP"
+  },
+  "faq": [
+    {
+      "question": "Why convert WEBP to PNG?",
+      "answer": "PNG is widely supported and ideal for editing while preserving image quality."
+    },
+    {
+      "question": "Will image quality decrease?",
+      "answer": "No. The PNG output keeps the original image quality."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "webp-to-jpg",
+      "title": "WEBP to JPG"
+    },
+    {
+      "slug": "png-to-webp",
+      "title": "PNG to WEBP"
+    }
+  ],
+  "seo": {
+    "title": "WEBP to PNG | Convertin",
+    "description": "Free online WEBP to PNG converter.",
+    "keywords": "webp to png,image converter"
+  }
+}
