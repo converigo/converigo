@@ -24,23 +24,71 @@ class DocumentEngine(BaseEngine):
         target = target_format.lower().lstrip(".")
 
         if target == "pdf":
-            if source_path.suffix.lower() not in {".jpg", ".jpeg", ".png", ".webp", ".bmp"}:
-                raise ValueError(
-                    f"Unsupported source format for document engine: {source_path.suffix}"
-                )
+            if source_path.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp", ".bmp"}:
+                output_dir = Path("outputs") / "document"
+                output_dir.mkdir(parents=True, exist_ok=True)
 
-            output_dir = Path("outputs") / "document"
-            output_dir.mkdir(parents=True, exist_ok=True)
+                output_path = output_dir / f"{source_path.stem}.pdf"
 
-            output_path = output_dir / f"{source_path.stem}.pdf"
+                with Image.open(source_path) as image:
+                    if image.mode in ("RGBA", "LA", "P"):
+                        image = image.convert("RGB")
 
-            with Image.open(source_path) as image:
-                if image.mode in ("RGBA", "LA", "P"):
-                    image = image.convert("RGB")
+                    image.save(output_path, format="PDF", resolution=100.0)
 
-                image.save(output_path, format="PDF", resolution=100.0)
+                return output_path
 
-            return output_path
+            if source_path.suffix.lower() in {".docx", ".doc"}:
+                output_dir = Path("outputs") / "document"
+                output_dir.mkdir(parents=True, exist_ok=True)
+
+                output_path = output_dir / f"{source_path.stem}.pdf"
+
+                try:
+                    import docx
+                except ImportError as exc:
+                    raise RuntimeError("python-docx is required for DOCX to PDF conversion.") from exc
+
+                text = ""
+                with tempfile.TemporaryDirectory(prefix="docx2pdf_", dir=str(output_dir)) as temp_dir:
+                    temp_dir_path = Path(temp_dir)
+                    temp_text_path = temp_dir_path / f"{source_path.stem}.txt"
+
+                    try:
+                        document = docx.Document(str(source_path))
+                        paragraphs = [paragraph.text for paragraph in document.paragraphs if paragraph.text.strip()]
+                        temp_text_path.write_text("\n\n".join(paragraphs), encoding="utf-8")
+                        text = temp_text_path.read_text(encoding="utf-8")
+                    except Exception as exc:
+                        raise RuntimeError(f"Unable to read DOCX content: {exc}") from exc
+
+                try:
+                    from reportlab.lib.pagesizes import letter
+                    from reportlab.pdfgen import canvas
+                except ImportError as exc:
+                    raise RuntimeError("reportlab is required for DOCX to PDF conversion.") from exc
+
+                c = canvas.Canvas(str(output_path), pagesize=letter)
+                c.setFont("Helvetica", 12)
+                lines = text.splitlines()
+                y = 750
+                for line in lines:
+                    if y < 50:
+                        c.showPage()
+                        c.setFont("Helvetica", 12)
+                        y = 750
+                    c.drawString(50, y, line)
+                    y -= 14
+                c.save()
+
+                if not output_path.exists():
+                    raise RuntimeError("PDF output was not created.")
+
+                return output_path
+
+            raise ValueError(
+                f"Unsupported source format for document engine: {source_path.suffix}"
+            )
 
         if target in {"jpg", "jpeg"}:
             if source_path.suffix.lower() != ".pdf":

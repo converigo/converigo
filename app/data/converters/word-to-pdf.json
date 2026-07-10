@@ -1,0 +1,29 @@
+{
+  "slug": "word-to-pdf",
+  "title": "Word to PDF Converter",
+  "description": "Convert DOCX documents into PDF files.",
+  "category": "document",
+  "popular": true,
+  "featured": false,
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".docx,.doc",
+    "button_text": "Upload Word"
+  },
+  "faq": [
+    {
+      "question": "Does this preserve document formatting?",
+      "answer": "Basic formatting is preserved, though complex layouts may vary."
+    },
+    {
+      "question": "What file formats are supported?",
+      "answer": "Upload DOCX or DOC files to receive a PDF file."
+    }
+  ],
+  "seo": {
+    "title": "Word to PDF | Convertin",
+    "description": "Convert DOCX documents to PDF files online.",
+    "keywords": "word to pdf, docx to pdf, convert word to pdf"
+  }
+}

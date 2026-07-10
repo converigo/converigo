@@ -1,6 +1,8 @@
+from io import BytesIO
 from pathlib import Path
 
 from fastapi.testclient import TestClient
+from reportlab.pdfgen import canvas
 
 from app.main import app
 from app.plugins.registry import registry
@@ -12,14 +14,18 @@ def test_pdf_to_jpg_plugin_is_discovered_and_converts():
     assert plugin.slug == "pdf-to-jpg"
 
     client = TestClient(app)
-    sample_path = Path(__file__).parent.parent / "test_files" / "sample.pdf"
 
-    with sample_path.open("rb") as sample_file:
-        response = client.post(
-            "/convert",
-            files={"file": (sample_path.name, sample_file, "application/pdf")},
-            data={"target_format": "jpg"},
-        )
+    buffer = BytesIO()
+    pdf_canvas = canvas.Canvas(buffer)
+    pdf_canvas.drawString(100, 750, "Convertin PDF to JPG test")
+    pdf_canvas.save()
+    buffer.seek(0)
+
+    response = client.post(
+        "/convert",
+        files={"file": ("sample.pdf", buffer, "application/pdf")},
+        data={"target_format": "jpg"},
+    )
 
     assert response.status_code == 201
     assert response.json()["status"] == "success"
