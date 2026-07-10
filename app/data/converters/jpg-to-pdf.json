@@ -1,0 +1,29 @@
+{
+  "slug": "jpg-to-pdf",
+  "title": "JPG to PDF Converter",
+  "description": "Convert JPG images into PDF documents with high quality.",
+  "category": "document",
+  "popular": true,
+  "featured": false,
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".jpg,.jpeg",
+    "button_text": "Upload JPG"
+  },
+  "faq": [
+    {
+      "question": "Does this preserve image quality?",
+      "answer": "Yes. The converter preserves the original image quality in the generated PDF."
+    },
+    {
+      "question": "What file formats are supported?",
+      "answer": "Upload JPG or JPEG images to receive a PDF file."
+    }
+  ],
+  "seo": {
+    "title": "JPG to PDF | Convertin",
+    "description": "Convert JPG images to PDF documents online.",
+    "keywords": "jpg to pdf, convert jpg to pdf, image to pdf"
+  }
+}
