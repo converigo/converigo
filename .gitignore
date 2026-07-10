@@ -2,22 +2,24 @@
 __pycache__/
 *.pyc
 *.pyo
-*.pyd
 
 # Virtual Environment
 .venv/
-venv/
 
 # Environment
 .env
 
-# Upload & Output
-uploads/*
-outputs/*
+# Logs
+app/logs/
+*.log
 
-# VS Code
-.vscode/
+# Upload temporary
+app/uploads/*
+app/outputs/*
 
 # OS
 .DS_Store
 Thumbs.db
+
+# Editor
+.vscode/
