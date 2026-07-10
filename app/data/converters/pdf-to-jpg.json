@@ -1,0 +1,29 @@
+{
+  "slug": "pdf-to-jpg",
+  "title": "PDF to JPG Converter",
+  "description": "Convert PDF documents into JPG images page by page.",
+  "category": "document",
+  "popular": true,
+  "featured": false,
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".pdf",
+    "button_text": "Upload PDF"
+  },
+  "faq": [
+    {
+      "question": "Does this support multi-page PDFs?",
+      "answer": "Yes. Each page is converted into a separate JPG image."
+    },
+    {
+      "question": "What file formats are supported?",
+      "answer": "Upload PDF files to receive JPG image output."
+    }
+  ],
+  "seo": {
+    "title": "PDF to JPG | Convertin",
+    "description": "Convert PDF documents to JPG images online.",
+    "keywords": "pdf to jpg, convert pdf to jpg, pdf images"
+  }
+}
