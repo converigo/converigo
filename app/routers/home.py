@@ -468,3 +468,82 @@ async def webp_to_jpg_landing(request: Request):
             "structured_data": structured_data,
         },
     )
+
+
+@router.get("/jpg-to-pdf", response_class=HTMLResponse)
+async def jpg_to_pdf_landing(request: Request):
+    locale_data = language_service.load_locale(
+        accept_language=request.headers.get("accept-language"),
+        lang_query=request.query_params.get("lang"),
+    )
+
+    def t(key: str, default: str = "") -> str:
+        return language_service.translate(locale_data, key, default)
+
+    tool_data = converter_data_service.load_converter_by_slug("jpg-to-pdf")
+    base_url = _build_base_url(request)
+    seo_title = "JPG to PDF Converter Online Free - Convertin"
+    seo_description = (
+        "Convert JPG images to PDF online free. Fast, secure and easy image to PDF converter."
+    )
+
+    faq_items = [
+        {
+            "question": "What is JPG to PDF conversion?",
+            "answer": "JPG to PDF conversion combines one or more JPG images into a single PDF document.",
+        },
+        {
+            "question": "Why convert JPG images to PDF?",
+            "answer": "PDF documents are easy to share, print, and store while keeping your images intact.",
+        },
+        {
+            "question": "Is JPG to PDF converter free?",
+            "answer": "Yes, Convertin provides free online JPG to PDF conversion.",
+        },
+    ]
+
+    meta = {
+        "title": seo_title,
+        "description": seo_description,
+        "canonical": f"{base_url}/jpg-to-pdf",
+        "og_url": f"{base_url}/jpg-to-pdf",
+        "og_image": f"{base_url}/static/images/og-default.png",
+        "keywords": "jpg to pdf converter, convert jpg to pdf online, jpg to pdf online free",
+        "og_type": "website",
+        "twitter_card": "summary_large_image",
+    }
+
+    structured_data = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": item["question"],
+                "acceptedAnswer": {"@type": "Answer", "text": item["answer"]},
+            }
+            for item in faq_items
+        ],
+    }
+
+    return templates.TemplateResponse(
+        request=request,
+        name="pages/jpg_to_pdf_landing.html",
+        context={
+            "request": request,
+            "locale": locale_data,
+            "t": t,
+            "meta": meta,
+            "title": seo_title,
+            "tool": tool_data,
+            "upload_form": tool_data.get("upload_form", {}),
+            "faq_items": faq_items,
+            "benefits": [
+                {"title": "Convert JPG images quickly", "text": "Turn your JPG images into PDF in seconds without installing software."},
+                {"title": "Easy sharing and printing", "text": "Create a single PDF that is simple to send, print, and archive."},
+                {"title": "Secure file processing", "text": "Your files are handled safely and kept private during conversion."},
+                {"title": "Free online converter", "text": "Use Convertin online for free to turn JPG into PDF."},
+            ],
+            "structured_data": structured_data,
+        },
+    )
