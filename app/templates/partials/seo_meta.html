@@ -1,12 +1,24 @@
 {% set page_meta = meta if meta is defined else seo if seo is defined else {} %}
-<title>{{ page_meta.title }}</title>
-<meta name="description" content="{{ page_meta.description }}">
-<link rel="canonical" href="{{ page_meta.canonical }}">
-<meta property="og:title" content="{{ page_meta.title }}">
-<meta property="og:description" content="{{ page_meta.description }}">
-<meta property="og:type" content="{{ page_meta.og_type }}">
-<meta property="og:image" content="{{ page_meta.og_image }}">
-<meta name="twitter:card" content="{{ page_meta.twitter_card }}">
-<meta name="twitter:title" content="{{ page_meta.title }}">
-<meta name="twitter:description" content="{{ page_meta.description }}">
-<meta name="twitter:image" content="{{ page_meta.og_image }}">
+{% set page_title = page_meta.title | default('Convertin | Fast Online File Conversion') %}
+{% set page_description = page_meta.description | default('Convertin offers fast, secure, and automatic file conversion from video, audio, image, and document formats.') %}
+{% set page_canonical = page_meta.canonical | default('/') %}
+{% set page_keywords = page_meta.keywords | default('convert files, file conversion, online converter, convert video, convert image') %}
+{% set page_author = page_meta.author | default('Convertin') %}
+{% set page_robots = page_meta.robots | default('index,follow') %}
+{% set page_og_type = page_meta.og_type | default('website') %}
+{% set page_og_image = page_meta.og_image | default('/static/images/convertin-logo.png') %}
+{% set page_twitter_card = page_meta.twitter_card | default('summary_large_image') %}
+<title>{{ page_title }}</title>
+<meta name="description" content="{{ page_description }}">
+<meta name="keywords" content="{{ page_keywords }}">
+<meta name="author" content="{{ page_author }}">
+<meta name="robots" content="{{ page_robots }}">
+<link rel="canonical" href="{{ page_canonical }}">
+<meta property="og:title" content="{{ page_title }}">
+<meta property="og:description" content="{{ page_description }}">
+<meta property="og:type" content="{{ page_og_type }}">
+<meta property="og:image" content="{{ page_og_image }}">
+<meta name="twitter:card" content="{{ page_twitter_card }}">
+<meta name="twitter:title" content="{{ page_title }}">
+<meta name="twitter:description" content="{{ page_description }}">
+<meta name="twitter:image" content="{{ page_og_image }}">
