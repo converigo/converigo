@@ -153,3 +153,81 @@ async def contact(request: Request):
         "Get in touch with Convertin for support, questions, or feedback about our file conversion tools.",
         "/contact",
     )
+
+
+@router.get("/mp4-to-mp3", response_class=HTMLResponse)
+async def mp4_to_mp3_landing(request: Request):
+    locale_data = language_service.load_locale(
+        accept_language=request.headers.get("accept-language"),
+        lang_query=request.query_params.get("lang"),
+    )
+
+    def t(key: str, default: str = "") -> str:
+        return language_service.translate(locale_data, key, default)
+
+    tool_data = converter_data_service.load_converter_by_slug("mp4-to-mp3")
+    base_url = _build_base_url(request)
+    seo_title = "MP4 to MP3 Converter Online Free - Convertin"
+    seo_description = (
+        "Convert MP4 videos to MP3 audio online free. Fast, secure and easy MP4 to MP3 converter."
+    )
+
+    faq_items = [
+        {
+            "question": "What is MP4 to MP3 conversion?",
+            "answer": "MP4 to MP3 conversion extracts the audio track from a video file and saves it as a standalone MP3 audio file.",
+        },
+        {
+            "question": "How do I convert MP4 to MP3?",
+            "answer": "Upload your MP4 video, choose the MP3 output, and download the converted file once the process finishes.",
+        },
+        {
+            "question": "Is Convertin free?",
+            "answer": "Yes. Convertin lets you convert MP4 to MP3 online free for quick audio extraction.",
+        },
+    ]
+
+    meta = {
+        "title": seo_title,
+        "description": seo_description,
+        "canonical": f"{base_url}/mp4-to-mp3",
+        "og_url": f"{base_url}/mp4-to-mp3",
+        "og_image": f"{base_url}/static/images/og-default.png",
+        "keywords": "mp4 to mp3 converter, convert mp4 to mp3, mp4 to mp3 online free",
+        "og_type": "website",
+        "twitter_card": "summary_large_image",
+    }
+
+    structured_data = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": item["question"],
+                "acceptedAnswer": {"@type": "Answer", "text": item["answer"]},
+            }
+            for item in faq_items
+        ],
+    }
+
+    return templates.TemplateResponse(
+        request=request,
+        name="pages/mp4_to_mp3_landing.html",
+        context={
+            "request": request,
+            "locale": locale_data,
+            "t": t,
+            "meta": meta,
+            "title": seo_title,
+            "tool": tool_data,
+            "upload_form": tool_data.get("upload_form", {}),
+            "faq_items": faq_items,
+            "benefits": [
+                {"title": "Fast conversion", "text": "Convert your MP4 videos to MP3 in seconds without installing software."},
+                {"title": "Secure processing", "text": "Your files are handled safely and kept private during conversion."},
+                {"title": "Free online tool", "text": "Use Convertin online for free to extract audio from MP4 videos."},
+            ],
+            "structured_data": structured_data,
+        },
+    )
