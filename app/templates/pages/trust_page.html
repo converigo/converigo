@@ -1,0 +1,27 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}{{ meta.title }}{% endblock %}
+
+{% block content %}
+{% include "components/header.html" %}
+
+<main class="main" role="main">
+    <section class="hero section">
+        <div class="container hero-inner">
+            <div class="hero-copy">
+                <span class="eyebrow">Convertin</span>
+                <h1 class="hero-title">{% block page_heading %}Trust and support{% endblock %}</h1>
+                <p class="hero-sub">{% block page_intro %}Useful information about Convertin and how we help you convert files safely and quickly.{% endblock %}</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-white">
+        <div class="container">
+            {% block page_content %}{% endblock %}
+        </div>
+    </section>
+</main>
+
+{% include "components/footer.html" %}
+{% endblock %}

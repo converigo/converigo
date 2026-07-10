@@ -32,6 +32,40 @@ language_service = LanguageService(
 )
 
 
+def _build_base_url(request: Request) -> str:
+    base_url = f"{request.url.scheme}://{request.url.hostname}"
+    if request.url.port:
+        base_url += f":{request.url.port}"
+    return base_url.rstrip("/")
+
+
+async def _render_trust_page(
+    request: Request,
+    template_name: str,
+    title: str,
+    description: str,
+    canonical_path: str,
+) -> HTMLResponse:
+    base_url = _build_base_url(request)
+    metadata = {
+        "title": title,
+        "description": description,
+        "canonical": f"{base_url}{canonical_path}",
+        "keywords": "Convertin, file conversion, online converter, document conversion, image conversion",
+        "author": "Convertin",
+        "robots": "index,follow",
+    }
+    return templates.TemplateResponse(
+        request=request,
+        name=f"pages/{template_name}",
+        context={
+            "request": request,
+            "meta": metadata,
+            "year": datetime.utcnow().year,
+        },
+    )
+
+
 @router.get("/", response_class=HTMLResponse)
 async def home(request: Request):
 
@@ -74,4 +108,48 @@ async def home(request: Request):
             ),
             "year": datetime.utcnow().year,
         },
+    )
+
+
+@router.get("/about", response_class=HTMLResponse)
+async def about(request: Request):
+    return await _render_trust_page(
+        request,
+        "about.html",
+        "About Convertin | Fast Online File Conversion",
+        "Learn about Convertin, our mission, and how we make file conversion simple, fast, and secure.",
+        "/about",
+    )
+
+
+@router.get("/privacy", response_class=HTMLResponse)
+async def privacy(request: Request):
+    return await _render_trust_page(
+        request,
+        "privacy.html",
+        "Privacy Policy | Convertin",
+        "Read Convertin's privacy policy and understand how we handle your files and personal data.",
+        "/privacy",
+    )
+
+
+@router.get("/terms", response_class=HTMLResponse)
+async def terms(request: Request):
+    return await _render_trust_page(
+        request,
+        "terms.html",
+        "Terms of Service | Convertin",
+        "Review Convertin's terms of service and usage guidelines for converting files online.",
+        "/terms",
+    )
+
+
+@router.get("/contact", response_class=HTMLResponse)
+async def contact(request: Request):
+    return await _render_trust_page(
+        request,
+        "contact.html",
+        "Contact Convertin | File Conversion Support",
+        "Get in touch with Convertin for support, questions, or feedback about our file conversion tools.",
+        "/contact",
     )
