@@ -231,3 +231,82 @@ async def mp4_to_mp3_landing(request: Request):
             "structured_data": structured_data,
         },
     )
+
+
+@router.get("/jpg-to-png", response_class=HTMLResponse)
+async def jpg_to_png_landing(request: Request):
+    locale_data = language_service.load_locale(
+        accept_language=request.headers.get("accept-language"),
+        lang_query=request.query_params.get("lang"),
+    )
+
+    def t(key: str, default: str = "") -> str:
+        return language_service.translate(locale_data, key, default)
+
+    tool_data = converter_data_service.load_converter_by_slug("jpg-to-png")
+    base_url = _build_base_url(request)
+    seo_title = "JPG to PNG Converter Online Free - Convertin"
+    seo_description = (
+        "Convert JPG to PNG online free. Fast, secure and easy JPG to PNG image converter."
+    )
+
+    faq_items = [
+        {
+            "question": "What is JPG to PNG conversion?",
+            "answer": "JPG to PNG conversion changes JPG images into PNG format while preserving image quality.",
+        },
+        {
+            "question": "How do I convert JPG to PNG?",
+            "answer": "Upload your JPG image, choose PNG format, and download the converted file.",
+        },
+        {
+            "question": "Is JPG to PNG converter free?",
+            "answer": "Yes, Convertin provides free online JPG to PNG conversion.",
+        },
+    ]
+
+    meta = {
+        "title": seo_title,
+        "description": seo_description,
+        "canonical": f"{base_url}/jpg-to-png",
+        "og_url": f"{base_url}/jpg-to-png",
+        "og_image": f"{base_url}/static/images/og-default.png",
+        "keywords": "jpg to png converter, convert jpg to png online, jpg to png online free",
+        "og_type": "website",
+        "twitter_card": "summary_large_image",
+    }
+
+    structured_data = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": item["question"],
+                "acceptedAnswer": {"@type": "Answer", "text": item["answer"]},
+            }
+            for item in faq_items
+        ],
+    }
+
+    return templates.TemplateResponse(
+        request=request,
+        name="pages/jpg_to_png_landing.html",
+        context={
+            "request": request,
+            "locale": locale_data,
+            "t": t,
+            "meta": meta,
+            "title": seo_title,
+            "tool": tool_data,
+            "upload_form": tool_data.get("upload_form", {}),
+            "faq_items": faq_items,
+            "benefits": [
+                {"title": "Fast image conversion", "text": "Convert your JPG images to PNG quickly without installing software."},
+                {"title": "Secure file processing", "text": "Your files are handled safely and kept private during conversion."},
+                {"title": "Free online converter", "text": "Use Convertin online for free to turn JPG into PNG."},
+                {"title": "High quality PNG output", "text": "Export your images in crisp PNG format with strong visual quality."},
+            ],
+            "structured_data": structured_data,
+        },
+    )
