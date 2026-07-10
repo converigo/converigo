@@ -310,3 +310,82 @@ async def jpg_to_png_landing(request: Request):
             "structured_data": structured_data,
         },
     )
+
+
+@router.get("/png-to-webp", response_class=HTMLResponse)
+async def png_to_webp_landing(request: Request):
+    locale_data = language_service.load_locale(
+        accept_language=request.headers.get("accept-language"),
+        lang_query=request.query_params.get("lang"),
+    )
+
+    def t(key: str, default: str = "") -> str:
+        return language_service.translate(locale_data, key, default)
+
+    tool_data = converter_data_service.load_converter_by_slug("png-to-webp")
+    base_url = _build_base_url(request)
+    seo_title = "PNG to WEBP Converter Online Free - Convertin"
+    seo_description = (
+        "Convert PNG to WEBP online free. Fast, secure and easy PNG image converter."
+    )
+
+    faq_items = [
+        {
+            "question": "What is PNG to WEBP conversion?",
+            "answer": "PNG to WEBP conversion transforms PNG images into modern WEBP format with efficient compression.",
+        },
+        {
+            "question": "Why convert PNG to WEBP?",
+            "answer": "WEBP images usually provide smaller file sizes while maintaining good visual quality.",
+        },
+        {
+            "question": "Is PNG to WEBP converter free?",
+            "answer": "Yes, Convertin provides free online PNG to WEBP conversion.",
+        },
+    ]
+
+    meta = {
+        "title": seo_title,
+        "description": seo_description,
+        "canonical": f"{base_url}/png-to-webp",
+        "og_url": f"{base_url}/png-to-webp",
+        "og_image": f"{base_url}/static/images/og-default.png",
+        "keywords": "png to webp converter, convert png to webp online, png to webp online free",
+        "og_type": "website",
+        "twitter_card": "summary_large_image",
+    }
+
+    structured_data = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": item["question"],
+                "acceptedAnswer": {"@type": "Answer", "text": item["answer"]},
+            }
+            for item in faq_items
+        ],
+    }
+
+    return templates.TemplateResponse(
+        request=request,
+        name="pages/png_to_webp_landing.html",
+        context={
+            "request": request,
+            "locale": locale_data,
+            "t": t,
+            "meta": meta,
+            "title": seo_title,
+            "tool": tool_data,
+            "upload_form": tool_data.get("upload_form", {}),
+            "faq_items": faq_items,
+            "benefits": [
+                {"title": "Smaller image size", "text": "Reduce the size of your PNG files while keeping the visual quality high."},
+                {"title": "Fast conversion", "text": "Convert your PNG images to WEBP in seconds without installing software."},
+                {"title": "Secure processing", "text": "Your images are handled safely and kept private during conversion."},
+                {"title": "Free online tool", "text": "Use Convertin online for free to turn PNG into WEBP."},
+            ],
+            "structured_data": structured_data,
+        },
+    )

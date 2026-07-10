@@ -1,0 +1,71 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}{{ meta.title }}{% endblock %}
+
+{% block content %}
+{% include "components/header.html" %}
+{% include "partials/structured_data.html" %}
+
+<main class="main" role="main">
+    <section class="hero section">
+        <div class="container hero-inner">
+            <div class="hero-copy">
+                <span class="eyebrow">SEO Converter Landing Page</span>
+                <h1 class="hero-title">PNG to WEBP Converter Online Free</h1>
+                <p class="hero-sub">Convert PNG images to WEBP format online. Reduce image size while maintaining quality with Convertin.</p>
+                <div class="hero-cta">
+                    <a href="#converter" class="btn btn-primary">Convert now</a>
+                    <a href="#faq" class="btn btn-outline">Read FAQs</a>
+                </div>
+            </div>
+            <div class="hero-panel">
+                <div class="panel-head">
+                    <p class="panel-label">Ready to convert</p>
+                    <h2 class="panel-title">Upload a PNG image and receive a downloadable WEBP file.</h2>
+                </div>
+                <div id="converter" class="upload-card">
+                    {% include "components/upload_card.html" %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-white">
+        <div class="container section-heading">
+            <span class="eyebrow">Why choose Convertin</span>
+            <h2>Fast, secure, and free PNG to WEBP conversion</h2>
+        </div>
+        <div class="grid features-grid">
+            {% for benefit in benefits %}
+            <article class="feature-card hover-card">
+                <i data-lucide="sparkles"></i>
+                <h3>{{ benefit.title }}</h3>
+                <p>{{ benefit.text }}</p>
+            </article>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section id="faq" class="section">
+        <div class="container section-heading">
+            <span class="eyebrow">FAQ</span>
+            <h2>Frequently asked questions</h2>
+        </div>
+        <div class="faq-grid">
+            {% for item in faq_items %}
+            <div class="faq-item">
+                <button class="faq-question" type="button">
+                    {{ item.question }}
+                    <span class="faq-toggle">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>{{ item.answer }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+
+{% include "components/footer.html" %}
+{% endblock %}
