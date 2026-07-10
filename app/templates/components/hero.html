@@ -4,84 +4,165 @@
 
         <div class="hero-content">
 
+
+            <!-- HERO INTRO -->
+
             <div class="hero-top">
+
 
                 <span class="hero-badge">
                     🚀 Fast • Smart • Secure
                 </span>
 
+
+
                 <h1 class="hero-title">
+
                     Convert Any File
+
                     <br>
+
                     In Seconds
+
                 </h1>
 
+
+
+
                 <p class="hero-description">
-                    Upload your file once.
-                    Convertin automatically detects the file type,
-                    recommends the best conversion,
-                    and lets you download the result in just a few clicks.
+
+                    Convert images, videos, audio, and documents online.
+
+                    <br>
+
+                    Fast, secure, and free file converter for everyone.
+
                 </p>
+
+
 
             </div>
 
+
+
+
+
+            <!-- CONVERTER WORKSPACE -->
+
             <div class="hero-workspace">
 
+
+
                 {% include "components/upload_card.html" %}
+
+
+
+
+                <!-- SMART RESULT PANEL -->
 
                 <div
                     class="smart-panel"
                     id="smartPanel"
                     hidden>
 
+
+
                     <div class="panel-section">
 
+
                         <h3>
+
                             📄 Detected File
+
                         </h3>
+
+
 
                         <div id="detectedFile">
 
+
                             Waiting for file...
+
 
                         </div>
 
+
+
                     </div>
+
+
+
+
+
 
                     <div class="panel-section">
 
+
                         <h3>
+
                             ⭐ Best Choice
+
                         </h3>
+
+
 
                         <div id="recommendedFormat">
 
+
                             Recommendation will appear here.
+
 
                         </div>
 
+
+
                     </div>
+
+
+
+
+
+
 
                     <div class="panel-section">
 
+
                         <h3>
+
                             Need another format?
+
                         </h3>
+
+
+
 
                         <div
                             id="otherFormats"
                             class="format-list">
 
+
                         </div>
+
+
 
                     </div>
 
+
+
+
                 </div>
+
+
+
 
             </div>
 
+
+
         </div>
 
+
     </div>
+
 
 </section>

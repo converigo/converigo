@@ -5,6 +5,7 @@
 
     <meta charset="UTF-8">
 
+
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0">
@@ -18,6 +19,17 @@
 
     </title>
 
+
+    <!-- Favicon -->
+
+    <link
+        rel="icon"
+        type="image/x-icon"
+        href="/static/icons/favicon.ico">
+
+
+
+    <!-- Google Font -->
 
     <link
         rel="preconnect"
@@ -33,6 +45,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
+
+
 
 
 
@@ -124,98 +138,66 @@
 <body>
 
 
-    {% block content %}
+{% block content %}
 
-    {% endblock %}
-
-
-
-
-
-    <!-- ==========================
-         CONFIG
-    =========================== -->
-
-
-    <script src="/static/js/config.js"></script>
+{% endblock %}
 
 
 
 
 
-    <!-- ==========================
-         CORE
-    =========================== -->
+
+<!-- ==========================
+     JAVASCRIPT
+=========================== -->
 
 
-    <script src="/static/js/app.js"></script>
+<script src="/static/js/config.js"></script>
 
 
-
-
-
-    <!-- ==========================
-         API
-    =========================== -->
-
-
-    <script src="/static/js/api/plugin_api.js"></script>
+<script src="/static/js/app.js"></script>
 
 
 
+<script src="/static/js/api/plugin_api.js"></script>
 
 
-    <!-- ==========================
-         UI
-    =========================== -->
 
-
-    <script src="/static/js/ui/button_renderer.js"></script>
+<script src="/static/js/ui/button_renderer.js"></script>
 
 
 
 
 
-    <!-- ==========================
-         MANAGERS
-    =========================== -->
+<!-- Upload -->
 
-
-    <!-- Upload -->
-
-    <script src="/static/js/upload/upload_manager.js"></script>
+<script src="/static/js/upload/upload_manager.js"></script>
 
 
 
-    <!-- Recommendation -->
+<!-- Recommendation -->
 
-    <script src="/static/js/recommendation/recommendation_manager.js"></script>
-
-
-
-    <!-- Convert -->
-
-    <script src="/static/js/convert/convert_manager.js"></script>
-
-
-
-    <!-- Download -->
-
-    <script src="/static/js/download/download_manager.js"></script>
+<script src="/static/js/recommendation/recommendation_manager.js"></script>
 
 
 
 
 
-    <!-- ==========================
-         BOOTSTRAP
-    =========================== -->
+<!-- Download -->
+
+<script src="/static/js/download/download_manager.js"></script>
 
 
-    <script src="/static/js/converter.js"></script>
+
+
+
+<!-- Main Converter Controller -->
+
+<script src="/static/js/convert/converter.js"></script>
 
 
 
 </body>
+
 
 </html>

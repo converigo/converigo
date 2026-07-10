@@ -1,100 +1,349 @@
-<div class="upload-wrapper" id="upload">
+<!--
+====================================================
+Project : Convertin
+Component : Upload Card
+Version : 3.8.0
 
-    <div class="container">
+Dynamic Registry Format Selection
 
-        <div class="upload-card">
+<!--
+====================================================
+Project : Convertin
+Component : Upload Card
+Version : 3.8.0
 
-            <div class="upload-icon">
-                ☁
-            </div>
+Dynamic Registry Format Selection
 
-            <h2>
-                Drag &amp; Drop your file
-            </h2>
+Flow:
 
-            <p>
-                or choose a file from your computer
-            </p>
+Upload
+ ↓
+Recommendation API
+ ↓
+Format Options
+ ↓
+Convert API
 
-            <button
-                id="chooseFile"
-                class="btn btn-primary">
+====================================================
+-->
 
-                Choose File
+<section class="upload-wrapper">
 
-            </button>
 
-            <input
-                id="fileInput"
-                type="file"
-                hidden>
+<div class="upload-main">
 
-            <div class="selected-file">
 
-                <strong id="fileName">
+    <!-- DROP ZONE -->
 
-                    No file selected
+    <div 
+        class="drop-zone"
+        id="dropZone"
+    >
 
-                </strong>
 
-                <div id="fileSize"></div>
-
-            </div>
-
-            <h3 class="mt-4">
-                Convert To
-            </h3>
-
-            <!--
-                Dynamic Plugin UI
-
-                Format button akan dibuat otomatis
-                oleh converter.js berdasarkan:
-
-                GET /api/plugins?source=<extension>
-
-                Jangan menambahkan button manual lagi.
-            -->
-
-            <div
-                id="formatContainer"
-                class="supported-formats">
-
-            </div>
-
-            <button
-                id="convertBtn"
-                class="btn btn-success"
-                hidden>
-
-                Convert
-
-            </button>
-
-            <p
-                id="convertMessage"
-                class="muted">
-
-            </p>
-
-            <a
-                id="downloadBtn"
-                class="btn btn-primary"
-                hidden
-                download>
-
-                Download
-
-            </a>
-
-            <div class="progress">
-
-                <div class="progress-bar"></div>
-
-            </div>
-
+        <div class="upload-icon">
+            📁
         </div>
+
+
+        <h2>
+            Upload File
+        </h2>
+
+
+        <p>
+            Drag & Drop or click
+        </p>
+
+
+
+
+        <input
+
+            type="file"
+
+            id="fileInput"
+
+            hidden
+
+        >
+
+
+
+        <button
+
+            type="button"
+
+            id="chooseFile"
+
+            class="btn btn-success"
+
+        >
+
+            Choose File
+
+        </button>
+
 
     </div>
 
+
+
+
+    <!-- PREVIEW -->
+
+
+    <div
+
+        class="preview-container"
+
+        id="previewContainer"
+
+        hidden
+
+    >
+
+
+        <div class="preview-card">
+
+            <div id="previewMedia" class="preview-media">
+
+                <img
+
+                    id="previewImage"
+
+                    class="preview-image"
+
+                    hidden
+
+                >
+
+
+                <div
+
+                    id="previewIcon"
+
+                    class="preview-icon"
+
+                >
+
+                    📄
+
+                </div>
+
+            </div>
+
+
+            <div
+
+                id="previewName"
+
+                class="preview-name"
+
+            >
+
+            </div>
+
+
+            <div
+
+                id="previewSize"
+
+                class="preview-size"
+
+            >
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
 </div>
+
+
+
+
+<!-- FILE STATUS -->
+
+
+<div
+
+    class="selected-file"
+
+    id="selectedStatus"
+
+>
+
+
+    <span id="fileName">Choose a file to start</span>
+
+
+
+    <span id="fileSize"></span>
+
+
+
+</div>
+
+
+
+
+
+
+<!-- SMART RECOMMENDATION -->
+
+
+<div
+
+    id="smartRecommendation"
+
+    class="smart-recommendation"
+
+>
+
+</div>
+
+
+
+
+
+
+<!-- CONVERSION AREA -->
+
+
+<div
+
+    id="conversionArea"
+
+>
+
+
+<h3>
+Convert To
+</h3>
+
+
+
+
+<!--
+
+Recommendation Manager
+mengisi bagian ini
+
+contoh:
+
+[JPG]
+
+[WEBP]
+
+[ICO]
+
+-->
+
+<div
+
+    id="formatOptions"
+
+    class="supported-formats"
+
+>
+
+</div>
+
+
+
+
+
+<div class="conversion-actions">
+
+<button
+
+    id="convertButton"
+
+    class="btn btn-success"
+
+    type="button"
+
+    disabled
+
+>
+
+
+Convert
+
+
+
+</button>
+
+
+
+
+
+<div
+
+    id="convertMessage"
+
+    class="status-text"
+
+    aria-live="polite"
+
+>
+
+</div>
+
+
+
+
+
+<a
+
+    id="downloadBtn"
+
+    class="btn btn-secondary download-btn"
+
+    hidden
+
+    download
+
+>
+
+Download
+
+
+</a>
+
+</div>
+
+</div>
+
+
+
+
+
+
+</section>
+
+
+</a>
+
+</div>
+
+</div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+</section>

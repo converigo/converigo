@@ -1,83 +1,42 @@
-/**
- * -------------------------------------------------------
- * Convertin
- * Button Renderer
- * Version : 1.0.0
- * -------------------------------------------------------
- */
+/*
+====================================================
+Convertin
+Button Renderer
+Version : 1.1.1
+====================================================
+*/
 
 class ButtonRenderer {
-
-    constructor(containerId) {
-
-        this.container =
-            document.getElementById(containerId);
-
+    constructor(containerId){
+        this.container = document.getElementById(containerId);
     }
 
-    clear() {
-
-        if (!this.container) {
-
-            return;
-
-        }
-
-        this.container.innerHTML = "";
-
+    clear(){
+        if(this.container) this.container.innerHTML = "";
     }
 
-    render(formats, onClick) {
-
+    render(formats, onClick){
+        if(!this.container) return;
         this.clear();
 
-        formats.forEach((item) => {
+        formats.forEach(format => {
+            const btn = document.createElement("button");
+            btn.type = "button";
+            btn.className = "format-chip";
+            btn.textContent = format.target.toUpperCase();
 
-            const button =
-                document.createElement("button");
+            btn.addEventListener("click", () => {
+                document.querySelectorAll('.format-chip').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
 
-            button.type = "button";
+                window.dispatchEvent(new CustomEvent('format-selected', { detail: { target: format.target } }));
 
-            button.className =
-                "format-btn";
+                if(onClick) onClick(format.target);
+            });
 
-            button.dataset.format =
-                item.target;
-
-            button.textContent =
-                item.target.toUpperCase();
-
-            button.addEventListener(
-
-                "click",
-
-                () => {
-
-                    this.container
-
-                        .querySelectorAll(".format-btn")
-
-                        .forEach((btn) => {
-
-                            btn.classList.remove("active");
-
-                        });
-
-                    button.classList.add("active");
-
-                    onClick(item.target);
-
-                }
-
-            );
-
-            this.container.appendChild(button);
-
+            this.container.appendChild(btn);
         });
-
     }
-
 }
 
-window.ButtonRenderer =
-    ButtonRenderer;
+window.ButtonRenderer = ButtonRenderer;

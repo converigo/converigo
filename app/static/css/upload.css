@@ -1,0 +1,163 @@
+/*
+==========================================
+ Convertin
+ Upload Card CSS
+ Version : 3.1.0
+
+ Sprint 4.4
+ Premium Upload Zone
+==========================================
+*/
+
+/* ==========================================
+   UPLOAD WRAPPER
+========================================== */
+
+.upload-wrapper {
+
+    padding-top:40px;
+
+    padding-bottom:70px;
+
+}
+
+/* ==========================================
+   UPLOAD CARD
+========================================== */
+
+.upload-card {
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    width:100%;
+
+    max-width:720px;
+
+    margin:auto;
+
+}
+
+/* ==========================================
+   DROP ZONE
+========================================== */
+
+/* Upload drop-zone visuals are handled by the dedicated
+   upload-card component stylesheet. */
+
+/* ==========================================
+   SELECTED FILE
+========================================== */
+
+.selected-file {
+
+    margin-top:20px;
+
+    text-align:center;
+
+    min-height:35px;
+
+}
+
+#fileName {
+
+    font-weight:700;
+
+}
+
+#fileSize {
+
+    margin-top:5px;
+
+    color:#64748b;
+
+}
+
+/* ==========================================
+   FORMAT BUTTON
+========================================== */
+
+.supported-formats {
+
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:14px;
+
+    margin-top:25px;
+
+    margin-bottom:30px;
+
+}
+
+.format-btn {
+
+    min-width:75px;
+
+    padding:12px 20px;
+
+    border:2px solid #2563eb;
+
+    border-radius:12px;
+
+    background:white;
+
+    color:#2563eb;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.format-btn:hover {
+
+    background:#eff6ff;
+
+}
+
+.format-btn.active {
+
+    background:#2563eb;
+
+    color:white;
+
+    transform:translateY(-2px);
+
+    box-shadow:0 10px 25px rgba(37, 99, 235, .25);
+
+}
+
+/* ==========================================
+   CONVERT BUTTON
+========================================== */
+
+#convertBtn {
+
+    margin-top:20px;
+
+    min-width:160px;
+
+}
+
+/* ==========================================
+   RESPONSE
+========================================== */
+
+@media(max-width:800px){
+
+    .supported-formats {
+
+        gap:12px;
+
+    }
+
+}

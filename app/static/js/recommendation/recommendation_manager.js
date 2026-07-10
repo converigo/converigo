@@ -1,98 +1,50 @@
-/*
-Project : Convertin
-Author  : Pico Lala & ChatGPT
-Version : 3.0.0
-
-Recommendation Manager
-
-Handles smart converter suggestions.
-*/
+/**
+ * -------------------------------------------------------
+ * Convertin
+ *
+ * Recommendation Manager
+ * Version : 3.8.0
+ *
+ * Connect:
+ * Upload
+ * ->
+ * Backend Recommendation API
+ * ->
+ * Format Selector
+ *
+ * -------------------------------------------------------
+ */
 
 
 class RecommendationManager {
 
 
+
     constructor(){
 
 
-        this.endpoint = "/recommend";
-
-
-        this.smartPanel =
-            document.getElementById(
-                "smartPanel"
-            );
-
-
-        this.detectedFile =
-            document.getElementById(
-                "detectedFile"
-            );
-
-
-        this.recommendedFormat =
-            document.getElementById(
-                "recommendedFormat"
-            );
-
-
-        this.otherFormats =
-            document.getElementById(
-                "otherFormats"
-            );
+        console.log(
+            "Recommendation Manager 3.8.0 Loaded"
+        );
 
 
         this.formatContainer =
             document.getElementById(
-                "formatContainer"
+                "formatOptions"
             );
 
 
-    }
-
-
-
-
-
-    async getRecommendation(format){
-
-
-        try{
-
-
-            const response =
-                await fetch(
-                    `${this.endpoint}/${format}`
-                );
-
-
-            if(!response.ok){
-
-                return null;
-
-            }
-
-
-            return await response.json();
-
-
-        }
-        catch(error){
-
-
-            console.error(
-                error
+        this.convertButton =
+            document.getElementById(
+                "convertButton"
             );
 
 
-            return null;
+        this.selectedFormat = null;
 
-        }
 
 
     }
-
-
 
 
 
@@ -102,11 +54,10 @@ class RecommendationManager {
     async analyzeFile(file){
 
 
-        if(!file){
-
-            return;
-
-        }
+        console.log(
+            "Analyzing:",
+            file.name
+        );
 
 
 
@@ -118,209 +69,55 @@ class RecommendationManager {
 
 
 
-        const result =
-            await this.getRecommendation(
-                extension
-            );
+        try{
 
 
+            const response =
+                await fetch(
+                    `/recommend/${extension}`
+                );
 
-        if(!result){
 
-            return;
 
-        }
+            if(!response.ok){
 
 
-
-        this.smartPanel.hidden =
-            false;
-
-
-
-        this.renderDetected(
-            file,
-            extension
-        );
-
-
-
-        this.renderRecommendation(
-            result
-        );
-
-
-
-        this.renderAlternatives(
-            result
-        );
-
-
-        this.autoSelectBest(
-            result
-        );
-
-
-    }
-
-
-
-
-
-
-
-
-    renderDetected(
-        file,
-        extension
-    ){
-
-
-        this.detectedFile.innerHTML = `
-
-        <div class="detected-card">
-
-            📄
-
-            <strong>
-            ${file.name}
-            </strong>
-
-            <br>
-
-            Type:
-            ${extension.toUpperCase()}
-
-            <br>
-
-            Size:
-            ${(file.size / 1024 / 1024).toFixed(2)}
-            MB
-
-        </div>
-
-        `;
-
-
-    }
-
-
-
-
-
-
-
-
-
-    renderRecommendation(data){
-
-
-        const best =
-            data.best_choice;
-
-
-
-        this.recommendedFormat.innerHTML = `
-
-        <div class="recommend-card">
-
-
-            <h3>
-
-            ${best.icon}
-
-            ${best.title}
-
-            </h3>
-
-
-            <span class="badge">
-
-            ${best.badge}
-
-            </span>
-
-
-            <p>
-
-            ${best.description}
-
-            </p>
-
-
-        </div>
-
-        `;
-
-
-    }
-
-
-
-
-
-
-
-
-
-    renderAlternatives(data){
-
-
-        this.otherFormats.innerHTML = "";
-
-
-
-        data.alternatives.forEach(
-
-            item=>{
-
-
-                this.createFormatButton(
-                    item.target
+                throw new Error(
+                    "No recommendation"
                 );
 
 
             }
 
-        );
-
-
-    }
 
 
 
-
-
-
-
-
-
-    autoSelectBest(data){
-
-
-        const best =
-            data.best_choice.target;
-
-
-
-        this.createFormatButton(
-            best,
-            true
-        );
-
-
-
-        if(window.converter){
-
-
-            window.converter.selectedFormat =
-                best;
+            const data =
+                await response.json();
 
 
 
             console.log(
-                "Auto selected:",
-                best
+                "Recommendation:",
+                data
+            );
+
+
+
+            this.renderFormats(
+                data
+            );
+
+
+
+        }
+
+        catch(error){
+
+
+            console.error(
+                "Recommendation failed:",
+                error
             );
 
 
@@ -337,28 +134,15 @@ class RecommendationManager {
 
 
 
-    createFormatButton(
-        format,
-        active=false
-    ){
+    renderFormats(data){
+
 
 
         if(!this.formatContainer){
 
-            return;
-
-        }
-
-
-
-        const exists =
-            this.formatContainer.querySelector(
-                `[data-format="${format}"]`
+            console.warn(
+                "formatOptions missing"
             );
-
-
-
-        if(exists){
 
             return;
 
@@ -366,47 +150,156 @@ class RecommendationManager {
 
 
 
-        const button =
-            document.createElement(
-                "button"
-            );
 
 
-        button.type =
-            "button";
-
-
-        button.className =
-            "format-btn";
+        this.formatContainer.innerHTML = "";
 
 
 
-        button.dataset.format =
-            format;
+
+
+        const choices = [];
 
 
 
-        button.textContent =
-            format.toUpperCase();
+        if(
+            data.best_choice
+        ){
 
-
-
-        if(active){
-
-            button.classList.add(
-                "active"
+            choices.push(
+                data.best_choice
             );
 
         }
 
 
 
-        this.formatContainer.appendChild(
-            button
+
+
+
+
+        if(
+            data.alternatives
+        ){
+
+            data.alternatives.forEach(
+                item=>{
+
+
+                    choices.push(
+                        item
+                    );
+
+
+                }
+            );
+
+
+        }
+
+
+
+
+
+
+
+        choices.forEach(
+            option=>{
+
+
+                const button =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                button.className =
+                    "format-chip";
+
+
+
+                button.textContent =
+                    option.target
+                    .toUpperCase();
+
+
+
+                button.dataset.target =
+                    option.target;
+
+
+
+
+
+                button.onclick = ()=>{
+
+
+                    document
+                    .querySelectorAll(
+                        ".format-chip"
+                    )
+                    .forEach(
+                        btn => btn.classList.remove("active")
+                    );
+
+
+
+                    button.classList.add(
+                        "active"
+                    );
+
+
+
+                    this.selectedFormat =
+                        option.target;
+
+
+
+
+                    window.dispatchEvent(
+
+                        new CustomEvent(
+                            "format-selected",
+                            {
+                                detail:{
+                                    target:
+                                    option.target
+                                }
+                            }
+                        )
+
+                    );
+
+
+
+                    if(this.convertButton){
+
+                        this.convertButton.disabled =
+                            false;
+
+                    }
+
+
+                };
+
+
+
+
+
+                this.formatContainer.appendChild(
+                    button
+                );
+
+
+
+            }
         );
 
 
+
+
     }
+
 
 
 
@@ -416,5 +309,19 @@ class RecommendationManager {
 
 
 
-window.RecommendationManager =
-    new RecommendationManager();
+
+
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    ()=>{
+
+
+        window.RecommendationManager =
+            new RecommendationManager();
+
+
+    }
+
+);

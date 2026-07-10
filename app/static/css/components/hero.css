@@ -1,137 +1,132 @@
+/*
+====================================================
+Convertin Hero Section
+Version 2.3.0
+SEO Landing Layout
+====================================================
+*/
+
+
 .hero {
 
-    padding: 70px 0 40px;
+    text-align:center;
+
+    padding-top:18px;
+
+    padding-bottom:10px;
 
 }
 
-.hero-content {
 
-    max-width: 900px;
-
-    margin: 0 auto;
-
-    text-align: center;
-
-}
 
 .hero-badge {
 
-    display: inline-flex;
+    display:inline-flex;
 
-    align-items: center;
+    align-items:center;
 
-    justify-content: center;
+    justify-content:center;
 
-    gap: 8px;
+    padding:6px 15px;
 
-    padding: 10px 20px;
+    border-radius:999px;
 
-    border-radius: 999px;
+    background:#eef4ff;
 
-    background: rgba(37, 99, 235, .08);
+    color:#2563eb;
 
-    color: var(--color-primary);
+    font-size:12px;
 
-    font-weight: 600;
+    font-weight:600;
 
-    margin-bottom: 20px;
-
-}
-
-.hero-title {
-
-    font-size: 64px;
-
-    line-height: 1.05;
-
-    font-weight: 800;
-
-    color: var(--color-text);
-
-    margin-bottom: 20px;
+    margin-bottom:12px;
 
 }
 
-.hero-description {
 
-    max-width: 760px;
 
-    margin: 0 auto 50px;
 
-    font-size: 20px;
+.hero h1 {
 
-    line-height: 1.7;
 
-    color: var(--color-text-light);
+    max-width:760px;
 
-}
 
-.hero .upload-wrapper {
+    margin:0 auto;
 
-    display: flex;
 
-    justify-content: center;
+    font-size:clamp(38px,3.8vw,54px);
 
-    margin-top: 20px;
 
-}
+    line-height:1.02;
 
-@media (max-width: 992px) {
 
-    .hero {
+    letter-spacing:-1.8px;
 
-        padding: 60px 0 30px;
-
-    }
-
-    .hero-title {
-
-        font-size: 52px;
-
-    }
-
-    .hero-description {
-
-        font-size: 18px;
-
-    }
 
 }
 
-@media (max-width: 768px) {
 
-    .hero {
 
-        padding: 50px 0 20px;
 
-    }
+.hero p {
 
-    .hero-title {
 
-        font-size: 42px;
+    max-width:620px;
 
-    }
 
-    .hero-description {
+    margin:14px auto 22px;
 
-        font-size: 17px;
 
-    }
+    font-size:16px;
+
+
+    line-height:1.5;
+
+
+    color:#64748b;
+
 
 }
 
-@media (max-width: 480px) {
 
-    .hero-title {
 
-        font-size: 34px;
 
-    }
+.hero-workspace {
 
-    .hero-description {
 
-        font-size: 16px;
+    margin-top:18px;
 
-    }
+
+}
+
+
+
+
+@media(max-width:900px){
+
+
+.hero h1 {
+
+
+    font-size:38px;
+
+
+}
+
+
+
+.hero p {
+
+
+    font-size:15px;
+
+
+    padding:0 20px;
+
+
+}
+
+
 
 }

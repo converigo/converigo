@@ -7,15 +7,18 @@ Convertin FastAPI Application
 """
 
 from contextlib import asynccontextmanager
-from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
-
+from app.core.logging_config import configure_logging
+from app.core.settings import settings
+from app.services.cleanup_service import CleanupService
 from app.core.register_default import (
     register_default_converters,
 )
+
+configure_logging()
 
 
 from app.routers.convert import (
@@ -48,15 +51,13 @@ from app.routers.recommend import (
 
 
 # ==========================================
-# OUTPUT DIRECTORY
+# APPLICATION DIRECTORIES
 # ==========================================
 
-OUTPUT_DIR = Path("outputs")
+settings.UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+settings.OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-OUTPUT_DIR.mkdir(
-    parents=True,
-    exist_ok=True,
-)
+OUTPUT_DIR = settings.OUTPUT_DIR
 
 
 # ==========================================
@@ -71,6 +72,7 @@ async def lifespan(app: FastAPI):
     """
 
     register_default_converters()
+    CleanupService().clean_old_files()
 
     yield
 

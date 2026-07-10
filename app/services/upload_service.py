@@ -5,18 +5,22 @@ Version : 2.2.0
 """
 
 import hashlib
+import logging
 import uuid
 from datetime import datetime
 from pathlib import Path
 
 from fastapi import UploadFile
 
+from app.core.settings import settings
 from app.utils.file_validator import (
     FileValidationError,
     validate_upload_file,
 )
 
-UPLOAD_DIR = Path("uploads")
+logger = logging.getLogger(__name__)
+
+UPLOAD_DIR = settings.UPLOAD_DIR
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 CHUNK_SIZE = 1024 * 1024  # 1 MB
@@ -32,6 +36,8 @@ class UploadService:
         self,
         file: UploadFile,
     ) -> Path:
+
+        target_path = None
 
         try:
 
@@ -61,6 +67,11 @@ class UploadService:
 
                     file_size += len(chunk)
 
+                    if file_size > settings.MAX_UPLOAD_SIZE:
+                        raise FileValidationError(
+                            "File size exceeds maximum limit."
+                        )
+
                     sha256.update(chunk)
 
             await file.close()
@@ -83,6 +94,12 @@ class UploadService:
             return target_path
 
         except FileValidationError as exc:
+
+            if target_path and target_path.exists():
+                try:
+                    target_path.unlink()
+                except Exception:
+                    logger.exception("Failed to remove partial upload %s", target_path)
 
             raise UploadError(
                 str(exc)

@@ -1,7 +1,10 @@
+import logging
+
 from fastapi import APIRouter, File, HTTPException, UploadFile, status
 
 from app.services.upload_service import UploadError, UploadService
 
+logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/upload", tags=["upload"])
 
 
@@ -17,6 +20,7 @@ async def upload_file(file: UploadFile = File(...)):
     except UploadError as exc:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(exc))
     except Exception:
+        logger.exception("Unexpected upload error")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Failed to process the upload.",

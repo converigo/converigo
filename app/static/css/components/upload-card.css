@@ -1,59 +1,354 @@
-/* ==========================================
-   FORMAT BUTTON
-========================================== */
+/*
+====================================================
+Project : Convertin
+
+Component :
+Upload Card
+
+Version :
+2.3.2
+
+Update:
+- Format selector active state
+- Cleaner conversion UI
+- Preview alignment
+- Better first viewport
+- Production polish
+====================================================
+*/
+
+/*
+================================
+UPLOAD WRAPPER
+================================
+*/
+
+.upload-wrapper {
+    margin-top:-20px;
+    padding-bottom:40px;
+}
+
+.upload-card {
+    width:100%;
+}
+
+/*
+================================
+UPLOAD MAIN
+================================
+*/
+
+.upload-main {
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    gap:35px;
+}
+
+/*
+================================
+DROP ZONE
+================================
+*/
+
+.drop-zone {
+    width:420px;
+    height:235px;
+    border:2px dashed #2563eb;
+    border-radius:24px;
+    background:#ffffff;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    transition:.25s ease;
+}
+
+.drop-zone:hover {
+    transform:translateY(-3px);
+    box-shadow: 0 15px 35px rgba(37,99,235,.12);
+}
+
+.upload-icon {
+    font-size:36px;
+    margin-bottom:14px;
+}
+
+.drop-zone h2 {
+    font-size:23px;
+    color:#0f172a;
+    margin:0 0 8px;
+}
+
+.drop-zone p {
+    color:#64748b;
+    font-size:15px;
+    margin:0 0 16px;
+}
+
+/*
+================================
+PREVIEW
+================================
+*/
+
+.preview-container {
+    display:none;
+}
+
+.preview-container:not([hidden]) {
+    display:block;
+}
+
+.preview-card {
+    width:240px;
+    text-align:center;
+}
+
+.preview-media {
+    width:240px;
+    height:240px;
+    border-radius:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#f8fafc;
+    box-shadow: 0 12px 30px rgba(0,0,0,.08);
+    overflow:hidden;
+}
+
+.preview-media.audio {
+    background:#eef2ff;
+}
+
+.preview-media.video {
+    background:#fff7ed;
+}
+
+.preview-media.pdf {
+    background:#eef9ff;
+}
+
+.preview-image {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.preview-icon {
+    font-size:56px;
+    margin:0;
+}
+
+.preview-name {
+    margin-top:10px;
+    font-size:14px;
+    font-weight:600;
+    word-break:break-word;
+}
+
+.preview-size {
+    margin-top:5px;
+    font-size:14px;
+    color:#64748b;
+}
+
+/*
+================================
+FILE INFO
+================================
+*/
+
+.selected-file {
+    text-align:center;
+    margin-top:8px;
+}
+
+.selected-file strong {
+    font-size:15px;
+}
+
+/*
+================================
+CONVERSION AREA
+================================
+*/
+
+#conversionArea {
+    text-align:center;
+    margin-top:22px;
+}
+
+#conversionArea h3 {
+    font-size:22px;
+    margin-bottom:18px;
+}
+
+/*
+================================
+FORMAT BUTTON
+================================
+*/
 
 .supported-formats {
-
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 12px;
-
-    margin-top: 20px;
-    margin-bottom: 25px;
-
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+    align-items:center;
 }
 
-.format-btn {
-
-    min-width: 70px;
-
-    padding: 10px 18px;
-
-    border: 2px solid #2563eb;
-
-    border-radius: 10px;
-
-    background: white;
-
-    color: #2563eb;
-
-    font-size: 15px;
-
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition: all .25s ease;
-
+.format-chip {
+    border:1px solid #2563eb;
+    background:#ffffff;
+    color:#2563eb;
+    padding:8px 14px;
+    border-radius:12px;
+    font-size:13px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.15s ease;
+    white-space:nowrap;
 }
 
-.format-btn:hover {
-
-    background: #eff6ff;
-
+.format-chip:hover {
+    background:#2563eb;
+    color:white;
+    transform:translateY(-2px);
 }
 
-.format-btn.active {
+.format-chip.active {
+    background:#2563eb;
+    color:white;
+    box-shadow: 0 8px 20px rgba(37,99,235,.25);
+}
 
-    background: #2563eb;
+/*
+================================
+CONVERT BUTTON
+================================
+*/
 
-    color: white;
+#convertButton {
+    margin-top:22px;
+}
 
-    border-color: #2563eb;
+#convertButton:disabled {
+    opacity:.6;
+    cursor:not-allowed;
+}
 
-    transform: scale(1.05);
+.btn.loading {
+    opacity:0.9;
+    pointer-events:none;
+}
 
-    box-shadow: 0 10px 25px rgba(37,99,235,.25);
+.conversion-actions {
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    margin-top:18px;
+    align-items:center;
+}
+
+.status-text {
+    min-height:24px;
+    color:#334155;
+    font-size:0.95rem;
+    line-height:1.5;
+}
+
+.status-text.success {
+    color:#16a34a;
+}
+
+.status-text.error {
+    color:#dc2626;
+}
+
+.download-btn {
+    margin-top:10px;
+    width:max-content;
+    align-self:center;
+}
+
+/*
+================================
+PROGRESS
+================================
+*/
+
+.progress {
+    width:260px;
+    height:8px;
+    background:#e5e7eb;
+    border-radius:20px;
+    margin:20px auto;
+    overflow:hidden;
+}
+
+.progress-bar {
+    height:100%;
+    width:0;
+    background:#2563eb;
+    transition:.3s;
+}
+
+/*
+================================
+HIDDEN STATE
+================================
+*/
+
+#downloadBtn[hidden] {
+    display:none !important;
+}
+
+.progress[hidden] {
+    display:none !important;
+}
+
+/*
+================================
+MOBILE
+================================
+*/
+
+@media(max-width:900px){
+
+    .upload-main {
+        flex-direction:column;
+        align-items:center;
+        gap:25px;
+    }
+
+    .drop-zone {
+        width:90%;
+        max-width:420px;
+    }
+
+    .preview-card {
+        width:220px;
+    }
+
+    .preview-media {
+        width:220px;
+        height:220px;
+    }
+
+    .preview-image {
+        width:100%;
+        height:100%;
+    }
+
+    .supported-formats {
+        gap:10px;
+    }
+
+    .download-btn {
+        align-self:center;
+    }
 
 }

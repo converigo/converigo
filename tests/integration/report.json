@@ -1,0 +1,369 @@
+{
+    "plugins": [
+        "mp3-to-wav",
+        "bmp-to-jpg",
+        "bmp-to-jpeg",
+        "jpg-to-png",
+        "jpeg-to-png",
+        "jpg-to-webp",
+        "jpeg-to-webp",
+        "png-to-ico",
+        "png-to-jpg",
+        "png-to-jpeg",
+        "png-to-webp",
+        "webp-to-jpg",
+        "webp-to-jpeg",
+        "webp-to-png",
+        "mp4-to-mp3"
+    ],
+    "home": {
+        "status": 200,
+        "ok": true
+    },
+    "recommendations": [
+        {
+            "source": "jpg",
+            "status": 200,
+            "body": {
+                "detected_type": "JPG",
+                "best_choice": {
+                    "source": "jpg",
+                    "target": "webp",
+                    "title": "JPG to WEBP",
+                    "description": "Convert JPG images to WEBP with smaller file size and high quality.",
+                    "goal": "compress",
+                    "score": 92.5,
+                    "badge": "Best Choice",
+                    "icon": "🖼️"
+                },
+                "alternatives": [
+                    {
+                        "source": "jpg",
+                        "target": "png",
+                        "title": "JPG to PNG",
+                        "score": 78.5
+                    }
+                ]
+            }
+        },
+        {
+            "source": "jpg",
+            "status": 200,
+            "body": {
+                "detected_type": "JPG",
+                "best_choice": {
+                    "source": "jpg",
+                    "target": "webp",
+                    "title": "JPG to WEBP",
+                    "description": "Convert JPG images to WEBP with smaller file size and high quality.",
+                    "goal": "compress",
+                    "score": 92.5,
+                    "badge": "Best Choice",
+                    "icon": "🖼️"
+                },
+                "alternatives": [
+                    {
+                        "source": "jpg",
+                        "target": "png",
+                        "title": "JPG to PNG",
+                        "score": 78.5
+                    }
+                ]
+            }
+        },
+        {
+            "source": "png",
+            "status": 200,
+            "body": {
+                "detected_type": "PNG",
+                "best_choice": {
+                    "source": "png",
+                    "target": "webp",
+                    "title": "PNG to WEBP",
+                    "description": "Convert PNG images to WEBP with better compression.",
+                    "goal": "compress",
+                    "score": 94.5,
+                    "badge": "Best Choice",
+                    "icon": "🖼️"
+                },
+                "alternatives": [
+                    {
+                        "source": "png",
+                        "target": "jpg",
+                        "title": "PNG to JPG",
+                        "score": 85.5
+                    },
+                    {
+                        "source": "png",
+                        "target": "ico",
+                        "title": "PNG to ICO",
+                        "score": 72.5
+                    }
+                ]
+            }
+        },
+        {
+            "source": "png",
+            "status": 200,
+            "body": {
+                "detected_type": "PNG",
+                "best_choice": {
+                    "source": "png",
+                    "target": "webp",
+                    "title": "PNG to WEBP",
+                    "description": "Convert PNG images to WEBP with better compression.",
+                    "goal": "compress",
+                    "score": 94.5,
+                    "badge": "Best Choice",
+                    "icon": "🖼️"
+                },
+                "alternatives": [
+                    {
+                        "source": "png",
+                        "target": "jpg",
+                        "title": "PNG to JPG",
+                        "score": 85.5
+                    },
+                    {
+                        "source": "png",
+                        "target": "ico",
+                        "title": "PNG to ICO",
+                        "score": 72.5
+                    }
+                ]
+            }
+        },
+        {
+            "source": "png",
+            "status": 200,
+            "body": {
+                "detected_type": "PNG",
+                "best_choice": {
+                    "source": "png",
+                    "target": "webp",
+                    "title": "PNG to WEBP",
+                    "description": "Convert PNG images to WEBP with better compression.",
+                    "goal": "compress",
+                    "score": 94.5,
+                    "badge": "Best Choice",
+                    "icon": "🖼️"
+                },
+                "alternatives": [
+                    {
+                        "source": "png",
+                        "target": "jpg",
+                        "title": "PNG to JPG",
+                        "score": 85.5
+                    },
+                    {
+                        "source": "png",
+                        "target": "ico",
+                        "title": "PNG to ICO",
+                        "score": 72.5
+                    }
+                ]
+            }
+        },
+        {
+            "source": "webp",
+            "status": 200,
+            "body": {
+                "detected_type": "WEBP",
+                "best_choice": {
+                    "source": "webp",
+                    "target": "jpg",
+                    "title": "WEBP to JPG",
+                    "description": "Convert WEBP images to JPG for wider device compatibility.",
+                    "goal": "compatibility",
+                    "score": 83.5,
+                    "badge": "Universal Format",
+                    "icon": "🖼️"
+                },
+                "alternatives": [
+                    {
+                        "source": "webp",
+                        "target": "png",
+                        "title": "WEBP to PNG",
+                        "score": 78.5
+                    }
+                ]
+            }
+        },
+        {
+            "source": "webp",
+            "status": 200,
+            "body": {
+                "detected_type": "WEBP",
+                "best_choice": {
+                    "source": "webp",
+                    "target": "jpg",
+                    "title": "WEBP to JPG",
+                    "description": "Convert WEBP images to JPG for wider device compatibility.",
+                    "goal": "compatibility",
+                    "score": 83.5,
+                    "badge": "Universal Format",
+                    "icon": "🖼️"
+                },
+                "alternatives": [
+                    {
+                        "source": "webp",
+                        "target": "png",
+                        "title": "WEBP to PNG",
+                        "score": 78.5
+                    }
+                ]
+            }
+        },
+        {
+            "source": "mp3",
+            "status": 200,
+            "body": {
+                "detected_type": "MP3",
+                "best_choice": {
+                    "source": "mp3",
+                    "target": "wav",
+                    "title": "MP3 to WAV",
+                    "description": "Convert MP3 audio into WAV format for high quality editing.",
+                    "goal": "quality",
+                    "score": 81.25,
+                    "badge": "High Quality",
+                    "icon": "🎧"
+                },
+                "alternatives": []
+            }
+        },
+        {
+            "source": "mp4",
+            "status": 200,
+            "body": {
+                "detected_type": "MP4",
+                "best_choice": {
+                    "source": "mp4",
+                    "target": "mp3",
+                    "title": "MP4 to MP3",
+                    "description": "Extract audio from MP4 videos and convert it into MP3 format.",
+                    "goal": "extract_audio",
+                    "score": 94.75,
+                    "badge": "Most Popular",
+                    "icon": "🎵"
+                },
+                "alternatives": []
+            }
+        }
+    ],
+    "conversions": [
+        {
+            "source": "jpg",
+            "target": "png",
+            "plugin_available": true,
+            "status_code": 201,
+            "response": {
+                "status": "success",
+                "filename": "63fe7339c07e435db266906a7fed2c45.png",
+                "download_path": "/outputs/63fe7339c07e435db266906a7fed2c45.png",
+                "message": "Conversion completed successfully.",
+                "target_format": "png"
+            }
+        },
+        {
+            "source": "jpg",
+            "target": "webp",
+            "plugin_available": true,
+            "status_code": 201,
+            "response": {
+                "status": "success",
+                "filename": "cb039ef3547643a5a6744c8bfc6f7929.webp",
+                "download_path": "/outputs/cb039ef3547643a5a6744c8bfc6f7929.webp",
+                "message": "Conversion completed successfully.",
+                "target_format": "webp"
+            }
+        },
+        {
+            "source": "png",
+            "target": "jpg",
+            "plugin_available": true,
+            "status_code": 201,
+            "response": {
+                "status": "success",
+                "filename": "c6c1b3222bd4484298a157b342fc1590.jpg",
+                "download_path": "/outputs/c6c1b3222bd4484298a157b342fc1590.jpg",
+                "message": "Conversion completed successfully.",
+                "target_format": "jpg"
+            }
+        },
+        {
+            "source": "png",
+            "target": "webp",
+            "plugin_available": true,
+            "status_code": 201,
+            "response": {
+                "status": "success",
+                "filename": "1f2bd913d5ec4deba8ad1f8ce48bad2f.webp",
+                "download_path": "/outputs/1f2bd913d5ec4deba8ad1f8ce48bad2f.webp",
+                "message": "Conversion completed successfully.",
+                "target_format": "webp"
+            }
+        },
+        {
+            "source": "png",
+            "target": "ico",
+            "plugin_available": true,
+            "status_code": 201,
+            "response": {
+                "status": "success",
+                "filename": "efbd44dd368341c1b5eba4987304ebdb.ico",
+                "download_path": "/outputs/efbd44dd368341c1b5eba4987304ebdb.ico",
+                "message": "Conversion completed successfully.",
+                "target_format": "ico"
+            }
+        },
+        {
+            "source": "webp",
+            "target": "jpg",
+            "plugin_available": true,
+            "status_code": 201,
+            "response": {
+                "status": "success",
+                "filename": "2faf885bc7054192a8eca0a3a54ba192.jpg",
+                "download_path": "/outputs/2faf885bc7054192a8eca0a3a54ba192.jpg",
+                "message": "Conversion completed successfully.",
+                "target_format": "jpg"
+            }
+        },
+        {
+            "source": "webp",
+            "target": "png",
+            "plugin_available": true,
+            "status_code": 201,
+            "response": {
+                "status": "success",
+                "filename": "10d6cf17032e4d1a86b33814c9776ffa.png",
+                "download_path": "/outputs/10d6cf17032e4d1a86b33814c9776ffa.png",
+                "message": "Conversion completed successfully.",
+                "target_format": "png"
+            }
+        },
+        {
+            "source": "mp3",
+            "target": "wav",
+            "plugin_available": true,
+            "status_code": 201,
+            "response": {
+                "status": "success",
+                "filename": "3d8278103ee64256a6648eca71e7cb73.wav",
+                "download_path": "/outputs/3d8278103ee64256a6648eca71e7cb73.wav",
+                "message": "Conversion completed successfully.",
+                "target_format": "wav"
+            }
+        },
+        {
+            "source": "mp4",
+            "target": "mp3",
+            "plugin_available": true,
+            "status_code": 400,
+            "response": {
+                "detail": "Uploaded file contents do not match the file type."
+            }
+        }
+    ]
+}

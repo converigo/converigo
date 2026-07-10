@@ -1,287 +1,99 @@
 /*
 Project : Convertin
-Author  : Pico Lala & ChatGPT
-Version : 2.0.0
+App Controller
+Version : 3.0.0
 
-Smart Upload + Recommendation Integration
+Responsibility:
+- Listen for `fileSelected` and `formatSelected` events
+- Handle convert request lifecycle
+- Update convert/download UI and messages
 */
 
+document.addEventListener("DOMContentLoaded", () => {
 
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
+    const convertBtn = document.getElementById("convertButton");
+    const downloadBtn = document.getElementById("downloadBtn");
+    const convertMessage = document.getElementById("convertMessage");
 
+    let selectedFile = null;
+    let selectedFormat = null;
 
-    const fileInput =
-        document.getElementById(
-            "fileInput"
-        );
-
-
-    const fileName =
-        document.getElementById(
-            "fileName"
-        );
-
-
-    const fileSize =
-        document.getElementById(
-            "fileSize"
-        );
-
-
-    const convertBtn =
-        document.getElementById(
-            "convertBtn"
-        );
-
-
-    const uploadStatus =
-        document.getElementById(
-            "uploadStatus"
-        );
-
-
-
-    if(!fileInput){
-
-        return;
-
-    }
-
-
-
-    fileInput.addEventListener(
-        "change",
-        async () => {
-
-
-        const file =
-            fileInput.files[0];
-
-
-        if(!file){
-
-            return;
-
+    // File selected by UploadManager
+    document.addEventListener("file-selected", (e) => {
+        try {
+            selectedFile = e?.detail?.file || null;
+            if (selectedFile && convertBtn) {
+                convertBtn.disabled = false;
+                if (convertMessage) convertMessage.textContent = "";
+                if (downloadBtn) downloadBtn.hidden = true;
+            }
+        } catch (err) {
+            console.error(err);
         }
-
-
-
-        const extension =
-            file.name
-            .split(".")
-            .pop()
-            .toLowerCase();
-
-
-
-        const size =
-            (
-                file.size /
-                1024 /
-                1024
-            )
-            .toFixed(2);
-
-
-
-        if(fileName){
-
-            fileName.textContent =
-                file.name;
-
-        }
-
-
-
-        if(fileSize){
-
-            fileSize.textContent =
-                `${size} MB`;
-
-        }
-
-
-
-        if(uploadStatus){
-
-            uploadStatus.textContent =
-                "Analyzing file...";
-
-        }
-
-
-
-        if(convertBtn){
-
-            convertBtn.hidden =
-                false;
-
-        }
-
-
-
-        await loadRecommendation(
-            extension
-        );
-
-
-
-        if(uploadStatus){
-
-            uploadStatus.textContent =
-                "Ready to Convert";
-
-        }
-
-
     });
 
+    // Format selected by RecommendationManager or format UI
+    document.addEventListener("format-selected", (e) => {
+        try {
+            const fmt = e?.detail?.target;
+            if (fmt) selectedFormat = String(fmt).toLowerCase();
+            console.log("FORMAT SELECTED:", selectedFormat);
+        } catch (err) {
+            console.error(err);
+        }
+    });
 
+    // Convert button handler
+    if (convertBtn) {
+        convertBtn.addEventListener("click", async () => {
+            if (!selectedFile) return;
+            if (!selectedFormat) {
+                if (convertMessage) convertMessage.textContent = "❌ Select a target format first.";
+                return;
+            }
+
+            convertBtn.disabled = true;
+            const originalText = convertBtn.textContent;
+            convertBtn.textContent = "Converting...";
+
+            const formData = new FormData();
+            formData.append("file", selectedFile);
+            formData.append("target_format", selectedFormat);
+
+            try {
+                const response = await fetch("/convert", { method: "POST", body: formData });
+
+                if (!response.ok) {
+                    const err = await response.json().catch(() => ({}));
+                    console.error("Convert error", err);
+                    if (convertMessage) convertMessage.textContent = "❌ Conversion failed. Please try another format.";
+                    return;
+                }
+
+                const result = await response.json();
+
+                if (result.status === "success") {
+                    if (convertMessage) convertMessage.textContent = "✓ Conversion completed successfully";
+                    if (downloadBtn) {
+                        downloadBtn.href = result.download_path;
+                        if (result.filename) downloadBtn.download = result.filename;
+                        downloadBtn.hidden = false;
+                        // Update button state to indicate ready-to-download
+                        if (convertBtn) convertBtn.textContent = "Download Ready";
+                    }
+                } else {
+                    console.error("Convert failed", result);
+                    if (convertMessage) convertMessage.textContent = "❌ Conversion failed. Please try another format.";
+                }
+
+            } catch (error) {
+                console.error(error);
+                if (convertMessage) convertMessage.textContent = "❌ Conversion failed. Please try again later.";
+            } finally {
+                convertBtn.disabled = false;
+                convertBtn.textContent = originalText || "Convert";
+            }
+        });
+    }
 
 });
-
-
-
-
-
-async function loadRecommendation(
-    extension
-){
-
-    const container =
-        document.getElementById(
-            "smartRecommendation"
-        );
-
-
-    if(!container){
-
-        console.warn(
-            "smartRecommendation container missing"
-        );
-
-        return;
-
-    }
-
-
-
-    const result =
-        await RecommendationManager
-        .getRecommendation(
-            extension
-        );
-
-
-
-    if(!result){
-
-        container.innerHTML = `
-
-        <div class="recommend-card">
-
-            No recommendation available.
-
-        </div>
-
-        `;
-
-
-        return;
-
-    }
-
-
-
-    const best =
-        result.best_choice;
-
-
-
-    let alternatives = "";
-
-
-
-    result.alternatives.forEach(
-        item => {
-
-
-        alternatives += `
-
-        <button class="format-chip">
-
-            ${item.title}
-
-        </button>
-
-        `;
-
-
-    });
-
-
-
-    container.innerHTML = `
-
-    <div class="recommend-card">
-
-
-        <div class="recommend-header">
-
-            ${best.icon}
-
-            Recommended
-
-        </div>
-
-
-
-        <h3>
-
-            ${best.title}
-
-        </h3>
-
-
-
-        <span class="badge">
-
-            ${best.badge}
-
-        </span>
-
-
-
-        <p>
-
-            ${best.description}
-
-        </p>
-
-
-
-        <strong>
-
-            Score:
-            ${best.score}
-
-        </strong>
-
-
-
-        <div class="alternatives">
-
-            ${alternatives}
-
-        </div>
-
-
-
-    </div>
-
-    `;
-
-
-}
