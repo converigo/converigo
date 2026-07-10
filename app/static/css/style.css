@@ -309,6 +309,15 @@ input {
 .brand {
 
 
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:12px;
+
+
     font-size:24px;
 
 
@@ -316,6 +325,57 @@ input {
 
 
     color:var(--text);
+
+
+    text-decoration:none;
+
+
+}
+
+
+
+.brand img {
+    width:48px;
+    height:48px;
+    max-width:48px;
+    object-fit:contain;
+    display:block;
+    background: transparent !important;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    flex-shrink:0;
+}
+
+
+.brand span {
+
+
+    line-height:1;
+
+
+}
+
+
+@media (max-width: 768px) {
+
+
+    .brand {
+
+
+        font-size:20px;
+
+
+        gap:10px;
+
+
+    }
+
+
+    .brand img {
+        width:48px;
+        height:48px;
+    }
 
 
 }
@@ -785,12 +845,12 @@ input {
     flex-direction:
 
         column;
-
-
-    align-items:
-
-        center;
-
+    .brand img {
+        width:40px;
+        height:40px;
+        max-width:40px;
+        object-fit:contain;
+    }
 
 }
 

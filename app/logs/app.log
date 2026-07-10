@@ -305,3 +305,95 @@
 2026-07-10 22:02:03,863 INFO uvicorn.error Waiting for application shutdown.
 2026-07-10 22:02:03,863 INFO uvicorn.error Application shutdown complete.
 2026-07-10 22:02:03,864 INFO uvicorn.error Finished server process [20656]
+2026-07-10 22:05:47,102 INFO uvicorn.error Started server process [25496]
+2026-07-10 22:05:47,103 INFO uvicorn.error Waiting for application startup.
+2026-07-10 22:05:47,105 INFO uvicorn.error Application startup complete.
+2026-07-10 22:10:55,394 INFO uvicorn.error Shutting down
+2026-07-10 22:10:55,502 INFO uvicorn.error Waiting for application shutdown.
+2026-07-10 22:10:55,503 INFO uvicorn.error Application shutdown complete.
+2026-07-10 22:10:55,503 INFO uvicorn.error Finished server process [25496]
+2026-07-10 22:15:40,788 INFO uvicorn.error Started server process [19220]
+2026-07-10 22:15:40,789 INFO uvicorn.error Waiting for application startup.
+2026-07-10 22:15:40,798 INFO app.services.cleanup_service Removed stale temporary file: outputs\audio\2981a1c8e01a4a20a396d0471ebb59b1.wav
+2026-07-10 22:15:40,800 INFO app.services.cleanup_service Removed stale temporary file: outputs\audio\3d8278103ee64256a6648eca71e7cb73.wav
+2026-07-10 22:15:40,801 INFO app.services.cleanup_service Removed stale temporary file: outputs\image\10d6cf17032e4d1a86b33814c9776ffa.png
+2026-07-10 22:15:40,802 INFO app.services.cleanup_service Removed stale temporary file: outputs\image\1f2bd913d5ec4deba8ad1f8ce48bad2f.webp
+2026-07-10 22:15:40,804 INFO app.services.cleanup_service Removed stale temporary file: outputs\image\2faf885bc7054192a8eca0a3a54ba192.jpg
+2026-07-10 22:15:40,805 INFO app.services.cleanup_service Removed stale temporary file: outputs\image\63fe7339c07e435db266906a7fed2c45.png
+2026-07-10 22:15:40,808 INFO app.services.cleanup_service Removed stale temporary file: outputs\image\ad61bb4c1ce74caebff99260a2808a49.png
+2026-07-10 22:15:40,809 INFO app.services.cleanup_service Removed stale temporary file: outputs\image\c6c1b3222bd4484298a157b342fc1590.jpg
+2026-07-10 22:15:40,810 INFO app.services.cleanup_service Removed stale temporary file: outputs\image\cb039ef3547643a5a6744c8bfc6f7929.webp
+2026-07-10 22:15:40,811 INFO app.services.cleanup_service Removed stale temporary file: outputs\image\efbd44dd368341c1b5eba4987304ebdb.ico
+2026-07-10 22:15:40,812 INFO uvicorn.error Application startup complete.
+2026-07-10 22:22:36,603 INFO uvicorn.error Shutting down
+2026-07-10 22:22:36,711 INFO uvicorn.error Waiting for application shutdown.
+2026-07-10 22:22:36,712 INFO uvicorn.error Application shutdown complete.
+2026-07-10 22:22:36,712 INFO uvicorn.error Finished server process [19220]
+2026-07-10 22:25:34,427 INFO uvicorn.error Started server process [18320]
+2026-07-10 22:25:34,427 INFO uvicorn.error Waiting for application startup.
+2026-07-10 22:25:34,436 INFO app.services.cleanup_service Removed stale temporary file: outputs\audio\e4d1a6da9c204067917d350de54c22c3.wav
+2026-07-10 22:25:34,438 INFO app.services.cleanup_service Removed stale temporary file: outputs\image\5f2e8e02cd5d41a2abd0bc06d2453e9f.jpg
+2026-07-10 22:25:34,439 INFO app.services.cleanup_service Removed stale temporary file: outputs\image\c72e1e59bb674445a4c19f5975f4e98b.jpg
+2026-07-10 22:25:34,441 INFO app.services.cleanup_service Removed stale temporary file: outputs\image\ebd527e9750d435185c3c911bf106914.png
+2026-07-10 22:25:34,442 INFO uvicorn.error Application startup complete.
+2026-07-10 22:31:15,981 INFO uvicorn.error Shutting down
+2026-07-10 22:31:16,089 INFO uvicorn.error Waiting for application shutdown.
+2026-07-10 22:31:16,090 INFO uvicorn.error Application shutdown complete.
+2026-07-10 22:31:16,090 INFO uvicorn.error Finished server process [18320]
+2026-07-10 22:32:29,656 INFO uvicorn.error Started server process [13112]
+2026-07-10 22:32:29,657 INFO uvicorn.error Waiting for application startup.
+2026-07-10 22:32:29,659 INFO app.services.cleanup_service Removed stale temporary file: outputs\image\5647eece5164453f94ec4eeab3c40476.png
+2026-07-10 22:32:29,660 INFO app.services.cleanup_service Removed stale temporary file: outputs\image\7be255a4a4454e7683d06bdcf2afc54e.webp
+2026-07-10 22:32:29,661 INFO app.services.cleanup_service Removed stale temporary file: outputs\image\d36a590cd67d4fbd89f02128891d8289.png
+2026-07-10 22:32:29,662 INFO uvicorn.error Application startup complete.
+2026-07-10 22:38:18,138 INFO uvicorn.error Shutting down
+2026-07-10 22:38:18,247 INFO uvicorn.error Waiting for application shutdown.
+2026-07-10 22:38:18,248 INFO uvicorn.error Application shutdown complete.
+2026-07-10 22:38:18,248 INFO uvicorn.error Finished server process [13112]
+2026-07-10 22:41:38,277 INFO uvicorn.error Started server process [21824]
+2026-07-10 22:41:38,278 INFO uvicorn.error Waiting for application startup.
+2026-07-10 22:41:38,280 INFO uvicorn.error Application startup complete.
+2026-07-10 22:50:14,870 INFO uvicorn.error Shutting down
+2026-07-10 22:50:14,979 INFO uvicorn.error Waiting for application shutdown.
+2026-07-10 22:50:14,980 INFO uvicorn.error Application shutdown complete.
+2026-07-10 22:50:14,980 INFO uvicorn.error Finished server process [21824]
+2026-07-10 22:51:08,730 INFO uvicorn.error Started server process [3268]
+2026-07-10 22:51:08,731 INFO uvicorn.error Waiting for application startup.
+2026-07-10 22:51:08,733 INFO app.services.cleanup_service Removed stale temporary file: outputs\audio\1442275b152d466a95c43baf38708d10.mp3
+2026-07-10 22:51:08,736 INFO app.services.cleanup_service Removed stale temporary file: outputs\audio\e58c565c2f3c4f84a3b9bce0f0e776d2.mp3
+2026-07-10 22:51:08,737 INFO uvicorn.error Application startup complete.
+2026-07-10 22:51:19,160 INFO uvicorn.error Shutting down
+2026-07-10 22:51:19,269 INFO uvicorn.error Waiting for application shutdown.
+2026-07-10 22:51:19,270 INFO uvicorn.error Application shutdown complete.
+2026-07-10 22:51:19,270 INFO uvicorn.error Finished server process [3268]
+2026-07-10 22:52:06,078 INFO uvicorn.error Started server process [23332]
+2026-07-10 22:52:06,079 INFO uvicorn.error Waiting for application startup.
+2026-07-10 22:52:06,080 INFO uvicorn.error Application startup complete.
+2026-07-10 22:56:47,738 INFO uvicorn.error Shutting down
+2026-07-10 22:56:47,848 INFO uvicorn.error Waiting for application shutdown.
+2026-07-10 22:56:47,849 INFO uvicorn.error Application shutdown complete.
+2026-07-10 22:56:47,849 INFO uvicorn.error Finished server process [23332]
+2026-07-10 23:02:06,885 INFO uvicorn.error Started server process [26516]
+2026-07-10 23:02:06,886 INFO uvicorn.error Waiting for application startup.
+2026-07-10 23:02:06,887 INFO uvicorn.error Application startup complete.
+2026-07-10 23:03:09,256 INFO uvicorn.error Shutting down
+2026-07-10 23:03:09,365 INFO uvicorn.error Waiting for application shutdown.
+2026-07-10 23:03:09,365 INFO uvicorn.error Application shutdown complete.
+2026-07-10 23:03:09,366 INFO uvicorn.error Finished server process [26516]
+2026-07-10 23:08:14,466 INFO uvicorn.error Started server process [26176]
+2026-07-10 23:08:14,467 INFO uvicorn.error Waiting for application startup.
+2026-07-10 23:08:14,468 INFO uvicorn.error Application startup complete.
+2026-07-10 23:10:23,802 INFO uvicorn.error Started server process [17988]
+2026-07-10 23:10:23,802 INFO uvicorn.error Waiting for application startup.
+2026-07-10 23:10:23,804 INFO uvicorn.error Application startup complete.
+2026-07-10 23:15:27,729 INFO uvicorn.error Shutting down
+2026-07-10 23:15:27,839 INFO uvicorn.error Waiting for application shutdown.
+2026-07-10 23:15:27,840 INFO uvicorn.error Application shutdown complete.
+2026-07-10 23:15:27,840 INFO uvicorn.error Finished server process [26176]
+2026-07-10 23:19:31,009 INFO uvicorn.error Started server process [18048]
+2026-07-10 23:19:31,009 INFO uvicorn.error Waiting for application startup.
+2026-07-10 23:19:31,010 INFO uvicorn.error Application startup complete.
+2026-07-10 23:27:18,030 INFO uvicorn.error Shutting down
+2026-07-10 23:27:18,138 INFO uvicorn.error Waiting for application shutdown.
+2026-07-10 23:27:18,138 INFO uvicorn.error Application shutdown complete.
+2026-07-10 23:27:18,139 INFO uvicorn.error Finished server process [18048]

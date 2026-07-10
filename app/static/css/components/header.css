@@ -25,12 +25,48 @@
 }
 
 .logo{
-
+    display:flex;
+    align-items:center;
+    gap:10px;
     font-size:34px;
-
     font-weight:800;
-
     color:var(--color-text);
+    text-decoration:none;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+}
+
+.logo img{
+    width:48px;
+    height:48px;
+    max-width:48px;
+    object-fit:contain;
+    display:block;
+    background: transparent !important;
+    flex-shrink:0;
+}
+
+.logo span{
+    line-height:1;
+}
+
+@media (max-width: 768px) {
+
+    .logo {
+
+        font-size:24px;
+
+        gap:10px;
+
+    }
+
+    /* keep logo 48x48 on mobile as well */
+    .logo img {
+        width:48px;
+        height:48px;
+    }
 
 }
 
