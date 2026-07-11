@@ -65,6 +65,22 @@ class ConverterController {
         console.log("Convert READY:", ready);
     }
 
+    reset() {
+        this.file = null;
+        if (this.convertBtn) {
+            this.convertBtn.disabled = true;
+            this.convertBtn.classList.remove("loading");
+            this.convertBtn.textContent = "Convert";
+        }
+        if (this.message) {
+            this.message.textContent = "";
+            this.message.classList.remove("success", "error");
+        }
+        if (window.downloadManager && typeof window.downloadManager.clear === "function") {
+            window.downloadManager.clear();
+        }
+    }
+
     async convert() {
         if (!this.file || !this.selectedFormat) {
             console.warn("Missing conversion data");

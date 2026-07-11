@@ -35,12 +35,20 @@ class UploadManager {
 
     bindEvents(){
         if(this.chooseButton){
-            this.chooseButton.addEventListener('click', ()=> this.fileInput.click());
+            this.chooseButton.addEventListener('click', ()=>{
+                if(this.fileInput){
+                    this.fileInput.value = '';
+                }
+                this.fileInput.click();
+            });
         }
 
         this.fileInput.addEventListener('change', ()=>{
             const file = this.fileInput.files[0];
-            if(file) this.handleFile(file);
+            if(file){
+                this.handleFile(file);
+                this.fileInput.value = '';
+            }
         });
 
         if(this.dropZone){
@@ -153,6 +161,10 @@ class UploadManager {
 
         if(window.downloadManager && typeof window.downloadManager.clear === 'function'){
             window.downloadManager.clear();
+        }
+
+        if(window.converter && typeof window.converter.reset === 'function'){
+            window.converter.reset();
         }
 
         const convertBtn = document.getElementById('convertButton');

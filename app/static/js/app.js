@@ -15,16 +15,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const downloadBtn = document.getElementById("downloadBtn");
     const convertMessage = document.getElementById("convertMessage");
 
+    const hasConverterController = () => Boolean(window.converter);
+
     let selectedFile = null;
     let selectedFormat = null;
 
     // File selected by UploadManager
     document.addEventListener("file-selected", (e) => {
         try {
+            if (hasConverterController()) return;
+
             selectedFile = e?.detail?.file || null;
             if (selectedFile && convertBtn) {
                 convertBtn.disabled = false;
-                if (convertMessage) convertMessage.textContent = "";
+                convertBtn.textContent = "Convert";
+                if (convertMessage) {
+                    convertMessage.textContent = "";
+                    convertMessage.classList.remove("success", "error");
+                }
                 if (downloadBtn) downloadBtn.hidden = true;
             }
         } catch (err) {
@@ -35,6 +43,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Format selected by RecommendationManager or format UI
     document.addEventListener("format-selected", (e) => {
         try {
+            if (hasConverterController()) return;
+
             const fmt = e?.detail?.target;
             if (fmt) selectedFormat = String(fmt).toLowerCase();
             console.log("FORMAT SELECTED:", selectedFormat);
@@ -44,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Convert button handler
-    if (convertBtn) {
+    if (!hasConverterController && convertBtn) {
         convertBtn.addEventListener("click", async () => {
             if (!selectedFile) return;
             if (!selectedFormat) {
