@@ -30,6 +30,8 @@ class Settings:
             "testserver",
             "100.64.0.2",
             "100.64.0.2:8080",
+            "converigo.com",
+            "www.converigo.com",
             "*.railway.app",
             "*.up.railway.app",
             "*.railway.internal",
