@@ -13,7 +13,7 @@ from fastapi.responses import HTMLResponse
 from app.core.templates import templates
 from app.services.converter_data_service import ConverterDataService
 from app.services.language_service import LanguageService
-from app.services.seo_service import SeoService
+from app.services.seo_service import PRODUCTION_BASE_URL, SeoService
 
 router = APIRouter()
 
@@ -57,11 +57,11 @@ async def _render_trust_page(
     canonical_path: str,
 ) -> HTMLResponse:
     locale_data, t, supported_locales = _get_locale_context(request)
-    base_url = _build_base_url(request)
     metadata = {
         "title": title,
         "description": description,
-        "canonical": f"{base_url}{canonical_path}",
+        "canonical": f"{PRODUCTION_BASE_URL}{canonical_path}",
+        "og_url": f"{PRODUCTION_BASE_URL}{canonical_path}",
         "keywords": "Converigo, file conversion, online converter, document conversion, image conversion",
         "author": "Converigo",
         "robots": "index,follow",
@@ -219,17 +219,23 @@ async def blog_index(request: Request):
     metadata = {
         "title": "Blog Converigo | Panduan Konversi File dan Tips SEO",
         "description": "Temukan panduan praktis, tips konversi file, dan artikel SEO tentang alat online Converigo.",
-        "canonical": f"{_build_base_url(request)}/blog",
+        "canonical": f"{PRODUCTION_BASE_URL}/blog",
+        "og_url": f"{PRODUCTION_BASE_URL}/blog",
         "keywords": "blog converigo, panduan convert file, tips konversi online",
         "author": "Converigo",
         "robots": "index,follow",
     }
+
+    locale_data, t, supported_locales = _get_locale_context(request)
 
     return templates.TemplateResponse(
         request=request,
         name="pages/blog_index.html",
         context={
             "request": request,
+            "locale": locale_data,
+            "t": t,
+            "supported_locales": supported_locales,
             "meta": metadata,
             "articles": articles,
             "year": datetime.utcnow().year,
@@ -243,7 +249,8 @@ async def blog_article(request: Request, slug: str):
         "how-to-convert-mp4-to-mp3": {
             "title": "Cara Convert MP4 ke MP3 Online Gratis Tanpa Aplikasi",
             "description": "Panduan lengkap cara mengonversi MP4 ke MP3 secara online gratis dengan hasil yang cepat, aman, dan praktis.",
-            "canonical": f"{_build_base_url(request)}/blog/how-to-convert-mp4-to-mp3",
+            "canonical": f"{PRODUCTION_BASE_URL}/blog/how-to-convert-mp4-to-mp3",
+            "og_url": f"{PRODUCTION_BASE_URL}/blog/how-to-convert-mp4-to-mp3",
             "template": "pages/blog_mp4_to_mp3.html",
             "breadcrumb": [
                 {"name": "Home", "url": "/"},
@@ -254,7 +261,8 @@ async def blog_article(request: Request, slug: str):
         "jpg-to-pdf-guide": {
             "title": "Panduan JPG ke PDF: Cara Mengubah Gambar Menjadi PDF dengan Mudah",
             "description": "Pelajari langkah mudah mengubah JPG ke PDF online secara gratis untuk dokumen, portofolio, dan arsip digital.",
-            "canonical": f"{_build_base_url(request)}/blog/jpg-to-pdf-guide",
+            "canonical": f"{PRODUCTION_BASE_URL}/blog/jpg-to-pdf-guide",
+            "og_url": f"{PRODUCTION_BASE_URL}/blog/jpg-to-pdf-guide",
             "template": "pages/blog_jpg_to_pdf.html",
             "breadcrumb": [
                 {"name": "Home", "url": "/"},
@@ -265,7 +273,8 @@ async def blog_article(request: Request, slug: str):
         "png-to-jpg-guide": {
             "title": "Panduan PNG ke JPG: Ubah Gambar Transparan Menjadi JPG tanpa Ribet",
             "description": "Pelajari cara mengubah PNG ke JPG online untuk kebutuhan desain, dokumen, dan berbagi gambar secara lebih luas.",
-            "canonical": f"{_build_base_url(request)}/blog/png-to-jpg-guide",
+            "canonical": f"{PRODUCTION_BASE_URL}/blog/png-to-jpg-guide",
+            "og_url": f"{PRODUCTION_BASE_URL}/blog/png-to-jpg-guide",
             "template": "pages/blog_png_to_jpg.html",
             "breadcrumb": [
                 {"name": "Home", "url": "/"},
@@ -278,6 +287,8 @@ async def blog_article(request: Request, slug: str):
     article = article_map.get(slug)
     if article is None:
         raise HTTPException(status_code=404, detail="Blog article not found")
+
+    locale_data, t, supported_locales = _get_locale_context(request)
 
     metadata = {
         "title": article["title"],
@@ -293,6 +304,9 @@ async def blog_article(request: Request, slug: str):
         name=article["template"],
         context={
             "request": request,
+            "locale": locale_data,
+            "t": t,
+            "supported_locales": supported_locales,
             "meta": metadata,
             "article": article,
             "year": datetime.utcnow().year,

@@ -46,6 +46,13 @@
 
 <link rel="canonical" href="{{ page_canonical }}">
 
+{% set page_hreflang_locales = request.state.supported_locales | default(['en', 'id']) %}
+{% set page_hreflang_delimiter = '?' if '?' not in page_canonical else '&' %}
+{% for locale_code in page_hreflang_locales %}
+<link rel="alternate" hreflang="{{ locale_code }}" href="{{ page_canonical }}{{ page_hreflang_delimiter }}lang={{ locale_code }}">
+{% endfor %}
+<link rel="alternate" hreflang="x-default" href="{{ page_canonical }}">
+
 
 <!-- Open Graph -->
 
