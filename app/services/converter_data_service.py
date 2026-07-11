@@ -111,22 +111,32 @@ class ConverterDataService:
 
         all_converters = self.list_all_converters()
 
-        popular = [
-
-            tool
-
-            for tool in all_converters
-
-            if tool.get(
-                "popular",
-                False,
+        def sort_key(tool: dict[str, Any]) -> tuple[Any, ...]:
+            featured = tool.get("featured", False)
+            popular = tool.get("popular", False)
+            sort_order = tool.get("sort_order")
+            created_at = tool.get("created_at", "")
+            return (
+                0 if featured else 1,
+                0 if popular else 1,
+                sort_order if sort_order is not None else 999999,
+                created_at,
+                tool.get("title", ""),
             )
 
+        ranked = sorted(
+            all_converters,
+            key=sort_key,
+        )
+
+        popular = [
+            tool
+            for tool in ranked
+            if tool.get("popular", False)
         ]
 
         if not popular:
-
-            popular = all_converters
+            popular = ranked
 
         return popular[:limit]
 
