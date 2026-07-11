@@ -1,0 +1,63 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}{{ meta.title }}{% endblock %}
+
+{% block content %}
+{% include "components/header.html" %}
+
+<main class="main" role="main">
+    <section class="hero section">
+        <div class="container hero-inner">
+            <div class="hero-copy">
+                <span class="eyebrow">Blog</span>
+                <h1 class="hero-title">{{ article.title }}</h1>
+                <p class="hero-sub">Panduan lengkap mengubah file JPG menjadi PDF secara online dengan cepat dan praktis.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-white">
+        <div class="container">
+            <div class="card card-lg">
+                <nav aria-label="Breadcrumb">
+                    <ol>
+                        {% for item in article.breadcrumb %}
+                        <li><a href="{{ item.url }}">{{ item.name }}</a></li>
+                        {% endfor %}
+                    </ol>
+                </nav>
+
+                <p>Konversi JPG ke PDF sangat berguna saat Anda ingin menggabungkan gambar menjadi satu dokumen yang rapih, mudah dibagikan, dan lebih cocok untuk kebutuhan bisnis, pelajaran, atau arsip personal. Dengan layanan online, proses ini bisa dilakukan tanpa menginstal aplikasi khusus.</p>
+
+                <h2>Kenapa mengubah JPG ke PDF?</h2>
+                <p>PDF sering dipilih karena format ini mempertahankan tata letak dokumen dan lebih aman untuk dibagikan. Saat Anda mengubah beberapa gambar menjadi satu PDF, dokumen akan terasa lebih profesional dan mudah diakses oleh orang lain.</p>
+
+                <h2>Langkah-langkah convert JPG ke PDF</h2>
+                <p>Langkah pertama adalah membuka alat <a href="/tools/jpg-to-pdf">JPG to PDF</a> di Converigo. Setelah itu, unggah gambar yang ingin diproses, pilih format output PDF, dan tunggu beberapa saat sampai file siap diunduh. Prosesnya sederhana dan cocok untuk pengguna yang ingin menghemat waktu.</p>
+
+                <h2>Manfaat bagi kebutuhan harian</h2>
+                <p>Format PDF sering digunakan untuk tugas sekolah, portofolio, dokumen bisnis, dan arsip foto. Dengan mengubah gambar menjadi PDF, Anda bisa mengatur hasil dalam satu file yang lebih ringkas dan lebih mudah dikelola.</p>
+
+                <h2>Tips hasil PDF yang lebih rapi</h2>
+                <p>Pastikan gambar yang diunggah memiliki ukuran dan orientasi yang sesuai. Jika Anda memiliki beberapa gambar, urutkan terlebih dahulu supaya hasil PDF tersusun rapi. Hal ini sangat membantu jika Anda ingin dokumen terlihat profesional saat dibagikan.</p>
+
+                <h2>FAQ</h2>
+                <div class="card">
+                    <h3>Apakah JPG ke PDF bisa dilakukan secara gratis?</h3>
+                    <p>Ya. Converigo menyediakan alat online yang memungkinkan Anda mengubah file gambar menjadi PDF tanpa biaya tambahan.</p>
+                </div>
+                <div class="card">
+                    <h3>Apakah ukuran file menjadi lebih kecil?</h3>
+                    <p>Biasanya file PDF lebih ringkas dan lebih mudah dibagikan, terutama saat Anda menggabungkan banyak gambar menjadi satu dokumen.</p>
+                </div>
+                <div class="card">
+                    <h3>Apakah saya bisa mengubah beberapa gambar sekaligus?</h3>
+                    <p>Ya, Anda bisa menggunakan alat konversi online untuk mengolah beberapa gambar menjadi satu dokumen PDF.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% include "components/footer.html" %}
+{% endblock %}

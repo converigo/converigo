@@ -1,0 +1,63 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}{{ meta.title }}{% endblock %}
+
+{% block content %}
+{% include "components/header.html" %}
+
+<main class="main" role="main">
+    <section class="hero section">
+        <div class="container hero-inner">
+            <div class="hero-copy">
+                <span class="eyebrow">Blog</span>
+                <h1 class="hero-title">{{ article.title }}</h1>
+                <p class="hero-sub">Panduan singkat dan praktis untuk mengubah file PNG menjadi JPG secara online tanpa aplikasi berat.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-white">
+        <div class="container">
+            <div class="card card-lg">
+                <nav aria-label="Breadcrumb">
+                    <ol>
+                        {% for item in article.breadcrumb %}
+                        <li><a href="{{ item.url }}">{{ item.name }}</a></li>
+                        {% endfor %}
+                    </ol>
+                </nav>
+
+                <p>PNG adalah format yang populer untuk gambar dengan latar belakang transparan, tetapi terkadang Anda membutuhkan format JPG agar lebih kompatibel dengan aplikasi, sistem CMS, atau kebutuhan berbagi cepat. Mengubah PNG ke JPG bisa dilakukan dengan mudah melalui alat online yang sederhana.</p>
+
+                <h2>Kenapa mengubah PNG ke JPG?</h2>
+                <p>JPG lebih sering didukung oleh berbagai platform, terutama saat Anda ingin mengunggah gambar ke website, email, atau aplikasi yang tidak mendukung transparansi. Format JPG juga nyaman untuk penggunaan umum karena ukurannya cenderung lebih sederhana dan mudah diproses.</p>
+
+                <h2>Cara mengubah PNG ke JPG</h2>
+                <p>Anda cukup membuka alat konversi di Converigo, mengunggah file PNG, memilih format JPG, lalu menunggu proses selesai. Setelah itu, hasil dapat diunduh langsung dan digunakan sesuai kebutuhan.</p>
+
+                <h2>Tips sebelum mengonversi</h2>
+                <p>Perhatikan bahwa JPG tidak mendukung latar belakang transparan seperti PNG. Jika gambar Anda memiliki area transparan, area tersebut akan diisi dengan warna latar tertentu saat dikonversi. Pastikan Anda memilih warna latar yang sesuai agar hasil tetap menarik.</p>
+
+                <h2>Keuntungan layanan online</h2>
+                <p>Layanan online membantu mengurangi kebutuhan untuk menginstal editor gambar. Ini membuat proses konversi lebih cepat dan cocok untuk pengguna yang ingin langsung mendapatkan hasil tanpa banyak langkah teknis.</p>
+
+                <h2>FAQ</h2>
+                <div class="card">
+                    <h3>Apakah PNG ke JPG bisa dilakukan gratis?</h3>
+                    <p>Ya. Converigo menyediakan alat online yang memungkinkan Anda mengubah file gambar menjadi JPG secara gratis.</p>
+                </div>
+                <div class="card">
+                    <h3>Apakah background transparan tetap aman?</h3>
+                    <p>Background transparan tidak akan tersimpan dalam format JPG, sehingga biasanya akan diubah menjadi warna latar tertentu.</p>
+                </div>
+                <div class="card">
+                    <h3>Apakah hasilnya cepat?</h3>
+                    <p>Ya, proses konversi biasanya selesai dalam hitungan detik sampai menit, tergantung ukuran file.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% include "components/footer.html" %}
+{% endblock %}

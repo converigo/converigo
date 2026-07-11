@@ -1,0 +1,39 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}{{ meta.title }}{% endblock %}
+
+{% block content %}
+{% include "components/header.html" %}
+
+<main class="main" role="main">
+    <section class="hero section">
+        <div class="container hero-inner">
+            <div class="hero-copy">
+                <span class="eyebrow">Converigo Blog</span>
+                <h1 class="hero-title">Panduan konversi file dan tips SEO</h1>
+                <p class="hero-sub">Temukan artikel praktis tentang cara mengubah file dengan cepat, aman, dan tanpa aplikasi tambahan.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-white">
+        <div class="container">
+            <div class="card card-lg">
+                <h2>Artikel terbaru</h2>
+                <div class="popular-tools-grid">
+                    {% for article in articles %}
+                    <article class="card">
+                        <p class="eyebrow">{{ article.category }}</p>
+                        <h3><a href="/blog/{{ article.slug }}">{{ article.title }}</a></h3>
+                        <p>{{ article.description }}</p>
+                        <a href="/blog/{{ article.slug }}">Baca artikel</a>
+                    </article>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% include "components/footer.html" %}
+{% endblock %}

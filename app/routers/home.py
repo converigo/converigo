@@ -7,7 +7,7 @@ Version : 2.0.0
 from datetime import datetime
 from pathlib import Path
 
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import HTMLResponse
 
 from app.core.templates import templates
@@ -172,6 +172,113 @@ async def cookies(request: Request):
         "Cookie Policy | Converigo",
         "Learn how Converigo uses cookies, analytics, and advertising technologies on our website.",
         "/cookies",
+    )
+
+
+@router.get("/blog", response_class=HTMLResponse)
+async def blog_index(request: Request):
+    articles = [
+        {
+            "slug": "how-to-convert-mp4-to-mp3",
+            "title": "Cara Convert MP4 ke MP3 Online Gratis Tanpa Aplikasi",
+            "description": "Panduan lengkap tentang cara mengubah video MP4 menjadi audio MP3 secara online, cepat, aman, dan tanpa aplikasi tambahan.",
+            "category": "Audio",
+        },
+        {
+            "slug": "jpg-to-pdf-guide",
+            "title": "Panduan JPG ke PDF: Cara Mengubah Gambar Menjadi PDF dengan Mudah",
+            "description": "Pelajari langkah-langkah mengonversi file JPG ke PDF secara online untuk dokumen, portofolio, dan arsip.",
+            "category": "Documents",
+        },
+        {
+            "slug": "png-to-jpg-guide",
+            "title": "Panduan PNG ke JPG: Ubah Gambar Transparan Menjadi JPG tanpa Ribet",
+            "description": "Temukan cara mengubah file PNG ke JPG online dengan hasil yang tajam dan cepat untuk kebutuhan sehari-hari.",
+            "category": "Images",
+        },
+    ]
+
+    metadata = {
+        "title": "Blog Converigo | Panduan Konversi File dan Tips SEO",
+        "description": "Temukan panduan praktis, tips konversi file, dan artikel SEO tentang alat online Converigo.",
+        "canonical": f"{_build_base_url(request)}/blog",
+        "keywords": "blog converigo, panduan convert file, tips konversi online",
+        "author": "Converigo",
+        "robots": "index,follow",
+    }
+
+    return templates.TemplateResponse(
+        request=request,
+        name="pages/blog_index.html",
+        context={
+            "request": request,
+            "meta": metadata,
+            "articles": articles,
+            "year": datetime.utcnow().year,
+        },
+    )
+
+
+@router.get("/blog/{slug}", response_class=HTMLResponse)
+async def blog_article(request: Request, slug: str):
+    article_map = {
+        "how-to-convert-mp4-to-mp3": {
+            "title": "Cara Convert MP4 ke MP3 Online Gratis Tanpa Aplikasi",
+            "description": "Panduan lengkap cara mengonversi MP4 ke MP3 secara online gratis dengan hasil yang cepat, aman, dan praktis.",
+            "canonical": f"{_build_base_url(request)}/blog/how-to-convert-mp4-to-mp3",
+            "template": "pages/blog_mp4_to_mp3.html",
+            "breadcrumb": [
+                {"name": "Home", "url": "/"},
+                {"name": "Blog", "url": "/blog"},
+                {"name": "Cara Convert MP4 ke MP3 Online Gratis Tanpa Aplikasi", "url": "/blog/how-to-convert-mp4-to-mp3"},
+            ],
+        },
+        "jpg-to-pdf-guide": {
+            "title": "Panduan JPG ke PDF: Cara Mengubah Gambar Menjadi PDF dengan Mudah",
+            "description": "Pelajari langkah mudah mengubah JPG ke PDF online secara gratis untuk dokumen, portofolio, dan arsip digital.",
+            "canonical": f"{_build_base_url(request)}/blog/jpg-to-pdf-guide",
+            "template": "pages/blog_jpg_to_pdf.html",
+            "breadcrumb": [
+                {"name": "Home", "url": "/"},
+                {"name": "Blog", "url": "/blog"},
+                {"name": "Panduan JPG ke PDF", "url": "/blog/jpg-to-pdf-guide"},
+            ],
+        },
+        "png-to-jpg-guide": {
+            "title": "Panduan PNG ke JPG: Ubah Gambar Transparan Menjadi JPG tanpa Ribet",
+            "description": "Pelajari cara mengubah PNG ke JPG online untuk kebutuhan desain, dokumen, dan berbagi gambar secara lebih luas.",
+            "canonical": f"{_build_base_url(request)}/blog/png-to-jpg-guide",
+            "template": "pages/blog_png_to_jpg.html",
+            "breadcrumb": [
+                {"name": "Home", "url": "/"},
+                {"name": "Blog", "url": "/blog"},
+                {"name": "Panduan PNG ke JPG", "url": "/blog/png-to-jpg-guide"},
+            ],
+        },
+    }
+
+    article = article_map.get(slug)
+    if article is None:
+        raise HTTPException(status_code=404, detail="Blog article not found")
+
+    metadata = {
+        "title": article["title"],
+        "description": article["description"],
+        "canonical": article["canonical"],
+        "keywords": "blog converigo, panduan konversi file, converter online",
+        "author": "Converigo",
+        "robots": "index,follow",
+    }
+
+    return templates.TemplateResponse(
+        request=request,
+        name=article["template"],
+        context={
+            "request": request,
+            "meta": metadata,
+            "article": article,
+            "year": datetime.utcnow().year,
+        },
     )
 
 
