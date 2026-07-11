@@ -25,9 +25,15 @@ class SeoService:
             "description": "Convertin offers fast, secure, and automatic file conversion from video, audio, image, and document formats.",
             "canonical": f"{base_url}/",
             "og_url": f"{base_url}/",
+            "og_site_name": "Convertin",
             "og_image": f"{base_url}/static/images/og-home.png",
+            "og_image_alt": "Convertin file conversion platform",
+            "og_image_width": 1200,
+            "og_image_height": 630,
             "og_type": "website",
             "twitter_card": "summary_large_image",
+            "twitter_site": "@convertin",
+            "twitter_creator": "@convertin",
         }
 
     def build_tool_meta(self, request: Any, tool_data: dict[str, Any]) -> dict[str, str]:
@@ -41,10 +47,16 @@ class SeoService:
             "description": description,
             "canonical": canonical,
             "og_url": canonical,
+            "og_site_name": "Convertin",
             "og_image": og_image,
+            "og_image_alt": title,
+            "og_image_width": 1200,
+            "og_image_height": 630,
             "keywords": tool_data.get("seo", {}).get("keywords", ""),
             "og_type": tool_data.get("seo", {}).get("type", "website"),
             "twitter_card": tool_data.get("seo", {}).get("twitter_card", "summary_large_image"),
+            "twitter_site": "@convertin",
+            "twitter_creator": "@convertin",
         }
 
     def build_sitemap_xml(self, request: Any) -> str:
