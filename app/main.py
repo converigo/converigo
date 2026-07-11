@@ -8,8 +8,10 @@ Convertin FastAPI Application
 
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
+from starlette.middleware.trustedhost import TrustedHostMiddleware
 
 from app.core.logging_config import configure_logging
 from app.core.settings import settings
@@ -97,6 +99,15 @@ app = FastAPI(
 
 )
 
+app.add_middleware(
+    TrustedHostMiddleware,
+    allowed_hosts=settings.ALLOWED_HOSTS,
+)
+
+
+@app.get("/health")
+async def health() -> JSONResponse:
+    return JSONResponse({"status": "ok", "service": "convertin"})
 
 
 # ==========================================
