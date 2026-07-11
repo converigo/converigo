@@ -17,3 +17,11 @@ def test_health_endpoint_allows_loopback_host():
 
     assert response.status_code == 200
     assert response.json() == {"status": "ok", "service": "convertin"}
+
+
+def test_health_endpoint_accepts_unconfigured_hosts():
+    client = TestClient(app)
+    response = client.get("/health", headers={"host": "my-app.up.railway.app"})
+
+    assert response.status_code == 200
+    assert response.json() == {"status": "ok", "service": "convertin"}
