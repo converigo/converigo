@@ -23,3 +23,7 @@ def test_sitemap_contains_homepage_converter_and_trust_pages():
     assert any(loc.endswith("/terms") for loc in locations)
     assert any(loc.endswith("/contact") for loc in locations)
     assert any(loc.endswith("/cookies") for loc in locations)
+    assert any(loc.endswith("/blog") for loc in locations)
+    assert any(loc.endswith("/blog/how-to-convert-mp4-to-mp3") for loc in locations)
+    assert any(loc.endswith("/blog/jpg-to-pdf-guide") for loc in locations)
+    assert any(loc.endswith("/blog/png-to-jpg-guide") for loc in locations)

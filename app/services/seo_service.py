@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 from xml.sax.saxutils import escape
@@ -92,11 +93,29 @@ class SeoService:
             "twitter_creator": "@converigo",
         }
 
+    def _build_blog_entries(self, base_url: str) -> list[dict[str, str]]:
+        today = datetime.utcnow().date().isoformat()
+        paths = [
+            "/blog",
+            "/blog/how-to-convert-mp4-to-mp3",
+            "/blog/jpg-to-pdf-guide",
+            "/blog/png-to-jpg-guide",
+        ]
+
+        return [
+            {
+                "loc": base_url.rstrip("/") + path,
+                "lastmod": today,
+            }
+            for path in paths
+        ]
+
     def build_sitemap_xml(self, request: Any) -> str:
 
         base_url = self._build_base_url(request)
 
         entries = self.data_service.sitemap_entries(base_url)
+        entries.extend(self._build_blog_entries(base_url))
 
         lines = [
             '<?xml version="1.0" encoding="UTF-8"?>',
