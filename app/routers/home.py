@@ -470,6 +470,85 @@ async def webp_to_jpg_landing(request: Request):
     )
 
 
+@router.get("/pdf-to-jpg", response_class=HTMLResponse)
+async def pdf_to_jpg_landing(request: Request):
+    locale_data = language_service.load_locale(
+        accept_language=request.headers.get("accept-language"),
+        lang_query=request.query_params.get("lang"),
+    )
+
+    def t(key: str, default: str = "") -> str:
+        return language_service.translate(locale_data, key, default)
+
+    tool_data = converter_data_service.load_converter_by_slug("pdf-to-jpg")
+    base_url = _build_base_url(request)
+    seo_title = "PDF to JPG Converter Online Free - Convertin"
+    seo_description = (
+        "Convert PDF files to JPG images online free. Fast, secure and easy PDF image converter."
+    )
+
+    faq_items = [
+        {
+            "question": "What is PDF to JPG conversion?",
+            "answer": "PDF to JPG conversion converts PDF pages into image files that are easier to view and share.",
+        },
+        {
+            "question": "Why convert PDF to JPG?",
+            "answer": "JPG images are supported widely across devices and applications.",
+        },
+        {
+            "question": "Is PDF to JPG converter free?",
+            "answer": "Yes, Convertin provides free online PDF to JPG conversion.",
+        },
+    ]
+
+    meta = {
+        "title": seo_title,
+        "description": seo_description,
+        "canonical": f"{base_url}/pdf-to-jpg",
+        "og_url": f"{base_url}/pdf-to-jpg",
+        "og_image": f"{base_url}/static/images/og-default.png",
+        "keywords": "pdf to jpg converter, convert pdf to jpg online, pdf to jpg online free",
+        "og_type": "website",
+        "twitter_card": "summary_large_image",
+    }
+
+    structured_data = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": item["question"],
+                "acceptedAnswer": {"@type": "Answer", "text": item["answer"]},
+            }
+            for item in faq_items
+        ],
+    }
+
+    return templates.TemplateResponse(
+        request=request,
+        name="pages/pdf_to_jpg_landing.html",
+        context={
+            "request": request,
+            "locale": locale_data,
+            "t": t,
+            "meta": meta,
+            "title": seo_title,
+            "tool": tool_data,
+            "upload_form": tool_data.get("upload_form", {}),
+            "faq_items": faq_items,
+            "benefits": [
+                {"title": "Convert PDF pages into JPG images quickly", "text": "Turn your PDF pages into JPG images in seconds without installing software."},
+                {"title": "Easy image sharing and compatibility", "text": "Share and view your content across more devices and apps with JPG output."},
+                {"title": "Secure file processing", "text": "Your files are handled safely and kept private during conversion."},
+                {"title": "Free online converter", "text": "Use Convertin online for free to convert PDF files to JPG images."},
+            ],
+            "structured_data": structured_data,
+        },
+    )
+
+
 @router.get("/jpg-to-pdf", response_class=HTMLResponse)
 async def jpg_to_pdf_landing(request: Request):
     locale_data = language_service.load_locale(
