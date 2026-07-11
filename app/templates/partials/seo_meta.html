@@ -4,7 +4,7 @@
 
 {% set page_description = page_meta.description | default('Converigo offers fast, secure, and automatic file conversion from video, audio, image, and document formats.') %}
 
-{% set page_canonical = page_meta.canonical | default(request.url.path) %}
+{% set page_canonical = page_meta.canonical | default('https://converigo.com' ~ request.url.path) %}
 
 {% set page_keywords = page_meta.keywords | default('convert files, file conversion, online converter, convert video, convert image') %}
 
@@ -16,7 +16,7 @@
 
 {% set page_og_image = page_meta.og_image | default('/static/images/convertin-logo.png') %}
 
-{% set page_og_url = page_meta.og_url | default(request.url) %}
+{% set page_og_url = page_meta.og_url | default('https://converigo.com' ~ request.url.path) %}
 
 {% set page_og_site_name = page_meta.og_site_name | default('Converigo') %}
 

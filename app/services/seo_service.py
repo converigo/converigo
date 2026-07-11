@@ -6,6 +6,8 @@ from xml.sax.saxutils import escape
 
 from app.services.converter_data_service import ConverterDataService
 
+PRODUCTION_BASE_URL = "https://converigo.com"
+
 
 class SeoService:
     def __init__(self, data_dir: Path) -> None:
@@ -15,28 +17,10 @@ class SeoService:
         """
         Build canonical base URL.
 
-        Railway runs behind a reverse proxy.
-        The original request scheme may appear as HTTP internally,
-        while the public URL is HTTPS.
-
-        Uses x-forwarded-proto when available.
+        Production SEO should use the public domain consistently.
         """
 
-        forwarded_proto = request.headers.get("x-forwarded-proto")
-
-        if forwarded_proto:
-            scheme = forwarded_proto.split(",")[0].strip()
-        else:
-            scheme = request.url.scheme
-
-        hostname = request.url.hostname
-
-        base_url = f"{scheme}://{hostname}"
-
-        if request.url.port and request.url.port not in (80, 443):
-            base_url += f":{request.url.port}"
-
-        return base_url.rstrip("/")
+        return PRODUCTION_BASE_URL.rstrip("/")
 
     def build_home_meta(self, request: Any) -> dict[str, str]:
         base_url = self._build_base_url(request)

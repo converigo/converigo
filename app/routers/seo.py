@@ -4,7 +4,7 @@ from typing import List
 from fastapi import APIRouter, Request
 from fastapi.responses import FileResponse, PlainTextResponse, Response
 
-from app.services.seo_service import SeoService
+from app.services.seo_service import PRODUCTION_BASE_URL, SeoService
 
 router = APIRouter(tags=["seo"])
 seo_service = SeoService(Path("app/data/converters"))
@@ -18,4 +18,9 @@ async def sitemap(request: Request):
 
 @router.get("/robots.txt", response_class=PlainTextResponse)
 async def robots(request: Request):
-    return FileResponse("app/static/robots.txt", media_type="text/plain")
+    robots_content = (
+        "User-agent: *\n"
+        "Allow: /\n\n"
+        f"Sitemap: {PRODUCTION_BASE_URL}/sitemap.xml\n"
+    )
+    return PlainTextResponse(robots_content)
