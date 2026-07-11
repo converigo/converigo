@@ -7,6 +7,7 @@ Convertin FastAPI Application
 """
 
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
@@ -59,6 +60,7 @@ from app.routers.recommend import (
 settings.UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 settings.OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
+STATIC_DIR = Path(__file__).resolve().parent / "static"
 OUTPUT_DIR = settings.OUTPUT_DIR
 
 
@@ -119,7 +121,7 @@ app.mount(
     "/static",
 
     StaticFiles(
-        directory="app/static"
+        directory=str(STATIC_DIR)
     ),
 
     name="static",
