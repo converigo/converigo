@@ -27,6 +27,22 @@ def test_health_endpoint_accepts_unconfigured_hosts():
     assert response.json() == {"status": "ok", "service": "convertin"}
 
 
+def test_health_endpoint_allows_railway_internal_host():
+    client = TestClient(app)
+    response = client.get("/health", headers={"host": "100.64.0.2"})
+
+    assert response.status_code == 200
+    assert response.json() == {"status": "ok", "service": "convertin"}
+
+
+def test_health_endpoint_allows_railway_internal_host_with_port():
+    client = TestClient(app)
+    response = client.get("/health", headers={"host": "100.64.0.2:8080"})
+
+    assert response.status_code == 200
+    assert response.json() == {"status": "ok", "service": "convertin"}
+
+
 def test_manifest_endpoint_serves_webmanifest():
     client = TestClient(app)
     response = client.get("/static/site.webmanifest")

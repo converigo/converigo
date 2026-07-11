@@ -21,7 +21,23 @@ class Settings:
         self.IMAGE_CONVERSION_TIMEOUT_SECONDS = int(os.getenv("IMAGE_CONVERSION_TIMEOUT_SECONDS", str(self.CONVERSION_TIMEOUT_SECONDS)))
         self.DOCUMENT_CONVERSION_TIMEOUT_SECONDS = int(os.getenv("DOCUMENT_CONVERSION_TIMEOUT_SECONDS", str(self.CONVERSION_TIMEOUT_SECONDS)))
         self.MAX_FILENAME_LENGTH = int(os.getenv("MAX_FILENAME_LENGTH", "255"))
-        self.ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*" ).split(",")
+
+        default_allowed_hosts = [
+            "localhost",
+            "127.0.0.1",
+            "0.0.0.0",
+            "testserver",
+            "100.64.0.2",
+            "100.64.0.2:8080",
+            "*.railway.app",
+            "*.up.railway.app",
+            "*.railway.internal",
+        ]
+        allowed_hosts_env = os.getenv("ALLOWED_HOSTS", "").strip()
+        if allowed_hosts_env:
+            self.ALLOWED_HOSTS = [host.strip() for host in allowed_hosts_env.split(",") if host.strip()]
+        else:
+            self.ALLOWED_HOSTS = default_allowed_hosts
 
 
 settings = Settings()
