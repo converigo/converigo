@@ -1894,6 +1894,69 @@ input {
 ========================================== */
 
 
+.header-inner {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    width:100%;
+}
+
+.header-right {
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-left:auto;
+}
+
+@media (max-width: 480px) {
+    .container {
+        width:calc(100% - 20px);
+    }
+
+    .header-inner {
+        flex-wrap:wrap;
+        gap:10px;
+    }
+
+    .header-right {
+        width:100%;
+        justify-content:space-between;
+        gap:10px;
+        margin-left:0;
+    }
+
+    .logo {
+        font-size:20px;
+        gap:8px;
+    }
+
+    .logo img {
+        width:40px;
+        height:40px;
+    }
+
+    .main-nav {
+        gap:10px;
+    }
+
+    .main-nav a {
+        font-size:14px;
+    }
+
+    .header-actions {
+        gap:8px;
+    }
+
+    .header-actions .btn,
+    .btn {
+        min-height:44px;
+        padding:10px 12px;
+        font-size:13px;
+        white-space:nowrap;
+    }
+}
+
 @media(max-width:900px){
 
 

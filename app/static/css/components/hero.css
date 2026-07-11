@@ -130,3 +130,36 @@ SEO Landing Layout
 
 
 }
+
+@media(max-width:480px){
+
+    .hero {
+        padding-top:32px;
+        padding-bottom:18px;
+    }
+
+    .hero-badge {
+        margin-bottom:10px;
+        padding:6px 12px;
+        font-size:11px;
+    }
+
+    .hero h1 {
+        font-size:clamp(28px, 9vw, 36px);
+        line-height:1.08;
+        letter-spacing:-0.8px;
+        max-width:100%;
+    }
+
+    .hero p {
+        font-size:15px;
+        line-height:1.55;
+        margin:12px auto 18px;
+        padding:0 4px;
+    }
+
+    .hero-workspace {
+        margin-top:12px;
+    }
+
+}
