@@ -12,6 +12,8 @@ import shutil
 import subprocess
 from pathlib import Path
 
+from app.core.settings import settings
+
 
 class FFmpegEngine:
 
@@ -49,11 +51,19 @@ class FFmpegEngine:
         print(command)
         print("=" * 60)
 
-        completed = subprocess.run(
-            command,
-            capture_output=True,
-            text=True,
-        )
+        try:
+            completed = subprocess.run(
+                command,
+                capture_output=True,
+                text=True,
+                timeout=settings.CONVERSION_TIMEOUT_SECONDS,
+            )
+        except subprocess.TimeoutExpired as exc:
+            if output_path.exists():
+                output_path.unlink(missing_ok=True)
+            raise RuntimeError(
+                f"Conversion timed out after {settings.CONVERSION_TIMEOUT_SECONDS} seconds."
+            ) from exc
 
         if completed.returncode != 0:
 

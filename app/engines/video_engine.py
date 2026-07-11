@@ -1,6 +1,7 @@
 import subprocess
 from pathlib import Path
 
+from app.core.settings import settings
 from app.engines.base_engine import BaseEngine
 
 
@@ -55,12 +56,19 @@ class VideoEngine(BaseEngine):
                 capture_output=True,
                 text=True,
                 check=False,
+                timeout=settings.VIDEO_CONVERSION_TIMEOUT_SECONDS,
             )
 
         except FileNotFoundError as exc:
 
             raise RuntimeError(
                 "FFmpeg was not found."
+            ) from exc
+        except subprocess.TimeoutExpired as exc:
+            if output_path.exists():
+                output_path.unlink(missing_ok=True)
+            raise RuntimeError(
+                f"Conversion timed out after {settings.VIDEO_CONVERSION_TIMEOUT_SECONDS} seconds."
             ) from exc
 
         if result.returncode != 0:

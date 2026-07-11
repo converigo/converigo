@@ -160,10 +160,10 @@ async def convert_file(
 
 
     except ConversionError as exc:
-        logger.exception("Conversion failed")
+        logger.warning("Conversion failed: %s", exc)
         raise HTTPException(
             status_code=500,
-            detail="Conversion failed.",
+            detail=str(exc),
         )
 
 
