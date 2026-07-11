@@ -104,6 +104,20 @@ class ConverterDataService:
 
         )
 
+    def list_active_converters(
+        self,
+    ) -> List[dict[str, Any]]:
+
+        active_converters = []
+
+        for tool in self.list_all_converters():
+            active_flag = tool.get("active", tool.get("enabled", True))
+            if active_flag is False:
+                continue
+            active_converters.append(tool)
+
+        return active_converters
+
     def list_popular_converters(
         self,
         limit: int = 6,
@@ -254,22 +268,25 @@ class ConverterDataService:
     ) -> List[dict[str, str]]:
 
         entries = [
-
             {
                 "loc": base_url.rstrip("/") + "/",
                 "lastmod": datetime.utcnow().date().isoformat(),
             }
-
         ]
 
-        for tool in self.list_all_converters():
-
+        trust_pages = ["/about", "/privacy", "/terms", "/contact", "/cookies"]
+        for path in trust_pages:
             entries.append(
-
                 {
-                    "loc": base_url.rstrip("/")
-                    + f"/tools/{tool['slug']}",
+                    "loc": base_url.rstrip("/") + path,
+                    "lastmod": datetime.utcnow().date().isoformat(),
+                }
+            )
 
+        for tool in self.list_active_converters():
+            entries.append(
+                {
+                    "loc": base_url.rstrip("/") + f"/tools/{tool['slug']}",
                     "lastmod": tool.get(
                         "updated_at",
                         tool.get(
@@ -278,7 +295,6 @@ class ConverterDataService:
                         ),
                     ),
                 }
-
             )
 
         return entries

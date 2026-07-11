@@ -3,6 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from pathlib import Path
 from typing import Any
+from xml.sax.saxutils import escape
 
 from app.services.converter_data_service import ConverterDataService
 
@@ -45,6 +46,26 @@ class SeoService:
             "og_type": tool_data.get("seo", {}).get("type", "website"),
             "twitter_card": tool_data.get("seo", {}).get("twitter_card", "summary_large_image"),
         }
+
+    def build_sitemap_xml(self, request: Any) -> str:
+        base_url = self._build_base_url(request)
+        entries = self.data_service.sitemap_entries(base_url)
+
+        lines = [
+            '<?xml version="1.0" encoding="UTF-8"?>',
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+        ]
+
+        for entry in entries:
+            loc = escape(str(entry["loc"]))
+            lines.append("  <url>")
+            lines.append(f"    <loc>{loc}</loc>")
+            if "lastmod" in entry:
+                lines.append(f"    <lastmod>{escape(str(entry['lastmod']))}</lastmod>")
+            lines.append("  </url>")
+
+        lines.append("</urlset>")
+        return "\n".join(lines)
 
     def build_structured_data(self, request: Any, tool_data: dict[str, Any] | None = None) -> dict[str, Any]:
         base_url = self._build_base_url(request)
