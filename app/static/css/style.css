@@ -1504,6 +1504,27 @@ input {
 
 }
 
+.faq-list {
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+
+    gap:24px;
+
+}
+
+@media(max-width:700px){
+
+    .faq-list {
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+
 
 
 

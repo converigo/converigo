@@ -150,12 +150,50 @@ class SeoService:
         }
 
         if tool_data is None:
+            faq_items = [
+                {
+                    "@type": "Question",
+                    "name": "What is Converigo?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Converigo is a fast online file converter that helps you convert documents, images, audio, and video files without installing software.",
+                    },
+                },
+                {
+                    "@type": "Question",
+                    "name": "Is Converigo free?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, Converigo offers free file conversion so you can quickly transform files without paying for basic conversion tasks.",
+                    },
+                },
+                {
+                    "@type": "Question",
+                    "name": "Are uploaded files safe?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Uploaded files are processed securely and kept only as long as needed to complete the conversion, with privacy and safety in mind.",
+                    },
+                },
+                {
+                    "@type": "Question",
+                    "name": "What files can Converigo convert?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Converigo supports many popular formats for images, documents, audio, and video, so you can convert the files you need quickly.",
+                    },
+                },
+            ]
 
             return {
                 "@context": "https://schema.org",
                 "@graph": [
                     organization,
                     website,
+                    {
+                        "@type": "FAQPage",
+                        "mainEntity": faq_items,
+                    },
                 ],
             }
 

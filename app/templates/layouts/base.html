@@ -28,6 +28,9 @@
     </title>
 
     {% include "partials/seo_meta.html" %}
+    {% if structured_data %}
+    {% include "partials/structured_data.html" %}
+    {% endif %}
 
     <!-- Favicons -->
 
