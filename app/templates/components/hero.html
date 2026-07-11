@@ -11,18 +11,18 @@
 
 
                 <span class="hero-badge">
-                    🚀 Fast • Smart • Secure
+                    {{ request.state.t('hero.badge', '🚀 Fast • Smart • Secure') }}
                 </span>
 
 
 
                 <h1 class="hero-title">
 
-                    Convert Any File
+                    {{ request.state.t('hero.title', 'Convert Any File') }}
 
                     <br>
 
-                    In Seconds
+                    {{ request.state.t('hero.subtitle_line', 'In Seconds') }}
 
                 </h1>
 
@@ -31,11 +31,11 @@
 
                 <p class="hero-description">
 
-                    Convert images, videos, audio, and documents online.
+                    {{ request.state.t('hero.description', 'Convert images, videos, audio, and documents online.') }}
 
                     <br>
 
-                    <strong>Convert and Go!<br>Fast, Simple, Ready.</strong>
+                    <strong>{{ request.state.t('hero.callout', 'Convert and Go!') }}<br>{{ request.state.t('hero.callout_tagline', 'Fast, Simple, Ready.') }}</strong>
 
                 </p>
 

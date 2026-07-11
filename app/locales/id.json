@@ -1,8 +1,12 @@
 {
   "hero": {
     "eyebrow": "Premium File Converter",
-    "title": "Konversi file lebih cepat dengan kesederhanaan premium.",
-    "subtitle": "Converigo menghadirkan konversi file yang aman, responsif, dan rapi untuk pelajar, pembuat konten, dan profesional.",
+    "title": "Konversi Semua File",
+    "subtitle": "Konversi file lebih cepat dengan kesederhanaan premium.",
+    "subtitle_line": "Dalam Hitungan Detik",
+    "description": "Konversi gambar, video, audio, dan dokumen secara online.",
+    "callout": "Konversi dan Lanjutkan!",
+    "callout_tagline": "Cepat, Sederhana, Siap.",
     "primary_cta": "Mulai mengonversi",
     "secondary_cta": "Jelajahi fitur"
   },

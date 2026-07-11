@@ -1,8 +1,12 @@
 {
   "hero": {
     "eyebrow": "Premium File Converter",
-    "title": "Convert files faster with premium simplicity.",
-    "subtitle": "Converigo brings secure, responsive, and polished file conversion for students, creators, and office professionals. Fast, Simple, Ready.",
+    "title": "Convert Any File",
+    "subtitle": "Convert files faster with premium simplicity.",
+    "subtitle_line": "In Seconds",
+    "description": "Convert images, videos, audio, and documents online.",
+    "callout": "Convert and Go!",
+    "callout_tagline": "Fast, Simple, Ready.",
     "primary_cta": "Start converting",
     "secondary_cta": "Explore features"
   },
