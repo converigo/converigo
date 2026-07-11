@@ -39,7 +39,7 @@ class ConvertManager {
 
                 data.detail ||
 
-                "Conversion failed."
+                window.translate('upload.conversion_failed', 'Conversion failed.')
 
             );
 

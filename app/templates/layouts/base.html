@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ request.state.locale.lang_code if request.state and request.state.locale else 'en' }}">
 
 <head>
 
@@ -194,6 +194,36 @@
      JAVASCRIPT
 =========================== -->
 
+<script>
+    window.appLocale = {{ request.state.locale | tojson | safe }};
+    window.localeCode = "{{ request.state.locale.lang_code if request.state and request.state.locale else 'en' }}";
+    window.translate = function (key, defaultText) {
+        if (!window.appLocale || typeof key !== "string") {
+            return defaultText || key;
+        }
+        const parts = key.split(".");
+        let value = window.appLocale;
+        for (const part of parts) {
+            if (value && typeof value === "object" && part in value) {
+                value = value[part];
+            } else {
+                return defaultText || key;
+            }
+        }
+        return typeof value === "string" ? value : (defaultText || key);
+    };
+    window.handleLanguageChange = function (event) {
+        const selectedLang = event.target.value;
+        const params = new URLSearchParams(window.location.search);
+        if (selectedLang) {
+            params.set('lang', selectedLang);
+        } else {
+            params.delete('lang');
+        }
+        const query = params.toString();
+        window.location.search = query ? `?${query}` : window.location.pathname;
+    };
+</script>
 
 <script src="/static/js/config.js"></script>
 

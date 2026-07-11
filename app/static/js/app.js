@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
             selectedFile = e?.detail?.file || null;
             if (selectedFile && convertBtn) {
                 convertBtn.disabled = false;
-                convertBtn.textContent = "Convert";
+                convertBtn.textContent = window.translate('upload.convert', 'Convert');
                 if (convertMessage) {
                     convertMessage.textContent = "";
                     convertMessage.classList.remove("success", "error");
@@ -54,17 +54,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Convert button handler
-    if (!hasConverterController && convertBtn) {
+    if (!hasConverterController() && convertBtn) {
         convertBtn.addEventListener("click", async () => {
             if (!selectedFile) return;
             if (!selectedFormat) {
-                if (convertMessage) convertMessage.textContent = "❌ Select a target format first.";
+                if (convertMessage) convertMessage.textContent = window.translate('upload.select_target_format', '❌ Select a target format first.');
                 return;
             }
 
             convertBtn.disabled = true;
             const originalText = convertBtn.textContent;
-            convertBtn.textContent = "Converting...";
+            convertBtn.textContent = window.translate('upload.converting', 'Converting...');
 
             const formData = new FormData();
             formData.append("file", selectedFile);
@@ -76,32 +76,32 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (!response.ok) {
                     const err = await response.json().catch(() => ({}));
                     console.error("Convert error", err);
-                    if (convertMessage) convertMessage.textContent = "❌ Conversion failed. Please try another format.";
+                    if (convertMessage) convertMessage.textContent = window.translate('upload.conversion_failed_try_another', '❌ Conversion failed. Please try another format.');
                     return;
                 }
 
                 const result = await response.json();
 
                 if (result.status === "success") {
-                    if (convertMessage) convertMessage.textContent = "✓ Conversion completed successfully";
+                    if (convertMessage) convertMessage.textContent = window.translate('upload.conversion_completed', '✓ Conversion completed');
                     if (downloadBtn) {
                         downloadBtn.href = result.download_path;
                         if (result.filename) downloadBtn.download = result.filename;
                         downloadBtn.hidden = false;
                         // Update button state to indicate ready-to-download
-                        if (convertBtn) convertBtn.textContent = "Download Ready";
+                        if (convertBtn) convertBtn.textContent = window.translate('upload.download_ready', 'Download Ready');
                     }
                 } else {
                     console.error("Convert failed", result);
-                    if (convertMessage) convertMessage.textContent = "❌ Conversion failed. Please try another format.";
+                    if (convertMessage) convertMessage.textContent = window.translate('upload.conversion_failed_try_another', '❌ Conversion failed. Please try another format.');
                 }
 
             } catch (error) {
                 console.error(error);
-                if (convertMessage) convertMessage.textContent = "❌ Conversion failed. Please try again later.";
+                if (convertMessage) convertMessage.textContent = window.translate('upload.conversion_failed', '❌ Conversion failed. Please try again later.');
             } finally {
                 convertBtn.disabled = false;
-                convertBtn.textContent = originalText || "Convert";
+                convertBtn.textContent = originalText || window.translate('upload.convert', 'Convert');
             }
         });
     }

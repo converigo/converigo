@@ -11,11 +11,25 @@
     "subtext": "Seret, jatuhkan, atau telusuri untuk memilih file Anda.",
     "badge": "Instan",
     "drop_title": "Jatuhkan file Anda di sini",
-    "browse": "telusuri",
+    "browse": "Pilih File",
     "empty_status": "Belum ada file yang dipilih",
     "waiting_status": "Menunggu file Anda",
     "size_label": "0 KB",
-    "clear": "Hapus"
+    "clear": "Hapus",
+    "conversion_title": "Konversi Ke",
+    "convert": "Konversi",
+    "download": "Unduh",
+    "select_file": "Pilih file untuk memulai",
+    "file_ready": "File siap",
+    "converting": "Mengonversi...",
+    "conversion_completed": "✓ Konversi selesai",
+    "download_ready": "Unduhan siap",
+    "select_target_format": "❌ Pilih format tujuan terlebih dahulu.",
+    "conversion_failed": "❌ Konversi gagal. Silakan coba lagi nanti.",
+    "conversion_failed_try_another": "❌ Konversi gagal. Silakan coba lagi dengan format lain.",
+    "file_type_audio": "File Audio",
+    "file_type_video": "File Video",
+    "file_type_pdf": "File PDF"
   },
   "stats": {
     "formats": "Format yang didukung",
@@ -40,10 +54,12 @@
   },
   "faq": {
     "heading": "Pertanyaan yang Sering Diajukan",
+    "description": "Jawaban atas pertanyaan umum tentang layanan konversi file Converigo.",
     "items": [
-      {"question": "Format file apa yang dapat saya konversi?", "answer": "Converigo mendukung format video, audio, dan dokumen populer termasuk MP4, MP3, WAV, PDF, DOCX, dan lainnya."},
-      {"question": "Apakah data saya privat?", "answer": "Semua file yang diunggah ditangani dengan aman dan UI dirancang untuk menghormati privasi selama pengujian konversi."},
-      {"question": "Apakah ini bekerja di perangkat seluler?", "answer": "Ya. Halaman ini sepenuhnya responsif untuk desktop, tablet, dan ponsel."}
+      {"question": "Apa itu Converigo?", "answer": "Converigo adalah konverter file online yang cepat untuk membantu Anda mengonversi dokumen, gambar, audio, dan video tanpa harus menginstal perangkat lunak."},
+      {"question": "Apakah Converigo gratis?", "answer": "Ya, Converigo menawarkan konversi file gratis agar Anda dapat mengubah file dengan cepat tanpa biaya tambahan."},
+      {"question": "Apakah file yang diunggah aman?", "answer": "File yang diunggah diproses dengan aman dan disimpan hanya selama diperlukan untuk menyelesaikan konversi."},
+      {"question": "File apa saja yang dapat dikonversi Converigo?", "answer": "Converigo mendukung banyak format populer untuk gambar, dokumen, audio, dan video sehingga Anda dapat mengonversi file yang diperlukan dengan cepat."}
     ]
   },
   "footer": {
@@ -55,6 +71,12 @@
     "features": "Fitur",
     "faq": "FAQ",
     "upload": "Unggah",
+    "about": "Tentang",
+    "contact": "Kontak",
+    "blog": "Blog",
+    "privacy_policy": "Kebijakan Privasi",
+    "terms": "Syarat",
+    "made_with_love": "Dibuat dengan ❤️ untuk para pembuat di seluruh dunia.",
     "copyright": "© {year} Converigo. Dibuat untuk konversi file yang elegan."
   },
   "nav": {
@@ -64,7 +86,19 @@
     "stats": "Statistik",
     "faq": "FAQ",
     "upload": "Unggah",
-    "related": "Terkait"
+    "related": "Terkait",
+    "tools": "Alat",
+    "api": "API",
+    "pricing": "Harga"
+  },
+  "header": {
+    "sign_in": "Masuk",
+    "get_started": "Mulai"
+  },
+  "language": {
+    "selector_label": "Bahasa",
+    "en": "EN",
+    "id": "ID"
   },
   "tool_page": {
     "panel": {
@@ -92,6 +126,8 @@
       "eyebrow": "FAQ",
       "heading": "Pertanyaan yang sering diajukan"
     },
+    "cta_convert": "Konversi sekarang",
+    "cta_faq": "Baca FAQ",
     "related": {
       "eyebrow": "Alat Terkait",
       "heading": "Konverter lain yang mungkin Anda butuhkan",

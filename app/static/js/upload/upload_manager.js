@@ -83,7 +83,7 @@ class UploadManager {
         if(this.fileSize) this.fileSize.textContent = size;
         if(this.previewName) this.previewName.textContent = file.name;
         if(this.previewSize) this.previewSize.textContent = size;
-        if(this.selectedStatus) this.selectedStatus.textContent = 'File ready';
+        if(this.selectedStatus) this.selectedStatus.textContent = window.translate('upload.file_ready', 'File ready');
     }
 
     showPreview(file){
@@ -122,7 +122,7 @@ class UploadManager {
         if(file.type && file.type.startsWith('audio/')){
             if(iconEl) { iconEl.textContent = '🎵'; iconEl.hidden = false; }
             if(this.previewMedia) this.previewMedia.classList.add('audio');
-            if(this.previewName) this.previewName.textContent = 'Audio File';
+            if(this.previewName) this.previewName.textContent = window.translate('upload.file_type_audio', 'Audio File');
             return;
         }
 
@@ -130,7 +130,7 @@ class UploadManager {
         if(file.type && file.type.startsWith('video/')){
             if(iconEl) { iconEl.textContent = '🎬'; iconEl.hidden = false; }
             if(this.previewMedia) this.previewMedia.classList.add('video');
-            if(this.previewName) this.previewName.textContent = 'Video File';
+            if(this.previewName) this.previewName.textContent = window.translate('upload.file_type_video', 'Video File');
             return;
         }
 
@@ -138,7 +138,7 @@ class UploadManager {
         if(file.type === 'application/pdf'){
             if(iconEl) { iconEl.textContent = '📄'; iconEl.hidden = false; }
             if(this.previewMedia) this.previewMedia.classList.add('pdf');
-            if(this.previewName) this.previewName.textContent = 'PDF File';
+            if(this.previewName) this.previewName.textContent = window.translate('upload.file_type_pdf', 'PDF File');
             return;
         }
 
@@ -171,7 +171,7 @@ class UploadManager {
         if(convertBtn){
             convertBtn.disabled = true;
             convertBtn.classList.remove('loading');
-            convertBtn.textContent = 'Convert';
+            convertBtn.textContent = window.translate('upload.convert', 'Convert');
         }
 
         const progress = document.querySelector('.progress');

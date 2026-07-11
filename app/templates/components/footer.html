@@ -7,15 +7,15 @@
             <div class="footer-brand">
 
                 <h3>
-                    Converigo
+                    {{ request.state.t('footer.brand', 'Converigo') }}
                 </h3>
 
                 <p>
-                    Fast, Simple, Ready.
+                    {{ request.state.t('footer.description', 'Fast, Simple, Ready.') }}
                 </p>
 
                 <p>
-                    Convert and Go!
+                    {{ request.state.t('footer.tagline', 'Convert and Go!') }}
                 </p>
 
             </div>
@@ -24,30 +24,30 @@
 
                 <div class="footer-column">
 
-                    <h4>Product</h4>
+                    <h4>{{ request.state.t('footer.product', 'Product') }}</h4>
 
-                    <a href="/tools">Tools</a>
-                    <a href="/pricing">Pricing</a>
-                    <a href="/api">API</a>
-
-                </div>
-
-                <div class="footer-column">
-
-                    <h4>Company</h4>
-
-                    <a href="/about">About</a>
-                    <a href="/contact">Contact</a>
-                    <a href="/blog">Blog</a>
+                    <a href="/tools">{{ request.state.t('nav.tools', 'Tools') }}</a>
+                    <a href="/pricing">{{ request.state.t('nav.pricing', 'Pricing') }}</a>
+                    <a href="/api">{{ request.state.t('nav.api', 'API') }}</a>
 
                 </div>
 
                 <div class="footer-column">
 
-                    <h4>Legal</h4>
+                    <h4>{{ request.state.t('footer.company', 'Company') }}</h4>
 
-                    <a href="/privacy-policy">Privacy Policy</a>
-                    <a href="/terms">Terms</a>
+                    <a href="/about">{{ request.state.t('footer.about', 'About') }}</a>
+                    <a href="/contact">{{ request.state.t('footer.contact', 'Contact') }}</a>
+                    <a href="/blog">{{ request.state.t('footer.blog', 'Blog') }}</a>
+
+                </div>
+
+                <div class="footer-column">
+
+                    <h4>{{ request.state.t('footer.legal', 'Legal') }}</h4>
+
+                    <a href="/privacy-policy">{{ request.state.t('footer.privacy_policy', 'Privacy Policy') }}</a>
+                    <a href="/terms">{{ request.state.t('footer.terms', 'Terms') }}</a>
 
                 </div>
 
@@ -58,11 +58,11 @@
         <div class="footer-bottom">
 
             <p>
-                © 2026 Converigo. All rights reserved.
+                {{ request.state.t('footer.copyright', '© 2026 Converigo. All rights reserved.') }}
             </p>
 
             <p>
-                Made with ❤️ for creators around the world.
+                {{ request.state.t('footer.made_with_love', 'Made with ❤️ for creators around the world.') }}
             </p>
 
         </div>

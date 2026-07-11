@@ -204,7 +204,9 @@ class DownloadManager {
 
         this.button.textContent =
 
-            "Download " +
+            window.translate('upload.download', 'Download') +
+
+            " " +
 
             extension;
 

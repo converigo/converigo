@@ -47,12 +47,12 @@ Convert API
 
 
         <h2>
-            Upload File
+            {{ request.state.t('upload.label', 'Upload File') }}
         </h2>
 
 
         <p>
-            Drag & Drop or click
+            {{ request.state.t('upload.subtext', 'Drag & Drop or click') }}
         </p>
 
 
@@ -80,7 +80,7 @@ Convert API
 
         >
 
-            Choose File
+            {{ request.state.t('upload.browse', 'Choose File') }}
 
         </button>
 
@@ -179,7 +179,7 @@ Convert API
 >
 
 
-    <span id="fileName">Choose a file to start</span>
+    <span id="fileName">{{ request.state.t('upload.select_file', 'Choose a file to start') }}</span>
 
 
 
@@ -223,7 +223,7 @@ Convert API
 
 
 <h3>
-Convert To
+    {{ request.state.t('upload.conversion_title', 'Convert To') }}
 </h3>
 
 
@@ -273,8 +273,7 @@ contoh:
 >
 
 
-Convert
-
+    {{ request.state.t('upload.convert', 'Convert') }}
 
 
 </button>
@@ -311,7 +310,7 @@ Convert
 
 >
 
-Download
+    {{ request.state.t('upload.download', 'Download') }}
 
 
 </a>

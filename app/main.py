@@ -14,6 +14,8 @@ from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
+from app.services.language_manager import LanguageManager
+
 from app.core.logging_config import configure_logging
 from app.core.settings import settings
 from app.services.cleanup_service import CleanupService
@@ -60,6 +62,8 @@ from app.routers.upload import (
 from app.routers.recommend import (
     router as recommend_router,
 )
+
+language_manager = LanguageManager(Path("app/locales"))
 
 
 # ==========================================
@@ -110,6 +114,24 @@ app = FastAPI(
     lifespan=lifespan,
 
 )
+
+
+@app.middleware("http")
+async def locale_middleware(request: Request, call_next):
+    locale_data = language_manager.load_locale(
+        accept_language=request.headers.get("accept-language"),
+        lang_query=request.query_params.get("lang"),
+    )
+
+    def t(key: str, default: str = "") -> str:
+        return language_manager.translate(locale_data, key, default)
+
+    request.state.locale = locale_data
+    request.state.t = t
+    request.state.supported_locales = language_manager.get_supported_locales()
+
+    response = await call_next(request)
+    return response
 
 app.add_middleware(
     HealthCheckTrustedHostMiddleware,

@@ -37,6 +37,18 @@ def _build_base_url(request: Request) -> str:
     return base_url.rstrip("/")
 
 
+def _get_locale_context(request: Request):
+    locale_data = language_service.load_locale(
+        accept_language=request.headers.get("accept-language"),
+        lang_query=request.query_params.get("lang"),
+    )
+
+    def t(key: str, default: str = "") -> str:
+        return language_service.translate(locale_data, key, default)
+
+    return locale_data, t, language_service.get_supported_locales()
+
+
 async def _render_trust_page(
     request: Request,
     template_name: str,
@@ -44,6 +56,7 @@ async def _render_trust_page(
     description: str,
     canonical_path: str,
 ) -> HTMLResponse:
+    locale_data, t, supported_locales = _get_locale_context(request)
     base_url = _build_base_url(request)
     metadata = {
         "title": title,
@@ -58,6 +71,9 @@ async def _render_trust_page(
         name=f"pages/{template_name}",
         context={
             "request": request,
+            "locale": locale_data,
+            "t": t,
+            "supported_locales": supported_locales,
             "meta": metadata,
             "year": datetime.utcnow().year,
         },
@@ -88,6 +104,7 @@ async def home(request: Request):
     )
 
     metadata = seo_service.build_home_meta(request)
+    _, _, supported_locales = _get_locale_context(request)
 
     return templates.TemplateResponse(
         request=request,
@@ -96,6 +113,7 @@ async def home(request: Request):
             "request": request,
             "locale": locale_data,
             "t": t,
+            "supported_locales": supported_locales,
             "title": metadata["title"],
             "meta": metadata,
             "featured_converters": popular[:4],

@@ -11,11 +11,25 @@
     "subtext": "Drag, drop or browse to select your file.",
     "badge": "Instant",
     "drop_title": "Drop your file here",
-    "browse": "browse",
+    "browse": "Choose File",
     "empty_status": "No file selected yet",
     "waiting_status": "Waiting for your file",
     "size_label": "0 KB",
-    "clear": "Clear"
+    "clear": "Clear",
+    "conversion_title": "Convert To",
+    "convert": "Convert",
+    "download": "Download",
+    "select_file": "Choose a file to start",
+    "file_ready": "File ready",
+    "converting": "Converting...",
+    "conversion_completed": "✓ Conversion completed",
+    "download_ready": "Download Ready",
+    "select_target_format": "❌ Select a target format first.",
+    "conversion_failed": "❌ Conversion failed. Please try again later.",
+    "conversion_failed_try_another": "❌ Conversion failed. Please try another format.",
+    "file_type_audio": "Audio File",
+    "file_type_video": "Video File",
+    "file_type_pdf": "PDF File"
   },
   "stats": {
     "formats": "Supported formats",
@@ -40,10 +54,12 @@
   },
   "faq": {
     "heading": "Frequently asked questions",
+    "description": "Answers to common questions about Converigo's file conversion service.",
     "items": [
-      {"question": "What file formats can I convert?", "answer": "Converigo supports popular video, audio, and document formats including MP4, MP3, WAV, PDF, DOCX, and more."},
-      {"question": "Is my data private?", "answer": "All uploaded files are handled securely and the UI is designed to respect privacy during conversion tests."},
-      {"question": "Will it work on mobile devices?", "answer": "Yes. The landing page is fully responsive and built for desktop, tablet, and mobile users."}
+      {"question": "What is Converigo?", "answer": "Converigo is a fast online file converter that helps you convert documents, images, audio, and video files without installing software."},
+      {"question": "Is Converigo free?", "answer": "Yes, Converigo offers free file conversion so you can quickly transform files without paying for basic conversion tasks."},
+      {"question": "Are uploaded files safe?", "answer": "Uploaded files are processed securely and kept only as long as needed to complete the conversion, with privacy and safety in mind."},
+      {"question": "What files can Converigo convert?", "answer": "Converigo supports many popular formats for images, documents, audio, and video, so you can convert the files you need quickly."}
     ]
   },
   "footer": {
@@ -55,6 +71,13 @@
     "features": "Features",
     "faq": "FAQ",
     "upload": "Upload",
+    "about": "About",
+    "contact": "Contact",
+    "blog": "Blog",
+    "privacy_policy": "Privacy Policy",
+    "terms": "Terms",
+    "tagline": "Convert and Go!",
+    "made_with_love": "Made with ❤️ for creators around the world.",
     "copyright": "© {year} Converigo. Built for elegant file conversion."
   },
   "nav": {
@@ -64,7 +87,19 @@
     "stats": "Stats",
     "faq": "FAQ",
     "upload": "Upload",
-    "related": "Related"
+    "related": "Related",
+    "tools": "Tools",
+    "api": "API",
+    "pricing": "Pricing"
+  },
+  "header": {
+    "sign_in": "Sign In",
+    "get_started": "Get Started"
+  },
+  "language": {
+    "selector_label": "Language",
+    "en": "EN",
+    "id": "ID"
   },
   "tool_page": {
     "panel": {
@@ -92,6 +127,8 @@
       "eyebrow": "FAQ",
       "heading": "Frequently asked questions"
     },
+    "cta_convert": "Convert now",
+    "cta_faq": "Read FAQs",
     "related": {
       "eyebrow": "Related Tools",
       "heading": "Other converters you may need",

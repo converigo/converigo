@@ -70,7 +70,7 @@ class ConverterController {
         if (this.convertBtn) {
             this.convertBtn.disabled = true;
             this.convertBtn.classList.remove("loading");
-            this.convertBtn.textContent = "Convert";
+            this.convertBtn.textContent = window.translate('upload.convert', 'Convert');
         }
         if (this.message) {
             this.message.textContent = "";
@@ -91,18 +91,18 @@ class ConverterController {
         formData.append("file", this.file);
         formData.append("target_format", this.selectedFormat);
 
-        const originalLabel = this.convertBtn ? this.convertBtn.textContent : "Convert";
+        const originalLabel = this.convertBtn ? this.convertBtn.textContent : window.translate('upload.convert', 'Convert');
         let wasSuccess = false;
 
         try {
             if (this.convertBtn) {
                 this.convertBtn.disabled = true;
                 this.convertBtn.classList.add("loading");
-                this.convertBtn.textContent = "Converting...";
+                this.convertBtn.textContent = window.translate('upload.converting', 'Converting...');
             }
 
             if (this.message) {
-                this.message.textContent = "Converting...";
+                this.message.textContent = window.translate('upload.converting', 'Converting...');
                 this.message.classList.remove("success", "error");
             }
 
@@ -115,16 +115,16 @@ class ConverterController {
             console.log("CONVERT RESPONSE:", data);
 
             if (!response.ok) {
-                throw new Error(data.detail || "Conversion failed");
+                throw new Error(data.detail || window.translate('upload.conversion_failed', 'Conversion failed'));
             }
 
             if (this.message) {
-                this.message.textContent = "✓ Conversion completed";
+                this.message.textContent = window.translate('upload.conversion_completed', '✓ Conversion completed');
                 this.message.classList.add("success");
             }
 
             if (this.convertBtn) {
-                this.convertBtn.textContent = "✓ Conversion completed";
+                this.convertBtn.textContent = window.translate('upload.conversion_completed', '✓ Conversion completed');
             }
 
             wasSuccess = true;

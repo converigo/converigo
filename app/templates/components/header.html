@@ -8,30 +8,39 @@
         </a>
 
         <div class="header-right">
-            <nav class="main-nav">
+                <div class="language-switcher">
+                    <label for="languageSelect" class="sr-only">{{ request.state.t('language.selector_label', 'Language') }}</label>
+                    <select id="languageSelect" onchange="handleLanguageChange(event)">
+                        {% for locale_code in request.state.supported_locales %}
+                            <option value="{{ locale_code }}" {% if request.state.locale.lang_code == locale_code %}selected{% endif %}>
+                                {{ request.state.t('language.' ~ locale_code, locale_code.upper()) }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
 
-                <a href="/tools">
-                    Tools
-                </a>
+                <nav class="main-nav">
+                    <a href="/tools">
+                        {{ request.state.t('nav.tools', 'Tools') }}
+                    </a>
 
-                <a href="/api">
-                    API
-                </a>
+                    <a href="/api">
+                        {{ request.state.t('nav.api', 'API') }}
+                    </a>
 
-                <a href="/pricing">
-                    Pricing
-                </a>
-
-            </nav>
+                    <a href="/pricing">
+                        {{ request.state.t('nav.pricing', 'Pricing') }}
+                    </a>
+                </nav>
 
             <div class="header-actions">
 
                 <button class="btn btn-secondary">
-                    Sign In
+                    {{ t('header.sign_in', 'Sign In') }}
                 </button>
 
                 <button class="btn btn-primary">
-                    Get Started
+                    {{ t('header.get_started', 'Get Started') }}
                 </button>
 
             </div>
