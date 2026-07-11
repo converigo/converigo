@@ -549,6 +549,85 @@ async def pdf_to_jpg_landing(request: Request):
     )
 
 
+@router.get("/word-to-pdf", response_class=HTMLResponse)
+async def word_to_pdf_landing(request: Request):
+    locale_data = language_service.load_locale(
+        accept_language=request.headers.get("accept-language"),
+        lang_query=request.query_params.get("lang"),
+    )
+
+    def t(key: str, default: str = "") -> str:
+        return language_service.translate(locale_data, key, default)
+
+    tool_data = converter_data_service.load_converter_by_slug("word-to-pdf")
+    base_url = _build_base_url(request)
+    seo_title = "Word to PDF Converter Online Free - Convertin"
+    seo_description = (
+        "Convert Word documents to PDF online free. Fast, secure and easy DOCX to PDF converter."
+    )
+
+    faq_items = [
+        {
+            "question": "What is Word to PDF conversion?",
+            "answer": "Word to PDF conversion transforms DOCX documents into PDF files for easier sharing and viewing.",
+        },
+        {
+            "question": "Why convert Word files to PDF?",
+            "answer": "PDF files keep documents consistent across different devices.",
+        },
+        {
+            "question": "Is Word to PDF converter free?",
+            "answer": "Yes, Convertin provides free online Word to PDF conversion.",
+        },
+    ]
+
+    meta = {
+        "title": seo_title,
+        "description": seo_description,
+        "canonical": f"{base_url}/word-to-pdf",
+        "og_url": f"{base_url}/word-to-pdf",
+        "og_image": f"{base_url}/static/images/og-default.png",
+        "keywords": "word to pdf converter, convert word to pdf online, docx to pdf online free",
+        "og_type": "website",
+        "twitter_card": "summary_large_image",
+    }
+
+    structured_data = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": item["question"],
+                "acceptedAnswer": {"@type": "Answer", "text": item["answer"]},
+            }
+            for item in faq_items
+        ],
+    }
+
+    return templates.TemplateResponse(
+        request=request,
+        name="pages/word_to_pdf_landing.html",
+        context={
+            "request": request,
+            "locale": locale_data,
+            "t": t,
+            "meta": meta,
+            "title": seo_title,
+            "tool": tool_data,
+            "upload_form": tool_data.get("upload_form", {}),
+            "faq_items": faq_items,
+            "benefits": [
+                {"title": "Convert DOCX files quickly", "text": "Turn your Word documents into PDF in seconds without installing software."},
+                {"title": "Preserve document readability", "text": "Keep your formatting and layout intact for reliable viewing and printing."},
+                {"title": "Easy PDF sharing", "text": "Share polished PDF files across devices, email, and cloud storage."},
+                {"title": "Free online converter", "text": "Use Convertin online for free to turn Word files into PDF."},
+            ],
+            "structured_data": structured_data,
+        },
+    )
+
+
 @router.get("/jpg-to-pdf", response_class=HTMLResponse)
 async def jpg_to_pdf_landing(request: Request):
     locale_data = language_service.load_locale(
