@@ -1,6 +1,6 @@
 """
 ====================================================
-Project : Convertin
+Project : Converigo
 Author  : Pico Lala & ChatGPT
 
 Create Integration Test Files
@@ -52,7 +52,7 @@ def create_image():
 
     draw.text(
         (250,280),
-        "Convertin Test",
+        "Converigo Test",
         fill="black"
     )
 

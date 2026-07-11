@@ -1,11 +1,11 @@
 """
-Project : Convertin
+Project : Converigo
 Author  : Pico Lala & ChatGPT
 Version : 3.0.0
 
 MP3 -> WAV Plugin
 
-Convertin Smart Metadata Version
+Converigo Smart Metadata Version
 """
 
 from pathlib import Path
@@ -87,7 +87,7 @@ class MP3ToWAVPlugin(ConverterPlugin):
     # ==========================================
 
     seo_title = (
-        "MP3 to WAV Converter | Convertin"
+        "MP3 to WAV Converter | Converigo"
     )
 
     seo_description = (

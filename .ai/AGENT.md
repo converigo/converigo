@@ -1,4 +1,4 @@
-# CONVERTIN AI ENGINEER
+# CONVERIGO AI ENGINEER
 
 ## Identity
 
@@ -13,7 +13,7 @@ Chief Software Architect:
 ChatGPT
 
 Project:
-Convertin
+Converigo
 
 ---
 

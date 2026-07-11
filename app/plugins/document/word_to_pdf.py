@@ -1,5 +1,5 @@
 """
-Project : Convertin
+Project : Converigo
 Author  : Pico Lala & ChatGPT
 Version : 3.0.0
 
@@ -30,7 +30,7 @@ class WordToPDFPlugin(ConverterPlugin):
     compatibility = 85
     estimated_saving = 15
     badge = "Portable PDF"
-    seo_title = "Word to PDF Converter | Convertin"
+    seo_title = "Word to PDF Converter | Converigo"
     seo_description = "Convert DOCX documents into PDF files quickly and easily."
 
     async def convert(

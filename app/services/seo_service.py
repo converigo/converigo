@@ -42,19 +42,19 @@ class SeoService:
         base_url = self._build_base_url(request)
 
         return {
-            "title": "Convertin | Fast Online File Conversion",
-            "description": "Convertin offers fast, secure, and automatic file conversion from video, audio, image, and document formats.",
+            "title": "Converigo | Fast Online File Conversion",
+            "description": "Converigo offers fast, secure, and automatic file conversion from video, audio, image, and document formats.",
             "canonical": f"{base_url}/",
             "og_url": f"{base_url}/",
-            "og_site_name": "Convertin",
+            "og_site_name": "Converigo",
             "og_image": f"{base_url}/static/images/og-home.png",
-            "og_image_alt": "Convertin file conversion platform",
+            "og_image_alt": "Converigo file conversion platform",
             "og_image_width": 1200,
             "og_image_height": 630,
             "og_type": "website",
             "twitter_card": "summary_large_image",
-            "twitter_site": "@convertin",
-            "twitter_creator": "@convertin",
+            "twitter_site": "@converigo",
+            "twitter_creator": "@converigo",
         }
 
     def build_tool_meta(
@@ -67,7 +67,7 @@ class SeoService:
 
         title = (
             tool_data.get("seo", {}).get("title")
-            or f"{tool_data['title']} | Convertin"
+            or f"{tool_data['title']} | Converigo"
         )
 
         description = (
@@ -90,7 +90,7 @@ class SeoService:
             "description": description,
             "canonical": canonical,
             "og_url": canonical,
-            "og_site_name": "Convertin",
+            "og_site_name": "Converigo",
             "og_image": og_image,
             "og_image_alt": title,
             "og_image_width": 1200,
@@ -104,8 +104,8 @@ class SeoService:
                 "twitter_card",
                 "summary_large_image",
             ),
-            "twitter_site": "@convertin",
-            "twitter_creator": "@convertin",
+            "twitter_site": "@converigo",
+            "twitter_creator": "@converigo",
         }
 
     def build_sitemap_xml(self, request: Any) -> str:
@@ -147,7 +147,7 @@ class SeoService:
 
         organization = {
             "@type": "Organization",
-            "name": "Convertin",
+            "name": "Converigo",
             "url": base_url,
             "logo": f"{base_url}/static/images/convertin-logo.png",
         }
@@ -156,7 +156,7 @@ class SeoService:
             "@context": "https://schema.org",
             "@type": "WebSite",
             "url": base_url,
-            "name": "Convertin",
+            "name": "Converigo",
             "publisher": organization,
             "potentialAction": {
                 "@type": "SearchAction",

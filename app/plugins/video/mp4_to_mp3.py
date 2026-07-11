@@ -1,11 +1,11 @@
 """
-Project : Convertin
+Project : Converigo
 Author  : Pico Lala & ChatGPT
 Version : 3.0.0
 
 MP4 -> MP3 Plugin
 
-Convertin Smart Metadata Version
+Converigo Smart Metadata Version
 """
 
 from pathlib import Path
@@ -87,7 +87,7 @@ class MP4ToMP3Plugin(ConverterPlugin):
     # ==========================================
 
     seo_title = (
-        "MP4 to MP3 Converter | Convertin"
+        "MP4 to MP3 Converter | Converigo"
     )
 
     seo_description = (

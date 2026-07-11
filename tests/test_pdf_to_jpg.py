@@ -17,7 +17,7 @@ def test_pdf_to_jpg_plugin_is_discovered_and_converts():
 
     buffer = BytesIO()
     pdf_canvas = canvas.Canvas(buffer)
-    pdf_canvas.drawString(100, 750, "Convertin PDF to JPG test")
+    pdf_canvas.drawString(100, 750, "Converigo PDF to JPG test")
     pdf_canvas.save()
     buffer.seek(0)
 

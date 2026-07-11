@@ -11,7 +11,7 @@ def test_webp_to_jpg_landing_page_renders_with_seo_and_faq():
     response = client.get("/webp-to-jpg")
 
     assert response.status_code == 200
-    assert "WEBP to JPG Converter Online Free - Convertin" in response.text
+    assert "WEBP to JPG Converter Online Free - Converigo" in response.text
     assert "What is WEBP to JPG conversion?" in response.text
     assert "Why convert WEBP to JPG?" in response.text
     assert "Is WEBP to JPG converter free?" in response.text

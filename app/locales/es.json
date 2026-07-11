@@ -2,7 +2,7 @@
   "hero": {
     "eyebrow": "Convertidor de archivos premium",
     "title": "Convierte archivos más rápido con simplicidad premium.",
-    "subtitle": "Convertin ofrece conversión de archivos segura, receptiva y pulida para estudiantes, creadores y profesionales.",
+    "subtitle": "Converigo ofrece conversión de archivos segura, receptiva y pulida para estudiantes, creadores y profesionales.",
     "primary_cta": "Comenzar conversión",
     "secondary_cta": "Explorar características"
   },
@@ -41,13 +41,13 @@
   "faq": {
     "heading": "Preguntas frecuentes",
     "items": [
-      {"question": "¿Qué formatos de archivo puedo convertir?", "answer": "Convertin admite formatos de video, audio y documentos populares como MP4, MP3, WAV, PDF, DOCX y más."},
+      {"question": "¿Qué formatos de archivo puedo convertir?", "answer": "Converigo admite formatos de video, audio y documentos populares como MP4, MP3, WAV, PDF, DOCX y más."},
       {"question": "¿Mis datos son privados?", "answer": "Todos los archivos cargados se manejan de forma segura y la interfaz está diseñada para respetar la privacidad durante las pruebas de conversión."},
       {"question": "¿Funciona en dispositivos móviles?", "answer": "Sí. La página de destino es totalmente receptiva en escritorio, tablet y móvil."}
     ]
   },
   "footer": {
-    "brand": "Convertin",
+    "brand": "Converigo",
     "description": "Conversión moderna de archivos para estudiantes, creadores y profesionales.",
     "product": "Producto",
     "company": "Empresa",
@@ -55,7 +55,7 @@
     "features": "Características",
     "faq": "FAQ",
     "upload": "Subir",
-    "copyright": "© {year} Convertin. Construido para una conversión de archivos elegante."
+    "copyright": "© {year} Converigo. Construido para una conversión de archivos elegante."
   },
   "nav": {
     "home": "Inicio",
@@ -77,7 +77,7 @@
       "heading": "Conversión simple en tres pasos",
       "step1": {
         "title": "Sube tu archivo",
-        "text": "Selecciona un archivo compatible y envíalo a Convertin."
+        "text": "Selecciona un archivo compatible y envíalo a Converigo."
       },
       "step2": {
         "title": "Elige salida",

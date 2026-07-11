@@ -11,10 +11,10 @@ def test_mp4_to_mp3_landing_page_renders_with_seo_and_faq():
     response = client.get("/mp4-to-mp3")
 
     assert response.status_code == 200
-    assert "MP4 to MP3 Converter Online Free - Convertin" in response.text
+    assert "MP4 to MP3 Converter Online Free - Converigo" in response.text
     assert "What is MP4 to MP3 conversion?" in response.text
     assert "How do I convert MP4 to MP3?" in response.text
-    assert "Is Convertin free?" in response.text
+    assert "Is Converigo free?" in response.text
     assert "application/ld+json" in response.text
 
 

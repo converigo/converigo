@@ -11,7 +11,7 @@
 - `ALLOWED_HOSTS=<your-railway-domain>,www.<your-domain>`
 - `UPLOAD_DIR=/app/uploads`
 - `OUTPUT_DIR=/app/outputs`
-- `APP_NAME=Convertin`
+- `APP_NAME=Converigo`
 - `APP_VERSION=3.0.0`
 
 ## Start command

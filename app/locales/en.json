@@ -2,7 +2,7 @@
   "hero": {
     "eyebrow": "Premium File Converter",
     "title": "Convert files faster with premium simplicity.",
-    "subtitle": "Convertin brings secure, responsive, and polished file conversion for students, creators, and office professionals.",
+    "subtitle": "Converigo brings secure, responsive, and polished file conversion for students, creators, and office professionals.",
     "primary_cta": "Start converting",
     "secondary_cta": "Explore features"
   },
@@ -41,13 +41,13 @@
   "faq": {
     "heading": "Frequently asked questions",
     "items": [
-      {"question": "What file formats can I convert?", "answer": "Convertin supports popular video, audio, and document formats including MP4, MP3, WAV, PDF, DOCX, and more."},
+      {"question": "What file formats can I convert?", "answer": "Converigo supports popular video, audio, and document formats including MP4, MP3, WAV, PDF, DOCX, and more."},
       {"question": "Is my data private?", "answer": "All uploaded files are handled securely and the UI is designed to respect privacy during conversion tests."},
       {"question": "Will it work on mobile devices?", "answer": "Yes. The landing page is fully responsive and built for desktop, tablet, and mobile users."}
     ]
   },
   "footer": {
-    "brand": "Convertin",
+    "brand": "Converigo",
     "description": "Modern file conversion for students, creators, and professionals.",
     "product": "Product",
     "company": "Company",
@@ -55,7 +55,7 @@
     "features": "Features",
     "faq": "FAQ",
     "upload": "Upload",
-    "copyright": "© {year} Convertin. Built for elegant file conversion."
+    "copyright": "© {year} Converigo. Built for elegant file conversion."
   },
   "nav": {
     "home": "Home",
@@ -77,7 +77,7 @@
       "heading": "Simple conversion in three steps",
       "step1": {
         "title": "Upload your file",
-        "text": "Select a supported file and send it to Convertin."
+        "text": "Select a supported file and send it to Converigo."
       },
       "step2": {
         "title": "Choose output",

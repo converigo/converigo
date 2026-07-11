@@ -1,11 +1,11 @@
 """
-Project : Convertin
+Project : Converigo
 Author  : Pico Lala & ChatGPT
 Version : 3.0.0
 
 Recommendation API Router
 
-Convertin Core Architecture
+Converigo Core Architecture
 """
 
 from fastapi import APIRouter, HTTPException

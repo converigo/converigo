@@ -1,8 +1,8 @@
-# Convertin
+# Converigo
 
 > Convert Files in Seconds.
 
-Convertin adalah web application modern untuk mengubah berbagai format file dengan cepat, aman, dan mudah digunakan.
+Converigo adalah web application modern untuk mengubah berbagai format file dengan cepat, aman, dan mudah digunakan.
 
 ---
 

@@ -1,5 +1,5 @@
 """
-Project : Convertin
+Project : Converigo
 Author  : Pico Lala & ChatGPT
 Version : 3.0.0
 
@@ -30,7 +30,7 @@ class JPGToPDFPlugin(ConverterPlugin):
     compatibility = 90
     estimated_saving = 15
     badge = "Portable PDF"
-    seo_title = "JPG to PDF Converter | Convertin"
+    seo_title = "JPG to PDF Converter | Converigo"
     seo_description = "Convert JPG images into PDF documents with high quality."
 
     async def convert(

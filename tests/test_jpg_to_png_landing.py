@@ -11,7 +11,7 @@ def test_jpg_to_png_landing_page_renders_with_seo_and_faq():
     response = client.get("/jpg-to-png")
 
     assert response.status_code == 200
-    assert "JPG to PNG Converter Online Free - Convertin" in response.text
+    assert "JPG to PNG Converter Online Free - Converigo" in response.text
     assert "What is JPG to PNG conversion?" in response.text
     assert "How do I convert JPG to PNG?" in response.text
     assert "Is JPG to PNG converter free?" in response.text

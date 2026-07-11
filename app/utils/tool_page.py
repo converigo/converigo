@@ -44,7 +44,7 @@ TOOL_PAGES = {
             {"slug": "png-to-jpg", "title": "PNG to JPG"},
             {"slug": "pdf-to-word", "title": "PDF to Word"},
         ],
-        seo={"title": "MP4 to MP3 | Convertin", "description": "Convert MP4 video to MP3 audio with Convertin.", "keywords": "mp4 to mp3, video to audio, file converter"},
+        seo={"title": "MP4 to MP3 | Converigo", "description": "Convert MP4 video to MP3 audio with Converigo.", "keywords": "mp4 to mp3, video to audio, file converter"},
     ),
     "png-to-jpg": tool_page_entry(
         title="PNG to JPG Converter",
@@ -63,7 +63,7 @@ TOOL_PAGES = {
             {"slug": "mp4-to-mp3", "title": "MP4 to MP3"},
             {"slug": "pdf-to-word", "title": "PDF to Word"},
         ],
-        seo={"title": "PNG to JPG | Convertin", "description": "Convert PNG images to JPG format.", "keywords": "png to jpg, image converter, photo converter"},
+        seo={"title": "PNG to JPG | Converigo", "description": "Convert PNG images to JPG format.", "keywords": "png to jpg, image converter, photo converter"},
     ),
     "pdf-to-word": tool_page_entry(
         title="PDF to Word Converter",
@@ -82,6 +82,6 @@ TOOL_PAGES = {
             {"slug": "mp4-to-mp3", "title": "MP4 to MP3"},
             {"slug": "png-to-jpg", "title": "PNG to JPG"},
         ],
-        seo={"title": "PDF to Word | Convertin", "description": "Convert PDF to Word documents with ease.", "keywords": "pdf to word, document converter, docx converter"},
+        seo={"title": "PDF to Word | Converigo", "description": "Convert PDF to Word documents with ease.", "keywords": "pdf to word, document converter, docx converter"},
     ),
 }

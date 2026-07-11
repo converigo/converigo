@@ -1,5 +1,5 @@
 """
-Project : Convertin
+Project : Converigo
 Author  : Pico Lala & ChatGPT
 Version : 2.0.0
 """
@@ -49,8 +49,8 @@ async def _render_trust_page(
         "title": title,
         "description": description,
         "canonical": f"{base_url}{canonical_path}",
-        "keywords": "Convertin, file conversion, online converter, document conversion, image conversion",
-        "author": "Convertin",
+        "keywords": "Converigo, file conversion, online converter, document conversion, image conversion",
+        "author": "Converigo",
         "robots": "index,follow",
     }
     return templates.TemplateResponse(
@@ -114,8 +114,8 @@ async def about(request: Request):
     return await _render_trust_page(
         request,
         "about.html",
-        "About Convertin | Fast Online File Conversion",
-        "Learn about Convertin, our mission, and how we make file conversion simple, fast, and secure.",
+        "About Converigo | Fast Online File Conversion",
+        "Learn about Converigo, our mission, and how we make file conversion simple, fast, and secure.",
         "/about",
     )
 
@@ -125,8 +125,8 @@ async def privacy(request: Request):
     return await _render_trust_page(
         request,
         "privacy.html",
-        "Privacy Policy | Convertin",
-        "Read Convertin's privacy policy and understand how we handle your files and personal data.",
+        "Privacy Policy | Converigo",
+        "Read Converigo's privacy policy and understand how we handle your files and personal data.",
         "/privacy",
     )
 
@@ -136,8 +136,8 @@ async def terms(request: Request):
     return await _render_trust_page(
         request,
         "terms.html",
-        "Terms of Service | Convertin",
-        "Review Convertin's terms of service and usage guidelines for converting files online.",
+        "Terms of Service | Converigo",
+        "Review Converigo's terms of service and usage guidelines for converting files online.",
         "/terms",
     )
 
@@ -147,8 +147,8 @@ async def contact(request: Request):
     return await _render_trust_page(
         request,
         "contact.html",
-        "Contact Convertin | File Conversion Support",
-        "Get in touch with Convertin for support, questions, or feedback about our file conversion tools.",
+        "Contact Converigo | File Conversion Support",
+        "Get in touch with Converigo for support, questions, or feedback about our file conversion tools.",
         "/contact",
     )
 
@@ -158,8 +158,8 @@ async def cookies(request: Request):
     return await _render_trust_page(
         request,
         "cookies.html",
-        "Cookie Policy | Convertin",
-        "Learn how Convertin uses cookies, analytics, and advertising technologies on our website.",
+        "Cookie Policy | Converigo",
+        "Learn how Converigo uses cookies, analytics, and advertising technologies on our website.",
         "/cookies",
     )
 
@@ -176,7 +176,7 @@ async def mp4_to_mp3_landing(request: Request):
 
     tool_data = converter_data_service.load_converter_by_slug("mp4-to-mp3")
     base_url = _build_base_url(request)
-    seo_title = "MP4 to MP3 Converter Online Free - Convertin"
+    seo_title = "MP4 to MP3 Converter Online Free - Converigo"
     seo_description = (
         "Convert MP4 videos to MP3 audio online free. Fast, secure and easy MP4 to MP3 converter."
     )
@@ -191,8 +191,8 @@ async def mp4_to_mp3_landing(request: Request):
             "answer": "Upload your MP4 video, choose the MP3 output, and download the converted file once the process finishes.",
         },
         {
-            "question": "Is Convertin free?",
-            "answer": "Yes. Convertin lets you convert MP4 to MP3 online free for quick audio extraction.",
+            "question": "Is Converigo free?",
+            "answer": "Yes. Converigo lets you convert MP4 to MP3 online free for quick audio extraction.",
         },
     ]
 
@@ -235,7 +235,7 @@ async def mp4_to_mp3_landing(request: Request):
             "benefits": [
                 {"title": "Fast conversion", "text": "Convert your MP4 videos to MP3 in seconds without installing software."},
                 {"title": "Secure processing", "text": "Your files are handled safely and kept private during conversion."},
-                {"title": "Free online tool", "text": "Use Convertin online for free to extract audio from MP4 videos."},
+                {"title": "Free online tool", "text": "Use Converigo online for free to extract audio from MP4 videos."},
             ],
             "structured_data": structured_data,
         },
@@ -254,7 +254,7 @@ async def jpg_to_png_landing(request: Request):
 
     tool_data = converter_data_service.load_converter_by_slug("jpg-to-png")
     base_url = _build_base_url(request)
-    seo_title = "JPG to PNG Converter Online Free - Convertin"
+    seo_title = "JPG to PNG Converter Online Free - Converigo"
     seo_description = (
         "Convert JPG to PNG online free. Fast, secure and easy JPG to PNG image converter."
     )
@@ -270,7 +270,7 @@ async def jpg_to_png_landing(request: Request):
         },
         {
             "question": "Is JPG to PNG converter free?",
-            "answer": "Yes, Convertin provides free online JPG to PNG conversion.",
+            "answer": "Yes, Converigo provides free online JPG to PNG conversion.",
         },
     ]
 
@@ -313,7 +313,7 @@ async def jpg_to_png_landing(request: Request):
             "benefits": [
                 {"title": "Fast image conversion", "text": "Convert your JPG images to PNG quickly without installing software."},
                 {"title": "Secure file processing", "text": "Your files are handled safely and kept private during conversion."},
-                {"title": "Free online converter", "text": "Use Convertin online for free to turn JPG into PNG."},
+                {"title": "Free online converter", "text": "Use Converigo online for free to turn JPG into PNG."},
                 {"title": "High quality PNG output", "text": "Export your images in crisp PNG format with strong visual quality."},
             ],
             "structured_data": structured_data,
@@ -333,7 +333,7 @@ async def png_to_webp_landing(request: Request):
 
     tool_data = converter_data_service.load_converter_by_slug("png-to-webp")
     base_url = _build_base_url(request)
-    seo_title = "PNG to WEBP Converter Online Free - Convertin"
+    seo_title = "PNG to WEBP Converter Online Free - Converigo"
     seo_description = (
         "Convert PNG to WEBP online free. Fast, secure and easy PNG image converter."
     )
@@ -349,7 +349,7 @@ async def png_to_webp_landing(request: Request):
         },
         {
             "question": "Is PNG to WEBP converter free?",
-            "answer": "Yes, Convertin provides free online PNG to WEBP conversion.",
+            "answer": "Yes, Converigo provides free online PNG to WEBP conversion.",
         },
     ]
 
@@ -393,7 +393,7 @@ async def png_to_webp_landing(request: Request):
                 {"title": "Smaller image size", "text": "Reduce the size of your PNG files while keeping the visual quality high."},
                 {"title": "Fast conversion", "text": "Convert your PNG images to WEBP in seconds without installing software."},
                 {"title": "Secure processing", "text": "Your images are handled safely and kept private during conversion."},
-                {"title": "Free online tool", "text": "Use Convertin online for free to turn PNG into WEBP."},
+                {"title": "Free online tool", "text": "Use Converigo online for free to turn PNG into WEBP."},
             ],
             "structured_data": structured_data,
         },
@@ -412,7 +412,7 @@ async def webp_to_jpg_landing(request: Request):
 
     tool_data = converter_data_service.load_converter_by_slug("webp-to-jpg")
     base_url = _build_base_url(request)
-    seo_title = "WEBP to JPG Converter Online Free - Convertin"
+    seo_title = "WEBP to JPG Converter Online Free - Converigo"
     seo_description = (
         "Convert WEBP to JPG online free. Fast, secure and easy WEBP image converter."
     )
@@ -428,7 +428,7 @@ async def webp_to_jpg_landing(request: Request):
         },
         {
             "question": "Is WEBP to JPG converter free?",
-            "answer": "Yes, Convertin provides free online WEBP to JPG conversion.",
+            "answer": "Yes, Converigo provides free online WEBP to JPG conversion.",
         },
     ]
 
@@ -472,7 +472,7 @@ async def webp_to_jpg_landing(request: Request):
                 {"title": "Convert WEBP images quickly", "text": "Convert your WEBP images to JPG in seconds without installing software."},
                 {"title": "Improve compatibility with JPG format", "text": "Use your images across more apps, devices, and platforms."},
                 {"title": "Secure file processing", "text": "Your files are handled safely and kept private during conversion."},
-                {"title": "Free online converter", "text": "Use Convertin online for free to turn WEBP into JPG."},
+                {"title": "Free online converter", "text": "Use Converigo online for free to turn WEBP into JPG."},
             ],
             "structured_data": structured_data,
         },
@@ -491,7 +491,7 @@ async def pdf_to_jpg_landing(request: Request):
 
     tool_data = converter_data_service.load_converter_by_slug("pdf-to-jpg")
     base_url = _build_base_url(request)
-    seo_title = "PDF to JPG Converter Online Free - Convertin"
+    seo_title = "PDF to JPG Converter Online Free - Converigo"
     seo_description = (
         "Convert PDF files to JPG images online free. Fast, secure and easy PDF image converter."
     )
@@ -507,7 +507,7 @@ async def pdf_to_jpg_landing(request: Request):
         },
         {
             "question": "Is PDF to JPG converter free?",
-            "answer": "Yes, Convertin provides free online PDF to JPG conversion.",
+            "answer": "Yes, Converigo provides free online PDF to JPG conversion.",
         },
     ]
 
@@ -551,7 +551,7 @@ async def pdf_to_jpg_landing(request: Request):
                 {"title": "Convert PDF pages into JPG images quickly", "text": "Turn your PDF pages into JPG images in seconds without installing software."},
                 {"title": "Easy image sharing and compatibility", "text": "Share and view your content across more devices and apps with JPG output."},
                 {"title": "Secure file processing", "text": "Your files are handled safely and kept private during conversion."},
-                {"title": "Free online converter", "text": "Use Convertin online for free to convert PDF files to JPG images."},
+                {"title": "Free online converter", "text": "Use Converigo online for free to convert PDF files to JPG images."},
             ],
             "structured_data": structured_data,
         },
@@ -570,7 +570,7 @@ async def word_to_pdf_landing(request: Request):
 
     tool_data = converter_data_service.load_converter_by_slug("word-to-pdf")
     base_url = _build_base_url(request)
-    seo_title = "Word to PDF Converter Online Free - Convertin"
+    seo_title = "Word to PDF Converter Online Free - Converigo"
     seo_description = (
         "Convert Word documents to PDF online free. Fast, secure and easy DOCX to PDF converter."
     )
@@ -586,7 +586,7 @@ async def word_to_pdf_landing(request: Request):
         },
         {
             "question": "Is Word to PDF converter free?",
-            "answer": "Yes, Convertin provides free online Word to PDF conversion.",
+            "answer": "Yes, Converigo provides free online Word to PDF conversion.",
         },
     ]
 
@@ -630,7 +630,7 @@ async def word_to_pdf_landing(request: Request):
                 {"title": "Convert DOCX files quickly", "text": "Turn your Word documents into PDF in seconds without installing software."},
                 {"title": "Preserve document readability", "text": "Keep your formatting and layout intact for reliable viewing and printing."},
                 {"title": "Easy PDF sharing", "text": "Share polished PDF files across devices, email, and cloud storage."},
-                {"title": "Free online converter", "text": "Use Convertin online for free to turn Word files into PDF."},
+                {"title": "Free online converter", "text": "Use Converigo online for free to turn Word files into PDF."},
             ],
             "structured_data": structured_data,
         },
@@ -649,7 +649,7 @@ async def jpg_to_pdf_landing(request: Request):
 
     tool_data = converter_data_service.load_converter_by_slug("jpg-to-pdf")
     base_url = _build_base_url(request)
-    seo_title = "JPG to PDF Converter Online Free - Convertin"
+    seo_title = "JPG to PDF Converter Online Free - Converigo"
     seo_description = (
         "Convert JPG images to PDF online free. Fast, secure and easy image to PDF converter."
     )
@@ -665,7 +665,7 @@ async def jpg_to_pdf_landing(request: Request):
         },
         {
             "question": "Is JPG to PDF converter free?",
-            "answer": "Yes, Convertin provides free online JPG to PDF conversion.",
+            "answer": "Yes, Converigo provides free online JPG to PDF conversion.",
         },
     ]
 
@@ -709,7 +709,7 @@ async def jpg_to_pdf_landing(request: Request):
                 {"title": "Convert JPG images quickly", "text": "Turn your JPG images into PDF in seconds without installing software."},
                 {"title": "Easy sharing and printing", "text": "Create a single PDF that is simple to send, print, and archive."},
                 {"title": "Secure file processing", "text": "Your files are handled safely and kept private during conversion."},
-                {"title": "Free online converter", "text": "Use Convertin online for free to turn JPG into PDF."},
+                {"title": "Free online converter", "text": "Use Converigo online for free to turn JPG into PDF."},
             ],
             "structured_data": structured_data,
         },

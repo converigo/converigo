@@ -5,8 +5,8 @@ ROOT = Path(__file__).resolve().parent.parent
 IMAGES_DIR = ROOT / "app" / "static" / "images"
 LOGO_PATH = IMAGES_DIR / "convertin-logo.png"
 OUTPUTS = [
-    (IMAGES_DIR / "og-home.png", "Convertin\nFast Online File Conversion"),
-    (IMAGES_DIR / "og-default.png", "Convertin\nConvert files fast and securely"),
+    (IMAGES_DIR / "og-home.png", "Converigo\nFast Online File Conversion"),
+    (IMAGES_DIR / "og-default.png", "Converigo\nConvert files fast and securely"),
 ]
 
 WIDTH, HEIGHT = 1200, 630

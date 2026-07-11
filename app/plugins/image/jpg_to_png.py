@@ -1,11 +1,11 @@
 """
-Project : Convertin
+Project : Converigo
 Author  : Pico Lala & ChatGPT
 Version : 3.0.0
 
 JPG -> PNG Plugin
 
-Convertin Smart Metadata Version
+Converigo Smart Metadata Version
 """
 
 from pathlib import Path
@@ -88,7 +88,7 @@ class JPGToPNGPlugin(ConverterPlugin):
     # ==========================================
 
     seo_title = (
-        "JPG to PNG Converter | Convertin"
+        "JPG to PNG Converter | Converigo"
     )
 
     seo_description = (

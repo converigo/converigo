@@ -8,7 +8,7 @@ def test_health_endpoint_returns_expected_payload():
     response = client.get("/health")
 
     assert response.status_code == 200
-    assert response.json() == {"status": "ok", "service": "convertin"}
+    assert response.json() == {"status": "ok", "service": "converigo"}
 
 
 def test_health_endpoint_allows_loopback_host():
@@ -16,7 +16,7 @@ def test_health_endpoint_allows_loopback_host():
     response = client.get("/health", headers={"host": "127.0.0.1"})
 
     assert response.status_code == 200
-    assert response.json() == {"status": "ok", "service": "convertin"}
+    assert response.json() == {"status": "ok", "service": "converigo"}
 
 
 def test_health_endpoint_accepts_unconfigured_hosts():
@@ -24,7 +24,7 @@ def test_health_endpoint_accepts_unconfigured_hosts():
     response = client.get("/health", headers={"host": "my-app.up.railway.app"})
 
     assert response.status_code == 200
-    assert response.json() == {"status": "ok", "service": "convertin"}
+    assert response.json() == {"status": "ok", "service": "converigo"}
 
 
 def test_health_endpoint_allows_railway_internal_host():
@@ -32,7 +32,7 @@ def test_health_endpoint_allows_railway_internal_host():
     response = client.get("/health", headers={"host": "100.64.0.2"})
 
     assert response.status_code == 200
-    assert response.json() == {"status": "ok", "service": "convertin"}
+    assert response.json() == {"status": "ok", "service": "converigo"}
 
 
 def test_health_endpoint_allows_railway_internal_host_with_port():
@@ -40,7 +40,7 @@ def test_health_endpoint_allows_railway_internal_host_with_port():
     response = client.get("/health", headers={"host": "100.64.0.2:8080"})
 
     assert response.status_code == 200
-    assert response.json() == {"status": "ok", "service": "convertin"}
+    assert response.json() == {"status": "ok", "service": "converigo"}
 
 
 def test_non_health_routes_still_require_allowed_host():
@@ -55,4 +55,4 @@ def test_manifest_endpoint_serves_webmanifest():
     response = client.get("/static/site.webmanifest")
 
     assert response.status_code == 200
-    assert '"name": "Convertin"' in response.text
+    assert '"name": "Converigo"' in response.text

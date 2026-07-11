@@ -1,9 +1,9 @@
 """
-Project : Convertin
+Project : Converigo
 Author  : Pico Lala & ChatGPT
 Version : 3.0.0
 
-Convertin FastAPI Application
+Converigo FastAPI Application
 """
 
 from contextlib import asynccontextmanager
@@ -98,7 +98,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
 
-    title="Convertin",
+    title="Converigo",
 
     version="3.0.0",
 
@@ -119,7 +119,7 @@ app.add_middleware(
 
 @app.get("/health")
 async def health() -> JSONResponse:
-    return JSONResponse({"status": "ok", "service": "convertin"})
+    return JSONResponse({"status": "ok", "service": "converigo"})
 
 
 @app.get("/static/site.webmanifest")

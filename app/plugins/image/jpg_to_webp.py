@@ -1,11 +1,11 @@
 """
-Project : Convertin
+Project : Converigo
 Author  : Pico Lala & ChatGPT
 Version : 3.0.0
 
 JPG -> WEBP Plugin
 
-Convertin Smart Metadata Version
+Converigo Smart Metadata Version
 """
 
 from pathlib import Path
@@ -88,7 +88,7 @@ class JPGToWEBPPlugin(ConverterPlugin):
     # ==========================================
 
     seo_title = (
-        "JPG to WEBP Converter | Convertin"
+        "JPG to WEBP Converter | Converigo"
     )
 
     seo_description = (

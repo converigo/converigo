@@ -2,7 +2,7 @@
   "hero": {
     "eyebrow": "Premium File Converter",
     "title": "Konversi file lebih cepat dengan kesederhanaan premium.",
-    "subtitle": "Convertin menghadirkan konversi file yang aman, responsif, dan rapi untuk pelajar, pembuat konten, dan profesional.",
+    "subtitle": "Converigo menghadirkan konversi file yang aman, responsif, dan rapi untuk pelajar, pembuat konten, dan profesional.",
     "primary_cta": "Mulai mengonversi",
     "secondary_cta": "Jelajahi fitur"
   },
@@ -41,13 +41,13 @@
   "faq": {
     "heading": "Pertanyaan yang Sering Diajukan",
     "items": [
-      {"question": "Format file apa yang dapat saya konversi?", "answer": "Convertin mendukung format video, audio, dan dokumen populer termasuk MP4, MP3, WAV, PDF, DOCX, dan lainnya."},
+      {"question": "Format file apa yang dapat saya konversi?", "answer": "Converigo mendukung format video, audio, dan dokumen populer termasuk MP4, MP3, WAV, PDF, DOCX, dan lainnya."},
       {"question": "Apakah data saya privat?", "answer": "Semua file yang diunggah ditangani dengan aman dan UI dirancang untuk menghormati privasi selama pengujian konversi."},
       {"question": "Apakah ini bekerja di perangkat seluler?", "answer": "Ya. Halaman ini sepenuhnya responsif untuk desktop, tablet, dan ponsel."}
     ]
   },
   "footer": {
-    "brand": "Convertin",
+    "brand": "Converigo",
     "description": "Konversi file modern untuk pelajar, pembuat, dan profesional.",
     "product": "Produk",
     "company": "Perusahaan",
@@ -55,7 +55,7 @@
     "features": "Fitur",
     "faq": "FAQ",
     "upload": "Unggah",
-    "copyright": "© {year} Convertin. Dibuat untuk konversi file yang elegan."
+    "copyright": "© {year} Converigo. Dibuat untuk konversi file yang elegan."
   },
   "nav": {
     "home": "Beranda",
@@ -77,7 +77,7 @@
       "heading": "Konversi sederhana dalam tiga langkah",
       "step1": {
         "title": "Unggah file Anda",
-        "text": "Pilih file yang didukung dan kirim ke Convertin."
+        "text": "Pilih file yang didukung dan kirim ke Converigo."
       },
       "step2": {
         "title": "Pilih output",

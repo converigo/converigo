@@ -16,7 +16,7 @@ def test_word_to_pdf_plugin_is_discovered_and_converts():
     client = TestClient(app)
 
     document = Document()
-    document.add_paragraph("Convertin DOCX to PDF test")
+    document.add_paragraph("Converigo DOCX to PDF test")
     document.add_paragraph("This document should be converted successfully.")
 
     buffer = BytesIO()

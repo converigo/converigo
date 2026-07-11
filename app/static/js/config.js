@@ -1,14 +1,14 @@
 /**
  * -------------------------------------------------------
- * Convertin
+ * Converigo
  * Frontend Configuration
  * Version : 1.0.0
  * -------------------------------------------------------
  */
 
-window.ConvertinConfig = {
+window.ConverigoConfig = {
 
-    APP_NAME: "Convertin",
+    APP_NAME: "Converigo",
 
     VERSION: "2.0.0",
 

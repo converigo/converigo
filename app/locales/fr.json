@@ -2,7 +2,7 @@
   "hero": {
     "eyebrow": "Convertisseur de fichiers premium",
     "title": "Convertissez vos fichiers plus rapidement avec une simplicité premium.",
-    "subtitle": "Convertin offre une conversion de fichiers sécurisée, responsive et soignée pour les étudiants, créateurs et professionnels.",
+    "subtitle": "Converigo offre une conversion de fichiers sécurisée, responsive et soignée pour les étudiants, créateurs et professionnels.",
     "primary_cta": "Commencer la conversion",
     "secondary_cta": "Découvrir les fonctionnalités"
   },
@@ -41,13 +41,13 @@
   "faq": {
     "heading": "Questions fréquemment posées",
     "items": [
-      {"question": "Quels formats de fichiers puis-je convertir ?", "answer": "Convertin prend en charge les formats vidéo, audio et document populaires tels que MP4, MP3, WAV, PDF, DOCX et plus."},
+      {"question": "Quels formats de fichiers puis-je convertir ?", "answer": "Converigo prend en charge les formats vidéo, audio et document populaires tels que MP4, MP3, WAV, PDF, DOCX et plus."},
       {"question": "Mes données sont-elles privées ?", "answer": "Tous les fichiers téléchargés sont traités en toute sécurité et l'interface est conçue pour respecter la confidentialité pendant les tests de conversion."},
       {"question": "Est-ce que ça fonctionne sur mobile ?", "answer": "Oui. La page de destination est entièrement responsive sur desktop, tablette et mobile."}
     ]
   },
   "footer": {
-    "brand": "Convertin",
+    "brand": "Converigo",
     "description": "Conversion de fichiers moderne pour les étudiants, créateurs et professionnels.",
     "product": "Produit",
     "company": "Entreprise",
@@ -55,7 +55,7 @@
     "features": "Fonctionnalités",
     "faq": "FAQ",
     "upload": "Télécharger",
-    "copyright": "© {year} Convertin. Construit pour une conversion de fichiers élégante."
+    "copyright": "© {year} Converigo. Construit pour une conversion de fichiers élégante."
   },
   "nav": {
     "home": "Accueil",
@@ -77,7 +77,7 @@
       "heading": "Conversion simple en trois étapes",
       "step1": {
         "title": "Téléchargez votre fichier",
-        "text": "Sélectionnez un fichier pris en charge et envoyez-le à Convertin."
+        "text": "Sélectionnez un fichier pris en charge et envoyez-le à Converigo."
       },
       "step2": {
         "title": "Choisissez la sortie",

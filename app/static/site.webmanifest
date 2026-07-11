@@ -1,6 +1,6 @@
 {
-  "name": "Convertin",
-  "short_name": "Convertin",
+  "name": "Converigo",
+  "short_name": "Converigo",
   "description": "Fast, secure online file conversion for documents, images, audio, and video.",
   "start_url": "/",
   "display": "standalone",

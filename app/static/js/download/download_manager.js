@@ -1,6 +1,6 @@
 /**
  * -------------------------------------------------------
- * Convertin
+ * Converigo
  * Download Manager
  * Version : 1.2.0
  *

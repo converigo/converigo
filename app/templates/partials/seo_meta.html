@@ -1,14 +1,14 @@
 {% set page_meta = meta if meta is defined else seo if seo is defined else {} %}
 
-{% set page_title = page_meta.title | default('Convertin | Fast Online File Conversion') %}
+{% set page_title = page_meta.title | default('Converigo | Fast Online File Conversion') %}
 
-{% set page_description = page_meta.description | default('Convertin offers fast, secure, and automatic file conversion from video, audio, image, and document formats.') %}
+{% set page_description = page_meta.description | default('Converigo offers fast, secure, and automatic file conversion from video, audio, image, and document formats.') %}
 
 {% set page_canonical = page_meta.canonical | default(request.url.path) %}
 
 {% set page_keywords = page_meta.keywords | default('convert files, file conversion, online converter, convert video, convert image') %}
 
-{% set page_author = page_meta.author | default('Convertin') %}
+{% set page_author = page_meta.author | default('Converigo') %}
 
 {% set page_robots = page_meta.robots | default('index,follow') %}
 
@@ -18,7 +18,7 @@
 
 {% set page_og_url = page_meta.og_url | default(request.url) %}
 
-{% set page_og_site_name = page_meta.og_site_name | default('Convertin') %}
+{% set page_og_site_name = page_meta.og_site_name | default('Converigo') %}
 
 {% set page_og_image_alt = page_meta.og_image_alt | default(page_title) %}
 
@@ -28,9 +28,9 @@
 
 {% set page_twitter_card = page_meta.twitter_card | default('summary_large_image') %}
 
-{% set page_twitter_site = page_meta.twitter_site | default('@convertin') %}
+{% set page_twitter_site = page_meta.twitter_site | default('@converigo') %}
 
-{% set page_twitter_creator = page_meta.twitter_creator | default('@convertin') %}
+{% set page_twitter_creator = page_meta.twitter_creator | default('@converigo') %}
 
 
 <title>{{ page_title }}</title>

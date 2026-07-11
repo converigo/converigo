@@ -1,8 +1,8 @@
-# Convertin Engineering Rules
+# Converigo Engineering Rules
 
 ## Mission
 
-Convertin is a production-ready online file conversion platform focused on:
+Converigo is a production-ready online file conversion platform focused on:
 
 - Performance
 - SEO

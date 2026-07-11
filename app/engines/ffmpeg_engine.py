@@ -1,5 +1,5 @@
 """
-Project : Convertin
+Project : Converigo
 Author  : Pico Lala & ChatGPT
 Version : 1.0.0
 

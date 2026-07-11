@@ -1,5 +1,5 @@
 """
-Project : Convertin
+Project : Converigo
 Author  : Pico Lala & ChatGPT
 Version : 3.0.0
 
@@ -67,7 +67,7 @@ class PNGToWEBPPlugin(ConverterPlugin):
     # SEO
 
     seo_title = (
-        "PNG to WEBP Converter | Convertin"
+        "PNG to WEBP Converter | Converigo"
     )
 
     seo_description = (

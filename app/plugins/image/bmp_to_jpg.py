@@ -1,11 +1,11 @@
 """
-Project : Convertin
+Project : Converigo
 Author  : Pico Lala & ChatGPT
 Version : 3.0.0
 
 BMP -> JPG Plugin
 
-Convertin Smart Metadata Version
+Converigo Smart Metadata Version
 """
 
 from pathlib import Path
@@ -88,7 +88,7 @@ class BMPToJPGPlugin(ConverterPlugin):
     # ==========================================
 
     seo_title = (
-        "BMP to JPG Converter | Convertin"
+        "BMP to JPG Converter | Converigo"
     )
 
     seo_description = (

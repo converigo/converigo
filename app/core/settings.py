@@ -4,7 +4,7 @@ from pathlib import Path
 
 class Settings:
     def __init__(self):
-        self.APP_NAME = os.getenv("APP_NAME", "Convertin")
+        self.APP_NAME = os.getenv("APP_NAME", "Converigo")
         self.APP_VERSION = os.getenv("APP_VERSION", "3.0.0")
         self.UPLOAD_DIR = Path(os.getenv("UPLOAD_DIR", "uploads"))
         self.OUTPUT_DIR = Path(os.getenv("OUTPUT_DIR", "outputs"))

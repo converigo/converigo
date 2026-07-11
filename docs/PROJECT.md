@@ -1,4 +1,4 @@
-# Convertin
+# Converigo
 
 Version: 2.0 (Aurora)
 
@@ -6,7 +6,7 @@ Version: 2.0 (Aurora)
 
 # Vision
 
-Convertin is a modern online file conversion platform designed to be the easiest, fastest, and cleanest way to convert files.
+Converigo is a modern online file conversion platform designed to be the easiest, fastest, and cleanest way to convert files.
 
 Our goal is not only to convert files.
 
@@ -160,7 +160,7 @@ Pico Lala
 
 Project
 
-Convertin
+Converigo
 
 Status
 

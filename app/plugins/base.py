@@ -1,11 +1,11 @@
 """
-Project : Convertin
+Project : Converigo
 Author  : Pico Lala & ChatGPT
 Version : 3.0.0
 
 Plugin Base Class
 
-Convertin Core Architecture
+Converigo Core Architecture
 """
 
 from __future__ import annotations

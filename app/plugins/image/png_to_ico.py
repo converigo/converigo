@@ -1,11 +1,11 @@
 """
-Project : Convertin
+Project : Converigo
 Author  : Pico Lala & ChatGPT
 Version : 3.0.0
 
 PNG -> ICO Plugin
 
-Convertin Smart Metadata Version
+Converigo Smart Metadata Version
 """
 
 from pathlib import Path
@@ -87,7 +87,7 @@ class PNGToICOPlugin(ConverterPlugin):
     # ==========================================
 
     seo_title = (
-        "PNG to ICO Converter | Convertin"
+        "PNG to ICO Converter | Converigo"
     )
 
     seo_description = (
