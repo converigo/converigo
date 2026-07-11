@@ -325,11 +325,8 @@ async def mp4_to_mp3_landing(request: Request):
         return language_service.translate(locale_data, key, default)
 
     tool_data = converter_data_service.load_converter_by_slug("mp4-to-mp3")
-    base_url = _build_base_url(request)
-    seo_title = "MP4 to MP3 Converter Online Free - Converigo"
-    seo_description = (
-        "Convert MP4 videos to MP3 audio online free. Fast, secure and easy MP4 to MP3 converter."
-    )
+    related_tools = converter_data_service.resolve_related_tools(tool_data, limit=4)
+    seo_data = seo_service.build_tool_meta(request, tool_data)
 
     faq_items = [
         {
@@ -338,37 +335,40 @@ async def mp4_to_mp3_landing(request: Request):
         },
         {
             "question": "How do I convert MP4 to MP3?",
-            "answer": "Upload your MP4 video, choose the MP3 output, and download the converted file once the process finishes.",
+            "answer": "Upload your MP4 video, choose MP3 as the output, and download the converted audio once the process finishes.",
         },
         {
             "question": "Is Converigo free?",
             "answer": "Yes. Converigo lets you convert MP4 to MP3 online free for quick audio extraction.",
         },
+        {
+            "question": "What file types can I upload?",
+            "answer": "Upload MP4 video files only, and Converigo will extract the MP3 audio track.",
+        },
     ]
 
-    meta = {
-        "title": seo_title,
-        "description": seo_description,
-        "canonical": f"{base_url}/mp4-to-mp3",
-        "og_url": f"{base_url}/mp4-to-mp3",
-        "og_image": f"{base_url}/static/images/og-default.png",
-        "keywords": "mp4 to mp3 converter, convert mp4 to mp3, mp4 to mp3 online free",
-        "og_type": "website",
-        "twitter_card": "summary_large_image",
-    }
+    supported_formats = [
+        {"label": "Input format", "value": tool_data.get("source", "MP4").upper()},
+        {"label": "Output format", "value": tool_data.get("target", "MP3").upper()},
+    ]
 
-    structured_data = {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-            {
-                "@type": "Question",
-                "name": item["question"],
-                "acceptedAnswer": {"@type": "Answer", "text": item["answer"]},
-            }
-            for item in faq_items
-        ],
-    }
+    how_to_use = [
+        {
+            "step": "1",
+            "title": "Upload your MP4",
+            "description": "Choose an MP4 video file from your device or drag it into the converter.",
+        },
+        {
+            "step": "2",
+            "title": "Convert to MP3",
+            "description": "Start the conversion and let Converigo process the audio track securely.",
+        },
+        {
+            "step": "3",
+            "title": "Download MP3",
+            "description": "Download your MP3 file instantly once the conversion is complete.",
+        },
+    ]
 
     return templates.TemplateResponse(
         request=request,
@@ -377,17 +377,20 @@ async def mp4_to_mp3_landing(request: Request):
             "request": request,
             "locale": locale_data,
             "t": t,
-            "meta": meta,
-            "title": seo_title,
+            "meta": seo_data,
+            "title": seo_data["title"],
             "tool": tool_data,
             "upload_form": tool_data.get("upload_form", {}),
             "faq_items": faq_items,
             "benefits": [
                 {"title": "Fast conversion", "text": "Convert your MP4 videos to MP3 in seconds without installing software."},
                 {"title": "Secure processing", "text": "Your files are handled safely and kept private during conversion."},
-                {"title": "Free online tool", "text": "Use Converigo online for free to extract audio from MP4 videos."},
+                {"title": "High-quality audio", "text": "Extract clean MP3 audio from your video while preserving sound clarity."},
             ],
-            "structured_data": structured_data,
+            "supported_formats": supported_formats,
+            "how_to_use": how_to_use,
+            "related_tools": related_tools,
+            "structured_data": seo_service.build_structured_data(request, tool_data),
         },
     )
 

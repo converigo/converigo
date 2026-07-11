@@ -17,6 +17,13 @@
                     <a href="#converter" class="btn btn-primary">{{ request.state.t('tool_page.cta_convert', 'Convert now') }}</a>
                     <a href="#faq" class="btn btn-outline">{{ request.state.t('tool_page.cta_faq', 'Read FAQs') }}</a>
                 </div>
+                <div class="hero-links">
+                    <a href="#converter">Converter</a>
+                    <a href="#how-to-use">How to use</a>
+                    <a href="#supported-formats">Supported formats</a>
+                    <a href="#faq">FAQ</a>
+                    <a href="#related-tools">Related tools</a>
+                </div>
             </div>
             <div class="hero-panel">
                 <div class="panel-head">
@@ -46,6 +53,37 @@
         </div>
     </section>
 
+    <section id="how-to-use" class="section">
+        <div class="container section-heading">
+            <span class="eyebrow">How it works</span>
+            <h2>Convert MP4 to MP3 in three simple steps</h2>
+        </div>
+        <div class="grid steps-grid">
+            {% for step in how_to_use %}
+            <article class="step-card hover-card">
+                <span class="step-number">{{ step.step }}</span>
+                <h3>{{ step.title }}</h3>
+                <p>{{ step.description }}</p>
+            </article>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section id="supported-formats" class="section section-white">
+        <div class="container section-heading">
+            <span class="eyebrow">Supported formats</span>
+            <h2>MP4 input, MP3 output</h2>
+        </div>
+        <div class="supported-formats-grid">
+            {% for format in supported_formats %}
+            <div class="format-card">
+                <h3>{{ format.label }}</h3>
+                <p>{{ format.value }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
     <section id="faq" class="section">
         <div class="container section-heading">
             <span class="eyebrow">FAQ</span>
@@ -62,6 +100,20 @@
                     <p>{{ item.answer }}</p>
                 </div>
             </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section id="related-tools" class="section section-white">
+        <div class="container section-heading">
+            <span class="eyebrow">Related tools</span>
+            <h2>Other useful converters</h2>
+        </div>
+        <div class="related-tools-grid">
+            {% for related in related_tools %}
+            <article class="related-tool-card hover-card">
+                <h3><a href="/tools/{{ related.slug }}">{{ related.title }}</a></h3>
+            </article>
             {% endfor %}
         </div>
     </section>

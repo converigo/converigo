@@ -14,11 +14,18 @@ def test_mp4_to_mp3_landing_page_renders_with_seo_and_faq():
     response = client.get("/mp4-to-mp3")
 
     assert response.status_code == 200
-    assert "MP4 to MP3 Converter Online Free - Converigo" in response.text
-    assert "What is MP4 to MP3 conversion?" in response.text
-    assert "How do I convert MP4 to MP3?" in response.text
-    assert "Is Converigo free?" in response.text
+    assert "MP4 to MP3 | Converigo" in response.text
+    assert "Convert MP4 to MP3 Online Free" in response.text
     assert "application/ld+json" in response.text
+    assert "@type\": \"SoftwareApplication\"" in response.text
+    assert "@type\": \"BreadcrumbList\"" in response.text
+    assert "href=\"#converter\"" in response.text
+    assert "href=\"#how-to-use\"" in response.text
+    assert "href=\"#supported-formats\"" in response.text
+    assert "href=\"#faq\"" in response.text
+    assert "href=\"#related-tools\"" in response.text
+    assert "MP4 input, MP3 output" in response.text
+    assert "/tools/png-to-jpg" in response.text or "/tools/pdf-to-word" in response.text
 
 
 def test_mp4_to_mp3_conversion_endpoint_still_accepts_uploads():
