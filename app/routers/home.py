@@ -9,15 +9,13 @@ from pathlib import Path
 
 from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
 
+from app.core.templates import templates
 from app.services.converter_data_service import ConverterDataService
 from app.services.language_service import LanguageService
 from app.services.seo_service import SeoService
 
 router = APIRouter()
-
-templates = Jinja2Templates(directory="app/templates")
 
 converter_data_service = ConverterDataService(
     Path("app/data/converters")

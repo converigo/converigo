@@ -1,38 +1,83 @@
 {% set page_meta = meta if meta is defined else seo if seo is defined else {} %}
+
 {% set page_title = page_meta.title | default('Convertin | Fast Online File Conversion') %}
+
 {% set page_description = page_meta.description | default('Convertin offers fast, secure, and automatic file conversion from video, audio, image, and document formats.') %}
-{% set page_canonical = page_meta.canonical | default('/') %}
+
+{% set page_canonical = page_meta.canonical | default(request.url.path) %}
+
 {% set page_keywords = page_meta.keywords | default('convert files, file conversion, online converter, convert video, convert image') %}
+
 {% set page_author = page_meta.author | default('Convertin') %}
+
 {% set page_robots = page_meta.robots | default('index,follow') %}
+
 {% set page_og_type = page_meta.og_type | default('website') %}
+
 {% set page_og_image = page_meta.og_image | default('/static/images/convertin-logo.png') %}
-{% set page_og_url = page_meta.og_url | default(page_canonical) %}
+
+{% set page_og_url = page_meta.og_url | default(request.url) %}
+
 {% set page_og_site_name = page_meta.og_site_name | default('Convertin') %}
+
 {% set page_og_image_alt = page_meta.og_image_alt | default(page_title) %}
+
 {% set page_og_image_width = page_meta.og_image_width | default(1200) %}
+
 {% set page_og_image_height = page_meta.og_image_height | default(630) %}
+
 {% set page_twitter_card = page_meta.twitter_card | default('summary_large_image') %}
+
 {% set page_twitter_site = page_meta.twitter_site | default('@convertin') %}
+
 {% set page_twitter_creator = page_meta.twitter_creator | default('@convertin') %}
+
+
 <title>{{ page_title }}</title>
+
 <meta name="description" content="{{ page_description }}">
+
 <meta name="keywords" content="{{ page_keywords }}">
+
 <meta name="author" content="{{ page_author }}">
+
 <meta name="robots" content="{{ page_robots }}">
+
+
 <link rel="canonical" href="{{ page_canonical }}">
+
+
+<!-- Open Graph -->
+
 <meta property="og:title" content="{{ page_title }}">
+
 <meta property="og:description" content="{{ page_description }}">
+
 <meta property="og:type" content="{{ page_og_type }}">
+
 <meta property="og:url" content="{{ page_og_url }}">
+
 <meta property="og:site_name" content="{{ page_og_site_name }}">
+
 <meta property="og:image" content="{{ page_og_image }}">
+
 <meta property="og:image:alt" content="{{ page_og_image_alt }}">
+
 <meta property="og:image:width" content="{{ page_og_image_width }}">
+
 <meta property="og:image:height" content="{{ page_og_image_height }}">
+
+
+<!-- Twitter -->
+
 <meta name="twitter:card" content="{{ page_twitter_card }}">
+
 <meta name="twitter:title" content="{{ page_title }}">
+
 <meta name="twitter:description" content="{{ page_description }}">
+
 <meta name="twitter:image" content="{{ page_og_image }}">
+
 <meta name="twitter:site" content="{{ page_twitter_site }}">
+
 <meta name="twitter:creator" content="{{ page_twitter_creator }}">

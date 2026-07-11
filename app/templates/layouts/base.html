@@ -32,6 +32,17 @@
         rel="manifest"
         href="/static/site.webmanifest">
 
+    {% set template_globals = get_template_globals() %}
+    {% if template_globals.ga_measurement_id %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ template_globals.ga_measurement_id }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{{ template_globals.ga_measurement_id }}');
+    </script>
+    {% endif %}
+
     <link
         rel="icon"
         type="image/png"
