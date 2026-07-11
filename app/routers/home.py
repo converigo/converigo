@@ -120,13 +120,24 @@ async def about(request: Request):
     )
 
 
+@router.get("/privacy-policy", response_class=HTMLResponse)
+async def privacy_policy(request: Request):
+    return await _render_trust_page(
+        request,
+        "privacy-policy.html",
+        "Privacy Policy | Converigo",
+        "Read Converigo's privacy policy and understand how we handle your files, analytics, cookies, and uploads.",
+        "/privacy-policy",
+    )
+
+
 @router.get("/privacy", response_class=HTMLResponse)
 async def privacy(request: Request):
     return await _render_trust_page(
         request,
-        "privacy.html",
+        "privacy-policy.html",
         "Privacy Policy | Converigo",
-        "Read Converigo's privacy policy and understand how we handle your files and personal data.",
+        "Read Converigo's privacy policy and understand how we handle your files, analytics, cookies, and uploads.",
         "/privacy",
     )
 
