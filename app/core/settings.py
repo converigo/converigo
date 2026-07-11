@@ -7,11 +7,19 @@ class Settings:
         self.ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
         self.DEBUG = os.getenv("DEBUG", "true" if self.ENVIRONMENT == "development" else "false").lower() in {"1", "true", "yes", "on"}
         self.LOG_LEVEL = os.getenv("LOG_LEVEL", "debug" if self.DEBUG else "info")
+        default_hosts = "localhost,127.0.0.1,testserver"
+        configured_hosts = os.getenv("ALLOWED_HOSTS", default_hosts)
         self.ALLOWED_HOSTS = [
             host.strip()
-            for host in os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1,testserver").split(",")
+            for host in configured_hosts.split(",")
             if host.strip()
         ]
+        if "localhost" not in self.ALLOWED_HOSTS:
+            self.ALLOWED_HOSTS.append("localhost")
+        if "127.0.0.1" not in self.ALLOWED_HOSTS:
+            self.ALLOWED_HOSTS.append("127.0.0.1")
+        if "testserver" not in self.ALLOWED_HOSTS:
+            self.ALLOWED_HOSTS.append("testserver")
         self.APP_NAME = os.getenv("APP_NAME", "Convertin")
         self.APP_VERSION = os.getenv("APP_VERSION", "3.0.0")
         self.UPLOAD_DIR = Path(os.getenv("UPLOAD_DIR", "uploads")).expanduser()
