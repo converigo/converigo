@@ -21,6 +21,15 @@ from app.core.register_default import (
     register_default_converters,
 )
 
+
+class HealthCheckTrustedHostMiddleware(TrustedHostMiddleware):
+    async def __call__(self, scope, receive, send):
+        if scope["type"] == "http" and scope.get("path") in {"/health", "/health/"}:
+            await self.app(scope, receive, send)
+            return
+
+        await super().__call__(scope, receive, send)
+
 configure_logging()
 
 
@@ -103,7 +112,7 @@ app = FastAPI(
 )
 
 app.add_middleware(
-    TrustedHostMiddleware,
+    HealthCheckTrustedHostMiddleware,
     allowed_hosts=settings.ALLOWED_HOSTS,
 )
 

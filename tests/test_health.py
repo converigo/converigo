@@ -43,6 +43,13 @@ def test_health_endpoint_allows_railway_internal_host_with_port():
     assert response.json() == {"status": "ok", "service": "convertin"}
 
 
+def test_non_health_routes_still_require_allowed_host():
+    client = TestClient(app)
+    response = client.get("/", headers={"host": "blocked.example"})
+
+    assert response.status_code == 400
+
+
 def test_manifest_endpoint_serves_webmanifest():
     client = TestClient(app)
     response = client.get("/static/site.webmanifest")
