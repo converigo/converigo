@@ -155,6 +155,17 @@ async def contact(request: Request):
     )
 
 
+@router.get("/cookies", response_class=HTMLResponse)
+async def cookies(request: Request):
+    return await _render_trust_page(
+        request,
+        "cookies.html",
+        "Cookie Policy | Convertin",
+        "Learn how Convertin uses cookies, analytics, and advertising technologies on our website.",
+        "/cookies",
+    )
+
+
 @router.get("/mp4-to-mp3", response_class=HTMLResponse)
 async def mp4_to_mp3_landing(request: Request):
     locale_data = language_service.load_locale(
