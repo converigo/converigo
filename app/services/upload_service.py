@@ -69,7 +69,7 @@ class UploadService:
 
                     if file_size > settings.MAX_UPLOAD_SIZE:
                         raise FileValidationError(
-                            "File size exceeds maximum limit."
+                            f"Maximum upload size is {settings.MAX_UPLOAD_SIZE_MB} MB."
                         )
 
                     sha256.update(chunk)

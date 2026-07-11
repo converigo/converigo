@@ -165,14 +165,15 @@ def validate_signature(file: UploadFile, extension: str) -> None:
 
 def validate_size(file: UploadFile) -> None:
 
-    contents = file.file.read(settings.MAX_UPLOAD_SIZE + 1)
+    max_size_bytes = settings.MAX_UPLOAD_SIZE
+    contents = file.file.read(max_size_bytes + 1)
 
     file.file.seek(0)
 
-    if len(contents) > settings.MAX_UPLOAD_SIZE:
+    if len(contents) > max_size_bytes:
 
         raise FileValidationError(
-            f"Maximum upload size is {settings.MAX_UPLOAD_SIZE // 1024 // 1024} MB."
+            f"Maximum upload size is {settings.MAX_UPLOAD_SIZE_MB} MB."
         )
 
 
