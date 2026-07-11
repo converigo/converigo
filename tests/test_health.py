@@ -25,3 +25,11 @@ def test_health_endpoint_accepts_unconfigured_hosts():
 
     assert response.status_code == 200
     assert response.json() == {"status": "ok", "service": "convertin"}
+
+
+def test_manifest_endpoint_serves_webmanifest():
+    client = TestClient(app)
+    response = client.get("/static/site.webmanifest")
+
+    assert response.status_code == 200
+    assert '"name": "Convertin"' in response.text

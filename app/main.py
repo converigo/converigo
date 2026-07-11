@@ -9,8 +9,8 @@ Convertin FastAPI Application
 from contextlib import asynccontextmanager
 from pathlib import Path
 
-from fastapi import FastAPI, Request
-from fastapi.responses import JSONResponse
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
@@ -62,6 +62,7 @@ settings.OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 STATIC_DIR = Path(__file__).resolve().parent / "static"
 OUTPUT_DIR = settings.OUTPUT_DIR
+MANIFEST_PATH = STATIC_DIR / "site.webmanifest"
 
 
 # ==========================================
@@ -110,6 +111,17 @@ app.add_middleware(
 @app.get("/health")
 async def health() -> JSONResponse:
     return JSONResponse({"status": "ok", "service": "convertin"})
+
+
+@app.get("/static/site.webmanifest")
+async def manifest() -> FileResponse:
+    if not MANIFEST_PATH.exists():
+        raise HTTPException(status_code=404, detail="Manifest not found")
+
+    return FileResponse(
+        MANIFEST_PATH,
+        media_type="application/manifest+json",
+    )
 
 
 # ==========================================
