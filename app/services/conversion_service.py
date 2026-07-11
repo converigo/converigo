@@ -41,6 +41,8 @@ class ConversionService:
             raise ConversionError(
                 f"Conversion timed out after {timeout_seconds} seconds."
             ) from exc
+        except (RuntimeError, ValueError) as exc:
+            raise ConversionError(str(exc)) from exc
 
         if not output_path.exists():
 

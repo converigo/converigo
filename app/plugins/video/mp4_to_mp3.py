@@ -8,6 +8,8 @@ MP4 -> MP3 Plugin
 Converigo Smart Metadata Version
 """
 
+import shutil
+import subprocess
 from pathlib import Path
 
 from app.engines.ffmpeg_engine import FFmpegEngine
@@ -100,6 +102,39 @@ class MP4ToMP3Plugin(ConverterPlugin):
     # Conversion
     # ==========================================
 
+    def _ensure_audio_stream(self, source_path: Path) -> None:
+        ffprobe = shutil.which("ffprobe")
+        if ffprobe is None:
+            return
+
+        command = [
+            ffprobe,
+            "-v",
+            "error",
+            "-select_streams",
+            "a",
+            "-show_entries",
+            "stream=index",
+            "-of",
+            "default=nw=1:nk=1",
+            str(source_path),
+        ]
+
+        try:
+            completed = subprocess.run(
+                command,
+                capture_output=True,
+                text=True,
+                timeout=30,
+            )
+        except subprocess.TimeoutExpired:
+            return
+
+        if completed.returncode != 0 or not completed.stdout.strip():
+            raise RuntimeError(
+                "The selected MP4 file does not contain an audio stream. Please upload a video file that includes audio before converting to MP3."
+            )
+
     async def convert(
         self,
         source_path: Path,
@@ -116,6 +151,7 @@ class MP4ToMP3Plugin(ConverterPlugin):
                 "MP4ToMP3Plugin only supports MP4 -> MP3."
             )
 
+        self._ensure_audio_stream(source_path)
 
         output_path = (
             Path("outputs")

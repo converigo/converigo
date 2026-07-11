@@ -1,5 +1,8 @@
+import shutil
+import subprocess
 from pathlib import Path
 
+import pytest
 from fastapi.testclient import TestClient
 
 from app.main import app
@@ -31,3 +34,42 @@ def test_mp4_to_mp3_conversion_endpoint_still_accepts_uploads():
 
     assert response.status_code == 201
     assert response.json()["status"] == "success"
+
+
+def test_mp4_to_mp3_returns_clear_error_when_input_has_no_audio(tmp_path):
+    ffmpeg = shutil.which("ffmpeg")
+    if ffmpeg is None:
+        pytest.skip("ffmpeg not available")
+
+    sample_path = tmp_path / "video-only.mp4"
+    subprocess.run(
+        [
+            ffmpeg,
+            "-f",
+            "lavfi",
+            "-i",
+            "color=c=black:s=320x240:d=1",
+            "-frames:v",
+            "1",
+            "-c:v",
+            "libx264",
+            "-pix_fmt",
+            "yuv420p",
+            str(sample_path),
+        ],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+
+    client = TestClient(app)
+
+    with sample_path.open("rb") as sample_file:
+        response = client.post(
+            "/convert",
+            files={"file": (sample_path.name, sample_file, "video/mp4")},
+            data={"target_format": "mp3"},
+        )
+
+    assert response.status_code == 500
+    assert "does not contain an audio stream" in response.json()["detail"]
