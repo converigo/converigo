@@ -149,7 +149,7 @@ class SeoService:
             "@type": "Organization",
             "name": "Convertin",
             "url": base_url,
-            "logo": f"{base_url}/static/images/logo.png",
+            "logo": f"{base_url}/static/images/convertin-logo.png",
         }
 
         website = {
