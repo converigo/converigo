@@ -16,6 +16,8 @@ app/logs/
 # Upload temporary
 app/uploads/*
 app/outputs/*
+uploads/
+outputs/
 
 # OS
 .DS_Store
