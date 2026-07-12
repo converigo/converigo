@@ -75,6 +75,16 @@ async def _render_trust_page(
             "t": t,
             "supported_locales": supported_locales,
             "meta": metadata,
+            "structured_data": seo_service.build_structured_data(
+                request,
+                page_type="trust_page",
+                page_data={
+                    "title": title,
+                    "description": description,
+                    "url": canonical_path,
+                    "name": title,
+                },
+            ),
             "year": datetime.utcnow().year,
         },
     )
@@ -238,6 +248,16 @@ async def blog_index(request: Request):
             "supported_locales": supported_locales,
             "meta": metadata,
             "articles": articles,
+            "structured_data": seo_service.build_structured_data(
+                request,
+                page_type="blog_index",
+                page_data={
+                    "name": "Converigo Blog",
+                    "description": metadata["description"],
+                    "url": "/blog",
+                    "articles": articles,
+                },
+            ),
             "year": datetime.utcnow().year,
         },
     )
@@ -309,6 +329,16 @@ async def blog_article(request: Request, slug: str):
             "supported_locales": supported_locales,
             "meta": metadata,
             "article": article,
+            "structured_data": seo_service.build_structured_data(
+                request,
+                page_type="blog_article",
+                page_data={
+                    "headline": article["title"],
+                    "description": article["description"],
+                    "url": article["canonical"].replace(PRODUCTION_BASE_URL, ""),
+                    "breadcrumb": article["breadcrumb"],
+                },
+            ),
             "year": datetime.utcnow().year,
         },
     )

@@ -140,10 +140,31 @@ class SeoService:
 
         return "\n".join(lines)
 
+    def _normalize_url(self, base_url: str, path: str) -> str:
+        if path.startswith("http://") or path.startswith("https://"):
+            return path
+        return base_url.rstrip("/") + path
+
+    def _build_breadcrumb_list(self, base_url: str, items: list[dict[str, str]]) -> dict[str, Any]:
+        return {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": index + 1,
+                    "name": item["name"],
+                    "item": self._normalize_url(base_url, item["url"]),
+                }
+                for index, item in enumerate(items)
+            ],
+        }
+
     def build_structured_data(
         self,
         request: Any,
         tool_data: dict[str, Any] | None = None,
+        page_type: str | None = None,
+        page_data: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
 
         base_url = self._build_base_url(request)
@@ -168,7 +189,7 @@ class SeoService:
             },
         }
 
-        if tool_data is None:
+        if tool_data is None and page_type is None:
             faq_items = [
                 {
                     "@type": "Question",
@@ -214,6 +235,97 @@ class SeoService:
                         "mainEntity": faq_items,
                     },
                 ],
+            }
+
+        if page_type == "blog_index" and page_data is not None:
+            blog_posts: list[dict[str, Any]] = []
+            for article in page_data.get("articles", []):
+                post = {
+                    "@type": "BlogPosting",
+                    "headline": article["title"],
+                    "description": article["description"],
+                    "url": self._normalize_url(base_url, f"/blog/{article['slug']}"),
+                    "author": {"@type": "Organization", "name": "Converigo"},
+                }
+                if article.get("datePublished"):
+                    post["datePublished"] = article["datePublished"]
+                if article.get("dateModified"):
+                    post["dateModified"] = article["dateModified"]
+                blog_posts.append(post)
+
+            graph = [
+                organization,
+                website,
+                {
+                    "@type": "Blog",
+                    "name": page_data.get("name", "Converigo Blog"),
+                    "description": page_data.get("description", ""),
+                    "url": self._normalize_url(base_url, page_data.get("url", "/blog")),
+                    "publisher": organization,
+                    "blogPost": blog_posts,
+                },
+                self._build_breadcrumb_list(
+                    base_url,
+                    [{"name": "Home", "url": "/"}, {"name": "Blog", "url": "/blog"}],
+                ),
+            ]
+
+            return {
+                "@context": "https://schema.org",
+                "@graph": graph,
+            }
+
+        if page_type == "blog_article" and page_data is not None:
+            graph = [
+                organization,
+                website,
+                {
+                    "@type": "BlogPosting",
+                    "headline": page_data.get("headline", ""),
+                    "description": page_data.get("description", ""),
+                    "url": self._normalize_url(base_url, page_data.get("url", "")),
+                    "mainEntityOfPage": {
+                        "@type": "WebPage",
+                        "@id": self._normalize_url(base_url, page_data.get("url", "")),
+                    },
+                    "author": {"@type": "Organization", "name": "Converigo"},
+                    "publisher": organization,
+                },
+                self._build_breadcrumb_list(
+                    base_url,
+                    page_data.get(
+                        "breadcrumb",
+                        [{"name": "Home", "url": "/"}, {"name": "Blog", "url": "/blog"}],
+                    ),
+                ),
+            ]
+
+            return {
+                "@context": "https://schema.org",
+                "@graph": graph,
+            }
+
+        if page_type == "trust_page" and page_data is not None:
+            title = page_data.get("name", page_data.get("title", ""))
+            graph = [
+                organization,
+                website,
+                {
+                    "@type": "WebPage",
+                    "name": title,
+                    "description": page_data.get("description", ""),
+                    "url": self._normalize_url(base_url, page_data.get("url", "")),
+                    "publisher": organization,
+                },
+                self._build_breadcrumb_list(
+                    base_url,
+                    [{"name": "Home", "url": "/"}, {"name": title, "url": page_data.get("url", "")}],
+                ),
+            ]
+
+            return {
+                "@context": "https://schema.org",
+                "@graph": graph,
             }
 
         breadcrumb_items = [
