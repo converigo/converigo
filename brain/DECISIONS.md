@@ -31,3 +31,18 @@
 - **Decision:** Introduce a shared universal converter route without removing or changing existing public URLs.
 - **Rationale:** Route compatibility is required for SEO stability, legacy links, and gradual migration to JSON-driven landing rendering.
 - **Outcome:** Existing landing URLs remain functional while the shared route uses the same converter data service and tool template.
+
+### D007 — JSON-driven tool page sections
+- **Decision:** Render all universal tool page sections from converter JSON data and keep router logic minimal.
+- **Rationale:** This reduces hardcoded landing logic and ensures consistent migration across tools.
+- **Outcome:** Hero, upload, benefits, features, supported formats, how-to-use, FAQ, related tools, use cases, about formats, CTA, and structured data are now derived from JSON-driven context.
+
+### D008 — Legacy template containment
+- **Decision:** Move legacy landing templates into a dedicated legacy folder without changing routes, URLs, SEO, or runtime behavior.
+- **Rationale:** This cleans up template structure while preserving compatibility and avoiding regressions.
+- **Outcome:** Legacy landing templates are preserved under the legacy folder and the active landing experience remains centered on the universal tool page.
+
+### D009 — JSON enrichment for universal tool pages
+- **Decision:** Enrich converter JSON with universal tool page sections so renderer content comes from structured data instead of fallback defaults.
+- **Rationale:** This keeps landing experience consistent across converters and removes dependence on generic page content.
+- **Outcome:** All converter JSON files now carry hero, features, supported formats, how-to-use, about formats, and CTA sections that match the renderer contract.

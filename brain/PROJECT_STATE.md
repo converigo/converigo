@@ -9,17 +9,17 @@ The focus is on building a trusted conversion experience with polished UX, stron
 ## Current Phase
 
 - **Phase:** Product Foundation
-- **Current focus:** Universal route compatibility and release readiness
-- **Checkpoint:** C1
-- **Milestone:** Image Foundation
+- **Current focus:** Legacy template cleanup and release readiness
+- **Checkpoint:** C3.3.2
+- **Milestone:** JSON Enrichment
 
 ## Current Milestone
 
-- **Image Foundation**
-- Completed core image conversion package delivery for:
-  - `IMG-001` PNG→WEBP
-  - `IMG-002` WEBP→PNG
-- Ensuring landing pages, SEO metadata, and category experience are release-ready.
+- **Universal Tool Page**
+- Completed migration of landing rendering to a JSON-driven universal tool page for converter routes.
+- Legacy public URLs remain active while sharing the same renderer and structured data pipeline.
+- Enriched converter JSON for hero, features, supported formats, how-to-use, about formats, and CTA so the universal tool page uses structured data instead of falling back to generic content.
+- Verified that all converter JSON files remain valid and renderer output stays intact.
 
 ## Packages in Scope
 

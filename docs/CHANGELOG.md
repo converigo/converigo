@@ -8,4 +8,7 @@
 
 ### Changed
 - Legacy landing wrappers now delegate to the shared universal tool renderer so route behavior remains consistent.
-- Updated release and brain documentation to describe the new compatibility approach.
+- Universal tool page sections now render from converter JSON for hero, upload, benefits, features, supported formats, how-to-use, FAQ, related tools, use cases, about formats, CTA, and structured data.
+- Added comprehensive JSON enrichment for every converter so the universal tool page uses structured content instead of fallback defaults.
+- Legacy landing templates were moved into a dedicated legacy folder to simplify repository structure without changing URLs, routes, SEO, or application behavior.
+- Updated release and brain documentation to describe the new compatibility and cleanup approach.

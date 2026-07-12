@@ -1,5 +1,17 @@
 # Converigo Release Notes
 
+## Sprint C3.3.2 — JSON Enrichment
+
+### Summary
+- Enriched every converter JSON file with hero, features, supported formats, how-to-use, about formats, and CTA data.
+- Kept routing, templates, SEO, and pipeline logic unchanged while ensuring the universal tool page uses structured content instead of fallback text.
+- Verified the renderer and full regression suite remain stable.
+
+### Validation
+- 13 converter files updated.
+- 6 enrichment fields added per converter.
+- Full pytest suite passed.
+
 ## Checkpoint C1 — Image Foundation
 
 ### Release Summary
@@ -25,8 +37,10 @@ Checkpoint C1 delivers the first official production image converter packages fo
 - Updated `PNG→WEBP` landing page metadata and page content
 - Added or updated converter metadata for both image packages
 - Added a shared universal converter route with legacy URL compatibility for existing landing URLs
+- Migrated universal tool page rendering to JSON-driven sections for hero, upload, benefits, features, supported formats, how-to-use, FAQ, related tools, use cases, about formats, CTA, and structured data
+- Moved legacy landing templates into a dedicated legacy folder to simplify repository structure without changing URLs, routes, SEO, or behavior
 - Fixed accessibility issue in upload preview image alt text
-- Verified clean git staging for C1 release files
+- Verified the full regression suite with 60 passing tests
 
 ### Release Notes
 
