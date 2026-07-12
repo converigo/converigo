@@ -24,13 +24,59 @@ class ConverterController {
 
         this.convertBtn = document.getElementById("convertButton");
         this.message = document.getElementById("convertMessage");
+        this.convertProgress = document.getElementById("convertProgress");
+        this.progressBar = this.convertProgress?.querySelector(".progress-bar");
+        this.progressTimer = null;
 
         // ensure button disabled on load
         if (this.convertBtn) {
             this.convertBtn.disabled = true;
         }
 
+        if (this.convertProgress) {
+            this.convertProgress.hidden = true;
+            this.convertProgress.setAttribute("aria-hidden", "true");
+        }
+
         this.init();
+    }
+
+    setProgress(value) {
+        if (!this.progressBar) {
+            return;
+        }
+        const width = `${Math.min(100, Math.max(0, value))}%`;
+        this.progressBar.style.width = width;
+        this.progressBar.setAttribute('aria-valuenow', String(Math.min(100, Math.max(0, value))));
+    }
+
+    startProgress() {
+        if (this.convertProgress) {
+            this.convertProgress.hidden = false;
+            this.convertProgress.setAttribute("aria-hidden", "false");
+        }
+        this.setProgress(10);
+        clearInterval(this.progressTimer);
+        this.progressTimer = setInterval(() => {
+            const current = parseInt(this.progressBar?.style.width || '0', 10) || 0;
+            const next = current + (current < 70 ? 8 : 2);
+            this.setProgress(next);
+            if (current >= 90) {
+                clearInterval(this.progressTimer);
+            }
+        }, 300);
+    }
+
+    stopProgress(complete = false) {
+        clearInterval(this.progressTimer);
+        this.progressTimer = null;
+        if (complete) {
+            this.setProgress(100);
+        }
+        if (this.convertProgress) {
+            this.convertProgress.hidden = true;
+            this.convertProgress.setAttribute("aria-hidden", "true");
+        }
     }
 
     init() {
@@ -106,6 +152,8 @@ class ConverterController {
                 this.message.classList.remove("success", "error");
             }
 
+            this.startProgress();
+
             const response = await fetch("/convert", {
                 method: "POST",
                 body: formData,
@@ -135,15 +183,20 @@ class ConverterController {
         } catch (error) {
             console.error(error);
             if (this.message) {
-                this.message.textContent = "❌ " + error.message;
+                this.message.textContent = window.translate('upload.conversion_failed_try_another', '❌ Conversion failed. Please try another format.');
                 this.message.classList.add("error");
             }
         } finally {
+            this.stopProgress(wasSuccess);
             if (this.convertBtn) {
                 this.convertBtn.classList.remove("loading");
                 this.convertBtn.disabled = false;
                 if (!wasSuccess) {
                     this.convertBtn.textContent = originalLabel;
+                } else {
+                    if (this.convertBtn) {
+                        this.convertBtn.textContent = window.translate('upload.ready_to_download', 'Ready to download');
+                    }
                 }
             }
         }

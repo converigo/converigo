@@ -14,11 +14,56 @@ document.addEventListener("DOMContentLoaded", () => {
     const convertBtn = document.getElementById("convertButton");
     const downloadBtn = document.getElementById("downloadBtn");
     const convertMessage = document.getElementById("convertMessage");
+    const convertProgress = document.getElementById("convertProgress");
+    const progressBar = convertProgress?.querySelector(".progress-bar");
 
     const hasConverterController = () => Boolean(window.converter);
 
     let selectedFile = null;
     let selectedFormat = null;
+    let progressTimer = null;
+
+    const setProgress = (value) => {
+        if (progressBar) {
+            progressBar.style.width = `${Math.min(100, Math.max(0, value))}%`;
+        }
+    };
+
+    const startProgress = () => {
+        if (convertProgress) {
+            convertProgress.hidden = false;
+            convertProgress.setAttribute("aria-hidden", "false");
+        }
+        setProgress(10);
+        clearInterval(progressTimer);
+        progressTimer = setInterval(() => {
+            const current = parseInt(progressBar?.style.width || '0', 10) || 0;
+            const next = current + (current < 70 ? 8 : 2);
+            setProgress(next);
+            if (current >= 90) {
+                clearInterval(progressTimer);
+            }
+        }, 300);
+    };
+
+    const stopProgress = (complete = false) => {
+        clearInterval(progressTimer);
+        progressTimer = null;
+        if (complete) {
+            setProgress(100);
+        }
+        if (convertProgress) {
+            convertProgress.hidden = true;
+            convertProgress.setAttribute("aria-hidden", "true");
+        }
+    };
+
+    const showStatus = (message, type = "") => {
+        if (!convertMessage) return;
+        convertMessage.textContent = message;
+        convertMessage.classList.remove("success", "error");
+        if (type) convertMessage.classList.add(type);
+    };
 
     // File selected by UploadManager
     document.addEventListener("file-selected", (e) => {
@@ -29,10 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (selectedFile && convertBtn) {
                 convertBtn.disabled = false;
                 convertBtn.textContent = window.translate('upload.convert', 'Convert');
-                if (convertMessage) {
-                    convertMessage.textContent = "";
-                    convertMessage.classList.remove("success", "error");
-                }
+                showStatus("");
                 if (downloadBtn) downloadBtn.hidden = true;
             }
         } catch (err) {
@@ -53,57 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Convert button handler
-    if (!hasConverterController() && convertBtn) {
-        convertBtn.addEventListener("click", async () => {
-            if (!selectedFile) return;
-            if (!selectedFormat) {
-                if (convertMessage) convertMessage.textContent = window.translate('upload.select_target_format', '❌ Select a target format first.');
-                return;
-            }
-
-            convertBtn.disabled = true;
-            const originalText = convertBtn.textContent;
-            convertBtn.textContent = window.translate('upload.converting', 'Converting...');
-
-            const formData = new FormData();
-            formData.append("file", selectedFile);
-            formData.append("target_format", selectedFormat);
-
-            try {
-                const response = await fetch("/convert", { method: "POST", body: formData });
-
-                if (!response.ok) {
-                    const err = await response.json().catch(() => ({}));
-                    console.error("Convert error", err);
-                    if (convertMessage) convertMessage.textContent = window.translate('upload.conversion_failed_try_another', '❌ Conversion failed. Please try another format.');
-                    return;
-                }
-
-                const result = await response.json();
-
-                if (result.status === "success") {
-                    if (convertMessage) convertMessage.textContent = window.translate('upload.conversion_completed', '✓ Conversion completed');
-                    if (downloadBtn) {
-                        downloadBtn.href = result.download_path;
-                        if (result.filename) downloadBtn.download = result.filename;
-                        downloadBtn.hidden = false;
-                        // Update button state to indicate ready-to-download
-                        if (convertBtn) convertBtn.textContent = window.translate('upload.download_ready', 'Download Ready');
-                    }
-                } else {
-                    console.error("Convert failed", result);
-                    if (convertMessage) convertMessage.textContent = window.translate('upload.conversion_failed_try_another', '❌ Conversion failed. Please try another format.');
-                }
-
-            } catch (error) {
-                console.error(error);
-                if (convertMessage) convertMessage.textContent = window.translate('upload.conversion_failed', '❌ Conversion failed. Please try again later.');
-            } finally {
-                convertBtn.disabled = false;
-                convertBtn.textContent = originalText || window.translate('upload.convert', 'Convert');
-            }
-        });
-    }
+    // When ConverterController is loaded, it manages the conversion lifecycle and progress UI.
+    // `app.js` keeps upload and format helpers available for non-controller pages.
 
 });
