@@ -8,8 +8,16 @@ def test_pdf_to_jpg_landing_page_renders_with_seo_and_faq():
     response = client.get("/pdf-to-jpg")
 
     assert response.status_code == 200
-    assert "PDF to JPG Converter Online Free - Converigo" in response.text
-    assert "What is PDF to JPG conversion?" in response.text
+    assert "PDF to JPG Converter Online Free" in response.text
+    assert "Convert PDF files to JPG images online free" in response.text
+    assert "href=\"#converter\"" in response.text
+    assert "href=\"#how-to-use\"" in response.text
+    assert "href=\"#supported-formats\"" in response.text
+    assert "href=\"#faq\"" in response.text
+    assert "href=\"#related-tools\"" in response.text
+    assert "Input format" in response.text
+    assert "Output format" in response.text
     assert "FAQPage" in response.text
+    assert "SoftwareApplication" in response.text
+    assert "BreadcrumbList" in response.text
     assert "application/ld+json" in response.text
-    assert "Upload PDF" in response.text

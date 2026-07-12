@@ -727,11 +727,8 @@ async def pdf_to_jpg_landing(request: Request):
         return language_service.translate(locale_data, key, default)
 
     tool_data = converter_data_service.load_converter_by_slug("pdf-to-jpg")
-    base_url = _build_base_url(request)
-    seo_title = "PDF to JPG Converter Online Free - Converigo"
-    seo_description = (
-        "Convert PDF files to JPG images online free. Fast, secure and easy PDF image converter."
-    )
+    related_tools = converter_data_service.resolve_related_tools(tool_data, limit=4)
+    seo_data = seo_service.build_tool_meta(request, tool_data)
 
     faq_items = [
         {
@@ -740,7 +737,11 @@ async def pdf_to_jpg_landing(request: Request):
         },
         {
             "question": "Why convert PDF to JPG?",
-            "answer": "JPG images are supported widely across devices and applications.",
+            "answer": "JPG images are supported widely across devices and applications for easier sharing.",
+        },
+        {
+            "question": "Can I convert multiple PDF pages at once?",
+            "answer": "Yes, Converigo converts multiple PDF pages into JPG images in one session.",
         },
         {
             "question": "Is PDF to JPG converter free?",
@@ -748,29 +749,31 @@ async def pdf_to_jpg_landing(request: Request):
         },
     ]
 
-    meta = {
-        "title": seo_title,
-        "description": seo_description,
-        "canonical": f"{base_url}/pdf-to-jpg",
-        "og_url": f"{base_url}/pdf-to-jpg",
-        "og_image": f"{base_url}/static/images/og-default.png",
-        "keywords": "pdf to jpg converter, convert pdf to jpg online, pdf to jpg online free",
-        "og_type": "website",
-        "twitter_card": "summary_large_image",
-    }
+    supported_formats = [
+        {"label": "Input format", "value": tool_data.get("source", "PDF").upper()},
+        {"label": "Output format", "value": tool_data.get("target", "JPG").upper()},
+    ]
 
-    structured_data = {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-            {
-                "@type": "Question",
-                "name": item["question"],
-                "acceptedAnswer": {"@type": "Answer", "text": item["answer"]},
-            }
-            for item in faq_items
-        ],
-    }
+    how_to_use = [
+        {
+            "step": "1",
+            "title": "Upload your PDF",
+            "description": "Choose a PDF file from your device or drag it into the converter.",
+        },
+        {
+            "step": "2",
+            "title": "Convert to JPG",
+            "description": "Start the conversion and let Converigo transform each PDF page into JPG.",
+        },
+        {
+            "step": "3",
+            "title": "Download your images",
+            "description": "Download the converted JPG files instantly once conversion is complete.",
+        },
+    ]
+
+    tool_data_with_faq = {**tool_data, "faq": faq_items}
+    structured_data = seo_service.build_structured_data(request, tool_data_with_faq)
 
     return templates.TemplateResponse(
         request=request,
@@ -779,17 +782,19 @@ async def pdf_to_jpg_landing(request: Request):
             "request": request,
             "locale": locale_data,
             "t": t,
-            "meta": meta,
-            "title": seo_title,
+            "meta": seo_data,
+            "title": seo_data["title"],
             "tool": tool_data,
             "upload_form": tool_data.get("upload_form", {}),
             "faq_items": faq_items,
             "benefits": [
-                {"title": "Convert PDF pages into JPG images quickly", "text": "Turn your PDF pages into JPG images in seconds without installing software."},
-                {"title": "Easy image sharing and compatibility", "text": "Share and view your content across more devices and apps with JPG output."},
-                {"title": "Secure file processing", "text": "Your files are handled safely and kept private during conversion."},
-                {"title": "Free online converter", "text": "Use Converigo online for free to convert PDF files to JPG images."},
+                {"title": "Fast conversion", "text": "Convert PDF to JPG in seconds without installing software."},
+                {"title": "Easy image sharing", "text": "Share your JPG images across more devices, platforms, and apps."},
+                {"title": "Preserve page clarity", "text": "Keep your PDF page visuals crisp and clear inside JPG images."},
             ],
+            "supported_formats": supported_formats,
+            "how_to_use": how_to_use,
+            "related_tools": related_tools,
             "structured_data": structured_data,
         },
     )
