@@ -801,10 +801,11 @@ async def jpg_to_pdf_landing(request: Request):
         return language_service.translate(locale_data, key, default)
 
     tool_data = converter_data_service.load_converter_by_slug("jpg-to-pdf")
+    related_tools = converter_data_service.resolve_related_tools(tool_data, limit=4)
     base_url = _build_base_url(request)
     seo_title = "JPG to PDF Converter Online Free - Converigo"
     seo_description = (
-        "Convert JPG images to PDF online free. Fast, secure and easy image to PDF converter."
+        "Convert JPG images to PDF online free. Fast, secure and easy image to PDF conversion."
     )
 
     faq_items = [
@@ -817,8 +818,35 @@ async def jpg_to_pdf_landing(request: Request):
             "answer": "PDF documents are easy to share, print, and store while keeping your images intact.",
         },
         {
+            "question": "Can I convert multiple JPG files into one PDF?",
+            "answer": "Yes, Converigo can combine multiple JPG images into a single PDF document for easier sharing and archiving.",
+        },
+        {
             "question": "Is JPG to PDF converter free?",
             "answer": "Yes, Converigo provides free online JPG to PDF conversion.",
+        },
+    ]
+
+    supported_formats = [
+        {"label": "Input format", "value": tool_data.get("source", "JPG").upper()},
+        {"label": "Output format", "value": tool_data.get("target", "PDF").upper()},
+    ]
+
+    how_to_use = [
+        {
+            "step": "1",
+            "title": "Upload your JPG images",
+            "description": "Choose one or more JPG files from your device or drag them into the converter.",
+        },
+        {
+            "step": "2",
+            "title": "Convert to PDF",
+            "description": "Start the conversion and let Converigo create a single PDF from your JPG images.",
+        },
+        {
+            "step": "3",
+            "title": "Download your PDF",
+            "description": "Download the finished PDF document instantly once conversion is complete.",
         },
     ]
 
@@ -833,18 +861,8 @@ async def jpg_to_pdf_landing(request: Request):
         "twitter_card": "summary_large_image",
     }
 
-    structured_data = {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-            {
-                "@type": "Question",
-                "name": item["question"],
-                "acceptedAnswer": {"@type": "Answer", "text": item["answer"]},
-            }
-            for item in faq_items
-        ],
-    }
+    tool_data_with_faq = {**tool_data, "faq": faq_items}
+    structured_data = seo_service.build_structured_data(request, tool_data_with_faq)
 
     return templates.TemplateResponse(
         request=request,
@@ -864,6 +882,9 @@ async def jpg_to_pdf_landing(request: Request):
                 {"title": "Secure file processing", "text": "Your files are handled safely and kept private during conversion."},
                 {"title": "Free online converter", "text": "Use Converigo online for free to turn JPG into PDF."},
             ],
+            "supported_formats": supported_formats,
+            "how_to_use": how_to_use,
+            "related_tools": related_tools,
             "structured_data": structured_data,
         },
     )
