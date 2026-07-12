@@ -1,0 +1,75 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}{{ meta.title }}{% endblock %}
+
+{% block content %}
+{% include "components/header.html" %}
+
+<main class="main" role="main">
+
+  <nav aria-label="Breadcrumb">
+    <ol class="breadcrumb">
+      <li><a href="/">Home</a></li>
+      <li aria-current="page">Image Conversion</li>
+    </ol>
+  </nav>
+
+  <section class="hero section">
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <span class="eyebrow">Image Conversion</span>
+        <h1 class="hero-title">Convert, optimize, and prepare images for web & editing</h1>
+        <p class="hero-sub">Fast, secure, and free image conversion workflows built for your needs.</p>
+        <div class="hero-cta">
+          <a href="#workflow-selector" class="btn btn-primary">Choose a workflow</a>
+          <a href="#faq" class="btn btn-outline">See FAQs</a>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <div class="panel-head">
+          <p class="panel-label">Ready to convert</p>
+          <h2 class="panel-title">Pick a workflow or browse tools below.</h2>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="workflow-selector" class="section">
+    <div class="container">
+      <h2>Workflows</h2>
+      <div class="grid workflow-grid">
+        <article class="workflow-card">Optimize for Web</article>
+        <article class="workflow-card">Prepare for Editing</article>
+        <article class="workflow-card">Create Favicons</article>
+        <article class="workflow-card">Fix Compatibility</article>
+      </div>
+    </div>
+  </section>
+
+  <section id="featured-workflow" class="section section-white">
+    <div class="container">
+      <h2>Featured workflow (placeholder)</h2>
+      <div class="featured-placeholder">Featured workflow content will appear here.</div>
+    </div>
+  </section>
+
+  <section id="faq" class="section">
+    <div class="container">
+      <h2>Frequently asked questions</h2>
+      <div class="faq-placeholder">
+        <p>FAQ content placeholder. Real questions will be added in subsequent sprints.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="trust" class="section section-alt">
+    <div class="container">
+      <h2>Trust & Security</h2>
+      <p>Files are processed securely and removed after conversion. No human access.</p>
+    </div>
+  </section>
+
+</main>
+
+{% include "components/footer.html" %}
+{% endblock %}

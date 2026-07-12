@@ -868,6 +868,78 @@ async def webp_to_png_landing(request: Request):
     )
 
 
+@router.get("/image-conversion", response_class=HTMLResponse)
+async def image_hub(request: Request):
+    """Image Hub — a pillar page that surfaces image workflows and tools."""
+
+    locale_data = language_service.load_locale(
+        accept_language=request.headers.get("accept-language"),
+        lang_query=request.query_params.get("lang"),
+    )
+
+    def t(key: str, default: str = "") -> str:
+        return language_service.translate(locale_data, key, default)
+
+    base_url = _build_base_url(request)
+
+    seo_title = "Image Conversion Hub | Converigo"
+    seo_description = (
+        "Discover the best workflows and tools to convert, optimize, and prepare images for web and editing."
+    )
+
+    meta = {
+        "title": seo_title,
+        "description": seo_description,
+        "canonical": f"{PRODUCTION_BASE_URL}/image-conversion",
+        "og_url": f"{PRODUCTION_BASE_URL}/image-conversion",
+        "og_image": f"{PRODUCTION_BASE_URL}/static/images/og-default.png",
+        "keywords": "image conversion, webp, png, jpg, image optimization",
+        "og_type": "website",
+        "twitter_card": "summary_large_image",
+    }
+
+    # BreadcrumbList and FAQ placeholders
+    structured_data = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {"@type": "ListItem", "position": 1, "name": "Home", "item": f"{PRODUCTION_BASE_URL}/"},
+                    {"@type": "ListItem", "position": 2, "name": "Image Conversion", "item": f"{PRODUCTION_BASE_URL}/image-conversion"},
+                ],
+            },
+            {
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "How do I convert images for the web?",
+                        "acceptedAnswer": {"@type": "Answer", "text": "Use the 'Optimize for Web' workflow to convert and compress images for faster loading."},
+                    }
+                ],
+            },
+        ],
+    }
+
+    _, _, supported_locales = _get_locale_context(request)
+
+    return templates.TemplateResponse(
+        request=request,
+        name="pages/image_hub.html",
+        context={
+            "request": request,
+            "locale": locale_data,
+            "t": t,
+            "supported_locales": supported_locales,
+            "meta": meta,
+            "title": seo_title,
+            "structured_data": structured_data,
+            "year": datetime.utcnow().year,
+        },
+    )
+
+
 @router.get("/pdf-to-jpg", response_class=HTMLResponse)
 async def pdf_to_jpg_landing(request: Request):
     locale_data = language_service.load_locale(
