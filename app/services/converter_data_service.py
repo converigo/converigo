@@ -288,6 +288,8 @@ class ConverterDataService:
             "jpg-to-pdf": "/jpg-to-pdf",
             "png-to-jpg": "/png-to-jpg",
             "pdf-to-jpg": "/pdf-to-jpg",
+            "png-to-webp": "/png-to-webp",
+            "webp-to-png": "/webp-to-png",
         }
 
         for tool in self.list_active_converters():

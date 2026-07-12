@@ -11,8 +11,8 @@
         <div class="container hero-inner">
             <div class="hero-copy">
                 <span class="eyebrow">SEO Converter Landing Page</span>
-                <h1 class="hero-title">PNG to WEBP Converter Online Free</h1>
-                <p class="hero-sub">Convert PNG images to WEBP format online. Reduce image size while maintaining quality with Converigo.</p>
+                <h1 class="hero-title">WEBP to PNG Converter Online Free</h1>
+                <p class="hero-sub">Convert WEBP images to PNG format easily. Get lossless PNG files ready for editing, sharing, and compatibility.</p>
                 <div class="hero-cta">
                     <a href="#converter" class="btn btn-primary">{{ request.state.t('tool_page.cta_convert', 'Convert now') }}</a>
                     <a href="#faq" class="btn btn-outline">{{ request.state.t('tool_page.cta_faq', 'Read FAQs') }}</a>
@@ -21,7 +21,7 @@
             <div class="hero-panel">
                 <div class="panel-head">
                     <p class="panel-label">Ready to convert</p>
-                    <h2 class="panel-title">Upload a PNG image and receive a downloadable WEBP file.</h2>
+                    <h2 class="panel-title">Upload a WEBP image and download a PNG file.</h2>
                 </div>
                 <div id="converter" class="upload-card">
                     {% include "components/upload_card.html" %}
@@ -33,7 +33,7 @@
     <section class="section section-white">
         <div class="container section-heading">
             <span class="eyebrow">Why choose Converigo</span>
-            <h2>Fast, secure, and free PNG to WEBP conversion</h2>
+            <h2>Fast, secure, and free WEBP to PNG conversion</h2>
         </div>
         <div class="grid features-grid">
             {% for benefit in benefits %}
@@ -48,17 +48,17 @@
 
     <section class="section">
         <div class="container section-heading">
-            <span class="eyebrow">What is This</span>
-            <h2>About PNG and WEBP</h2>
+            <span class="eyebrow">About the formats</span>
+            <h2>What is WEBP and what is PNG?</h2>
         </div>
         <div class="grid two-column">
             <div>
-                <h3>{{ what_is_png.heading }}</h3>
-                <p>{{ what_is_png.text }}</p>
-            </div>
-            <div>
                 <h3>{{ what_is_webp.heading }}</h3>
                 <p>{{ what_is_webp.text }}</p>
+            </div>
+            <div>
+                <h3>{{ what_is_png.heading }}</h3>
+                <p>{{ what_is_png.text }}</p>
             </div>
         </div>
     </section>
@@ -66,7 +66,7 @@
     <section class="section section-alt">
         <div class="container section-heading">
             <span class="eyebrow">Use Cases</span>
-            <h2>When to use PNG → WEBP</h2>
+            <h2>When to use WEBP → PNG</h2>
         </div>
         <ul class="use-cases">
             {% for case in use_cases %}
@@ -77,8 +77,8 @@
 
     <section class="section">
         <div class="container section-heading">
-            <span class="eyebrow">How it Works</span>
-            <h2>Quick workflow</h2>
+            <span class="eyebrow">How it works</span>
+            <h2>Conversion workflow</h2>
         </div>
         <ol class="how-to-use">
             {% for step in how_to_use %}
@@ -88,18 +88,6 @@
             </li>
             {% endfor %}
         </ol>
-    </section>
-
-    <section class="section section-white">
-        <div class="container section-heading">
-            <span class="eyebrow">Related</span>
-            <h2>Related tools</h2>
-        </div>
-        <div class="related-tools">
-            {% for rel in related_tools %}
-            <a class="related-link" href="/tools/{{ rel.slug }}">{{ rel.title }}</a>
-            {% endfor %}
-        </div>
     </section>
 
     <section id="faq" class="section">
@@ -118,6 +106,18 @@
                     <p>{{ item.answer }}</p>
                 </div>
             </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="section section-white">
+        <div class="container section-heading">
+            <span class="eyebrow">Related</span>
+            <h2>Related tools</h2>
+        </div>
+        <div class="related-tools">
+            {% for rel in related_tools %}
+            <a class="related-link" href="/tools/{{ rel.slug }}">{{ rel.title }}</a>
             {% endfor %}
         </div>
     </section>

@@ -660,12 +660,30 @@ async def png_to_webp_landing(request: Request):
             "tool": tool_data,
             "upload_form": tool_data.get("upload_form", {}),
             "faq_items": faq_items,
-            "benefits": [
+            "benefits": tool_data.get("benefits", [
                 {"title": "Smaller image size", "text": "Reduce the size of your PNG files while keeping the visual quality high."},
                 {"title": "Fast conversion", "text": "Convert your PNG images to WEBP in seconds without installing software."},
                 {"title": "Secure processing", "text": "Your images are handled safely and kept private during conversion."},
                 {"title": "Free online tool", "text": "Use Converigo online for free to turn PNG into WEBP."},
+            ]),
+            "use_cases": tool_data.get("use_cases", [
+                "Website image optimization and faster page loads",
+                "Reduce storage and bandwidth for image-heavy sites",
+            ]),
+            "what_is_png": {
+                "heading": "What is PNG?",
+                "text": "PNG (Portable Network Graphics) is a lossless image format that supports transparency and high-quality images.",
+            },
+            "what_is_webp": {
+                "heading": "What is WEBP?",
+                "text": "WEBP is a modern image format that provides superior compression for both lossy and lossless images, often producing smaller files than PNG or JPEG.",
+            },
+            "how_to_use": [
+                {"step": "1", "title": "Upload PNG", "description": "Choose or drag your PNG image into the upload area."},
+                {"step": "2", "title": "Select WEBP", "description": "Pick WEBP as the target format in the convert options."},
+                {"step": "3", "title": "Download", "description": "Download the converted WEBP image once conversion completes."},
             ],
+            "related_tools": tool_data.get("related_tools", []),
             "structured_data": structured_data,
         },
     )
@@ -745,6 +763,106 @@ async def webp_to_jpg_landing(request: Request):
                 {"title": "Secure file processing", "text": "Your files are handled safely and kept private during conversion."},
                 {"title": "Free online converter", "text": "Use Converigo online for free to turn WEBP into JPG."},
             ],
+            "structured_data": structured_data,
+        },
+    )
+
+
+@router.get("/webp-to-png", response_class=HTMLResponse)
+async def webp_to_png_landing(request: Request):
+    locale_data = language_service.load_locale(
+        accept_language=request.headers.get("accept-language"),
+        lang_query=request.query_params.get("lang"),
+    )
+
+    def t(key: str, default: str = "") -> str:
+        return language_service.translate(locale_data, key, default)
+
+    tool_data = converter_data_service.load_converter_by_slug("webp-to-png")
+    related_tools = converter_data_service.resolve_related_tools(tool_data, limit=4)
+    seo_title = "WEBP to PNG Converter Online Free - Converigo"
+    seo_description = (
+        "Convert WEBP images to PNG online free. Fast, secure, and easy WEBP to PNG image converter."
+    )
+    seo_data = seo_service.build_tool_meta(request, tool_data)
+    seo_data["title"] = seo_title
+    seo_data["description"] = seo_description
+    seo_data["canonical"] = f"{PRODUCTION_BASE_URL}/webp-to-png"
+    seo_data["og_url"] = seo_data["canonical"]
+
+    faq_items = [
+        {
+            "question": "What is WEBP to PNG conversion?",
+            "answer": "WEBP to PNG conversion transforms WEBP images into PNG files for editing, compatibility, and lossless output.",
+        },
+        {
+            "question": "Why convert WEBP to PNG?",
+            "answer": "PNG is widely supported by editing tools and image platforms, making it ideal for further work and sharing.",
+        },
+        {
+            "question": "Does PNG preserve image quality?",
+            "answer": "Yes. PNG preserves the quality of the original WEBP image and supports lossless output.",
+        },
+    ]
+
+    supported_formats = [
+        {"label": "Input format", "value": tool_data.get("source", "WEBP").upper()},
+        {"label": "Output format", "value": tool_data.get("target", "PNG").upper()},
+    ]
+
+    how_to_use = [
+        {
+            "step": "1",
+            "title": "Upload WEBP",
+            "description": "Choose a WEBP file from your device or drag it into the converter.",
+        },
+        {
+            "step": "2",
+            "title": "Convert to PNG",
+            "description": "Start the conversion and let Converigo transform your WEBP image.",
+        },
+        {
+            "step": "3",
+            "title": "Download PNG",
+            "description": "Download the converted PNG file instantly once conversion completes.",
+        },
+    ]
+
+    tool_data_with_faq = {**tool_data, "faq": faq_items}
+    structured_data = seo_service.build_structured_data(request, tool_data_with_faq)
+
+    return templates.TemplateResponse(
+        request=request,
+        name="pages/webp_to_png_landing.html",
+        context={
+            "request": request,
+            "locale": locale_data,
+            "t": t,
+            "meta": seo_data,
+            "title": seo_data["title"],
+            "tool": tool_data,
+            "upload_form": tool_data.get("upload_form", {}),
+            "faq_items": faq_items,
+            "benefits": tool_data.get("benefits", [
+                {"title": "Lossless output", "text": "Convert WEBP to PNG without sacrificing the original image quality."},
+                {"title": "Wide compatibility", "text": "PNG works with nearly every image viewer and editor."},
+                {"title": "Edit-ready format", "text": "Use PNG for further editing and design workflows."},
+            ]),
+            "use_cases": tool_data.get("use_cases", [
+                "Prepare WEBP images for editing in design tools",
+                "Convert WEBP for compatibility with older apps and platforms",
+            ]),
+            "what_is_webp": {
+                "heading": "What is WEBP?",
+                "text": "WEBP is a modern image format that offers efficient compression and smaller file sizes while preserving high visual quality.",
+            },
+            "what_is_png": {
+                "heading": "What is PNG?",
+                "text": "PNG is a lossless image format that supports transparency, editing workflows, and broad compatibility across apps and platforms.",
+            },
+            "supported_formats": supported_formats,
+            "how_to_use": how_to_use,
+            "related_tools": related_tools,
             "structured_data": structured_data,
         },
     )
