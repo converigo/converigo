@@ -327,6 +327,8 @@ async def mp4_to_mp3_landing(request: Request):
     tool_data = converter_data_service.load_converter_by_slug("mp4-to-mp3")
     related_tools = converter_data_service.resolve_related_tools(tool_data, limit=4)
     seo_data = seo_service.build_tool_meta(request, tool_data)
+    seo_data["canonical"] = f"{PRODUCTION_BASE_URL}/mp4-to-mp3"
+    seo_data["og_url"] = seo_data["canonical"]
 
     faq_items = [
         {
@@ -487,6 +489,8 @@ async def png_to_jpg_landing(request: Request):
     tool_data = converter_data_service.load_converter_by_slug("png-to-jpg")
     related_tools = converter_data_service.resolve_related_tools(tool_data, limit=4)
     seo_data = seo_service.build_tool_meta(request, tool_data)
+    seo_data["canonical"] = f"{PRODUCTION_BASE_URL}/png-to-jpg"
+    seo_data["og_url"] = seo_data["canonical"]
 
     faq_items = [
         {
@@ -729,6 +733,8 @@ async def pdf_to_jpg_landing(request: Request):
     tool_data = converter_data_service.load_converter_by_slug("pdf-to-jpg")
     related_tools = converter_data_service.resolve_related_tools(tool_data, limit=4)
     seo_data = seo_service.build_tool_meta(request, tool_data)
+    seo_data["canonical"] = f"{PRODUCTION_BASE_URL}/pdf-to-jpg"
+    seo_data["og_url"] = seo_data["canonical"]
 
     faq_items = [
         {
@@ -891,7 +897,7 @@ async def jpg_to_pdf_landing(request: Request):
 
     tool_data = converter_data_service.load_converter_by_slug("jpg-to-pdf")
     related_tools = converter_data_service.resolve_related_tools(tool_data, limit=4)
-    base_url = _build_base_url(request)
+    base_url = PRODUCTION_BASE_URL
     seo_title = "JPG to PDF Converter Online Free - Converigo"
     seo_description = (
         "Convert JPG images to PDF online free. Fast, secure and easy image to PDF conversion."

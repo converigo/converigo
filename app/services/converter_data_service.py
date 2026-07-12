@@ -274,7 +274,7 @@ class ConverterDataService:
             }
         ]
 
-        trust_pages = ["/about", "/privacy", "/terms", "/contact", "/cookies"]
+        trust_pages = ["/about", "/privacy-policy", "/terms", "/contact", "/cookies"]
         for path in trust_pages:
             entries.append(
                 {
@@ -283,10 +283,18 @@ class ConverterDataService:
                 }
             )
 
+        landing_page_overrides = {
+            "mp4-to-mp3": "/mp4-to-mp3",
+            "jpg-to-pdf": "/jpg-to-pdf",
+            "png-to-jpg": "/png-to-jpg",
+            "pdf-to-jpg": "/pdf-to-jpg",
+        }
+
         for tool in self.list_active_converters():
+            path = landing_page_overrides.get(tool["slug"], f"/tools/{tool['slug']}")
             entries.append(
                 {
-                    "loc": base_url.rstrip("/") + f"/tools/{tool['slug']}",
+                    "loc": base_url.rstrip("/") + path,
                     "lastmod": tool.get(
                         "updated_at",
                         tool.get(
