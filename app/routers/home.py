@@ -474,6 +474,90 @@ async def jpg_to_png_landing(request: Request):
     )
 
 
+@router.get("/png-to-jpg", response_class=HTMLResponse)
+async def png_to_jpg_landing(request: Request):
+    locale_data = language_service.load_locale(
+        accept_language=request.headers.get("accept-language"),
+        lang_query=request.query_params.get("lang"),
+    )
+
+    def t(key: str, default: str = "") -> str:
+        return language_service.translate(locale_data, key, default)
+
+    tool_data = converter_data_service.load_converter_by_slug("png-to-jpg")
+    related_tools = converter_data_service.resolve_related_tools(tool_data, limit=4)
+    seo_data = seo_service.build_tool_meta(request, tool_data)
+
+    faq_items = [
+        {
+            "question": "What is PNG to JPG conversion?",
+            "answer": "PNG to JPG conversion changes PNG images into JPG format for easier sharing and smaller file size.",
+        },
+        {
+            "question": "Why convert PNG images to JPG?",
+            "answer": "JPG files are widely supported and typically have smaller file sizes for faster sharing and loading.",
+        },
+        {
+            "question": "Can I convert multiple PNG files at once?",
+            "answer": "Yes, Converigo lets you convert one or more PNG images to JPG in a single session.",
+        },
+        {
+            "question": "Is PNG to JPG converter free?",
+            "answer": "Yes, Converigo provides free online PNG to JPG conversion.",
+        },
+    ]
+
+    supported_formats = [
+        {"label": "Input format", "value": tool_data.get("source", "PNG").upper()},
+        {"label": "Output format", "value": tool_data.get("target", "JPG").upper()},
+    ]
+
+    how_to_use = [
+        {
+            "step": "1",
+            "title": "Upload your PNG images",
+            "description": "Choose one or more PNG files from your device or drag them into the converter.",
+        },
+        {
+            "step": "2",
+            "title": "Convert to JPG",
+            "description": "Start the conversion and let Converigo transform your images securely.",
+        },
+        {
+            "step": "3",
+            "title": "Download your JPG files",
+            "description": "Download the converted JPG files instantly once conversion is complete.",
+        },
+    ]
+
+    tool_data_with_faq = {**tool_data, "faq": faq_items}
+    structured_data = seo_service.build_structured_data(request, tool_data_with_faq)
+
+    return templates.TemplateResponse(
+        request=request,
+        name="pages/png_to_jpg_landing.html",
+        context={
+            "request": request,
+            "locale": locale_data,
+            "t": t,
+            "meta": seo_data,
+            "title": seo_data["title"],
+            "tool": tool_data,
+            "upload_form": tool_data.get("upload_form", {}),
+            "faq_items": faq_items,
+            "benefits": [
+                {"title": "Fast conversion", "text": "Convert PNG to JPG in seconds without installing software."},
+                {"title": "Smaller image size", "text": "Reduce your PNG file size while keeping good visual quality."},
+                {"title": "Broad compatibility", "text": "JPG files work with more devices, websites, and apps than PNG."},
+            ],
+            "supported_formats": supported_formats,
+            "how_to_use": how_to_use,
+            "related_tools": related_tools,
+            "structured_data": structured_data,
+        },
+    )
+
+
 @router.get("/png-to-webp", response_class=HTMLResponse)
 async def png_to_webp_landing(request: Request):
     locale_data = language_service.load_locale(
