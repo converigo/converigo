@@ -9,7 +9,7 @@ The focus is on building a trusted conversion experience with polished UX, stron
 ## Current Phase
 
 - **Phase:** Product Foundation
-- **Current focus:** Image category delivery and release readiness
+- **Current focus:** Universal route compatibility and release readiness
 - **Checkpoint:** C1
 - **Milestone:** Image Foundation
 
@@ -41,6 +41,7 @@ The focus is on building a trusted conversion experience with polished UX, stron
 2. Validate category landing pages, metadata, and internal linking.
 3. Secure release readiness through QA and repository audit.
 4. Prepare the first checkpoint for GitHub Push.
+5. Preserve legacy public URLs while introducing a shared universal converter route.
 
 ## Development Workflow
 

@@ -26,3 +26,8 @@
 - **Decision:** Only checkpoint-related files are staged for the C1 commit.
 - **Rationale:** Ensures a clean release commit with no accidental changes.
 - **Outcome:** C1 readiness was verified for the intended files only.
+
+### D006 — Universal route compatibility
+- **Decision:** Introduce a shared universal converter route without removing or changing existing public URLs.
+- **Rationale:** Route compatibility is required for SEO stability, legacy links, and gradual migration to JSON-driven landing rendering.
+- **Outcome:** Existing landing URLs remain functional while the shared route uses the same converter data service and tool template.
