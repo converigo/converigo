@@ -35,9 +35,12 @@ Convert API
 
     <!-- DROP ZONE -->
 
-    <div 
+    <div
         class="drop-zone"
         id="dropZone"
+        role="button"
+        tabindex="0"
+        aria-label="{{ request.state.t('upload.label', 'Upload File') }}"
     >
 
 
@@ -46,16 +49,20 @@ Convert API
         </div>
 
 
-        <h2>
-            {{ request.state.t('upload.label', 'Upload File') }}
-        </h2>
+        <div class="drop-zone-copy">
+            <h2>
+                {{ request.state.t('upload.label', 'Upload File') }}
+            </h2>
+
+            <p>
+                {{ request.state.t('upload.subtext', 'Drag & Drop or click') }}
+            </p>
+        </div>
 
 
-        <p>
-            {{ request.state.t('upload.subtext', 'Drag & Drop or click') }}
-        </p>
-
-
+        <div class="upload-support">
+            {{ request.state.t('upload.empty_state', 'Upload a file to get format recommendations and convert it instantly.') }}
+        </div>
 
 
         <input
@@ -134,25 +141,9 @@ Convert API
             </div>
 
 
-            <div
-
-                id="previewName"
-
-                class="preview-name"
-
-            >
-
-            </div>
-
-
-            <div
-
-                id="previewSize"
-
-                class="preview-size"
-
-            >
-
+            <div class="preview-details">
+                <div id="previewName" class="preview-name"></div>
+                <div id="previewSize" class="preview-size"></div>
             </div>
 
 
@@ -179,7 +170,7 @@ Convert API
 >
 
 
-    <span id="fileName">{{ request.state.t('upload.select_file', 'Choose a file to start') }}</span>
+    <span id="fileName">{{ request.state.t('upload.select_file', 'No file selected yet. Choose a file to begin.') }}</span>
 
 
 
@@ -187,6 +178,11 @@ Convert API
 
 
 
+</div>
+
+
+<div id="uploadHint" class="upload-hint">
+    {{ request.state.t('upload.empty_state', 'Upload a file to get format recommendations and convert it instantly.') }}
 </div>
 
 
@@ -280,6 +276,34 @@ contoh:
 
 
 
+
+
+<div
+
+    id="convertProgress"
+
+    class="progress"
+
+    hidden
+
+    aria-hidden="true"
+
+>
+    <div
+
+        class="progress-bar"
+
+        role="progressbar"
+
+        aria-valuemin="0"
+
+        aria-valuemax="100"
+
+        aria-valuenow="0"
+
+    ></div>
+
+</div>
 
 
 <div
