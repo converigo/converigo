@@ -7,9 +7,13 @@ def test_image_hub_renders():
     resp = client.get("/image-conversion")
     assert resp.status_code == 200
     text = resp.text
-    assert "Image Conversion" in text
-    assert "Choose a workflow" in text
-    assert "Featured workflow (placeholder)" in text
-    assert "FAQ content placeholder" in text
-    # structured data JSON-LD should be present
-    assert 'application/ld+json' in text or 'BreadcrumbList' in text
+    assert "Image Conversion Hub" in text
+    assert "Optimize for Web" in text
+    assert "Edit-ready" in text
+    assert "Create Icons" in text
+    assert "Featured converters" in text
+    assert "All image converters" in text
+    assert "Frequently asked questions" in text
+    assert "/tools/png-to-jpg" in text
+    assert 'application/ld+json' in text or 'FAQPage' in text
+    assert '<link rel="canonical" href="https://converigo.com/image-conversion">' in text

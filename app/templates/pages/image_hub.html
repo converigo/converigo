@@ -18,54 +18,164 @@
     <div class="container hero-inner">
       <div class="hero-copy">
         <span class="eyebrow">Image Conversion</span>
-        <h1 class="hero-title">Convert, optimize, and prepare images for web & editing</h1>
-        <p class="hero-sub">Fast, secure, and free image conversion workflows built for your needs.</p>
+        <h1 class="hero-title">Image Conversion Hub: Optimize, edit, and publish images faster</h1>
+        <p class="hero-sub">Explore curated image workflows, converter tools, and resources for web-ready assets, edit-friendly files, compatibility, and icon creation.</p>
         <div class="hero-cta">
-          <a href="#workflow-selector" class="btn btn-primary">Choose a workflow</a>
-          <a href="#faq" class="btn btn-outline">See FAQs</a>
+          <a href="#workflow-selector" class="btn btn-primary">Explore workflows</a>
+          <a href="#featured-converters" class="btn btn-outline">Browse converters</a>
         </div>
       </div>
       <div class="hero-panel">
         <div class="panel-head">
-          <p class="panel-label">Ready to convert</p>
-          <h2 class="panel-title">Pick a workflow or browse tools below.</h2>
+          <p class="panel-label">Image work made simple</p>
+          <h2 class="panel-title">Find the right converter for every image task.</h2>
+        </div>
+        <div class="panel-copy">
+          <p>Convert, compress, and prepare JPG, PNG, WEBP, and icon assets with the fastest online tools on Converigo.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="workflow-selector" class="section">
+  <section id="workflow-selector" class="section section-white">
     <div class="container">
-      <h2>Workflows</h2>
+      <div class="section-header">
+        <h2>Image workflows</h2>
+        <p>Choose the right workflow for web performance, editing, compatibility, or icon design.</p>
+      </div>
       <div class="grid workflow-grid">
-        <article class="workflow-card">Optimize for Web</article>
-        <article class="workflow-card">Prepare for Editing</article>
-        <article class="workflow-card">Create Favicons</article>
-        <article class="workflow-card">Fix Compatibility</article>
+        <article class="workflow-card">
+          <h3>Optimize for Web</h3>
+          <p>Compress and convert images to the best web formats for faster page load times.</p>
+        </article>
+        <article class="workflow-card">
+          <h3>Edit-ready</h3>
+          <p>Prepare PNG and JPG files that are easy to edit in your favorite design tools.</p>
+        </article>
+        <article class="workflow-card">
+          <h3>Compatibility</h3>
+          <p>Convert modern image formats into widely supported JPG or PNG files.</p>
+        </article>
+        <article class="workflow-card">
+          <h3>Create Icons</h3>
+          <p>Generate favicons and app-ready icons from your images with the right size and format.</p>
+        </article>
       </div>
     </div>
   </section>
 
-  <section id="featured-workflow" class="section section-white">
+  <section id="featured-converters" class="section">
     <div class="container">
-      <h2>Featured workflow (placeholder)</h2>
-      <div class="featured-placeholder">Featured workflow content will appear here.</div>
-    </div>
-  </section>
-
-  <section id="faq" class="section">
-    <div class="container">
-      <h2>Frequently asked questions</h2>
-      <div class="faq-placeholder">
-        <p>FAQ content placeholder. Real questions will be added in subsequent sprints.</p>
+      <div class="section-header">
+        <h2>Featured converters</h2>
+        <p>Top image converters for fast, reliable results.</p>
+      </div>
+      <div class="grid featured-grid">
+        {% for tool in featured_tools %}
+        <article class="card card-lg hover-card">
+          <div class="card-content">
+            <h3><a href="/tools/{{ tool.slug }}">{{ tool.title }}</a></h3>
+            <p>{{ tool.description }}</p>
+            <a class="btn btn-outline" href="/tools/{{ tool.slug }}">Use {{ tool.title.split(' ')[0] }}</a>
+          </div>
+        </article>
+        {% endfor %}
       </div>
     </div>
   </section>
 
-  <section id="trust" class="section section-alt">
+  <section id="comparison-teaser" class="section section-alt">
     <div class="container">
-      <h2>Trust & Security</h2>
-      <p>Files are processed securely and removed after conversion. No human access.</p>
+      <div class="section-header">
+        <h2>Compare image converters</h2>
+        <p>Find the best tool for your task: web performance, editing, compatibility, or icon creation.</p>
+      </div>
+      <div class="grid compare-grid">
+        <article class="card">
+          <h3>Web vs edit-ready</h3>
+          <p>Learn when to use compressed WEBP/JPG formats versus edit-friendly PNG files.</p>
+        </article>
+        <article class="card">
+          <h3>Compatibility first</h3>
+          <p>Choose the right output format for older browsers and software support.</p>
+        </article>
+        <article class="card">
+          <h3>Icon creation</h3>
+          <p>Pick the right converter for favicons, app icons, and social media thumbnails.</p>
+        </article>
+      </div>
+      <div class="section-actions">
+        <a class="btn btn-primary" href="/blog">Read image conversion guides</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="knowledge-center" class="section section-white">
+    <div class="container">
+      <div class="section-header">
+        <h2>Knowledge center</h2>
+        <p>Explore articles and resources to master image conversion and optimization.</p>
+      </div>
+      <div class="grid knowledge-grid">
+        <article class="card">
+          <h3><a href="/blog/png-to-jpg-guide">PNG to JPG guide</a></h3>
+          <p>Learn the best practices for converting PNG images to JPG with quality and speed.</p>
+        </article>
+        <article class="card">
+          <h3><a href="/blog/jpg-to-pdf-guide">JPG to PDF workflow</a></h3>
+          <p>Discover how to convert images into shareable, printable PDF documents quickly.</p>
+        </article>
+        <article class="card">
+          <h3><a href="/blog">More conversion tips</a></h3>
+          <p>Browse additional tutorials, SEO tips, and conversion best practices.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="all-image-tools" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>All image converters</h2>
+        <p>Access every image tool available on Converigo for your conversion needs.</p>
+      </div>
+      <div class="grid tools-grid">
+        {% for tool in image_tools %}
+        <a href="/tools/{{ tool.slug }}" class="tool-card">
+          <strong>{{ tool.source | upper }}</strong>
+          <span>→</span>
+          <strong>{{ tool.target | upper }}</strong>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="section section-alt" itemscope itemtype="https://schema.org/FAQPage">
+    <div class="container">
+      <div class="section-header">
+        <h2>Frequently asked questions</h2>
+        <p>Answers to the most common image conversion questions.</p>
+      </div>
+      <div class="faq-list">
+        {% for item in faq_items %}
+        <article class="card" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+          <h3 itemprop="name">{{ item.question }}</h3>
+          <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+            <p itemprop="text">{{ item.answer }}</p>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section id="trust" class="section section-white">
+    <div class="container">
+      <div class="section-header">
+        <h2>Trusted image conversion</h2>
+        <p>Secure processing, no manual review, and files removed after conversion.</p>
+      </div>
     </div>
   </section>
 

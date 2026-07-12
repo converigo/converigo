@@ -884,7 +884,7 @@ async def image_hub(request: Request):
 
     seo_title = "Image Conversion Hub | Converigo"
     seo_description = (
-        "Discover the best workflows and tools to convert, optimize, and prepare images for web and editing."
+        "Discover workflow-driven image converters and optimization tools for web, editing, compatibility, and icon creation."
     )
 
     meta = {
@@ -893,12 +893,49 @@ async def image_hub(request: Request):
         "canonical": f"{PRODUCTION_BASE_URL}/image-conversion",
         "og_url": f"{PRODUCTION_BASE_URL}/image-conversion",
         "og_image": f"{PRODUCTION_BASE_URL}/static/images/og-default.png",
-        "keywords": "image conversion, webp, png, jpg, image optimization",
+        "og_image_alt": "Converigo image conversion hub",
+        "keywords": "image conversion hub, image optimization, web image tools, png to jpg, webp converter",
         "og_type": "website",
         "twitter_card": "summary_large_image",
     }
 
-    # BreadcrumbList and FAQ placeholders
+    image_formats = {"jpg", "jpeg", "png", "webp", "bmp"}
+    image_tools = [
+        tool
+        for tool in converter_data_service.list_active_converters()
+        if tool.get("slug") not in {"mp4-to-mp3", "pdf-to-word", "word-to-pdf"}
+        and (
+            tool.get("source", "").lower() in image_formats
+            or tool.get("target", "").lower() in image_formats
+        )
+    ]
+
+    featured_tool_slugs = ["jpg-to-png", "png-to-jpg", "png-to-webp", "webp-to-png"]
+    featured_tools = [
+        next((tool for tool in image_tools if tool["slug"] == slug), None)
+        for slug in featured_tool_slugs
+    ]
+    featured_tools = [tool for tool in featured_tools if tool is not None]
+
+    faq_items = [
+        {
+            "question": "How do I optimize images for faster web pages?",
+            "answer": "Choose the Optimize for Web workflow to resize, compress, and convert images to the best format for fast loading.",
+        },
+        {
+            "question": "Which format is best for editing?",
+            "answer": "Use PNG or JPG image formats for edit-ready workflows, since they are widely supported by photo editors and design tools.",
+        },
+        {
+            "question": "Can I convert images for compatibility with older browsers?",
+            "answer": "Yes, the Compatibility workflow helps convert WebP and modern formats into JPG or PNG so they work across more apps and devices.",
+        },
+        {
+            "question": "How do I create icons from images?",
+            "answer": "Use dedicated icon workflows to resize and export images for favicons, app icons, and social preview graphics.",
+        },
+    ]
+
     structured_data = {
         "@context": "https://schema.org",
         "@graph": [
@@ -914,9 +951,10 @@ async def image_hub(request: Request):
                 "mainEntity": [
                     {
                         "@type": "Question",
-                        "name": "How do I convert images for the web?",
-                        "acceptedAnswer": {"@type": "Answer", "text": "Use the 'Optimize for Web' workflow to convert and compress images for faster loading."},
+                        "name": item["question"],
+                        "acceptedAnswer": {"@type": "Answer", "text": item["answer"]},
                     }
+                    for item in faq_items
                 ],
             },
         ],
@@ -935,6 +973,9 @@ async def image_hub(request: Request):
             "meta": meta,
             "title": seo_title,
             "structured_data": structured_data,
+            "featured_tools": featured_tools,
+            "image_tools": image_tools,
+            "faq_items": faq_items,
             "year": datetime.utcnow().year,
         },
     )
