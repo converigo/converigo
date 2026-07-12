@@ -19,3 +19,13 @@ def test_existing_tools_route_still_renders_for_same_converter():
 
     assert response.status_code == 200
     assert "JPG to PDF Converter" in response.text
+
+
+def test_universal_tool_page_renders_json_driven_sections():
+    client = TestClient(app)
+    response = client.get("/png-to-webp")
+
+    assert response.status_code == 200
+    assert "Benefits" in response.text
+    assert "Use Cases" in response.text
+    assert "About Formats" in response.text
