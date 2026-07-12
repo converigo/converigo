@@ -192,6 +192,11 @@ app.mount(
 # ==========================================
 
 app.include_router(
+    seo_router
+)
+
+
+app.include_router(
     home_router
 )
 
@@ -208,11 +213,6 @@ app.include_router(
 
 app.include_router(
     tools_router
-)
-
-
-app.include_router(
-    seo_router
 )
 
 

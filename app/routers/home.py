@@ -14,8 +14,23 @@ from app.core.templates import templates
 from app.services.converter_data_service import ConverterDataService
 from app.services.language_service import LanguageService
 from app.services.seo_service import PRODUCTION_BASE_URL, SeoService
+from app.routers.tools import render_universal_tool_page
 
 router = APIRouter()
+
+RESERVED_PATHS = {
+    "about",
+    "privacy-policy",
+    "privacy",
+    "terms",
+    "contact",
+    "cookies",
+    "blog",
+    "image-conversion",
+    "sitemap.xml",
+    "robots.txt",
+    "health",
+}
 
 converter_data_service = ConverterDataService(
     Path("app/data/converters")
@@ -346,526 +361,32 @@ async def blog_article(request: Request, slug: str):
 
 @router.get("/mp4-to-mp3", response_class=HTMLResponse)
 async def mp4_to_mp3_landing(request: Request):
-    locale_data = language_service.load_locale(
-        accept_language=request.headers.get("accept-language"),
-        lang_query=request.query_params.get("lang"),
-    )
-
-    def t(key: str, default: str = "") -> str:
-        return language_service.translate(locale_data, key, default)
-
-    tool_data = converter_data_service.load_converter_by_slug("mp4-to-mp3")
-    related_tools = converter_data_service.resolve_related_tools(tool_data, limit=4)
-    seo_data = seo_service.build_tool_meta(request, tool_data)
-    seo_data["canonical"] = f"{PRODUCTION_BASE_URL}/mp4-to-mp3"
-    seo_data["og_url"] = seo_data["canonical"]
-
-    faq_items = [
-        {
-            "question": "What is MP4 to MP3 conversion?",
-            "answer": "MP4 to MP3 conversion extracts the audio track from a video file and saves it as a standalone MP3 audio file.",
-        },
-        {
-            "question": "How do I convert MP4 to MP3?",
-            "answer": "Upload your MP4 video, choose MP3 as the output, and download the converted audio once the process finishes.",
-        },
-        {
-            "question": "Is Converigo free?",
-            "answer": "Yes. Converigo lets you convert MP4 to MP3 online free for quick audio extraction.",
-        },
-        {
-            "question": "What file types can I upload?",
-            "answer": "Upload MP4 video files only, and Converigo will extract the MP3 audio track.",
-        },
-    ]
-
-    supported_formats = [
-        {"label": "Input format", "value": tool_data.get("source", "MP4").upper()},
-        {"label": "Output format", "value": tool_data.get("target", "MP3").upper()},
-    ]
-
-    how_to_use = [
-        {
-            "step": "1",
-            "title": "Upload your MP4",
-            "description": "Choose an MP4 video file from your device or drag it into the converter.",
-        },
-        {
-            "step": "2",
-            "title": "Convert to MP3",
-            "description": "Start the conversion and let Converigo process the audio track securely.",
-        },
-        {
-            "step": "3",
-            "title": "Download MP3",
-            "description": "Download your MP3 file instantly once the conversion is complete.",
-        },
-    ]
-
-    return templates.TemplateResponse(
-        request=request,
-        name="pages/mp4_to_mp3_landing.html",
-        context={
-            "request": request,
-            "locale": locale_data,
-            "t": t,
-            "meta": seo_data,
-            "title": seo_data["title"],
-            "tool": tool_data,
-            "upload_form": tool_data.get("upload_form", {}),
-            "faq_items": faq_items,
-            "benefits": [
-                {"title": "Fast conversion", "text": "Convert your MP4 videos to MP3 in seconds without installing software."},
-                {"title": "Secure processing", "text": "Your files are handled safely and kept private during conversion."},
-                {"title": "High-quality audio", "text": "Extract clean MP3 audio from your video while preserving sound clarity."},
-            ],
-            "supported_formats": supported_formats,
-            "how_to_use": how_to_use,
-            "related_tools": related_tools,
-            "structured_data": seo_service.build_structured_data(request, tool_data),
-        },
-    )
+    return await render_universal_tool_page(request, "mp4-to-mp3", canonical_path="/mp4-to-mp3")
 
 
 @router.get("/jpg-to-png", response_class=HTMLResponse)
 async def jpg_to_png_landing(request: Request):
-    locale_data = language_service.load_locale(
-        accept_language=request.headers.get("accept-language"),
-        lang_query=request.query_params.get("lang"),
-    )
-
-    def t(key: str, default: str = "") -> str:
-        return language_service.translate(locale_data, key, default)
-
-    tool_data = converter_data_service.load_converter_by_slug("jpg-to-png")
-    base_url = _build_base_url(request)
-    seo_title = "JPG to PNG Converter Online Free - Converigo"
-    seo_description = (
-        "Convert JPG to PNG online free. Fast, secure and easy JPG to PNG image converter."
-    )
-
-    faq_items = [
-        {
-            "question": "What is JPG to PNG conversion?",
-            "answer": "JPG to PNG conversion changes JPG images into PNG format while preserving image quality.",
-        },
-        {
-            "question": "How do I convert JPG to PNG?",
-            "answer": "Upload your JPG image, choose PNG format, and download the converted file.",
-        },
-        {
-            "question": "Is JPG to PNG converter free?",
-            "answer": "Yes, Converigo provides free online JPG to PNG conversion.",
-        },
-    ]
-
-    meta = {
-        "title": seo_title,
-        "description": seo_description,
-        "canonical": f"{base_url}/jpg-to-png",
-        "og_url": f"{base_url}/jpg-to-png",
-        "og_image": f"{base_url}/static/images/og-default.png",
-        "keywords": "jpg to png converter, convert jpg to png online, jpg to png online free",
-        "og_type": "website",
-        "twitter_card": "summary_large_image",
-    }
-
-    structured_data = {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-            {
-                "@type": "Question",
-                "name": item["question"],
-                "acceptedAnswer": {"@type": "Answer", "text": item["answer"]},
-            }
-            for item in faq_items
-        ],
-    }
-
-    return templates.TemplateResponse(
-        request=request,
-        name="pages/jpg_to_png_landing.html",
-        context={
-            "request": request,
-            "locale": locale_data,
-            "t": t,
-            "meta": meta,
-            "title": seo_title,
-            "tool": tool_data,
-            "upload_form": tool_data.get("upload_form", {}),
-            "faq_items": faq_items,
-            "benefits": [
-                {"title": "Fast image conversion", "text": "Convert your JPG images to PNG quickly without installing software."},
-                {"title": "Secure file processing", "text": "Your files are handled safely and kept private during conversion."},
-                {"title": "Free online converter", "text": "Use Converigo online for free to turn JPG into PNG."},
-                {"title": "High quality PNG output", "text": "Export your images in crisp PNG format with strong visual quality."},
-            ],
-            "structured_data": structured_data,
-        },
-    )
+    return await render_universal_tool_page(request, "jpg-to-png", canonical_path="/jpg-to-png")
 
 
 @router.get("/png-to-jpg", response_class=HTMLResponse)
 async def png_to_jpg_landing(request: Request):
-    locale_data = language_service.load_locale(
-        accept_language=request.headers.get("accept-language"),
-        lang_query=request.query_params.get("lang"),
-    )
-
-    def t(key: str, default: str = "") -> str:
-        return language_service.translate(locale_data, key, default)
-
-    tool_data = converter_data_service.load_converter_by_slug("png-to-jpg")
-    related_tools = converter_data_service.resolve_related_tools(tool_data, limit=4)
-    seo_data = seo_service.build_tool_meta(request, tool_data)
-    seo_data["canonical"] = f"{PRODUCTION_BASE_URL}/png-to-jpg"
-    seo_data["og_url"] = seo_data["canonical"]
-
-    faq_items = [
-        {
-            "question": "What is PNG to JPG conversion?",
-            "answer": "PNG to JPG conversion changes PNG images into JPG format for easier sharing and smaller file size.",
-        },
-        {
-            "question": "Why convert PNG images to JPG?",
-            "answer": "JPG files are widely supported and typically have smaller file sizes for faster sharing and loading.",
-        },
-        {
-            "question": "Can I convert multiple PNG files at once?",
-            "answer": "Yes, Converigo lets you convert one or more PNG images to JPG in a single session.",
-        },
-        {
-            "question": "Is PNG to JPG converter free?",
-            "answer": "Yes, Converigo provides free online PNG to JPG conversion.",
-        },
-    ]
-
-    supported_formats = [
-        {"label": "Input format", "value": tool_data.get("source", "PNG").upper()},
-        {"label": "Output format", "value": tool_data.get("target", "JPG").upper()},
-    ]
-
-    how_to_use = [
-        {
-            "step": "1",
-            "title": "Upload your PNG images",
-            "description": "Choose one or more PNG files from your device or drag them into the converter.",
-        },
-        {
-            "step": "2",
-            "title": "Convert to JPG",
-            "description": "Start the conversion and let Converigo transform your images securely.",
-        },
-        {
-            "step": "3",
-            "title": "Download your JPG files",
-            "description": "Download the converted JPG files instantly once conversion is complete.",
-        },
-    ]
-
-    tool_data_with_faq = {**tool_data, "faq": faq_items}
-    structured_data = seo_service.build_structured_data(request, tool_data_with_faq)
-
-    return templates.TemplateResponse(
-        request=request,
-        name="pages/png_to_jpg_landing.html",
-        context={
-            "request": request,
-            "locale": locale_data,
-            "t": t,
-            "meta": seo_data,
-            "title": seo_data["title"],
-            "tool": tool_data,
-            "upload_form": tool_data.get("upload_form", {}),
-            "faq_items": faq_items,
-            "benefits": [
-                {"title": "Fast conversion", "text": "Convert PNG to JPG in seconds without installing software."},
-                {"title": "Smaller image size", "text": "Reduce your PNG file size while keeping good visual quality."},
-                {"title": "Broad compatibility", "text": "JPG files work with more devices, websites, and apps than PNG."},
-            ],
-            "supported_formats": supported_formats,
-            "how_to_use": how_to_use,
-            "related_tools": related_tools,
-            "structured_data": structured_data,
-        },
-    )
+    return await render_universal_tool_page(request, "png-to-jpg", canonical_path="/png-to-jpg")
 
 
 @router.get("/png-to-webp", response_class=HTMLResponse)
 async def png_to_webp_landing(request: Request):
-    locale_data = language_service.load_locale(
-        accept_language=request.headers.get("accept-language"),
-        lang_query=request.query_params.get("lang"),
-    )
-
-    def t(key: str, default: str = "") -> str:
-        return language_service.translate(locale_data, key, default)
-
-    tool_data = converter_data_service.load_converter_by_slug("png-to-webp")
-    base_url = _build_base_url(request)
-    seo_title = "PNG to WEBP Converter Online Free - Converigo"
-    seo_description = (
-        "Convert PNG to WEBP online free. Fast, secure and easy PNG image converter."
-    )
-
-    faq_items = [
-        {
-            "question": "What is PNG to WEBP conversion?",
-            "answer": "PNG to WEBP conversion transforms PNG images into modern WEBP format with efficient compression.",
-        },
-        {
-            "question": "Why convert PNG to WEBP?",
-            "answer": "WEBP images usually provide smaller file sizes while maintaining good visual quality.",
-        },
-        {
-            "question": "Is PNG to WEBP converter free?",
-            "answer": "Yes, Converigo provides free online PNG to WEBP conversion.",
-        },
-    ]
-
-    meta = {
-        "title": seo_title,
-        "description": seo_description,
-        "canonical": f"{base_url}/png-to-webp",
-        "og_url": f"{base_url}/png-to-webp",
-        "og_image": f"{base_url}/static/images/og-default.png",
-        "keywords": "png to webp converter, convert png to webp online, png to webp online free",
-        "og_type": "website",
-        "twitter_card": "summary_large_image",
-    }
-
-    structured_data = {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-            {
-                "@type": "Question",
-                "name": item["question"],
-                "acceptedAnswer": {"@type": "Answer", "text": item["answer"]},
-            }
-            for item in faq_items
-        ],
-    }
-
-    return templates.TemplateResponse(
-        request=request,
-        name="pages/png_to_webp_landing.html",
-        context={
-            "request": request,
-            "locale": locale_data,
-            "t": t,
-            "meta": meta,
-            "title": seo_title,
-            "tool": tool_data,
-            "upload_form": tool_data.get("upload_form", {}),
-            "faq_items": faq_items,
-            "benefits": tool_data.get("benefits", [
-                {"title": "Smaller image size", "text": "Reduce the size of your PNG files while keeping the visual quality high."},
-                {"title": "Fast conversion", "text": "Convert your PNG images to WEBP in seconds without installing software."},
-                {"title": "Secure processing", "text": "Your images are handled safely and kept private during conversion."},
-                {"title": "Free online tool", "text": "Use Converigo online for free to turn PNG into WEBP."},
-            ]),
-            "use_cases": tool_data.get("use_cases", [
-                "Website image optimization and faster page loads",
-                "Reduce storage and bandwidth for image-heavy sites",
-            ]),
-            "what_is_png": {
-                "heading": "What is PNG?",
-                "text": "PNG (Portable Network Graphics) is a lossless image format that supports transparency and high-quality images.",
-            },
-            "what_is_webp": {
-                "heading": "What is WEBP?",
-                "text": "WEBP is a modern image format that provides superior compression for both lossy and lossless images, often producing smaller files than PNG or JPEG.",
-            },
-            "how_to_use": [
-                {"step": "1", "title": "Upload PNG", "description": "Choose or drag your PNG image into the upload area."},
-                {"step": "2", "title": "Select WEBP", "description": "Pick WEBP as the target format in the convert options."},
-                {"step": "3", "title": "Download", "description": "Download the converted WEBP image once conversion completes."},
-            ],
-            "related_tools": tool_data.get("related_tools", []),
-            "structured_data": structured_data,
-        },
-    )
+    return await render_universal_tool_page(request, "png-to-webp", canonical_path="/png-to-webp")
 
 
 @router.get("/webp-to-jpg", response_class=HTMLResponse)
 async def webp_to_jpg_landing(request: Request):
-    locale_data = language_service.load_locale(
-        accept_language=request.headers.get("accept-language"),
-        lang_query=request.query_params.get("lang"),
-    )
-
-    def t(key: str, default: str = "") -> str:
-        return language_service.translate(locale_data, key, default)
-
-    tool_data = converter_data_service.load_converter_by_slug("webp-to-jpg")
-    base_url = _build_base_url(request)
-    seo_title = "WEBP to JPG Converter Online Free - Converigo"
-    seo_description = (
-        "Convert WEBP to JPG online free. Fast, secure and easy WEBP image converter."
-    )
-
-    faq_items = [
-        {
-            "question": "What is WEBP to JPG conversion?",
-            "answer": "WEBP to JPG conversion changes modern WEBP images into widely supported JPG format.",
-        },
-        {
-            "question": "Why convert WEBP to JPG?",
-            "answer": "JPG files are supported by more applications and devices, making sharing easier.",
-        },
-        {
-            "question": "Is WEBP to JPG converter free?",
-            "answer": "Yes, Converigo provides free online WEBP to JPG conversion.",
-        },
-    ]
-
-    meta = {
-        "title": seo_title,
-        "description": seo_description,
-        "canonical": f"{base_url}/webp-to-jpg",
-        "og_url": f"{base_url}/webp-to-jpg",
-        "og_image": f"{base_url}/static/images/og-default.png",
-        "keywords": "webp to jpg converter, convert webp to jpg online, webp to jpg online free",
-        "og_type": "website",
-        "twitter_card": "summary_large_image",
-    }
-
-    structured_data = {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-            {
-                "@type": "Question",
-                "name": item["question"],
-                "acceptedAnswer": {"@type": "Answer", "text": item["answer"]},
-            }
-            for item in faq_items
-        ],
-    }
-
-    return templates.TemplateResponse(
-        request=request,
-        name="pages/webp_to_jpg_landing.html",
-        context={
-            "request": request,
-            "locale": locale_data,
-            "t": t,
-            "meta": meta,
-            "title": seo_title,
-            "tool": tool_data,
-            "upload_form": tool_data.get("upload_form", {}),
-            "faq_items": faq_items,
-            "benefits": [
-                {"title": "Convert WEBP images quickly", "text": "Convert your WEBP images to JPG in seconds without installing software."},
-                {"title": "Improve compatibility with JPG format", "text": "Use your images across more apps, devices, and platforms."},
-                {"title": "Secure file processing", "text": "Your files are handled safely and kept private during conversion."},
-                {"title": "Free online converter", "text": "Use Converigo online for free to turn WEBP into JPG."},
-            ],
-            "structured_data": structured_data,
-        },
-    )
+    return await render_universal_tool_page(request, "webp-to-jpg", canonical_path="/webp-to-jpg")
 
 
 @router.get("/webp-to-png", response_class=HTMLResponse)
 async def webp_to_png_landing(request: Request):
-    locale_data = language_service.load_locale(
-        accept_language=request.headers.get("accept-language"),
-        lang_query=request.query_params.get("lang"),
-    )
-
-    def t(key: str, default: str = "") -> str:
-        return language_service.translate(locale_data, key, default)
-
-    tool_data = converter_data_service.load_converter_by_slug("webp-to-png")
-    related_tools = converter_data_service.resolve_related_tools(tool_data, limit=4)
-    seo_title = "WEBP to PNG Converter Online Free - Converigo"
-    seo_description = (
-        "Convert WEBP images to PNG online free. Fast, secure, and easy WEBP to PNG image converter."
-    )
-    seo_data = seo_service.build_tool_meta(request, tool_data)
-    seo_data["title"] = seo_title
-    seo_data["description"] = seo_description
-    seo_data["canonical"] = f"{PRODUCTION_BASE_URL}/webp-to-png"
-    seo_data["og_url"] = seo_data["canonical"]
-
-    faq_items = [
-        {
-            "question": "What is WEBP to PNG conversion?",
-            "answer": "WEBP to PNG conversion transforms WEBP images into PNG files for editing, compatibility, and lossless output.",
-        },
-        {
-            "question": "Why convert WEBP to PNG?",
-            "answer": "PNG is widely supported by editing tools and image platforms, making it ideal for further work and sharing.",
-        },
-        {
-            "question": "Does PNG preserve image quality?",
-            "answer": "Yes. PNG preserves the quality of the original WEBP image and supports lossless output.",
-        },
-    ]
-
-    supported_formats = [
-        {"label": "Input format", "value": tool_data.get("source", "WEBP").upper()},
-        {"label": "Output format", "value": tool_data.get("target", "PNG").upper()},
-    ]
-
-    how_to_use = [
-        {
-            "step": "1",
-            "title": "Upload WEBP",
-            "description": "Choose a WEBP file from your device or drag it into the converter.",
-        },
-        {
-            "step": "2",
-            "title": "Convert to PNG",
-            "description": "Start the conversion and let Converigo transform your WEBP image.",
-        },
-        {
-            "step": "3",
-            "title": "Download PNG",
-            "description": "Download the converted PNG file instantly once conversion completes.",
-        },
-    ]
-
-    tool_data_with_faq = {**tool_data, "faq": faq_items}
-    structured_data = seo_service.build_structured_data(request, tool_data_with_faq)
-
-    return templates.TemplateResponse(
-        request=request,
-        name="pages/webp_to_png_landing.html",
-        context={
-            "request": request,
-            "locale": locale_data,
-            "t": t,
-            "meta": seo_data,
-            "title": seo_data["title"],
-            "tool": tool_data,
-            "upload_form": tool_data.get("upload_form", {}),
-            "faq_items": faq_items,
-            "benefits": tool_data.get("benefits", [
-                {"title": "Lossless output", "text": "Convert WEBP to PNG without sacrificing the original image quality."},
-                {"title": "Wide compatibility", "text": "PNG works with nearly every image viewer and editor."},
-                {"title": "Edit-ready format", "text": "Use PNG for further editing and design workflows."},
-            ]),
-            "use_cases": tool_data.get("use_cases", [
-                "Prepare WEBP images for editing in design tools",
-                "Convert WEBP for compatibility with older apps and platforms",
-            ]),
-            "what_is_webp": {
-                "heading": "What is WEBP?",
-                "text": "WEBP is a modern image format that offers efficient compression and smaller file sizes while preserving high visual quality.",
-            },
-            "what_is_png": {
-                "heading": "What is PNG?",
-                "text": "PNG is a lossless image format that supports transparency, editing workflows, and broad compatibility across apps and platforms.",
-            },
-            "supported_formats": supported_formats,
-            "how_to_use": how_to_use,
-            "related_tools": related_tools,
-            "structured_data": structured_data,
-        },
-    )
+    return await render_universal_tool_page(request, "webp-to-png", canonical_path="/webp-to-png")
 
 
 @router.get("/image-conversion", response_class=HTMLResponse)
@@ -983,264 +504,27 @@ async def image_hub(request: Request):
 
 @router.get("/pdf-to-jpg", response_class=HTMLResponse)
 async def pdf_to_jpg_landing(request: Request):
-    locale_data = language_service.load_locale(
-        accept_language=request.headers.get("accept-language"),
-        lang_query=request.query_params.get("lang"),
-    )
-
-    def t(key: str, default: str = "") -> str:
-        return language_service.translate(locale_data, key, default)
-
-    tool_data = converter_data_service.load_converter_by_slug("pdf-to-jpg")
-    related_tools = converter_data_service.resolve_related_tools(tool_data, limit=4)
-    seo_data = seo_service.build_tool_meta(request, tool_data)
-    seo_data["canonical"] = f"{PRODUCTION_BASE_URL}/pdf-to-jpg"
-    seo_data["og_url"] = seo_data["canonical"]
-
-    faq_items = [
-        {
-            "question": "What is PDF to JPG conversion?",
-            "answer": "PDF to JPG conversion converts PDF pages into image files that are easier to view and share.",
-        },
-        {
-            "question": "Why convert PDF to JPG?",
-            "answer": "JPG images are supported widely across devices and applications for easier sharing.",
-        },
-        {
-            "question": "Can I convert multiple PDF pages at once?",
-            "answer": "Yes, Converigo converts multiple PDF pages into JPG images in one session.",
-        },
-        {
-            "question": "Is PDF to JPG converter free?",
-            "answer": "Yes, Converigo provides free online PDF to JPG conversion.",
-        },
-    ]
-
-    supported_formats = [
-        {"label": "Input format", "value": tool_data.get("source", "PDF").upper()},
-        {"label": "Output format", "value": tool_data.get("target", "JPG").upper()},
-    ]
-
-    how_to_use = [
-        {
-            "step": "1",
-            "title": "Upload your PDF",
-            "description": "Choose a PDF file from your device or drag it into the converter.",
-        },
-        {
-            "step": "2",
-            "title": "Convert to JPG",
-            "description": "Start the conversion and let Converigo transform each PDF page into JPG.",
-        },
-        {
-            "step": "3",
-            "title": "Download your images",
-            "description": "Download the converted JPG files instantly once conversion is complete.",
-        },
-    ]
-
-    tool_data_with_faq = {**tool_data, "faq": faq_items}
-    structured_data = seo_service.build_structured_data(request, tool_data_with_faq)
-
-    return templates.TemplateResponse(
-        request=request,
-        name="pages/pdf_to_jpg_landing.html",
-        context={
-            "request": request,
-            "locale": locale_data,
-            "t": t,
-            "meta": seo_data,
-            "title": seo_data["title"],
-            "tool": tool_data,
-            "upload_form": tool_data.get("upload_form", {}),
-            "faq_items": faq_items,
-            "benefits": [
-                {"title": "Fast conversion", "text": "Convert PDF to JPG in seconds without installing software."},
-                {"title": "Easy image sharing", "text": "Share your JPG images across more devices, platforms, and apps."},
-                {"title": "Preserve page clarity", "text": "Keep your PDF page visuals crisp and clear inside JPG images."},
-            ],
-            "supported_formats": supported_formats,
-            "how_to_use": how_to_use,
-            "related_tools": related_tools,
-            "structured_data": structured_data,
-        },
-    )
+    return await render_universal_tool_page(request, "pdf-to-jpg", canonical_path="/pdf-to-jpg")
 
 
 @router.get("/word-to-pdf", response_class=HTMLResponse)
 async def word_to_pdf_landing(request: Request):
-    locale_data = language_service.load_locale(
-        accept_language=request.headers.get("accept-language"),
-        lang_query=request.query_params.get("lang"),
-    )
-
-    def t(key: str, default: str = "") -> str:
-        return language_service.translate(locale_data, key, default)
-
-    tool_data = converter_data_service.load_converter_by_slug("word-to-pdf")
-    base_url = _build_base_url(request)
-    seo_title = "Word to PDF Converter Online Free - Converigo"
-    seo_description = (
-        "Convert Word documents to PDF online free. Fast, secure and easy DOCX to PDF converter."
-    )
-
-    faq_items = [
-        {
-            "question": "What is Word to PDF conversion?",
-            "answer": "Word to PDF conversion transforms DOCX documents into PDF files for easier sharing and viewing.",
-        },
-        {
-            "question": "Why convert Word files to PDF?",
-            "answer": "PDF files keep documents consistent across different devices.",
-        },
-        {
-            "question": "Is Word to PDF converter free?",
-            "answer": "Yes, Converigo provides free online Word to PDF conversion.",
-        },
-    ]
-
-    meta = {
-        "title": seo_title,
-        "description": seo_description,
-        "canonical": f"{base_url}/word-to-pdf",
-        "og_url": f"{base_url}/word-to-pdf",
-        "og_image": f"{base_url}/static/images/og-default.png",
-        "keywords": "word to pdf converter, convert word to pdf online, docx to pdf online free",
-        "og_type": "website",
-        "twitter_card": "summary_large_image",
-    }
-
-    structured_data = {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-            {
-                "@type": "Question",
-                "name": item["question"],
-                "acceptedAnswer": {"@type": "Answer", "text": item["answer"]},
-            }
-            for item in faq_items
-        ],
-    }
-
-    return templates.TemplateResponse(
-        request=request,
-        name="pages/word_to_pdf_landing.html",
-        context={
-            "request": request,
-            "locale": locale_data,
-            "t": t,
-            "meta": meta,
-            "title": seo_title,
-            "tool": tool_data,
-            "upload_form": tool_data.get("upload_form", {}),
-            "faq_items": faq_items,
-            "benefits": [
-                {"title": "Convert DOCX files quickly", "text": "Turn your Word documents into PDF in seconds without installing software."},
-                {"title": "Preserve document readability", "text": "Keep your formatting and layout intact for reliable viewing and printing."},
-                {"title": "Easy PDF sharing", "text": "Share polished PDF files across devices, email, and cloud storage."},
-                {"title": "Free online converter", "text": "Use Converigo online for free to turn Word files into PDF."},
-            ],
-            "structured_data": structured_data,
-        },
-    )
+    return await render_universal_tool_page(request, "word-to-pdf", canonical_path="/word-to-pdf")
 
 
 @router.get("/jpg-to-pdf", response_class=HTMLResponse)
 async def jpg_to_pdf_landing(request: Request):
-    locale_data = language_service.load_locale(
-        accept_language=request.headers.get("accept-language"),
-        lang_query=request.query_params.get("lang"),
-    )
+    return await render_universal_tool_page(request, "jpg-to-pdf", canonical_path="/jpg-to-pdf")
 
-    def t(key: str, default: str = "") -> str:
-        return language_service.translate(locale_data, key, default)
 
-    tool_data = converter_data_service.load_converter_by_slug("jpg-to-pdf")
-    related_tools = converter_data_service.resolve_related_tools(tool_data, limit=4)
-    base_url = PRODUCTION_BASE_URL
-    seo_title = "JPG to PDF Converter Online Free - Converigo"
-    seo_description = (
-        "Convert JPG images to PDF online free. Fast, secure and easy image to PDF conversion."
-    )
+@router.get("/{slug}", response_class=HTMLResponse)
+async def universal_converter_route(request: Request, slug: str):
+    if slug in RESERVED_PATHS:
+        raise HTTPException(status_code=404, detail="Not found")
 
-    faq_items = [
-        {
-            "question": "What is JPG to PDF conversion?",
-            "answer": "JPG to PDF conversion combines one or more JPG images into a single PDF document.",
-        },
-        {
-            "question": "Why convert JPG images to PDF?",
-            "answer": "PDF documents are easy to share, print, and store while keeping your images intact.",
-        },
-        {
-            "question": "Can I convert multiple JPG files into one PDF?",
-            "answer": "Yes, Converigo can combine multiple JPG images into a single PDF document for easier sharing and archiving.",
-        },
-        {
-            "question": "Is JPG to PDF converter free?",
-            "answer": "Yes, Converigo provides free online JPG to PDF conversion.",
-        },
-    ]
+    try:
+        converter_data_service.load_converter_by_slug(slug)
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="Converter not found")
 
-    supported_formats = [
-        {"label": "Input format", "value": tool_data.get("source", "JPG").upper()},
-        {"label": "Output format", "value": tool_data.get("target", "PDF").upper()},
-    ]
-
-    how_to_use = [
-        {
-            "step": "1",
-            "title": "Upload your JPG images",
-            "description": "Choose one or more JPG files from your device or drag them into the converter.",
-        },
-        {
-            "step": "2",
-            "title": "Convert to PDF",
-            "description": "Start the conversion and let Converigo create a single PDF from your JPG images.",
-        },
-        {
-            "step": "3",
-            "title": "Download your PDF",
-            "description": "Download the finished PDF document instantly once conversion is complete.",
-        },
-    ]
-
-    meta = {
-        "title": seo_title,
-        "description": seo_description,
-        "canonical": f"{base_url}/jpg-to-pdf",
-        "og_url": f"{base_url}/jpg-to-pdf",
-        "og_image": f"{base_url}/static/images/og-default.png",
-        "keywords": "jpg to pdf converter, convert jpg to pdf online, jpg to pdf online free",
-        "og_type": "website",
-        "twitter_card": "summary_large_image",
-    }
-
-    tool_data_with_faq = {**tool_data, "faq": faq_items}
-    structured_data = seo_service.build_structured_data(request, tool_data_with_faq)
-
-    return templates.TemplateResponse(
-        request=request,
-        name="pages/jpg_to_pdf_landing.html",
-        context={
-            "request": request,
-            "locale": locale_data,
-            "t": t,
-            "meta": meta,
-            "title": seo_title,
-            "tool": tool_data,
-            "upload_form": tool_data.get("upload_form", {}),
-            "faq_items": faq_items,
-            "benefits": [
-                {"title": "Convert JPG images quickly", "text": "Turn your JPG images into PDF in seconds without installing software."},
-                {"title": "Easy sharing and printing", "text": "Create a single PDF that is simple to send, print, and archive."},
-                {"title": "Secure file processing", "text": "Your files are handled safely and kept private during conversion."},
-                {"title": "Free online converter", "text": "Use Converigo online for free to turn JPG into PDF."},
-            ],
-            "supported_formats": supported_formats,
-            "how_to_use": how_to_use,
-            "related_tools": related_tools,
-            "structured_data": structured_data,
-        },
-    )
+    return await render_universal_tool_page(request, slug, canonical_path=f"/{slug}")

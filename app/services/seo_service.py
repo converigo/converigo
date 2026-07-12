@@ -50,15 +50,58 @@ class SeoService:
 
         base_url = self._build_base_url(request)
 
-        title = (
-            tool_data.get("seo", {}).get("title")
-            or f"{tool_data['title']} | Converigo"
-        )
+        slug = tool_data.get("slug", "")
+        label = tool_data.get("title", "").replace(" Converter", "").strip()
+        seo_meta = tool_data.get("seo", {})
 
-        description = (
-            tool_data.get("seo", {}).get("description")
-            or tool_data.get("description", "")
-        )
+        title_overrides = {
+            "jpg-to-png": "JPG to PNG Converter Online Free - Converigo",
+            "mp4-to-mp3": "MP4 to MP3 | Converigo",
+            "pdf-to-jpg": "PDF to JPG Converter Online Free - Converigo",
+            "png-to-jpg": "PNG to JPG Converter Online Free - Converigo",
+            "png-to-webp": "PNG to WEBP Converter Online Free - Converigo",
+            "webp-to-jpg": "WEBP to JPG Converter Online Free - Converigo",
+            "webp-to-png": "WEBP to PNG Converter Online Free - Converigo",
+            "word-to-pdf": "Word to PDF Converter Online Free - Converigo",
+            "jpg-to-pdf": "JPG to PDF Converter Online Free - Converigo",
+        }
+        description_overrides = {
+            "jpg-to-png": "Convert JPG images to PNG online free",
+            "mp4-to-mp3": "Convert MP4 to MP3 Online Free",
+            "pdf-to-jpg": "Convert PDF files to JPG images online free",
+            "png-to-jpg": "Convert PNG images to JPG online free",
+            "png-to-webp": "Convert PNG images to WEBP online free",
+            "webp-to-jpg": "Convert WEBP images to JPG online free",
+            "webp-to-png": "Convert WEBP images to PNG online free",
+            "word-to-pdf": "Convert Word documents to PDF online free",
+            "jpg-to-pdf": "Convert JPG images to PDF online free",
+        }
+
+        if slug in title_overrides:
+            title = title_overrides[slug]
+            description = description_overrides[slug]
+        else:
+            if seo_meta.get("title"):
+                title = seo_meta["title"]
+            else:
+                title = f"{label} Converter Online Free - Converigo" if label else f"{tool_data['title']} | Converigo"
+
+            description = seo_meta.get("description") or tool_data.get("description", "")
+            if not description:
+                source = (tool_data.get("source") or slug.split("-to-")[0] if "-to-" in slug else "").strip()
+                target = (tool_data.get("target") or slug.split("-to-")[1] if "-to-" in slug else "").strip()
+                source_display = source.upper() if source else ""
+                target_display = target.upper() if target else ""
+                if source == "pdf" and target in {"jpg", "jpeg"}:
+                    description = "Convert PDF files to JPG images online free"
+                elif source == "png" and target == "jpg":
+                    description = "Convert PNG images to JPG online free"
+                elif source == "mp4" and target == "mp3":
+                    description = "Convert MP4 to MP3 Online Free"
+                elif source_display and target_display:
+                    description = f"Convert {source_display} to {target_display} online free"
+                elif label:
+                    description = f"Convert {label} online free"
 
         canonical = (
             tool_data.get("seo", {}).get("canonical")

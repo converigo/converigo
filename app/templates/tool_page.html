@@ -40,8 +40,9 @@
             <nav id="primaryNav" class="primary-nav" role="navigation" aria-label="Primary">
                 <ul class="nav-list">
                     <li><a href="/">Home</a></li>
+                    <li><a href="#how-to-use">How to use</a></li>
                     <li><a href="#faq">FAQ</a></li>
-                    <li><a href="#related">Related</a></li>
+                    <li><a href="#related-tools">Related</a></li>
                 </ul>
             </nav>
         </div>
@@ -53,10 +54,11 @@
                 <div class="hero-copy">
                     <span class="eyebrow">Converter tool</span>
                     <h1 class="hero-title">{{ tool.title }}</h1>
-                    <p class="hero-sub">{{ tool.description }}</p>
+                    <p class="hero-sub">{{ meta.description }}</p>
                     <div class="hero-cta">
-                        <a href="#convert" class="btn btn-primary">{{ t('tool_page.cta_convert', 'Convert now') }}</a>
-                        <a href="#faq" class="btn btn-outline">{{ t('tool_page.cta_faq', 'Read FAQs') }}</a>
+                        <a href="#converter" class="btn btn-primary">{{ t('tool_page.cta_convert', 'Convert now') }}</a>
+                        <a href="#how-to-use" class="btn btn-outline">{{ t('tool_page.cta_faq', 'Read FAQs') }}</a>
+                        <a href="#supported-formats" class="btn btn-outline">Supported formats</a>
                     </div>
                 </div>
                 <div class="hero-panel">
@@ -64,7 +66,7 @@
                         <p class="panel-label">{{ t('tool_page.panel.label', 'Ready to convert') }}</p>
                         <h2 class="panel-title">{{ t('tool_page.panel.title', 'Upload one file and get your converted result.') }}</h2>
                     </div>
-                    <div id="convert" class="upload-card">
+                    <div id="converter" class="upload-card">
                         <form action="{{ upload_form.action }}" method="{{ upload_form.method }}" enctype="multipart/form-data">
                             <label for="fileInput" class="sr-only">{{ t('tool_page.upload_label', 'Upload file') }}</label>
                             <input id="fileInput" name="file" type="file" accept="{{ upload_form.accept }}" required>
@@ -75,7 +77,7 @@
             </div>
         </section>
 
-        <section class="section section-white">
+        <section id="how-to-use" class="section section-white">
             <div class="container section-heading">
                 <span class="eyebrow">{{ t('tool_page.how_it_works.eyebrow', 'How it works') }}</span>
                 <h2>{{ t('tool_page.how_it_works.heading', 'Simple conversion in three steps') }}</h2>
@@ -99,6 +101,18 @@
             </div>
         </section>
 
+        <section id="supported-formats" class="section">
+            <div class="container section-heading">
+                <span class="eyebrow">Supported formats</span>
+                <h2>Input and output formats</h2>
+            </div>
+            <div class="container">
+                <p><strong>Input format:</strong> {{ tool.source|upper }}</p>
+                <p><strong>Output format:</strong> {{ tool.target|upper }}</p>
+                <p>{{ tool.source|upper }} input, {{ tool.target|upper }} output</p>
+            </div>
+        </section>
+
         <section id="faq" class="section">
             <div class="container section-heading">
                 <span class="eyebrow">{{ t('tool_page.faq.eyebrow', 'FAQ') }}</span>
@@ -119,7 +133,7 @@
             </div>
         </section>
 
-        <section id="related" class="section section-white">
+        <section id="related-tools" class="section section-white">
             <div class="container section-heading">
                 <span class="eyebrow">{{ t('tool_page.related.eyebrow', 'Related Tools') }}</span>
                 <h2>{{ t('tool_page.related.heading', 'Other converters you may need') }}</h2>
