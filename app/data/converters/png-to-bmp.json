@@ -1,0 +1,67 @@
+{
+  "slug": "png-to-bmp",
+  "title": "PNG to BMP Converter",
+  "description": "Convert PNG images to BMP format online. BMP is a widely supported legacy format used in older systems and specific workflows.",
+  "category": "image",
+  "popular": false,
+  "featured": false,
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".png",
+    "button_text": "Upload PNG"
+  },
+  "seo": {
+    "title": "PNG to BMP | Converigo",
+    "description": "Free online PNG to BMP converter.",
+    "keywords": "png to bmp, convert png, image converter"
+  },
+  "source": "png",
+  "target": "bmp",
+  "active": true,
+  "hero": {
+    "eyebrow": "Converter tool",
+    "title": "Convert PNG to BMP",
+    "description": "Quickly convert PNG images to BMP format for legacy compatibility.",
+    "panel_label": "Ready to convert",
+    "panel_title": "Upload a PNG file and receive a BMP result in seconds."
+  },
+  "features": [
+    {
+      "title": "Simple conversion",
+      "text": "Upload PNG and get BMP with a single click."
+    }
+  ],
+  "how_to_use": [
+    {
+      "title": "Upload your file",
+      "description": "Select a PNG file from your device to start the conversion."
+    },
+    {
+      "title": "Download the result",
+      "description": "Receive the BMP file and download it immediately."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is PNG?",
+      "text": "PNG is the source file format used for this conversion workflow."
+    },
+    {
+      "title": "What is BMP?",
+      "text": "BMP is a legacy bitmap image format supported in many older systems."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Convert PNG files to BMP in seconds",
+    "text": "Upload your file and receive a ready-to-use BMP instantly.",
+    "primary_text": "Convert now",
+    "primary_href": "#converter"
+  },
+  "supported_formats": {
+    "input": ["PNG"],
+    "output": ["BMP"],
+    "description": "PNG input, BMP output"
+  }
+}
