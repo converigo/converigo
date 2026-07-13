@@ -12,6 +12,7 @@ from fastapi.responses import HTMLResponse
 
 from app.core.templates import templates
 from app.services.converter_data_service import ConverterDataService
+from app.services.hub_service import HubService
 from app.services.language_service import LanguageService
 from app.services.seo_service import PRODUCTION_BASE_URL, SeoService
 from app.routers.tools import render_universal_tool_page
@@ -35,6 +36,8 @@ RESERVED_PATHS = {
 converter_data_service = ConverterDataService(
     Path("app/data/converters")
 )
+
+hub_service = HubService(converter_data_service)
 
 seo_service = SeoService(
     Path("app/data/converters")
@@ -391,8 +394,30 @@ async def webp_to_png_landing(request: Request):
 
 @router.get("/image-conversion", response_class=HTMLResponse)
 async def image_hub(request: Request):
-    """Image Hub — a pillar page that surfaces image workflows and tools."""
+    return await _render_hub_page(request, "image-conversion")
 
+
+@router.get("/pdf-conversion", response_class=HTMLResponse)
+async def pdf_hub(request: Request):
+    return await _render_hub_page(request, "pdf-conversion")
+
+
+@router.get("/audio-conversion", response_class=HTMLResponse)
+async def audio_hub(request: Request):
+    return await _render_hub_page(request, "audio-conversion")
+
+
+@router.get("/video-conversion", response_class=HTMLResponse)
+async def video_hub(request: Request):
+    return await _render_hub_page(request, "video-conversion")
+
+
+@router.get("/document-conversion", response_class=HTMLResponse)
+async def document_hub(request: Request):
+    return await _render_hub_page(request, "document-conversion")
+
+
+async def _render_hub_page(request: Request, slug: str) -> HTMLResponse:
     locale_data = language_service.load_locale(
         accept_language=request.headers.get("accept-language"),
         lang_query=request.query_params.get("lang"),
@@ -401,61 +426,31 @@ async def image_hub(request: Request):
     def t(key: str, default: str = "") -> str:
         return language_service.translate(locale_data, key, default)
 
-    base_url = _build_base_url(request)
-
-    seo_title = "Image Conversion Hub | Converigo"
-    seo_description = (
-        "Discover workflow-driven image converters and optimization tools for web, editing, compatibility, and icon creation."
-    )
-
-    meta = {
-        "title": seo_title,
-        "description": seo_description,
-        "canonical": f"{PRODUCTION_BASE_URL}/image-conversion",
-        "og_url": f"{PRODUCTION_BASE_URL}/image-conversion",
-        "og_image": f"{PRODUCTION_BASE_URL}/static/images/og-default.png",
-        "og_image_alt": "Converigo image conversion hub",
-        "keywords": "image conversion hub, image optimization, web image tools, png to jpg, webp converter",
-        "og_type": "website",
-        "twitter_card": "summary_large_image",
-    }
-
-    image_formats = {"jpg", "jpeg", "png", "webp", "bmp"}
-    image_tools = [
-        tool
-        for tool in converter_data_service.list_active_converters()
-        if tool.get("slug") not in {"mp4-to-mp3", "pdf-to-word", "word-to-pdf"}
-        and (
-            tool.get("source", "").lower() in image_formats
-            or tool.get("target", "").lower() in image_formats
-        )
-    ]
-
-    featured_tool_slugs = ["jpg-to-png", "png-to-jpg", "png-to-webp", "webp-to-png"]
-    featured_tools = [
-        next((tool for tool in image_tools if tool["slug"] == slug), None)
-        for slug in featured_tool_slugs
-    ]
-    featured_tools = [tool for tool in featured_tools if tool is not None]
+    page_data = hub_service.get_hub_page_data(slug)
+    hub = page_data["hub"]
 
     faq_items = [
         {
-            "question": "How do I optimize images for faster web pages?",
-            "answer": "Choose the Optimize for Web workflow to resize, compress, and convert images to the best format for fast loading.",
+            "question": f"How can I use {hub['title']}?",
+            "answer": f"Browse the featured and popular converters in {hub['title']} to find the workflow that matches your file format needs.",
         },
         {
-            "question": "Which format is best for editing?",
-            "answer": "Use PNG or JPG image formats for edit-ready workflows, since they are widely supported by photo editors and design tools.",
-        },
-        {
-            "question": "Can I convert images for compatibility with older browsers?",
-            "answer": "Yes, the Compatibility workflow helps convert WebP and modern formats into JPG or PNG so they work across more apps and devices.",
-        },
-        {
-            "question": "How do I create icons from images?",
-            "answer": "Use dedicated icon workflows to resize and export images for favicons, app icons, and social preview graphics.",
+            "question": "Why use a hub page?",
+            "answer": "A hub page helps you quickly find the most relevant converter tools and related workflows without searching manually.",
         },
     ]
+
+    meta = {
+        "title": f"{hub['title']} | Converigo",
+        "description": hub["description"],
+        "canonical": f"{PRODUCTION_BASE_URL}{hub['path']}",
+        "og_url": f"{PRODUCTION_BASE_URL}{hub['path']}",
+        "og_image": f"{PRODUCTION_BASE_URL}/static/images/og-default.png",
+        "og_image_alt": f"Converigo {hub['title']}",
+        "keywords": hub["keywords"],
+        "og_type": "website",
+        "twitter_card": "summary_large_image",
+    }
 
     structured_data = {
         "@context": "https://schema.org",
@@ -464,7 +459,7 @@ async def image_hub(request: Request):
                 "@type": "BreadcrumbList",
                 "itemListElement": [
                     {"@type": "ListItem", "position": 1, "name": "Home", "item": f"{PRODUCTION_BASE_URL}/"},
-                    {"@type": "ListItem", "position": 2, "name": "Image Conversion", "item": f"{PRODUCTION_BASE_URL}/image-conversion"},
+                    {"@type": "ListItem", "position": 2, "name": hub["title"], "item": f"{PRODUCTION_BASE_URL}{hub['path']}"},
                 ],
             },
             {
@@ -485,18 +480,22 @@ async def image_hub(request: Request):
 
     return templates.TemplateResponse(
         request=request,
-        name="pages/image_hub.html",
+        name="components/hub_page.html",
         context={
             "request": request,
             "locale": locale_data,
             "t": t,
             "supported_locales": supported_locales,
             "meta": meta,
-            "title": seo_title,
+            "title": hub["title"],
             "structured_data": structured_data,
-            "featured_tools": featured_tools,
-            "image_tools": image_tools,
+            "featured_converters": page_data["featured_converters"],
+            "popular_converters": page_data["popular_converters"],
+            "related_converters": page_data["related_converters"],
+            "all_converters": page_data["all_converters"],
+            "internal_links": page_data["internal_links"],
             "faq_items": faq_items,
+            "hub": hub,
             "year": datetime.utcnow().year,
         },
     )

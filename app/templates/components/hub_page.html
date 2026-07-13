@@ -1,0 +1,133 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}{{ meta.title }}{% endblock %}
+
+{% block content %}
+{% include "components/header.html" %}
+
+<main class="main" role="main">
+  <nav aria-label="Breadcrumb">
+    <ol class="breadcrumb">
+      <li><a href="/">Home</a></li>
+      <li aria-current="page">{{ hub.title }}</li>
+    </ol>
+  </nav>
+
+  <section class="hero section">
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <span class="eyebrow">{{ hub.eyebrow }}</span>
+        <h1 class="hero-title">{{ hub.hero_title }}</h1>
+        <p class="hero-sub">{{ hub.hero_subtitle }}</p>
+        <div class="hero-cta">
+          <a href="#featured-converters" class="btn btn-primary">Explore converters</a>
+          <a href="#all-converters" class="btn btn-outline">Browse all tools</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="featured-converters" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Featured converters</h2>
+        <p>Curated tools that represent the most useful workflows in this hub.</p>
+      </div>
+      <div class="grid featured-grid">
+        {% for tool in featured_converters %}
+        <article class="card card-lg hover-card">
+          <div class="card-content">
+            <h3><a href="/tools/{{ tool.slug }}">{{ tool.title }}</a></h3>
+            <p>{{ tool.description }}</p>
+            <a class="btn btn-outline" href="/tools/{{ tool.slug }}">Use {{ tool.title }}</a>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section id="popular-converters" class="section section-white">
+    <div class="container">
+      <div class="section-header">
+        <h2>Popular converters</h2>
+        <p>Most-used tools in this category.</p>
+      </div>
+      <div class="grid tools-grid">
+        {% for tool in popular_converters %}
+        <a href="/tools/{{ tool.slug }}" class="tool-card">
+          <strong>{{ tool.title }}</strong>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section id="related-converters" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Related converters</h2>
+        <p>Additional options that pair well with the main workflows in this hub.</p>
+      </div>
+      <div class="grid tools-grid">
+        {% for tool in related_converters %}
+        <a href="/tools/{{ tool.slug }}" class="tool-card">
+          <strong>{{ tool.title }}</strong>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section id="all-converters" class="section section-white">
+    <div class="container">
+      <div class="section-header">
+        <h2>All converters</h2>
+        <p>{{ hub.all_converters_label }}</p>
+      </div>
+      <div class="grid tools-grid">
+        {% for tool in all_converters %}
+        <a href="/tools/{{ tool.slug }}" class="tool-card">
+          <strong>{{ tool.title }}</strong>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section id="internal-links" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Explore more hubs</h2>
+        <p>Jump to the other conversion hubs for related workflows.</p>
+      </div>
+      <div class="grid tools-grid">
+        {% for link in internal_links %}
+        <a href="{{ link.path }}" class="tool-card">
+          <strong>{{ link.title }}</strong>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <h2>Frequently asked questions</h2>
+        <p>Common questions about this conversion category.</p>
+      </div>
+      <div class="faq-list">
+        {% for item in faq_items %}
+        <article class="card">
+          <h3>{{ item.question }}</h3>
+          <p>{{ item.answer }}</p>
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</main>
+
+{% include "components/footer.html" %}
+{% endblock %}
