@@ -1,0 +1,18 @@
+{
+  "slug": "jpg-to-tiff",
+  "title": "JPG to TIFF",
+  "source": "jpg",
+  "target": "tiff",
+  "category": "image",
+  "description": "Convert JPG images to TIFF format for archival and printing.",
+  "active": true,
+  "popular": false,
+  "featured": false,
+  "supported_formats": { "input": ["jpg", "jpeg"], "output": ["tiff", "tif"] },
+  "how_to_use": [ { "title": "Upload JPG", "description": "Upload a JPG image." }, { "title": "Download TIFF", "description": "Download the resulting TIFF file." } ],
+  "about_formats": [ { "title": "What is TIFF?", "text": "TIFF is a flexible image format commonly used in publishing." } ],
+  "hero": { "title": "Convert JPG to TIFF", "subtitle": "Create high-quality TIFFs from JPG images." },
+  "features": [ { "title": "Archival quality", "text": "Store images with minimal compression artifacts." } ],
+  "cta": { "eyebrow": "Ready to convert", "title": "Convert JPG images to TIFF for archival use.", "primary_text": "Convert now", "primary_href": "#converter" },
+  "seo": { "title": "JPG to TIFF Converter | Converigo", "description": "Convert JPG images to high-fidelity TIFF format for archival or printing." }
+}

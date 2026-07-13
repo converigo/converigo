@@ -1,0 +1,18 @@
+{
+  "slug": "tiff-to-png",
+  "title": "TIFF to PNG",
+  "source": "tiff",
+  "target": "png",
+  "category": "image",
+  "description": "Convert TIFF images to PNG format for web and editing.",
+  "active": true,
+  "popular": false,
+  "featured": false,
+    "supported_formats": { "input": ["tiff", "tif"], "output": ["png"] },
+  "how_to_use": [ { "title": "Upload TIFF", "description": "Upload a TIFF image." }, { "title": "Download PNG", "description": "Download the resulting PNG file." } ],
+    "about_formats": [ { "title": "What is TIFF?", "text": "TIFF is a flexible image format commonly used in publishing." } ],
+    "hero": { "title": "Convert TIFF to PNG", "subtitle": "Export high-quality PNGs from TIFF files." },
+    "features": [ { "title": "High fidelity", "text": "Preserve image detail during conversion." } ],
+    "cta": { "eyebrow": "Ready to convert", "title": "Convert TIFF images to PNG with ease.", "primary_text": "Convert now", "primary_href": "#converter" },
+  "seo": { "title": "TIFF to PNG Converter | Converigo", "description": "Convert TIFF images to PNG for web publishing and editing." }
+}

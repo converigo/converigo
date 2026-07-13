@@ -1,0 +1,18 @@
+{
+  "slug": "tiff-to-jpg",
+  "title": "TIFF to JPG",
+  "source": "tiff",
+  "target": "jpg",
+  "category": "image",
+  "description": "Convert TIFF images to JPG format for publishing and web.",
+  "active": true,
+  "popular": false,
+  "featured": false,
+  "supported_formats": { "input": ["tiff"], "output": ["jpg", "jpeg"] },
+  "how_to_use": [ { "title": "Upload TIFF", "description": "Upload a TIFF image." }, { "title": "Download JPG", "description": "Download the resulting JPG file." } ],
+    "about_formats": [ { "title": "What is TIFF?", "text": "TIFF is a flexible image format commonly used in publishing." } ],
+    "hero": { "title": "Convert TIFF to JPG", "subtitle": "Produce compressed JPGs from TIFFs for smaller file sizes." },
+    "features": [ { "title": "Compression", "text": "Reduce file size while keeping quality." } ],
+    "cta": { "eyebrow": "Ready to convert", "title": "Convert TIFF images to JPG quickly.", "primary_text": "Convert now", "primary_href": "#converter" },
+  "seo": { "title": "TIFF to JPG Converter | Converigo", "description": "Convert TIFF images to JPG for web publishing and sharing." }
+}

@@ -110,7 +110,7 @@ class HubService:
             "featured_converters": featured_converters[:3],
             "popular_converters": popular_converters[:4],
             "related_converters": related_converters[:4],
-            "all_converters": matching_converters[:12],
+            "all_converters": matching_converters,
             "internal_links": self.list_hub_links(slug),
         }
 

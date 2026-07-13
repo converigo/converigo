@@ -1,0 +1,18 @@
+{
+  "slug": "jpg-to-ico",
+  "title": "JPG to ICO",
+  "source": "jpg",
+  "target": "ico",
+  "category": "image",
+  "description": "Convert JPG images to ICO format for favicon and icons.",
+  "active": true,
+  "popular": true,
+  "featured": false,
+  "supported_formats": { "input": ["jpg", "jpeg"], "output": ["ico"] },
+  "how_to_use": [ { "title": "Upload JPG", "description": "Upload a JPG image." }, { "title": "Download ICO", "description": "Download the resulting ICO file." } ],
+  "about_formats": [ { "title": "What is ICO?", "text": "ICO files are used for website favicons and application icons." } ],
+  "hero": { "title": "Convert JPG to ICO", "subtitle": "Create favicons and icons from JPG images." },
+  "features": [ { "title": "Fast conversion", "text": "Quickly produce ICO files." } ],
+  "cta": { "eyebrow": "Ready to convert", "title": "Convert JPG images to ICO in seconds.", "primary_text": "Convert now", "primary_href": "#converter" },
+  "seo": { "title": "JPG to ICO Converter | Converigo", "description": "Convert JPG images to ICO icons for websites and applications." }
+}
