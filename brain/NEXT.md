@@ -1,23 +1,42 @@
-# Next Steps
+﻿# NEXT — Current Sprint & Roadmap
 
-## C3.6 Recommendation Engine - Completed ✓
-- ✓ Audited existing recommendation architecture and converter metadata
-- ✓ Implemented RecommendationService with data-driven recommendation generation
-- ✓ Created regression tests for deduplication, category matching, workflow, and automatic inclusion
-- ✓ Verified all 68 tests pass (66 existing + 2 new)
-- ✓ Updated brain/docs with completion status
+**Sprint:** C3.8 - Dynamic Platform  
+**Status:** In Progress  
+**Days Left:** 10-14 days
 
-## C3.7 Plugin Validation Framework - Completed ✓
-- ✓ Audited converter integration workflow across Plugin, JSON, Metadata, Route, SEO, Hub, Recommendation, Sitemap
-- ✓ Implemented PluginValidationService with 8 integrated validators
-- ✓ Created comprehensive test suite (27 tests) covering all validation scenarios
-- ✓ Verified all 95 tests pass (68 existing + 27 new)
-- ✓ Updated brain/docs with checkpoint status
+---
 
-## C3.8 - Upcoming Checkpoints
-- Integrate PluginValidationService into CI/CD pipeline for pre-deployment validation
-- Add validation hooks to converter upload/import process
-- Build admin dashboard for validator reports and converter status monitoring
-- Implement validation webhooks for external systems
-- Add performance monitoring for validation framework at 100+ converters scale
-- Plan: No commit or push at this checkpoint
+## Completed This Quarter
+
+✓ C3.7 - Plugin Validation Framework  
+✓ C3.6 - Recommendation Engine  
+✓ C3.5 - Hub Automation  
+
+---
+
+## Current Work (C3.8)
+
+- Adding payload validation hooks
+- Dynamic platform integration prep
+- Regression testing (97 tests passing)
+
+---
+
+## In Progress
+
+| Item | Owner | Due |
+|------|-------|-----|
+| Validation hooks | Tech | 2026-07-17 |
+| Integration tests | QA | 2026-07-20 |
+| Release prep | Tech Lead | 2026-07-24 |
+
+---
+
+## Next Sprint
+
+**C4 - Launch Preparation**  
+Focus: Pre-release checklist, performance tuning, SEO audit
+
+---
+
+**For detailed roadmap: See docs/ROADMAP.md**

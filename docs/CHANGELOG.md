@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+### Added (C3.8)
+- Added import-time payload validation hooks for converter definitions through the shared validation service.
+- Extended converter persistence to reject invalid payloads before they are written to disk.
+- Added regression tests for valid import payloads and invalid import blocking.
+
 ### Added (C3.7)
 - Added PluginValidationService framework that validates converters across all integration points (JSON, Metadata, Plugin, Route, SEO, Hub, Recommendation, Sitemap).
 - Added ValidationResult container for organized error and warning tracking.

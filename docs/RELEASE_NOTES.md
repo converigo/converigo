@@ -1,5 +1,21 @@
 # Converigo Release Notes
 
+## Sprint C3.8 — Dynamic Platform
+
+### Summary
+- Added import-time validation hooks so new converter definitions can be checked before they are persisted.
+- Reused the existing PluginValidationService and ConverterDataService workflow to keep validation data-driven and aligned with the JSON-first architecture.
+- Added regression tests to ensure valid payloads continue to pass while invalid imports are blocked.
+
+### Validation
+- 97/97 tests passing across the full suite.
+- New regression tests for payload validation and import blocking passed.
+
+### Key Capabilities
+- Validate converter payloads before disk write
+- Reuse existing metadata, plugin, route, SEO, and recommendation checks
+- Keep application runtime behavior unchanged while strengthening data integrity
+
 ## Sprint C3.7 — Plugin Validation Framework
 
 ### Summary
