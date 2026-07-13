@@ -5,6 +5,7 @@
 ### Summary
 - Added import-time validation hooks so new converter definitions can be checked before they are persisted.
 - Reused the existing PluginValidationService and ConverterDataService workflow to keep validation data-driven and aligned with the JSON-first architecture.
+- Activated six Batch B1 image converters for JPG, WEBP, and TIFF workflows as part of image converter coverage milestone.
 - Added regression tests to ensure valid payloads continue to pass while invalid imports are blocked.
 
 ### Validation
