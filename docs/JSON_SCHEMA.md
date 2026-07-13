@@ -26,6 +26,45 @@ Contoh JSON yang konsisten:
     "accept": ".png",
     "button_text": "Upload PNG"
   },
+  "hero": {
+    "eyebrow": "Converter tool",
+    "title": "Convert PNG to WEBP Online Free",
+    "description": "Convert PNG images to WEBP online for free.",
+    "panel_label": "Ready to convert",
+    "panel_title": "Upload a PNG file and receive a WEBP result in seconds."
+  },
+  "features": [
+    {
+      "title": "High-quality output",
+      "text": "Preserve image quality while reducing file size."
+    }
+  ],
+  "supported_formats": {
+    "input": ["PNG"],
+    "output": ["WEBP"],
+    "description": "PNG input, WEBP output"
+  },
+  "how_to_use": [
+    {
+      "title": "Upload your file",
+      "description": "Select a PNG file to begin the conversion."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is PNG?",
+      "text": "PNG is a raster image format that preserves image quality."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Convert PNG files to WEBP in seconds",
+    "text": "Upload your file and receive a ready-to-use result instantly.",
+    "primary_text": "Convert now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  },
   "faq": [
     {
       "question": "Why convert PNG to WEBP?",
@@ -77,6 +116,12 @@ Contoh JSON yang konsisten:
     "target",
     "active",
     "upload_form",
+    "hero",
+    "features",
+    "supported_formats",
+    "how_to_use",
+    "about_formats",
+    "cta",
     "faq",
     "seo"
   ],
@@ -129,6 +174,78 @@ Contoh JSON yang konsisten:
         "method": { "type": "string" },
         "accept": { "type": "string" },
         "button_text": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "hero": {
+      "type": "object",
+      "required": ["eyebrow", "title", "description", "panel_label", "panel_title"],
+      "properties": {
+        "eyebrow": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "panel_label": { "type": "string" },
+        "panel_title": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title", "text"],
+        "properties": {
+          "title": { "type": "string" },
+          "text": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "supported_formats": {
+      "type": "object",
+      "required": ["input", "output", "description"],
+      "properties": {
+        "input": { "type": "array", "items": { "type": "string" } },
+        "output": { "type": "array", "items": { "type": "string" } },
+        "description": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "how_to_use": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title", "description"],
+        "properties": {
+          "title": { "type": "string" },
+          "description": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "about_formats": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title", "text"],
+        "properties": {
+          "title": { "type": "string" },
+          "text": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "cta": {
+      "type": "object",
+      "required": ["eyebrow", "title", "text", "primary_text", "secondary_text", "primary_href", "secondary_href"],
+      "properties": {
+        "eyebrow": { "type": "string" },
+        "title": { "type": "string" },
+        "text": { "type": "string" },
+        "primary_text": { "type": "string" },
+        "secondary_text": { "type": "string" },
+        "primary_href": { "type": "string" },
+        "secondary_href": { "type": "string" }
       },
       "additionalProperties": false
     },
