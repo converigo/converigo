@@ -1,33 +1,57 @@
 # Converigo Checkpoints
 
-## Checkpoint C3.3.2 — JSON Enrichment
+## Checkpoint C3.7 — Plugin Validation Framework
 
 - **Status:** Ready for review
-- **Scope:** JSON enrichment for the universal tool page across all converters
-- **Milestone:** JSON Enrichment
+- **Scope:** Implement validator framework to ensure converter quality across all integration points
+- **Milestone:** Plugin Validation Framework
 - **Deliverables:**
-  - Converter JSON files enriched with hero, features, supported formats, how-to-use, about formats, and CTA sections
-  - No routing, URL, SEO, template, or pipeline behavior changed
-  - Renderer continues to use structured data instead of fallback content
+  - PluginValidationService with 8 integrated validators
+  - Validation across JSON, Metadata, Plugin, Route, SEO, Hub, Recommendation, and Sitemap
+  - Comprehensive unit test suite (27 tests) covering all validators
+  - Report generation with validity percentage and check summary
+  - Full integration with ConverterDataService, HubService, RecommendationService, and SeoService
+
+### Checkpoint Deliverables
+
+- Detect duplicate converter slugs automatically
+- Validate metadata fields (slug, source, target, category) are present and valid
+- Verify plugins exist in registry for source->target conversions
+- Ensure routes can be rendered without errors
+- Confirm SEO metadata generation succeeds
+- Validate converter inclusion in appropriate hubs
+- Check converter can be included in recommendations
+- Verify converter appears in sitemap
+- Generate validation reports showing converter validity percentage
+- All 95 tests passing (68 existing + 27 new validation tests)
+
+## Checkpoint C3.5 — Hub Automation
+
+- **Status:** Completed
+- **Scope:** Automate all category hubs from converter JSON data
+- **Milestone:** Hub Automation
+- **Deliverables:**
+  - A hub generator that builds Image, PDF, Audio, Video, and Document hubs automatically from active converter definitions
+  - Shared hero, converter lists, featured/popular/related sections, internal links, CTA, SEO metadata, and structured data across all hubs
+  - Category-based routing that remains compatible with the Architecture V4 data model and ConverterDataService
   - Full regression test suite executed successfully
 
 ### Checkpoint Deliverables
 
-- JSON-driven universal tool page rendering for converter routes
-- Enriched hero, features, supported formats, how-to-use, about formats, and CTA sections for every converter JSON
-- Legacy route compatibility retained for public URLs
+- Data-driven hub rendering for all category hubs
+- Converter category membership derived from converter JSON instead of manual lists
+- Automatic visibility of new converters in the correct hub
+- Regeneration of hub content without duplicating converter metadata
 - Full regression test suite executed with zero failures
-- Final release audit and blocker resolution
 
 ### Checkpoint Gate Criteria
 
-1. Product completeness for image package scope
-2. SEO completeness for landing pages and metadata
-3. UX consistency across image conversions
-4. Accessibility audit completed
-5. QA tests passing for the checkpoint packages
+1. Hub content is generated from converter JSON data
+2. New converters appear in the right hub automatically
+3. No duplicate converter entries appear across hub sections
+4. SEO metadata and structured data are present for each hub
+5. QA tests passing for the new hub automation flow
 6. Repository cleanliness validated
-7. Git readiness confirmed
 
 ### Release Gate
 
@@ -36,11 +60,10 @@
 
 ## Checkpoint History
 
-- C1 created for the first official image foundation milestone
-- Focused on delivering `IMG-001` and `IMG-002`
-- Included final release audit and cleanup steps
+- C3.3.2 delivered JSON enrichment for the universal tool page
+- C3.5 now extends that pattern to the hub experience
 
 ## Next Checkpoint
 
 - Future checkpoint planning should reuse this structured release gate process.
-- The next step is review and release approval after this migration is confirmed.
+- The next step is review and release approval after hub automation is confirmed.

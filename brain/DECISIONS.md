@@ -46,3 +46,13 @@
 - **Decision:** Enrich converter JSON with universal tool page sections so renderer content comes from structured data instead of fallback defaults.
 - **Rationale:** This keeps landing experience consistent across converters and removes dependence on generic page content.
 - **Outcome:** All converter JSON files now carry hero, features, supported formats, how-to-use, about formats, and CTA sections that match the renderer contract.
+
+### D010 — Data-driven hub automation
+- **Decision:** Generate category hubs from active converter JSON definitions via a dedicated hub service instead of maintaining manual hub lists.
+- **Rationale:** This prevents duplicated content, makes new converters appear automatically, and keeps hub content aligned with the shared converter data model.
+- **Outcome:** Image, PDF, Audio, Video, and Document hubs now render from the same converter dataset with consistent SEO, structured data, and internal linking.
+
+### D011 — Plugin validation as non-breaking framework
+- **Decision:** Implement validation service as opt-in framework that doesn't break existing converters or modify runtime behavior.
+- **Rationale:** Enables comprehensive quality assurance without requiring changes to converter registration, routing, or SEO systems. Soft failures allow graceful degradation.
+- **Outcome:** PluginValidationService validates across all integration points (JSON, Metadata, Plugin, Route, SEO, Hub, Recommendation, Sitemap) while remaining non-breaking for production converters.

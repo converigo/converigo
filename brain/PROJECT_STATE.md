@@ -9,17 +9,27 @@ The focus is on building a trusted conversion experience with polished UX, stron
 ## Current Phase
 
 - **Phase:** Product Foundation
-- **Current focus:** Legacy template cleanup and release readiness
-- **Checkpoint:** C3.3.2
-- **Milestone:** JSON Enrichment
+- **Current focus:** Plugin validation framework and converter quality assurance
+- **Checkpoint:** C3.7
+- **Milestone:** Plugin Validation Framework
 
 ## Current Milestone
 
-- **Universal Tool Page**
-- Completed migration of landing rendering to a JSON-driven universal tool page for converter routes.
-- Legacy public URLs remain active while sharing the same renderer and structured data pipeline.
-- Enriched converter JSON for hero, features, supported formats, how-to-use, about formats, and CTA so the universal tool page uses structured data instead of falling back to generic content.
-- Verified that all converter JSON files remain valid and renderer output stays intact.
+- **Plugin Validation Framework**
+- Implemented PluginValidationService to validate converters across all integration points before marking as active.
+- Validation checks cover:
+  - **JSON Validation**: File exists and is valid JSON
+  - **Metadata Validation**: Required fields (slug, source, target, category) are present and valid
+  - **Plugin Validation**: Plugin exists in registry for source->target conversion
+  - **Route Validation**: Route can be rendered without errors
+  - **SEO Validation**: SEO metadata can be generated correctly
+  - **Hub Validation**: Converter is included in correct hub category
+  - **Recommendation Validation**: Converter can be included in recommendations
+  - **Sitemap Validation**: Converter is included in sitemap entries
+- Integrated with ConverterDataService, HubService, RecommendationService, and SeoService as single source of truth.
+- Added comprehensive unit test suite (27 tests) covering all validators and integration scenarios.
+- Implemented report generation showing converter validity percentage and validation results.
+- Verified that all 95 tests pass (68 existing + 27 new validation tests).
 
 ## Packages in Scope
 
