@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="{{ locale.lang_code or 'en' }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% include "partials/seo_meta.html" %}
+    <link rel="stylesheet" href="/static/css/style.css">
+    {% include "partials/structured_data.html" %}
+</head>
+<body>
+    <header class="site-header" role="banner">
+        <div class="container nav-wrap">
+            <a class="brand" href="/" aria-label="Converigo home">
+                <img src="/static/images/converigo-logo.png" alt="Converigo logo">
+                <span>Converigo</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="main" role="main">
+        <section class="hero section">
+            <div class="container hero-inner">
+                <div class="hero-copy">
+                    <span class="eyebrow">Comparison</span>
+                    <h1>{{ comparison.h1 }}</h1>
+                    <p>{{ comparison.introduction.text }}</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-white">
+            <div class="container section-heading">
+                <span class="eyebrow">Winner summary</span>
+                <h2>{{ comparison.winner_summary.title }}</h2>
+            </div>
+            <div class="container">
+                <p>{{ comparison.winner_summary.text }}</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container section-heading">
+                <span class="eyebrow">Feature comparison</span>
+                <h2>How the formats differ</h2>
+            </div>
+            <div class="container">
+                <table>
+                    <thead>
+                        <tr><th>Feature</th><th>First format</th><th>Second format</th></tr>
+                    </thead>
+                    <tbody>
+                        {% for row in comparison.comparison_table %}
+                        <tr>
+                            <td>{{ row.feature }}</td>
+                            <td>{{ row.source }}</td>
+                            <td>{{ row.target }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="section section-white">
+            <div class="container section-heading">
+                <span class="eyebrow">Advantages</span>
+                <h2>What each format does well</h2>
+            </div>
+            <div class="grid features-grid">
+                {% for item in comparison.advantages %}
+                <article class="feature-card">
+                    <h3>{{ item.title }}</h3>
+                    <p>{{ item.text }}</p>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container section-heading">
+                <span class="eyebrow">Disadvantages</span>
+                <h2>Common trade-offs</h2>
+            </div>
+            <div class="grid features-grid">
+                {% for item in comparison.disadvantages %}
+                <article class="feature-card">
+                    <h3>{{ item.title }}</h3>
+                    <p>{{ item.text }}</p>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="section section-white">
+            <div class="container section-heading">
+                <span class="eyebrow">Best use cases</span>
+                <h2>When each option makes sense</h2>
+            </div>
+            <div class="grid features-grid">
+                {% for item in comparison.best_use_cases %}
+                <article class="feature-card">
+                    <h3>{{ item.title }}</h3>
+                    <p>{{ item.text }}</p>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container section-heading">
+                <span class="eyebrow">FAQ</span>
+                <h2>Frequently asked questions</h2>
+            </div>
+            <div class="faq-grid">
+                {% for item in comparison.faq %}
+                <div class="faq-item">
+                    <button class="faq-question" type="button">{{ item.question }}<span class="faq-toggle">+</span></button>
+                    <div class="faq-answer"><p>{{ item.answer }}</p></div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="section section-white">
+            <div class="container section-heading">
+                <span class="eyebrow">Related converters</span>
+                <h2>Useful conversion tools</h2>
+            </div>
+            <div class="grid popular-grid">
+                {% for item in comparison.related_converters %}
+                <article class="card card-lg">
+                    <h3><a href="{{ item.href }}">{{ item.title }}</a></h3>
+                    <p>{{ item.description }}</p>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container section-heading">
+                <span class="eyebrow">Related formats</span>
+                <h2>Helpful format references</h2>
+            </div>
+            <div class="grid popular-grid">
+                {% for item in comparison.related_formats %}
+                <article class="card card-lg">
+                    <h3><a href="{{ item.href }}">{{ item.title }}</a></h3>
+                    <p>{{ item.description }}</p>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="section section-white">
+            <div class="container section-heading">
+                <span class="eyebrow">Internal links</span>
+                <h2>More helpful pages</h2>
+            </div>
+            <div class="container">
+                <ul>
+                    {% for item in comparison.internal_links['items'] %}
+                    <li><a href="{{ item.href }}">{{ item.title }}</a> — {{ item.description }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

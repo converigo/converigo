@@ -10,6 +10,9 @@ from app.services.hub_page_service import HubPageService
 from app.services.production_audit_service import ProductionAuditService
 from app.services.programmatic_seo_service import ProgrammaticSEOService
 from app.services.sitemap_service import SitemapService
+from app.services.internal_link_service import InternalLinkService
+from app.services.topic_cluster_service import TopicClusterService
+from app.services.programmatic_seo_engine import ProgrammaticSeoEngine
 
 
 class GrowthDashboardService:
@@ -36,6 +39,15 @@ class GrowthDashboardService:
             converter_data_dir=Path(converter_data_dir or contracts_dir or "app/data/converters"),
             registry_instance=self.registry,
         )
+        self.internal_link_service = InternalLinkService(
+            contracts_dir=Path(contracts_dir or "app/data/converters"),
+        )
+        self.topic_cluster_service = TopicClusterService(
+            contracts_dir=Path(contracts_dir or "app/data/converters"),
+        )
+        self.seo_engine = ProgrammaticSeoEngine(
+            contracts_dir=Path(contracts_dir or "app/data/converters"),
+        )
 
     def build_dashboard(self) -> dict[str, Any]:
         converters = [converter for converter in self.registry.get_all() if getattr(converter, "enabled", True)]
@@ -51,6 +63,9 @@ class GrowthDashboardService:
         production_audit = self._build_production_audit(converters)
         authority_coverage = self._build_authority_coverage(converters)
         format_encyclopedia_coverage = self._build_format_encyclopedia_coverage()
+        internal_linking = self._build_internal_linking_metrics()
+        topic_clusters = self._build_topic_cluster_metrics()
+        seo_pages = self._build_seo_pages_metrics()
 
         return {
             "total_converters": len(converters),
@@ -65,6 +80,9 @@ class GrowthDashboardService:
             "production_audit": production_audit,
             "authority_coverage": authority_coverage,
             "format_encyclopedia_coverage": format_encyclopedia_coverage,
+            "internal_linking": internal_linking,
+            "topic_clusters": topic_clusters,
+            "seo_pages": seo_pages,
         }
 
     def _build_registry_health(self, converters: list[Any]) -> dict[str, Any]:
@@ -167,3 +185,76 @@ class GrowthDashboardService:
             "expected": expected,
             "rate": round((covered / expected) * 100, 2) if expected else 0.0,
         }
+
+    def _build_internal_linking_metrics(self) -> dict[str, Any]:
+        """Build internal linking dashboard metrics."""
+        try:
+            report = self.internal_link_service.build_internal_link_coverage_report()
+            return {
+                "status": "healthy" if report.get("orphan_pages", 0) == 0 else "warning",
+                "internal_links_total": report.get("pages_with_internal_links", 0),
+                "internal_links_coverage": report.get("internal_links_coverage_percentage", 0),
+                "avg_internal_links_per_page": report.get("avg_internal_links_per_page", 0),
+                "orphan_pages": report.get("orphan_pages", 0),
+                "landing_pages_with_links": report.get("landing_pages_with_links", 0),
+                "comparison_pages_with_links": report.get("comparison_pages_with_links", 0),
+                "format_pages_with_links": report.get("format_pages_with_links", 0),
+            }
+        except Exception as exc:  # pragma: no cover - defensive fallback
+            return {
+                "status": "warning",
+                "error": str(exc),
+                "internal_links_total": 0,
+                "internal_links_coverage": 0.0,
+                "avg_internal_links_per_page": 0.0,
+                "orphan_pages": 0,
+            }
+
+    def _build_topic_cluster_metrics(self) -> dict[str, Any]:
+        """Build topic cluster dashboard metrics."""
+        try:
+            report = self.topic_cluster_service.build_cluster_coverage_report()
+            return {
+                "status": "healthy" if report.get("orphan_topics_count", 0) == 0 else "warning",
+                "topic_clusters_total": report.get("topic_clusters_total", 0),
+                "topic_clusters_ready": report.get("topic_clusters_complete", 0),
+                "topic_cluster_coverage": report.get("topic_cluster_coverage", 0),
+                "completeness_percentage": report.get("completeness_percentage", 0),
+                "orphan_topics": report.get("orphan_topics_count", 0),
+                "total_formats": report.get("total_formats", 0),
+            }
+        except Exception as exc:  # pragma: no cover - defensive fallback
+            return {
+                "status": "warning",
+                "error": str(exc),
+                "topic_clusters_total": 0,
+                "topic_clusters_ready": 0,
+                "topic_cluster_coverage": 0.0,
+                "completeness_percentage": 0.0,
+                "orphan_topics": 0,
+            }
+
+    def _build_seo_pages_metrics(self) -> dict[str, Any]:
+        """Build SEO pages dashboard metrics."""
+        try:
+            report = self.seo_engine.get_seo_page_coverage_report()
+            return {
+                "status": "healthy" if report.get("orphan_seo_pages", 0) == 0 else "warning",
+                "seo_pages_total": report.get("seo_pages_total", 0),
+                "seo_pages_ready": report.get("seo_pages_ready", 0),
+                "seo_page_coverage": report.get("seo_page_coverage", 0),
+                "completeness_percentage": report.get("completeness_percentage", 0),
+                "orphan_seo_pages": report.get("orphan_seo_pages", 0),
+                "page_types_supported": report.get("page_types_supported", 0),
+                "total_formats": report.get("total_formats", 0),
+            }
+        except Exception as exc:  # pragma: no cover - defensive fallback
+            return {
+                "status": "warning",
+                "error": str(exc),
+                "seo_pages_total": 0,
+                "seo_pages_ready": 0,
+                "seo_page_coverage": 0.0,
+                "completeness_percentage": 0.0,
+                "orphan_seo_pages": 0,
+            }

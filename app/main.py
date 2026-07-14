@@ -65,6 +65,9 @@ from app.routers.recommend import (
 from app.routers.formats import (
     router as formats_router,
 )
+from app.routers.comparison import (
+    router as comparison_router,
+)
 
 language_manager = LanguageManager(Path("app/locales"))
 
@@ -208,6 +211,10 @@ app.include_router(
 )
 
 app.include_router(
+    comparison_router
+)
+
+app.include_router(
     home_router
 )
 
@@ -235,6 +242,7 @@ app.include_router(
 app.include_router(
     recommend_router
 )
+
 
 app.include_router(
     formats_router

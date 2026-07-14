@@ -13,6 +13,9 @@ from app.services.related_converter_service import RelatedConverterService
 from app.services.seo_service import SeoService
 from app.services.sitemap_service import SitemapService
 from app.services.hub_page_service import HubPageService
+from app.services.internal_link_service import InternalLinkService
+from app.services.topic_cluster_service import TopicClusterService
+from app.services.programmatic_seo_engine import ProgrammaticSeoEngine
 
 
 class ProductionAuditService:
@@ -36,6 +39,9 @@ class ProductionAuditService:
         self.related_service = RelatedConverterService(self.converter_data_service)
         self.sitemap_service = SitemapService(output_dir=Path("outputs/sitemaps"), registry_instance=self.registry)
         self.hub_service = HubPageService(registry_instance=self.registry)
+        self.internal_link_service = InternalLinkService(self.contracts_dir)
+        self.topic_cluster_service = TopicClusterService(self.contracts_dir)
+        self.seo_engine = ProgrammaticSeoEngine(self.contracts_dir)
         self._register_active_contracts()
 
     def audit_all(self) -> dict[str, Any]:
@@ -67,6 +73,13 @@ class ProductionAuditService:
             "related_converters": False,
             "sitemap_inclusion": False,
             "hub_inclusion": False,
+            "topic_cluster_complete": False,
+            "topic_cluster_links": False,
+            "topic_cluster_quality": False,
+            "seo_structure": False,
+            "seo_metadata": False,
+            "seo_internal_links": False,
+            "seo_content_quality": False,
         }
 
         try:
@@ -89,8 +102,14 @@ class ProductionAuditService:
             if tool_data.get("related_tools"):
                 checks["related_converters"] = True
 
-            if landing is not None:
-                checks["internal_links"] = bool(landing.get("internal_links", {}).get("items"))
+            # Check internal links using the comprehensive InternalLinkService
+            try:
+                internal_links = self.internal_link_service.get_links_for_landing(slug, contract)
+                links_total = sum(len(items) for items in internal_links.values() if isinstance(items, list))
+                checks["internal_links"] = links_total >= 3
+            except Exception:
+                checks["internal_links"] = bool(landing and landing.get("internal_links", {}).get("items")) if landing else False
+
 
             try:
                 knowledge = self.knowledge_service.generate_payload(contract)
@@ -126,6 +145,73 @@ class ProductionAuditService:
         if checks.get("related_converters") is False:
             related_tools = self.related_service.get_related_converters(tool_data or contract, limit=4) if tool_data else []
             checks["related_converters"] = bool(related_tools)
+
+        # Check topic cluster completeness
+        try:
+            input_formats = contract.get("input_formats", [])
+            output_formats = contract.get("output_formats", [])
+            formats_to_check = list(set(input_formats + output_formats))
+            
+            if formats_to_check:
+                primary_format = str(formats_to_check[0]).lower()
+                cluster = self.topic_cluster_service.build_cluster(primary_format)
+                
+                # Check if cluster is complete (has all 17 sections)
+                sections = [
+                    "knowledge", "faq", "mime", "file_extensions", "metadata",
+                    "specification", "history", "security", "compression",
+                    "accessibility", "software", "tutorials", "best_practices",
+                    "comparisons", "related_formats", "related_converters", "hub"
+                ]
+                
+                checks["topic_cluster_complete"] = all(section in cluster and cluster[section] for section in sections)
+                checks["topic_cluster_links"] = bool(cluster.get("internal_links", {}).get("related_converters", []))
+                checks["topic_cluster_quality"] = bool(cluster.get("knowledge", {}).get("overview")) and checks["topic_cluster_links"]
+        except Exception:
+            checks["topic_cluster_complete"] = False
+            checks["topic_cluster_links"] = False
+            checks["topic_cluster_quality"] = False
+
+        # Check SEO pages for format
+        try:
+            input_formats = contract.get("input_formats", [])
+            output_formats = contract.get("output_formats", [])
+            formats_to_check = list(set(input_formats + output_formats))
+            
+            if formats_to_check:
+                primary_format = str(formats_to_check[0]).lower()
+                seo_pages_generated = 0
+                
+                # Check if SEO pages can be generated for this format
+                for page_type in self.seo_engine.PAGE_TYPES:
+                    try:
+                        page = self.seo_engine.generate_page(primary_format, page_type)
+                        if page:
+                            seo_pages_generated += 1
+                    except Exception:
+                        continue
+                
+                # Check SEO structure (title, meta_description, canonical)
+                if seo_pages_generated > 0:
+                    sample_page = self.seo_engine.generate_page(primary_format, "how_to")
+                    seo_data = sample_page.get("seo", {})
+                    checks["seo_structure"] = bool(
+                        seo_data.get("title") and 
+                        seo_data.get("meta_description") and 
+                        seo_data.get("canonical")
+                    )
+                    checks["seo_metadata"] = bool(seo_data.get("keywords", []))
+                    checks["seo_internal_links"] = bool(sample_page.get("internal_links"))
+                    checks["seo_content_quality"] = bool(
+                        sample_page.get("content") and 
+                        sample_page.get("json_ld") and
+                        seo_pages_generated >= 5
+                    )
+        except Exception:
+            checks["seo_structure"] = False
+            checks["seo_metadata"] = False
+            checks["seo_internal_links"] = False
+            checks["seo_content_quality"] = False
 
         quality_score = self._score_checks(checks)
         status = self._derive_status(quality_score)
@@ -170,7 +256,7 @@ class ProductionAuditService:
         return False
 
     def _score_checks(self, checks: dict[str, Any]) -> int:
-        total = 10
+        total = 17
         score = 0
         for key in [
             "converter_contract",
@@ -183,6 +269,13 @@ class ProductionAuditService:
             "related_converters",
             "sitemap_inclusion",
             "hub_inclusion",
+            "topic_cluster_complete",
+            "topic_cluster_links",
+            "topic_cluster_quality",
+            "seo_structure",
+            "seo_metadata",
+            "seo_internal_links",
+            "seo_content_quality",
         ]:
             if checks.get(key):
                 score += 1
@@ -194,3 +287,15 @@ class ProductionAuditService:
         if quality_score >= 70:
             return "WARNING"
         return "NOT READY"
+
+    def get_internal_linking_report(self) -> dict[str, Any]:
+        """Get comprehensive internal linking coverage report."""
+        return self.internal_link_service.build_internal_link_coverage_report()
+
+    def get_topic_cluster_report(self) -> dict[str, Any]:
+        """Get comprehensive topic cluster coverage report."""
+        return self.topic_cluster_service.build_cluster_coverage_report()
+
+    def get_seo_pages_report(self) -> dict[str, Any]:
+        """Get comprehensive SEO pages coverage report."""
+        return self.seo_engine.get_seo_page_coverage_report()
