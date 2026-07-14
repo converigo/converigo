@@ -39,6 +39,14 @@ outputs/
 *.swo
 *~
 
+# Temporary artifacts and generated media
+tmp_*
+tmp*/
+*.mp4
+*.mov
+*.avi
+*.mkv
+
 # Railway / deployment
 .railway/
 railway.env
