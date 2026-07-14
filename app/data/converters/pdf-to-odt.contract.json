@@ -1,0 +1,20 @@
+{
+  "id": "pdf-to-odt",
+  "slug": "pdf-to-odt",
+  "name": "PDF to ODT",
+  "description": "Convert PDF files into OpenDocument Text (ODT) editable format.",
+  "category": "pdf",
+  "input_formats": ["pdf"],
+  "output_formats": ["odt"],
+  "accepted_mime_types": ["application/pdf"],
+  "max_upload_size": 52428800,
+  "conversion_engine": "document",
+  "landing_path": "/pdf-to-odt",
+  "canonical_url": "https://converigo.com/pdf-to-odt",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.pdf",
+  "supported_platforms": ["web", "api"],
+  "lifecycle_status": "active"
+}

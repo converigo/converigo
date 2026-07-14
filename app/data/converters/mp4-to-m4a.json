@@ -1,0 +1,101 @@
+{
+  "slug": "mp4-to-m4a",
+  "title": "MP4 to M4A Converter",
+  "description": "Convert MP4 video files into M4A audio for compact, modern playback.",
+  "upload_form": {
+    "action": "/convert",
+    "method": "post",
+    "accept": ".mp4",
+    "button_text": "Convert MP4 to M4A"
+  },
+  "faq": [
+    {
+      "question": "What file types can I upload?",
+      "answer": "Upload MP4 video files only."
+    },
+    {
+      "question": "What output do I get?",
+      "answer": "An M4A audio file optimized for compact size and broad compatibility."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "mp4-to-aac",
+      "title": "MP4 to AAC"
+    },
+    {
+      "slug": "mp4-to-mp3",
+      "title": "MP4 to MP3"
+    }
+  ],
+  "seo": {
+    "title": "MP4 to M4A | Converigo",
+    "description": "Convert MP4 to M4A online for efficient audio output.",
+    "keywords": "mp4 to m4a, video to audio, file converter"
+  },
+  "source": "mp4",
+  "target": "m4a",
+  "category": "audio",
+  "active": true,
+  "popular": true,
+  "featured": false,
+  "hero": {
+    "eyebrow": "Converter tool",
+    "title": "Convert MP4 to M4A Online Free",
+    "description": "Convert MP4 video files into M4A audio quickly and reliably.",
+    "panel_label": "Ready to convert",
+    "panel_title": "Upload an MP4 file and receive an M4A result in seconds."
+  },
+  "features": [
+    {
+      "title": "Compact audio",
+      "text": "M4A offers efficient compression and strong compatibility across modern devices."
+    },
+    {
+      "title": "Fast workflow",
+      "text": "Upload, convert, and download in a few quick steps."
+    },
+    {
+      "title": "Secure processing",
+      "text": "Your files are handled securely and the result is ready to use immediately."
+    }
+  ],
+  "supported_formats": {
+    "input": ["MP4"],
+    "output": ["M4A"],
+    "description": "MP4 input, M4A output"
+  },
+  "how_to_use": [
+    {
+      "title": "Upload your file",
+      "description": "Select an MP4 file from your device to start the conversion."
+    },
+    {
+      "title": "Choose the output format",
+      "description": "Pick M4A as the result format and review the conversion options."
+    },
+    {
+      "title": "Download the converted file",
+      "description": "Get your converted file immediately without installing extra software."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is MP4?",
+      "text": "MP4 is a container format that commonly stores video and audio."
+    },
+    {
+      "title": "What is M4A?",
+      "text": "M4A is a modern audio container format that usually stores AAC audio."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Convert MP4 files to M4A in seconds",
+    "text": "Upload your file and receive a ready-to-use result instantly.",
+    "primary_text": "Convert now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  }
+}

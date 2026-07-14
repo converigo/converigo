@@ -1,0 +1,20 @@
+{
+  "id": "bmp-to-jpg",
+  "slug": "bmp-to-jpg",
+  "name": "BMP to JPG",
+  "category": "image",
+  "description": "Convert BMP images into JPG format.",
+  "input_formats": ["bmp"],
+  "output_formats": ["jpg"],
+  "accepted_mime_types": ["image/bmp"],
+  "max_upload_size": 104857600,
+  "conversion_engine": "image",
+  "landing_path": "/bmp-to-jpg",
+  "canonical_url": "https://converigo.com/bmp-to-jpg",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.bmp",
+  "supported_platforms": ["web"],
+  "lifecycle_status": "active"
+}

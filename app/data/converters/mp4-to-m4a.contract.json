@@ -1,0 +1,20 @@
+{
+  "id": "mp4-to-m4a",
+  "slug": "mp4-to-m4a",
+  "name": "MP4 to M4A",
+  "category": "audio",
+  "description": "Convert MP4 video files into M4A audio.",
+  "input_formats": ["mp4"],
+  "output_formats": ["m4a"],
+  "accepted_mime_types": ["video/mp4"],
+  "max_upload_size": 104857600,
+  "conversion_engine": "ffmpeg",
+  "landing_path": "/mp4-to-m4a",
+  "canonical_url": "https://converigo.com/mp4-to-m4a",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.mp4",
+  "supported_platforms": ["web"],
+  "lifecycle_status": "active"
+}

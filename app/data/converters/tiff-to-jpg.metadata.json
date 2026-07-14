@@ -1,0 +1,20 @@
+{
+  "id": "tiff-to-jpg",
+  "slug": "tiff-to-jpg",
+  "name": "TIFF to JPG",
+  "category": "image",
+  "description": "Convert TIFF images into JPG format.",
+  "input_formats": ["tiff"],
+  "output_formats": ["jpg"],
+  "accepted_mime_types": ["image/tiff"],
+  "max_upload_size": 104857600,
+  "conversion_engine": "image",
+  "landing_path": "/tiff-to-jpg",
+  "canonical_url": "https://converigo.com/tiff-to-jpg",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.tiff",
+  "supported_platforms": ["web"],
+  "lifecycle_status": "active"
+}

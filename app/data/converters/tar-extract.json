@@ -1,0 +1,145 @@
+{
+  "slug": "tar-extract",
+  "title": "TAR File Extractor",
+  "description": "Extract files from TAR archives online instantly and securely.",
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".tar",
+    "button_text": "Upload TAR"
+  },
+  "faq": [
+    {
+      "question": "How do I extract a TAR file?",
+      "answer": "Upload your TAR file to Converigo, and the contents will be extracted and ready for download immediately."
+    },
+    {
+      "question": "Is the extraction secure?",
+      "answer": "Yes, files are processed securely on our servers and automatically deleted after extraction."
+    },
+    {
+      "question": "What file sizes are supported?",
+      "answer": "TAR files up to 500MB can be extracted instantly on Converigo."
+    },
+    {
+      "question": "What is the difference between TAR and ZIP?",
+      "answer": "TAR is a traditional Unix archiver that preserves file permissions and structure. ZIP includes compression by default."
+    },
+    {
+      "question": "Can I extract TAR.GZ files?",
+      "answer": "Yes, both plain TAR and compressed TAR.GZ files are fully supported."
+    },
+    {
+      "question": "Are permissions preserved?",
+      "answer": "Yes, file permissions and ownership information are preserved during extraction when available."
+    },
+    {
+      "question": "What if extraction fails?",
+      "answer": "Ensure the TAR file is not corrupted and try re-uploading if extraction fails."
+    },
+    {
+      "question": "Can I extract TAR files on mobile?",
+      "answer": "Yes, Converigo works on all modern browsers and devices."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "zip-extract",
+      "title": "ZIP Extract"
+    },
+    {
+      "slug": "rar-extract",
+      "title": "RAR Extract"
+    },
+    {
+      "slug": "gz-extract",
+      "title": "GZ Extract"
+    }
+  ],
+  "seo": {
+    "title": "TAR File Extractor | Converigo",
+    "description": "Extract TAR files online for free. Fast, secure, and no installation required.",
+    "keywords": "tar extractor, extract tar, tar files, archive extraction, unix"
+  },
+  "source": "tar",
+  "target": "tar",
+  "category": "archive",
+  "active": true,
+  "popular": false,
+  "featured": false,
+  "hero": {
+    "eyebrow": "Archive tool",
+    "title": "Extract TAR Files Online Free",
+    "description": "Extract files from TAR archives in seconds with Converigo. No installation needed.",
+    "panel_label": "Ready to extract",
+    "panel_title": "Upload a TAR file and receive extracted contents instantly."
+  },
+  "features": [
+    {
+      "title": "Instant extraction",
+      "text": "Extract TAR contents in seconds without installing any software."
+    },
+    {
+      "title": "Secure processing",
+      "text": "Your files are processed securely and automatically deleted after extraction."
+    },
+    {
+      "title": "Large file support",
+      "text": "Extract TAR files up to 500MB in size instantly."
+    },
+    {
+      "title": "Permission preservation",
+      "text": "File permissions and ownership information are maintained during extraction."
+    },
+    {
+      "title": "Cross-platform",
+      "text": "Works on Windows, Mac, Linux, and all modern mobile devices."
+    },
+    {
+      "title": "No limits",
+      "text": "Extract unlimited files and archives without any restrictions."
+    }
+  ],
+  "supported_formats": {
+    "input": ["TAR"],
+    "output": ["TAR"],
+    "description": "TAR input, extracted files output"
+  },
+  "how_to_use": [
+    {
+      "title": "Upload your TAR file",
+      "description": "Select a TAR archive from your device to begin extraction."
+    },
+    {
+      "title": "Wait for processing",
+      "description": "Converigo extracts the contents instantly with secure processing."
+    },
+    {
+      "title": "Download extracted files",
+      "description": "Get all extracted files as a folder ready to download immediately."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is a TAR file?",
+      "text": "TAR (Tape Archive) is a traditional Unix archiver that bundles multiple files into a single archive without compression. It's widely used in Linux and Unix systems."
+    },
+    {
+      "title": "Why extract a TAR file?",
+      "text": "Extracting TAR files allows you to access individual files, preserve Unix permissions, and view the original folder structure."
+    },
+    {
+      "title": "TAR vs compression",
+      "text": "TAR is typically used with compression (like gzip) for distribution. Plain TAR files are uncompressed archives."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to extract",
+    "title": "Extract TAR files in seconds",
+    "text": "Upload your TAR archive and get all files instantly.",
+    "primary_text": "Extract now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "slug": "avif-to-jpg",
+  "title": "AVIF to JPG Converter",
+  "description": "Convert AVIF images to JPG format for broad compatibility and easy sharing.",
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".avif",
+    "button_text": "Convert AVIF to JPG"
+  },
+  "faq": [
+    {
+      "question": "Why convert AVIF to JPG?",
+      "answer": "JPG offers broad compatibility with older apps and devices."
+    },
+    {
+      "question": "Will the output quality be good?",
+      "answer": "Yes. JPG output is optimized for compatibility and sharing."
+    }
+  ],
+  "related_tools": [
+    {"slug": "jpg-to-png", "title": "JPG to PNG"},
+    {"slug": "png-to-jpg", "title": "PNG to JPG"}
+  ],
+  "seo": {
+    "title": "AVIF to JPG | Converigo",
+    "description": "Convert AVIF images to JPG online for compatibility.",
+    "keywords": "avif to jpg, image converter"
+  },
+  "source": "avif",
+  "target": "jpg",
+  "category": "image",
+  "active": true,
+  "popular": true,
+  "featured": false,
+  "hero": {
+    "eyebrow": "Converter tool",
+    "title": "Convert AVIF to JPG Online Free",
+    "description": "Convert AVIF images to JPG format for broad compatibility and easy sharing.",
+    "panel_label": "Ready to convert",
+    "panel_title": "Upload an AVIF file and receive a JPG result in seconds."
+  },
+  "features": [
+    {"title": "Broad compatibility", "text": "JPG is supported by virtually every browser and device."},
+    {"title": "Fast workflow", "text": "Upload, convert, and download in a few quick steps."},
+    {"title": "Secure processing", "text": "Your files are handled securely and the result is ready to use immediately."}
+  ],
+  "supported_formats": {"input": ["AVIF"], "output": ["JPG"], "description": "AVIF input, JPG output"},
+  "how_to_use": [
+    {"title": "Upload your file", "description": "Select an AVIF file from your device to start the conversion."},
+    {"title": "Choose the output format", "description": "Pick JPG as the result format and review the conversion options."},
+    {"title": "Download the converted file", "description": "Get your converted file immediately without installing extra software."}
+  ],
+  "about_formats": [
+    {"title": "What is AVIF?", "text": "AVIF is a modern image format designed for high compression efficiency."},
+    {"title": "What is JPG?", "text": "JPG is a widely supported image format ideal for compatibility and sharing."}
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Convert AVIF files to JPG in seconds",
+    "text": "Upload your file and receive a ready-to-use result instantly.",
+    "primary_text": "Convert now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  }
+}

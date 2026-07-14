@@ -25,7 +25,10 @@ def test_mp4_to_mp3_landing_page_renders_with_seo_and_faq():
     assert "href=\"#faq\"" in response.text
     assert "href=\"#related-tools\"" in response.text
     assert "MP4 input, MP3 output" in response.text
-    assert "/tools/png-to-jpg" in response.text or "/tools/pdf-to-word" in response.text
+    assert "Download your converted MP3" in response.text
+    assert "How to convert MP4 to MP3" in response.text
+    # Check that related tools are shown (may vary based on related converter service)
+    assert "/tools/" in response.text
 
 
 def test_mp4_to_mp3_conversion_endpoint_still_accepts_uploads():

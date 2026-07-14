@@ -1,0 +1,20 @@
+{
+  "id": "xlsx-to-ods",
+  "slug": "xlsx-to-ods",
+  "name": "XLSX to ODS",
+  "description": "Convert Excel XLSX spreadsheets into OpenDocument Spreadsheet (ODS) format.",
+  "category": "pdf",
+  "input_formats": ["xlsx"],
+  "output_formats": ["ods"],
+  "accepted_mime_types": ["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"],
+  "max_upload_size": 52428800,
+  "conversion_engine": "document",
+  "landing_path": "/xlsx-to-ods",
+  "canonical_url": "https://converigo.com/xlsx-to-ods",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.xlsx",
+  "supported_platforms": ["web", "api"],
+  "lifecycle_status": "active"
+}

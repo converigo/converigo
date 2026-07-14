@@ -1,0 +1,20 @@
+{
+  "id": "tar-extract",
+  "slug": "tar-extract",
+  "name": "TAR Extract",
+  "category": "archive",
+  "description": "Extract files from TAR archives online.",
+  "input_formats": ["tar"],
+  "output_formats": ["tar"],
+  "accepted_mime_types": ["application/x-tar"],
+  "max_upload_size": 524288000,
+  "conversion_engine": "archive",
+  "landing_path": "/tar-extract",
+  "canonical_url": "https://converigo.com/tar-extract",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.tar",
+  "supported_platforms": ["web"],
+  "lifecycle_status": "active"
+}

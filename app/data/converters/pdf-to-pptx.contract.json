@@ -1,0 +1,20 @@
+{
+  "id": "pdf-to-pptx",
+  "slug": "pdf-to-pptx",
+  "name": "PDF to PPTX",
+  "description": "Convert PDF pages into editable PowerPoint slides.",
+  "category": "pdf",
+  "input_formats": ["pdf"],
+  "output_formats": ["pptx"],
+  "accepted_mime_types": ["application/pdf"],
+  "max_upload_size": 104857600,
+  "conversion_engine": "document",
+  "landing_path": "/pdf-to-pptx",
+  "canonical_url": "https://converigo.com/pdf-to-pptx",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.pdf",
+  "supported_platforms": ["web", "api"],
+  "lifecycle_status": "active"
+}

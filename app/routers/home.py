@@ -160,7 +160,7 @@ async def about(request: Request):
     return await _render_trust_page(
         request,
         "about.html",
-        "About Converigo | Fast Online File Conversion",
+        "About Converigo | Fast, Free & Secure Online File Converter",
         "Learn about Converigo, our mission, and how we make file conversion simple, fast, and secure.",
         "/about",
     )

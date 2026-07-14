@@ -1,0 +1,18 @@
+{
+  "slug": "ods-to-xlsx",
+  "hero": { "title": "ODS to XLSX", "subtitle": "Convert OpenOffice spreadsheets to Excel format." },
+  "steps": ["Upload ODS","Choose XLSX","Download XLSX"],
+  "benefits": ["Edit in Excel","Preserve formulas","Data portability"],
+  "supported_formats": {"input": [".ods"], "output": [".xlsx"], "description": "ODS input, XLSX output"},
+  "features": [{"title":"OpenDocument compatibility","text":"Converts ODS to Excel without losing basic data."}],
+  "how_to_use": ["Upload ODS file.", "Review sheet mapping.", "Download XLSX."],
+  "about_formats": ["ODS is the OpenDocument Spreadsheet format.", "XLSX is Microsoft's spreadsheet format used in Excel."],
+  "compatibility": "Web and API",
+  "common_problems": ["Advanced formulas may differ","Cell styles may vary"],
+  "tips": ["Review formulas after conversion"],
+  "faq": [{"question":"Are formulas preserved?","answer":"Most formulas are preserved but complex macros are not supported."}],
+  "related_tools": ["xlsx-to-ods","xlsx-to-pdf"],
+  "internal_links": {"items": [{"title":"PDF Tools","href":"/pdf-tools"}]},
+  "cta": {"label":"Convert ODS to XLSX","href":"/ods-to-xlsx"},
+  "json_ld": {"@context":"https://schema.org","@type":"SoftwareApplication","name":"ODS to XLSX Converter"}
+}

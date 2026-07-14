@@ -1,0 +1,20 @@
+{
+  "id": "gz-extract",
+  "slug": "gz-extract",
+  "name": "GZ Extract",
+  "category": "archive",
+  "description": "Extract files from GZIP archives online.",
+  "input_formats": ["gz", "gzip"],
+  "output_formats": ["gz", "gzip"],
+  "accepted_mime_types": ["application/gzip", "application/x-gzip"],
+  "max_upload_size": 524288000,
+  "conversion_engine": "archive",
+  "landing_path": "/gz-extract",
+  "canonical_url": "https://converigo.com/gz-extract",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.gz",
+  "supported_platforms": ["web"],
+  "lifecycle_status": "active"
+}

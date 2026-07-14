@@ -1,0 +1,20 @@
+{
+  "id": "svg-to-png",
+  "slug": "svg-to-png",
+  "name": "SVG to PNG",
+  "category": "image",
+  "description": "Convert SVG graphics into PNG images.",
+  "input_formats": ["svg"],
+  "output_formats": ["png"],
+  "accepted_mime_types": ["image/svg+xml"],
+  "max_upload_size": 104857600,
+  "conversion_engine": "image",
+  "landing_path": "/svg-to-png",
+  "canonical_url": "https://converigo.com/svg-to-png",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.svg",
+  "supported_platforms": ["web"],
+  "lifecycle_status": "active"
+}

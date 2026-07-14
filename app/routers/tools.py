@@ -7,11 +7,13 @@ from fastapi.responses import HTMLResponse
 from app.core.templates import templates
 from app.services.converter_data_service import ConverterDataService
 from app.services.language_service import LanguageService
+from app.services.landing_service import LandingPageBuilder
 from app.services.seo_service import PRODUCTION_BASE_URL, SeoService
 
 router = APIRouter(prefix="/tools", tags=["tools"])
 converter_data_service = ConverterDataService(Path("app/data/converters"))
 seo_service = SeoService(Path("app/data/converters"))
+landing_page_builder = LandingPageBuilder(seo_service, converter_data_service)
 language_service = LanguageService(Path("app/locales"))
 
 
@@ -153,8 +155,19 @@ async def render_universal_tool_page(
     except FileNotFoundError:
         raise HTTPException(status_code=404, detail="Tool page not found")
 
-    seo_data = seo_service.build_tool_meta(request, tool_data)
-    related_tools = converter_data_service.resolve_related_tools(tool_data, limit=4)
+    if slug == "mp4-to-mp3":
+        landing = landing_page_builder.build_context(
+            request,
+            tool_data,
+            faq_items=faq_items,
+            canonical_path=canonical_path,
+        )
+        seo_data = landing["meta"]
+        related_tools = landing["related_tools"]
+        faq_items = landing["faq"]
+    else:
+        seo_data = seo_service.build_tool_meta(request, tool_data)
+        related_tools = converter_data_service.resolve_related_tools(tool_data, limit=4)
 
     fallback_faq = []
     label = tool_data.get("title", "").replace(" Converter", "").strip()
@@ -200,6 +213,15 @@ async def render_universal_tool_page(
         seo_data["og_url"] = seo_data["canonical"]
 
     page_sections = _build_tool_page_sections(tool_data)
+    landing_context = None
+    if slug == "mp4-to-mp3":
+        landing_context = landing_page_builder.build_context(
+            request,
+            tool_data,
+            faq_items=faq_items,
+            canonical_path=canonical_path,
+        )
+        seo_data = landing_context["meta"]
 
     return templates.TemplateResponse(
         request=request,
@@ -215,7 +237,11 @@ async def render_universal_tool_page(
             "faq": faq_items,
             "upload_form": tool_data.get("upload_form", {}),
             "related_tools": related_tools,
-            "structured_data": seo_service.build_structured_data(request, tool_data),
+            "structured_data": seo_service.build_structured_data(
+                request,
+                tool_data,
+                canonical_path=canonical_path,
+            ),
             "hero": page_sections["hero"],
             "benefits": page_sections["benefits"],
             "features": page_sections["features"],
@@ -224,6 +250,7 @@ async def render_universal_tool_page(
             "use_cases": page_sections["use_cases"],
             "about_formats": page_sections["about_formats"],
             "cta": page_sections["cta"],
+            "landing": landing_context,
         },
     )
 

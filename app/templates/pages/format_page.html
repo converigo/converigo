@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="{{ locale.lang_code or 'en' }}">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% include "partials/seo_meta.html" %}
+    <link rel="stylesheet" href="/static/css/style.css">
+    {% include "partials/structured_data.html" %}
+</head>
+
+<body>
+    <header class="site-header" role="banner">
+        <div class="container nav-wrap">
+            <a class="brand" href="/" aria-label="Converigo home">
+                <img src="/static/images/converigo-logo.png" alt="Converigo logo">
+                <span>Converigo</span>
+            </a>
+            <nav id="primaryNav" class="primary-nav" role="navigation" aria-label="Primary">
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/formats">Formats</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main" role="main">
+        <section class="hero section">
+            <div class="container hero-inner">
+                <div class="hero-copy">
+                    <span class="eyebrow">Format Encyclopedia</span>
+                    <h1>{{ payload.title }}</h1>
+                    <p>{{ payload.description }}</p>
+                </div>
+                <div class="hero-panel">
+                    <div class="panel-head">
+                        <p class="panel-label">Format authority</p>
+                        <h2>{{ payload.category | title }} format reference</h2>
+                    </div>
+                    <div class="panel-body">
+                        <p><strong>MIME type:</strong> {{ payload.mime_type }}</p>
+                        <p><strong>Extension:</strong> {{ payload.file_extension }}</p>
+                        <p><strong>Category:</strong> {{ payload.category }}</p>
+                        <p><strong>Supported OS:</strong> {{ payload.operating_system_support }}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-white">
+            <div class="container section-heading">
+                <span class="eyebrow">Overview</span>
+                <h2>Format summary</h2>
+            </div>
+            <div class="container content-grid">
+                <article>
+                    <h3>History</h3>
+                    <p>{{ payload.history }}</p>
+                    <h3>Specification</h3>
+                    <p>{{ payload.specification }}</p>
+                    <h3>Developer</h3>
+                    <p>{{ payload.developer_maintainer }}</p>
+                </article>
+                <aside>
+                    <div class="card">
+                        <h3>Compatibility</h3>
+                        <p>{{ payload.compatibility }}</p>
+                    </div>
+                    <div class="card">
+                        <h3>Typical size</h3>
+                        <p>{{ payload.typical_file_size }}</p>
+                    </div>
+                    <div class="card">
+                        <h3>Software support</h3>
+                        <ul>
+                            {% for item in payload.software_support %}
+                            <li>{{ item.title }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container section-heading">
+                <span class="eyebrow">Technical details</span>
+                <h2>File format characteristics</h2>
+            </div>
+            <div class="grid features-grid">
+                <article class="feature-card">
+                    <h3>Compression</h3>
+                    <p>{{ payload.compression }}</p>
+                </article>
+                <article class="feature-card">
+                    <h3>Encoding</h3>
+                    <p>{{ payload.encoding }}</p>
+                </article>
+                <article class="feature-card">
+                    <h3>Metadata</h3>
+                    <p>{{ payload.metadata }}</p>
+                </article>
+                <article class="feature-card">
+                    <h3>Performance</h3>
+                    <p>{{ payload.performance[0].text }}</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section section-white">
+            <div class="container section-heading">
+                <span class="eyebrow">Best practices</span>
+                <h2>How to use this format well</h2>
+            </div>
+            <div class="grid features-grid">
+                {% for item in payload.best_practices %}
+                <article class="feature-card hover-card">
+                    <h3>{{ item.title }}</h3>
+                    <p>{{ item.text }}</p>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container section-heading">
+                <span class="eyebrow">Advantages</span>
+                <h2>Why use this format</h2>
+            </div>
+            <div class="grid features-grid">
+                {% for item in payload.advantages %}
+                <article class="feature-card">
+                    <h3>{{ item.title }}</h3>
+                    <p>{{ item.text }}</p>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="section section-white">
+            <div class="container section-heading">
+                <span class="eyebrow">Disadvantages</span>
+                <h2>Format limitations</h2>
+            </div>
+            <div class="grid features-grid">
+                {% for item in payload.disadvantages %}
+                <article class="feature-card">
+                    <h3>{{ item.title }}</h3>
+                    <p>{{ item.text }}</p>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container section-heading">
+                <span class="eyebrow">FAQ</span>
+                <h2>Frequently asked questions</h2>
+            </div>
+            <div class="faq-grid">
+                {% for item in payload.faq %}
+                <div class="faq-item">
+                    <button class="faq-question" type="button">{{ item.question }}<span class="faq-toggle">+</span></button>
+                    <div class="faq-answer"><p>{{ item.answer }}</p></div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="section section-white">
+            <div class="container section-heading">
+                <span class="eyebrow">Related formats</span>
+                <h2>Format connections</h2>
+            </div>
+            <div class="grid cards-grid">
+                {% for item in payload.related_formats or [] %}
+                <article class="card">
+                    <h3><a href="{{ item.href }}">{{ item.title }}</a></h3>
+                    <p>{{ item.description }}</p>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container section-heading">
+                <span class="eyebrow">Related converters</span>
+                <h2>Conversion tools for this format</h2>
+            </div>
+            <div class="grid cards-grid">
+                {% for item in related_converters %}
+                <article class="card">
+                    <h3><a href="{{ item.href }}">{{ item.title }}</a></h3>
+                    <p>{{ item.description }}</p>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="section section-white">
+            <div class="container section-heading">
+                <span class="eyebrow">Troubleshooting</span>
+                <h2>Common problems and fixes</h2>
+            </div>
+            <div class="grid features-grid">
+                {% for item in payload.troubleshooting %}
+                <article class="feature-card">
+                    <h3>{{ item.title }}</h3>
+                    <p>{{ item.text }}</p>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container section-heading">
+                <span class="eyebrow">Reference</span>
+                <h2>Further reading</h2>
+            </div>
+            <div class="container">
+                <ul>
+                    {% for ref in payload.references %}
+                    <li><a href="{{ ref.url }}" target="_blank" rel="noopener noreferrer">{{ ref.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

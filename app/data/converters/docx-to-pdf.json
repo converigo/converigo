@@ -1,0 +1,18 @@
+{
+  "slug": "docx-to-pdf",
+  "hero": { "title": "DOCX to PDF", "subtitle": "Convert Word documents to PDF instantly." },
+  "steps": ["Upload your DOCX file","Choose PDF as output","Download the PDF"],
+  "benefits": ["Preserve layout","Easy to share","Print ready"],
+  "supported_formats": {"input": [".docx", ".doc"], "output": [".pdf"], "description": "DOCX input, PDF output"},
+  "features": [{"title": "Preserve formatting", "text": "Keeps basic styles and layout."}],
+  "how_to_use": ["Upload your DOCX file.", "Choose PDF as output.", "Download the generated PDF."],
+  "about_formats": ["DOCX is the Microsoft Word document format.", "PDF is a portable document format used for sharing and printing."],
+  "compatibility": "Works on web and API",
+  "common_problems": ["Large images causing layout shifts","Unsupported macros"],
+  "tips": ["Remove unnecessary embedded fonts","Flatten images before conversion"],
+  "faq": [{"question":"Will styles be preserved?","answer":"Basic text and paragraph styles are preserved; complex layouts may differ."}],
+  "related_tools": ["pdf-to-docx","pdf-to-ppt","excel-to-pdf"],
+  "internal_links": {"items": [{"title":"PDF Tools","href":"/pdf-tools"}]},
+  "cta": {"label":"Convert DOCX to PDF","href":"/docx-to-pdf"},
+  "json_ld": {"@context":"https://schema.org","@type":"SoftwareApplication","name":"DOCX to PDF Converter"}
+}

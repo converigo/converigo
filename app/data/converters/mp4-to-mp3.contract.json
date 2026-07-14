@@ -1,0 +1,20 @@
+{
+  "id": "mp4-to-mp3",
+  "slug": "mp4-to-mp3",
+  "name": "MP4 to MP3",
+  "category": "audio",
+  "description": "Convert MP4 video files into MP3 audio.",
+  "input_formats": ["mp4"],
+  "output_formats": ["mp3"],
+  "accepted_mime_types": ["video/mp4"],
+  "max_upload_size": 104857600,
+  "conversion_engine": "ffmpeg",
+  "landing_path": "/mp4-to-mp3",
+  "canonical_url": "https://converigo.com/mp4-to-mp3",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.mp4",
+  "supported_platforms": ["web"],
+  "lifecycle_status": "active"
+}

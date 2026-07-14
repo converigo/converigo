@@ -1,0 +1,20 @@
+{
+  "id": "excel-to-pdf",
+  "slug": "excel-to-pdf",
+  "name": "Excel to PDF",
+  "category": "document",
+  "description": "Convert Excel spreadsheets into PDF files.",
+  "input_formats": ["xls", "xlsx"],
+  "output_formats": ["pdf"],
+  "accepted_mime_types": ["application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"],
+  "max_upload_size": 104857600,
+  "conversion_engine": "document",
+  "landing_path": "/excel-to-pdf",
+  "canonical_url": "https://converigo.com/excel-to-pdf",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.xlsx",
+  "supported_platforms": ["web"],
+  "lifecycle_status": "active"
+}

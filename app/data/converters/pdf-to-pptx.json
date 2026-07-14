@@ -1,0 +1,18 @@
+{
+  "slug": "pdf-to-pptx",
+  "hero": { "title": "PDF to PPTX", "subtitle": "Create editable slides from PDFs." },
+  "steps": ["Upload PDF","Select conversion options","Download PPTX"],
+  "benefits": ["Edit slide content","Reuse visuals","Quick edits"],
+  "supported_formats": {"input": [".pdf"], "output": [".pptx"], "description": "PDF input, PPTX output"},
+  "features": [{"title":"Slide creation","text":"Creates editable slides from PDF pages."}],
+  "how_to_use": ["Upload your PDF.", "Choose pages to convert.", "Download the PPTX file."],
+  "about_formats": ["PDF pages can be converted into individual slides.", "PPTX is editable in presentation software like PowerPoint."],
+  "compatibility": "Web and API",
+  "common_problems": ["Complex layouts may not map exactly"],
+  "tips": ["Use high-resolution images in PDFs for best results"],
+  "faq": [{"question":"Can I edit text after conversion?","answer":"Extracted text is editable but may require layout adjustments."}],
+  "related_tools": ["pptx-to-pdf","pdf-to-docx"],
+  "internal_links": {"items": [{"title":"PDF Tools","href":"/pdf-tools"}]},
+  "cta": {"label":"Convert PDF to PPTX","href":"/pdf-to-pptx"},
+  "json_ld": {"@context":"https://schema.org","@type":"SoftwareApplication","name":"PDF to PPTX Converter"}
+}

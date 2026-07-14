@@ -34,7 +34,7 @@
     <header class="site-header" role="banner">
         <div class="container nav-wrap">
             <a class="brand" href="/" aria-label="Converigo home">
-                <img src="/static/images/convertin-logo.png" alt="Converigo logo">
+                <img src="/static/images/converigo-logo.png" alt="Converigo logo">
                 <span>Converigo</span>
             </a>
             <nav id="primaryNav" class="primary-nav" role="navigation" aria-label="Primary">
@@ -53,7 +53,7 @@
             <div class="container hero-inner">
                 <div class="hero-copy">
                     <span class="eyebrow">{{ hero.eyebrow or 'Converter tool' }}</span>
-                    <h1 class="hero-title">{{ hero.title or tool.title }}</h1>
+                    <h1 class="hero-title">{{ landing.h1 if landing else hero.title or tool.title }}</h1>
                     <p class="hero-sub">{{ hero.description or meta.description }}</p>
                     <div class="hero-cta">
                         <a href="{{ cta.primary_href or '#converter' }}" class="btn btn-primary">{{ cta.primary_text or t('tool_page.cta_convert', 'Convert now') }}</a>
@@ -215,7 +215,11 @@
             </div>
         </section>
 
-        {% if cta %}
+        {% if landing %}
+        {% include "components/landing_sections.html" %}
+        {% endif %}
+
+        {% if cta and not landing %}
         <section class="section">
             <div class="container">
                 <div class="card card-lg">

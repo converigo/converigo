@@ -1,6 +1,6 @@
 {% set page_meta = meta if meta is defined else seo if seo is defined else {} %}
 
-{% set page_title = page_meta.title | default('Converigo | Fast Online File Conversion') %}
+{% set page_title = page_meta.title | default('Converigo | Fast, Free & Secure Online File Converter') %}
 
 {% set page_description = page_meta.description | default('Converigo offers fast, secure, and automatic file conversion from video, audio, image, and document formats.') %}
 
@@ -14,7 +14,7 @@
 
 {% set page_og_type = page_meta.og_type | default('website') %}
 
-{% set page_og_image = page_meta.og_image | default('/static/images/convertin-logo.png') %}
+{% set page_og_image = page_meta.og_image | default('/static/images/converigo-logo.png') %}
 
 {% set page_og_url = page_meta.og_url | default('https://converigo.com' ~ request.url.path) %}
 

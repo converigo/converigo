@@ -1,7 +1,7 @@
 from PIL import Image
 
-input_file = "app/static/images/convertin-logo.png"
-output_file = "app/static/images/convertin-logo-fixed.png"
+input_file = "app/static/images/converigo-logo.png"
+output_file = "app/static/images/converigo-logo-fixed.png"
 
 
 img = Image.open(input_file).convert("RGBA")

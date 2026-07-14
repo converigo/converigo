@@ -1,0 +1,18 @@
+{
+  "slug": "pdf-to-docx",
+  "hero": { "title": "PDF to DOCX", "subtitle": "Turn PDFs into editable Word documents." },
+  "steps": ["Upload PDF","Choose DOCX","Download editable DOCX"],
+  "benefits": ["Edit content","Reuse text","Preserve original layout where possible"],
+  "supported_formats": {"input": [".pdf"], "output": [".docx"], "description": "PDF input, DOCX output"},
+  "features": [{"title":"OCR when needed","text":"Extracts text from scans."}],
+  "how_to_use": ["Upload your PDF.", "Select OCR options if needed.", "Download the DOCX file."],
+  "about_formats": ["PDF is a fixed-layout format.", "DOCX is editable in common word processors like Microsoft Word."],
+  "compatibility": "Web and API",
+  "common_problems": ["Scanned PDFs may not be editable","Complex layouts may be approximated"],
+  "tips": ["Use higher resolution scans for OCR accuracy"],
+  "faq": [{"question":"Does it perform OCR?","answer":"OCR is applied when needed to extract text from scanned PDFs."}],
+  "related_tools": ["docx-to-pdf","pdf-to-ppt","pdf-to-excel"],
+  "internal_links": {"items": [{"title":"PDF Tools","href":"/pdf-tools"}]},
+  "cta": {"label":"Convert PDF to DOCX","href":"/pdf-to-docx"},
+  "json_ld": {"@context":"https://schema.org","@type":"SoftwareApplication","name":"PDF to DOCX Converter"}
+}

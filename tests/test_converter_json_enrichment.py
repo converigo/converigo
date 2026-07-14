@@ -4,7 +4,7 @@ from pathlib import Path
 
 def test_all_converters_include_universal_tool_page_sections() -> None:
     converter_dir = Path("app/data/converters")
-    files = sorted(converter_dir.glob("*.json"))
+    files = sorted([f for f in converter_dir.glob("*.json") if not f.name.endswith((".contract.json", ".metadata.json"))])
 
     assert files, "No converter JSON files were found"
 

@@ -1,0 +1,101 @@
+{
+  "slug": "mp4-to-flac",
+  "title": "MP4 to FLAC Converter",
+  "description": "Convert MP4 video files into FLAC audio for lossless audio preservation.",
+  "upload_form": {
+    "action": "/convert",
+    "method": "post",
+    "accept": ".mp4",
+    "button_text": "Convert MP4 to FLAC"
+  },
+  "faq": [
+    {
+      "question": "What file types can I upload?",
+      "answer": "Upload MP4 video files only."
+    },
+    {
+      "question": "What output do I get?",
+      "answer": "A FLAC audio file that preserves the original audio quality without lossy compression."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "mp4-to-wav",
+      "title": "MP4 to WAV"
+    },
+    {
+      "slug": "mp4-to-mp3",
+      "title": "MP4 to MP3"
+    }
+  ],
+  "seo": {
+    "title": "MP4 to FLAC | Converigo",
+    "description": "Convert MP4 to FLAC online for lossless audio output.",
+    "keywords": "mp4 to flac, video to audio, file converter"
+  },
+  "source": "mp4",
+  "target": "flac",
+  "category": "audio",
+  "active": true,
+  "popular": true,
+  "featured": false,
+  "hero": {
+    "eyebrow": "Converter tool",
+    "title": "Convert MP4 to FLAC Online Free",
+    "description": "Convert MP4 video files into FLAC audio quickly and reliably.",
+    "panel_label": "Ready to convert",
+    "panel_title": "Upload an MP4 file and receive a FLAC result in seconds."
+  },
+  "features": [
+    {
+      "title": "Lossless audio",
+      "text": "FLAC preserves audio quality without the size overhead of WAV."
+    },
+    {
+      "title": "Fast workflow",
+      "text": "Upload, convert, and download in a few quick steps."
+    },
+    {
+      "title": "Secure processing",
+      "text": "Your files are handled securely and the result is ready to use immediately."
+    }
+  ],
+  "supported_formats": {
+    "input": ["MP4"],
+    "output": ["FLAC"],
+    "description": "MP4 input, FLAC output"
+  },
+  "how_to_use": [
+    {
+      "title": "Upload your file",
+      "description": "Select an MP4 file from your device to start the conversion."
+    },
+    {
+      "title": "Choose the output format",
+      "description": "Pick FLAC as the result format and review the conversion options."
+    },
+    {
+      "title": "Download the converted file",
+      "description": "Get your converted file immediately without installing extra software."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is MP4?",
+      "text": "MP4 is a container format that commonly stores video and audio."
+    },
+    {
+      "title": "What is FLAC?",
+      "text": "FLAC is a lossless compressed audio format that preserves sound quality."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Convert MP4 files to FLAC in seconds",
+    "text": "Upload your file and receive a ready-to-use result instantly.",
+    "primary_text": "Convert now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  }
+}

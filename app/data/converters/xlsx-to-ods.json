@@ -1,0 +1,18 @@
+{
+  "slug": "xlsx-to-ods",
+  "hero": { "title": "XLSX to ODS", "subtitle": "Export Excel files to ODS for OpenOffice/LibreOffice." },
+  "steps": ["Upload XLSX","Choose ODS","Download ODS"],
+  "benefits": ["Open in LibreOffice","Share with ODF users","Preserve tables"],
+  "supported_formats": {"input": [".xlsx"], "output": [".ods"], "description": "XLSX input, ODS output"},
+  "features": [{"title":"Export to ODF","text":"Create ODS files compatible with OpenOffice/LibreOffice."}],
+  "how_to_use": ["Upload XLSX file.", "Choose ODS as target.", "Download converted ODS."],
+  "about_formats": ["XLSX is Excel's native workbook format.", "ODS is the OpenDocument Spreadsheet format for LibreOffice and OpenOffice."],
+  "compatibility": "Web and API",
+  "common_problems": ["Macros are not supported","Some styles may change"],
+  "tips": ["Save a copy before converting complex workbooks"],
+  "faq": [{"question":"Will macros be preserved?","answer":"Macros are not preserved when converting to ODS."}],
+  "related_tools": ["ods-to-xlsx","xlsx-to-pdf"],
+  "internal_links": {"items": [{"title":"PDF Tools","href":"/pdf-tools"}]},
+  "cta": {"label":"Convert XLSX to ODS","href":"/xlsx-to-ods"},
+  "json_ld": {"@context":"https://schema.org","@type":"SoftwareApplication","name":"XLSX to ODS Converter"}
+}

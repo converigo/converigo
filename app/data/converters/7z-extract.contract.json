@@ -1,0 +1,20 @@
+{
+  "id": "7z-extract",
+  "slug": "7z-extract",
+  "name": "7Z Extract",
+  "category": "archive",
+  "description": "Extract files from 7Z archives online.",
+  "input_formats": ["7z"],
+  "output_formats": ["7z"],
+  "accepted_mime_types": ["application/x-7z-compressed"],
+  "max_upload_size": 524288000,
+  "conversion_engine": "archive",
+  "landing_path": "/7z-extract",
+  "canonical_url": "https://converigo.com/7z-extract",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.7z",
+  "supported_platforms": ["web"],
+  "lifecycle_status": "active"
+}

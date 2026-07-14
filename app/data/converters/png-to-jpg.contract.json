@@ -1,0 +1,20 @@
+{
+  "id": "png-to-jpg",
+  "slug": "png-to-jpg",
+  "name": "PNG to JPG",
+  "category": "image",
+  "description": "Convert PNG images into JPG format.",
+  "input_formats": ["png"],
+  "output_formats": ["jpg", "jpeg"],
+  "accepted_mime_types": ["image/png"],
+  "max_upload_size": 104857600,
+  "conversion_engine": "image",
+  "landing_path": "/png-to-jpg",
+  "canonical_url": "https://converigo.com/png-to-jpg",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.png",
+  "supported_platforms": ["web"],
+  "lifecycle_status": "active"
+}

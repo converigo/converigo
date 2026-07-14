@@ -1,0 +1,101 @@
+{
+  "slug": "mp4-to-wav",
+  "title": "MP4 to WAV Converter",
+  "description": "Convert MP4 video files into WAV audio for high-quality editing and playback.",
+  "upload_form": {
+    "action": "/convert",
+    "method": "post",
+    "accept": ".mp4",
+    "button_text": "Convert MP4 to WAV"
+  },
+  "faq": [
+    {
+      "question": "What file types can I upload?",
+      "answer": "Upload MP4 video files only."
+    },
+    {
+      "question": "What output do I get?",
+      "answer": "A WAV audio file that is ideal for editing and archiving."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "mp4-to-mp3",
+      "title": "MP4 to MP3"
+    },
+    {
+      "slug": "mp3-to-wav",
+      "title": "MP3 to WAV"
+    }
+  ],
+  "seo": {
+    "title": "MP4 to WAV | Converigo",
+    "description": "Convert MP4 to WAV online for high-quality audio output.",
+    "keywords": "mp4 to wav, video to audio, file converter"
+  },
+  "source": "mp4",
+  "target": "wav",
+  "category": "audio",
+  "active": true,
+  "popular": true,
+  "featured": false,
+  "hero": {
+    "eyebrow": "Converter tool",
+    "title": "Convert MP4 to WAV Online Free",
+    "description": "Convert MP4 video files into WAV audio quickly and reliably.",
+    "panel_label": "Ready to convert",
+    "panel_title": "Upload an MP4 file and receive a WAV result in seconds."
+  },
+  "features": [
+    {
+      "title": "High-quality audio",
+      "text": "Keep crisp audio quality for editing and production pipelines."
+    },
+    {
+      "title": "Fast workflow",
+      "text": "Upload, convert, and download in a few quick steps."
+    },
+    {
+      "title": "Secure processing",
+      "text": "Your files are handled securely and the result is ready to use immediately."
+    }
+  ],
+  "supported_formats": {
+    "input": ["MP4"],
+    "output": ["WAV"],
+    "description": "MP4 input, WAV output"
+  },
+  "how_to_use": [
+    {
+      "title": "Upload your file",
+      "description": "Select an MP4 file from your device to start the conversion."
+    },
+    {
+      "title": "Choose the output format",
+      "description": "Pick WAV as the result format and review the conversion options."
+    },
+    {
+      "title": "Download the converted file",
+      "description": "Get your converted file immediately without installing extra software."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is MP4?",
+      "text": "MP4 is a container format that commonly stores video and audio."
+    },
+    {
+      "title": "What is WAV?",
+      "text": "WAV is a lossless audio format used for editing and high-fidelity playback."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Convert MP4 files to WAV in seconds",
+    "text": "Upload your file and receive a ready-to-use result instantly.",
+    "primary_text": "Convert now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  }
+}

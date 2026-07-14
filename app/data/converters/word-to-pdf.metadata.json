@@ -1,0 +1,20 @@
+{
+  "id": "word-to-pdf",
+  "slug": "word-to-pdf",
+  "name": "Word to PDF",
+  "category": "document",
+  "description": "Convert Word documents into PDF files.",
+  "input_formats": ["doc", "docx"],
+  "output_formats": ["pdf"],
+  "accepted_mime_types": ["application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"],
+  "max_upload_size": 104857600,
+  "conversion_engine": "document",
+  "landing_path": "/word-to-pdf",
+  "canonical_url": "https://converigo.com/word-to-pdf",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.docx",
+  "supported_platforms": ["web"],
+  "lifecycle_status": "active"
+}

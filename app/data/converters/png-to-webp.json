@@ -46,8 +46,8 @@
       "title": "PNG to JPG"
     },
     {
-      "slug": "jpg-to-webp",
-      "title": "JPG to WEBP"
+      "slug": "webp-to-png",
+      "title": "WebP to PNG"
     }
   ],
   "seo": {

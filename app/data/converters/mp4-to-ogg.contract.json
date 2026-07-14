@@ -1,0 +1,20 @@
+{
+  "id": "mp4-to-ogg",
+  "slug": "mp4-to-ogg",
+  "name": "MP4 to OGG",
+  "category": "audio",
+  "description": "Convert MP4 video files into OGG audio.",
+  "input_formats": ["mp4"],
+  "output_formats": ["ogg"],
+  "accepted_mime_types": ["video/mp4"],
+  "max_upload_size": 104857600,
+  "conversion_engine": "ffmpeg",
+  "landing_path": "/mp4-to-ogg",
+  "canonical_url": "https://converigo.com/mp4-to-ogg",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.mp4",
+  "supported_platforms": ["web"],
+  "lifecycle_status": "active"
+}

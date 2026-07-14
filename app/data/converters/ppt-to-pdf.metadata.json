@@ -1,0 +1,20 @@
+{
+  "id": "ppt-to-pdf",
+  "slug": "ppt-to-pdf",
+  "name": "PowerPoint to PDF",
+  "category": "document",
+  "description": "Convert PowerPoint presentations into PDF files.",
+  "input_formats": ["ppt", "pptx"],
+  "output_formats": ["pdf"],
+  "accepted_mime_types": ["application/vnd.ms-powerpoint", "application/vnd.openxmlformats-officedocument.presentationml.presentation"],
+  "max_upload_size": 104857600,
+  "conversion_engine": "document",
+  "landing_path": "/ppt-to-pdf",
+  "canonical_url": "https://converigo.com/ppt-to-pdf",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.pptx",
+  "supported_platforms": ["web"],
+  "lifecycle_status": "active"
+}

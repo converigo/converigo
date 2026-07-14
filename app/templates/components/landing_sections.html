@@ -1,0 +1,158 @@
+{% if landing %}
+<section class="section section-white">
+    <div class="container">
+        <div class="section-heading">
+            <span class="eyebrow">Intro</span>
+            <h2>{{ landing.intro.title }}</h2>
+        </div>
+        <p>{{ landing.intro.text }}</p>
+    </div>
+</section>
+
+<section id="guide" class="section">
+    <div class="container section-heading">
+        <span class="eyebrow">Step-by-step guide</span>
+        <h2>How it works</h2>
+    </div>
+    <div class="grid features-grid">
+        {% for step in landing.steps %}
+        <article class="feature-card hover-card">
+            <h3>{{ step.title }}</h3>
+            <p>{{ step.description }}</p>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section id="benefits" class="section section-white">
+    <div class="container section-heading">
+        <span class="eyebrow">Benefits</span>
+        <h2>Why people choose this converter</h2>
+    </div>
+    <div class="grid features-grid">
+        {% for item in landing.benefits %}
+        <article class="feature-card hover-card">
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.text }}</p>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section id="supported-formats" class="section">
+    <div class="container section-heading">
+        <span class="eyebrow">Supported formats</span>
+        <h2>Input and output formats</h2>
+    </div>
+    <div class="container">
+        <p><strong>Input:</strong> {{ landing.supported_formats.input | join(', ') }}</p>
+        <p><strong>Output:</strong> {{ landing.supported_formats.output | join(', ') }}</p>
+        <p>{{ landing.supported_formats.description }}</p>
+    </div>
+</section>
+
+<section id="tips" class="section section-white">
+    <div class="container section-heading">
+        <span class="eyebrow">Tips</span>
+        <h2>Helpful recommendations</h2>
+    </div>
+    <div class="grid features-grid">
+        {% for item in landing.tips %}
+        <article class="feature-card hover-card">
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.text }}</p>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section id="common-problems" class="section">
+    <div class="container section-heading">
+        <span class="eyebrow">Common problems</span>
+        <h2>What to do if something goes wrong</h2>
+    </div>
+    <div class="grid features-grid">
+        {% for item in landing.common_problems %}
+        <article class="feature-card hover-card">
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.text }}</p>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section id="faq" class="section section-white">
+    <div class="container section-heading">
+        <span class="eyebrow">FAQ</span>
+        <h2>Frequently asked questions</h2>
+    </div>
+    <div class="faq-grid">
+        {% for item in landing.faq %}
+        <div class="faq-item">
+            <button class="faq-question" type="button">
+                {{ item.question }}
+                <span class="faq-toggle">+</span>
+            </button>
+            <div class="faq-answer">
+                <p>{{ item.answer }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="section-heading">
+            <span class="eyebrow">Breadcrumb</span>
+            <h2>Navigation</h2>
+        </div>
+        <nav aria-label="Breadcrumb">
+            <ol>
+                {% for item in landing.breadcrumb %}
+                <li><a href="{{ item.url }}">{{ item.name }}</a></li>
+                {% endfor %}
+            </ol>
+        </nav>
+    </div>
+</section>
+
+<section class="section section-white">
+    <div class="container">
+        <div class="section-heading">
+            <span class="eyebrow">Download</span>
+            <h2>{{ landing.download.title }}</h2>
+        </div>
+        <p>{{ landing.download.text }}</p>
+        <a href="{{ landing.download.primary_href }}" class="btn btn-primary">{{ landing.download.primary_text }}</a>
+    </div>
+</section>
+
+<section id="related-tools" class="section">
+    <div class="container section-heading">
+        <span class="eyebrow">Related converters</span>
+        <h2>{{ landing.internal_links.title }}</h2>
+    </div>
+    <div class="grid popular-grid">
+        {% for item in landing.related_converters %}
+        <article class="card card-lg hover-card">
+            <h3><a href="{{ item.href }}">{{ item.title }}</a></h3>
+            <p>{{ item.description }}</p>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section section-white">
+    <div class="container">
+        <div class="card card-lg">
+            <h2>{{ landing.cta.title }}</h2>
+            <p>{{ landing.cta.text }}</p>
+            <div class="hero-cta">
+                <a href="{{ landing.cta.primary_href or '#converter' }}" class="btn btn-primary">{{ landing.cta.primary_text or 'Convert now' }}</a>
+                <a href="{{ landing.cta.secondary_href or '#faq' }}" class="btn btn-outline">{{ landing.cta.secondary_text or 'Read FAQs' }}</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}

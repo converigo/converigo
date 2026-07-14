@@ -1,0 +1,20 @@
+{
+  "id": "pptx-to-pdf",
+  "slug": "pptx-to-pdf",
+  "name": "PPTX to PDF",
+  "description": "Convert PowerPoint presentations into printable PDF files.",
+  "category": "pdf",
+  "input_formats": ["pptx"],
+  "output_formats": ["pdf"],
+  "accepted_mime_types": ["application/vnd.openxmlformats-officedocument.presentationml.presentation"],
+  "max_upload_size": 104857600,
+  "conversion_engine": "document",
+  "landing_path": "/pptx-to-pdf",
+  "canonical_url": "https://converigo.com/pptx-to-pdf",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.pptx",
+  "supported_platforms": ["web", "api"],
+  "lifecycle_status": "active"
+}

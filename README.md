@@ -38,7 +38,7 @@ Menjadi website file converter yang paling modern, cepat, dan mudah digunakan.
 ## Project Structure
 
 ```
-Convertin/
+Converigo/
 
 app/
 

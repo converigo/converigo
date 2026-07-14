@@ -1,0 +1,20 @@
+{
+  "id": "heic-to-jpg",
+  "slug": "heic-to-jpg",
+  "name": "HEIC to JPG",
+  "category": "image",
+  "description": "Convert HEIC images into JPG format for compatibility.",
+  "input_formats": ["heic"],
+  "output_formats": ["jpg"],
+  "accepted_mime_types": ["image/heic"],
+  "max_upload_size": 104857600,
+  "conversion_engine": "image",
+  "landing_path": "/heic-to-jpg",
+  "canonical_url": "https://converigo.com/heic-to-jpg",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.heic",
+  "supported_platforms": ["web"],
+  "lifecycle_status": "active"
+}

@@ -1,0 +1,18 @@
+{
+  "slug": "pdf-to-xlsx",
+  "hero": { "title": "PDF to XLSX", "subtitle": "Turn PDF tables into editable Excel spreadsheets." },
+  "steps": ["Upload PDF","Select extraction settings","Download XLSX"],
+  "benefits": ["Edit extracted tables","Reuse data","Analyze quickly"],
+  "supported_formats": {"input": [".pdf"], "output": [".xlsx"], "description": "PDF input, XLSX output"},
+  "features": [{"title":"Table extraction","text":"Detects and exports tables to sheets."}],
+  "how_to_use": ["Upload your PDF.", "Select table areas or use automatic detection.", "Download the XLSX workbook."],
+  "about_formats": ["PDF often contains tables and reports.", "XLSX stores tabular data in spreadsheets for analysis."],
+  "compatibility": "Web and API",
+  "common_problems": ["Complex table layouts may not map perfectly","Scanned PDFs require OCR"],
+  "tips": ["Crop to the table area for better extraction"],
+  "faq": [{"question":"Will it extract multiple tables?","answer":"Yes, we attempt to detect multiple tables and export them into a single workbook."}],
+  "related_tools": ["xlsx-to-pdf","pdf-to-excel"],
+  "internal_links": {"items": [{"title":"PDF Tools","href":"/pdf-tools"}]},
+  "cta": {"label":"Convert PDF to XLSX","href":"/pdf-to-xlsx"},
+  "json_ld": {"@context":"https://schema.org","@type":"SoftwareApplication","name":"PDF to XLSX Converter"}
+}

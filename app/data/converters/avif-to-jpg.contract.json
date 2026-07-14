@@ -1,0 +1,20 @@
+{
+  "id": "avif-to-jpg",
+  "slug": "avif-to-jpg",
+  "name": "AVIF to JPG",
+  "category": "image",
+  "description": "Convert AVIF images into JPG format.",
+  "input_formats": ["avif"],
+  "output_formats": ["jpg", "jpeg"],
+  "accepted_mime_types": ["image/avif"],
+  "max_upload_size": 104857600,
+  "conversion_engine": "image",
+  "landing_path": "/avif-to-jpg",
+  "canonical_url": "https://converigo.com/avif-to-jpg",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.avif",
+  "supported_platforms": ["web"],
+  "lifecycle_status": "active"
+}

@@ -4,6 +4,10 @@ Author  : Pico Lala & ChatGPT
 Version : 2.2.0
 """
 
+import json
+import shutil
+import subprocess
+import tempfile
 from pathlib import Path
 
 from fastapi import UploadFile
@@ -173,7 +177,94 @@ def _get_content_type(file: UploadFile) -> str | None:
     return None
 
 
+MEDIA_EXTENSIONS = {
+    "mp3",
+    "wav",
+    "aac",
+    "ogg",
+    "flac",
+    "m4a",
+    "mp4",
+    "mov",
+    "avi",
+    "mkv",
+    "webm",
+}
+
+
+def _validate_media_with_ffprobe(file: UploadFile, extension: str) -> None:
+    if extension not in MEDIA_EXTENSIONS:
+        return
+
+    ffprobe = shutil.which("ffprobe")
+    if not ffprobe:
+        return
+
+    current_position = file.file.tell()
+
+    try:
+        file.file.seek(0)
+
+        with tempfile.NamedTemporaryFile(suffix=f".{extension}", delete=False) as temp_file:
+            temp_path = Path(temp_file.name)
+
+            while True:
+                chunk = file.file.read(1024 * 1024)
+                if not chunk:
+                    break
+                temp_file.write(chunk)
+
+        try:
+            result = subprocess.run(
+                [
+                    ffprobe,
+                    "-v",
+                    "error",
+                    "-show_entries",
+                    "format=format_name:stream=codec_type",
+                    "-of",
+                    "json",
+                    str(temp_path),
+                ],
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+
+            if result.returncode != 0:
+                raise FileValidationError(
+                    "Uploaded file contents do not match the file type."
+                )
+
+            try:
+                payload = json.loads(result.stdout or "{}")
+            except json.JSONDecodeError as exc:
+                raise FileValidationError(
+                    "Uploaded file contents do not match the file type."
+                ) from exc
+
+            format_name = (payload.get("format") or {}).get("format_name")
+            streams = payload.get("streams") or []
+
+            if not format_name or not streams:
+                raise FileValidationError(
+                    "Uploaded file contents do not match the file type."
+                )
+
+        finally:
+            try:
+                temp_path.unlink(missing_ok=True)
+            except Exception:
+                pass
+    finally:
+        file.file.seek(current_position)
+
+
 def validate_signature(file: UploadFile, extension: str) -> None:
+
+    if extension in MEDIA_EXTENSIONS:
+        _validate_media_with_ffprobe(file, extension)
+        return
 
     signatures = FILE_SIGNATURES.get(extension, [])
 

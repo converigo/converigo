@@ -1,0 +1,145 @@
+{
+  "slug": "rar-extract",
+  "title": "RAR File Extractor",
+  "description": "Extract files from RAR archives online instantly and securely.",
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".rar",
+    "button_text": "Upload RAR"
+  },
+  "faq": [
+    {
+      "question": "How do I extract a RAR file?",
+      "answer": "Upload your RAR file to Converigo, and the contents will be extracted and ready for download immediately."
+    },
+    {
+      "question": "Is the extraction secure?",
+      "answer": "Yes, files are processed securely on our servers and automatically deleted after extraction."
+    },
+    {
+      "question": "What file sizes are supported?",
+      "answer": "RAR files up to 500MB can be extracted instantly on Converigo."
+    },
+    {
+      "question": "Can I extract RAR5 format files?",
+      "answer": "Yes, both RAR4 and RAR5 formats are supported for extraction."
+    },
+    {
+      "question": "What about password-protected RAR files?",
+      "answer": "Password-protected RAR files require the correct password for successful extraction."
+    },
+    {
+      "question": "Do you support multi-volume RAR archives?",
+      "answer": "Multi-part RAR archives require all volumes to be present for complete extraction."
+    },
+    {
+      "question": "What if extraction fails?",
+      "answer": "If extraction fails, ensure the RAR file is not corrupted and try re-uploading."
+    },
+    {
+      "question": "Can I extract RAR files on my phone?",
+      "answer": "Yes, Converigo works on all modern browsers and devices."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "zip-extract",
+      "title": "ZIP Extract"
+    },
+    {
+      "slug": "7z-extract",
+      "title": "7Z Extract"
+    },
+    {
+      "slug": "tar-extract",
+      "title": "TAR Extract"
+    }
+  ],
+  "seo": {
+    "title": "RAR File Extractor | Converigo",
+    "description": "Extract RAR files online for free. Fast, secure, and no installation required.",
+    "keywords": "rar extractor, extract rar, rar files, archive extraction, winrar"
+  },
+  "source": "rar",
+  "target": "rar",
+  "category": "archive",
+  "active": true,
+  "popular": true,
+  "featured": false,
+  "hero": {
+    "eyebrow": "Archive tool",
+    "title": "Extract RAR Files Online Free",
+    "description": "Extract files from RAR archives in seconds with Converigo. No installation needed.",
+    "panel_label": "Ready to extract",
+    "panel_title": "Upload a RAR file and receive extracted contents instantly."
+  },
+  "features": [
+    {
+      "title": "Instant extraction",
+      "text": "Extract RAR contents in seconds without installing WinRAR or other software."
+    },
+    {
+      "title": "Secure processing",
+      "text": "Your files are processed securely and automatically deleted after extraction."
+    },
+    {
+      "title": "Large file support",
+      "text": "Extract RAR files up to 500MB in size instantly."
+    },
+    {
+      "title": "RAR5 support",
+      "text": "Handles both legacy RAR4 and modern RAR5 format files."
+    },
+    {
+      "title": "Cross-platform",
+      "text": "Works on Windows, Mac, Linux, and all modern mobile devices."
+    },
+    {
+      "title": "No limits",
+      "text": "Extract unlimited files and archives without any restrictions."
+    }
+  ],
+  "supported_formats": {
+    "input": ["RAR"],
+    "output": ["RAR"],
+    "description": "RAR input, extracted files output"
+  },
+  "how_to_use": [
+    {
+      "title": "Upload your RAR file",
+      "description": "Select a RAR archive from your device to begin extraction."
+    },
+    {
+      "title": "Wait for processing",
+      "description": "Converigo extracts the contents instantly with secure processing."
+    },
+    {
+      "title": "Download extracted files",
+      "description": "Get all extracted files as a folder ready to download immediately."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is a RAR file?",
+      "text": "RAR is a powerful archive format known for high compression ratios. It's commonly used for large file collections and often requires WinRAR to open on Windows."
+    },
+    {
+      "title": "Why extract a RAR file?",
+      "answer": "Extracting RAR files allows you to access the original contents, modify files, and view the folder structure without needing WinRAR."
+    },
+    {
+      "title": "RAR compression",
+      "text": "RAR provides efficient lossless compression. Extracted files are identical to the originals and maintain their properties."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to extract",
+    "title": "Extract RAR files in seconds",
+    "text": "Upload your RAR archive and get all files instantly.",
+    "primary_text": "Extract now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  }
+}

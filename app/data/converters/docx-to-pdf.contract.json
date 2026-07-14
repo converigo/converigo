@@ -1,0 +1,20 @@
+{
+  "id": "docx-to-pdf",
+  "slug": "docx-to-pdf",
+  "name": "DOCX to PDF",
+  "description": "Convert Microsoft Word DOCX documents to PDF for sharing and printing.",
+  "category": "pdf",
+  "input_formats": ["docx"],
+  "output_formats": ["pdf"],
+  "accepted_mime_types": ["application/vnd.openxmlformats-officedocument.wordprocessingml.document"],
+  "max_upload_size": 52428800,
+  "conversion_engine": "document",
+  "landing_path": "/docx-to-pdf",
+  "canonical_url": "https://converigo.com/docx-to-pdf",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.docx",
+  "supported_platforms": ["web", "api"],
+  "lifecycle_status": "active"
+}

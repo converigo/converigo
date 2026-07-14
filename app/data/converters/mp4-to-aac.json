@@ -1,0 +1,101 @@
+{
+  "slug": "mp4-to-aac",
+  "title": "MP4 to AAC Converter",
+  "description": "Convert MP4 video files into AAC audio for streaming and device compatibility.",
+  "upload_form": {
+    "action": "/convert",
+    "method": "post",
+    "accept": ".mp4",
+    "button_text": "Convert MP4 to AAC"
+  },
+  "faq": [
+    {
+      "question": "What file types can I upload?",
+      "answer": "Upload MP4 video files only."
+    },
+    {
+      "question": "What output do I get?",
+      "answer": "An AAC audio file that is compatible with many devices and apps."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "mp4-to-mp3",
+      "title": "MP4 to MP3"
+    },
+    {
+      "slug": "mp4-to-m4a",
+      "title": "MP4 to M4A"
+    }
+  ],
+  "seo": {
+    "title": "MP4 to AAC | Converigo",
+    "description": "Convert MP4 to AAC online for efficient audio streaming.",
+    "keywords": "mp4 to aac, video to audio, file converter"
+  },
+  "source": "mp4",
+  "target": "aac",
+  "category": "audio",
+  "active": true,
+  "popular": true,
+  "featured": false,
+  "hero": {
+    "eyebrow": "Converter tool",
+    "title": "Convert MP4 to AAC Online Free",
+    "description": "Convert MP4 video files into AAC audio quickly and reliably.",
+    "panel_label": "Ready to convert",
+    "panel_title": "Upload an MP4 file and receive an AAC result in seconds."
+  },
+  "features": [
+    {
+      "title": "Wide compatibility",
+      "text": "AAC is supported by most mobile devices, browsers, and streaming platforms."
+    },
+    {
+      "title": "Fast workflow",
+      "text": "Upload, convert, and download in a few quick steps."
+    },
+    {
+      "title": "Secure processing",
+      "text": "Your files are handled securely and the result is ready to use immediately."
+    }
+  ],
+  "supported_formats": {
+    "input": ["MP4"],
+    "output": ["AAC"],
+    "description": "MP4 input, AAC output"
+  },
+  "how_to_use": [
+    {
+      "title": "Upload your file",
+      "description": "Select an MP4 file from your device to start the conversion."
+    },
+    {
+      "title": "Choose the output format",
+      "description": "Pick AAC as the result format and review the conversion options."
+    },
+    {
+      "title": "Download the converted file",
+      "description": "Get your converted file immediately without installing extra software."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is MP4?",
+      "text": "MP4 is a container format that commonly stores video and audio."
+    },
+    {
+      "title": "What is AAC?",
+      "text": "AAC is a modern compressed audio format often used for streaming and mobile playback."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Convert MP4 files to AAC in seconds",
+    "text": "Upload your file and receive a ready-to-use result instantly.",
+    "primary_text": "Convert now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  }
+}

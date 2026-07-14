@@ -1,5 +1,6 @@
 import asyncio
 from io import BytesIO
+from unittest.mock import patch
 
 import pytest
 from fastapi import UploadFile
@@ -43,4 +44,42 @@ def test_oversized_upload_is_rejected(monkeypatch, tmp_path):
     file = UploadFile(filename="large.txt", file=BytesIO(oversized_payload))
 
     with pytest.raises(UploadError, match="Maximum upload size"):
+        asyncio.run(service.process_upload(file))
+
+
+def test_mp4_with_mobile_container_signature_is_accepted(monkeypatch, tmp_path):
+    monkeypatch.setattr(settings, "MAX_UPLOAD_SIZE_MB", 100, raising=False)
+    monkeypatch.setattr(settings, "MAX_UPLOAD_SIZE", 100 * 1024 * 1024, raising=False)
+    monkeypatch.setattr(upload_service_module, "UPLOAD_DIR", tmp_path, raising=False)
+
+    service = UploadService()
+    payload = b"\x00\x00\x00\x14moov" + b"\x00" * 24
+    file = UploadFile(
+        filename="android-recording.mp4",
+        file=BytesIO(payload),
+        headers={"content-type": "video/mp4"},
+    )
+
+    # Mock ffprobe to skip validation in test environment
+    with patch("app.utils.file_validator.shutil.which", return_value=None):
+        saved_path = asyncio.run(service.process_upload(file))
+
+        assert saved_path.exists()
+        saved_path.unlink(missing_ok=True)
+
+
+def test_mp4_with_conflicting_content_type_is_rejected(monkeypatch, tmp_path):
+    monkeypatch.setattr(settings, "MAX_UPLOAD_SIZE_MB", 100, raising=False)
+    monkeypatch.setattr(settings, "MAX_UPLOAD_SIZE", 100 * 1024 * 1024, raising=False)
+    monkeypatch.setattr(upload_service_module, "UPLOAD_DIR", tmp_path, raising=False)
+
+    service = UploadService()
+    payload = b"\x00\x00\x00\x14ftyp" + b"\x00" * 24
+    file = UploadFile(
+        filename="fake.mp4",
+        file=BytesIO(payload),
+        headers={"content-type": "text/plain"},
+    )
+
+    with pytest.raises(UploadError, match="content type"):
         asyncio.run(service.process_upload(file))

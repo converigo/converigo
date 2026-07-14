@@ -42,12 +42,12 @@
   ],
   "related_tools": [
     {
-      "slug": "webp-to-jpg",
-      "title": "WEBP to JPG"
+      "slug": "png-to-webp",
+      "title": "PNG to WebP"
     },
     {
-      "slug": "png-to-webp",
-      "title": "PNG to WEBP"
+      "slug": "png-to-jpg",
+      "title": "PNG to JPG"
     }
   ],
   "seo": {

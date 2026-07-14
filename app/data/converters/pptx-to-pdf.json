@@ -1,0 +1,18 @@
+{
+  "slug": "pptx-to-pdf",
+  "hero": { "title": "PPTX to PDF", "subtitle": "Export presentations to PDF for distribution." },
+  "steps": ["Upload PPTX","Choose layout","Download PDF"],
+  "benefits": ["Consistent slides","Printable","Shareable"],
+  "supported_formats": {"input": [".pptx", ".ppt"], "output": [".pdf"], "description": "PPTX input, PDF output"},
+  "features": [{"title":"Slide fidelity","text":"Preserves slide visuals for distribution."}],
+  "how_to_use": ["Upload your PPTX file.", "Select paper size and layout.", "Download the PDF version."],
+  "about_formats": ["PPTX is an editable presentation format used by PowerPoint.", "PDF is static and ideal for distribution and printing."],
+  "compatibility": "Web and API",
+  "common_problems": ["Embedded fonts may change","Animations are not preserved"],
+  "tips": ["Embed fonts before export for best fidelity"],
+  "faq": [{"question":"Are animations preserved?","answer":"No — PDF is static and animations are not exported."}],
+  "related_tools": ["pdf-to-ppt","docx-to-pdf"],
+  "internal_links": {"items": [{"title":"PDF Tools","href":"/pdf-tools"}]},
+  "cta": {"label":"Convert PPTX to PDF","href":"/pptx-to-pdf"},
+  "json_ld": {"@context":"https://schema.org","@type":"SoftwareApplication","name":"PPTX to PDF Converter"}
+}

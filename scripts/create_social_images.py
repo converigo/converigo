@@ -3,9 +3,9 @@ from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parent.parent
 IMAGES_DIR = ROOT / "app" / "static" / "images"
-LOGO_PATH = IMAGES_DIR / "convertin-logo.png"
+LOGO_PATH = IMAGES_DIR / "converigo-logo.png"
 OUTPUTS = [
-    (IMAGES_DIR / "og-home.png", "Converigo\nFast Online File Conversion"),
+    (IMAGES_DIR / "og-home.png", "Converigo\nFast, Free & Secure Online File Converter"),
     (IMAGES_DIR / "og-default.png", "Converigo\nConvert files fast and securely"),
 ]
 

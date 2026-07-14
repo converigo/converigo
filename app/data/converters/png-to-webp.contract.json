@@ -1,0 +1,20 @@
+{
+  "id": "png-to-webp",
+  "slug": "png-to-webp",
+  "name": "PNG to WebP",
+  "category": "image",
+  "description": "Convert PNG images into WebP format.",
+  "input_formats": ["png"],
+  "output_formats": ["webp"],
+  "accepted_mime_types": ["image/png"],
+  "max_upload_size": 104857600,
+  "conversion_engine": "image",
+  "landing_path": "/png-to-webp",
+  "canonical_url": "https://converigo.com/png-to-webp",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.png",
+  "supported_platforms": ["web"],
+  "lifecycle_status": "active"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "pdf-to-ppt",
+  "slug": "pdf-to-ppt",
+  "name": "PDF to PPT",
+  "category": "document",
+  "description": "Convert PDF documents into PowerPoint presentations.",
+  "input_formats": ["pdf"],
+  "output_formats": ["ppt"],
+  "accepted_mime_types": ["application/pdf"],
+  "max_upload_size": 104857600,
+  "conversion_engine": "document",
+  "landing_path": "/pdf-to-ppt",
+  "canonical_url": "https://converigo.com/pdf-to-ppt",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.pdf",
+  "supported_platforms": ["web"],
+  "lifecycle_status": "active"
+}

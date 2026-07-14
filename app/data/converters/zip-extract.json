@@ -1,0 +1,145 @@
+{
+  "slug": "zip-extract",
+  "title": "ZIP File Extractor",
+  "description": "Extract files from ZIP archives online instantly and securely.",
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".zip",
+    "button_text": "Upload ZIP"
+  },
+  "faq": [
+    {
+      "question": "How do I extract a ZIP file?",
+      "answer": "Upload your ZIP file to Converigo, and the contents will be extracted and ready for download immediately."
+    },
+    {
+      "question": "Is the extraction secure?",
+      "answer": "Yes, files are processed securely on our servers and automatically deleted after extraction."
+    },
+    {
+      "question": "What file sizes are supported?",
+      "answer": "ZIP files up to 500MB can be extracted instantly on Converigo."
+    },
+    {
+      "question": "Will my original ZIP file be preserved?",
+      "answer": "Yes, extraction doesn't modify the original ZIP file. You receive only the extracted contents."
+    },
+    {
+      "question": "Can I extract password-protected ZIPs?",
+      "answer": "Password-protected ZIP files require the correct password for successful extraction."
+    },
+    {
+      "question": "Do you support nested ZIP files?",
+      "answer": "Yes, nested archives within the ZIP can be extracted, though only the top level is automated."
+    },
+    {
+      "question": "What happens if extraction fails?",
+      "answer": "If extraction fails, try re-uploading the ZIP file or checking that it's not corrupted."
+    },
+    {
+      "question": "Can I use ZIP extraction on mobile?",
+      "answer": "Yes, Converigo works on all modern browsers on desktop, tablet, and mobile devices."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "rar-extract",
+      "title": "RAR Extract"
+    },
+    {
+      "slug": "7z-extract",
+      "title": "7Z Extract"
+    },
+    {
+      "slug": "tar-extract",
+      "title": "TAR Extract"
+    }
+  ],
+  "seo": {
+    "title": "ZIP File Extractor | Converigo",
+    "description": "Extract ZIP files online for free. Fast, secure, and no installation required.",
+    "keywords": "zip extractor, extract zip, zip files, archive extraction, file compression"
+  },
+  "source": "zip",
+  "target": "zip",
+  "category": "archive",
+  "active": true,
+  "popular": true,
+  "featured": true,
+  "hero": {
+    "eyebrow": "Archive tool",
+    "title": "Extract ZIP Files Online Free",
+    "description": "Extract files from ZIP archives in seconds with Converigo. No installation needed.",
+    "panel_label": "Ready to extract",
+    "panel_title": "Upload a ZIP file and receive extracted contents instantly."
+  },
+  "features": [
+    {
+      "title": "Instant extraction",
+      "text": "Extract ZIP contents in seconds without installing any software."
+    },
+    {
+      "title": "Secure processing",
+      "text": "Your files are processed securely and automatically deleted after extraction."
+    },
+    {
+      "title": "Large file support",
+      "text": "Extract ZIP files up to 500MB in size instantly."
+    },
+    {
+      "title": "Preserved structure",
+      "text": "Original folder structure and file organization is maintained."
+    },
+    {
+      "title": "Cross-platform",
+      "text": "Works on Windows, Mac, Linux, and all modern mobile devices."
+    },
+    {
+      "title": "No limits",
+      "text": "Extract unlimited files and archives without any restrictions."
+    }
+  ],
+  "supported_formats": {
+    "input": ["ZIP"],
+    "output": ["ZIP"],
+    "description": "ZIP input, extracted files output"
+  },
+  "how_to_use": [
+    {
+      "title": "Upload your ZIP file",
+      "description": "Select a ZIP archive from your device to begin extraction."
+    },
+    {
+      "title": "Wait for processing",
+      "description": "Converigo extracts the contents instantly with secure processing."
+    },
+    {
+      "title": "Download extracted files",
+      "description": "Get all extracted files as a folder ready to download immediately."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is a ZIP file?",
+      "text": "ZIP is a widely-used archive format for compressing and bundling multiple files together. It's supported on virtually all operating systems and devices."
+    },
+    {
+      "title": "Why extract a ZIP file?",
+      "text": "Extracting ZIPs allows you to access the original files, modify them, and view folder structures that were compressed into the archive."
+    },
+    {
+      "title": "ZIP file compression",
+      "text": "ZIP files reduce storage space using lossless compression. Extracted files are identical to the originals."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to extract",
+    "title": "Extract ZIP files in seconds",
+    "text": "Upload your ZIP archive and get all files instantly.",
+    "primary_text": "Extract now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "slug": "odt-to-pdf",
+  "hero": { "title": "ODT to PDF", "subtitle": "Convert ODT files from LibreOffice/OpenOffice to PDF." },
+  "steps": ["Upload ODT","Choose PDF","Download PDF"],
+  "benefits": ["Portable format","Preserve layout","Easy sharing"],
+  "supported_formats": {"input": [".odt"], "output": [".pdf"], "description": "ODT input, PDF output"},
+  "features": [{"title":"LibreOffice compatibility","text":"Convert ODT files without installing LibreOffice."}],
+  "how_to_use": ["Upload your ODT file.", "Confirm conversion options.", "Download the PDF."],
+  "about_formats": ["ODT is the OpenDocument Text format used by LibreOffice.", "PDF is suitable for sharing and printing documents."],
+  "compatibility": "Web and API",
+  "common_problems": ["Macros are not supported","Complex styles may vary"],
+  "tips": ["Flatten embedded objects before conversion"],
+  "faq": [{"question":"Do I need LibreOffice installed?","answer":"No — server-side conversion is handled by the engine when available."}],
+  "related_tools": ["docx-to-pdf","pdf-to-docx"],
+  "internal_links": {"items": [{"title":"PDF Tools","href":"/pdf-tools"}]},
+  "cta": {"label":"Convert ODT to PDF","href":"/odt-to-pdf"},
+  "json_ld": {"@context":"https://schema.org","@type":"SoftwareApplication","name":"ODT to PDF Converter"}
+}

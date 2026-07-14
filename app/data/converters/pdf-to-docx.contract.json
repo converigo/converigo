@@ -1,0 +1,20 @@
+{
+  "id": "pdf-to-docx",
+  "slug": "pdf-to-docx",
+  "name": "PDF to DOCX",
+  "description": "Convert PDFs into editable Word DOCX documents.",
+  "category": "pdf",
+  "input_formats": ["pdf"],
+  "output_formats": ["docx"],
+  "accepted_mime_types": ["application/pdf"],
+  "max_upload_size": 52428800,
+  "conversion_engine": "document",
+  "landing_path": "/pdf-to-docx",
+  "canonical_url": "https://converigo.com/pdf-to-docx",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.pdf",
+  "supported_platforms": ["web", "api"],
+  "lifecycle_status": "active"
+}

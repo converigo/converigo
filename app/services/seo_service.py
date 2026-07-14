@@ -27,7 +27,7 @@ class SeoService:
         base_url = self._build_base_url(request)
 
         return {
-            "title": "Converigo | Fast Online File Conversion",
+            "title": "Converigo | Fast, Free & Secure Online File Converter",
             "description": "Converigo offers fast, secure, and automatic file conversion from video, audio, image, and document formats.",
             "canonical": f"{base_url}/",
             "og_url": f"{base_url}/",
@@ -46,6 +46,7 @@ class SeoService:
         self,
         request: Any,
         tool_data: dict[str, Any],
+        canonical_path: str | None = None,
     ) -> dict[str, str]:
 
         base_url = self._build_base_url(request)
@@ -81,9 +82,9 @@ class SeoService:
         else:
             description = tool_data.get("description") or seo_meta.get("description") or f"Convert {label} online free"
 
-        canonical = (
-            seo_meta.get("canonical")
-            or f"{base_url}/tools/{tool_data['slug']}"
+        canonical = seo_meta.get("canonical") or self._resolve_url(
+            base_url,
+            canonical_path or f"/tools/{tool_data['slug']}",
         )
 
         og_image = (
@@ -166,6 +167,13 @@ class SeoService:
             return path
         return base_url.rstrip("/") + path
 
+    def _resolve_url(self, base_url: str, path: str | None) -> str:
+        if not path:
+            return base_url
+        if path.startswith("http://") or path.startswith("https://"):
+            return path
+        return base_url.rstrip("/") + (path if path.startswith("/") else f"/{path}")
+
     def _build_breadcrumb_list(self, base_url: str, items: list[dict[str, str]]) -> dict[str, Any]:
         return {
             "@type": "BreadcrumbList",
@@ -186,6 +194,7 @@ class SeoService:
         tool_data: dict[str, Any] | None = None,
         page_type: str | None = None,
         page_data: dict[str, Any] | None = None,
+        canonical_path: str | None = None,
     ) -> dict[str, Any]:
 
         base_url = self._build_base_url(request)
@@ -194,7 +203,7 @@ class SeoService:
             "@type": "Organization",
             "name": "Converigo",
             "url": base_url,
-            "logo": f"{base_url}/static/images/convertin-logo.png",
+            "logo": f"{base_url}/static/images/converigo-logo.png",
         }
 
         website = {
@@ -349,6 +358,8 @@ class SeoService:
                 "@graph": graph,
             }
 
+        tool_url = self._resolve_url(base_url, canonical_path or f"/tools/{tool_data['slug']}")
+
         breadcrumb_items = [
             {
                 "@type": "ListItem",
@@ -360,7 +371,7 @@ class SeoService:
                 "@type": "ListItem",
                 "position": 2,
                 "name": tool_data["title"],
-                "item": f"{base_url}/tools/{tool_data['slug']}",
+                "item": tool_url,
             },
         ]
 
@@ -381,7 +392,7 @@ class SeoService:
             "name": tool_data["title"],
             "operatingSystem": "Web",
             "applicationCategory": "Utilities",
-            "url": f"{base_url}/tools/{tool_data['slug']}",
+            "url": tool_url,
             "description": tool_data.get("description", ""),
         }
 

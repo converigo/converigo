@@ -1,0 +1,20 @@
+{
+  "id": "odt-to-pdf",
+  "slug": "odt-to-pdf",
+  "name": "ODT to PDF",
+  "description": "Convert OpenDocument Text (ODT) files into PDF.",
+  "category": "pdf",
+  "input_formats": ["odt"],
+  "output_formats": ["pdf"],
+  "accepted_mime_types": ["application/vnd.oasis.opendocument.text"],
+  "max_upload_size": 52428800,
+  "conversion_engine": "document",
+  "landing_path": "/odt-to-pdf",
+  "canonical_url": "https://converigo.com/odt-to-pdf",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.odt",
+  "supported_platforms": ["web", "api"],
+  "lifecycle_status": "active"
+}

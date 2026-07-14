@@ -16,11 +16,22 @@ class ConverterDataService:
         if not self.data_dir.exists():
             return iter([])
 
-        return (
-            path
-            for path in self.data_dir.iterdir()
-            if path.suffix.lower() == ".json"
-        )
+        files: list[Path] = []
+
+        for path in self.data_dir.iterdir():
+            if not path.is_file() or path.suffix.lower() != ".json":
+                continue
+            if path.name.endswith(".contract.json"):
+                continue
+            if path.name.endswith(".metadata.json"):
+                stem = path.name.removesuffix(".metadata.json")
+                if (self.data_dir / f"{stem}.json").exists():
+                    continue
+                files.append(path)
+                continue
+            files.append(path)
+
+        return iter(files)
 
     def _load_converter(
         self,
@@ -34,9 +45,13 @@ class ConverterDataService:
 
             data = json.load(handle)
 
+        fallback_slug = path.stem
+        if path.name.endswith(".metadata.json"):
+            fallback_slug = path.name.removesuffix(".metadata.json")
+
         slug = data.setdefault(
             "slug",
-            path.stem,
+            fallback_slug,
         )
 
         # --------------------------------------------------
@@ -78,6 +93,9 @@ class ConverterDataService:
             "title",
             slug.replace("-", " ").upper(),
         )
+
+        data["cluster"] = self._infer_cluster(data)
+        data["output_category"] = self._infer_output_category(data)
 
         return data
 
@@ -190,9 +208,11 @@ class ConverterDataService:
         normalized = slug.strip().lower()
 
         for path in self._iter_converter_files():
+            stem = path.stem.lower()
+            if path.name.lower().endswith(".metadata.json"):
+                stem = path.name[: -len(".metadata.json")].lower()
 
-            if path.stem.lower() == normalized:
-
+            if stem == normalized:
                 return self._load_converter(path)
 
         raise FileNotFoundError(
@@ -205,62 +225,51 @@ class ConverterDataService:
         limit: int = 4,
     ) -> List[dict[str, Any]]:
 
-        related_slugs = [
+        from app.services.related_converter_service import RelatedConverterService
 
-            related.get("slug")
+        service = RelatedConverterService(self)
+        return service.get_related_converters(tool_data, limit=limit)
 
-            for related in tool_data.get(
-                "related_tools",
-                [],
-            )
+    def _infer_cluster(self, converter: dict[str, Any]) -> str:
+        source = str(converter.get("source") or "").lower()
+        target = str(converter.get("target") or "").lower()
+        if self._is_video(source) and self._is_audio(target):
+            return "video-audio"
+        if self._is_audio(source) and self._is_video(target):
+            return "video-audio"
+        if self._is_image(source) and self._is_image(target):
+            return "image"
+        if self._is_audio(source) and self._is_audio(target):
+            return "audio"
+        if self._is_video(source) and self._is_video(target):
+            return "video"
+        if self._is_document(source) and self._is_document(target):
+            return "document"
+        return str(converter.get("category") or "").lower()
 
-            if related.get("slug")
+    def _infer_output_category(self, converter: dict[str, Any]) -> str:
+        target = str(converter.get("target") or "").lower()
+        if self._is_audio(target):
+            return "audio"
+        if self._is_image(target):
+            return "image"
+        if self._is_video(target):
+            return "video"
+        if self._is_document(target):
+            return "document"
+        return str(converter.get("category") or "").lower()
 
-        ]
+    def _is_audio(self, value: str) -> bool:
+        return value in {"mp3", "wav", "flac", "ogg", "m4a", "aac", "opus"}
 
-        if not related_slugs:
+    def _is_image(self, value: str) -> bool:
+        return value in {"jpg", "jpeg", "png", "webp", "bmp", "gif", "ico", "svg"}
 
-            return self.list_popular_converters(
-                limit=limit,
-            )
+    def _is_video(self, value: str) -> bool:
+        return value in {"mp4", "mov", "avi", "mkv", "webm", "mpeg", "mpg", "wmv"}
 
-        resolved: List[dict[str, Any]] = []
-
-        for slug in related_slugs:
-
-            try:
-
-                resolved.append(
-                    self.load_converter_by_slug(slug)
-                )
-
-            except FileNotFoundError:
-
-                continue
-
-        if len(resolved) < limit:
-
-            fallback = [
-
-                tool
-
-                for tool in self.list_popular_converters(
-                    limit=limit,
-                )
-
-                if tool["slug"] not in related_slugs
-
-            ]
-
-            resolved.extend(
-
-                fallback[
-                    : limit - len(resolved)
-                ]
-
-            )
-
-        return resolved[:limit]
+    def _is_document(self, value: str) -> bool:
+        return value in {"pdf", "doc", "docx", "ppt", "pptx", "xls", "xlsx", "txt", "odt", "rtf"}
 
     def sitemap_entries(
         self,

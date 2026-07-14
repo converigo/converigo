@@ -20,12 +20,12 @@
   ],
   "related_tools": [
     {
-      "slug": "mp4-to-mp3",
-      "title": "MP4 to MP3"
+      "slug": "jpg-to-png",
+      "title": "JPG to PNG"
     },
     {
-      "slug": "pdf-to-word",
-      "title": "PDF to Word"
+      "slug": "png-to-webp",
+      "title": "PNG to WebP"
     }
   ],
   "seo": {

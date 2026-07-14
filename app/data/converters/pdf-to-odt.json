@@ -1,0 +1,18 @@
+{
+  "slug": "pdf-to-odt",
+  "hero": { "title": "PDF to ODT", "subtitle": "Convert PDFs into ODT editable documents." },
+  "steps": ["Upload PDF","Select ODT","Download ODT"],
+  "benefits": ["Edit in LibreOffice","Preserve text","Recover tables"],
+  "supported_formats": {"input": [".pdf"], "output": [".odt"], "description": "PDF input, ODT output"},
+  "features": [{"title":"Editable ODT output","text":"Produces ODT compatible with LibreOffice."}],
+  "how_to_use": ["Upload PDF.", "Select conversion preferences.", "Download ODT."],
+  "about_formats": ["ODT is editable in LibreOffice and OpenOffice.", "Use ODT when you need editable documents on open office suites."],
+  "compatibility": "Web and API",
+  "common_problems": ["Scanned PDFs require OCR","Complex layouts may need manual cleanup"],
+  "tips": ["Use OCR-enabled PDFs for best results"],
+  "faq": [{"question":"Can I edit after conversion?","answer":"Yes — ODT is editable in LibreOffice and OpenOffice."}],
+  "related_tools": ["odt-to-pdf","pdf-to-docx"],
+  "internal_links": {"items": [{"title":"PDF Tools","href":"/pdf-tools"}]},
+  "cta": {"label":"Convert PDF to ODT","href":"/pdf-to-odt"},
+  "json_ld": {"@context":"https://schema.org","@type":"SoftwareApplication","name":"PDF to ODT Converter"}
+}

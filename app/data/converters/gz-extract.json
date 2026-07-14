@@ -1,0 +1,145 @@
+{
+  "slug": "gz-extract",
+  "title": "GZIP File Extractor",
+  "description": "Extract files from GZIP archives online instantly and securely.",
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".gz,.gzip",
+    "button_text": "Upload GZIP"
+  },
+  "faq": [
+    {
+      "question": "How do I extract a GZ file?",
+      "answer": "Upload your GZIP file to Converigo, and the contents will be extracted and ready for download immediately."
+    },
+    {
+      "question": "Is the extraction secure?",
+      "answer": "Yes, files are processed securely on our servers and automatically deleted after extraction."
+    },
+    {
+      "question": "What file sizes are supported?",
+      "answer": "GZIP files up to 500MB can be extracted instantly on Converigo."
+    },
+    {
+      "question": "What is GZIP compression?",
+      "answer": "GZIP is a compression algorithm that reduces file size while preserving the original data exactly."
+    },
+    {
+      "question": "Can I extract TAR.GZ files?",
+      "answer": "Yes, TAR.GZ files (compressed TAR archives) are fully supported for extraction."
+    },
+    {
+      "question": "Are multiple files supported?",
+      "answer": "GZIP typically contains one file. For multiple files, use TAR.GZ or other multi-file formats."
+    },
+    {
+      "question": "What if extraction fails?",
+      "answer": "Ensure the GZIP file is not corrupted and try re-uploading if extraction fails."
+    },
+    {
+      "question": "Can I extract GZ files on mobile?",
+      "answer": "Yes, Converigo works on all modern browsers and devices."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "zip-extract",
+      "title": "ZIP Extract"
+    },
+    {
+      "slug": "tar-extract",
+      "title": "TAR Extract"
+    },
+    {
+      "slug": "rar-extract",
+      "title": "RAR Extract"
+    }
+  ],
+  "seo": {
+    "title": "GZIP File Extractor | Converigo",
+    "description": "Extract GZIP files online for free. Fast, secure, and no installation required.",
+    "keywords": "gzip extractor, extract gz, gzip files, file compression, decompress"
+  },
+  "source": "gz",
+  "target": "gz",
+  "category": "archive",
+  "active": true,
+  "popular": false,
+  "featured": false,
+  "hero": {
+    "eyebrow": "Archive tool",
+    "title": "Extract GZIP Files Online Free",
+    "description": "Extract files from GZIP archives in seconds with Converigo. No installation needed.",
+    "panel_label": "Ready to extract",
+    "panel_title": "Upload a GZIP file and receive extracted contents instantly."
+  },
+  "features": [
+    {
+      "title": "Instant extraction",
+      "text": "Extract GZIP contents in seconds without installing any software."
+    },
+    {
+      "title": "Secure processing",
+      "text": "Your files are processed securely and automatically deleted after extraction."
+    },
+    {
+      "title": "Large file support",
+      "text": "Extract GZIP files up to 500MB in size instantly."
+    },
+    {
+      "title": "Quality preservation",
+      "text": "Extracted files are identical to originals with lossless decompression."
+    },
+    {
+      "title": "Cross-platform",
+      "text": "Works on Windows, Mac, Linux, and all modern mobile devices."
+    },
+    {
+      "title": "No limits",
+      "text": "Extract unlimited files and archives without any restrictions."
+    }
+  ],
+  "supported_formats": {
+    "input": ["GZIP"],
+    "output": ["GZIP"],
+    "description": "GZIP input, extracted files output"
+  },
+  "how_to_use": [
+    {
+      "title": "Upload your GZIP file",
+      "description": "Select a GZIP archive from your device to begin extraction."
+    },
+    {
+      "title": "Wait for processing",
+      "description": "Converigo extracts the contents instantly with secure processing."
+    },
+    {
+      "title": "Download extracted file",
+      "description": "Get your extracted file ready to download immediately."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is a GZIP file?",
+      "text": "GZIP is a compression format used to reduce file size. It's widely used on the web for file distribution and data transfer."
+    },
+    {
+      "title": "Why extract a GZIP file?",
+      "text": "Extracting GZIP files recovers the original content and allows you to work with the uncompressed data."
+    },
+    {
+      "title": "GZIP compression ratio",
+      "text": "GZIP typically reduces file size by 60-80%, making it ideal for data distribution and backups."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to extract",
+    "title": "Extract GZIP files in seconds",
+    "text": "Upload your GZIP archive and get your file instantly.",
+    "primary_text": "Extract now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  }
+}

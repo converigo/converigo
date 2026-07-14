@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="{{ locale.lang_code or 'en' }}">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% include "partials/seo_meta.html" %}
+    <link rel="stylesheet" href="/static/css/style.css">
+    {% include "partials/structured_data.html" %}
+</head>
+
+<body>
+    <header class="site-header" role="banner">
+        <div class="container nav-wrap">
+            <a class="brand" href="/" aria-label="Converigo home">
+                <img src="/static/images/converigo-logo.png" alt="Converigo logo">
+                <span>Converigo</span>
+            </a>
+            <nav id="primaryNav" class="primary-nav" role="navigation" aria-label="Primary">
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/formats">Formats</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main" role="main">
+        <section class="section">
+            <div class="container section-heading">
+                <span class="eyebrow">Format Encyclopedia</span>
+                <h1>Explore supported file formats</h1>
+                <p>Browse detailed format pages with metadata, compatibility, best practices, and related converters.</p>
+            </div>
+            <div class="grid cards-grid">
+                {% for fmt in formats %}
+                <article class="card">
+                    <h2><a href="/formats/{{ fmt }}">{{ fmt.upper() }}</a></h2>
+                    <p>View the Converigo encyclopedia page for {{ fmt.upper() }} format.</p>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

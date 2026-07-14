@@ -25,6 +25,10 @@
     {
       "slug": "png-to-jpg",
       "title": "PNG to JPG"
+    },
+    {
+      "slug": "png-to-webp",
+      "title": "PNG to WebP"
     }
   ],
   "seo": {

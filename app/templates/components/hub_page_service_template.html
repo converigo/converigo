@@ -1,0 +1,60 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}{{ meta.title }}{% endblock %}
+
+{% block content %}
+<main class="container">
+  <nav aria-label="Breadcrumb">
+    <ol class="breadcrumb">
+      {% for item in breadcrumb %}
+      <li><a href="{{ item.url }}">{{ item.name }}</a></li>
+      {% endfor %}
+    </ol>
+  </nav>
+
+  <section>
+    <h1>{{ intro.title }}</h1>
+    <p>{{ intro.text }}</p>
+  </section>
+
+  <section>
+    <h2>Converters</h2>
+    <ul>
+      {% for converter in converter_list %}
+      <li>{{ converter.name }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section>
+    <h2>Popular converters</h2>
+    <ul>
+      {% for converter in popular_converters %}
+      <li>{{ converter.name }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section>
+    <h2>Related categories</h2>
+    <ul>
+      {% for item in related_category_section.items %}
+      <li><a href="{{ item.href }}">{{ item.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section>
+    <h2>FAQ</h2>
+    <ul>
+      {% for item in faq %}
+      <li><strong>{{ item.question }}</strong> {{ item.answer }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <script type="application/ld+json">
+    {{ json_ld | tojson }}
+  </script>
+</main>
+{% endblock %}

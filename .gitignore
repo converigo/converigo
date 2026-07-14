@@ -1,27 +1,63 @@
 # Python
 __pycache__/
-*.pyc
+*.py[cod]
 *.pyo
+*.pyd
+*.py.class
+*.egg-info/
+build/
+dist/
 
 # Virtual Environment
 .venv/
-
-# Environment
+venv/
 .env
+.env.*
+
+# Testing and tooling
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+pip-wheel-metadata/
+htmlcov/
+.coverage
+.coverage.*
 
 # Logs
 app/logs/
 *.log
 
-# Upload temporary
+# Runtime and temp files
 app/uploads/*
 app/outputs/*
 uploads/
 outputs/
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*~
+
+# Railway / deployment
+.railway/
+railway.env
+
+# Node
+node_modules/
+package-lock.json
 
 # OS
 .DS_Store
 Thumbs.db
+Desktop.ini
 
-# Editor
+# Editor / IDE
 .vscode/
+.idea/
+
+# Linux / macOS / Windows
+.AppleDouble
+.LSOverride
+._*
+*.lnk

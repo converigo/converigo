@@ -1,0 +1,18 @@
+{
+  "slug": "xlsx-to-pdf",
+  "hero": { "title": "XLSX to PDF", "subtitle": "Export spreadsheets to PDF for sharing and printing." },
+  "steps": ["Upload XLSX","Choose PDF","Download PDF"],
+  "benefits": ["Fixed layout","Easy sharing","Printable"],
+  "supported_formats": {"input": [".xlsx", ".xls"], "output": [".pdf"], "description": "XLSX input, PDF output"},
+  "features": [{"title":"Print-ready export","text":"Preserves sheet layout for printing."}],
+  "how_to_use": ["Upload your XLSX.", "Choose page and print settings.", "Download the PDF."],
+  "about_formats": ["XLSX is Microsoft Excel's workbook format.", "PDF is ideal for sharing and printing spreadsheets."],
+  "compatibility": "Web and API",
+  "common_problems": ["Complex formulas may not translate to static PDF","Large sheets may produce multiple pages"],
+  "tips": ["Adjust print area before conversion","Remove hidden rows/columns"],
+  "faq": [{"question":"Are formulas preserved?","answer":"PDF is static; formulas are not preserved in the PDF output."}],
+  "related_tools": ["pdf-to-excel","docx-to-pdf"],
+  "internal_links": {"items": [{"title":"PDF Tools","href":"/pdf-tools"}]},
+  "cta": {"label":"Convert XLSX to PDF","href":"/xlsx-to-pdf"},
+  "json_ld": {"@context":"https://schema.org","@type":"SoftwareApplication","name":"XLSX to PDF Converter"}
+}

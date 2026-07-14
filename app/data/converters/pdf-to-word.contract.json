@@ -1,0 +1,20 @@
+{
+  "id": "pdf-to-word",
+  "slug": "pdf-to-word",
+  "name": "PDF to Word",
+  "category": "document",
+  "description": "Convert PDF documents into editable Word files.",
+  "input_formats": ["pdf"],
+  "output_formats": ["docx"],
+  "accepted_mime_types": ["application/pdf"],
+  "max_upload_size": 104857600,
+  "conversion_engine": "document",
+  "landing_path": "/pdf-to-word",
+  "canonical_url": "https://converigo.com/pdf-to-word",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.pdf",
+  "supported_platforms": ["web"],
+  "lifecycle_status": "active"
+}
