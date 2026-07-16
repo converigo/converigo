@@ -5,6 +5,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Iterator, List
 
+from app.plugins.registry import registry as plugin_registry
 from app.services.converter_registry_service import ConverterRegistryService
 
 
@@ -106,6 +107,24 @@ class ConverterDataService:
 
         return active_converters
 
+    def _is_supported_converter(self, converter: dict[str, Any]) -> bool:
+        source = str(converter.get("source", "")).strip().lower()
+        target = str(converter.get("target", "")).strip().lower()
+        if not source or not target:
+            return False
+
+        try:
+            plugin_registry.get_plugin(source, target)
+            return True
+        except ValueError:
+            return False
+
+    def list_supported_converters(self) -> List[dict[str, Any]]:
+        return [
+            tool for tool in self.list_active_converters()
+            if self._is_supported_converter(tool)
+        ]
+
     def list_public_converters(self) -> List[dict[str, Any]]:
         """
         Return list of public converters that are:
@@ -119,7 +138,7 @@ class ConverterDataService:
         active_contract_slugs = self._get_active_contract_slugs()
         has_active_contracts = len(active_contract_slugs) > 0
 
-        for tool in self.list_all_converters():
+        for tool in self.list_supported_converters():
             slug = str(tool.get("slug", "")).strip().lower()
             if not slug:
                 continue
@@ -140,7 +159,7 @@ class ConverterDataService:
         self,
         limit: int = 6,
     ) -> List[dict[str, Any]]:
-        all_converters = self.list_active_converters()
+        all_converters = self.list_supported_converters()
 
         def sort_key(tool: dict[str, Any]) -> tuple[Any, ...]:
             featured = tool.get("featured", False)
@@ -168,7 +187,7 @@ class ConverterDataService:
         def sort_key(tool: dict[str, Any]) -> str:
             return tool.get("created_at", "")
 
-        all_converters = self.list_active_converters()
+        all_converters = self.list_supported_converters()
         sorted_tools = sorted(all_converters, key=sort_key, reverse=True)
         return sorted_tools[:limit]
 
@@ -268,7 +287,7 @@ class ConverterDataService:
             "webp-to-png": "/webp-to-png",
         }
 
-        for tool in self.list_active_converters():
+        for tool in self.list_supported_converters():
             path = landing_page_overrides.get(tool["slug"], f"/tools/{tool['slug']}")
             entries.append(
                 {

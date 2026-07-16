@@ -76,7 +76,7 @@ class HubService:
 
     def get_hub_page_data(self, slug: str) -> dict[str, Any]:
         hub = self.get_hub_definition(slug)
-        all_converters = self.converter_data_service.list_active_converters()
+        all_converters = self.converter_data_service.list_supported_converters()
         matching_converters = [
             tool for tool in all_converters if self._matches_hub(tool, slug)
         ]
