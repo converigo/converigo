@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Any
 
 from app.services.converter_data_service import ConverterDataService
+from app.plugins.registry import registry as plugin_registry
 
 
 class RecommendationService:
@@ -48,6 +49,22 @@ class RecommendationService:
         current_target = str(converter.get("target", "") or "").lower()
 
         ranked_converters = self._rank_converters(self.converter_data_service.list_public_converters())
+
+        # Filter out any converters that are not actually supported by the plugin registry
+        filtered_ranked: list[dict[str, Any]] = []
+        for tool in ranked_converters:
+            try:
+                source = str(tool.get("source", "") or "").strip().lower()
+                target = str(tool.get("target", "") or "").strip().lower()
+                if not source or not target:
+                    continue
+                plugin_registry.get_plugin(source, target)
+                filtered_ranked.append(tool)
+            except Exception:
+                # plugin not available or other registry issue -> skip
+                continue
+
+        ranked_converters = filtered_ranked
 
         related_candidates = self._get_related_candidates(converter, ranked_converters)
         popular_candidates = [tool for tool in ranked_converters if tool.get("slug") != current_slug and tool.get("popular", False)]
