@@ -22,6 +22,10 @@ class Settings:
         self.DOCUMENT_CONVERSION_TIMEOUT_SECONDS = int(os.getenv("DOCUMENT_CONVERSION_TIMEOUT_SECONDS", str(self.CONVERSION_TIMEOUT_SECONDS)))
         self.MAX_FILENAME_LENGTH = int(os.getenv("MAX_FILENAME_LENGTH", "255"))
         self.GA_MEASUREMENT_ID = os.getenv("GA_MEASUREMENT_ID", "")
+        self.RATE_LIMIT_CONVERT_REQUESTS_PER_MINUTE = int(os.getenv("RATE_LIMIT_CONVERT_REQUESTS_PER_MINUTE", "30"))
+        self.RATE_LIMIT_UPLOAD_REQUESTS_PER_MINUTE = int(os.getenv("RATE_LIMIT_UPLOAD_REQUESTS_PER_MINUTE", "20"))
+        self.RATE_LIMIT_API_REQUESTS_PER_MINUTE = int(os.getenv("RATE_LIMIT_API_REQUESTS_PER_MINUTE", "60"))
+        self.RATE_LIMIT_OTHER_REQUESTS_PER_MINUTE = int(os.getenv("RATE_LIMIT_OTHER_REQUESTS_PER_MINUTE", "120"))
 
         default_allowed_hosts = [
             "localhost",

@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 from datetime import datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, TYPE_CHECKING
 
 from app.services.authority_service import AuthorityService
 from app.services.comparison_service import ComparisonService
@@ -16,6 +16,9 @@ from app.services.knowledge_service import KnowledgeService
 from app.services.landing_service import LandingPageBuilder
 from app.services.seo_service import SeoService
 from app.services.topic_cluster_service import TopicClusterService
+
+if TYPE_CHECKING:
+    from app.services.content_quality_service import ContentQualityService
 
 
 class ProgrammaticSeoEngine:
@@ -46,6 +49,16 @@ class ProgrammaticSeoEngine:
         self.comparison_service = ComparisonService(self.contracts_dir)
         self.internal_link_service = InternalLinkService(self.contracts_dir)
         self.topic_cluster_service = TopicClusterService(self.contracts_dir)
+        self._content_quality_service: ContentQualityService | None = None
+
+    @property
+    def content_quality_service(self) -> ContentQualityService:
+        """Lazy load ContentQualityService to avoid circular imports."""
+        if self._content_quality_service is None:
+            # Import here to avoid circular import at module load time
+            from app.services.content_quality_service import ContentQualityService as CQS
+            self._content_quality_service = CQS(self.contracts_dir)
+        return self._content_quality_service
 
     def generate_page(
         self, format_name: str, page_type: str
@@ -100,6 +113,68 @@ class ProgrammaticSeoEngine:
                     continue
 
         return all_pages
+
+    def generate_page_with_quality_check(
+        self, format_name: str, page_type: str
+    ) -> dict[str, Any]:
+        """Generate page with quality evaluation before returning.
+        
+        Evaluates page quality, attaches quality metrics, and determines publication status.
+        """
+        page = self.generate_page(format_name, page_type)
+        quality_eval = self.content_quality_service.evaluate_page(format_name, page_type)
+        
+        # Attach quality metrics to page
+        page["quality_evaluation"] = quality_eval
+        page["quality_score"] = quality_eval.get("quality_score", 0)
+        page["quality_decision"] = quality_eval.get("decision", "REJECT")
+        page["publication_status"] = self._publication_status_for_decision(
+            page["quality_decision"], page["quality_score"]
+        )
+        
+        return page
+
+    def generate_all_pages_with_quality_control(
+        self, min_quality_score: float = 60
+    ) -> dict[str, dict[str, Any]]:
+        """Generate all pages with quality control filtering.
+        
+        Returns pages with explicit CQE publication status assigned.
+        """
+        formats = self._collect_all_formats()
+        all_pages = {}
+
+        for fmt in formats:
+            all_pages[fmt] = {}
+            for page_type in self.PAGE_TYPES:
+                try:
+                    page = self.generate_page_with_quality_check(fmt, page_type)
+                    page["publication_status"] = self._publication_status_for_decision(
+                        page["quality_decision"], page["quality_score"], min_quality_score
+                    )
+                    all_pages[fmt][page_type] = page
+                except Exception:
+                    continue
+
+        return all_pages
+
+    def _publication_status_for_decision(
+        self, decision: str, quality_score: float, min_quality_score: float = 60
+    ) -> str:
+        """Map CQE decision and score into a publication status."""
+        if decision == "PASS" and quality_score >= min_quality_score:
+            return "ELIGIBLE"
+        if decision == "PASS":
+            return "HOLD_FOR_REVIEW"
+        if decision == "NEEDS_REVIEW":
+            return "HOLD_FOR_REVIEW"
+        if decision == "NO_INDEX":
+            return "NO_INDEX"
+        return "REJECT"
+
+    def get_quality_report(self) -> dict[str, Any]:
+        """Get comprehensive quality report for all pages."""
+        return self.content_quality_service.evaluate_all_pages()
 
     def get_seo_page_coverage_report(self) -> dict[str, Any]:
         """Build SEO page coverage report."""

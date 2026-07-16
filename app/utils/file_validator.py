@@ -5,6 +5,7 @@ Version : 2.2.0
 """
 
 import json
+import logging
 import shutil
 import subprocess
 import tempfile
@@ -13,6 +14,8 @@ from pathlib import Path
 from fastapi import UploadFile
 
 from app.core.settings import settings
+
+logger = logging.getLogger(__name__)
 
 # ==========================================================
 # Configuration
@@ -27,6 +30,10 @@ ALLOWED_EXTENSIONS = {
     "gif",
     "webp",
     "bmp",
+    "avif",
+    "heic",
+    "heif",
+    "svg",
 
     # AUDIO
     "mp3",
@@ -48,6 +55,19 @@ ALLOWED_EXTENSIONS = {
     "docx",
     "doc",
     "txt",
+    "xlsx",
+    "xls",
+    "odt",
+    "pptx",
+    "ppt",
+
+    # ARCHIVE
+    "7z",
+    "tar",
+    "tgz",
+    "gz",
+    "rar",
+    "zip",
 }
 
 DISALLOWED_EXTENSIONS = {
@@ -66,51 +86,91 @@ DISALLOWED_EXTENSIONS = {
 }
 
 FILE_SIGNATURES = {
+    # Images
     "jpg": [b"\xff\xd8\xff"],
     "jpeg": [b"\xff\xd8\xff"],
     "png": [b"\x89PNG\r\n\x1a\n"],
     "gif": [b"GIF87a", b"GIF89a"],
     "webp": [b"RIFF"],
     "bmp": [b"BM"],
+    "svg": [b"<", b"<?xml"],  # SVG is XML-based, flexible start
+    "avif": [b"ftyp"],  # AVIF is MP4-based container
+    "heic": [b"ftyp"],  # HEIC is MP4-based container
+    "heif": [b"ftyp"],  # HEIF is MP4-based container
+    # Audio
     "mp3": [b"ID3", b"\xff\xfb"],
     "wav": [b"RIFF"],
     "aac": [b"\xFF\xF1", b"\xFF\xF9"],
     "ogg": [b"OggS"],
     "flac": [b"fLaC"],
     "m4a": [b"ftyp", b"moov"],
+    # Video
     "mp4": [b"ftyp", b"moov"],
     "mov": [b"ftyp", b"moov"],
     "avi": [b"RIFF"],
     "mkv": [b"\x1A\x45\xDF\xA3"],
     "webm": [b"\x1A\x45\xDF\xA3"],
+    # Documents
     "pdf": [b"%PDF-"],
-    "docx": [b"PK"],
+    "docx": [b"PK\x03\x04", b"PK\x05\x06", b"PK\x07\x08"],  # ZIP-based container
+    "xlsx": [b"PK\x03\x04", b"PK\x05\x06", b"PK\x07\x08"],  # ZIP-based container
+    "xls": [b"\xD0\xCF\x11\xE0"],  # OLE2 format
+    "pptx": [b"PK\x03\x04", b"PK\x05\x06", b"PK\x07\x08"],  # ZIP-based container
+    "ppt": [b"\xD0\xCF\x11\xE0"],  # OLE2 format
+    "odt": [b"PK\x03\x04", b"PK\x05\x06", b"PK\x07\x08"],  # ZIP-based container
     "doc": [b"\xD0\xCF\x11\xE0"],
-    "txt": [],
+    "txt": [],  # Text files no specific signature
+    # Archives
+    "7z": [b"7z\xBC\xAF\x27\x1C"],
+    "tar": [],  # TAR has no consistent magic bytes, allow permissively
+    "tgz": [b"\x1f\x8b\x08"],  # gzip signature
+    "gz": [b"\x1f\x8b\x08"],
+    "rar": [b"Rar!\x1A\x07\x00"],
+    "zip": [b"PK\x03\x04", b"PK\x05\x06", b"PK\x07\x08"],
 }
 
 CONTENT_TYPE_BY_EXTENSION = {
+    # Images
     "jpg": ["image/jpeg"],
     "jpeg": ["image/jpeg"],
     "png": ["image/png"],
     "gif": ["image/gif"],
     "webp": ["image/webp"],
     "bmp": ["image/bmp"],
+    "svg": ["image/svg+xml", "text/svg"],
+    "avif": ["image/avif"],
+    "heic": ["image/heic"],
+    "heif": ["image/heif"],
+    # Audio
     "mp3": ["audio/mpeg"],
     "wav": ["audio/wav", "audio/x-wav"],
     "aac": ["audio/aac"],
     "ogg": ["audio/ogg", "application/ogg"],
     "flac": ["audio/flac"],
     "m4a": ["audio/mp4", "audio/m4a"],
+    # Video
     "mp4": ["video/mp4"],
     "mov": ["video/quicktime"],
     "avi": ["video/x-msvideo"],
     "mkv": ["video/x-matroska"],
     "webm": ["video/webm"],
+    # Documents
     "pdf": ["application/pdf"],
     "docx": ["application/vnd.openxmlformats-officedocument.wordprocessingml.document"],
     "doc": ["application/msword"],
     "txt": ["text/plain"],
+    "xlsx": ["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"],
+    "xls": ["application/vnd.ms-excel"],
+    "pptx": ["application/vnd.openxmlformats-officedocument.presentationml.presentation"],
+    "ppt": ["application/vnd.ms-powerpoint"],
+    "odt": ["application/vnd.oasis.opendocument.text"],
+    # Archives
+    "7z": ["application/x-7z-compressed"],
+    "tar": ["application/x-tar"],
+    "tgz": ["application/gzip", "application/x-gzip"],
+    "gz": ["application/gzip", "application/x-gzip"],
+    "rar": ["application/x-rar-compressed"],
+    "zip": ["application/zip"],
 }
 
 
@@ -128,7 +188,15 @@ class FileValidationError(Exception):
 # ==========================================================
 
 def get_extension(filename: str) -> str:
-    return Path(filename).suffix.lower().replace(".", "")
+    """Get file extension, handling special cases like .tar.gz"""
+    path = Path(filename)
+    suffix = path.suffix.lower().replace(".", "")
+    
+    # Special handling for .tar.gz -> .tgz
+    if suffix == "gz" and path.stem.lower().endswith(".tar"):
+        return "tgz"
+    
+    return suffix
 
 
 def validate_filename(filename: str) -> None:
@@ -190,6 +258,15 @@ MEDIA_EXTENSIONS = {
     "mkv",
     "webm",
 }
+
+# Archive and special formats that don't validate reliably with magic bytes
+PERMISSIVE_EXTENSIONS = {
+    "tar",  # TAR has no consistent signature across variants
+    "svg",  # SVG is XML-based, flexible format
+    "txt",  # Text files no specific signature requirement
+}
+
+CONTAINER_EXTENSIONS = {"docx", "xlsx", "pptx", "odt", "zip"}
 
 
 def _validate_media_with_ffprobe(file: UploadFile, extension: str) -> None:
@@ -266,6 +343,11 @@ def validate_signature(file: UploadFile, extension: str) -> None:
         _validate_media_with_ffprobe(file, extension)
         return
 
+    # Skip strict signature checking for permissive formats
+    # These formats have unreliable or flexible magic bytes
+    if extension in PERMISSIVE_EXTENSIONS:
+        return
+
     signatures = FILE_SIGNATURES.get(extension, [])
 
     if not signatures:
@@ -278,6 +360,19 @@ def validate_signature(file: UploadFile, extension: str) -> None:
     if not header:
         raise FileValidationError("Uploaded file appears to be empty.")
 
+    content_type = _get_content_type(file)
+    normalized_type = content_type.split(";")[0].strip().lower() if content_type else None
+    expected_content_types = CONTENT_TYPE_BY_EXTENSION.get(extension, [])
+
+    if extension in CONTAINER_EXTENSIONS and normalized_type in expected_content_types:
+        logger.debug(
+            "Signature validation skipped for container format %s because MIME %s matched expected MIME %s",
+            extension,
+            normalized_type,
+            expected_content_types,
+        )
+        return
+
     def matches_signature(signature: bytes) -> bool:
         if signature in {b"ftyp", b"moov"}:
             return (
@@ -287,10 +382,26 @@ def validate_signature(file: UploadFile, extension: str) -> None:
             )
         return header.startswith(signature)
 
+    logger.debug(
+        "Signature validation for %s expected=%s detected=%s",
+        extension,
+        [signature.hex() for signature in signatures],
+        header[:32].hex(),
+    )
+
     if not any(matches_signature(signature) for signature in signatures):
         raise FileValidationError(
             "Uploaded file contents do not match the file type."
         )
+
+
+GENERIC_CONTENT_TYPES = {
+    "application/octet-stream",
+    "binary/octet-stream",
+    "application/x-octet-stream",
+    "application/x-unknown-content-type",
+    "application/x-download",
+}
 
 
 def validate_content_type(file: UploadFile, extension: str) -> None:
@@ -303,6 +414,14 @@ def validate_content_type(file: UploadFile, extension: str) -> None:
         return
 
     normalized_type = content_type.split(";")[0].strip().lower()
+    if normalized_type in GENERIC_CONTENT_TYPES:
+        logger.debug(
+            "Skipping strict MIME validation for generic content type %s on %s",
+            normalized_type,
+            extension,
+        )
+        return
+
     if normalized_type not in expected_types:
         raise FileValidationError(
             "Uploaded file content type does not match the file type."

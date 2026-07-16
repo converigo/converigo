@@ -16,13 +16,16 @@ from fastapi import (
     File,
     Form,
     HTTPException,
+    Request,
     UploadFile,
     status,
 )
+from fastapi.responses import JSONResponse
 
 from app.services.conversion_service import (
     ConversionError,
     ConversionService,
+    UnsupportedConversionError,
 )
 
 from app.services.upload_service import (
@@ -39,6 +42,19 @@ router = APIRouter(
     tags=["convert"],
 )
 
+
+async def unsupported_conversion_exception_handler(
+    request: Request,
+    exc: UnsupportedConversionError,
+) -> JSONResponse:
+    return JSONResponse(
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        content={
+            "success": False,
+            "code": "UNSUPPORTED_CONVERSION",
+            "message": str(exc),
+        },
+    )
 
 
 @router.post(
@@ -102,13 +118,7 @@ async def convert_file(
         except ValueError as exc:
 
 
-            raise HTTPException(
-
-                status_code=400,
-
-                detail=str(exc)
-
-            )
+            raise UnsupportedConversionError(source_format, target_format) from exc
 
 
 
@@ -157,6 +167,9 @@ async def convert_file(
             detail=str(exc)
         )
 
+
+    except UnsupportedConversionError:
+        raise
 
 
     except ConversionError as exc:

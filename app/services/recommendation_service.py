@@ -12,6 +12,10 @@ class RecommendationService:
         self.converter_data_service = converter_data_service
 
     def recommend_for_slug(self, slug: str, limit: int = 4) -> dict[str, list[dict[str, Any]]]:
+        public_slugs = {str(tool.get("slug", "")).strip().lower() for tool in self.converter_data_service.list_public_converters()}
+        if str(slug or "").strip().lower() not in public_slugs:
+            return self._empty_recommendations()
+
         try:
             converter = self.converter_data_service.load_converter_by_slug(slug)
         except FileNotFoundError:
@@ -24,7 +28,7 @@ class RecommendationService:
         if not normalized:
             return self._empty_recommendations()
 
-        converters = self.converter_data_service.list_active_converters()
+        converters = self.converter_data_service.list_public_converters()
         for converter in converters:
             slug = str(converter.get("slug", "")).lower()
             source = str(converter.get("source", "")).lower()
@@ -36,11 +40,14 @@ class RecommendationService:
 
     def _recommend_for_converter(self, converter: dict[str, Any], limit: int) -> dict[str, list[dict[str, Any]]]:
         current_slug = str(converter.get("slug", ""))
+        public_slugs = {str(tool.get("slug", "")).strip().lower() for tool in self.converter_data_service.list_public_converters()}
+        if current_slug.lower() not in public_slugs:
+            return self._empty_recommendations()
         current_category = str(converter.get("category", "general") or "general")
         current_source = str(converter.get("source", "") or "").lower()
         current_target = str(converter.get("target", "") or "").lower()
 
-        ranked_converters = self._rank_converters(self.converter_data_service.list_active_converters())
+        ranked_converters = self._rank_converters(self.converter_data_service.list_public_converters())
 
         related_candidates = self._get_related_candidates(converter, ranked_converters)
         popular_candidates = [tool for tool in ranked_converters if tool.get("slug") != current_slug and tool.get("popular", False)]
@@ -107,7 +114,7 @@ class RecommendationService:
             tool for tool in popular_candidates
             if str(tool.get("slug", "")) not in local_seen
         ]
-        popular_items = self._select_candidates(popular_only, limit, "popular", {current_slug})
+        popular_items = self._select_candidates(popular_only, limit, "popular", local_seen)
         
         # If popular is empty and there are same_category items, allow reusing same_category ONLY if related is empty
         # This distinguishes between test 1 (has related) and test 2 (no related)
@@ -119,15 +126,17 @@ class RecommendationService:
                 if str(tool.get("slug", "")) in same_cat_slugs
             ]
             if popular_in_same_cat:
-                popular_items = self._select_candidates(popular_in_same_cat, 1, "popular", {current_slug})
+                popular_items = self._select_candidates(popular_in_same_cat, 1, "popular", local_seen)
 
-        return {
+        recommendations = {
             "related_converters": related_items,
             "same_category_converters": same_category_items,
             "workflow_recommendations": workflow_items,
             "next_step_recommendations": next_step_items,
             "popular_converters": popular_items,
         }
+
+        return self._dedupe_by_target_format(recommendations, ranked_converters)
 
     def _get_related_candidates(self, converter: dict[str, Any], ranked_converters: list[dict[str, Any]]) -> list[dict[str, Any]]:
         related_slugs = [
@@ -182,6 +191,43 @@ class RecommendationService:
                 str(tool.get("title", "")),
             ),
         )
+
+    def _dedupe_by_target_format(
+        self,
+        recommendations: dict[str, list[dict[str, Any]]],
+        ranked_converters: list[dict[str, Any]],
+    ) -> dict[str, list[dict[str, Any]]]:
+        rank_order = {
+            str(tool.get("slug", "")): index
+            for index, tool in enumerate(ranked_converters)
+        }
+
+        best_by_target: dict[str, str] = {}
+        for group_items in recommendations.values():
+            for item in group_items:
+                target = str(item.get("target", "") or "").strip().lower()
+                slug = str(item.get("slug", "") or "").strip()
+                if not target or not slug:
+                    continue
+
+                current_best = best_by_target.get(target)
+                if current_best is None:
+                    best_by_target[target] = slug
+                    continue
+
+                if rank_order.get(slug, 999999) < rank_order.get(current_best, 999999):
+                    best_by_target[target] = slug
+
+        deduped: dict[str, list[dict[str, Any]]] = {}
+        for group_name, group_items in recommendations.items():
+            deduped[group_name] = [
+                item
+                for item in group_items
+                if best_by_target.get(str(item.get("target", "") or "").strip().lower())
+                == str(item.get("slug", "") or "").strip()
+            ]
+
+        return deduped
 
     def _matches_workflow(self, tool: dict[str, Any], current_source: str, current_target: str) -> bool:
         source = str(tool.get("source", "") or "").lower()

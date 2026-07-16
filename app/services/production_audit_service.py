@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any
+from typing import Any, TYPE_CHECKING
 
 from app.core.registry import ConverterInfo, ConverterRegistry, registry
 from app.services.converter_data_service import ConverterDataService
@@ -16,6 +16,9 @@ from app.services.hub_page_service import HubPageService
 from app.services.internal_link_service import InternalLinkService
 from app.services.topic_cluster_service import TopicClusterService
 from app.services.programmatic_seo_engine import ProgrammaticSeoEngine
+
+if TYPE_CHECKING:
+    from app.services.content_quality_service import ContentQualityService
 
 
 class ProductionAuditService:
@@ -42,7 +45,17 @@ class ProductionAuditService:
         self.internal_link_service = InternalLinkService(self.contracts_dir)
         self.topic_cluster_service = TopicClusterService(self.contracts_dir)
         self.seo_engine = ProgrammaticSeoEngine(self.contracts_dir)
+        self._content_quality_service: ContentQualityService | None = None
         self._register_active_contracts()
+
+    @property
+    def content_quality_service(self) -> ContentQualityService:
+        """Lazy load ContentQualityService to avoid circular imports."""
+        if self._content_quality_service is None:
+            # Import here to avoid circular import at module load time
+            from app.services.content_quality_service import ContentQualityService as CQS
+            self._content_quality_service = CQS(self.contracts_dir)
+        return self._content_quality_service
 
     def audit_all(self) -> dict[str, Any]:
         results = [self.audit_converter(contract) for contract in self.converter_registry_service.get_active()]
@@ -80,6 +93,13 @@ class ProductionAuditService:
             "seo_metadata": False,
             "seo_internal_links": False,
             "seo_content_quality": False,
+            "content_quality": False,
+            "content_uniqueness": False,
+            "content_density": False,
+            "content_eligibility": False,
+            "content_search_intent": False,
+            "content_schema_quality": False,
+            "duplicate_detection": False,
         }
 
         try:
@@ -212,6 +232,48 @@ class ProductionAuditService:
             checks["seo_metadata"] = False
             checks["seo_internal_links"] = False
             checks["seo_content_quality"] = False
+
+        # Check content quality for all page types
+        try:
+            input_formats = contract.get("input_formats", [])
+            if input_formats:
+                primary_format = str(input_formats[0]).lower()
+                
+                # Evaluate quality for multiple page types
+                quality_scores = []
+                quality_decisions = {"PASS": 0, "NEEDS_REVIEW": 0, "NO_INDEX": 0, "REJECT": 0}
+                
+                for page_type in self.seo_engine.PAGE_TYPES[:3]:  # Sample 3 page types
+                    try:
+                        quality_eval = self.content_quality_service.evaluate_page(primary_format, page_type)
+                        score = quality_eval.get("quality_score", 0)
+                        decision = quality_eval.get("decision", "REJECT")
+                        quality_scores.append(score)
+                        quality_decisions[decision] = quality_decisions.get(decision, 0) + 1
+                        
+                        # Check individual metrics
+                        metrics = quality_eval.get("metrics", {})
+                        checks["content_uniqueness"] = max(checks.get("content_uniqueness", False), metrics.get("uniqueness_score", 0) >= 70)
+                        checks["content_density"] = max(checks.get("content_density", False), metrics.get("data_density_score", 0) >= 60)
+                        checks["content_eligibility"] = max(checks.get("content_eligibility", False), metrics.get("eligibility_score", 0) >= 80)
+                        checks["content_search_intent"] = max(checks.get("content_search_intent", False), metrics.get("search_intent_score", 0) >= 70)
+                        checks["content_schema_quality"] = max(checks.get("content_schema_quality", False), metrics.get("schema_score", 0) >= 80)
+                        checks["duplicate_detection"] = max(checks.get("duplicate_detection", False), metrics.get("duplicate_score", 0) >= 80)
+                    except Exception:
+                        continue
+                
+                # Overall content quality check
+                if quality_scores:
+                    avg_quality = sum(quality_scores) / len(quality_scores)
+                    checks["content_quality"] = avg_quality >= 80
+        except Exception:
+            checks["content_quality"] = False
+            checks["content_uniqueness"] = False
+            checks["content_density"] = False
+            checks["content_eligibility"] = False
+            checks["content_search_intent"] = False
+            checks["content_schema_quality"] = False
+            checks["duplicate_detection"] = False
 
         quality_score = self._score_checks(checks)
         status = self._derive_status(quality_score)
