@@ -96,17 +96,11 @@ class ConverterDataService:
     def list_active_converters(
         self,
     ) -> List[dict[str, Any]]:
-        active_contract_slugs = self._get_active_contract_slugs()
         active_converters = []
 
         for tool in self.list_all_converters():
             active_flag = tool.get("active", tool.get("enabled", True))
             if active_flag is False:
-                continue
-            slug = str(tool.get("slug", "")).strip().lower()
-            if slug not in active_contract_slugs:
-                continue
-            if not self._is_publicly_visible(slug):
                 continue
             active_converters.append(tool)
 
@@ -123,18 +117,23 @@ class ConverterDataService:
         """
         public_converters = []
         active_contract_slugs = self._get_active_contract_slugs()
-        
+        has_active_contracts = len(active_contract_slugs) > 0
+
         for tool in self.list_all_converters():
             slug = str(tool.get("slug", "")).strip().lower()
             if not slug:
                 continue
-            # Require: has active contract
-            if slug not in active_contract_slugs:
+
+            # If there are active contracts, require membership; otherwise
+            # allow converters determined solely by their own metadata.
+            if has_active_contracts and slug not in active_contract_slugs:
                 continue
-            # Require: marked as publicly visible
-            if not self._is_publicly_visible(slug):
+
+            # Require: marked as publicly visible only when active contracts exist.
+            if has_active_contracts and not self._is_publicly_visible(slug):
                 continue
             public_converters.append(tool)
+
         return public_converters
 
     def list_popular_converters(
