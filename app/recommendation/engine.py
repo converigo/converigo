@@ -63,15 +63,31 @@ class RecommendationEngine:
 
         )
 
+        # Deduplicate by normalized target format while preserving ranking.
+        deduped: list[object] = []
+        seen_targets: set[str] = set()
+        for opt in options:
+            target = (opt.target or "").strip().lower()
+            if not target:
+                # keep items with no explicit target
+                deduped.append(opt)
+                continue
+            if target in seen_targets:
+                continue
+            seen_targets.add(target)
+            deduped.append(opt)
+
+        if not deduped:
+            return RecommendationResult(
+                detected_type=source_format.upper(),
+                best_choice=None,
+                alternatives=[],
+            )
 
         return RecommendationResult(
-
             detected_type=source_format.upper(),
-
-            best_choice=options[0],
-
-            alternatives=options[1:],
-
+            best_choice=deduped[0],
+            alternatives=deduped[1:],
         )
 
 
