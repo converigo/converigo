@@ -15,6 +15,14 @@ class ConversionError(Exception):
     pass
 
 
+class UnsupportedConversionError(Exception):
+    def __init__(self, source_format: str, target_format: str) -> None:
+        self.source_format = source_format
+        self.target_format = target_format
+        message = f"{source_format.upper()} to {target_format.upper()} conversion is not supported yet"
+        super().__init__(message)
+
+
 class ConversionService:
 
     async def convert_file(
@@ -25,10 +33,13 @@ class ConversionService:
 
         source_format = source_path.suffix.replace(".", "")
 
-        plugin = registry.get_plugin(
-            source_format,
-            target_format,
-        )
+        try:
+            plugin = registry.get_plugin(
+                source_format,
+                target_format,
+            )
+        except ValueError as exc:
+            raise UnsupportedConversionError(source_format, target_format) from exc
 
         timeout_seconds = self._get_timeout_seconds(source_format, target_format)
 
@@ -41,8 +52,13 @@ class ConversionService:
             raise ConversionError(
                 f"Conversion timed out after {timeout_seconds} seconds."
             ) from exc
-        except (RuntimeError, ValueError) as exc:
+        except RuntimeError as exc:
             raise ConversionError(str(exc)) from exc
+        except ValueError as exc:
+            message = str(exc)
+            if message.startswith("Unsupported ") or "Unsupported" in message:
+                raise UnsupportedConversionError(source_format, target_format) from exc
+            raise ConversionError(message) from exc
 
         if not output_path.exists():
 

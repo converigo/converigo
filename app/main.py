@@ -19,6 +19,7 @@ from app.services.language_manager import LanguageManager
 from app.core.logging_config import configure_logging
 from app.core.settings import settings
 from app.services.cleanup_service import CleanupService
+from app.services.conversion_service import UnsupportedConversionError
 from app.core.register_default import (
     register_default_converters,
 )
@@ -37,6 +38,7 @@ configure_logging()
 
 from app.routers.convert import (
     router as convert_router,
+    unsupported_conversion_exception_handler,
 )
 
 from app.routers.home import (
@@ -119,6 +121,11 @@ app = FastAPI(
 
     lifespan=lifespan,
 
+)
+
+app.add_exception_handler(
+    UnsupportedConversionError,
+    unsupported_conversion_exception_handler,
 )
 
 
