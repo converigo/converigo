@@ -204,12 +204,21 @@ def validate_filename(filename: str) -> None:
     if not filename:
         raise FileValidationError("Filename is empty.")
 
+    if filename != filename.strip():
+        raise FileValidationError("Invalid filename.")
+
+    if filename in {".", ".."}:
+        raise FileValidationError("Invalid filename.")
+
     name = Path(filename).name
 
     if name != filename:
         raise FileValidationError("Invalid filename.")
 
     if ".." in filename:
+        raise FileValidationError("Invalid filename.")
+
+    if "/" in filename or "\\" in filename:
         raise FileValidationError("Invalid filename.")
 
     if len(filename) > settings.MAX_FILENAME_LENGTH:

@@ -61,6 +61,23 @@ class ConversionService:
                 raise UnsupportedConversionError(source_format, target_format) from exc
             raise ConversionError(message) from exc
 
+        if not isinstance(output_path, Path):
+            raise ConversionError("Invalid output path.")
+
+        resolved_output_path = output_path.resolve(strict=False)
+        resolved_output_dir = settings.OUTPUT_DIR.resolve(strict=False)
+        resolved_workdir = Path.cwd().resolve(strict=False)
+        resolved_source_dir = source_path.resolve(strict=False).parent
+
+        allowed_roots = {resolved_output_dir, resolved_workdir, resolved_source_dir}
+        if not any(
+            resolved_output_path == root or root in resolved_output_path.parents
+            for root in allowed_roots
+        ):
+            raise ConversionError(
+                f"Output path is outside the allowed output directory: {resolved_output_dir}"
+            )
+
         if not output_path.exists():
 
             raise ConversionError(
