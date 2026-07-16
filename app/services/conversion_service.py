@@ -31,7 +31,8 @@ class ConversionService:
         target_format: str,
     ) -> Path:
 
-        source_format = source_path.suffix.replace(".", "")
+        source_format = source_path.suffix.replace(".", "").lower()
+        target_format = target_format.lower().strip()
 
         try:
             plugin = registry.get_plugin(
