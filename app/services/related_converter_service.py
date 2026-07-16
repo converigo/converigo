@@ -13,7 +13,7 @@ class RelatedConverterService:
         if not converter:
             return []
 
-        all_converters = self.converter_data_service.list_active_converters()
+        all_converters = self.converter_data_service.list_supported_converters()
         current_slug = str(converter.get("slug") or "").strip()
         current_source = str(converter.get("source") or "").lower()
         current_target = str(converter.get("target") or "").lower()

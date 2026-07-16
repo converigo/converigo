@@ -14,8 +14,8 @@ def _write_converter(path: Path, *, slug: str, category: str = "image", popular:
         "popular": popular,
         "featured": featured,
         "active": True,
-        "source": source or slug.split("-to-")[0],
-        "target": target or slug.split("-to-")[1] if "-to-" in slug else slug,
+        "source": source or (slug.split("-to-")[0] if "-to-" in slug else "src"),
+        "target": target or (slug.split("-to-")[1] if "-to-" in slug else "dst"),
     }
     if related_slugs is not None:
         payload["related_tools"] = [{"slug": related_slug} for related_slug in related_slugs]
@@ -28,8 +28,8 @@ def _write_converter(path: Path, *, slug: str, category: str = "image", popular:
         "name": payload.get("title", payload["slug"]).strip(),
         "category": payload.get("category", "document"),
         "description": payload.get("description", ""),
-        "input_formats": [payload.get("source") or payload["slug"].split("-to-")[0] if "-to-" in payload["slug"] else "txt"],
-        "output_formats": [payload.get("target") or payload["slug"].split("-to-")[1] if "-to-" in payload["slug"] else "pdf"],
+        "input_formats": [payload["source"]],
+        "output_formats": [payload["target"]],
         "accepted_mime_types": ["application/octet-stream"],
         "max_upload_size": 1048576,
         "conversion_engine": "test",
@@ -54,7 +54,13 @@ def test_recommendations_are_deduplicated_and_follow_category_and_workflow(tmp_p
     _write_converter(data_dir / "jpg-to-png.json", slug="jpg-to-png", category="image", related_slugs=["png-to-jpg", "webp-to-png"])
     _write_converter(data_dir / "png-to-jpg.json", slug="png-to-jpg", category="image")
     _write_converter(data_dir / "webp-to-png.json", slug="webp-to-png", category="image")
-    _write_converter(data_dir / "pdf-to-word.json", slug="pdf-to-word", category="document")
+    _write_converter(
+        data_dir / "pdf-to-word.json",
+        slug="pdf-to-word",
+        category="document",
+        source="pdf",
+        target="docx",
+    )
     _write_converter(data_dir / "jpg-to-webp.json", slug="jpg-to-webp", category="image")
 
     service = RecommendationService(ConverterDataService(data_dir))
@@ -77,7 +83,14 @@ def test_new_converter_is_included_without_manual_configuration(tmp_path: Path) 
     data_dir = tmp_path
     _write_converter(data_dir / "jpg-to-png.json", slug="jpg-to-png", category="image", related_slugs=[])
     _write_converter(data_dir / "png-to-jpg.json", slug="png-to-jpg", category="image")
-    _write_converter(data_dir / "new-image-tool.json", slug="new-image-tool", category="image", popular=True)
+    _write_converter(
+        data_dir / "new-image-tool.json",
+        slug="new-image-tool",
+        category="image",
+        popular=True,
+        source="png",
+        target="bmp",
+    )
 
     service = RecommendationService(ConverterDataService(data_dir))
     recommendations = service.recommend_for_slug("jpg-to-png")

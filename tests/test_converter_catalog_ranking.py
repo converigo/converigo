@@ -5,13 +5,25 @@ import time
 from app.services.converter_data_service import ConverterDataService
 
 
-def _write_converter(path: Path, slug: str, *, popular: bool = True, featured: bool = False, sort_order: int | None = None) -> None:
+def _write_converter(
+    path: Path,
+    slug: str,
+    *,
+    popular: bool = True,
+    featured: bool = False,
+    source: str | None = None,
+    target: str | None = None,
+    sort_order: int | None = None,
+) -> None:
     payload = {
         "slug": slug,
         "title": slug.replace("-", " ").title(),
         "description": f"{slug} converter",
         "popular": popular,
         "featured": featured,
+        "active": True,
+        "source": source or (slug.split("-to-")[0] if "-to-" in slug else "src"),
+        "target": target or (slug.split("-to-")[1] if "-to-" in slug else "dst"),
     }
     if sort_order is not None:
         payload["sort_order"] = sort_order
@@ -24,8 +36,13 @@ def test_popular_converters_prioritize_recent_popular_items(tmp_path: Path) -> N
     for slug in ["alpha", "beta", "gamma", "delta", "epsilon", "zeta"]:
         _write_converter(tmp_path / f"{slug}.json", slug)
 
-    newest_slug = "word-to-pdf"
-    _write_converter(tmp_path / f"{newest_slug}.json", newest_slug)
+    newest_slug = "docx-to-pdf"
+    _write_converter(
+        tmp_path / f"{newest_slug}.json",
+        newest_slug,
+        source="docx",
+        target="pdf",
+    )
 
     # Make the newest converter appear more recent than the others.
     newest_path = tmp_path / f"{newest_slug}.json"
