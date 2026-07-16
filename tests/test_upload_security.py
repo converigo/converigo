@@ -1,5 +1,6 @@
 import asyncio
 from io import BytesIO
+from pathlib import Path
 from unittest.mock import patch
 
 import pytest
@@ -7,6 +8,7 @@ from fastapi import UploadFile
 
 import app.services.upload_service as upload_service_module
 from app.core.settings import settings
+from app.services.conversion_service import ConversionError, ConversionService
 from app.services.upload_service import UploadError, UploadService
 
 
@@ -83,3 +85,57 @@ def test_mp4_with_conflicting_content_type_is_rejected(monkeypatch, tmp_path):
 
     with pytest.raises(UploadError, match="content type"):
         asyncio.run(service.process_upload(file))
+
+
+def test_upload_rejects_windows_style_path_traversal_filename(monkeypatch, tmp_path):
+    monkeypatch.setattr(settings, "MAX_UPLOAD_SIZE_MB", 100, raising=False)
+    monkeypatch.setattr(settings, "MAX_UPLOAD_SIZE", 100 * 1024 * 1024, raising=False)
+    monkeypatch.setattr(upload_service_module, "UPLOAD_DIR", tmp_path, raising=False)
+
+    service = UploadService()
+    file = UploadFile(filename="..\\evil.txt", file=BytesIO(b"payload"))
+
+    with pytest.raises(UploadError, match="Invalid filename"):
+        asyncio.run(service.process_upload(file))
+
+
+def test_failed_upload_cleans_up_partial_file(monkeypatch, tmp_path):
+    monkeypatch.setattr(settings, "MAX_UPLOAD_SIZE_MB", 100, raising=False)
+    monkeypatch.setattr(settings, "MAX_UPLOAD_SIZE", 100 * 1024 * 1024, raising=False)
+    monkeypatch.setattr(upload_service_module, "UPLOAD_DIR", tmp_path, raising=False)
+
+    service = UploadService()
+    file = UploadFile(filename="partial.txt", file=BytesIO(b"payload"))
+    call_count = {"value": 0}
+
+    async def broken_read(_size):
+        call_count["value"] += 1
+        if call_count["value"] == 1:
+            return b"partial"
+        raise RuntimeError("boom")
+
+    file.read = broken_read
+
+    with pytest.raises(UploadError):
+        asyncio.run(service.process_upload(file))
+
+    assert not any(tmp_path.iterdir())
+
+
+def test_conversion_rejects_output_path_outside_output_dir(monkeypatch, tmp_path):
+    output_dir = tmp_path / "outputs"
+    output_dir.mkdir(parents=True)
+    monkeypatch.setattr(settings, "OUTPUT_DIR", output_dir, raising=False)
+
+    class DummyPlugin:
+        async def convert(self, source_path, target_format):
+            return Path("/tmp/escaped-output.bin")
+
+    monkeypatch.setattr(
+        "app.services.conversion_service.registry.get_plugin",
+        lambda source_format, target_format: DummyPlugin(),
+    )
+
+    service = ConversionService()
+    with pytest.raises(ConversionError, match="Output path"):
+        asyncio.run(service.convert_file(Path("sample.mp4"), "mp3"))

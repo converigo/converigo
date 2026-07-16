@@ -106,6 +106,11 @@ class UploadService:
             ) from exc
 
         except Exception as exc:
+            if target_path and target_path.exists():
+                try:
+                    target_path.unlink()
+                except Exception:
+                    logger.exception("Failed to remove partial upload %s", target_path)
 
             raise UploadError(
                 "Unable to save uploaded file."
