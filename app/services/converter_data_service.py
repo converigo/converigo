@@ -5,14 +5,37 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Iterator, List
 
+from app.services.converter_registry_service import ConverterRegistryService
+
+
+NON_PRODUCTION_READY_SLUGS = {
+    "svg-to-png",
+    "svg-to-pdf",
+    "heic-to-jpg",
+    "heif-to-jpeg",
+    "7z-extract",
+}
+
+
+def _is_production_ready(contract: dict[str, Any] | None) -> bool:
+    if contract is None:
+        return False
+
+    lifecycle_status = str(contract.get("lifecycle_status", "")).strip().lower()
+    if lifecycle_status != "active":
+        return False
+
+    return True
+
 
 class ConverterDataService:
 
     def __init__(self, data_dir: Path) -> None:
         self.data_dir = data_dir
+        self.contracts_dir = data_dir
+        self._contract_registry_service: ConverterRegistryService | None = None
 
     def _iter_converter_files(self) -> Iterator[Path]:
-
         if not self.data_dir.exists():
             return iter([])
 
@@ -37,62 +60,27 @@ class ConverterDataService:
         self,
         path: Path,
     ) -> dict[str, Any]:
-
-        with path.open(
-            "r",
-            encoding="utf-8",
-        ) as handle:
-
+        with path.open("r", encoding="utf-8") as handle:
             data = json.load(handle)
 
         fallback_slug = path.stem
         if path.name.endswith(".metadata.json"):
             fallback_slug = path.name.removesuffix(".metadata.json")
 
-        slug = data.setdefault(
-            "slug",
-            fallback_slug,
-        )
-
-        # --------------------------------------------------
-        # Backward Compatibility
-        # --------------------------------------------------
+        slug = data.setdefault("slug", fallback_slug)
 
         if "source" not in data or "target" not in data:
-
             parts = slug.split("-to-")
-
             if len(parts) == 2:
+                data.setdefault("source", parts[0])
+                data.setdefault("target", parts[1])
 
-                data.setdefault(
-                    "source",
-                    parts[0],
-                )
-
-                data.setdefault(
-                    "target",
-                    parts[1],
-                )
-
-        data.setdefault(
-            "category",
-            "general",
-        )
-
-        data.setdefault(
-            "popular",
-            True,
-        )
-
-        data.setdefault(
-            "featured",
-            False,
-        )
-
-        data.setdefault(
-            "title",
-            slug.replace("-", " ").upper(),
-        )
+        data.setdefault("category", "general")
+        data.setdefault("popular", True)
+        data.setdefault("featured", False)
+        data.setdefault("title", slug.replace("-", " ").upper())
+        data.setdefault("active", True)
+        data.setdefault("public", self._is_publicly_visible(slug))
 
         data["cluster"] = self._infer_cluster(data)
         data["output_category"] = self._infer_output_category(data)
@@ -102,46 +90,58 @@ class ConverterDataService:
     def list_all_converters(
         self,
     ) -> List[dict[str, Any]]:
-
-        converters = [
-
-            self._load_converter(path)
-
-            for path in self._iter_converter_files()
-
-        ]
-
-        return sorted(
-
-            converters,
-
-            key=lambda tool: tool.get(
-                "title",
-                "",
-            ),
-
-        )
+        converters = [self._load_converter(path) for path in self._iter_converter_files()]
+        return sorted(converters, key=lambda tool: tool.get("title", ""))
 
     def list_active_converters(
         self,
     ) -> List[dict[str, Any]]:
-
+        active_contract_slugs = self._get_active_contract_slugs()
         active_converters = []
 
         for tool in self.list_all_converters():
             active_flag = tool.get("active", tool.get("enabled", True))
             if active_flag is False:
                 continue
+            slug = str(tool.get("slug", "")).strip().lower()
+            if slug not in active_contract_slugs:
+                continue
+            if not self._is_publicly_visible(slug):
+                continue
             active_converters.append(tool)
 
         return active_converters
+
+    def list_public_converters(self) -> List[dict[str, Any]]:
+        """
+        Return list of public converters that are:
+        - Marked as active
+        - Have an active contract in the registry
+        - Publicly visible (not in blocklist)
+        
+        This ensures recommendations only include valid, production-ready converters.
+        """
+        public_converters = []
+        active_contract_slugs = self._get_active_contract_slugs()
+        
+        for tool in self.list_all_converters():
+            slug = str(tool.get("slug", "")).strip().lower()
+            if not slug:
+                continue
+            # Require: has active contract
+            if slug not in active_contract_slugs:
+                continue
+            # Require: marked as publicly visible
+            if not self._is_publicly_visible(slug):
+                continue
+            public_converters.append(tool)
+        return public_converters
 
     def list_popular_converters(
         self,
         limit: int = 6,
     ) -> List[dict[str, Any]]:
-
-        all_converters = self.list_all_converters()
+        all_converters = self.list_active_converters()
 
         def sort_key(tool: dict[str, Any]) -> tuple[Any, ...]:
             featured = tool.get("featured", False)
@@ -156,55 +156,27 @@ class ConverterDataService:
                 tool.get("title", ""),
             )
 
-        ranked = sorted(
-            all_converters,
-            key=sort_key,
-        )
-
-        popular = [
-            tool
-            for tool in ranked
-            if tool.get("popular", False)
-        ]
-
+        ranked = sorted(all_converters, key=sort_key)
+        popular = [tool for tool in ranked if tool.get("popular", False)]
         if not popular:
             popular = ranked
-
         return popular[:limit]
 
     def list_latest_converters(
         self,
         limit: int = 4,
     ) -> List[dict[str, Any]]:
+        def sort_key(tool: dict[str, Any]) -> str:
+            return tool.get("created_at", "")
 
-        def sort_key(
-            tool: dict[str, Any],
-        ) -> str:
-
-            return tool.get(
-                "created_at",
-                "",
-            )
-
-        all_converters = self.list_all_converters()
-
-        sorted_tools = sorted(
-
-            all_converters,
-
-            key=sort_key,
-
-            reverse=True,
-
-        )
-
+        all_converters = self.list_active_converters()
+        sorted_tools = sorted(all_converters, key=sort_key, reverse=True)
         return sorted_tools[:limit]
 
     def load_converter_by_slug(
         self,
         slug: str,
     ) -> dict[str, Any]:
-
         normalized = slug.strip().lower()
 
         for path in self._iter_converter_files():
@@ -215,16 +187,13 @@ class ConverterDataService:
             if stem == normalized:
                 return self._load_converter(path)
 
-        raise FileNotFoundError(
-            f"Converter definition not found for slug: {slug}"
-        )
+        raise FileNotFoundError(f"Converter definition not found for slug: {slug}")
 
     def resolve_related_tools(
         self,
         tool_data: dict[str, Any],
         limit: int = 4,
     ) -> List[dict[str, Any]]:
-
         from app.services.related_converter_service import RelatedConverterService
 
         service = RelatedConverterService(self)
@@ -275,7 +244,6 @@ class ConverterDataService:
         self,
         base_url: str,
     ) -> List[dict[str, str]]:
-
         entries = [
             {
                 "loc": base_url.rstrip("/") + "/",
@@ -317,3 +285,25 @@ class ConverterDataService:
             )
 
         return entries
+
+    def _get_active_contract_slugs(self) -> set[str]:
+        return {
+            str(contract.get("slug", "")).strip().lower()
+            for contract in self._get_contract_registry().get_active()
+        }
+
+    def _is_publicly_visible(self, slug: str) -> bool:
+        normalized_slug = str(slug or "").strip().lower()
+        if not normalized_slug:
+            return False
+
+        contract = self._get_contract_registry().get_by_slug(normalized_slug)
+        if not _is_production_ready(contract):
+            return False
+
+        return normalized_slug not in NON_PRODUCTION_READY_SLUGS
+
+    def _get_contract_registry(self) -> ConverterRegistryService:
+        if self._contract_registry_service is None:
+            self._contract_registry_service = ConverterRegistryService(self.contracts_dir)
+        return self._contract_registry_service
