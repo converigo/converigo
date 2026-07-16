@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from collections import Counter
 from pathlib import Path
-from typing import Any
+from typing import Any, TYPE_CHECKING
 
 from app.core.registry import ConverterRegistry, registry
 from app.services.authority_service import AuthorityService
@@ -13,6 +13,10 @@ from app.services.sitemap_service import SitemapService
 from app.services.internal_link_service import InternalLinkService
 from app.services.topic_cluster_service import TopicClusterService
 from app.services.programmatic_seo_engine import ProgrammaticSeoEngine
+
+if TYPE_CHECKING:
+    from app.services.content_quality_service import ContentQualityService
+    from app.services.converter_expansion_service import ConverterExpansionService
 
 
 class GrowthDashboardService:
@@ -48,6 +52,27 @@ class GrowthDashboardService:
         self.seo_engine = ProgrammaticSeoEngine(
             contracts_dir=Path(contracts_dir or "app/data/converters"),
         )
+        self.contracts_dir = Path(contracts_dir or "app/data/converters")
+        self._content_quality_service: ContentQualityService | None = None
+        self._expansion_service: ConverterExpansionService | None = None
+
+    @property
+    def content_quality_service(self) -> ContentQualityService:
+        """Lazy load ContentQualityService to avoid circular imports."""
+        if self._content_quality_service is None:
+            # Import here to avoid circular import at module load time
+            from app.services.content_quality_service import ContentQualityService as CQS
+            self._content_quality_service = CQS(self.contracts_dir)
+        return self._content_quality_service
+
+    @property
+    def expansion_service(self) -> ConverterExpansionService:
+        """Lazy load ConverterExpansionService to avoid circular imports."""
+        if self._expansion_service is None:
+            # Import here to avoid circular import at module load time
+            from app.services.converter_expansion_service import ConverterExpansionService as CES
+            self._expansion_service = CES(self.contracts_dir)
+        return self._expansion_service
 
     def build_dashboard(self) -> dict[str, Any]:
         converters = [converter for converter in self.registry.get_all() if getattr(converter, "enabled", True)]
@@ -66,6 +91,8 @@ class GrowthDashboardService:
         internal_linking = self._build_internal_linking_metrics()
         topic_clusters = self._build_topic_cluster_metrics()
         seo_pages = self._build_seo_pages_metrics()
+        content_quality = self._build_content_quality_metrics()
+        expansion = self._build_expansion_metrics()
 
         return {
             "total_converters": len(converters),
@@ -83,6 +110,8 @@ class GrowthDashboardService:
             "internal_linking": internal_linking,
             "topic_clusters": topic_clusters,
             "seo_pages": seo_pages,
+            "content_quality": content_quality,
+            "expansion": expansion,
         }
 
     def _build_registry_health(self, converters: list[Any]) -> dict[str, Any]:
@@ -257,4 +286,76 @@ class GrowthDashboardService:
                 "seo_page_coverage": 0.0,
                 "completeness_percentage": 0.0,
                 "orphan_seo_pages": 0,
+            }
+
+    def _build_content_quality_metrics(self) -> dict[str, Any]:
+        """Build content quality dashboard metrics."""
+        try:
+            report = self.content_quality_service.evaluate_all_pages()
+            
+            total_pages = report.get("total_pages_evaluated", 0)
+            pass_count = report.get("pass_count", 0)
+            needs_review_count = report.get("needs_review_count", 0)
+            no_index_count = report.get("no_index_count", 0)
+            reject_count = report.get("reject_count", 0)
+            average_quality = report.get("average_quality_score", 0)
+            
+            # Calculate metrics
+            pass_rate = (pass_count / total_pages * 100) if total_pages > 0 else 0
+            
+            # Determine status
+            status = "healthy" if pass_rate >= 80 else ("warning" if pass_rate >= 60 else "critical")
+            
+            return {
+                "status": status,
+                "pages_evaluated": total_pages,
+                "pages_pass": pass_count,
+                "pages_needs_review": needs_review_count,
+                "pages_no_index": no_index_count,
+                "pages_reject": reject_count,
+                "pass_rate_percentage": round(pass_rate, 2),
+                "average_quality_score": round(average_quality, 2),
+                "quality_assessment": "EXCELLENT" if average_quality >= 90 else ("GOOD" if average_quality >= 80 else ("FAIR" if average_quality >= 60 else "POOR")),
+                "eligible_pages": pass_count + needs_review_count,
+            }
+        except Exception as exc:  # pragma: no cover - defensive fallback
+            return {
+                "status": "warning",
+                "error": str(exc),
+                "pages_evaluated": 0,
+                "pages_pass": 0,
+                "pages_needs_review": 0,
+                "pages_no_index": 0,
+                "pages_reject": 0,
+                "pass_rate_percentage": 0.0,
+                "average_quality_score": 0.0,
+            }
+
+    def _build_expansion_metrics(self) -> dict[str, Any]:
+        """Build converter expansion dashboard metrics."""
+        try:
+            current_count = self.expansion_service.converter_registry_service.count()
+            target_count = 100
+            coverage_rate = (current_count / target_count) * 100 if target_count > 0 else 0
+            remaining = target_count - current_count
+            
+            status = "on_track" if coverage_rate >= 50 else ("behind" if coverage_rate >= 25 else "critical")
+            
+            return {
+                "status": status,
+                "current_converters": current_count,
+                "target_converters": target_count,
+                "expansion_rate_percentage": round(coverage_rate, 2),
+                "converters_remaining": remaining,
+                "expansion_phase": "tier_1" if coverage_rate < 33 else ("tier_2" if coverage_rate < 67 else "tier_3"),
+                "estimated_completion": "on_track",
+            }
+        except Exception as exc:  # pragma: no cover - defensive fallback
+            return {
+                "status": "critical",
+                "error": str(exc),
+                "current_converters": 0,
+                "target_converters": 100,
+                "expansion_rate_percentage": 0.0,
+                "converters_remaining": 100,
             }
