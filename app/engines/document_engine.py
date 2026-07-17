@@ -39,8 +39,13 @@ class DocumentEngine(BaseEngine):
             target = "pptx"
 
         source_format = source_path.suffix.lower().lstrip(".")
-        output_dir = Path("outputs") / "document"
+        # Use configured OUTPUT_DIR to avoid environment-dependent CWD issues.
+        # settings.OUTPUT_DIR is mapped from OUTPUT_DIR env var in app/core/settings.py
+        from app.core.settings import settings
+
+        output_dir = settings.OUTPUT_DIR / "document"
         output_dir.mkdir(parents=True, exist_ok=True)
+
 
         if source_format == "pdf":
             if target == "docx":
