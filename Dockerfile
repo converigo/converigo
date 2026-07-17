@@ -10,9 +10,10 @@ RUN apt-get update && \
         p7zip-full \
         unrar-free \
         libcairo2 \
-        libpango1.0-0 \
-        libgdk-pixbuf2.0-0 \
+        libpango-1.0-0 \
+        libgdk-pixbuf-xlib-2.0-0 \
         librsvg2-dev \
+
         libheif1 \
         libheif-dev \
         libavif-dev \
