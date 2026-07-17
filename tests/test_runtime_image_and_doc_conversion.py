@@ -59,7 +59,7 @@ def test_xlsx_to_pdf_runtime_conversion():
     sample_path = Path(__file__).parent.parent / "test_files" / "sample.xlsx"
     if not sample_path.exists():
         sample_path = Path(__file__).parent / "sample.xlsx"
-    # XLSX -> PDF requires future DocumentEngine support; assert unsupported behavior
+
     with sample_path.open("rb") as sample_file:
         response = client.post(
             "/convert",
@@ -67,10 +67,45 @@ def test_xlsx_to_pdf_runtime_conversion():
             data={"target_format": "pdf"},
         )
 
-    # Engine currently does not support arbitrary spreadsheet -> PDF conversions
-    assert response.status_code == 422
-    body = response.json()
-    assert body.get("code") == "UNSUPPORTED_CONVERSION"
+    _assert_output_exists(response)
+
+
+def test_pptx_to_pdf_runtime_conversion():
+    plugin = registry.get_plugin("pptx", "pdf")
+    assert plugin is not None
+
+    client = TestClient(app)
+    sample_path = Path(__file__).parent.parent / "test_files" / "sample.pptx"
+    if not sample_path.exists():
+        sample_path = Path(__file__).parent / "sample.pptx"
+
+    with sample_path.open("rb") as sample_file:
+        response = client.post(
+            "/convert",
+            files={"file": (sample_path.name, sample_file, "application/vnd.openxmlformats-officedocument.presentationml.presentation")},
+            data={"target_format": "pdf"},
+        )
+
+    _assert_output_exists(response)
+
+
+def test_odt_to_pdf_runtime_conversion():
+    plugin = registry.get_plugin("odt", "pdf")
+    assert plugin is not None
+
+    client = TestClient(app)
+    sample_path = Path(__file__).parent.parent / "test_files" / "sample.odt"
+    if not sample_path.exists():
+        sample_path = Path(__file__).parent / "sample.odt"
+
+    with sample_path.open("rb") as sample_file:
+        response = client.post(
+            "/convert",
+            files={"file": (sample_path.name, sample_file, "application/vnd.oasis.opendocument.text")},
+            data={"target_format": "pdf"},
+        )
+
+    _assert_output_exists(response)
 
 
 def test_mp4_to_mp3_runtime_placeholder():

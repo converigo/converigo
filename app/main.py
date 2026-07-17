@@ -64,12 +64,11 @@ from app.routers.upload import (
 from app.routers.recommend import (
     router as recommend_router,
 )
-from app.routers.formats import (
-    router as formats_router,
-)
-from app.routers.comparison import (
-    router as comparison_router,
-)
+from app.routers.formats import router as formats_router
+from app.routers.comparison import router as comparison_router
+
+# Ensure formats router is imported before app creation
+
 
 language_manager = LanguageManager(Path("app/locales"))
 
@@ -122,6 +121,12 @@ app = FastAPI(
     lifespan=lifespan,
 
 )
+
+print("DEBUG APP CREATED")
+print("APP ID:", id(app))
+print("ROUTES AFTER CREATE:", len(app.routes))
+
+
 
 app.add_exception_handler(
     UnsupportedConversionError,
@@ -209,16 +214,14 @@ app.include_router(
 )
 
 
-app.include_router(
-    formats_router
-)
 
-app.include_router(
-    formats_router
-)
 
 app.include_router(
     comparison_router
+)
+
+app.include_router(
+    formats_router
 )
 
 app.include_router(
@@ -245,12 +248,3 @@ app.include_router(
     plugins_router
 )
 
-
-app.include_router(
-    recommend_router
-)
-
-
-app.include_router(
-    formats_router
-)

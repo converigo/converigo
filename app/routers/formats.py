@@ -1,4 +1,3 @@
-from __future__ import annotations
 
 from pathlib import Path
 from typing import Any
@@ -14,13 +13,13 @@ from app.services.seo_service import PRODUCTION_BASE_URL, SeoService
 
 router = APIRouter(tags=["formats"])
 
-CONTRACTS_DIR = Path("app/data/converters")
+CONTRACTS_DIR = (Path(__file__).resolve().parents[1] / "data" / "converters").resolve()
 seo_service = SeoService(CONTRACTS_DIR)
-language_service = LanguageService(Path("app/locales"))
-
+language_service = LanguageService((Path(__file__).resolve().parents[1] / "locales").resolve())
 
 def _authority_service() -> AuthorityService:
     return AuthorityService(CONTRACTS_DIR)
+
 
 
 def _converter_registry() -> ConverterRegistryService:

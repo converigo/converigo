@@ -1,20 +1,75 @@
 {
     "plugins": [
+        "7z-to-7z",
+        "gz-to-gz",
+        "gz-to-gzip",
+        "gzip-to-gz",
+        "gzip-to-gzip",
+        "rar-to-rar",
+        "tar-to-tar",
+        "zip-to-zip",
         "mp3-to-wav",
+        "xlsx-to-pdf",
+        "xls-to-pdf",
+        "csv-to-pdf",
+        "jpg-to-pdf",
+        "jpeg-to-pdf",
+        "ods-to-xlsx",
+        "odt-to-pdf",
+        "pdf-to-pdf",
+        "pdf-to-xlsx",
+        "pdf-to-xls",
+        "pdf-to-jpg",
+        "pdf-to-jpeg",
+        "pdf-to-odt",
+        "pdf-to-ppt",
+        "pdf-to-pptx",
+        "pdf-to-docx",
+        "pdf-to-doc",
+        "ppt-to-pdf",
+        "pptx-to-pdf",
+        "docx-to-pdf",
+        "doc-to-pdf",
+        "xlsx-to-ods",
+        "avif-to-jpg",
+        "avif-to-jpeg",
         "bmp-to-jpg",
         "bmp-to-jpeg",
+        "bmp-to-png",
+        "bmp-to-webp",
+        "heic-to-jpg",
+        "heic-to-jpeg",
+        "heif-to-jpg",
+        "heif-to-jpeg",
+        "jpg-to-ico",
+        "jpeg-to-ico",
         "jpg-to-png",
         "jpeg-to-png",
+        "jpg-to-tiff",
+        "jpeg-to-tiff",
         "jpg-to-webp",
         "jpeg-to-webp",
+        "png-to-bmp",
         "png-to-ico",
         "png-to-jpg",
         "png-to-jpeg",
+        "png-to-tiff",
         "png-to-webp",
+        "svg-to-png",
+        "tiff-to-jpg",
+        "tiff-to-jpeg",
+        "tiff-to-png",
+        "webp-to-ico",
         "webp-to-jpg",
         "webp-to-jpeg",
         "webp-to-png",
-        "mp4-to-mp3"
+        "webp-to-tiff",
+        "mp4-to-aac",
+        "mp4-to-flac",
+        "mp4-to-m4a",
+        "mp4-to-mp3",
+        "mp4-to-ogg",
+        "mp4-to-wav"
     ],
     "home": {
         "status": 200,
@@ -23,231 +78,65 @@
     "recommendations": [
         {
             "source": "jpg",
-            "status": 200,
+            "status": 404,
             "body": {
-                "detected_type": "JPG",
-                "best_choice": {
-                    "source": "jpg",
-                    "target": "webp",
-                    "title": "JPG to WEBP",
-                    "description": "Convert JPG images to WEBP with smaller file size and high quality.",
-                    "goal": "compress",
-                    "score": 92.5,
-                    "badge": "Best Choice",
-                    "icon": "🖼️"
-                },
-                "alternatives": [
-                    {
-                        "source": "jpg",
-                        "target": "png",
-                        "title": "JPG to PNG",
-                        "score": 78.5
-                    }
-                ]
+                "detail": "Not Found"
             }
         },
         {
             "source": "jpg",
-            "status": 200,
+            "status": 404,
             "body": {
-                "detected_type": "JPG",
-                "best_choice": {
-                    "source": "jpg",
-                    "target": "webp",
-                    "title": "JPG to WEBP",
-                    "description": "Convert JPG images to WEBP with smaller file size and high quality.",
-                    "goal": "compress",
-                    "score": 92.5,
-                    "badge": "Best Choice",
-                    "icon": "🖼️"
-                },
-                "alternatives": [
-                    {
-                        "source": "jpg",
-                        "target": "png",
-                        "title": "JPG to PNG",
-                        "score": 78.5
-                    }
-                ]
+                "detail": "Not Found"
             }
         },
         {
             "source": "png",
-            "status": 200,
+            "status": 404,
             "body": {
-                "detected_type": "PNG",
-                "best_choice": {
-                    "source": "png",
-                    "target": "webp",
-                    "title": "PNG to WEBP",
-                    "description": "Convert PNG images to WEBP with better compression.",
-                    "goal": "compress",
-                    "score": 94.5,
-                    "badge": "Best Choice",
-                    "icon": "🖼️"
-                },
-                "alternatives": [
-                    {
-                        "source": "png",
-                        "target": "jpg",
-                        "title": "PNG to JPG",
-                        "score": 85.5
-                    },
-                    {
-                        "source": "png",
-                        "target": "ico",
-                        "title": "PNG to ICO",
-                        "score": 72.5
-                    }
-                ]
+                "detail": "Not Found"
             }
         },
         {
             "source": "png",
-            "status": 200,
+            "status": 404,
             "body": {
-                "detected_type": "PNG",
-                "best_choice": {
-                    "source": "png",
-                    "target": "webp",
-                    "title": "PNG to WEBP",
-                    "description": "Convert PNG images to WEBP with better compression.",
-                    "goal": "compress",
-                    "score": 94.5,
-                    "badge": "Best Choice",
-                    "icon": "🖼️"
-                },
-                "alternatives": [
-                    {
-                        "source": "png",
-                        "target": "jpg",
-                        "title": "PNG to JPG",
-                        "score": 85.5
-                    },
-                    {
-                        "source": "png",
-                        "target": "ico",
-                        "title": "PNG to ICO",
-                        "score": 72.5
-                    }
-                ]
+                "detail": "Not Found"
             }
         },
         {
             "source": "png",
-            "status": 200,
+            "status": 404,
             "body": {
-                "detected_type": "PNG",
-                "best_choice": {
-                    "source": "png",
-                    "target": "webp",
-                    "title": "PNG to WEBP",
-                    "description": "Convert PNG images to WEBP with better compression.",
-                    "goal": "compress",
-                    "score": 94.5,
-                    "badge": "Best Choice",
-                    "icon": "🖼️"
-                },
-                "alternatives": [
-                    {
-                        "source": "png",
-                        "target": "jpg",
-                        "title": "PNG to JPG",
-                        "score": 85.5
-                    },
-                    {
-                        "source": "png",
-                        "target": "ico",
-                        "title": "PNG to ICO",
-                        "score": 72.5
-                    }
-                ]
+                "detail": "Not Found"
             }
         },
         {
             "source": "webp",
-            "status": 200,
+            "status": 404,
             "body": {
-                "detected_type": "WEBP",
-                "best_choice": {
-                    "source": "webp",
-                    "target": "jpg",
-                    "title": "WEBP to JPG",
-                    "description": "Convert WEBP images to JPG for wider device compatibility.",
-                    "goal": "compatibility",
-                    "score": 83.5,
-                    "badge": "Universal Format",
-                    "icon": "🖼️"
-                },
-                "alternatives": [
-                    {
-                        "source": "webp",
-                        "target": "png",
-                        "title": "WEBP to PNG",
-                        "score": 78.5
-                    }
-                ]
+                "detail": "Not Found"
             }
         },
         {
             "source": "webp",
-            "status": 200,
+            "status": 404,
             "body": {
-                "detected_type": "WEBP",
-                "best_choice": {
-                    "source": "webp",
-                    "target": "jpg",
-                    "title": "WEBP to JPG",
-                    "description": "Convert WEBP images to JPG for wider device compatibility.",
-                    "goal": "compatibility",
-                    "score": 83.5,
-                    "badge": "Universal Format",
-                    "icon": "🖼️"
-                },
-                "alternatives": [
-                    {
-                        "source": "webp",
-                        "target": "png",
-                        "title": "WEBP to PNG",
-                        "score": 78.5
-                    }
-                ]
+                "detail": "Not Found"
             }
         },
         {
             "source": "mp3",
-            "status": 200,
+            "status": 404,
             "body": {
-                "detected_type": "MP3",
-                "best_choice": {
-                    "source": "mp3",
-                    "target": "wav",
-                    "title": "MP3 to WAV",
-                    "description": "Convert MP3 audio into WAV format for high quality editing.",
-                    "goal": "quality",
-                    "score": 81.25,
-                    "badge": "High Quality",
-                    "icon": "🎧"
-                },
-                "alternatives": []
+                "detail": "Not Found"
             }
         },
         {
             "source": "mp4",
-            "status": 200,
+            "status": 404,
             "body": {
-                "detected_type": "MP4",
-                "best_choice": {
-                    "source": "mp4",
-                    "target": "mp3",
-                    "title": "MP4 to MP3",
-                    "description": "Extract audio from MP4 videos and convert it into MP3 format.",
-                    "goal": "extract_audio",
-                    "score": 94.75,
-                    "badge": "Most Popular",
-                    "icon": "🎵"
-                },
-                "alternatives": []
+                "detail": "Not Found"
             }
         }
     ],
@@ -259,8 +148,8 @@
             "status_code": 201,
             "response": {
                 "status": "success",
-                "filename": "63fe7339c07e435db266906a7fed2c45.png",
-                "download_path": "/outputs/63fe7339c07e435db266906a7fed2c45.png",
+                "filename": "49c232a22e654a86bebf7f7b93179f1d.png",
+                "download_path": "/outputs/image/49c232a22e654a86bebf7f7b93179f1d.png",
                 "message": "Conversion completed successfully.",
                 "target_format": "png"
             }
@@ -272,8 +161,8 @@
             "status_code": 201,
             "response": {
                 "status": "success",
-                "filename": "cb039ef3547643a5a6744c8bfc6f7929.webp",
-                "download_path": "/outputs/cb039ef3547643a5a6744c8bfc6f7929.webp",
+                "filename": "1d61aa66b3774f4daa5751b3e06680a4.webp",
+                "download_path": "/outputs/image/1d61aa66b3774f4daa5751b3e06680a4.webp",
                 "message": "Conversion completed successfully.",
                 "target_format": "webp"
             }
@@ -285,8 +174,8 @@
             "status_code": 201,
             "response": {
                 "status": "success",
-                "filename": "c6c1b3222bd4484298a157b342fc1590.jpg",
-                "download_path": "/outputs/c6c1b3222bd4484298a157b342fc1590.jpg",
+                "filename": "7ce80617b4cb497780518767b6fcadcc.jpg",
+                "download_path": "/outputs/image/7ce80617b4cb497780518767b6fcadcc.jpg",
                 "message": "Conversion completed successfully.",
                 "target_format": "jpg"
             }
@@ -298,8 +187,8 @@
             "status_code": 201,
             "response": {
                 "status": "success",
-                "filename": "1f2bd913d5ec4deba8ad1f8ce48bad2f.webp",
-                "download_path": "/outputs/1f2bd913d5ec4deba8ad1f8ce48bad2f.webp",
+                "filename": "67ae5ff97c714fd8b936365bf19a33bd.webp",
+                "download_path": "/outputs/image/67ae5ff97c714fd8b936365bf19a33bd.webp",
                 "message": "Conversion completed successfully.",
                 "target_format": "webp"
             }
@@ -311,8 +200,8 @@
             "status_code": 201,
             "response": {
                 "status": "success",
-                "filename": "efbd44dd368341c1b5eba4987304ebdb.ico",
-                "download_path": "/outputs/efbd44dd368341c1b5eba4987304ebdb.ico",
+                "filename": "fb06f06c247248c8859d971d2e69a031.ico",
+                "download_path": "/outputs/image/fb06f06c247248c8859d971d2e69a031.ico",
                 "message": "Conversion completed successfully.",
                 "target_format": "ico"
             }
@@ -324,8 +213,8 @@
             "status_code": 201,
             "response": {
                 "status": "success",
-                "filename": "2faf885bc7054192a8eca0a3a54ba192.jpg",
-                "download_path": "/outputs/2faf885bc7054192a8eca0a3a54ba192.jpg",
+                "filename": "046fb8a17e1440e985fd12888d622363.jpg",
+                "download_path": "/outputs/image/046fb8a17e1440e985fd12888d622363.jpg",
                 "message": "Conversion completed successfully.",
                 "target_format": "jpg"
             }
@@ -337,8 +226,8 @@
             "status_code": 201,
             "response": {
                 "status": "success",
-                "filename": "10d6cf17032e4d1a86b33814c9776ffa.png",
-                "download_path": "/outputs/10d6cf17032e4d1a86b33814c9776ffa.png",
+                "filename": "8dff0bc75c15498dbb99b15a7d83f0df.png",
+                "download_path": "/outputs/image/8dff0bc75c15498dbb99b15a7d83f0df.png",
                 "message": "Conversion completed successfully.",
                 "target_format": "png"
             }
@@ -350,8 +239,8 @@
             "status_code": 201,
             "response": {
                 "status": "success",
-                "filename": "3d8278103ee64256a6648eca71e7cb73.wav",
-                "download_path": "/outputs/3d8278103ee64256a6648eca71e7cb73.wav",
+                "filename": "e1ad009c809c45e388f3e1a53743f39d.wav",
+                "download_path": "/outputs/audio/e1ad009c809c45e388f3e1a53743f39d.wav",
                 "message": "Conversion completed successfully.",
                 "target_format": "wav"
             }
@@ -360,9 +249,13 @@
             "source": "mp4",
             "target": "mp3",
             "plugin_available": true,
-            "status_code": 400,
+            "status_code": 201,
             "response": {
-                "detail": "Uploaded file contents do not match the file type."
+                "status": "success",
+                "filename": "3afc5e38d8a74f3b8ab64d30f0e57c07.mp3",
+                "download_path": "/outputs/audio/3afc5e38d8a74f3b8ab64d30f0e57c07.mp3",
+                "message": "Conversion completed successfully.",
+                "target_format": "mp3"
             }
         }
     ]

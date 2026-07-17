@@ -1,0 +1,82 @@
+[
+  {
+    "converter": "pdf-docx",
+    "status": 422,
+    "plugin": "unknown",
+    "engine": "unknown",
+    "error": "PDF to DOCX conversion is not supported yet",
+    "output_success": false,
+    "response": {
+      "success": false,
+      "code": "UNSUPPORTED_CONVERSION",
+      "message": "PDF to DOCX conversion is not supported yet"
+    }
+  },
+  {
+    "converter": "pdf-xlsx",
+    "status": 422,
+    "plugin": "unknown",
+    "engine": "unknown",
+    "error": "PDF to XLSX conversion is not supported yet",
+    "output_success": false,
+    "response": {
+      "success": false,
+      "code": "UNSUPPORTED_CONVERSION",
+      "message": "PDF to XLSX conversion is not supported yet"
+    }
+  },
+  {
+    "converter": "pdf-pptx",
+    "status": 422,
+    "plugin": "unknown",
+    "engine": "unknown",
+    "error": "PDF to PPTX conversion is not supported yet",
+    "output_success": false,
+    "response": {
+      "success": false,
+      "code": "UNSUPPORTED_CONVERSION",
+      "message": "PDF to PPTX conversion is not supported yet"
+    }
+  },
+  {
+    "converter": "pdf-odt",
+    "status": 422,
+    "plugin": "unknown",
+    "engine": "unknown",
+    "error": "PDF to ODT conversion is not supported yet",
+    "output_success": false,
+    "response": {
+      "success": false,
+      "code": "UNSUPPORTED_CONVERSION",
+      "message": "PDF to ODT conversion is not supported yet"
+    }
+  },
+  {
+    "converter": "pdf-jpg",
+    "status": 201,
+    "plugin": "unknown",
+    "engine": "unknown",
+    "error": null,
+    "output_success": true,
+    "response": {
+      "status": "success",
+      "filename": "d92cc527ddea4056999c20001e8ead66_page_01.jpg",
+      "download_path": "/outputs/document/d92cc527ddea4056999c20001e8ead66_page_01.jpg",
+      "message": "Conversion completed successfully.",
+      "target_format": "jpg"
+    }
+  },
+  {
+    "converter": "pdf-png",
+    "status": 422,
+    "plugin": "unknown",
+    "engine": "unknown",
+    "error": "PDF to PNG conversion is not supported yet",
+    "output_success": false,
+    "response": {
+      "success": false,
+      "code": "UNSUPPORTED_CONVERSION",
+      "message": "PDF to PNG conversion is not supported yet"
+    }
+  }
+]
