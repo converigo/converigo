@@ -4,16 +4,30 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 RUN apt-get update && \
-    apt-get install -y ffmpeg && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get install -y --no-install-recommends \
+        ffmpeg \
+        libreoffice \
+        p7zip-full \
+        unrar-free \
+        libcairo2 \
+        libpango1.0-0 \
+        libgdk-pixbuf2.0-0 \
+        librsvg2-dev \
+        libheif1 \
+        libheif-dev \
+        libavif-dev \
+        libffi-dev \
+        libjpeg-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-COPY requirements.txt .
+COPY requirements.txt ./
 
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY . ./
 
 EXPOSE 8000
 
