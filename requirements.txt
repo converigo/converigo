@@ -15,4 +15,3 @@ pytest-asyncio>=0.22.0
 pillow-heif>=0.10.0
 pillow-avif-plugin>=0.1.5
 cairosvg>=2.0.0
-pycairo>=1.29.0
