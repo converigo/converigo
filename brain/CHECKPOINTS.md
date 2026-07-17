@@ -1,57 +1,33 @@
 # Converigo Checkpoints
 
-## Checkpoint C3.7 — Plugin Validation Framework
+## Checkpoint C3.3.1 — Legacy Cleanup
 
 - **Status:** Ready for review
-- **Scope:** Implement validator framework to ensure converter quality across all integration points
-- **Milestone:** Plugin Validation Framework
+- **Scope:** Legacy template cleanup and release readiness
+- **Milestone:** Legacy Cleanup
 - **Deliverables:**
-  - PluginValidationService with 8 integrated validators
-  - Validation across JSON, Metadata, Plugin, Route, SEO, Hub, Recommendation, and Sitemap
-  - Comprehensive unit test suite (27 tests) covering all validators
-  - Report generation with validity percentage and check summary
-  - Full integration with ConverterDataService, HubService, RecommendationService, and SeoService
-
-### Checkpoint Deliverables
-
-- Detect duplicate converter slugs automatically
-- Validate metadata fields (slug, source, target, category) are present and valid
-- Verify plugins exist in registry for source->target conversions
-- Ensure routes can be rendered without errors
-- Confirm SEO metadata generation succeeds
-- Validate converter inclusion in appropriate hubs
-- Check converter can be included in recommendations
-- Verify converter appears in sitemap
-- Generate validation reports showing converter validity percentage
-- All 95 tests passing (68 existing + 27 new validation tests)
-
-## Checkpoint C3.5 — Hub Automation
-
-- **Status:** Completed
-- **Scope:** Automate all category hubs from converter JSON data
-- **Milestone:** Hub Automation
-- **Deliverables:**
-  - A hub generator that builds Image, PDF, Audio, Video, and Document hubs automatically from active converter definitions
-  - Shared hero, converter lists, featured/popular/related sections, internal links, CTA, SEO metadata, and structured data across all hubs
-  - Category-based routing that remains compatible with the Architecture V4 data model and ConverterDataService
+  - Legacy landing templates moved to a dedicated legacy folder
+  - No routing, URL, or SEO behavior changed
+  - Active landing experience remains anchored to the universal tool page
   - Full regression test suite executed successfully
 
 ### Checkpoint Deliverables
 
-- Data-driven hub rendering for all category hubs
-- Converter category membership derived from converter JSON instead of manual lists
-- Automatic visibility of new converters in the correct hub
-- Regeneration of hub content without duplicating converter metadata
+- JSON-driven universal tool page rendering for converter routes
+- Hero, upload, benefits, features, formats, how-to-use, FAQ, related tools, use cases, about formats, CTA, and structured data support
+- Legacy route compatibility retained for public URLs
 - Full regression test suite executed with zero failures
+- Final release audit and blocker resolution
 
 ### Checkpoint Gate Criteria
 
-1. Hub content is generated from converter JSON data
-2. New converters appear in the right hub automatically
-3. No duplicate converter entries appear across hub sections
-4. SEO metadata and structured data are present for each hub
-5. QA tests passing for the new hub automation flow
+1. Product completeness for image package scope
+2. SEO completeness for landing pages and metadata
+3. UX consistency across image conversions
+4. Accessibility audit completed
+5. QA tests passing for the checkpoint packages
 6. Repository cleanliness validated
+7. Git readiness confirmed
 
 ### Release Gate
 
@@ -60,10 +36,11 @@
 
 ## Checkpoint History
 
-- C3.3.2 delivered JSON enrichment for the universal tool page
-- C3.5 now extends that pattern to the hub experience
+- C1 created for the first official image foundation milestone
+- Focused on delivering `IMG-001` and `IMG-002`
+- Included final release audit and cleanup steps
 
 ## Next Checkpoint
 
 - Future checkpoint planning should reuse this structured release gate process.
-- The next step is review and release approval after hub automation is confirmed.
+- The next step is review and release approval after this migration is confirmed.

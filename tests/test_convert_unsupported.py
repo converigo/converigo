@@ -24,7 +24,7 @@ def _remove_output_file(output_filename: str) -> None:
         output_path.unlink(missing_ok=True)
 
 
-def test_pdf_to_xlsx_unsupported_returns_422():
+def test_pdf_to_xlsx_conversion_succeeds():
     client = TestClient(app)
     response = client.post(
         "/convert",
@@ -32,13 +32,13 @@ def test_pdf_to_xlsx_unsupported_returns_422():
         data={"target_format": "xlsx"},
     )
 
-    assert response.status_code == 422
-    assert response.json()["success"] is False
-    assert response.json()["code"] == "UNSUPPORTED_CONVERSION"
-    assert "PDF to XLSX conversion is not supported yet" in response.json()["message"]
+    assert response.status_code == 201
+    assert response.json()["status"] == "success"
+    assert response.json()["target_format"] == "xlsx"
+    _remove_output_file(response.json()["filename"])
 
 
-def test_pdf_to_pptx_unsupported_returns_422():
+def test_pdf_to_pptx_conversion_succeeds():
     client = TestClient(app)
     response = client.post(
         "/convert",
@@ -46,11 +46,13 @@ def test_pdf_to_pptx_unsupported_returns_422():
         data={"target_format": "pptx"},
     )
 
-    assert response.status_code == 422
-    assert response.json()["code"] == "UNSUPPORTED_CONVERSION"
+    assert response.status_code == 201
+    assert response.json()["status"] == "success"
+    assert response.json()["target_format"] == "pptx"
+    _remove_output_file(response.json()["filename"])
 
 
-def test_pdf_to_odt_unsupported_returns_422():
+def test_pdf_to_odt_conversion_succeeds():
     client = TestClient(app)
     response = client.post(
         "/convert",
@@ -58,8 +60,10 @@ def test_pdf_to_odt_unsupported_returns_422():
         data={"target_format": "odt"},
     )
 
-    assert response.status_code == 422
-    assert response.json()["code"] == "UNSUPPORTED_CONVERSION"
+    assert response.status_code == 201
+    assert response.json()["status"] == "success"
+    assert response.json()["target_format"] == "odt"
+    _remove_output_file(response.json()["filename"])
 
 
 def test_jpg_to_png_conversion_succeeds():

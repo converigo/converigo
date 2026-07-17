@@ -6,10 +6,13 @@ Version : 3.0.0
 PDF -> Excel Plugin
 """
 
+import logging
 from pathlib import Path
 
 from app.engines.document_engine import DocumentEngine
 from app.plugins.base import ConverterPlugin
+
+logger = logging.getLogger(__name__)
 
 
 class PDFToExcelPlugin(ConverterPlugin):
@@ -41,5 +44,6 @@ class PDFToExcelPlugin(ConverterPlugin):
         if not self.supports(source_path.suffix, target_format):
             raise RuntimeError("PDFToExcelPlugin only supports PDF -> XLSX/XLS.")
 
+        logger.info("PDFToExcelPlugin invoked for %s -> %s", source_path, target_format)
         engine = DocumentEngine()
         return await engine.convert(source_path=source_path, target_format=target_format)

@@ -26,7 +26,15 @@ from pathlib import Path
 from fastapi.testclient import TestClient
 
 
+import sys
+
+# Ensure project root is importable when executing as `python scripts/integration_test.py`
+ROOT_DIR = Path(__file__).resolve().parents[1]
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+
 from app.main import app
+
 
 from app.plugins.registry import registry
 

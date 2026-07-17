@@ -9,6 +9,9 @@ from pathlib import Path
 
 from app.core.settings import settings
 from app.plugins.registry import registry
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class ConversionError(Exception):
@@ -39,6 +42,11 @@ class ConversionService:
                 source_format,
                 target_format,
             )
+            try:
+                slug = getattr(plugin, "slug", None)
+            except Exception:
+                slug = None
+            logger.info("Selected plugin for conversion: %s (%s -> %s)", slug or str(plugin), source_format, target_format)
         except ValueError as exc:
             raise UnsupportedConversionError(source_format, target_format) from exc
 
@@ -60,6 +68,11 @@ class ConversionService:
             if message.startswith("Unsupported ") or "Unsupported" in message:
                 raise UnsupportedConversionError(source_format, target_format) from exc
             raise ConversionError(message) from exc
+        except Exception as exc:
+            logger.exception("Conversion raised an unexpected exception")
+            raise ConversionError(f"{type(exc).__name__}: {exc}") from exc
+
+        logger.info("Plugin returned output path: %s", str(output_path))
 
         if not isinstance(output_path, Path):
             raise ConversionError("Invalid output path.")

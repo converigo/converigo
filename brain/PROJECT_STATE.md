@@ -1,66 +1,56 @@
-﻿# PROJECT_STATE — Current Status
+﻿# Converigo Project State
 
-**Checkpoint:** C3.8 — Dynamic Platform  
-**Milestone:** Plugin validation framework  
-**Phase:** Product Foundation
+## Vision
 
----
+Converigo is a modern online file conversion platform designed to be the easiest, fastest, and cleanest way to convert files.
 
-## Version
+The focus is on building a trusted conversion experience with polished UX, strong SEO, and a clear product foundation.
 
-- **Current:** C3.8
-- **Previous:** C3.7
-- **Release Date:** 2026-07-13
+## Current Phase
 
----
+- **Phase:** Product Foundation
+- **Current focus:** Legacy template cleanup and release readiness
+- **Checkpoint:** C3.3.1
+- **Milestone:** Legacy Cleanup
 
-## Sprint Active
+## Current Milestone
 
-**Sprint:** C3.8 - Dynamic Platform  
-**Status:** In Progress  
-**Focus:** Validation hooks & import-time guardrails
+- **Universal Tool Page**
+- Completed migration of landing rendering to a JSON-driven universal tool page for converter routes.
+- Legacy public URLs remain active while sharing the same renderer and structured data pipeline.
+- Ensured universal sections for hero, upload, benefits, features, formats, how-to-use, FAQ, related tools, use cases, about formats, CTA, and structured data are rendered from converter JSON.
 
----
+## Packages in Scope
 
-## Repository Status
+- `IMG-001 PNG→WEBP`
+  - Landing page
+  - Converter metadata
+  - Route and SEO support
+  - Tests
 
-| Metric | Status |
-|--------|--------|
-| **Tests** | 97 passing (100%) ✓ |
-| **Branch** | main (clean) |
-| **Health** | ✓ Production ready |
-| **Coverage** | 95%+ |
+- `IMG-002 WEBP→PNG`
+  - Landing page
+  - Converter metadata
+  - Route and SEO support
+  - Tests
 
----
+## Roadmap Summary
 
-## Project Health
+1. Complete the Image Foundation milestone.
+2. Validate category landing pages, metadata, and internal linking.
+3. Secure release readiness through QA and repository audit.
+4. Prepare the first checkpoint for GitHub Push.
+5. Preserve legacy public URLs while introducing a shared universal converter route.
 
-✓ All converters valid  
-✓ Plugin registry aligned  
-✓ Zero blockers  
-✓ Repository clean  
+## Development Workflow
 
----
+- Work from `main` or a release branch.
+- Keep feature scope limited to the current checkpoint.
+- Do not modify unrelated application code during release preparation.
+- Use `brain/` docs as the single source of truth for release status.
 
-## Packages in Scope (Active)
+## Checkpoint Health
 
-- **IMG-001:** PNG→WEBP
-- **IMG-002:** WEBP→PNG
-- Plus 11 other active converters
-
----
-
-## Known Issues
-
-- None (all blockers resolved)
-
----
-
-## Next Goal
-
-Move to C4: Launch Preparation  
-(See NEXT.md for timeline)
-
----
-
-Technical details: See docs/ for full metrics and health dashboard.
+- Checkpoint C1 is focused on the image category.
+- The project is in a release gate phase: audit, cleanup, and prepare for push.
+- Only intended files for C1 are staged in git.
