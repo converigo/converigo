@@ -245,6 +245,11 @@ app.include_router(
 
 
 app.include_router(
+    recommend_router
+)
+
+
+app.include_router(
     plugins_router
 )
 
