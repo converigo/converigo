@@ -19,6 +19,7 @@ from pathlib import Path
 import tempfile
 
 from fastapi.testclient import TestClient
+from app.core.settings import settings
 from reportlab.pdfgen import canvas
 from docx import Document
 
@@ -86,7 +87,7 @@ class TestPDFToDocxCertified:
         
         assert response.status_code == 201
         filename = response.json()["filename"]
-        output_path = Path("outputs/document") / filename
+        output_path = settings.OUTPUT_DIR / "document" / filename
         
         # File must exist
         assert output_path.exists()
@@ -106,7 +107,7 @@ class TestPDFToDocxCertified:
         filename = response.json()["filename"]
         assert filename.endswith(".docx")
         
-        output_path = Path("outputs/document") / filename
+        output_path = settings.OUTPUT_DIR / "document" / filename
         assert output_path.suffix == ".docx"
         output_path.unlink(missing_ok=True)
     
@@ -122,7 +123,7 @@ class TestPDFToDocxCertified:
         )
         
         filename = response.json()["filename"]
-        output_path = Path("outputs/document") / filename
+        output_path = settings.OUTPUT_DIR / "document" / filename
         
         # File must be readable as valid DOCX
         try:
@@ -149,7 +150,7 @@ class TestPDFToDocxCertified:
         assert response.json()["status"] == "success"
         
         filename = response.json()["filename"]
-        output_path = Path("outputs/document") / filename
+        output_path = settings.OUTPUT_DIR / "document" / filename
         
         # Verify file exists and is valid
         assert output_path.exists()
@@ -191,8 +192,8 @@ class TestPDFToDocxCertified:
         )
         
         assert response.json()["target_format"] == "docx"
-        
-        output_path = Path("outputs/document") / response.json()["filename"]
+
+        output_path = settings.OUTPUT_DIR / "document" / response.json()["filename"]
         output_path.unlink(missing_ok=True)
     
     def test_009_doc_alias_converts_to_docx(self):
@@ -213,7 +214,7 @@ class TestPDFToDocxCertified:
         # Output should be .docx (not .doc)
         assert filename.endswith(".docx")
         
-        output_path = Path("outputs/document") / filename
+        output_path = settings.OUTPUT_DIR / "document" / filename
         output_path.unlink(missing_ok=True)
 
 

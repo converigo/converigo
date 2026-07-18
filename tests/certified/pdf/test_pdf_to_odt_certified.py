@@ -11,6 +11,7 @@ from io import BytesIO
 from pathlib import Path
 
 from fastapi.testclient import TestClient
+from app.core.settings import settings
 from reportlab.pdfgen import canvas
 from odf.opendocument import load
 
@@ -63,7 +64,7 @@ def test_pdf_to_odt_output_exists():
     )
     
     filename = response.json()["filename"]
-    output_path = Path("outputs/document") / filename
+    output_path = settings.OUTPUT_DIR / "document" / filename
     assert output_path.exists()
     
     output_path.unlink(missing_ok=True)
@@ -83,7 +84,7 @@ def test_pdf_to_odt_extension_correct():
     filename = response.json()["filename"]
     assert filename.endswith(".odt")
     
-    output_path = Path("outputs/document") / filename
+    output_path = settings.OUTPUT_DIR / "document" / filename
     assert output_path.suffix == ".odt"
     output_path.unlink(missing_ok=True)
 
@@ -100,7 +101,7 @@ def test_pdf_to_odt_not_corrupted():
     )
     
     filename = response.json()["filename"]
-    output_path = Path("outputs/document") / filename
+    output_path = settings.OUTPUT_DIR / "document" / filename
     
     # File must be readable as valid ODT
     try:
