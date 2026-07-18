@@ -19,11 +19,54 @@ class ConversionError(Exception):
 
 
 class UnsupportedConversionError(Exception):
-    def __init__(self, source_format: str, target_format: str) -> None:
+    def __init__(self, source_format: str, target_format: str, message: str | None = None) -> None:
         self.source_format = source_format
         self.target_format = target_format
-        message = f"{source_format.upper()} to {target_format.upper()} conversion is not supported yet"
+        if message is None:
+            message = f"{source_format.upper()} to {target_format.upper()} conversion is not supported yet"
         super().__init__(message)
+
+
+class PDFEmptyError(UnsupportedConversionError):
+    def __init__(
+        self,
+        source_format: str | None = None,
+        target_format: str | None = None,
+        message: str = "PDF has no pages",
+    ) -> None:
+        if source_format is None:
+            source_format = "pdf"
+        if target_format is None:
+            target_format = "docx"
+        super().__init__(source_format, target_format, message)
+
+
+class PDFPasswordProtectedError(UnsupportedConversionError):
+    def __init__(
+        self,
+        source_format: str | None = None,
+        target_format: str | None = None,
+        message: str = "PDF is password protected",
+    ) -> None:
+        if source_format is None:
+            source_format = "pdf"
+        if target_format is None:
+            target_format = "docx"
+        super().__init__(source_format, target_format, message)
+
+
+class PDFValidationError(UnsupportedConversionError):
+    def __init__(
+        self,
+        source_format: str | None = None,
+        target_format: str | None = None,
+        message: str = "PDF validation failed",
+    ) -> None:
+        if source_format is None:
+            source_format = "pdf"
+        if target_format is None:
+            target_format = "docx"
+        super().__init__(source_format, target_format, message)
 
 
 class ConversionService:
@@ -63,6 +106,8 @@ class ConversionService:
             ) from exc
         except RuntimeError as exc:
             raise ConversionError(str(exc)) from exc
+        except UnsupportedConversionError:
+            raise
         except ValueError as exc:
             message = str(exc)
             if message.startswith("Unsupported ") or "Unsupported" in message:

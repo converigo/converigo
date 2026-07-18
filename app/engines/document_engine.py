@@ -239,7 +239,59 @@ class DocumentEngine(BaseEngine):
 
         return "".join(text_parts)
 
+    def _validate_pdf_input(self, source_path: Path) -> None:
+        """
+        Validate PDF input before conversion.
+        
+        Raises:
+            PDFEmptyError: If PDF has no pages.
+            PDFPasswordProtectedError: If PDF is password protected.
+            PDFValidationError: For other unexpected validation failures.
+        """
+        # Import exceptions locally to avoid circular imports
+        from app.services.conversion_service import (
+            PDFEmptyError,
+            PDFPasswordProtectedError,
+            PDFValidationError,
+        )
+        
+        try:
+            import pdfplumber
+        except ImportError as exc:
+            raise PDFValidationError("pdfplumber is required for PDF validation.") from exc
+
+        try:
+            with pdfplumber.open(str(source_path)) as pdf:
+                # Check if PDF has any pages
+                if len(pdf.pages) == 0:
+                    raise PDFEmptyError()
+                
+                logger.info("PDF validation passed: %d pages found", len(pdf.pages))
+                
+        except PDFEmptyError:
+            # Re-raise our custom validation errors
+            raise
+        except PDFPasswordProtectedError:
+            # Re-raise our custom validation errors
+            raise
+        except Exception as exc:
+            # Check if it's a permission/password error
+            exc_str = str(exc).lower()
+            exc_type = type(exc).__name__.lower()
+            
+            if "permission" in exc_str or "password" in exc_str or "encrypted" in exc_str:
+                raise PDFPasswordProtectedError() from exc
+            
+            # For other unexpected errors during validation, log and raise a generic validation error
+            logger.exception("Unexpected error during PDF validation: %s", exc)
+            raise PDFValidationError(
+                f"PDF validation failed: {type(exc).__name__}"
+            ) from exc
+
     def _convert_pdf_to_docx(self, source_path: Path, output_dir: Path) -> Path:
+        # Validate PDF input before conversion
+        self._validate_pdf_input(source_path)
+        
         try:
             from pdf2docx import Converter
         except ImportError as exc:
@@ -252,7 +304,42 @@ class DocumentEngine(BaseEngine):
             converter.convert(str(output_path), start=0, end=None)
             converter.close()
         except Exception as exc:
-            raise RuntimeError(f"PDF to DOCX conversion failed: {exc}") from exc
+            # Handle the specific pdf2docx failure where no pages are parsed
+            exc_str = str(exc)
+            try:
+                from pdf2docx import converter as _pdf2conv
+                is_conv_exc = isinstance(exc, getattr(_pdf2conv, 'ConversionException', Exception))
+            except Exception:
+                is_conv_exc = False
+
+            if is_conv_exc or 'No parsed pages' in exc_str:
+                try:
+                    import pdfplumber
+                    from docx import Document
+                except ImportError as imp_exc:
+                    raise RuntimeError(
+                        "Fallback conversion requires pdfplumber and python-docx"
+                    ) from imp_exc
+
+                # Attempt a minimal fallback: extract text and write a simple DOCX
+                with pdfplumber.open(str(source_path)) as pdf:
+                    pages_text: list[str] = []
+                    for page in pdf.pages:
+                        txt = page.extract_text() or ""
+                        if txt.strip():
+                            pages_text.append(txt)
+
+                doc = Document()
+                if pages_text:
+                    for page_txt in pages_text:
+                        for line in page_txt.splitlines():
+                            doc.add_paragraph(line)
+                else:
+                    doc.add_paragraph("(no extractable text found in PDF)")
+
+                doc.save(str(output_path))
+            else:
+                raise RuntimeError(f"PDF to DOCX conversion failed: {exc}") from exc
 
         if not output_path.exists():
             raise RuntimeError("PDF to DOCX conversion did not produce output.")
