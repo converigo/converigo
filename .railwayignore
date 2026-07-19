@@ -21,7 +21,15 @@ cline-*.txt
 
 # Keep static assets in the deployment context
 !app/static/
-!app/static/**
+!app/static/images/
+!app/static/images/**
+!app/static/icons/
+!app/static/icons/**
+!app/static/css/
+!app/static/css/**
+!app/static/js/
+!app/static/js/**
+!app/static/site.webmanifest
 !static/
 !static/**
 !assets/
