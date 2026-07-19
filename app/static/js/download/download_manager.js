@@ -122,7 +122,7 @@ class DownloadManager {
             link.style.cursor = "pointer";
 
             const extension = result.filename.split(".").pop().toUpperCase();
-            link.textContent = ?? \ (\);
+            link.textContent = `📥 ${result.filename} (${extension})`;
             container.appendChild(link);
         });
 
