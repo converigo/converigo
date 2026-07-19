@@ -182,22 +182,40 @@ class ConverterController {
                 body: formData,
             });
 
-            const data = await response.json();
+            const data = await response.json().catch(() => null);
             console.log("CONVERT RESPONSE:", data);
 
             if (!response.ok) {
-                // Extract readable error message from response
-                let errorMsg = 'Conversion failed';
-                if (data && typeof data === 'object') {
-                    if (data.detail && typeof data.detail === 'string') {
-                        errorMsg = data.detail;
-                    } else if (data.message && typeof data.message === 'string') {
-                        errorMsg = data.message;
-                    } else if (data.error && typeof data.error === 'string') {
-                        errorMsg = data.error;
+                // Robust extraction of readable error messages
+                let errorMsg = window.translate('upload.conversion_failed', 'Conversion failed. Please try again.');
+                try {
+                    if (data) {
+                        // Common FastAPI error shape: {'detail': '...'} or {'detail': [...]}
+                        if (typeof data === 'string') {
+                            errorMsg = data;
+                        } else if (Array.isArray(data.detail)) {
+                            // detail as list of errors
+                            errorMsg = data.detail
+                                .map(d => (typeof d === 'string' ? d : d.msg || JSON.stringify(d)))
+                                .join('; ');
+                        } else if (data.detail && typeof data.detail === 'string') {
+                            errorMsg = data.detail;
+                        } else if (data.message && typeof data.message === 'string') {
+                            errorMsg = data.message;
+                        } else if (data.error && typeof data.error === 'string') {
+                            errorMsg = data.error;
+                        } else if (typeof data === 'object') {
+                            // Fallback: pick any top-level string value
+                            const candidate = Object.values(data).find(v => typeof v === 'string');
+                            if (candidate) errorMsg = candidate;
+                            else errorMsg = JSON.stringify(data);
+                        }
                     }
+                } catch (e) {
+                    console.warn('Error parsing error response', e);
                 }
-                throw new Error(errorMsg || window.translate('upload.conversion_failed', 'Conversion failed'));
+
+                throw new Error(errorMsg || window.translate('upload.conversion_failed', 'Conversion failed.'));
             }
 
             // Handle batch results
@@ -232,13 +250,26 @@ class ConverterController {
             }
         } catch (error) {
             console.error(error);
-            let errorMessage = window.translate('upload.conversion_failed_try_another', '❌ Conversion failed. Please try another format.');
-            
-            // Extract readable error message
-            if (error && error.message && typeof error.message === 'string') {
+            let errorMessage = window.translate('upload.conversion_failed_try_another', 'Conversion failed. Please try again.');
+
+            // Prefer explicit string messages, fallbacks handled below
+            if (typeof error === 'string') {
+                errorMessage = error;
+            } else if (error && error.message && typeof error.message === 'string' && error.message !== '[object Object]') {
                 errorMessage = error.message;
+            } else if (error && typeof error === 'object') {
+                try {
+                    // Try to extract useful fields
+                    if (error.detail && typeof error.detail === 'string') errorMessage = error.detail;
+                    else if (Array.isArray(error.detail)) errorMessage = error.detail.map(d => (typeof d === 'string' ? d : d.msg || JSON.stringify(d))).join('; ');
+                    else if (error.message && typeof error.message === 'string') errorMessage = error.message;
+                    else if (error.error && typeof error.error === 'string') errorMessage = error.error;
+                    else errorMessage = JSON.stringify(error);
+                } catch (e) {
+                    errorMessage = window.translate('upload.conversion_failed_try_another', 'Conversion failed. Please try again.');
+                }
             }
-            
+
             if (this.message) {
                 this.message.textContent = errorMessage;
                 this.message.classList.add("error");

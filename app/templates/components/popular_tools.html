@@ -9,48 +9,115 @@
             </div>
         </div>
 
-        <div class="featured-tools-row compact-grid">
-            <a href="/tools/jpg-to-pdf" class="tool-panel-card popular-tool-card">
-                <span class="popular-tool-card__icon">🖼️</span>
-                <div class="popular-tool-card__content">
-                    <div class="tool-panel-label">
-                        <strong>JPG to PDF</strong>
-                    </div>
-                    <p>Turn photos into a polished PDF document in seconds.</p>
-                </div>
-            </a>
+        <div class="popular-accordion">
+            <button class="accordion" aria-expanded="false">
+                <span class="accordion-title">JPG &rarr; PNG</span>
+                <span class="accordion-chevron">▶</span>
+            </button>
+            <div class="panel">
+                <p>Convert JPG images into PNG format.</p>
+                <a class="btn primary" href="/tools/jpg-to-png">Convert</a>
+            </div>
 
-            <a href="/tools/png-to-jpg" class="tool-panel-card popular-tool-card">
-                <span class="popular-tool-card__icon">🧩</span>
-                <div class="popular-tool-card__content">
-                    <div class="tool-panel-label">
-                        <strong>PNG to JPG</strong>
-                    </div>
-                    <p>Convert transparent images into a compact JPG file.</p>
-                </div>
-            </a>
+            <button class="accordion" aria-expanded="false">
+                <span class="accordion-title">PNG &rarr; JPG</span>
+                <span class="accordion-chevron">▶</span>
+            </button>
+            <div class="panel">
+                <p>Convert PNG images into JPG format.</p>
+                <a class="btn primary" href="/tools/png-to-jpg">Convert</a>
+            </div>
 
-            <a href="/tools/pdf-to-word" class="tool-panel-card popular-tool-card">
-                <span class="popular-tool-card__icon">📄</span>
-                <div class="popular-tool-card__content">
-                    <div class="tool-panel-label">
-                        <strong>PDF to Word</strong>
-                    </div>
-                    <p>Extract editable text and formatting from your PDF.</p>
-                </div>
-            </a>
+            <button class="accordion" aria-expanded="false">
+                <span class="accordion-title">JPG &rarr; PDF</span>
+                <span class="accordion-chevron">▶</span>
+            </button>
+            <div class="panel">
+                <p>Turn photos into a polished PDF document in seconds.</p>
+                <a class="btn primary" href="/tools/jpg-to-pdf">Convert</a>
+            </div>
 
-            <a href="/tools/mp4-to-mp3" class="tool-panel-card popular-tool-card">
-                <span class="popular-tool-card__icon">🎵</span>
-                <div class="popular-tool-card__content">
-                    <div class="tool-panel-label">
-                        <strong>MP4 to MP3</strong>
-                    </div>
-                    <p>Extract audio from video and save it as a lightweight MP3.</p>
-                </div>
-            </a>
+            <button class="accordion" aria-expanded="false">
+                <span class="accordion-title">PDF &rarr; JPG</span>
+                <span class="accordion-chevron">▶</span>
+            </button>
+            <div class="panel">
+                <p>Extract images from PDFs and save them as JPG files.</p>
+                <a class="btn primary" href="/tools/pdf-to-jpg">Convert</a>
+            </div>
+
+            <button class="accordion" aria-expanded="false">
+                <span class="accordion-title">DOCX &rarr; PDF</span>
+                <span class="accordion-chevron">▶</span>
+            </button>
+            <div class="panel">
+                <p>Export DOCX documents into PDF format.</p>
+                <a class="btn primary" href="/tools/docx-to-pdf">Convert</a>
+            </div>
+
+            <button class="accordion" aria-expanded="false">
+                <span class="accordion-title">XLSX &rarr; PDF</span>
+                <span class="accordion-chevron">▶</span>
+            </button>
+            <div class="panel">
+                <p>Export spreadsheets to printable PDFs.</p>
+                <a class="btn primary" href="/tools/xlsx-to-pdf">Convert</a>
+            </div>
+
+            <button class="accordion" aria-expanded="false">
+                <span class="accordion-title">MP4 &rarr; MP3</span>
+                <span class="accordion-chevron">▶</span>
+            </button>
+            <div class="panel">
+                <p>Extract audio from videos and save as MP3.</p>
+                <a class="btn primary" href="/tools/mp4-to-mp3">Convert</a>
+            </div>
+
+            <button class="accordion" aria-expanded="false">
+                <span class="accordion-title">WEBP &rarr; JPG</span>
+                <span class="accordion-chevron">▶</span>
+            </button>
+            <div class="panel">
+                <p>Convert WEBP images into JPG format for wider compatibility.</p>
+                <a class="btn primary" href="/tools/webp-to-jpg">Convert</a>
+            </div>
         </div>
 
     </div>
+
+    <style>
+        .popular-accordion { max-width: 900px; margin: 0 auto; }
+        .accordion { width:100%; text-align:left; padding:12px 16px; border:1px solid #e6e6e6; background:#fff; display:flex; justify-content:space-between; align-items:center; cursor:pointer; font-size:16px; }
+        .accordion + .panel { border-top: none; }
+        .panel { max-height:0; overflow:hidden; transition: max-height 0.28s ease; padding:0 16px; background:#fafafa; }
+        .panel p { margin:12px 0; }
+        .accordion[aria-expanded="true"] { background:#f5f7fb; }
+        .accordion-chevron { transition: transform 0.28s ease; }
+        .accordion[aria-expanded="true"] .accordion-chevron { transform: rotate(90deg); }
+        .btn.primary { display:inline-block; padding:8px 12px; background:#0b69ff; color:#fff; border-radius:4px; text-decoration:none; }
+        @media(max-width:760px){ .accordion { font-size:15px; padding:10px 12px } .panel { padding:8px 12px } }
+    </style>
+
+    <script>
+        (function(){
+            const accordions = document.querySelectorAll('.popular-accordion .accordion');
+            accordions.forEach(btn => {
+                btn.addEventListener('click', function(){
+                    const expanded = this.getAttribute('aria-expanded') === 'true';
+                    // collapse all
+                    accordions.forEach(b => { b.setAttribute('aria-expanded','false'); b.nextElementSibling.style.maxHeight = null; });
+                    if (!expanded) {
+                        this.setAttribute('aria-expanded','true');
+                        const panel = this.nextElementSibling;
+                        panel.style.maxHeight = panel.scrollHeight + 'px';
+                    }
+                });
+            });
+            // ensure accordion panels start collapsed (in case of server-side rendering)
+            document.addEventListener('DOMContentLoaded', function(){
+                document.querySelectorAll('.popular-accordion .panel').forEach(p => p.style.maxHeight = null);
+            });
+        })();
+    </script>
 
 </section>
