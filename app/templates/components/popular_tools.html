@@ -87,36 +87,47 @@
 
     <style>
         .popular-accordion { max-width: 900px; margin: 0 auto; }
-        .accordion { width:100%; text-align:left; padding:12px 16px; border:1px solid #e6e6e6; background:#fff; display:flex; justify-content:space-between; align-items:center; cursor:pointer; font-size:16px; }
+        .accordion { width:100%; text-align:left; padding:12px 16px; border:1px solid #e6e6e6; background:#fff; display:flex; gap:12px; align-items:center; cursor:pointer; font-size:16px; }
+        .accordion-title { flex:1; display:flex; align-items:center; }
+        .accordion-chevron { margin-left:12px; transition: transform 0.28s ease; }
         .accordion + .panel { border-top: none; }
         .panel { max-height:0; overflow:hidden; transition: max-height 0.28s ease; padding:0 16px; background:#fafafa; }
         .panel p { margin:12px 0; }
         .accordion[aria-expanded="true"] { background:#f5f7fb; }
-        .accordion-chevron { transition: transform 0.28s ease; }
         .accordion[aria-expanded="true"] .accordion-chevron { transform: rotate(90deg); }
+        .accordion:hover { background:#fbfdff; }
         .btn.primary { display:inline-block; padding:8px 12px; background:#0b69ff; color:#fff; border-radius:4px; text-decoration:none; }
         @media(max-width:760px){ .accordion { font-size:15px; padding:10px 12px } .panel { padding:8px 12px } }
     </style>
 
     <script>
         (function(){
-            const accordions = document.querySelectorAll('.popular-accordion .accordion');
-            accordions.forEach(btn => {
-                btn.addEventListener('click', function(){
-                    const expanded = this.getAttribute('aria-expanded') === 'true';
-                    // collapse all
-                    accordions.forEach(b => { b.setAttribute('aria-expanded','false'); b.nextElementSibling.style.maxHeight = null; });
-                    if (!expanded) {
-                        this.setAttribute('aria-expanded','true');
-                        const panel = this.nextElementSibling;
-                        panel.style.maxHeight = panel.scrollHeight + 'px';
-                    }
+            function initAccordion(){
+                const accordions = document.querySelectorAll('.popular-accordion .accordion');
+                if(!accordions || accordions.length === 0) return;
+
+                accordions.forEach(btn => {
+                    btn.addEventListener('click', function(){
+                        const expanded = this.getAttribute('aria-expanded') === 'true';
+                        // collapse all
+                        accordions.forEach(b => { b.setAttribute('aria-expanded','false'); if(b.nextElementSibling) b.nextElementSibling.style.maxHeight = null; });
+                        if (!expanded) {
+                            this.setAttribute('aria-expanded','true');
+                            const panel = this.nextElementSibling;
+                            if(panel) panel.style.maxHeight = panel.scrollHeight + 'px';
+                        }
+                    });
                 });
-            });
-            // ensure accordion panels start collapsed (in case of server-side rendering)
-            document.addEventListener('DOMContentLoaded', function(){
+
+                // ensure panels start collapsed
                 document.querySelectorAll('.popular-accordion .panel').forEach(p => p.style.maxHeight = null);
-            });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initAccordion);
+            } else {
+                initAccordion();
+            }
         })();
     </script>
 

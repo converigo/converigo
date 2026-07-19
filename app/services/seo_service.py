@@ -32,7 +32,7 @@ class SeoService:
             "canonical": f"{base_url}/",
             "og_url": f"{base_url}/",
             "og_site_name": "Converigo",
-            "og_image": f"{base_url}/static/images/og-home.png",
+            "og_image": f"{base_url}/static/images/converigo-og-image.png",
             "og_image_alt": "Converigo file conversion platform",
             "og_image_width": 1200,
             "og_image_height": 630,

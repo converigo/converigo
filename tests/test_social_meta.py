@@ -17,3 +17,14 @@ def test_homepage_renders_extended_social_metadata():
     assert 'property="og:image:height"' in html
     assert 'name="twitter:site"' in html
     assert 'name="twitter:creator"' in html
+
+
+def test_homepage_uses_converigo_og_image():
+    client = TestClient(app)
+    response = client.get("/")
+
+    assert response.status_code == 200
+    html = response.text
+
+    assert 'property="og:image" content="https://converigo.com/static/images/converigo-og-image.png"' in html
+    assert 'name="twitter:image" content="https://converigo.com/static/images/converigo-og-image.png"' in html
