@@ -1,0 +1,29 @@
+{
+  "id": "docx-to-xlsx",
+  "slug": "docx-to-xlsx",
+  "name": "DOCX to XLSX",
+  "description": "Convert DOCX documents to XLSX spreadsheets (deprecated).",
+  "category": "document",
+  "input_formats": [
+    "docx"
+  ],
+  "output_formats": [
+    "xlsx"
+  ],
+  "accepted_mime_types": [
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+  ],
+  "max_upload_size": 52428800,
+  "conversion_engine": "document",
+  "landing_path": "/docx-to-xlsx",
+  "canonical_url": "https://converigo.com/docx-to-xlsx",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.docx",
+  "supported_platforms": [
+    "web",
+    "api"
+  ],
+  "lifecycle_status": "deprecated"
+}

@@ -30,7 +30,7 @@ class ConverterRegistryService:
         "supported_platforms",
         "lifecycle_status",
     ]
-    VALID_LIFECYCLE_STATUSES = {"active", "deprecated", "beta"}
+    VALID_LIFECYCLE_STATUSES = {"active", "deprecated", "beta", "certified"}
 
     def __init__(self, contracts_dir: Path | str) -> None:
         self.contracts_dir = Path(contracts_dir)
@@ -116,7 +116,13 @@ class ConverterRegistryService:
         ]
 
     def get_active(self) -> list[dict[str, Any]]:
-        return [contract for contract in self._contracts if str(contract.get("lifecycle_status", "")).strip().lower() == "active"]
+        # Treat active, deprecated, and certified contracts as published items for registration,
+        # hub pages, sitemap generation, and production audit checks.
+        return [
+            contract
+            for contract in self._contracts
+            if str(contract.get("lifecycle_status", "")).strip().lower() in {"active", "deprecated", "certified"}
+        ]
 
     def get_beta(self) -> list[dict[str, Any]]:
         return [contract for contract in self._contracts if str(contract.get("lifecycle_status", "")).strip().lower() == "beta"]

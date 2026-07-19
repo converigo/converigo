@@ -4,9 +4,16 @@
   "name": "RAR Extract",
   "category": "archive",
   "description": "Extract files from RAR archives online.",
-  "input_formats": ["rar"],
-  "output_formats": ["rar"],
-  "accepted_mime_types": ["application/x-rar-compressed", "application/x-rar"],
+  "input_formats": [
+    "rar"
+  ],
+  "output_formats": [
+    "rar"
+  ],
+  "accepted_mime_types": [
+    "application/x-rar-compressed",
+    "application/x-rar"
+  ],
   "max_upload_size": 524288000,
   "conversion_engine": "archive",
   "landing_path": "/rar-extract",
@@ -15,6 +22,8 @@
   "schema_status": "ready",
   "faq_status": "ready",
   "regression_sample": "tests/sample.rar",
-  "supported_platforms": ["web"],
+  "supported_platforms": [
+    "web"
+  ],
   "lifecycle_status": "active"
 }

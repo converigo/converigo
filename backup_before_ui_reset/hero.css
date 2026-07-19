@@ -1,0 +1,286 @@
+/*
+====================================================
+Converigo Hero Section
+Version 2.3.0
+SEO Landing Layout
+====================================================
+*/
+
+
+.hero {
+    text-align:left;
+    padding:40px 0 28px;
+    opacity:1;
+    transform:none;
+    animation:none;
+    max-width:none;
+    margin:0 auto;
+}
+
+.tool-page .hero {
+    padding: 32px 0 24px;
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 auto;
+}
+
+.tool-page .hero h1,
+.tool-page .hero p {
+    margin: 0;
+    max-width: 100%;
+}
+
+
+
+.hero-badge {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:6px 14px;
+    border-radius:999px;
+    background:rgba(37,99,235,.08);
+    color:#2563eb;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.02em;
+    margin-bottom:14px;
+}
+
+
+
+
+.hero h1 {
+    max-width:760px;
+    margin:0 0 18px;
+    font-size:clamp(36px,4.5vw,56px);
+    line-height:1.05;
+    letter-spacing:-0.8px;
+    font-weight:800;
+    color:#0f172a;
+}
+
+
+
+
+.hero p {
+    max-width:700px;
+    margin:0;
+    font-size:1rem;
+    line-height:1.75;
+    color:#475569;
+    padding:0;
+}
+
+.tool-page .hero {
+    padding: 32px 0 24px;
+}
+
+.tool-page .hero h1,
+.tool-page .hero p {
+    margin: 0;
+    max-width: 100%;
+}
+
+.hero-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(360px, 560px);
+    gap: 32px;
+    align-items: center;
+    max-width: var(--container);
+    margin: 0 auto;
+}
+
+.hero-copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 18px;
+}
+
+.hero-sub {
+    max-width: 620px;
+    margin: 18px 0 0;
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 16px;
+    margin-top: 22px;
+}
+
+.hero-cta .btn {
+    min-width: 160px;
+    padding: 0 26px;
+}
+
+.hero-cta .btn-outline {
+    min-width: 150px;
+}
+
+.hero-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) + 4px);
+    box-shadow: var(--shadow);
+    padding: 24px;
+    min-width: 0;
+    min-height: 520px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.panel-head {
+    margin-bottom: 20px;
+}
+
+.panel-label {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+}
+
+.panel-title {
+    margin: 0;
+    font-size: 1.18rem;
+    line-height: 1.5;
+    color: var(--text);
+}
+
+.hero-detail-list {
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:16px;
+    color:#334155;
+    font-size:0.92rem;
+}
+
+.hero-detail-list span {
+    background:rgba(37,99,235,.08);
+    color:#1d4ed8;
+    padding:8px 14px;
+    border-radius:999px;
+    font-weight:600;
+}
+
+.hero-content {
+    display:grid;
+    grid-template-columns:minmax(320px, 1.5fr) minmax(320px, 1fr);
+    gap:32px;
+    align-items:flex-start;
+    max-width: var(--container);
+    margin:0 auto;
+    padding-top:18px;
+}
+
+.hero-workspace {
+    margin-top:28px;
+    display:grid;
+    grid-template-columns: minmax(360px, 1.75fr) minmax(320px, 1fr);
+    gap:28px;
+    align-items:start;
+}
+
+
+
+
+
+@media(max-width:900px){
+
+
+.hero h1 {
+
+
+    font-size:38px;
+
+
+}
+
+
+.hero-content {
+    grid-template-columns:1fr;
+}
+
+
+
+.hero p {
+
+
+    font-size:15px;
+
+
+    padding:0 20px;
+
+
+}
+
+
+
+}
+
+@media(max-width:480px){
+
+    .hero {
+        padding-top:28px;
+        padding-bottom:14px;
+    }
+
+    .hero-badge {
+        margin-bottom:10px;
+        padding:6px 12px;
+        font-size:11px;
+    }
+
+    .hero h1 {
+        font-size:clamp(28px, 9vw, 36px);
+        line-height:1.08;
+        letter-spacing:-0.8px;
+        max-width:100%;
+    }
+
+    .hero p {
+        font-size:15px;
+        line-height:1.55;
+        margin:12px auto 16px;
+        padding:0 4px;
+    }
+
+    .hero-workspace {
+        margin-top:14px;
+    }
+
+}
+
+
+@keyframes fadeInUp {
+    from {
+        opacity:0;
+        transform:translateY(12px);
+    }
+    to {
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero {
+        animation:none;
+        transform:none;
+    }
+}

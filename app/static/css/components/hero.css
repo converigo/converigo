@@ -1,165 +1,396 @@
 /*
 ====================================================
 Converigo Hero Section
-Version 2.3.0
-SEO Landing Layout
+Version 3.0.0
+Upload-first landing layout
 ====================================================
 */
 
-
 .hero {
-
-    text-align:center;
-
-    padding-top:18px;
-
-    padding-bottom:10px;
-
+    padding: 60px 0 40px;
+    text-align: left;
+    opacity: 1;
+    transform: none;
+    animation: none;
+    margin: 0 auto 24px;
 }
 
-
-
-.hero-badge {
-
-    display:inline-flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:6px 15px;
-
-    border-radius:999px;
-
-    background:#eef4ff;
-
-    color:#2563eb;
-
-    font-size:12px;
-
-    font-weight:600;
-
-    margin-bottom:12px;
-
+.homepage-hero {
+    padding: 60px 0;
 }
 
-
-
-
-.hero h1 {
-
-
-    max-width:760px;
-
-
-    margin:0 auto;
-
-
-    font-size:clamp(38px,3.8vw,54px);
-
-
-    line-height:1.02;
-
-
-    letter-spacing:-1.8px;
-
-
+.hero-container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
 }
 
-
-
-
-.hero p {
-
-
-    max-width:620px;
-
-
-    margin:14px auto 22px;
-
-
-    font-size:16px;
-
-
-    line-height:1.5;
-
-
-    color:#64748b;
-
-
+.hero-content {
+    max-width: 760px;
+    margin: 0 auto;
 }
 
-
-
-
-.hero-workspace {
-
-
-    margin-top:18px;
-
-
+.hero-title {
+    font-size: clamp(2.75rem, 4vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+    color: #0f172a;
+    margin: 0 auto;
+    max-width: 700px;
+    white-space: normal;
 }
 
-
-
-
-@media(max-width:900px){
-
-
-.hero h1 {
-
-
-    font-size:38px;
-
-
+.hero-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #475569;
+    margin: 22px auto 0;
+    max-width: 660px;
 }
 
-
-
-.hero p {
-
-
-    font-size:15px;
-
-
-    padding:0 20px;
-
-
+.hero-batch-hint {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 24px auto 0;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: rgba(37, 99, 235, 0.1);
+    color: #2563eb;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
 }
 
-
-
+.homepage-upload-card {
+    max-width: 720px;
+    min-height: 320px;
+    margin: 36px auto 0;
+    padding: 44px;
+    background: #ffffff;
+    border: 1px solid rgba(148, 163, 184, 0.24);
+    border-radius: 28px;
+    box-shadow: 0 26px 70px rgba(15, 23, 42, 0.12);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-@media(max-width:480px){
+.homepage-upload-card .upload-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    justify-content: center;
+}
 
+.homepage-upload-card .upload-main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.homepage-upload-card .upload-stage {
+    width: 100%;
+}
+
+.homepage-upload-card .drop-zone {
+    width: 100%;
+    min-height: 260px;
+    padding: 36px 28px;
+    border: 1px dashed rgba(148, 163, 184, 0.45);
+    border-radius: 22px;
+    background: linear-gradient(180deg, #f8fbff 0%, #f8fafc 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 16px;
+    box-sizing: border-box;
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease, background-color 180ms ease;
+}
+
+.homepage-upload-card .drop-zone:hover,
+.homepage-upload-card .drop-zone.drag-active {
+    border-color: #2563eb;
+    box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.18), 0 14px 32px rgba(37, 99, 235, 0.12);
+    background-color: #edf4ff;
+    transform: translateY(-2px);
+}
+
+.homepage-upload-card .upload-icon {
+    font-size: 36px;
+    line-height: 1;
+}
+
+.homepage-upload-card .drop-zone-copy h2 {
+    margin: 0 0 8px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.homepage-upload-card .drop-zone-copy p {
+    margin: 0;
+    color: #475569;
+    line-height: 1.6;
+}
+
+.homepage-upload-card .upload-support {
+    font-size: 14px;
+    color: #64748b;
+}
+
+.homepage-upload-card .btn {
+    margin-top: 8px;
+}
+
+.homepage-upload-card .selected-file,
+.homepage-upload-card .upload-hint,
+.homepage-upload-card .smart-recommendation,
+.homepage-upload-card #conversionArea,
+.homepage-upload-card .preview-container,
+.homepage-upload-card .preview-card {
+    width: 100%;
+    max-width: 100%;
+}
+
+.tool-hero {
+    padding: 44px 0 32px;
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 auto;
+}
+
+.tool-hero-inner {
+    display: grid;
+    grid-template-columns: minmax(320px, 1.2fr) minmax(360px, 520px);
+    gap: 3rem;
+    align-items: start;
+}
+
+.hero-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.hero-panel {
+    position: relative;
+    padding: 30px;
+    background: #ffffff;
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    border-radius: 32px;
+    box-shadow: 0 28px 80px rgba(15, 23, 42, 0.08);
+}
+
+.panel-head {
+    margin-bottom: 24px;
+    padding: 0 0 0;
+}
+
+.panel-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(59, 130, 246, 0.12);
+    color: #1d4ed8;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.panel-title {
+    margin: 0;
+    font-size: 1.35rem;
+    line-height: 1.5;
+    color: #0f172a;
+    max-width: 520px;
+}
+
+.tool-hero h1,
+.tool-hero p {
+    margin: 0;
+    max-width: 100%;
+}
+
+.hero-sub {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #475569;
+    max-width: 620px;
+}
+
+.hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 24px;
+    align-items: center;
+}
+
+.hero-cta .btn {
+    min-width: 160px;
+}
+
+.hero-cta .btn-primary {
+    min-width: 180px;
+}
+
+@media (max-width: 900px) {
+    .homepage-hero {
+        padding: 42px 0;
+    }
+
+    .hero-title {
+        font-size: 42px;
+    }
+
+    .hero-description {
+        font-size: 15.5px;
+    }
+
+    .homepage-upload-card {
+        max-width: 100%;
+        padding: 26px;
+        min-height: 300px;
+    }
+
+    .homepage-upload-card .drop-zone {
+        min-height: 220px;
+        padding: 24px 18px;
+    }
+
+    .tool-hero {
+        padding: 32px 16px 24px;
+    }
+
+    .tool-hero-inner {
+        grid-template-columns: 1fr;
+        gap: 1.8rem;
+    }
+
+    .hero-copy {
+        gap: 16px;
+    }
+
+    .hero-cta {
+        justify-content: flex-start;
+        gap: 12px;
+    }
+
+    .hero-panel {
+        padding: 22px;
+        border-radius: 26px;
+    }
+}
+
+@media (max-width: 520px) {
+    .tool-hero {
+        padding: 24px 16px 20px;
+    }
+
+    .hero-copy {
+        gap: 14px;
+    }
+
+    .hero-sub {
+        font-size: 0.98rem;
+        line-height: 1.65;
+    }
+
+    .hero-cta {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 18px;
+    }
+
+    .hero-cta .btn {
+        width: 100%;
+        min-width: auto;
+        height: 48px;
+    }
+
+    .hero-cta .btn-primary {
+        min-width: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .homepage-hero {
+        padding: 40px 0;
+    }
+
+    .hero-title {
+        font-size: 38px;
+        max-width: 100%;
+    }
+
+    .hero-description {
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    .homepage-upload-card {
+        padding: 25px;
+        border-radius: 20px;
+    }
+
+    .homepage-upload-card .drop-zone {
+        padding: 20px 14px;
+    }
+
+    .hero-cta {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .hero-cta .btn {
+        width: 100%;
+        max-width: none;
+    }
+
+    .hero-cta .btn-primary {
+        min-width: auto;
+    }
+
+    .hero-copy {
+        gap: 16px;
+    }
+
+    .hero-panel {
+        padding: 20px;
+        border-radius: 24px;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
     .hero {
-        padding-top:32px;
-        padding-bottom:18px;
+        animation: none;
+        transform: none;
     }
-
-    .hero-badge {
-        margin-bottom:10px;
-        padding:6px 12px;
-        font-size:11px;
-    }
-
-    .hero h1 {
-        font-size:clamp(28px, 9vw, 36px);
-        line-height:1.08;
-        letter-spacing:-0.8px;
-        max-width:100%;
-    }
-
-    .hero p {
-        font-size:15px;
-        line-height:1.55;
-        margin:12px auto 18px;
-        padding:0 4px;
-    }
-
-    .hero-workspace {
-        margin-top:12px;
-    }
-
 }

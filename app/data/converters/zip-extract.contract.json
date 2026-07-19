@@ -4,9 +4,16 @@
   "name": "ZIP Extract",
   "category": "archive",
   "description": "Extract files from ZIP archives online.",
-  "input_formats": ["zip"],
-  "output_formats": ["zip"],
-  "accepted_mime_types": ["application/zip", "application/x-zip-compressed"],
+  "input_formats": [
+    "zip"
+  ],
+  "output_formats": [
+    "zip"
+  ],
+  "accepted_mime_types": [
+    "application/zip",
+    "application/x-zip-compressed"
+  ],
   "max_upload_size": 524288000,
   "conversion_engine": "archive",
   "landing_path": "/zip-extract",
@@ -15,6 +22,8 @@
   "schema_status": "ready",
   "faq_status": "ready",
   "regression_sample": "tests/sample.zip",
-  "supported_platforms": ["web"],
+  "supported_platforms": [
+    "web"
+  ],
   "lifecycle_status": "active"
 }

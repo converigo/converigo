@@ -225,6 +225,10 @@ app.include_router(
 )
 
 app.include_router(
+    tools_router
+)
+
+app.include_router(
     home_router
 )
 
@@ -236,11 +240,6 @@ app.include_router(
 
 app.include_router(
     convert_router
-)
-
-
-app.include_router(
-    tools_router
 )
 
 

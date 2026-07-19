@@ -90,7 +90,7 @@ class ConverterController {
 
         /* FILE EVENT */
         window.addEventListener("file-selected", (event) => {
-            this.file = event.detail.file;
+            this.file = event.detail.file || event.detail.files?.[0] || null;
             console.log("Converter file:", this.file && this.file.name);
             this.checkReady();
         });
@@ -105,14 +105,24 @@ class ConverterController {
 
     checkReady() {
         const ready = Boolean(this.file && this.selectedFormat && this.convertBtn);
-        if (this.convertBtn) {
+        if (window.conversionStateController && typeof window.conversionStateController.setConvertReady === 'function') {
+            window.conversionStateController.setConvertReady(ready);
+        } else if (this.convertBtn) {
             this.convertBtn.disabled = !ready;
+            if (ready) {
+                this.convertBtn.hidden = false;
+                this.convertBtn.style.removeProperty('display');
+            } else {
+                this.convertBtn.hidden = true;
+                this.convertBtn.style.display = 'none';
+            }
         }
         console.log("Convert READY:", ready);
     }
 
     reset() {
         this.file = null;
+        this.selectedFormat = null;
         if (this.convertBtn) {
             this.convertBtn.disabled = true;
             this.convertBtn.classList.remove("loading");
@@ -124,6 +134,9 @@ class ConverterController {
         }
         if (window.downloadManager && typeof window.downloadManager.clear === "function") {
             window.downloadManager.clear();
+        }
+        if (window.conversionStateController && typeof window.conversionStateController.setConversionState === 'function') {
+            window.conversionStateController.setConversionState(window.conversionStateController.ConversionState.IDLE);
         }
     }
 
@@ -141,6 +154,9 @@ class ConverterController {
         let wasSuccess = false;
 
         try {
+            if (window.conversionStateController && typeof window.conversionStateController.setConversionState === 'function') {
+                window.conversionStateController.setConversionState(window.conversionStateController.ConversionState.CONVERTING);
+            }
             if (this.convertBtn) {
                 this.convertBtn.disabled = true;
                 this.convertBtn.classList.add("loading");
@@ -180,13 +196,22 @@ class ConverterController {
             if (window.downloadManager) {
                 window.downloadManager.prepare(data);
             }
+            if (window.uploadManager && typeof window.uploadManager.showResult === 'function') {
+                window.uploadManager.showResult(this.file);
+            }
         } catch (error) {
             console.error(error);
             if (this.message) {
                 this.message.textContent = window.translate('upload.conversion_failed_try_another', '❌ Conversion failed. Please try another format.');
                 this.message.classList.add("error");
             }
+            if (window.uploadManager && typeof window.uploadManager.showError === 'function') {
+                window.uploadManager.showError(error?.message || window.translate('upload.conversion_failed_try_another', 'Conversion failed. Please try another format.'));
+            }
         } finally {
+            if (!wasSuccess && window.conversionStateController && typeof window.conversionStateController.setConversionState === 'function') {
+                window.conversionStateController.setConversionState(window.conversionStateController.ConversionState.ERROR);
+            }
             this.stopProgress(wasSuccess);
             if (this.convertBtn) {
                 this.convertBtn.classList.remove("loading");
@@ -194,10 +219,11 @@ class ConverterController {
                 if (!wasSuccess) {
                     this.convertBtn.textContent = originalLabel;
                 } else {
-                    if (this.convertBtn) {
-                        this.convertBtn.textContent = window.translate('upload.ready_to_download', 'Ready to download');
-                    }
+                    this.convertBtn.textContent = window.translate('upload.ready_to_download', 'Ready to download');
                 }
+            }
+            if (wasSuccess && window.conversionStateController && typeof window.conversionStateController.setConversionState === 'function') {
+                window.conversionStateController.setConversionState(window.conversionStateController.ConversionState.SUCCESS);
             }
         }
     }

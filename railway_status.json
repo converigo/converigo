@@ -1,0 +1,302 @@
+﻿{
+  "buckets": {
+    "edges": []
+  },
+  "deletedAt": null,
+  "environments": {
+    "edges": [
+      {
+        "node": {
+          "canAccess": true,
+          "deletedAt": null,
+          "id": "44833611-c6e8-4cbe-8a6b-1e32f9147bd6",
+          "name": "production",
+          "serviceInstances": {
+            "edges": [
+              {
+                "node": {
+                  "activeDeployments": [
+                    {
+                      "createdAt": "2026-07-18T08:02:07.465Z",
+                      "deploymentStopped": true,
+                      "id": "515e2271-aced-4b29-8c6e-ee397553d515",
+                      "instances": [
+                        {
+                          "id": "5b40aa21-0fdd-4568-a409-f4144d5589d5",
+                          "status": "RUNNING"
+                        }
+                      ],
+                      "meta": {
+                        "branch": "main",
+                        "buildOnly": false,
+                        "commitAuthor": "converigo",
+                        "commitHash": "7cc7351dfc202381c415f616b7ff091778d7675f",
+                        "commitMessage": "Merge pull request #14 from converigo/fix/recommend-router\n\nMerge fix(api): register recommendation router endpoint. Validated scope, regression test passed.",
+                        "configFile": "/railway.toml",
+                        "fileServiceManifest": {
+                          "build": {
+                            "builder": "DOCKERFILE"
+                          },
+                          "deploy": {
+                            "startCommand": "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"
+                          }
+                        },
+                        "logsV2": true,
+                        "nixpacksProviders": [],
+                        "plan": "trial",
+                        "propertyFileMapping": {
+                          "build.builder": "$.build.builder",
+                          "deploy.startCommand": "$.deploy.startCommand"
+                        },
+                        "reason": "deploy",
+                        "repo": "converigo/converigo",
+                        "rootDirectory": null,
+                        "runtime": "V2",
+                        "serviceManifest": {
+                          "build": {
+                            "buildCommand": null,
+                            "buildEnvironment": "V3",
+                            "builder": "DOCKERFILE",
+                            "dockerfilePath": "/Dockerfile",
+                            "nixpacksConfigPath": null,
+                            "nixpacksPlan": null,
+                            "watchPatterns": []
+                          },
+                          "deploy": {
+                            "cronSchedule": null,
+                            "drainingSeconds": null,
+                            "healthcheckPath": "/health",
+                            "healthcheckTimeout": null,
+                            "ipv6EgressEnabled": false,
+                            "limitOverride": null,
+                            "multiRegionConfig": {
+                              "sfo": {
+                                "numReplicas": 1
+                              }
+                            },
+                            "numReplicas": 1,
+                            "overlapSeconds": null,
+                            "preDeployCommand": null,
+                            "region": null,
+                            "registryCredentials": null,
+                            "requiredMountPath": null,
+                            "restartPolicyMaxRetries": 10,
+                            "restartPolicyType": "ON_FAILURE",
+                            "runtime": "V2",
+                            "sleepApplication": false,
+                            "startCommand": "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}",
+                            "useLegacyStacker": false
+                          }
+                        },
+                        "volumeMounts": []
+                      },
+                      "status": "DEPLOYING"
+                    },
+                    {
+                      "createdAt": "2026-07-18T06:52:11.143Z",
+                      "deploymentStopped": false,
+                      "id": "d18649cc-561f-47d0-89e8-5dd26889f851",
+                      "instances": [
+                        {
+                          "id": "b19449e6-d6f9-4e86-a930-2479cd0a84d6",
+                          "status": "RUNNING"
+                        }
+                      ],
+                      "meta": {
+                        "buildOnly": false,
+                        "cliAgentSessionId": "8858164b-035c-427b-bbcb-db1c4a347c1e",
+                        "cliCaller": "agent_unknown:vscode",
+                        "configFile": "/railway.toml",
+                        "fileServiceManifest": {
+                          "build": {
+                            "builder": "DOCKERFILE"
+                          },
+                          "deploy": {
+                            "startCommand": "sh -c \"uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}\""
+                          }
+                        },
+                        "imageDigest": "sha256:c36705813cd5a9a582d996ca5e5858fac7b4f08bc5cbceab213b370a4d184b44",
+                        "logsV2": true,
+                        "nixpacksProviders": [],
+                        "propertyFileMapping": {
+                          "build.builder": "$.build.builder",
+                          "deploy.startCommand": "$.deploy.startCommand"
+                        },
+                        "reason": "deploy",
+                        "rootDirectory": null,
+                        "runtime": "V2",
+                        "serviceManifest": {
+                          "build": {
+                            "buildCommand": null,
+                            "buildEnvironment": "V3",
+                            "builder": "DOCKERFILE",
+                            "dockerfilePath": "/Dockerfile",
+                            "nixpacksConfigPath": null,
+                            "nixpacksPlan": null,
+                            "watchPatterns": []
+                          },
+                          "deploy": {
+                            "cronSchedule": null,
+                            "drainingSeconds": null,
+                            "healthcheckPath": "/health",
+                            "healthcheckTimeout": null,
+                            "ipv6EgressEnabled": false,
+                            "limitOverride": null,
+                            "multiRegionConfig": {
+                              "sfo": {
+                                "numReplicas": 1
+                              }
+                            },
+                            "numReplicas": 1,
+                            "overlapSeconds": null,
+                            "preDeployCommand": null,
+                            "region": null,
+                            "registryCredentials": null,
+                            "requiredMountPath": null,
+                            "restartPolicyMaxRetries": 10,
+                            "restartPolicyType": "ON_FAILURE",
+                            "runtime": "V2",
+                            "sleepApplication": false,
+                            "startCommand": "sh -c \"uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}\"",
+                            "useLegacyStacker": false
+                          }
+                        },
+                        "volumeMounts": []
+                      },
+                      "status": "SUCCESS"
+                    }
+                  ],
+                  "cronSchedule": null,
+                  "domains": {
+                    "customDomains": [
+                      {
+                        "domain": "converigo.com",
+                        "id": "30e13a75-a24f-47a4-9627-8d910df6be18",
+                        "targetPort": 8080
+                      }
+                    ],
+                    "serviceDomains": [
+                      {
+                        "domain": "convertin-production.up.railway.app",
+                        "id": "b17dbbe9-a7b7-4058-bd7f-1328506cb453",
+                        "targetPort": 8080
+                      }
+                    ]
+                  },
+                  "environmentId": "44833611-c6e8-4cbe-8a6b-1e32f9147bd6",
+                  "id": "81494f65-62f3-4d07-945c-7280b45f1788",
+                  "latestDeployment": {
+                    "canRedeploy": true,
+                    "createdAt": "2026-07-18T08:02:07.465Z",
+                    "deploymentStopped": true,
+                    "id": "515e2271-aced-4b29-8c6e-ee397553d515",
+                    "instances": [
+                      {
+                        "id": "5b40aa21-0fdd-4568-a409-f4144d5589d5",
+                        "status": "RUNNING"
+                      }
+                    ],
+                    "meta": {
+                      "branch": "main",
+                      "buildOnly": false,
+                      "commitAuthor": "converigo",
+                      "commitHash": "7cc7351dfc202381c415f616b7ff091778d7675f",
+                      "commitMessage": "Merge pull request #14 from converigo/fix/recommend-router\n\nMerge fix(api): register recommendation router endpoint. Validated scope, regression test passed.",
+                      "configFile": "/railway.toml",
+                      "fileServiceManifest": {
+                        "build": {
+                          "builder": "DOCKERFILE"
+                        },
+                        "deploy": {
+                          "startCommand": "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"
+                        }
+                      },
+                      "logsV2": true,
+                      "nixpacksProviders": [],
+                      "plan": "trial",
+                      "propertyFileMapping": {
+                        "build.builder": "$.build.builder",
+                        "deploy.startCommand": "$.deploy.startCommand"
+                      },
+                      "reason": "deploy",
+                      "repo": "converigo/converigo",
+                      "rootDirectory": null,
+                      "runtime": "V2",
+                      "serviceManifest": {
+                        "build": {
+                          "buildCommand": null,
+                          "buildEnvironment": "V3",
+                          "builder": "DOCKERFILE",
+                          "dockerfilePath": "/Dockerfile",
+                          "nixpacksConfigPath": null,
+                          "nixpacksPlan": null,
+                          "watchPatterns": []
+                        },
+                        "deploy": {
+                          "cronSchedule": null,
+                          "drainingSeconds": null,
+                          "healthcheckPath": "/health",
+                          "healthcheckTimeout": null,
+                          "ipv6EgressEnabled": false,
+                          "limitOverride": null,
+                          "multiRegionConfig": {
+                            "sfo": {
+                              "numReplicas": 1
+                            }
+                          },
+                          "numReplicas": 1,
+                          "overlapSeconds": null,
+                          "preDeployCommand": null,
+                          "region": null,
+                          "registryCredentials": null,
+                          "requiredMountPath": null,
+                          "restartPolicyMaxRetries": 10,
+                          "restartPolicyType": "ON_FAILURE",
+                          "runtime": "V2",
+                          "sleepApplication": false,
+                          "startCommand": "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}",
+                          "useLegacyStacker": false
+                        }
+                      },
+                      "volumeMounts": []
+                    },
+                    "status": "DEPLOYING"
+                  },
+                  "nextCronRunAt": null,
+                  "numReplicas": null,
+                  "serviceId": "f0c83e8b-e79e-4941-a44f-880e25fbfdbe",
+                  "serviceName": "converigo",
+                  "source": {
+                    "image": null,
+                    "repo": "converigo/converigo"
+                  },
+                  "startCommand": "/bin/sh -c 'uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080}'"
+                }
+              }
+            ]
+          },
+          "unmergedChangesCount": null,
+          "volumeInstances": {
+            "edges": []
+          }
+        }
+      }
+    ]
+  },
+  "id": "ec45cf92-1f8c-4e9f-b36f-8f6f3141f491",
+  "name": "Converigo",
+  "services": {
+    "edges": [
+      {
+        "node": {
+          "id": "f0c83e8b-e79e-4941-a44f-880e25fbfdbe",
+          "name": "converigo"
+        }
+      }
+    ]
+  },
+  "workspace": {
+    "name": "jevithos's Projects"
+  },
+  "workspaceId": "0af4693a-5be0-4f5b-b72d-2034bf3b19aa"
+}

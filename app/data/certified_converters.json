@@ -1,0 +1,203 @@
+{
+  "certified": [
+    {
+      "slug": "avif-to-jpg",
+      "lifecycle_status": "certified",
+      "name": "AVIF to JPG",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_avif_to_jpg.py"]
+    },
+    {
+      "slug": "bmp-to-jpg",
+      "lifecycle_status": "certified",
+      "name": "BMP to JPG",
+      "locked": true,
+      "test_files": []
+    },
+    {
+      "slug": "docx-to-pdf",
+      "lifecycle_status": "certified",
+      "name": "DOCX to PDF",
+      "locked": true,
+      "test_files": []
+    },
+    {
+      "slug": "heic-to-jpg",
+      "lifecycle_status": "certified",
+      "name": "HEIC to JPG",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_heic_to_jpg.py"]
+    },
+    {
+      "slug": "jpg-to-png",
+      "lifecycle_status": "certified",
+      "name": "JPG to PNG",
+      "locked": true,
+      "test_files": []
+    },
+    {
+      "slug": "mp4-to-aac",
+      "lifecycle_status": "certified",
+      "name": "MP4 to AAC",
+      "locked": true,
+      "test_files": []
+    },
+    {
+      "slug": "mp4-to-flac",
+      "lifecycle_status": "certified",
+      "name": "MP4 to FLAC",
+      "locked": true,
+      "test_files": []
+    },
+    {
+      "slug": "mp4-to-m4a",
+      "lifecycle_status": "certified",
+      "name": "MP4 to M4A",
+      "locked": true,
+      "test_files": []
+    },
+    {
+      "slug": "mp4-to-mp3",
+      "lifecycle_status": "certified",
+      "name": "MP4 to MP3",
+      "locked": true,
+      "test_files": ["tests/certified/video/test_mp4_to_mp3.py"]
+    },
+    {
+      "slug": "mp4-to-ogg",
+      "lifecycle_status": "certified",
+      "name": "MP4 to OGG",
+      "locked": true,
+      "test_files": []
+    },
+    {
+      "slug": "mp4-to-wav",
+      "lifecycle_status": "certified",
+      "name": "MP4 to WAV",
+      "locked": true,
+      "test_files": []
+    },
+    {
+      "slug": "pdf-to-docx",
+      "lifecycle_status": "certified",
+      "name": "PDF to DOCX",
+      "locked": true,
+      "test_files": ["tests/certified/pdf/test_pdf_to_docx_certified.py"]
+    },
+    {
+      "slug": "pdf-to-odt",
+      "lifecycle_status": "certified",
+      "name": "PDF to ODT",
+      "locked": true,
+      "test_files": ["tests/certified/pdf/test_pdf_to_odt_certified.py"]
+    },
+    {
+      "slug": "pdf-to-ppt",
+      "lifecycle_status": "certified",
+      "name": "PDF to PPT",
+      "locked": true,
+      "test_files": ["tests/certified/pdf/test_pdf_to_ppt_certified.py"]
+    },
+    {
+      "slug": "pdf-to-xlsx",
+      "lifecycle_status": "certified",
+      "name": "PDF to XLSX",
+      "locked": true,
+      "test_files": ["tests/certified/pdf/test_pdf_to_excel_certified.py"]
+    },
+    {
+      "slug": "png-to-jpg",
+      "lifecycle_status": "certified",
+      "name": "PNG to JPG",
+      "locked": true,
+      "test_files": []
+    },
+    {
+      "slug": "png-to-webp",
+      "lifecycle_status": "certified",
+      "name": "PNG to WEBP",
+      "locked": true,
+      "test_files": []
+    },
+    {
+      "slug": "ppt-to-pdf",
+      "lifecycle_status": "certified",
+      "name": "PPT to PDF",
+      "locked": true,
+      "test_files": ["tests/certified/office/test_ppt_to_pdf_certified.py"]
+    },
+    {
+      "slug": "svg-to-png",
+      "lifecycle_status": "certified",
+      "name": "SVG to PNG",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_svg_to_png.py"]
+    },
+    {
+      "slug": "tiff-to-jpg",
+      "lifecycle_status": "certified",
+      "name": "TIFF to JPG",
+      "locked": true,
+      "test_files": []
+    },
+    {
+      "slug": "webp-to-png",
+      "lifecycle_status": "certified",
+      "name": "WEBP to PNG",
+      "locked": true,
+      "test_files": []
+    },
+    {
+      "slug": "xlsx-to-pdf",
+      "lifecycle_status": "certified",
+      "name": "XLSX to PDF",
+      "locked": true,
+      "test_files": []
+    }
+  ],
+  "beta": [],
+  "disabled": [
+    {
+      "slug": "docx-to-ppt",
+      "lifecycle_status": "deprecated",
+      "name": "DOCX to PPT",
+      "locked": false,
+      "test_files": []
+    },
+    {
+      "slug": "docx-to-xlsx",
+      "lifecycle_status": "deprecated",
+      "name": "DOCX to XLSX",
+      "locked": false,
+      "test_files": []
+    },
+    {
+      "slug": "ppt-to-docx",
+      "lifecycle_status": "deprecated",
+      "name": "PPT to DOCX",
+      "locked": false,
+      "test_files": []
+    },
+    {
+      "slug": "ppt-to-jpg",
+      "lifecycle_status": "deprecated",
+      "name": "PPT to JPG",
+      "locked": false,
+      "test_files": []
+    },
+    {
+      "slug": "ppt-to-xlsx",
+      "lifecycle_status": "deprecated",
+      "name": "PPT to XLSX",
+      "locked": false,
+      "test_files": []
+    },
+    {
+      "slug": "xlsx-to-ods",
+      "lifecycle_status": "deprecated",
+      "name": "XLSX to ODS",
+      "locked": false,
+      "test_files": []
+    }
+  ]
+}

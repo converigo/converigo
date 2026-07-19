@@ -2,42 +2,53 @@
 
     <div class="container">
 
-        <div class="section-header">
-
-            <h2>
-                Popular Converters
-            </h2>
-
-            <p>
-                The most frequently used tools on Converigo.
-            </p>
-
+        <div class="section-header compact-header">
+            <div>
+                <h2>Popular Converters</h2>
+                <p>Jump straight into the conversion tools people use most often.</p>
+            </div>
         </div>
 
-        <div class="tools-grid">
-
-            {% for converter in popular_converters %}
-
-            <a
-                href="/tools/{{ converter.slug }}"
-                class="tool-card">
-
-                <strong>
-                    {{ converter.source | upper }}
-                </strong>
-
-                <span>
-                    →
-                </span>
-
-                <strong>
-                    {{ converter.target | upper }}
-                </strong>
-
+        <div class="featured-tools-row compact-grid">
+            <a href="/tools/jpg-to-pdf" class="tool-panel-card popular-tool-card">
+                <span class="popular-tool-card__icon">🖼️</span>
+                <div class="popular-tool-card__content">
+                    <div class="tool-panel-label">
+                        <strong>JPG to PDF</strong>
+                    </div>
+                    <p>Turn photos into a polished PDF document in seconds.</p>
+                </div>
             </a>
 
-            {% endfor %}
+            <a href="/tools/png-to-jpg" class="tool-panel-card popular-tool-card">
+                <span class="popular-tool-card__icon">🧩</span>
+                <div class="popular-tool-card__content">
+                    <div class="tool-panel-label">
+                        <strong>PNG to JPG</strong>
+                    </div>
+                    <p>Convert transparent images into a compact JPG file.</p>
+                </div>
+            </a>
 
+            <a href="/tools/pdf-to-word" class="tool-panel-card popular-tool-card">
+                <span class="popular-tool-card__icon">📄</span>
+                <div class="popular-tool-card__content">
+                    <div class="tool-panel-label">
+                        <strong>PDF to Word</strong>
+                    </div>
+                    <p>Extract editable text and formatting from your PDF.</p>
+                </div>
+            </a>
+
+            <a href="/tools/mp4-to-mp3" class="tool-panel-card popular-tool-card">
+                <span class="popular-tool-card__icon">🎵</span>
+                <div class="popular-tool-card__content">
+                    <div class="tool-panel-label">
+                        <strong>MP4 to MP3</strong>
+                    </div>
+                    <p>Extract audio from video and save it as a lightweight MP3.</p>
+                </div>
+            </a>
         </div>
 
     </div>

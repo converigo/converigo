@@ -34,6 +34,12 @@ class RecommendationManager {
             );
 
 
+        this.conversionArea =
+            document.getElementById(
+                "conversionArea"
+            );
+
+
         this.convertButton =
             document.getElementById(
                 "convertButton"
@@ -158,6 +164,12 @@ class RecommendationManager {
 
 
 
+        if(window.conversionStateController && typeof window.conversionStateController.setFormatChoicesAvailable === 'function'){
+            window.conversionStateController.setFormatChoicesAvailable(false);
+        } else if(this.conversionArea){
+            this.conversionArea.hidden = true;
+        }
+
         const choices = [];
 
 
@@ -272,11 +284,12 @@ class RecommendationManager {
 
 
 
-                    if(this.convertButton){
-
-                        this.convertButton.disabled =
-                            false;
-
+                    if(window.conversionStateController && typeof window.conversionStateController.setConvertReady === 'function'){
+                        window.conversionStateController.setConvertReady(true);
+                    } else if(this.convertButton){
+                        this.convertButton.disabled = false;
+                        this.convertButton.hidden = false;
+                        this.convertButton.style.removeProperty('display');
                     }
 
 
@@ -295,7 +308,11 @@ class RecommendationManager {
             }
         );
 
-
+        if(window.conversionStateController && typeof window.conversionStateController.setFormatChoicesAvailable === 'function'){
+            window.conversionStateController.setFormatChoicesAvailable(choices.length > 0);
+        } else if(this.conversionArea){
+            this.conversionArea.hidden = choices.length === 0;
+        }
 
 
     }

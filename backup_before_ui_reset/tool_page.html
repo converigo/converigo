@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="{{ locale.lang_code or 'en' }}">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% include "partials/seo_meta.html" %}
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/components/upload-card.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/lucide.min.js"></script>
+    <script>
+        window.appLocale = {{ locale | tojson | safe }};
+        window.localeCode = "{{ locale.lang_code or 'en' }}";
+        window.translate = function (key, defaultText) {
+            if (!window.appLocale || typeof key !== "string") {
+                return defaultText || key;
+            }
+            const parts = key.split(".");
+            let value = window.appLocale;
+            for (const part of parts) {
+                if (value && typeof value === "object" && part in value) {
+                    value = value[part];
+                } else {
+                    return defaultText || key;
+                }
+            }
+            return typeof value === "string" ? value : (defaultText || key);
+        };
+    </script>
+    <script defer src="/static/js/app.js"></script>
+    <script defer src="/static/js/upload/upload_manager.js"></script>
+    <script defer src="/static/js/recommendation/recommendation_manager.js"></script>
+    <script defer src="/static/js/download/download_manager.js"></script>
+    <script defer src="/static/js/convert/converter.js"></script>
+    {% include "partials/structured_data.html" %}
+</head>
+
+<body class="tool-page">
+    <header class="site-header" role="banner">
+        <div class="container nav-wrap">
+            <a class="brand" href="/" aria-label="Converigo home">
+                <img src="/static/images/converigo-logo.png" alt="Converigo logo">
+                <span>Converigo</span>
+            </a>
+            <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Toggle navigation">
+                <span class="nav-toggle-icon">☰</span>
+            </button>
+            <nav id="primaryNav" class="primary-nav" role="navigation" aria-label="Primary">
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="#how-to-use">How to use</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#related-tools">Related</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main" role="main">
+        <section class="hero section">
+            <div class="container hero-inner">
+                <div class="hero-copy">
+                    <span class="eyebrow">{{ hero.eyebrow or 'Converter tool' }}</span>
+                    <h1 class="hero-title">{{ landing.h1 if landing else hero.title or tool.title }}</h1>
+                    <p class="hero-sub">{{ hero.description or meta.description }}</p>
+                    <div class="hero-cta">
+                        <a href="{{ cta.primary_href or '#converter' }}" class="btn btn-primary">{{ cta.primary_text or t('tool_page.cta_convert', 'Convert now') }}</a>
+                        <a href="{{ cta.secondary_href or '#faq' }}" class="btn btn-outline">{{ cta.secondary_text or t('tool_page.cta_faq', 'Read FAQs') }}</a>
+                        <a href="#supported-formats" class="btn btn-outline">Supported formats</a>
+                    </div>
+                </div>
+                <div class="hero-panel">
+                    <div class="panel-head">
+                        <p class="panel-label">{{ hero.panel_label or t('tool_page.panel.label', 'Ready to convert') }}</p>
+                        <h2 class="panel-title">{{ hero.panel_title or t('tool_page.panel.title', 'Upload one file and get your converted result.') }}</h2>
+                    </div>
+                    {% include "components/upload_card.html" %}
+                </div>
+            </div>
+        </section>
+
+        {% if benefits %}
+        <section id="benefits" class="section section-white">
+            <div class="container section-heading">
+                <span class="eyebrow">Benefits</span>
+                <h2>Why choose this converter</h2>
+            </div>
+            <div class="grid features-grid">
+                {% for item in benefits %}
+                <article class="feature-card hover-card">
+                    <i data-lucide="sparkles"></i>
+                    <h3>{{ item.title }}</h3>
+                    <p>{{ item.text }}</p>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+        {% if features %}
+        <section id="features" class="section">
+            <div class="container section-heading">
+                <span class="eyebrow">Features</span>
+                <h2>Built for quick and reliable conversions</h2>
+            </div>
+            <div class="grid features-grid">
+                {% for item in features %}
+                <article class="feature-card hover-card">
+                    <i data-lucide="check-circle"></i>
+                    <h3>{{ item.title }}</h3>
+                    <p>{{ item.text }}</p>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+        {% if supported_formats %}
+        <section id="supported-formats" class="section section-white">
+            <div class="container section-heading">
+                <span class="eyebrow">Supported formats</span>
+                <h2>Input and output formats</h2>
+            </div>
+            <div class="container">
+                <p><strong>Input format:</strong> {{ supported_formats.input|join(', ') if supported_formats.input is iterable and supported_formats.input is not string else supported_formats.input }}</p>
+                <p><strong>Output format:</strong> {{ supported_formats.output|join(', ') if supported_formats.output is iterable and supported_formats.output is not string else supported_formats.output }}</p>
+                <p>{{ supported_formats.description or (tool.source|upper ~ ' input, ' ~ tool.target|upper ~ ' output') }}</p>
+            </div>
+        </section>
+        {% endif %}
+
+        {% if how_to_use %}
+        <section id="how-to-use" class="section">
+            <div class="container section-heading">
+                <span class="eyebrow">{{ t('tool_page.how_it_works.eyebrow', 'How it works') }}</span>
+                <h2>{{ t('tool_page.how_it_works.heading', 'Simple conversion in three steps') }}</h2>
+            </div>
+            <div class="grid features-grid">
+                {% for step in how_to_use %}
+                <article class="feature-card hover-card">
+                    <i data-lucide="upload"></i>
+                    <h3>{{ step.title }}</h3>
+                    <p>{{ step.description }}</p>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+        {% if use_cases %}
+        <section id="use-cases" class="section section-white">
+            <div class="container section-heading">
+                <span class="eyebrow">Use Cases</span>
+                <h2>When this converter is useful</h2>
+            </div>
+            <div class="container">
+                <ul>
+                    {% for case in use_cases %}
+                    <li>{{ case }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+        {% endif %}
+
+        {% if about_formats %}
+        <section id="about-formats" class="section">
+            <div class="container section-heading">
+                <span class="eyebrow">About Formats</span>
+                <h2>Understanding the source and output formats</h2>
+            </div>
+            <div class="grid features-grid">
+                {% for item in about_formats %}
+                <article class="feature-card hover-card">
+                    <i data-lucide="info"></i>
+                    <h3>{{ item.title }}</h3>
+                    <p>{{ item.text }}</p>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+        <section id="faq" class="section">
+            <div class="container section-heading">
+                <span class="eyebrow">{{ t('tool_page.faq.eyebrow', 'FAQ') }}</span>
+                <h2>{{ t('tool_page.faq.heading', 'Frequently asked questions') }}</h2>
+            </div>
+            <div class="faq-grid">
+                {% for item in faq %}
+                <div class="faq-item">
+                    <button class="faq-question" type="button" id="faq-question-{{ loop.index }}" aria-expanded="false" aria-controls="faq-answer-{{ loop.index }}">
+                        <span>{{ item.question }}</span>
+                        <span class="faq-toggle">+</span>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-{{ loop.index }}" role="region" aria-labelledby="faq-question-{{ loop.index }}" hidden>
+                        <p>{{ item.answer }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section id="related-tools" class="section section-white">
+            <div class="container section-heading">
+                <span class="eyebrow">{{ t('tool_page.related.eyebrow', 'Related Tools') }}</span>
+                <h2>{{ t('tool_page.related.heading', 'Other converters you may need') }}</h2>
+            </div>
+            <div class="grid popular-grid">
+                {% for related in related_tools %}
+                <article class="card card-lg hover-card">
+                    <div class="card-icon"><i data-lucide="layers"></i></div>
+                    <h3><a href="/tools/{{ related.slug }}">{{ related.title }}</a></h3>
+                    <p>{{ related.description or t('tool_page.related.fallback', 'Discover another useful conversion flow.') }}</p>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        {% if landing %}
+        {% include "components/landing_sections.html" %}
+        {% endif %}
+
+        {% if cta and not landing %}
+        <section class="section">
+            <div class="container">
+                <div class="card card-lg">
+                    <h2>{{ cta.title }}</h2>
+                    <p>{{ cta.text }}</p>
+                    <div class="hero-cta">
+                        <a href="{{ cta.primary_href or '#converter' }}" class="btn btn-primary">{{ cta.primary_text or t('tool_page.cta_convert', 'Convert now') }}</a>
+                        <a href="{{ cta.secondary_href or '#faq' }}" class="btn btn-outline">{{ cta.secondary_text or t('tool_page.cta_faq', 'Read FAQs') }}</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+    </main>
+</body>
+
+</html>

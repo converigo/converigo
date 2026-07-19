@@ -123,9 +123,36 @@ async def home(request: Request):
             default,
         )
 
-    popular = converter_data_service.list_popular_converters(
-        limit=6
-    )
+    popular = [
+        tool for tool in converter_data_service.list_popular_converters(limit=6)
+        if not (
+            str(tool.get("source", "")).strip().lower() == "pdf"
+            and str(tool.get("target", "")).strip().lower() == "pdf"
+        )
+    ]
+
+    category_icons = {
+        "image": "🖼️",
+        "document": "📄",
+        "audio": "🎧",
+        "video": "🎬",
+        "archive": "🗜️",
+        "general": "⚙️",
+    }
+
+    popular_converter_groups: list[dict[str, Any]] = []
+    group_map: dict[str, dict[str, Any]] = {}
+    for tool in popular:
+        category_key = str(tool.get("category", "general") or "general").strip().lower()
+        category_title = category_key.title()
+        if category_title not in group_map:
+            group_map[category_title] = {
+                "title": category_title,
+                "icon": category_icons.get(category_key, "⚙️"),
+                "tools": [],
+            }
+            popular_converter_groups.append(group_map[category_title])
+        group_map[category_title]["tools"].append(tool)
 
     latest = converter_data_service.list_latest_converters(
         limit=4
@@ -144,7 +171,9 @@ async def home(request: Request):
             "supported_locales": supported_locales,
             "title": metadata["title"],
             "meta": metadata,
+            "hero": {},
             "featured_converters": popular[:4],
+            "popular_converter_groups": popular_converter_groups,
             "popular_converters": popular,
             "latest_converters": latest,
             "structured_data": seo_service.build_structured_data(
@@ -218,6 +247,17 @@ async def cookies(request: Request):
         "Cookie Policy | Converigo",
         "Learn how Converigo uses cookies, analytics, and advertising technologies on our website.",
         "/cookies",
+    )
+
+
+@router.get("/pricing", response_class=HTMLResponse)
+async def pricing(request: Request):
+    return await _render_trust_page(
+        request,
+        "pricing.html",
+        "Pricing | Converigo",
+        "Compare Converigo plans and choose the best option for your file conversion needs.",
+        "/pricing",
     )
 
 

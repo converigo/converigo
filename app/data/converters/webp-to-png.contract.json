@@ -4,9 +4,15 @@
   "name": "WebP to PNG",
   "category": "image",
   "description": "Convert WebP images into PNG format.",
-  "input_formats": ["webp"],
-  "output_formats": ["png"],
-  "accepted_mime_types": ["image/webp"],
+  "input_formats": [
+    "webp"
+  ],
+  "output_formats": [
+    "png"
+  ],
+  "accepted_mime_types": [
+    "image/webp"
+  ],
   "max_upload_size": 104857600,
   "conversion_engine": "image",
   "landing_path": "/webp-to-png",
@@ -15,6 +21,8 @@
   "schema_status": "ready",
   "faq_status": "ready",
   "regression_sample": "tests/sample.webp",
-  "supported_platforms": ["web"],
-  "lifecycle_status": "active"
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "certified"
 }

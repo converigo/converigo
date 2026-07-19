@@ -1,56 +1,17 @@
-<!DOCTYPE html>
-<html lang="{{ locale.lang_code or 'en' }}">
+{% extends "layouts/base.html" %}
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    {% include "partials/seo_meta.html" %}
-    <link rel="stylesheet" href="/static/css/style.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/lucide.min.js"></script>
-    <script>
-        window.appLocale = {{ locale | tojson | safe }};
-        window.localeCode = "{{ locale.lang_code or 'en' }}";
-        window.translate = function (key, defaultText) {
-            if (!window.appLocale || typeof key !== "string") {
-                return defaultText || key;
-            }
-            const parts = key.split(".");
-            let value = window.appLocale;
-            for (const part of parts) {
-                if (value && typeof value === "object" && part in value) {
-                    value = value[part];
-                } else {
-                    return defaultText || key;
-                }
-            }
-            return typeof value === "string" ? value : (defaultText || key);
-        };
-    </script>
-    <script defer src="/static/js/app.js"></script>
-    {% include "partials/structured_data.html" %}
-</head>
+{% block title %}{{ landing.h1 if landing else hero.title or tool.title }}{% endblock %}
 
-<body>
-    <header class="site-header" role="banner">
-        <div class="container nav-wrap">
-            <a class="brand" href="/" aria-label="Converigo home">
-                <img src="/static/images/converigo-logo.png" alt="Converigo logo">
-                <span>Converigo</span>
-            </a>
-            <nav id="primaryNav" class="primary-nav" role="navigation" aria-label="Primary">
-                <ul class="nav-list">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="#how-to-use">How to use</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                    <li><a href="#related-tools">Related</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+{% block page_css %}{% endblock %}
+
+{% block body_class %}tool-page{% endblock %}
+
+{% block content %}
+    {% include "components/header.html" %}
 
     <main class="main" role="main">
-        <section class="hero section">
-            <div class="container hero-inner">
+        <section class="tool-hero section">
+            <div class="container tool-hero-inner">
                 <div class="hero-copy">
                     <span class="eyebrow">{{ hero.eyebrow or 'Converter tool' }}</span>
                     <h1 class="hero-title">{{ landing.h1 if landing else hero.title or tool.title }}</h1>
@@ -58,7 +19,9 @@
                     <div class="hero-cta">
                         <a href="{{ cta.primary_href or '#converter' }}" class="btn btn-primary">{{ cta.primary_text or t('tool_page.cta_convert', 'Convert now') }}</a>
                         <a href="{{ cta.secondary_href or '#faq' }}" class="btn btn-outline">{{ cta.secondary_text or t('tool_page.cta_faq', 'Read FAQs') }}</a>
+                        <a href="#how-to-use" class="btn btn-outline">How it works</a>
                         <a href="#supported-formats" class="btn btn-outline">Supported formats</a>
+                        <a href="#related-tools" class="btn btn-outline">Related tools</a>
                     </div>
                 </div>
                 <div class="hero-panel">
@@ -66,13 +29,7 @@
                         <p class="panel-label">{{ hero.panel_label or t('tool_page.panel.label', 'Ready to convert') }}</p>
                         <h2 class="panel-title">{{ hero.panel_title or t('tool_page.panel.title', 'Upload one file and get your converted result.') }}</h2>
                     </div>
-                    <div id="converter" class="upload-card">
-                        <form action="{{ upload_form.action }}" method="{{ upload_form.method }}" enctype="multipart/form-data">
-                            <label for="fileInput" class="sr-only">{{ t('tool_page.upload_label', 'Upload file') }}</label>
-                            <input id="fileInput" name="file" type="file" accept="{{ upload_form.accept }}" required>
-                            <button class="btn btn-primary" type="submit">{{ upload_form.button_text }}</button>
-                        </form>
-                    </div>
+                    {% include "components/upload_card.html" %}
                 </div>
             </div>
         </section>
@@ -187,11 +144,11 @@
             <div class="faq-grid">
                 {% for item in faq %}
                 <div class="faq-item">
-                    <button class="faq-question" type="button">
-                        {{ item.question }}
+                    <button class="faq-question" type="button" id="faq-question-{{ loop.index }}" aria-expanded="false" aria-controls="faq-answer-{{ loop.index }}">
+                        <span>{{ item.question }}</span>
                         <span class="faq-toggle">+</span>
                     </button>
-                    <div class="faq-answer">
+                    <div class="faq-answer" id="faq-answer-{{ loop.index }}" role="region" aria-labelledby="faq-question-{{ loop.index }}" hidden>
                         <p>{{ item.answer }}</p>
                     </div>
                 </div>
@@ -234,6 +191,6 @@
         </section>
         {% endif %}
     </main>
-</body>
+{% endblock %}
 
 </html>

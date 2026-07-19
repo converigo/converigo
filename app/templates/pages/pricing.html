@@ -1,0 +1,31 @@
+{% extends "pages/trust_page.html" %}
+
+{% block page_heading %}Converigo Plans{% endblock %}
+
+{% block page_intro %}Choose the plan that matches your file conversion needs and timing.{% endblock %}
+
+{% block page_content %}
+<div class="pricing-grid">
+    <div class="pricing-card">
+        <span class="plan-status">Free</span>
+        <h2>Free</h2>
+        <p>Perfect for occasional conversions with no commitment.</p>
+        <ul>
+            <li>Basic conversions</li>
+            <li>Standard processing</li>
+            <li>No account required</li>
+        </ul>
+    </div>
+
+    <div class="pricing-card pro">
+        <span class="plan-status">Coming Soon</span>
+        <h2>Pro</h2>
+        <p>More power for heavier workflows and professional requirements.</p>
+        <ul>
+            <li>Larger files</li>
+            <li>Faster processing</li>
+            <li>API access</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

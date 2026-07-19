@@ -5,6 +5,7 @@
     "subtitle": "Konversi file lebih cepat dengan kesederhanaan premium.",
     "subtitle_line": "Dalam Hitungan Detik",
     "description": "Konversi gambar, video, audio, dan dokumen secara online.",
+    "batch_hint": "Mendukung banyak file sekaligus",
     "callout": "Konversi dan Lanjutkan!",
     "callout_tagline": "Cepat, Sederhana, Siap.",
     "primary_cta": "Mulai mengonversi",
@@ -21,6 +22,7 @@
     "size_label": "0 KB",
     "clear": "Hapus",
     "conversion_title": "Konversi Ke",
+    "conversion_instruction": "Konversi semua file ke:",
     "convert": "Konversi",
     "download": "Unduh",
     "select_file": "Pilih file untuk memulai",
@@ -59,6 +61,16 @@
   "faq": {
     "heading": "Pertanyaan yang Sering Diajukan",
     "description": "Jawaban atas pertanyaan umum tentang layanan konversi file Converigo.",
+    "q1": "File apa saja yang bisa saya konversi?",
+    "a1": "Converigo mendukung banyak format termasuk gambar, dokumen, audio, dan video.",
+    "q2": "Apakah Converigo gratis untuk digunakan?",
+    "a2": "Ya. Anda bisa mengonversi file secara online secara gratis tanpa menginstal perangkat lunak.",
+    "q3": "Apakah file saya aman?",
+    "a3": "Ya. File Anda diproses dengan aman dan tidak dibagikan ke pihak lain.",
+    "q4": "Apakah saya perlu menginstal perangkat lunak?",
+    "a4": "Tidak. Converigo bekerja langsung di browser Anda di desktop maupun perangkat seluler.",
+    "q5": "Apakah saya bisa mengonversi beberapa file sekaligus?",
+    "a5": "Ya. Converigo mendukung unggahan beberapa file untuk alur kerja yang lebih cepat.",
     "items": [
       {"question": "Apa itu Converigo?", "answer": "Converigo adalah konverter file online yang cepat untuk membantu Anda mengonversi dokumen, gambar, audio, dan video tanpa harus menginstal perangkat lunak."},
       {"question": "Apakah Converigo gratis?", "answer": "Ya, Converigo menawarkan konversi file gratis agar Anda dapat mengubah file dengan cepat tanpa biaya tambahan."},
@@ -92,12 +104,16 @@
     "upload": "Unggah",
     "related": "Terkait",
     "tools": "Alat",
+    "support": "Dukungan",
     "api": "API",
     "pricing": "Harga"
   },
   "header": {
     "sign_in": "Masuk",
     "get_started": "Mulai"
+  },
+  "community_support": {
+    "support_cta": "Dukung Converigo di Ko-fi"
   },
   "language": {
     "selector_label": "Bahasa",

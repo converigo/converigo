@@ -6,11 +6,15 @@ Version : 2.1.0
 Image Engine
 """
 
+
 from __future__ import annotations
+import logging
 
 from pathlib import Path
 
 from PIL import Image
+
+logger = logging.getLogger(__name__)
 
 from app.engines.base_engine import BaseEngine
 
@@ -36,6 +40,8 @@ class ImageEngine(BaseEngine):
         target_format: str,
     ) -> Path:
 
+        logger.info("[CONVERTER_DEBUG] ImageEngine start conversion source=%s target=%s", str(source_path), target_format)
+
         target = target_format.lower().lstrip(".")
 
         if target not in self.SUPPORTED_FORMATS:
@@ -60,52 +66,58 @@ class ImageEngine(BaseEngine):
 
         self._load_optional_raster_backends(suffix)
 
-        with Image.open(source_path) as image:
+        try:
+            with Image.open(source_path) as image:
 
-            if target in (
-                "jpg",
-                "jpeg",
-            ):
-
-                if image.mode in (
-                    "RGBA",
-                    "LA",
-                    "P",
+                if target in (
+                    "jpg",
+                    "jpeg",
                 ):
-                    image = image.convert("RGB")
 
-                image.save(
-                    output_path,
-                    quality=95,
-                )
+                    if image.mode in (
+                        "RGBA",
+                        "LA",
+                        "P",
+                    ):
+                        image = image.convert("RGB")
 
-            elif target == "ico":
+                    image.save(
+                        output_path,
+                        quality=95,
+                    )
 
-                if image.mode not in (
-                    "RGB",
-                    "RGBA",
-                ):
-                    image = image.convert("RGBA")
+                elif target == "ico":
 
-                image.thumbnail(
-                    (
-                        256,
-                        256,
-                    ),
-                    Image.LANCZOS,
-                )
+                    if image.mode not in (
+                        "RGB",
+                        "RGBA",
+                    ):
+                        image = image.convert("RGBA")
 
-                image.save(
-                    output_path,
-                    format="ICO",
-                )
+                    image.thumbnail(
+                        (
+                            256,
+                            256,
+                        ),
+                        Image.LANCZOS,
+                    )
 
-            else:
+                    image.save(
+                        output_path,
+                        format="ICO",
+                    )
 
-                image.save(
-                    output_path,
-                )
+                else:
 
+                    image.save(
+                        output_path,
+                    )
+
+        except Exception:
+            logger.exception("[CONVERTER_DEBUG] ImageEngine conversion exception source=%s target=%s", str(source_path), target)
+            raise
+
+        logger.info("[CONVERTER_DEBUG] ImageEngine success output_path=%s", str(output_path))
         return output_path
 
     def _load_optional_raster_backends(self, suffix: str) -> None:

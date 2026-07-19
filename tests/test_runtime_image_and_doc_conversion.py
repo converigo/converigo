@@ -56,7 +56,10 @@ def test_xlsx_to_pdf_runtime_conversion():
     assert plugin is not None
 
     client = TestClient(app)
-    sample_path = Path(__file__).parent.parent / "test_files" / "sample.xlsx"
+    # Prefer the validated fixture; fall back to legacy locations if missing
+    sample_path = Path(__file__).parent.parent / "fixtures" / "sample_valid.xlsx"
+    if not sample_path.exists():
+        sample_path = Path(__file__).parent.parent / "test_files" / "sample.xlsx"
     if not sample_path.exists():
         sample_path = Path(__file__).parent / "sample.xlsx"
 

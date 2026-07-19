@@ -54,11 +54,30 @@
     =========== */
 
     --container-width: 1200px;
+    --container-padding: 24px;
 
     /* ===========
        TRANSITION
     =========== */
 
     --transition: .25s ease;
+
+    /* ===========
+       COMPATIBILITY ALIASES
+    =========== */
+
+    --bg: var(--color-bg);
+    --surface: var(--color-surface);
+    --surface-soft: #F8FAFC;
+    --text: var(--color-text);
+    --muted: var(--color-text-light);
+    --border: var(--color-border);
+    --accent: var(--color-primary);
+    --accent-soft: rgba(37, 99, 235, 0.08);
+    --accent-hover: var(--color-primary-hover);
+    --primary: var(--color-primary);
+    --primary-hover: var(--color-primary-hover);
+    --radius: var(--radius-lg);
+    --shadow: var(--shadow-md);
 
 }

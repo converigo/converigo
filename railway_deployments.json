@@ -1,0 +1,1259 @@
+﻿[
+  {
+    "id": "b98aa68d-9791-4c83-8019-e483b4b12cac",
+    "status": "BUILDING",
+    "createdAt": "2026-07-18T08:10:41.564Z",
+    "meta": {
+      "buildOnly": false,
+      "configFile": "/railway.toml",
+      "fileServiceManifest": {
+        "build": {
+          "builder": "DOCKERFILE"
+        },
+        "deploy": {
+          "startCommand": "sh -c \"uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}\""
+        }
+      },
+      "logsV2": true,
+      "nixpacksProviders": [],
+      "propertyFileMapping": {
+        "build.builder": "$.build.builder",
+        "deploy.startCommand": "$.deploy.startCommand"
+      },
+      "reason": "deploy",
+      "rootDirectory": null,
+      "runtime": "V2",
+      "serviceManifest": {
+        "build": {
+          "buildCommand": null,
+          "buildEnvironment": "V3",
+          "builder": "DOCKERFILE",
+          "dockerfilePath": "/Dockerfile",
+          "nixpacksConfigPath": null,
+          "nixpacksPlan": null,
+          "watchPatterns": []
+        },
+        "deploy": {
+          "cronSchedule": null,
+          "drainingSeconds": null,
+          "healthcheckPath": "/health",
+          "healthcheckTimeout": null,
+          "ipv6EgressEnabled": false,
+          "limitOverride": null,
+          "multiRegionConfig": {
+            "sfo": {
+              "numReplicas": 1
+            }
+          },
+          "numReplicas": 1,
+          "overlapSeconds": null,
+          "preDeployCommand": null,
+          "region": null,
+          "registryCredentials": null,
+          "requiredMountPath": null,
+          "restartPolicyMaxRetries": 10,
+          "restartPolicyType": "ON_FAILURE",
+          "runtime": "V2",
+          "sleepApplication": false,
+          "startCommand": "sh -c \"uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}\"",
+          "useLegacyStacker": false
+        }
+      },
+      "volumeMounts": []
+    }
+  },
+  {
+    "id": "515e2271-aced-4b29-8c6e-ee397553d515",
+    "status": "FAILED",
+    "createdAt": "2026-07-18T08:02:07.465Z",
+    "meta": {
+      "branch": "main",
+      "buildOnly": false,
+      "commitAuthor": "converigo",
+      "commitHash": "7cc7351dfc202381c415f616b7ff091778d7675f",
+      "commitMessage": "Merge pull request #14 from converigo/fix/recommend-router\n\nMerge fix(api): register recommendation router endpoint. Validated scope, regression test passed.",
+      "configFile": "/railway.toml",
+      "fileServiceManifest": {
+        "build": {
+          "builder": "DOCKERFILE"
+        },
+        "deploy": {
+          "startCommand": "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"
+        }
+      },
+      "logsV2": true,
+      "nixpacksProviders": [],
+      "plan": "trial",
+      "propertyFileMapping": {
+        "build.builder": "$.build.builder",
+        "deploy.startCommand": "$.deploy.startCommand"
+      },
+      "reason": "deploy",
+      "repo": "converigo/converigo",
+      "rootDirectory": null,
+      "runtime": "V2",
+      "serviceManifest": {
+        "build": {
+          "buildCommand": null,
+          "buildEnvironment": "V3",
+          "builder": "DOCKERFILE",
+          "dockerfilePath": "/Dockerfile",
+          "nixpacksConfigPath": null,
+          "nixpacksPlan": null,
+          "watchPatterns": []
+        },
+        "deploy": {
+          "cronSchedule": null,
+          "drainingSeconds": null,
+          "healthcheckPath": "/health",
+          "healthcheckTimeout": null,
+          "ipv6EgressEnabled": false,
+          "limitOverride": null,
+          "multiRegionConfig": {
+            "sfo": {
+              "numReplicas": 1
+            }
+          },
+          "numReplicas": 1,
+          "overlapSeconds": null,
+          "preDeployCommand": null,
+          "region": null,
+          "registryCredentials": null,
+          "requiredMountPath": null,
+          "restartPolicyMaxRetries": 10,
+          "restartPolicyType": "ON_FAILURE",
+          "runtime": "V2",
+          "sleepApplication": false,
+          "startCommand": "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}",
+          "useLegacyStacker": false
+        }
+      },
+      "volumeMounts": []
+    }
+  },
+  {
+    "id": "d18649cc-561f-47d0-89e8-5dd26889f851",
+    "status": "SUCCESS",
+    "createdAt": "2026-07-18T06:52:11.143Z",
+    "meta": {
+      "buildOnly": false,
+      "cliAgentSessionId": "8858164b-035c-427b-bbcb-db1c4a347c1e",
+      "cliCaller": "agent_unknown:vscode",
+      "configFile": "/railway.toml",
+      "fileServiceManifest": {
+        "build": {
+          "builder": "DOCKERFILE"
+        },
+        "deploy": {
+          "startCommand": "sh -c \"uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}\""
+        }
+      },
+      "imageDigest": "sha256:c36705813cd5a9a582d996ca5e5858fac7b4f08bc5cbceab213b370a4d184b44",
+      "logsV2": true,
+      "nixpacksProviders": [],
+      "propertyFileMapping": {
+        "build.builder": "$.build.builder",
+        "deploy.startCommand": "$.deploy.startCommand"
+      },
+      "reason": "deploy",
+      "rootDirectory": null,
+      "runtime": "V2",
+      "serviceManifest": {
+        "build": {
+          "buildCommand": null,
+          "buildEnvironment": "V3",
+          "builder": "DOCKERFILE",
+          "dockerfilePath": "/Dockerfile",
+          "nixpacksConfigPath": null,
+          "nixpacksPlan": null,
+          "watchPatterns": []
+        },
+        "deploy": {
+          "cronSchedule": null,
+          "drainingSeconds": null,
+          "healthcheckPath": "/health",
+          "healthcheckTimeout": null,
+          "ipv6EgressEnabled": false,
+          "limitOverride": null,
+          "multiRegionConfig": {
+            "sfo": {
+              "numReplicas": 1
+            }
+          },
+          "numReplicas": 1,
+          "overlapSeconds": null,
+          "preDeployCommand": null,
+          "region": null,
+          "registryCredentials": null,
+          "requiredMountPath": null,
+          "restartPolicyMaxRetries": 10,
+          "restartPolicyType": "ON_FAILURE",
+          "runtime": "V2",
+          "sleepApplication": false,
+          "startCommand": "sh -c \"uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}\"",
+          "useLegacyStacker": false
+        }
+      },
+      "volumeMounts": []
+    }
+  },
+  {
+    "id": "ae8edfc5-622e-4a31-84a2-17996e34db02",
+    "status": "FAILED",
+    "createdAt": "2026-07-18T06:21:48.938Z",
+    "meta": {
+      "branch": "main",
+      "buildOnly": false,
+      "commitAuthor": "converigo",
+      "commitHash": "40c6ed2bf0124fab2d5ab8092447eea19e990371",
+      "commitMessage": "fix(pdf): recover PDF office conversion engine\n\n* fix(pdf): recover PDF office conversion engine with validation and certified PDF tests\n\n* Clean release branch: remove unrelated Continue/Ollama tooling and add conversion service scope review\n\n* chore(release): add final PDF release approval report\n\n---------\n\nCo-authored-by: Converigo <release@converigo.com>",
+      "configFile": "/railway.toml",
+      "fileServiceManifest": {
+        "build": {
+          "builder": "DOCKERFILE"
+        },
+        "deploy": {
+          "startCommand": "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"
+        }
+      },
+      "logsV2": true,
+      "nixpacksProviders": [],
+      "plan": "trial",
+      "propertyFileMapping": {
+        "build.builder": "$.build.builder",
+        "deploy.startCommand": "$.deploy.startCommand"
+      },
+      "reason": "deploy",
+      "repo": "converigo/converigo",
+      "rootDirectory": null,
+      "runtime": "V2",
+      "serviceManifest": {
+        "build": {
+          "buildCommand": null,
+          "buildEnvironment": "V3",
+          "builder": "DOCKERFILE",
+          "dockerfilePath": "/Dockerfile",
+          "nixpacksConfigPath": null,
+          "nixpacksPlan": null,
+          "watchPatterns": []
+        },
+        "deploy": {
+          "cronSchedule": null,
+          "drainingSeconds": null,
+          "healthcheckPath": "/health",
+          "healthcheckTimeout": null,
+          "ipv6EgressEnabled": false,
+          "limitOverride": null,
+          "multiRegionConfig": {
+            "sfo": {
+              "numReplicas": 1
+            }
+          },
+          "numReplicas": 1,
+          "overlapSeconds": null,
+          "preDeployCommand": null,
+          "region": null,
+          "registryCredentials": null,
+          "requiredMountPath": null,
+          "restartPolicyMaxRetries": 10,
+          "restartPolicyType": "ON_FAILURE",
+          "runtime": "V2",
+          "sleepApplication": false,
+          "startCommand": "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}",
+          "useLegacyStacker": false
+        }
+      },
+      "volumeMounts": []
+    }
+  },
+  {
+    "id": "09927e67-2c7f-4cd2-9147-ee519f376b57",
+    "status": "REMOVED",
+    "createdAt": "2026-07-17T12:01:46.516Z",
+    "meta": {
+      "branch": "main",
+      "buildOnly": false,
+      "commitAuthor": "converigo",
+      "commitHash": "8a612dea11ae997f428d1c718d7702c33aaa74b2",
+      "commitMessage": "fix(recommendation): restore service-level converter filtering\n\nMerge PR #6: recommendation-service-filtering",
+      "configFile": "/railway.toml",
+      "fileServiceManifest": {},
+      "ignoreWatchPatterns": true,
+      "imageDigest": "sha256:551bd8b53d6c37b7de97102095c2f0e81bb0a5f2078aeef2cd03aeefa2de619b",
+      "logsV2": true,
+      "nixpacksProviders": [],
+      "plan": "trial",
+      "propertyFileMapping": {},
+      "reason": "redeploy",
+      "repo": "converigo/converigo",
+      "rootDirectory": null,
+      "runtime": "V2",
+      "serviceManifest": {
+        "build": {
+          "buildCommand": null,
+          "buildEnvironment": "V3",
+          "builder": "DOCKERFILE",
+          "dockerfilePath": "/Dockerfile",
+          "nixpacksConfigPath": null,
+          "nixpacksPlan": null,
+          "watchPatterns": []
+        },
+        "deploy": {
+          "cronSchedule": null,
+          "drainingSeconds": null,
+          "healthcheckPath": "/health",
+          "healthcheckTimeout": null,
+          "ipv6EgressEnabled": false,
+          "limitOverride": null,
+          "multiRegionConfig": {
+            "sfo": {
+              "numReplicas": 1
+            }
+          },
+          "numReplicas": 1,
+          "overlapSeconds": null,
+          "preDeployCommand": null,
+          "region": null,
+          "registryCredentials": null,
+          "requiredMountPath": null,
+          "restartPolicyMaxRetries": 10,
+          "restartPolicyType": "ON_FAILURE",
+          "runtime": "V2",
+          "sleepApplication": false,
+          "startCommand": "/bin/sh -c 'uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080}'",
+          "useLegacyStacker": false
+        }
+      },
+      "skipBuildCache": true,
+      "volumeMounts": []
+    }
+  },
+  {
+    "id": "99907c6c-68f5-4690-9a2f-6edfec5a89ee",
+    "status": "REMOVED",
+    "createdAt": "2026-07-17T11:34:49.108Z",
+    "meta": {
+      "branch": "main",
+      "buildOnly": false,
+      "commitAuthor": "converigo",
+      "commitHash": "1335e3834133f5fd993528cc557d198d0e95a627",
+      "commitMessage": "fix(docker): correct Debian package names for Railway build (#11)\n\n## Summary\n\nFix Railway Docker build failure caused by unavailable Debian package names.\n\n## Root Cause\n\nDocker build failed because Debian base image no longer provides:\n\n- libpango1.0-0\n- libgdk-pixbuf2.0-0\n\n## Solution\n\nUpdated package names:\n\n- libpango-1.0-0\n- libgdk-pixbuf-xlib-2.0-0\n\n## Validation\n\n- Docker-only PR reviewed\n- No application code changed\n- No converter modified\n- Risk: Low",
+      "configFile": "/railway.toml",
+      "fileServiceManifest": {
+        "build": {
+          "builder": "DOCKERFILE"
+        },
+        "deploy": {
+          "startCommand": "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"
+        }
+      },
+      "logsV2": true,
+      "nixpacksProviders": [],
+      "plan": "trial",
+      "propertyFileMapping": {
+        "build.builder": "$.build.builder",
+        "deploy.startCommand": "$.deploy.startCommand"
+      },
+      "reason": "deploy",
+      "repo": "converigo/converigo",
+      "rootDirectory": null,
+      "runtime": "V2",
+      "serviceManifest": {
+        "build": {
+          "buildCommand": null,
+          "buildEnvironment": "V3",
+          "builder": "DOCKERFILE",
+          "dockerfilePath": "/Dockerfile",
+          "nixpacksConfigPath": null,
+          "nixpacksPlan": null,
+          "watchPatterns": []
+        },
+        "deploy": {
+          "cronSchedule": null,
+          "drainingSeconds": null,
+          "healthcheckPath": "/health",
+          "healthcheckTimeout": null,
+          "ipv6EgressEnabled": false,
+          "limitOverride": null,
+          "multiRegionConfig": {
+            "sfo": {
+              "numReplicas": 1
+            }
+          },
+          "numReplicas": 1,
+          "overlapSeconds": null,
+          "preDeployCommand": null,
+          "region": null,
+          "registryCredentials": null,
+          "requiredMountPath": null,
+          "restartPolicyMaxRetries": 10,
+          "restartPolicyType": "ON_FAILURE",
+          "runtime": "V2",
+          "sleepApplication": false,
+          "startCommand": "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}",
+          "useLegacyStacker": false
+        }
+      },
+      "volumeMounts": []
+    }
+  },
+  {
+    "id": "4e48c5f0-0023-4746-8a91-9105990c5688",
+    "status": "FAILED",
+    "createdAt": "2026-07-17T11:10:59.894Z",
+    "meta": {
+      "branch": "main",
+      "buildOnly": false,
+      "commitAuthor": "converigo",
+      "commitHash": "427988159ef5617cea980cc6289a2ba58356c08f",
+      "commitMessage": "fix(pdf-engine): use settings.OUTPUT_DIR for PDF document output path (#9)\n\nCo-authored-by: Converigo <release@converigo.com>",
+      "configFile": "/railway.toml",
+      "fileServiceManifest": {
+        "build": {
+          "builder": "DOCKERFILE"
+        },
+        "deploy": {
+          "startCommand": "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"
+        }
+      },
+      "logsV2": true,
+      "nixpacksProviders": [],
+      "plan": "trial",
+      "propertyFileMapping": {
+        "build.builder": "$.build.builder",
+        "deploy.startCommand": "$.deploy.startCommand"
+      },
+      "reason": "deploy",
+      "repo": "converigo/converigo",
+      "rootDirectory": null,
+      "runtime": "V2",
+      "serviceManifest": {
+        "build": {
+          "buildCommand": null,
+          "buildEnvironment": "V3",
+          "builder": "DOCKERFILE",
+          "dockerfilePath": "/Dockerfile",
+          "nixpacksConfigPath": null,
+          "nixpacksPlan": null,
+          "watchPatterns": []
+        },
+        "deploy": {
+          "cronSchedule": null,
+          "drainingSeconds": null,
+          "healthcheckPath": "/health",
+          "healthcheckTimeout": null,
+          "ipv6EgressEnabled": false,
+          "limitOverride": null,
+          "multiRegionConfig": {
+            "sfo": {
+              "numReplicas": 1
+            }
+          },
+          "numReplicas": 1,
+          "overlapSeconds": null,
+          "preDeployCommand": null,
+          "region": null,
+          "registryCredentials": null,
+          "requiredMountPath": null,
+          "restartPolicyMaxRetries": 10,
+          "restartPolicyType": "ON_FAILURE",
+          "runtime": "V2",
+          "sleepApplication": false,
+          "startCommand": "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}",
+          "useLegacyStacker": false
+        }
+      },
+      "volumeMounts": []
+    }
+  },
+  {
+    "id": "4020324d-57e6-4d50-81af-2f27e2abbefa",
+    "status": "REMOVED",
+    "createdAt": "2026-07-17T09:29:11.430Z",
+    "meta": {
+      "branch": "main",
+      "buildOnly": false,
+      "commitAuthor": "converigo",
+      "commitHash": "8a612dea11ae997f428d1c718d7702c33aaa74b2",
+      "commitMessage": "fix(recommendation): restore service-level converter filtering\n\nMerge PR #6: recommendation-service-filtering",
+      "configFile": "/railway.toml",
+      "fileServiceManifest": {},
+      "ignoreWatchPatterns": true,
+      "imageDigest": "sha256:551bd8b53d6c37b7de97102095c2f0e81bb0a5f2078aeef2cd03aeefa2de619b",
+      "logsV2": true,
+      "nixpacksProviders": [],
+      "plan": "trial",
+      "propertyFileMapping": {},
+      "reason": "redeploy",
+      "repo": "converigo/converigo",
+      "rootDirectory": null,
+      "runtime": "V2",
+      "serviceManifest": {
+        "build": {
+          "buildCommand": null,
+          "buildEnvironment": "V3",
+          "builder": "DOCKERFILE",
+          "dockerfilePath": "/Dockerfile",
+          "nixpacksConfigPath": null,
+          "nixpacksPlan": null,
+          "watchPatterns": []
+        },
+        "deploy": {
+          "cronSchedule": null,
+          "drainingSeconds": null,
+          "healthcheckPath": "/health",
+          "healthcheckTimeout": null,
+          "ipv6EgressEnabled": false,
+          "limitOverride": null,
+          "multiRegionConfig": {
+            "sfo": {
+              "numReplicas": 1
+            }
+          },
+          "numReplicas": 1,
+          "overlapSeconds": null,
+          "preDeployCommand": null,
+          "region": null,
+          "registryCredentials": null,
+          "requiredMountPath": null,
+          "restartPolicyMaxRetries": 10,
+          "restartPolicyType": "ON_FAILURE",
+          "runtime": "V2",
+          "sleepApplication": false,
+          "startCommand": "/bin/sh -c 'uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080}'",
+          "useLegacyStacker": false
+        }
+      },
+      "skipBuildCache": true,
+      "volumeMounts": []
+    }
+  },
+  {
+    "id": "9f032f88-0968-41c3-8c86-854d5b83f119",
+    "status": "FAILED",
+    "createdAt": "2026-07-17T09:25:01.632Z",
+    "meta": {
+      "branch": "main",
+      "buildOnly": false,
+      "commitAuthor": "converigo",
+      "commitHash": "041b64cabe06ec6d8fdc6532182c1027009a3558",
+      "commitMessage": "chore(deploy): add Railway container startup config (#8)\n\n* chore(deploy): add Railway container startup config\n\n* chore(deploy): fix pycairo docker build failure\n\n---------\n\nCo-authored-by: Converigo <release@converigo.com>",
+      "configFile": "/railway.toml",
+      "fileServiceManifest": {
+        "build": {
+          "builder": "DOCKERFILE"
+        },
+        "deploy": {
+          "startCommand": "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"
+        }
+      },
+      "logsV2": true,
+      "nixpacksProviders": [],
+      "plan": "trial",
+      "propertyFileMapping": {
+        "build.builder": "$.build.builder",
+        "deploy.startCommand": "$.deploy.startCommand"
+      },
+      "reason": "deploy",
+      "repo": "converigo/converigo",
+      "rootDirectory": null,
+      "runtime": "V2",
+      "serviceManifest": {
+        "build": {
+          "buildCommand": null,
+          "buildEnvironment": "V3",
+          "builder": "DOCKERFILE",
+          "dockerfilePath": "/Dockerfile",
+          "nixpacksConfigPath": null,
+          "nixpacksPlan": null,
+          "watchPatterns": []
+        },
+        "deploy": {
+          "cronSchedule": null,
+          "drainingSeconds": null,
+          "healthcheckPath": "/health",
+          "healthcheckTimeout": null,
+          "ipv6EgressEnabled": false,
+          "limitOverride": null,
+          "multiRegionConfig": {
+            "sfo": {
+              "numReplicas": 1
+            }
+          },
+          "numReplicas": 1,
+          "overlapSeconds": null,
+          "preDeployCommand": null,
+          "region": null,
+          "registryCredentials": null,
+          "requiredMountPath": null,
+          "restartPolicyMaxRetries": 10,
+          "restartPolicyType": "ON_FAILURE",
+          "runtime": "V2",
+          "sleepApplication": false,
+          "startCommand": "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}",
+          "useLegacyStacker": false
+        }
+      },
+      "volumeMounts": []
+    }
+  },
+  {
+    "id": "15769dbe-c050-4c05-8624-f70e7dd1ec2a",
+    "status": "FAILED",
+    "createdAt": "2026-07-17T08:38:07.747Z",
+    "meta": {
+      "branch": "main",
+      "buildOnly": false,
+      "commitAuthor": "converigo",
+      "commitHash": "8d51f624c1f022c17e203551ed4dee4fb97d6908",
+      "commitMessage": "Converigo converter certification complete (#7)\n\nCo-authored-by: Converigo <release@converigo.com>",
+      "configFile": "/railway.toml",
+      "fileServiceManifest": {},
+      "logsV2": true,
+      "nixpacksProviders": [],
+      "plan": "trial",
+      "propertyFileMapping": {},
+      "reason": "deploy",
+      "repo": "converigo/converigo",
+      "rootDirectory": null,
+      "runtime": "V2",
+      "serviceManifest": {
+        "build": {
+          "buildCommand": null,
+          "buildEnvironment": "V3",
+          "builder": "DOCKERFILE",
+          "dockerfilePath": "/Dockerfile",
+          "nixpacksConfigPath": null,
+          "nixpacksPlan": null,
+          "watchPatterns": []
+        },
+        "deploy": {
+          "cronSchedule": null,
+          "drainingSeconds": null,
+          "healthcheckPath": "/health",
+          "healthcheckTimeout": null,
+          "ipv6EgressEnabled": false,
+          "limitOverride": null,
+          "multiRegionConfig": {
+            "sfo": {
+              "numReplicas": 1
+            }
+          },
+          "numReplicas": 1,
+          "overlapSeconds": null,
+          "preDeployCommand": null,
+          "region": null,
+          "registryCredentials": null,
+          "requiredMountPath": null,
+          "restartPolicyMaxRetries": 10,
+          "restartPolicyType": "ON_FAILURE",
+          "runtime": "V2",
+          "sleepApplication": false,
+          "startCommand": "/bin/sh -c 'uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080}'",
+          "useLegacyStacker": false
+        }
+      },
+      "volumeMounts": []
+    }
+  },
+  {
+    "id": "e5bf5609-9d7d-4b92-b986-027347462149",
+    "status": "REMOVED",
+    "createdAt": "2026-07-16T14:33:21.225Z",
+    "meta": {
+      "branch": "main",
+      "buildOnly": false,
+      "commitAuthor": "converigo",
+      "commitHash": "8a612dea11ae997f428d1c718d7702c33aaa74b2",
+      "commitMessage": "fix(recommendation): restore service-level converter filtering\n\nMerge PR #6: recommendation-service-filtering",
+      "configFile": "/railway.toml",
+      "fileServiceManifest": {},
+      "imageDigest": "sha256:551bd8b53d6c37b7de97102095c2f0e81bb0a5f2078aeef2cd03aeefa2de619b",
+      "logsV2": true,
+      "nixpacksProviders": [],
+      "plan": "trial",
+      "propertyFileMapping": {},
+      "reason": "deploy",
+      "repo": "converigo/converigo",
+      "rootDirectory": null,
+      "runtime": "V2",
+      "serviceManifest": {
+        "build": {
+          "buildCommand": null,
+          "buildEnvironment": "V3",
+          "builder": "DOCKERFILE",
+          "dockerfilePath": "/Dockerfile",
+          "nixpacksConfigPath": null,
+          "nixpacksPlan": null,
+          "watchPatterns": []
+        },
+        "deploy": {
+          "cronSchedule": null,
+          "drainingSeconds": null,
+          "healthcheckPath": "/health",
+          "healthcheckTimeout": null,
+          "ipv6EgressEnabled": false,
+          "limitOverride": null,
+          "multiRegionConfig": {
+            "sfo": {
+              "numReplicas": 1
+            }
+          },
+          "numReplicas": 1,
+          "overlapSeconds": null,
+          "preDeployCommand": null,
+          "region": null,
+          "registryCredentials": null,
+          "requiredMountPath": null,
+          "restartPolicyMaxRetries": 10,
+          "restartPolicyType": "ON_FAILURE",
+          "runtime": "V2",
+          "sleepApplication": false,
+          "startCommand": "/bin/sh -c 'uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080}'",
+          "useLegacyStacker": false
+        }
+      },
+      "volumeMounts": []
+    }
+  },
+  {
+    "id": "04aa8c98-a6e0-47ca-a0e4-6ccc4114811c",
+    "status": "REMOVED",
+    "createdAt": "2026-07-16T14:22:51.892Z",
+    "meta": {
+      "branch": "main",
+      "buildOnly": false,
+      "commitAuthor": "converigo",
+      "commitHash": "18d27c205f873b62a2fcc4ed49083e5af67f94fc",
+      "commitMessage": "fix(recommendation): dedupe converter targets in engine\n\nMerge PR #5: recommendation-engine-dedupe",
+      "configFile": "/railway.toml",
+      "fileServiceManifest": {},
+      "imageDigest": "sha256:f7af9f7581612a38ee8cd7eee13aae6f01755ccc3fb0cb0b806d3c442400296b",
+      "logsV2": true,
+      "nixpacksProviders": [],
+      "plan": "trial",
+      "propertyFileMapping": {},
+      "reason": "deploy",
+      "repo": "converigo/converigo",
+      "rootDirectory": null,
+      "runtime": "V2",
+      "serviceManifest": {
+        "build": {
+          "buildCommand": null,
+          "buildEnvironment": "V3",
+          "builder": "DOCKERFILE",
+          "dockerfilePath": "/Dockerfile",
+          "nixpacksConfigPath": null,
+          "nixpacksPlan": null,
+          "watchPatterns": []
+        },
+        "deploy": {
+          "cronSchedule": null,
+          "drainingSeconds": null,
+          "healthcheckPath": "/health",
+          "healthcheckTimeout": null,
+          "ipv6EgressEnabled": false,
+          "limitOverride": null,
+          "multiRegionConfig": {
+            "sfo": {
+              "numReplicas": 1
+            }
+          },
+          "numReplicas": 1,
+          "overlapSeconds": null,
+          "preDeployCommand": null,
+          "region": null,
+          "registryCredentials": null,
+          "requiredMountPath": null,
+          "restartPolicyMaxRetries": 10,
+          "restartPolicyType": "ON_FAILURE",
+          "runtime": "V2",
+          "sleepApplication": false,
+          "startCommand": "/bin/sh -c 'uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080}'",
+          "useLegacyStacker": false
+        }
+      },
+      "volumeMounts": []
+    }
+  },
+  {
+    "id": "e3e7f153-a4b1-487f-9365-57578cac92de",
+    "status": "REMOVED",
+    "createdAt": "2026-07-16T13:54:15.825Z",
+    "meta": {
+      "branch": "main",
+      "buildOnly": false,
+      "commitAuthor": "converigo",
+      "commitHash": "a428d622cb5372ba3b3a382add8a2bc4f5caecc0",
+      "commitMessage": "security(storage): harden upload cleanup and output validation\n\nMerge PR #4: storage-security-hardening",
+      "configFile": "/railway.toml",
+      "fileServiceManifest": {},
+      "imageDigest": "sha256:98241a9ef27473e7a91ce09f476ab1adc2e9c939e53d3742e7b6a0b9c19830af",
+      "logsV2": true,
+      "nixpacksProviders": [],
+      "plan": "trial",
+      "propertyFileMapping": {},
+      "reason": "deploy",
+      "repo": "converigo/converigo",
+      "rootDirectory": null,
+      "runtime": "V2",
+      "serviceManifest": {
+        "build": {
+          "buildCommand": null,
+          "buildEnvironment": "V3",
+          "builder": "DOCKERFILE",
+          "dockerfilePath": "/Dockerfile",
+          "nixpacksConfigPath": null,
+          "nixpacksPlan": null,
+          "watchPatterns": []
+        },
+        "deploy": {
+          "cronSchedule": null,
+          "drainingSeconds": null,
+          "healthcheckPath": "/health",
+          "healthcheckTimeout": null,
+          "ipv6EgressEnabled": false,
+          "limitOverride": null,
+          "multiRegionConfig": {
+            "sfo": {
+              "numReplicas": 1
+            }
+          },
+          "numReplicas": 1,
+          "overlapSeconds": null,
+          "preDeployCommand": null,
+          "region": null,
+          "registryCredentials": null,
+          "requiredMountPath": null,
+          "restartPolicyMaxRetries": 10,
+          "restartPolicyType": "ON_FAILURE",
+          "runtime": "V2",
+          "sleepApplication": false,
+          "startCommand": "/bin/sh -c 'uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080}'",
+          "useLegacyStacker": false
+        }
+      },
+      "volumeMounts": []
+    }
+  },
+  {
+    "id": "475cde5c-a65d-4a17-9b7a-7710402ab5b5",
+    "status": "REMOVED",
+    "createdAt": "2026-07-16T12:02:28.952Z",
+    "meta": {
+      "branch": "main",
+      "buildOnly": false,
+      "commitAuthor": "converigo",
+      "commitHash": "e1df965941fee6843ba940aa31fdeefd659c39d2",
+      "commitMessage": "fix(video): stabilize runtime video conversion pipeline (#3)\n\nCo-authored-by: Converigo <release@converigo.com>",
+      "configFile": "/railway.toml",
+      "fileServiceManifest": {},
+      "imageDigest": "sha256:4482f0c884abca15c7edd5d70bcafc06034871fec4fe4e98f49260a5be1694aa",
+      "logsV2": true,
+      "nixpacksProviders": [],
+      "plan": "trial",
+      "propertyFileMapping": {},
+      "reason": "deploy",
+      "repo": "converigo/converigo",
+      "rootDirectory": null,
+      "runtime": "V2",
+      "serviceManifest": {
+        "build": {
+          "buildCommand": null,
+          "buildEnvironment": "V3",
+          "builder": "DOCKERFILE",
+          "dockerfilePath": "/Dockerfile",
+          "nixpacksConfigPath": null,
+          "nixpacksPlan": null,
+          "watchPatterns": []
+        },
+        "deploy": {
+          "cronSchedule": null,
+          "drainingSeconds": null,
+          "healthcheckPath": "/health",
+          "healthcheckTimeout": null,
+          "ipv6EgressEnabled": false,
+          "limitOverride": null,
+          "multiRegionConfig": {
+            "sfo": {
+              "numReplicas": 1
+            }
+          },
+          "numReplicas": 1,
+          "overlapSeconds": null,
+          "preDeployCommand": null,
+          "region": null,
+          "registryCredentials": null,
+          "requiredMountPath": null,
+          "restartPolicyMaxRetries": 10,
+          "restartPolicyType": "ON_FAILURE",
+          "runtime": "V2",
+          "sleepApplication": false,
+          "startCommand": "/bin/sh -c 'uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080}'",
+          "useLegacyStacker": false
+        }
+      },
+      "volumeMounts": []
+    }
+  },
+  {
+    "id": "c88cb0a4-6218-4aea-884b-76d7a843947d",
+    "status": "REMOVED",
+    "createdAt": "2026-07-16T11:18:33.645Z",
+    "meta": {
+      "branch": "main",
+      "buildOnly": false,
+      "commitAuthor": "converigo",
+      "commitHash": "4eecfe35fde1050669c0a156a0d7c52f0e52f16c",
+      "commitMessage": "fix(converter): hide unsupported converters from production catalog (#2)\n\n- Add _is_supported_converter() validation using plugin registry\n- Implement list_supported_converters() filtering for public listings\n- Update converter_data_service public listing methods (list_public_converters, list_popular_converters, list_latest_converters, sitemap_entries)\n- Update hub_service.get_hub_page_data() to show only supported converters\n- Update related_converter_service.get_related_converters() to use supported list\n- Fix test helpers operator precedence for source/target parameters\n- Add regression test suite for supported converter filtering (2/2 passing)\n- All 345 tests passing with validation coverage\n\nResolves TASK-046: Converter Catalog Stabilization\n\nCo-authored-by: Converigo <release@converigo.com>",
+      "configFile": "/railway.toml",
+      "fileServiceManifest": {},
+      "imageDigest": "sha256:1067d1c79188cedbd4468ae1b6f8d75c1f12a3b1d393b7027bcaba94048b635e",
+      "logsV2": true,
+      "nixpacksProviders": [],
+      "plan": "trial",
+      "propertyFileMapping": {},
+      "reason": "deploy",
+      "repo": "converigo/converigo",
+      "rootDirectory": null,
+      "runtime": "V2",
+      "serviceManifest": {
+        "build": {
+          "buildCommand": null,
+          "buildEnvironment": "V3",
+          "builder": "DOCKERFILE",
+          "dockerfilePath": "/Dockerfile",
+          "nixpacksConfigPath": null,
+          "nixpacksPlan": null,
+          "watchPatterns": []
+        },
+        "deploy": {
+          "cronSchedule": null,
+          "drainingSeconds": null,
+          "healthcheckPath": "/health",
+          "healthcheckTimeout": null,
+          "ipv6EgressEnabled": false,
+          "limitOverride": null,
+          "multiRegionConfig": {
+            "sfo": {
+              "numReplicas": 1
+            }
+          },
+          "numReplicas": 1,
+          "overlapSeconds": null,
+          "preDeployCommand": null,
+          "region": null,
+          "registryCredentials": null,
+          "requiredMountPath": null,
+          "restartPolicyMaxRetries": 10,
+          "restartPolicyType": "ON_FAILURE",
+          "runtime": "V2",
+          "sleepApplication": false,
+          "startCommand": "/bin/sh -c 'uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080}'",
+          "useLegacyStacker": false
+        }
+      },
+      "volumeMounts": []
+    }
+  },
+  {
+    "id": "9f8e3542-7825-4f6c-8785-23e54b6959b3",
+    "status": "REMOVED",
+    "createdAt": "2026-07-16T09:44:21.488Z",
+    "meta": {
+      "branch": "main",
+      "buildOnly": false,
+      "commitAuthor": "converigo",
+      "commitHash": "6d00e416aab02e3906785f7d30b2433323577ee9",
+      "commitMessage": "Merge pull request #1 from converigo/stabilization-cleanup\n\nStabilization cleanup: converter catalog and production fixes",
+      "configFile": "/railway.toml",
+      "fileServiceManifest": {},
+      "imageDigest": "sha256:bd509789d00058951572865bc7211fe594e11a4dd85387101d8ba35561608ae4",
+      "logsV2": true,
+      "nixpacksProviders": [],
+      "plan": "trial",
+      "propertyFileMapping": {},
+      "reason": "deploy",
+      "repo": "converigo/converigo",
+      "rootDirectory": null,
+      "runtime": "V2",
+      "serviceManifest": {
+        "build": {
+          "buildCommand": null,
+          "buildEnvironment": "V3",
+          "builder": "DOCKERFILE",
+          "dockerfilePath": "/Dockerfile",
+          "nixpacksConfigPath": null,
+          "nixpacksPlan": null,
+          "watchPatterns": []
+        },
+        "deploy": {
+          "cronSchedule": null,
+          "drainingSeconds": null,
+          "healthcheckPath": "/health",
+          "healthcheckTimeout": null,
+          "ipv6EgressEnabled": false,
+          "limitOverride": null,
+          "multiRegionConfig": {
+            "sfo": {
+              "numReplicas": 1
+            }
+          },
+          "numReplicas": 1,
+          "overlapSeconds": null,
+          "preDeployCommand": null,
+          "region": null,
+          "registryCredentials": null,
+          "requiredMountPath": null,
+          "restartPolicyMaxRetries": 10,
+          "restartPolicyType": "ON_FAILURE",
+          "runtime": "V2",
+          "sleepApplication": false,
+          "startCommand": "/bin/sh -c 'uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080}'",
+          "useLegacyStacker": false
+        }
+      },
+      "volumeMounts": []
+    }
+  },
+  {
+    "id": "e3e157d7-6b70-49a5-aa8f-6c9db946c3dc",
+    "status": "REMOVED",
+    "createdAt": "2026-07-14T06:11:37.990Z",
+    "meta": {
+      "branch": "main",
+      "buildOnly": false,
+      "commitAuthor": "converigo",
+      "commitHash": "b6e671583a7f2ffa850c077f224ccd8b23a75db7",
+      "commitMessage": "Fix production logo and implement Growth Engines 001-004",
+      "configFile": "/railway.toml",
+      "fileServiceManifest": {},
+      "imageDigest": "sha256:8b335360f76b92eda5564ea475725339ac5028360f5f20f64c5e6e7c1b8dab1b",
+      "logsV2": true,
+      "nixpacksProviders": [],
+      "plan": "trial",
+      "propertyFileMapping": {},
+      "reason": "deploy",
+      "repo": "converigo/converigo",
+      "rootDirectory": null,
+      "runtime": "V2",
+      "serviceManifest": {
+        "build": {
+          "buildCommand": null,
+          "buildEnvironment": "V3",
+          "builder": "DOCKERFILE",
+          "dockerfilePath": "/Dockerfile",
+          "nixpacksConfigPath": null,
+          "nixpacksPlan": null,
+          "watchPatterns": []
+        },
+        "deploy": {
+          "cronSchedule": null,
+          "drainingSeconds": null,
+          "healthcheckPath": "/health",
+          "healthcheckTimeout": null,
+          "ipv6EgressEnabled": false,
+          "limitOverride": null,
+          "multiRegionConfig": {
+            "sfo": {
+              "numReplicas": 1
+            }
+          },
+          "numReplicas": 1,
+          "overlapSeconds": null,
+          "preDeployCommand": null,
+          "region": null,
+          "registryCredentials": null,
+          "requiredMountPath": null,
+          "restartPolicyMaxRetries": 10,
+          "restartPolicyType": "ON_FAILURE",
+          "runtime": "V2",
+          "sleepApplication": false,
+          "startCommand": "/bin/sh -c 'uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080}'",
+          "useLegacyStacker": false
+        }
+      },
+      "volumeMounts": []
+    }
+  },
+  {
+    "id": "3e834b03-dd2d-4d8b-83ab-e4606dcb013b",
+    "status": "REMOVED",
+    "createdAt": "2026-07-14T04:28:00.149Z",
+    "meta": {
+      "branch": "main",
+      "buildOnly": false,
+      "commitAuthor": "converigo",
+      "commitHash": "df24eedafa9c447dcf80f584e951620c2bde9a21",
+      "commitMessage": "Remove temporary media artifacts",
+      "configFile": "/railway.toml",
+      "fileServiceManifest": {},
+      "imageDigest": "sha256:64599c801c15e0eb8768878eba7788c8a749f69d82dd0df77d103b930b431d90",
+      "logsV2": true,
+      "nixpacksProviders": [],
+      "plan": "trial",
+      "propertyFileMapping": {},
+      "reason": "deploy",
+      "repo": "converigo/converigo",
+      "rootDirectory": null,
+      "runtime": "V2",
+      "serviceManifest": {
+        "build": {
+          "buildCommand": null,
+          "buildEnvironment": "V3",
+          "builder": "DOCKERFILE",
+          "dockerfilePath": "/Dockerfile",
+          "nixpacksConfigPath": null,
+          "nixpacksPlan": null,
+          "watchPatterns": []
+        },
+        "deploy": {
+          "cronSchedule": null,
+          "drainingSeconds": null,
+          "healthcheckPath": "/health",
+          "healthcheckTimeout": null,
+          "ipv6EgressEnabled": false,
+          "limitOverride": null,
+          "multiRegionConfig": {
+            "sfo": {
+              "numReplicas": 1
+            }
+          },
+          "numReplicas": 1,
+          "overlapSeconds": null,
+          "preDeployCommand": null,
+          "region": null,
+          "registryCredentials": null,
+          "requiredMountPath": null,
+          "restartPolicyMaxRetries": 10,
+          "restartPolicyType": "ON_FAILURE",
+          "runtime": "V2",
+          "sleepApplication": false,
+          "startCommand": "/bin/sh -c 'uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080}'",
+          "useLegacyStacker": false
+        }
+      },
+      "volumeMounts": []
+    }
+  },
+  {
+    "id": "21fb8336-7c8d-4ee1-b4f0-3c5dacebead4",
+    "status": "REMOVED",
+    "createdAt": "2026-07-13T14:05:43.699Z",
+    "meta": {
+      "branch": "main",
+      "buildOnly": false,
+      "commitAuthor": "converigo",
+      "commitHash": "d862f0e7f8f46101802f9b771329784e2735d616",
+      "commitMessage": "fix(upload): improve MP4 signature validation",
+      "configFile": "/railway.toml",
+      "fileServiceManifest": {},
+      "imageDigest": "sha256:6073ab8adf20d60cdd1d0db3283464bd039232e560d5650aac69f4c536521d55",
+      "logsV2": true,
+      "nixpacksProviders": [],
+      "plan": "trial",
+      "propertyFileMapping": {},
+      "reason": "deploy",
+      "repo": "converigo/converigo",
+      "rootDirectory": null,
+      "runtime": "V2",
+      "serviceManifest": {
+        "build": {
+          "buildCommand": null,
+          "buildEnvironment": "V3",
+          "builder": "DOCKERFILE",
+          "dockerfilePath": "/Dockerfile",
+          "nixpacksConfigPath": null,
+          "nixpacksPlan": null,
+          "watchPatterns": []
+        },
+        "deploy": {
+          "cronSchedule": null,
+          "drainingSeconds": null,
+          "healthcheckPath": "/health",
+          "healthcheckTimeout": null,
+          "ipv6EgressEnabled": false,
+          "limitOverride": null,
+          "multiRegionConfig": {
+            "sfo": {
+              "numReplicas": 1
+            }
+          },
+          "numReplicas": 1,
+          "overlapSeconds": null,
+          "preDeployCommand": null,
+          "region": null,
+          "registryCredentials": null,
+          "requiredMountPath": null,
+          "restartPolicyMaxRetries": 10,
+          "restartPolicyType": "ON_FAILURE",
+          "runtime": "V2",
+          "sleepApplication": false,
+          "startCommand": "/bin/sh -c 'uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080}'",
+          "useLegacyStacker": false
+        }
+      },
+      "volumeMounts": []
+    }
+  },
+  {
+    "id": "c823e2e1-f3c6-4102-a177-30b54a43f302",
+    "status": "REMOVED",
+    "createdAt": "2026-07-13T09:43:06.836Z",
+    "meta": {
+      "branch": "main",
+      "buildOnly": false,
+      "commitAuthor": "converigo",
+      "commitHash": "490937537c592719c99353213b65adc12bd0a419",
+      "commitMessage": "docs: update image converter coverage milestone",
+      "configFile": "/railway.toml",
+      "fileServiceManifest": {},
+      "imageDigest": "sha256:1116a577e2c7cf69d5b28395e49f2a27788a571a11561a48083e5e257a3d3b14",
+      "logsV2": true,
+      "nixpacksProviders": [],
+      "plan": "trial",
+      "propertyFileMapping": {},
+      "reason": "deploy",
+      "repo": "converigo/converigo",
+      "rootDirectory": null,
+      "runtime": "V2",
+      "serviceManifest": {
+        "build": {
+          "buildCommand": null,
+          "buildEnvironment": "V3",
+          "builder": "DOCKERFILE",
+          "dockerfilePath": "/Dockerfile",
+          "nixpacksConfigPath": null,
+          "nixpacksPlan": null,
+          "watchPatterns": []
+        },
+        "deploy": {
+          "cronSchedule": null,
+          "drainingSeconds": null,
+          "healthcheckPath": "/health",
+          "healthcheckTimeout": null,
+          "ipv6EgressEnabled": false,
+          "limitOverride": null,
+          "multiRegionConfig": {
+            "sfo": {
+              "numReplicas": 1
+            }
+          },
+          "numReplicas": 1,
+          "overlapSeconds": null,
+          "preDeployCommand": null,
+          "region": null,
+          "registryCredentials": null,
+          "requiredMountPath": null,
+          "restartPolicyMaxRetries": 10,
+          "restartPolicyType": "ON_FAILURE",
+          "runtime": "V2",
+          "sleepApplication": false,
+          "startCommand": "/bin/sh -c 'uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080}'",
+          "useLegacyStacker": false
+        }
+      },
+      "volumeMounts": []
+    }
+  }
+]

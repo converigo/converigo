@@ -1,10 +1,11 @@
 {
   "hero": {
     "eyebrow": "Premium File Converter",
-    "title": "Convert Any File",
+    "title": "Convert All Files",
     "subtitle": "Convert files faster with premium simplicity.",
     "subtitle_line": "In Seconds",
     "description": "Convert images, videos, audio, and documents online.",
+    "batch_hint": "Supports many files at once",
     "callout": "Convert and Go!",
     "callout_tagline": "Fast, Simple, Ready.",
     "primary_cta": "Start converting",
@@ -21,6 +22,7 @@
     "size_label": "0 KB",
     "clear": "Clear",
     "conversion_title": "Convert To",
+    "conversion_instruction": "Convert all files to:",
     "convert": "Convert",
     "download": "Download",
     "select_file": "Choose a file to start",
@@ -59,6 +61,16 @@
   "faq": {
     "heading": "Frequently asked questions",
     "description": "Answers to common questions about Converigo's file conversion service.",
+    "q1": "What files can I convert?",
+    "a1": "Converigo supports many formats including images, documents, audio, and video files.",
+    "q2": "Is Converigo free to use?",
+    "a2": "Yes. You can convert files online for free without installing any software.",
+    "q3": "Are my files secure?",
+    "a3": "Yes. Your files are processed safely and are not shared with others.",
+    "q4": "Do I need to install software?",
+    "a4": "No. Converigo works directly in your browser on desktop and mobile devices.",
+    "q5": "Can I convert multiple files at once?",
+    "a5": "Yes. Converigo supports multiple file uploads for faster conversion workflows.",
     "items": [
       {"question": "What is Converigo?", "answer": "Converigo is a fast online file converter that helps you convert documents, images, audio, and video files without installing software."},
       {"question": "Is Converigo free?", "answer": "Yes, Converigo offers free file conversion so you can quickly transform files without paying for basic conversion tasks."},
@@ -81,6 +93,7 @@
     "privacy_policy": "Privacy Policy",
     "terms": "Terms",
     "tagline": "Convert and Go!",
+    "support": "Support",
     "made_with_love": "Made with ❤️ for creators around the world.",
     "copyright": "© {year} Converigo. Built for elegant file conversion."
   },
@@ -93,12 +106,16 @@
     "upload": "Upload",
     "related": "Related",
     "tools": "Tools",
+    "support": "Support",
     "api": "API",
     "pricing": "Pricing"
   },
   "header": {
     "sign_in": "Sign In",
     "get_started": "Get Started"
+  },
+  "community_support": {
+    "support_cta": "Support Converigo on Ko-fi"
   },
   "language": {
     "selector_label": "Language",

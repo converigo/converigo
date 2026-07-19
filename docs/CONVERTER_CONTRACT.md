@@ -25,7 +25,7 @@ Each converter record must define the following fields:
 - FAQ status: whether FAQ content has been prepared for the converter
 - regression sample: path to a sample file used for regression testing
 - supported platforms: list of supported client platforms such as web, mobile, api
-- lifecycle status: one of active, deprecated, or beta
+- lifecycle status: one of active, deprecated, beta, or certified
 
 ## Required Shape
 
@@ -62,7 +62,7 @@ Every future converter must:
 4. Ensure accepted_mime_types contains at least one MIME type.
 5. Ensure supported_platforms contains at least one platform.
 6. Ensure regression_sample points to a file that exists in the repository when the converter is active.
-7. Keep lifecycle_status set to one of active, deprecated, or beta.
+7. Keep lifecycle_status set to one of active, deprecated, beta, or certified.
 
 ## Example: MP4 → MP3
 

@@ -104,6 +104,21 @@ async def convert_file(
 
         )
 
+        # [CONVERTER_DEBUG] — log converter selection and upload path
+        try:
+            plugin = registry.get_plugin(source_format, target_format)
+            slug = getattr(plugin, "slug", None)
+        except Exception:
+            slug = None
+
+        logger.info(
+            "[CONVERTER_DEBUG] Request: converter_slug=%s source_format=%s target_format=%s upload_path=%s",
+            slug,
+            source_format,
+            target_format,
+            str(saved_path),
+        )
+
 
 
         try:
