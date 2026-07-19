@@ -382,6 +382,7 @@
 
     .community-support-cta,
     .kofi-cta-button {
+        display:inline-flex;
         width:100%;
         justify-content:center;
         text-align:center;

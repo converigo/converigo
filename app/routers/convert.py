@@ -10,6 +10,7 @@ Version : 2.2.1
 import logging
 
 from pathlib import Path
+from typing import List
 
 from fastapi import (
     APIRouter,
@@ -63,7 +64,7 @@ async def unsupported_conversion_exception_handler(
 )
 async def convert_file(
 
-    files: list[UploadFile] = File(...),
+    files: List[UploadFile] = File(...),
 
     target_format: str = Form(...)
 

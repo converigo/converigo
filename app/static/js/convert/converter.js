@@ -186,7 +186,18 @@ class ConverterController {
             console.log("CONVERT RESPONSE:", data);
 
             if (!response.ok) {
-                throw new Error(data.detail || window.translate('upload.conversion_failed', 'Conversion failed'));
+                // Extract readable error message from response
+                let errorMsg = 'Conversion failed';
+                if (data && typeof data === 'object') {
+                    if (data.detail && typeof data.detail === 'string') {
+                        errorMsg = data.detail;
+                    } else if (data.message && typeof data.message === 'string') {
+                        errorMsg = data.message;
+                    } else if (data.error && typeof data.error === 'string') {
+                        errorMsg = data.error;
+                    }
+                }
+                throw new Error(errorMsg || window.translate('upload.conversion_failed', 'Conversion failed'));
             }
 
             // Handle batch results
@@ -196,8 +207,10 @@ class ConverterController {
             if (this.message) {
                 if (successCount === totalCount) {
                     this.message.textContent = window.translate('upload.conversion_completed', '✓ Conversion completed') + ` (${successCount}/${totalCount})`;
+                } else if (successCount === 0) {
+                    this.message.textContent = `❌ All conversions failed`;
                 } else {
-                    this.message.textContent = `✓ ${successCount}/${totalCount} files converted`;
+                    this.message.textContent = `⚠️  ${successCount}/${totalCount} files converted`;
                 }
                 this.message.classList.add("success");
             }
@@ -219,12 +232,19 @@ class ConverterController {
             }
         } catch (error) {
             console.error(error);
+            let errorMessage = window.translate('upload.conversion_failed_try_another', '❌ Conversion failed. Please try another format.');
+            
+            // Extract readable error message
+            if (error && error.message && typeof error.message === 'string') {
+                errorMessage = error.message;
+            }
+            
             if (this.message) {
-                this.message.textContent = window.translate('upload.conversion_failed_try_another', '❌ Conversion failed. Please try another format.');
+                this.message.textContent = errorMessage;
                 this.message.classList.add("error");
             }
             if (window.uploadManager && typeof window.uploadManager.showError === 'function') {
-                window.uploadManager.showError(error?.message || window.translate('upload.conversion_failed_try_another', 'Conversion failed. Please try another format.'));
+                window.uploadManager.showError(errorMessage);
             }
         } finally {
             if (!wasSuccess && window.conversionStateController && typeof window.conversionStateController.setConversionState === 'function') {
