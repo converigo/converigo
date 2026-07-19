@@ -64,16 +64,16 @@ async def unsupported_conversion_exception_handler(
 )
 async def convert_file(
 
-    files: List[UploadFile] = File(...),
+    file: List[UploadFile] = File(...),
 
     target_format: str = Form(...)
 
 ):
 
 
-    logger.info("Convert request received: files=%d target=%s", len(files), target_format)
+    logger.info("Convert request received: files=%d target=%s", len(file), target_format)
 
-    if not files or len(files) == 0:
+    if not file or len(file) == 0:
         raise HTTPException(status_code=400, detail="No files provided")
 
     target_format = target_format.lower().strip()
@@ -86,10 +86,10 @@ async def convert_file(
 
     try:
         # Process each file
-        for file in files:
+        for uploaded_file in file:
             saved_path: Path | None = None
             try:
-                saved_path = await upload_service.process_upload(file)
+                saved_path = await upload_service.process_upload(uploaded_file)
                 saved_paths.append(saved_path)
                 
                 source_format = (
@@ -134,9 +134,9 @@ async def convert_file(
                 })
 
             except (UploadError, UnsupportedConversionError, ConversionError) as exc:
-                logger.warning("Conversion failed for %s: %s", file.filename, exc)
+                logger.warning("Conversion failed for %s: %s", uploaded_file.filename, exc)
                 results.append({
-                    "filename": file.filename,
+                    "filename": uploaded_file.filename,
                     "status": "failed",
                     "error": str(exc),
                 })
@@ -145,7 +145,7 @@ async def convert_file(
         return {
             "status": "completed",
             "results": results,
-            "total": len(files),
+            "total": len(file),
             "successful": sum(1 for r in results if r["status"] == "success"),
             "target_format": target_format,
         }
