@@ -20,6 +20,7 @@ console.log("CONVERTER JS 3.9.0 LOADED");
 class ConverterController {
     constructor() {
         this.file = null;
+        this.files = [];
         this.selectedFormat = null;
 
         this.convertBtn = document.getElementById("convertButton");
@@ -90,8 +91,9 @@ class ConverterController {
 
         /* FILE EVENT */
         window.addEventListener("file-selected", (event) => {
+            this.files = event.detail.files || [];
             this.file = event.detail.file || event.detail.files?.[0] || null;
-            console.log("Converter file:", this.file && this.file.name);
+            console.log("Converter files:", this.files.length, "files selected");
             this.checkReady();
         });
 
@@ -122,6 +124,7 @@ class ConverterController {
 
     reset() {
         this.file = null;
+        this.files = [];
         this.selectedFormat = null;
         if (this.convertBtn) {
             this.convertBtn.disabled = true;
@@ -141,13 +144,17 @@ class ConverterController {
     }
 
     async convert() {
-        if (!this.file || !this.selectedFormat) {
+        if (!this.files || this.files.length === 0 || !this.selectedFormat) {
             console.warn("Missing conversion data");
             return;
         }
 
         const formData = new FormData();
-        formData.append("file", this.file);
+        
+        // Append all files
+        for (const file of this.files) {
+            formData.append("file", file);
+        }
         formData.append("target_format", this.selectedFormat);
 
         const originalLabel = this.convertBtn ? this.convertBtn.textContent : window.translate('upload.convert', 'Convert');
@@ -182,8 +189,16 @@ class ConverterController {
                 throw new Error(data.detail || window.translate('upload.conversion_failed', 'Conversion failed'));
             }
 
+            // Handle batch results
+            const successCount = data.successful || 0;
+            const totalCount = data.total || this.files.length;
+            
             if (this.message) {
-                this.message.textContent = window.translate('upload.conversion_completed', '✓ Conversion completed');
+                if (successCount === totalCount) {
+                    this.message.textContent = window.translate('upload.conversion_completed', '✓ Conversion completed') + ` (${successCount}/${totalCount})`;
+                } else {
+                    this.message.textContent = `✓ ${successCount}/${totalCount} files converted`;
+                }
                 this.message.classList.add("success");
             }
 
@@ -197,7 +212,10 @@ class ConverterController {
                 window.downloadManager.prepare(data);
             }
             if (window.uploadManager && typeof window.uploadManager.showResult === 'function') {
-                window.uploadManager.showResult(this.file);
+                // Show result for all converted files
+                for (const file of this.files) {
+                    window.uploadManager.showResult(file);
+                }
             }
         } catch (error) {
             console.error(error);
