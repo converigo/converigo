@@ -176,7 +176,7 @@ class MP4ToMP3Plugin(ConverterPlugin):
 
         if completed.returncode != 0:
             stderr = (completed.stderr or "").lower()
-            if "stream map" in stderr or "matches no streams" in stderr or "invalid argument" in stderr:
+            if "stream map" in stderr or "matches no streams" in stderr or "does not contain any stream" in stderr or "invalid argument" in stderr:
                 raise RuntimeError(
                     "The selected MP4 file does not contain an audio stream. Please upload a video file that includes audio before converting to MP3."
                 )
