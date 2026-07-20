@@ -157,6 +157,17 @@ class ConverterController {
         }
     }
 
+    _trackConversionCompleted(){
+        if(!window.converigoAnalytics || typeof window.converigoAnalytics.trackEvent !== 'function'){
+            return;
+        }
+        const context = window.converigoAnalytics.getConverterContext();
+        window.converigoAnalytics.trackEvent('conversion_completed', {
+            converter_name: context.converter_name,
+            output_format: this.selectedFormat || ''
+        });
+    }
+
     async convert() {
         if (!this.files || this.files.length === 0 || !this.selectedFormat) {
             console.warn("Missing conversion data");
@@ -255,6 +266,9 @@ class ConverterController {
             }
 
             wasSuccess = true;
+            if (successCount > 0) {
+                this._trackConversionCompleted();
+            }
 
             if (window.downloadManager) {
                 window.downloadManager.prepare(data);

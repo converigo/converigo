@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ request.state.locale.lang_code if request.state and request.state.locale else 'en' }}">
+<html lang="{{ request.state.locale.lang_code if request.state and request.state.locale else 'en' }}" data-locale="{{ request.state.locale.lang_code if request.state and request.state.locale else 'en' }}">
 
 <head>
 
@@ -231,6 +231,69 @@
 
 <script src="/static/js/config.js"></script>
 
+<script>
+    (function () {
+        const safeValue = (value) => {
+            if (typeof value !== 'string') {
+                return '';
+            }
+            return value.trim().toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+        };
+
+        const isConverterRoute = () => {
+            const path = (window.location.pathname || '').toLowerCase();
+            return path.includes('/tools/') || path.includes('/converter/') || path.includes('/convert/');
+        };
+
+        const getConverterContext = () => {
+            const path = (window.location.pathname || '').toLowerCase();
+            const parts = path.split('/').filter(Boolean);
+            const slug = parts[parts.length - 1] || '';
+            const converterName = slug && slug !== 'tools' && slug !== 'converter' && slug !== 'convert' ? safeValue(slug) : '';
+            return {
+                converter_name: converterName,
+                category: 'converter'
+            };
+        };
+
+        const normalizeParam = (value) => {
+            if (typeof value === 'string') {
+                const normalized = safeValue(value);
+                return normalized || '';
+            }
+            if (typeof value === 'number') {
+                return String(value);
+            }
+            return '';
+        };
+
+        window.converigoAnalytics = {
+            isConverterRoute,
+            getConverterContext,
+            trackEvent: function (eventName, params) {
+                if (!eventName || typeof eventName !== 'string') {
+                    return;
+                }
+                const safeParams = {};
+                const allowedKeys = ['converter_name', 'category', 'input_format', 'output_format', 'error_type', 'event_status'];
+                Object.entries(params || {}).forEach(([key, value]) => {
+                    if (allowedKeys.includes(key)) {
+                        const normalizedValue = normalizeParam(value);
+                        if (normalizedValue) {
+                            safeParams[key] = normalizedValue;
+                        }
+                    }
+                });
+                if (window.dataLayer && Array.isArray(window.dataLayer)) {
+                    window.dataLayer.push({ event: eventName, ...safeParams });
+                }
+                if (typeof window.gtag === 'function') {
+                    window.gtag('event', eventName, safeParams);
+                }
+            }
+        };
+    })();
+</script>
 
 <script src="/static/js/app.js"></script>
 

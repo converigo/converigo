@@ -337,6 +337,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // When ConverterController is loaded, it manages the conversion lifecycle and progress UI.
     // `app.js` keeps upload and format helpers available for non-controller pages.
 
+    if (window.converigoAnalytics && typeof window.converigoAnalytics.trackEvent === 'function' && window.converigoAnalytics.isConverterRoute()) {
+        window.converigoAnalytics.trackEvent('converter_view', window.converigoAnalytics.getConverterContext());
+    }
+
     const initConverterAccordion = () => {
         const accordion = document.getElementById('converterAccordion');
         if (!accordion) return;

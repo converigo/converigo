@@ -1,18 +1,86 @@
 {
   "slug": "docx-to-pdf",
-  "hero": { "title": "DOCX to PDF", "subtitle": "Convert Word documents to PDF instantly." },
-  "steps": ["Upload your DOCX file","Choose PDF as output","Download the PDF"],
-  "benefits": ["Preserve layout","Easy to share","Print ready"],
-  "supported_formats": {"input": [".docx", ".doc"], "output": [".pdf"], "description": "DOCX input, PDF output"},
-  "features": [{"title": "Preserve formatting", "text": "Keeps basic styles and layout."}],
-  "how_to_use": ["Upload your DOCX file.", "Choose PDF as output.", "Download the generated PDF."],
-  "about_formats": ["DOCX is the Microsoft Word document format.", "PDF is a portable document format used for sharing and printing."],
+  "hero": {
+    "title": "DOCX to PDF Converter Free Online",
+    "subtitle": "Convert Word documents to PDF with a secure, easy online workflow.",
+    "description": "Convert DOCX files to PDF online for free while preserving formatting and creating printable documents."
+  },
+  "steps": ["Upload your DOCX file", "Choose PDF as output", "Download the PDF"],
+  "benefits": ["Preserve layout", "Easy to share", "Print ready"],
+  "supported_formats": {
+    "input": [".docx", ".doc"],
+    "output": [".pdf"],
+    "description": "DOCX input, PDF output"
+  },
+  "features": [
+    {
+      "title": "Convert Word to PDF",
+      "text": "Turn DOCX documents into polished PDF files for sharing, printing, and archiving."
+    },
+    {
+      "title": "Preserve document formatting",
+      "text": "Keep your document layout, text, and styling intact for a professional result."
+    },
+    {
+      "title": "Secure online document conversion",
+      "text": "Convert files quickly in your browser with an easy workflow and no software installation."
+    }
+  ],
+  "how_to_use": [
+    "Upload your DOCX file.",
+    "Choose PDF as the output format and review the conversion options.",
+    "Download the generated PDF for sharing or printing."
+  ],
+  "about_formats": [
+    "DOCX is the Microsoft Word document format used for editing and collaboration.",
+    "PDF is a portable document format made for easy sharing, printing, and reliable presentation."
+  ],
   "compatibility": "Works on web and API",
-  "common_problems": ["Large images causing layout shifts","Unsupported macros"],
-  "tips": ["Remove unnecessary embedded fonts","Flatten images before conversion"],
-  "faq": [{"question":"Will styles be preserved?","answer":"Basic text and paragraph styles are preserved; complex layouts may differ."}],
-  "related_tools": ["pdf-to-docx","pdf-to-ppt","excel-to-pdf"],
-  "internal_links": {"items": [{"title":"PDF Tools","href":"/pdf-tools"}]},
-  "cta": {"label":"Convert DOCX to PDF","href":"/docx-to-pdf"},
-  "json_ld": {"@context":"https://schema.org","@type":"SoftwareApplication","name":"DOCX to PDF Converter"}
+  "common_problems": ["Large images causing layout shifts", "Unsupported macros"],
+  "tips": ["Remove unnecessary embedded fonts", "Flatten images before conversion"],
+  "faq": [
+    {
+      "question": "Can I convert Word documents to PDF online?",
+      "answer": "Yes. This tool makes it easy to convert Word documents to PDF using a simple online workflow."
+    },
+    {
+      "question": "Will document formatting be preserved?",
+      "answer": "The conversion aims to preserve formatting, including text layout and styling, for a polished PDF result."
+    },
+    {
+      "question": "Why convert DOCX to PDF?",
+      "answer": "PDF files are ideal for sharing, printing, and distributing documents while maintaining a consistent appearance."
+    },
+    {
+      "question": "Is the conversion secure?",
+      "answer": "Yes. The document conversion process is secure and designed for simple, dependable use."
+    },
+    {
+      "question": "Do I need to install software?",
+      "answer": "No. You can complete the conversion directly online with no software installation required."
+    }
+  ],
+  "related_tools": ["pdf-to-docx", "pdf-to-ppt", "excel-to-pdf"],
+  "internal_links": {
+    "items": [
+      {
+        "title": "PDF Tools",
+        "href": "/pdf-tools"
+      }
+    ]
+  },
+  "cta": {
+    "label": "Convert DOCX to PDF",
+    "href": "/docx-to-pdf"
+  },
+  "json_ld": {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "DOCX to PDF Converter"
+  },
+  "seo": {
+    "title": "DOCX to PDF Converter - Free Online Tool",
+    "description": "Convert Word documents to PDF online for free. Preserve document formatting, create printable documents, and enjoy a secure easy online workflow.",
+    "keywords": "docx to pdf, convert docx to pdf, word to pdf, printable documents"
+  }
 }

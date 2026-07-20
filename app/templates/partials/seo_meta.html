@@ -4,7 +4,8 @@
 
 {% set page_description = page_meta.description | default('Converigo offers fast, secure, and automatic file conversion from video, audio, image, and document formats.') %}
 
-{% set page_canonical = page_meta.canonical | default('https://converigo.com' ~ request.url.path) %}
+{% set current_path = request.url.path if request is defined and request.url is defined else '/' %}
+{% set page_canonical = page_meta.canonical | default('https://converigo.com' ~ current_path) %}
 
 {% set page_keywords = page_meta.keywords | default('convert files, file conversion, online converter, convert video, convert image') %}
 
@@ -14,9 +15,9 @@
 
 {% set page_og_type = page_meta.og_type | default('website') %}
 
-{% set page_og_image = page_meta.og_image | default('/static/images/converigo-og-image.png') %}
+{% set page_og_image = page_meta.og_image | default('https://converigo.com/static/images/converigo-og-image.png') %}
 
-{% set page_og_url = page_meta.og_url | default('https://converigo.com' ~ request.url.path) %}
+{% set page_og_url = page_meta.og_url | default(page_canonical) %}
 
 {% set page_og_site_name = page_meta.og_site_name | default('Converigo') %}
 
@@ -47,11 +48,12 @@
 <link rel="canonical" href="{{ page_canonical }}">
 
 {% set page_hreflang_locales = request.state.supported_locales | default(['en', 'id']) %}
-{% set page_hreflang_delimiter = '?' if '?' not in page_canonical else '&' %}
+{% set page_hreflang_base = page_canonical | replace('https://converigo.com', 'https://converigo.com') %}
+{% set page_hreflang_delimiter = '?' if '?' not in page_hreflang_base else '&' %}
 {% for locale_code in page_hreflang_locales %}
-<link rel="alternate" hreflang="{{ locale_code }}" href="{{ page_canonical }}{{ page_hreflang_delimiter }}lang={{ locale_code }}">
+<link rel="alternate" hreflang="{{ locale_code }}" href="{{ page_hreflang_base }}{{ page_hreflang_delimiter }}lang={{ locale_code }}">
 {% endfor %}
-<link rel="alternate" hreflang="x-default" href="{{ page_canonical }}">
+<link rel="alternate" hreflang="x-default" href="{{ page_hreflang_base }}">
 
 
 <!-- Open Graph -->

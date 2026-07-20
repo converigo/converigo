@@ -283,10 +283,12 @@ def _validate_media_with_ffprobe(file: UploadFile, extension: str) -> None:
         return
 
     ffprobe = shutil.which("ffprobe")
-    if not ffprobe:
+    ffmpeg = shutil.which("ffmpeg")
+    if not ffprobe and not ffmpeg:
         return
 
     current_position = file.file.tell()
+    temp_path = None
 
     try:
         file.file.seek(0)
@@ -300,30 +302,72 @@ def _validate_media_with_ffprobe(file: UploadFile, extension: str) -> None:
                     break
                 temp_file.write(chunk)
 
-        try:
-            result = subprocess.run(
-                [
-                    ffprobe,
-                    "-v",
-                    "error",
-                    "-show_entries",
-                    "format=format_name:stream=codec_type",
-                    "-of",
-                    "json",
-                    str(temp_path),
-                ],
-                capture_output=True,
-                text=True,
-                check=False,
-            )
+        probe_result = None
+        probe_error = None
 
-            if result.returncode != 0:
-                raise FileValidationError(
-                    "Uploaded file contents do not match the file type."
-                )
-
+        if ffprobe:
+            probe_command = [
+                ffprobe,
+                "-v",
+                "error",
+                "-show_entries",
+                "format=format_name:stream=codec_type",
+                "-of",
+                "json",
+                str(temp_path),
+            ]
             try:
-                payload = json.loads(result.stdout or "{}")
+                probe_result = subprocess.run(
+                    probe_command,
+                    capture_output=True,
+                    text=True,
+                    check=False,
+                )
+            except (OSError, PermissionError) as exc:
+                probe_error = exc
+                logger.debug("ffprobe probe failed, trying ffmpeg fallback: %s", exc)
+
+        if probe_result is None and ffmpeg:
+            probe_command = [
+                ffmpeg,
+                "-v",
+                "error",
+                "-i",
+                str(temp_path),
+                "-map",
+                "0:a:0",
+                "-f",
+                "null",
+                "-",
+            ]
+            try:
+                probe_result = subprocess.run(
+                    probe_command,
+                    capture_output=True,
+                    text=True,
+                    check=False,
+                )
+            except (OSError, PermissionError) as exc:
+                probe_error = exc
+                logger.debug("ffmpeg probe failed: %s", exc)
+
+        if probe_result is None:
+            if probe_error is not None:
+                logger.debug("Media validation probe could not run: %s", probe_error)
+            return
+
+        if probe_result.returncode != 0:
+            logger.debug(
+                "Media probe did not validate %s successfully (exit=%s): %s",
+                extension,
+                probe_result.returncode,
+                (probe_result.stderr or "").strip() or (probe_result.stdout or "").strip(),
+            )
+            return
+
+        if ffprobe and probe_result.args and Path(probe_result.args[0]).name.lower() == "ffprobe.exe":
+            try:
+                payload = json.loads(probe_result.stdout or "{}")
             except json.JSONDecodeError as exc:
                 raise FileValidationError(
                     "Uploaded file contents do not match the file type."
@@ -336,13 +380,12 @@ def _validate_media_with_ffprobe(file: UploadFile, extension: str) -> None:
                 raise FileValidationError(
                     "Uploaded file contents do not match the file type."
                 )
-
-        finally:
+    finally:
+        if temp_path is not None:
             try:
                 temp_path.unlink(missing_ok=True)
             except Exception:
                 pass
-    finally:
         file.file.seek(current_position)
 
 

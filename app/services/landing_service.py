@@ -227,7 +227,7 @@ class LandingPageBuilder:
                 "answer": "Upload your file, choose the output format, and download the converted result.",
             },
             {
-                "question": f"Is the {label or 'converter'} free to use?",
+                "question": f"Is {label or 'this'} converter free?",
                 "answer": "Yes, this converter is free for standard conversion tasks.",
             },
             {

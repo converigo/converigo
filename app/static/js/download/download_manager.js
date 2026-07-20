@@ -25,6 +25,29 @@ class DownloadManager {
         }
     }
 
+    _trackDownloadCompleted(){
+        if(!window.converigoAnalytics || typeof window.converigoAnalytics.trackEvent !== 'function'){
+            return;
+        }
+        const context = window.converigoAnalytics.getConverterContext();
+        window.converigoAnalytics.trackEvent('download_completed', {
+            converter_name: context.converter_name
+        });
+    }
+
+    _attachDownloadHandler(element){
+        if(!element){
+            return;
+        }
+        if(element.dataset.ga4Bound === 'true'){
+            return;
+        }
+        element.addEventListener('click', () => {
+            this._trackDownloadCompleted();
+        }, { passive: true });
+        element.dataset.ga4Bound = 'true';
+    }
+
     clear(){
         if(!this.button){
             return;
@@ -87,6 +110,7 @@ class DownloadManager {
         const extension = filename.split(".").pop().toUpperCase();
 
         this.button.hidden = false;
+        this._attachDownloadHandler(this.button);
         this.button.href = result.download_path;
         this.button.download = filename;
 
@@ -129,6 +153,7 @@ class DownloadManager {
 
             const extension = result.filename.split(".").pop().toUpperCase();
             link.textContent = `📥 ${result.filename} (${extension})`;
+            this._attachDownloadHandler(link);
             container.appendChild(link);
         });
 
