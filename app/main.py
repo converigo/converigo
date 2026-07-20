@@ -6,6 +6,7 @@ Version : 3.0.0
 Converigo FastAPI Application
 """
 
+import mimetypes
 from contextlib import asynccontextmanager
 from pathlib import Path
 
@@ -179,6 +180,32 @@ async def apple_touch_icon() -> FileResponse:
     if not icon_path.exists():
         raise HTTPException(status_code=404, detail="Icon not found")
     return FileResponse(icon_path, media_type="image/png")
+
+
+@app.get("/download/{path:path}")
+async def download_file(path: str) -> FileResponse:
+    requested_path = Path(path)
+    if requested_path.is_absolute():
+        raise HTTPException(status_code=404, detail="File not found")
+
+    candidate = (OUTPUT_DIR / requested_path).resolve(strict=False)
+    try:
+        candidate.relative_to(OUTPUT_DIR.resolve(strict=False))
+    except ValueError as exc:
+        raise HTTPException(status_code=404, detail="File not found") from exc
+
+    if not candidate.exists() or not candidate.is_file():
+        raise HTTPException(status_code=404, detail="File not found")
+
+    media_type, _ = mimetypes.guess_type(candidate.name)
+    if not media_type:
+        media_type = "application/octet-stream"
+
+    return FileResponse(
+        candidate,
+        media_type=media_type,
+        filename=candidate.name,
+    )
 
 
 # ==========================================

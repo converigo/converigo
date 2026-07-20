@@ -33,7 +33,7 @@ from app.services.upload_service import (
     UploadError,
     UploadService,
 )
-
+from app.core.settings import settings
 from app.plugins.registry import registry
 
 
@@ -127,13 +127,14 @@ async def convert_file(
                     target_format
                 )
 
-                # Build download_path relative to configured OUTPUT_DIR when possible.
+                # Build download_path using a dedicated download route so browsers
+                # receive an explicit attachment response on mobile devices.
                 try:
                     rel = output_path.relative_to(settings.OUTPUT_DIR)
-                    download_path = "/outputs/" + str(rel).replace('\\\\', '/')
+                    download_path = "/download/" + rel.as_posix()
                 except Exception:
                     # Fallback: preserve previous behavior (use parent folder name)
-                    download_path = "/outputs/" + output_path.parent.name + "/" + output_path.name
+                    download_path = "/download/" + output_path.parent.name + "/" + output_path.name
 
                 results.append({
                     "filename": output_path.name,
