@@ -69,3 +69,10 @@ Desktop.ini
 .LSOverride
 ._*
 *.lnk
+
+# Release cleanup artifacts
+reports/
+*.log
+*.tmp
+validation_*.png
+headers_*.txt
