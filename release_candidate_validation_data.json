@@ -1,0 +1,373 @@
+{
+  "timestamp": "2026-07-18T17:09:03.166032",
+  "validations": {
+    "recommendation_api": {
+      "jpg": {
+        "status": "\u2705 PASS",
+        "best_choice": {
+          "source": "jpg",
+          "target": "png",
+          "title": "JPG to PNG",
+          "score": 78.5
+        },
+        "alternatives_count": 0,
+        "message": "Recommended: png"
+      },
+      "png": {
+        "status": "\u2705 PASS",
+        "best_choice": {
+          "source": "png",
+          "target": "webp",
+          "title": "PNG to WEBP",
+          "score": 94.5
+        },
+        "alternatives_count": 1,
+        "message": "Recommended: webp"
+      },
+      "webp": {
+        "status": "\u2705 PASS",
+        "best_choice": {
+          "source": "webp",
+          "target": "png",
+          "title": "WEBP to PNG",
+          "score": 78.5
+        },
+        "alternatives_count": 0,
+        "message": "Recommended: png"
+      },
+      "pdf": {
+        "status": "\u2705 PASS",
+        "best_choice": {
+          "source": "pdf",
+          "target": "xlsx",
+          "title": "PDF to Excel",
+          "score": 76.75
+        },
+        "alternatives_count": 4,
+        "message": "Recommended: xlsx"
+      },
+      "docx": {
+        "status": "\u2705 PASS",
+        "best_choice": {
+          "source": "docx",
+          "target": "pdf",
+          "title": "Word to PDF",
+          "score": 79.25
+        },
+        "alternatives_count": 0,
+        "message": "Recommended: pdf"
+      },
+      "xlsx": {
+        "status": "\u2705 PASS",
+        "best_choice": {
+          "source": "xlsx",
+          "target": "pdf",
+          "title": "Excel to PDF",
+          "score": 76.75
+        },
+        "alternatives_count": 0,
+        "message": "Recommended: pdf"
+      },
+      "pptx": {
+        "status": "\u2705 PASS",
+        "best_choice": {
+          "source": "ppt",
+          "target": "pdf",
+          "title": "PPT to PDF",
+          "score": 76.75
+        },
+        "alternatives_count": 0,
+        "message": "Recommended: pdf"
+      },
+      "mp4": {
+        "status": "\u2705 PASS",
+        "best_choice": {
+          "source": "mp4",
+          "target": "mp3",
+          "title": "MP4 to MP3",
+          "score": 94.75
+        },
+        "alternatives_count": 5,
+        "message": "Recommended: mp3"
+      }
+    },
+    "converter_contracts": {
+      "total_contracts": 46,
+      "active_contracts": 37,
+      "beta_contracts": 0,
+      "contracts": {
+        "7z-extract": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "active"
+        },
+        "avif-to-jpg": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "certified"
+        },
+        "bmp-to-jpg": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "certified"
+        },
+        "docx-to-jpg": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "deprecated"
+        },
+        "docx-to-pdf": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "certified"
+        },
+        "docx-to-ppt": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "deprecated"
+        },
+        "docx-to-xlsx": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "deprecated"
+        },
+        "excel-to-pdf": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "active"
+        },
+        "gz-extract": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "active"
+        },
+        "heic-to-jpg": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "certified"
+        },
+        "jpg-to-png": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "certified"
+        },
+        "mp4-to-aac": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "certified"
+        },
+        "mp4-to-flac": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "certified"
+        },
+        "mp4-to-m4a": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "certified"
+        },
+        "mp4-to-mp3": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "certified"
+        },
+        "mp4-to-ogg": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "certified"
+        },
+        "mp4-to-wav": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "certified"
+        },
+        "ods-to-xlsx": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "active"
+        },
+        "odt-to-pdf": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "active"
+        },
+        "pdf-compress": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "active"
+        },
+        "pdf-merge": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "active"
+        },
+        "pdf-split": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "active"
+        },
+        "pdf-to-docx": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "certified"
+        },
+        "pdf-to-excel": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "active"
+        },
+        "pdf-to-odt": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "certified"
+        },
+        "pdf-to-ppt": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "certified"
+        },
+        "pdf-to-pptx": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "active"
+        },
+        "pdf-to-word": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "active"
+        },
+        "pdf-to-xlsx": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "certified"
+        },
+        "png-to-jpg": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "certified"
+        },
+        "png-to-webp": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "certified"
+        },
+        "ppt-to-docx": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "deprecated"
+        },
+        "ppt-to-jpg": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "deprecated"
+        },
+        "ppt-to-pdf": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "certified"
+        },
+        "ppt-to-xlsx": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "deprecated"
+        },
+        "pptx-to-pdf": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "active"
+        },
+        "rar-extract": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "active"
+        },
+        "svg-to-png": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "certified"
+        },
+        "tar-extract": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "active"
+        },
+        "tiff-to-jpg": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "certified"
+        },
+        "webp-to-png": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "certified"
+        },
+        "xlsx-to-docx": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "deprecated"
+        },
+        "xlsx-to-ods": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "deprecated"
+        },
+        "xlsx-to-pdf": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "certified"
+        },
+        "xlsx-to-ppt": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "deprecated"
+        },
+        "zip-extract": {
+          "status": "\u2705 PASS",
+          "lifecycle_status": "active"
+        }
+      }
+    },
+    "certified_registry": {
+      "file": "app\\data\\certified_converters.json",
+      "exists": true,
+      "certified_count": 22,
+      "beta_count": 0,
+      "disabled_count": 6,
+      "total": 28,
+      "certified_list": [
+        "avif-to-jpg",
+        "bmp-to-jpg",
+        "docx-to-pdf",
+        "heic-to-jpg",
+        "jpg-to-png",
+        "mp4-to-aac",
+        "mp4-to-flac",
+        "mp4-to-m4a",
+        "mp4-to-mp3",
+        "mp4-to-ogg",
+        "mp4-to-wav",
+        "pdf-to-docx",
+        "pdf-to-odt",
+        "pdf-to-ppt",
+        "pdf-to-xlsx",
+        "png-to-jpg",
+        "png-to-webp",
+        "ppt-to-pdf",
+        "svg-to-png",
+        "tiff-to-jpg",
+        "webp-to-png",
+        "xlsx-to-pdf"
+      ],
+      "status": "\u2705 PASS"
+    },
+    "error_handling": {
+      "invalid_format": {
+        "status": "\u2705 PASS",
+        "returns_null": true,
+        "detected_type": "INVALID_FORMAT_XYZ"
+      },
+      "empty_format": {
+        "status": "\u2705 PASS",
+        "returns_null": true
+      },
+      "case_insensitive": {
+        "status": "\u2705 PASS",
+        "message": "PDF and pdf return same recommendation"
+      }
+    },
+    "deployment": {
+      "dockerfile": {
+        "exists": true,
+        "status": "\u2705 PASS"
+      },
+      "railway_toml": {
+        "exists": true,
+        "status": "\u2705 PASS"
+      },
+      "virtual_environment": {
+        "exists": true,
+        "status": "\u2705 PASS"
+      },
+      "critical_files": {
+        "app/__init__.py": {
+          "exists": false,
+          "status": "\u274c FAIL"
+        },
+        "app/main.py": {
+          "exists": true,
+          "status": "\u2705 PASS"
+        },
+        "app/recommendation/__init__.py": {
+          "exists": true,
+          "status": "\u2705 PASS"
+        },
+        "app/services/converter_registry_service.py": {
+          "exists": true,
+          "status": "\u2705 PASS"
+        }
+      }
+    },
+    "certified_tests": {
+      "certified_tests": {
+        "status": "\u2705 PASS",
+        "output_summary": "60 passed, 1 skipped, 8 warnings in 8.58s"
+      }
+    }
+  },
+  "test_matrix_markdown": "| Format | Status | Recommendation | Score |\n|--------|--------|-----------------|-------|\n| JPG    | \u2705 PASS     | PNG             | 78.50 |\n| PNG    | \u2705 PASS     | WEBP            | 94.50 |\n| WEBP   | \u2705 PASS     | PNG             | 78.50 |\n| PDF    | \u2705 PASS     | XLSX            | 76.75 |\n| DOCX   | \u2705 PASS     | PDF             | 79.25 |\n| XLSX   | \u2705 PASS     | PDF             | 76.75 |\n| PPTX   | \u2705 PASS     | PDF             | 76.75 |\n| MP4    | \u2705 PASS     | MP3             | 94.75 |"
+}

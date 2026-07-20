@@ -32,3 +32,12 @@ def test_header_uses_canonical_logo_path_and_nonzero_render_size():
 
     assert width > 0 and height > 0
     assert width >= 48 and height >= 48
+
+
+def test_social_preview_image_asset_is_served():
+    client = TestClient(app)
+    response = client.get("/static/images/converigo-og-image.png")
+
+    assert response.status_code == 200
+    assert response.headers["content-type"].startswith("image/png")
+    assert response.content.startswith(b"\x89PNG")

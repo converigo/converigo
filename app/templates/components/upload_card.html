@@ -1,4 +1,4 @@
-<!--
+﻿<!--
 ====================================================
 Project : Converigo
 Component : Upload Card
@@ -37,8 +37,9 @@ Convert API
 
     <div
         class="drop-zone"
-        id="dropZone"
-        role="button"
+        hidden
+
+>
         tabindex="0"
         aria-label="{{ request.state.t('upload.label', 'Upload File') }}"
     >
@@ -71,6 +72,8 @@ Convert API
 
             id="fileInput"
 
+            multiple
+
             hidden
 
         >
@@ -94,64 +97,67 @@ Convert API
 
     </div>
 
+    <div class="upload-stage">
+        <div class="file-list" id="fileList" hidden></div>
 
 
 
-    <!-- PREVIEW -->
+        <!-- PREVIEW -->
 
 
-    <div
+        <div
 
-        class="preview-container"
+            class="preview-container"
 
-        id="previewContainer"
+            id="previewContainer"
 
-        hidden
+            hidden
 
-    >
-
-
-        <div class="preview-card">
-
-            <div id="previewMedia" class="preview-media">
-
-                <img
-
-                    id="previewImage"
-
-                    class="preview-image"
-
-                    alt="Preview of selected file"
-
-                    hidden
-
-                >
+        >
 
 
-                <div
+            <div class="preview-card">
 
-                    id="previewIcon"
+                <div id="previewMedia" class="preview-media">
 
-                    class="preview-icon"
+                    <img
 
-                >
+                        id="previewImage"
 
-                    📄
+                        class="preview-image"
+
+                        alt="Preview of selected file"
+
+                        hidden
+
+                    >
+
+
+                    <div
+
+                        id="previewIcon"
+
+                        class="preview-icon"
+
+                    >
+
+                        📄
+
+                    </div>
 
                 </div>
 
-            </div>
+
+                <div class="preview-details">
+                    <div id="previewName" class="preview-name"></div>
+                    <div id="previewSize" class="preview-size"></div>
+                </div>
 
 
-            <div class="preview-details">
-                <div id="previewName" class="preview-name"></div>
-                <div id="previewSize" class="preview-size"></div>
             </div>
 
 
         </div>
-
-
     </div>
 
 
@@ -169,6 +175,8 @@ Convert API
 
     id="selectedStatus"
 
+    hidden
+
 >
 
 
@@ -183,7 +191,7 @@ Convert API
 </div>
 
 
-<div id="uploadHint" class="upload-hint">
+<div id="uploadHint" class="upload-hint" hidden>
     {{ request.state.t('upload.empty_state', 'Upload a file to get format recommendations and convert it instantly.') }}
 </div>
 
@@ -200,6 +208,7 @@ Convert API
     id="smartRecommendation"
 
     class="smart-recommendation"
+    hidden
 
 >
 
@@ -216,6 +225,7 @@ Convert API
 <div
 
     id="conversionArea"
+    hidden
 
 >
 
@@ -223,6 +233,10 @@ Convert API
 <h3>
     {{ request.state.t('upload.conversion_title', 'Convert To') }}
 </h3>
+
+    <div class="format-instruction">
+        {{ request.state.t('upload.conversion_instruction', 'Convert all files to:') }}
+    </div>
 
 
 
@@ -344,31 +358,4 @@ contoh:
 </div>
 
 </div>
-
-
-
-
-
-
-</section>
-
-
-</a>
-
-</div>
-
-</div>
-
-
-
-
-
-
-</div>
-
-
-
-
-
-
 </section>

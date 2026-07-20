@@ -1,3 +1,4 @@
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -135,6 +136,76 @@ def _build_tool_page_sections(tool_data: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+TOOL_DIRECTORY_CATEGORIES = {
+    "image": {
+        "title": "Image tools",
+        "description": "Convert photos and graphic assets for editing, publishing, and compatibility.",
+        "icon": "🖼️",
+    },
+    "document": {
+        "title": "Document tools",
+        "description": "Transform PDFs, office files, and text documents with fast, reliable workflows.",
+        "icon": "📄",
+    },
+    "audio": {
+        "title": "Audio tools",
+        "description": "Convert music and voice files into MP3, WAV, and other common audio formats.",
+        "icon": "🎧",
+    },
+    "archive": {
+        "title": "Archive tools",
+        "description": "Extract, inspect, and manage compressed archives with one-click access.",
+        "icon": "📦",
+    },
+}
+
+
+def _normalize_directory_category(tool: dict[str, Any]) -> str | None:
+    category = str(tool.get("category", "") or "").strip().lower()
+    if category == "pdf":
+        category = "document"
+    if category not in TOOL_DIRECTORY_CATEGORIES:
+        category = str(tool.get("output_category", "") or "").strip().lower()
+    if category == "pdf":
+        category = "document"
+    if category not in TOOL_DIRECTORY_CATEGORIES:
+        return None
+    return category
+
+
+def _sort_tools_for_directory(tool: dict[str, Any]) -> tuple[int, int, str]:
+    return (
+        0 if tool.get("featured") else 1,
+        0 if tool.get("popular") else 1,
+        str(tool.get("title", "")).lower(),
+    )
+
+
+def _build_tools_directory_categories() -> list[dict[str, Any]]:
+    converters = converter_data_service.list_supported_converters()
+    grouped: dict[str, list[dict[str, Any]]] = {key: [] for key in TOOL_DIRECTORY_CATEGORIES}
+    for tool in converters:
+        category = _normalize_directory_category(tool)
+        if not category:
+            continue
+        grouped[category].append(tool)
+
+    category_list: list[dict[str, Any]] = []
+    for slug, definition in TOOL_DIRECTORY_CATEGORIES.items():
+        tools = sorted(grouped[slug], key=_sort_tools_for_directory)[:5]
+        if not tools:
+            continue
+        category_list.append({
+            "slug": slug,
+            "title": definition["title"],
+            "description": definition["description"],
+            "icon": definition["icon"],
+            "tools": tools,
+        })
+
+    return category_list
+
+
 async def render_universal_tool_page(
     request: Request,
     slug: str,
@@ -205,23 +276,23 @@ async def render_universal_tool_page(
         if fallback_item["question"].lower() not in existing_questions:
             faq_items.append(fallback_item)
 
+    page_sections = _build_tool_page_sections(tool_data)
+    landing_context = landing_page_builder.build_context(
+        request,
+        tool_data,
+        faq_items=faq_items,
+        canonical_path=canonical_path,
+    )
+    seo_data = landing_context["meta"]
+    related_tools = landing_context["related_tools"]
+    faq_items = landing_context["faq"]
+
     if meta_overrides:
         seo_data.update(meta_overrides)
 
     if canonical_path is not None:
         seo_data["canonical"] = f"{PRODUCTION_BASE_URL}{canonical_path}"
         seo_data["og_url"] = seo_data["canonical"]
-
-    page_sections = _build_tool_page_sections(tool_data)
-    landing_context = None
-    if slug == "mp4-to-mp3":
-        landing_context = landing_page_builder.build_context(
-            request,
-            tool_data,
-            faq_items=faq_items,
-            canonical_path=canonical_path,
-        )
-        seo_data = landing_context["meta"]
 
     return templates.TemplateResponse(
         request=request,
@@ -251,6 +322,52 @@ async def render_universal_tool_page(
             "about_formats": page_sections["about_formats"],
             "cta": page_sections["cta"],
             "landing": landing_context,
+        },
+    )
+
+
+@router.get("", response_class=HTMLResponse)
+async def tools_index(request: Request):
+    locale_data = language_service.load_locale(
+        accept_language=request.headers.get("accept-language"),
+        lang_query=request.query_params.get("lang"),
+    )
+
+    def t(key: str, default: str = "") -> str:
+        return language_service.translate(locale_data, key, default)
+
+    categories = _build_tools_directory_categories()
+    metadata = {
+        "title": "Tools Directory | Converigo",
+        "description": "Browse Converigo converters by category with fast access to image, document, audio, and archive tools.",
+        "canonical": f"{PRODUCTION_BASE_URL}/tools",
+        "og_url": f"{PRODUCTION_BASE_URL}/tools",
+        "keywords": "tools directory, file converters, image conversion, document conversion, audio conversion, archive tools",
+        "author": "Converigo",
+        "robots": "index,follow",
+    }
+
+    return templates.TemplateResponse(
+        request=request,
+        name="pages/tools_directory.html",
+        context={
+            "request": request,
+            "locale": locale_data,
+            "t": t,
+            "supported_locales": language_service.get_supported_locales(),
+            "meta": metadata,
+            "categories": categories,
+            "structured_data": seo_service.build_structured_data(
+                request,
+                page_type="trust_page",
+                page_data={
+                    "title": metadata["title"],
+                    "description": metadata["description"],
+                    "url": "/tools",
+                    "name": "Tools Directory",
+                },
+            ),
+            "year": datetime.utcnow().year,
         },
     )
 

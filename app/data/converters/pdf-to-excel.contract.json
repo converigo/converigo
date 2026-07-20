@@ -4,9 +4,15 @@
   "name": "PDF to Excel",
   "category": "document",
   "description": "Convert PDF documents into Excel spreadsheets.",
-  "input_formats": ["pdf"],
-  "output_formats": ["xlsx"],
-  "accepted_mime_types": ["application/pdf"],
+  "input_formats": [
+    "pdf"
+  ],
+  "output_formats": [
+    "xlsx"
+  ],
+  "accepted_mime_types": [
+    "application/pdf"
+  ],
   "max_upload_size": 104857600,
   "conversion_engine": "document",
   "landing_path": "/pdf-to-excel",
@@ -15,6 +21,8 @@
   "schema_status": "ready",
   "faq_status": "ready",
   "regression_sample": "tests/sample.pdf",
-  "supported_platforms": ["web"],
+  "supported_platforms": [
+    "web"
+  ],
   "lifecycle_status": "active"
 }

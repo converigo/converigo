@@ -7,6 +7,7 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         ffmpeg \
         libreoffice \
+        poppler-utils \
         p7zip-full \
         unrar-free \
         libcairo2 \

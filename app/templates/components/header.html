@@ -7,17 +7,28 @@
             <span>Converigo</span>
         </a>
 
+        <input type="checkbox" id="navToggle" class="nav-toggle" hidden>
+        <label for="navToggle" class="nav-toggle-button" aria-label="{{ request.state.t('nav.toggle_menu', 'Toggle navigation') }}">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+
         <nav class="main-nav" role="navigation" aria-label="Primary navigation">
             <a href="/tools">
                 {{ request.state.t('nav.tools', 'Tools') }}
             </a>
 
-            <a href="/api">
-                {{ request.state.t('nav.api', 'API') }}
+            <a href="https://ko-fi.com/converigo" target="_blank" rel="noopener" class="nav-support-link">
+                {{ request.state.t('nav.support', 'Support') }}
             </a>
 
-            <a href="/pricing">
+            <a href="/pricing" class="nav-hidden">
                 {{ request.state.t('nav.pricing', 'Pricing') }}
+            </a>
+
+            <a href="/api" class="nav-hidden">
+                {{ request.state.t('nav.api', 'API') }}
             </a>
         </nav>
 
@@ -35,7 +46,7 @@
             </div>
 
             <div class="header-actions">
-                <button class="btn btn-secondary">
+                <button class="btn btn-secondary button-hidden">
                     {{ t('header.sign_in', 'Sign In') }}
                 </button>
 

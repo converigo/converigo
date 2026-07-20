@@ -112,6 +112,10 @@
         rel="stylesheet"
         href="/static/css/core/base.css">
 
+    <link
+        rel="stylesheet"
+        href="/static/css/style.css">
+
 
 
 
@@ -168,17 +172,17 @@
          PAGE CSS
     =========================== -->
 
-
+    {% block page_css %}
     <link
         rel="stylesheet"
         href="/static/css/pages/home.css">
-
+    {% endblock %}
 
 </head>
 
 
 
-<body>
+<body class="{% block body_class %}{% endblock %}">
 
 
 {% block content %}

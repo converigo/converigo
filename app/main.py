@@ -173,6 +173,14 @@ async def manifest() -> FileResponse:
     )
 
 
+@app.get("/apple-touch-icon.png")
+async def apple_touch_icon() -> FileResponse:
+    icon_path = STATIC_DIR / "images" / "apple-touch-icon.png"
+    if not icon_path.exists():
+        raise HTTPException(status_code=404, detail="Icon not found")
+    return FileResponse(icon_path, media_type="image/png")
+
+
 # ==========================================
 # STATIC FILES
 # ==========================================
@@ -225,6 +233,10 @@ app.include_router(
 )
 
 app.include_router(
+    tools_router
+)
+
+app.include_router(
     home_router
 )
 
@@ -236,11 +248,6 @@ app.include_router(
 
 app.include_router(
     convert_router
-)
-
-
-app.include_router(
-    tools_router
 )
 
 

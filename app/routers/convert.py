@@ -10,6 +10,7 @@ Version : 2.2.1
 import logging
 
 from pathlib import Path
+from typing import List
 
 from fastapi import (
     APIRouter,
@@ -63,143 +64,133 @@ async def unsupported_conversion_exception_handler(
 )
 async def convert_file(
 
-    file: UploadFile = File(...),
+    file: List[UploadFile] = File(...),
 
     target_format: str = Form(...)
 
 ):
 
 
-    logger.info("Convert request received: file=%s target=%s", file.filename, target_format)
+    logger.info("Convert request received: files=%d target=%s", len(file), target_format)
 
-    saved_path: Path | None = None
+    if not file or len(file) == 0:
+        raise HTTPException(status_code=400, detail="No files provided")
 
+    target_format = target_format.lower().strip()
+    
+    upload_service = UploadService()
+    conversion_service = ConversionService()
+    
+    results = []
+    saved_paths = []
 
     try:
+        # Process each file
+        for uploaded_file in file:
+            saved_path: Path | None = None
+            try:
+                saved_path = await upload_service.process_upload(uploaded_file)
+                saved_paths.append(saved_path)
+                
+                source_format = (
+                    Path(saved_path)
+                    .suffix
+                    .replace(".", "")
+                    .lower()
+                )
 
+                # [CONVERTER_DEBUG] — log converter selection and upload path
+                try:
+                    plugin = registry.get_plugin(source_format, target_format)
+                    slug = getattr(plugin, "slug", None)
+                except Exception:
+                    slug = None
 
-        upload_service = UploadService()
+                logger.info(
+                    "[CONVERTER_DEBUG] Request: converter_slug=%s source_format=%s target_format=%s upload_path=%s",
+                    slug,
+                    source_format,
+                    target_format,
+                    str(saved_path),
+                )
 
+                try:
+                    registry.get_plugin(
+                        source_format,
+                        target_format
+                    )
+                except ValueError as exc:
+                    raise UnsupportedConversionError(source_format, target_format) from exc
 
-        saved_path = await upload_service.process_upload(
-            file
-        )
+                output_path = await conversion_service.convert_file(
+                    saved_path,
+                    target_format
+                )
 
+                # Build download_path relative to configured OUTPUT_DIR when possible.
+                try:
+                    rel = output_path.relative_to(settings.OUTPUT_DIR)
+                    download_path = "/outputs/" + str(rel).replace('\\\\', '/')
+                except Exception:
+                    # Fallback: preserve previous behavior (use parent folder name)
+                    download_path = "/outputs/" + output_path.parent.name + "/" + output_path.name
 
+                results.append({
+                    "filename": output_path.name,
+                    "download_path": download_path,
+                    "status": "success",
+                })
 
-        target_format = (
-            target_format
-            .lower()
-            .strip()
-        )
+            except UnsupportedConversionError:
+                raise
+            except (UploadError, ConversionError) as exc:
+                logger.warning("Conversion failed for %s: %s", uploaded_file.filename, exc)
+                results.append({
+                    "filename": uploaded_file.filename,
+                    "status": "failed",
+                    "error": str(exc),
+                })
 
-
-
-        source_format = (
-
-            Path(saved_path)
-            .suffix
-            .replace(".", "")
-            .lower()
-
-        )
-
-
-
-        try:
-
-
-            registry.get_plugin(
-                source_format,
-                target_format
-            )
-
-
-        except ValueError as exc:
-
-
-            raise UnsupportedConversionError(source_format, target_format) from exc
-
-
-
-        conversion_service = ConversionService()
-
-
-
-        output_path = await conversion_service.convert_file(
-
-            saved_path,
-
-            target_format
-
-        )
-
-
-
+        # Return single-file format for 1 file (backward compatibility)
+        # or batch format for multiple files
+        if len(file) == 1 and len(results) == 1:
+            result = results[0]
+            result["status"] = "success" if result["status"] == "success" else "failed"
+            result["target_format"] = target_format
+            if result["status"] == "failed":
+                raise HTTPException(
+                    status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                    detail=result["error"],
+                )
+            return result
+        
+        # Batch response for multiple files
         return {
-
-
-            "status": "success",
-
-
-            "filename": output_path.name,
-
-
-            "download_path":
-                "/outputs/" + output_path.parent.name + "/" + output_path.name,
-
-
-            "message":
-                "Conversion completed successfully.",
-
-
-            "target_format":
-                target_format
-
+            "status": "completed",
+            "results": results,
+            "total": len(file),
+            "successful": sum(1 for r in results if r["status"] == "success"),
+            "target_format": target_format,
         }
 
-
-
-    except UploadError as exc:
-        logger.warning("Upload failed during conversion: %s", exc)
-        raise HTTPException(
-            status_code=400,
-            detail=str(exc)
-        )
-
+    except HTTPException:
+        raise
 
     except UnsupportedConversionError:
         raise
 
-
-    except ConversionError as exc:
-        logger.warning("Conversion failed: %s", exc)
-        raise HTTPException(
-            status_code=500,
-            detail=str(exc),
-        )
-
-
-
-    except HTTPException:
-
-
-        raise
-
-
-
     except Exception:
-        logger.exception("Unexpected error during conversion")
+        logger.exception("Unexpected error during batch conversion")
         raise HTTPException(
             status_code=500,
-            detail="Conversion failed.",
+            detail="Batch conversion failed.",
         )
-
-
 
     finally:
-        try:
-            if saved_path and saved_path.exists():
-                saved_path.unlink()
-        except Exception:
-            logger.exception("Failed to remove temporary upload after conversion")
+        # Clean up all saved paths
+        for saved_path in saved_paths:
+            try:
+                if saved_path and saved_path.exists():
+                    saved_path.unlink()
+            except Exception:
+                logger.exception("Failed to remove temporary upload %s", saved_path)

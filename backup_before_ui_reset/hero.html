@@ -1,0 +1,148 @@
+<section id="hero" class="hero">
+
+    <div class="container">
+
+        <div class="hero-content">
+
+
+            <!-- HERO INTRO -->
+
+            <div class="hero-top">
+
+
+                <h1 class="hero-title">
+                    {{ request.state.t('hero.title', 'Convert Files in Seconds') }}
+                </h1>
+
+                <p class="hero-description">
+                    {{ request.state.t('hero.description', 'Upload a file, choose a format, and download instantly.') }}
+                </p>
+
+
+
+
+            </div>
+
+
+
+
+
+            <!-- CONVERTER WORKSPACE -->
+
+            <div class="hero-workspace">
+
+
+
+                {% include "components/upload_card.html" %}
+
+
+
+
+                <!-- SMART RESULT PANEL -->
+
+                <div
+                    class="smart-panel"
+                    id="smartPanel"
+                    hidden>
+
+
+
+                    <div class="panel-section">
+
+
+                        <h3>
+
+                            📄 Detected File
+
+                        </h3>
+
+
+
+                        <div id="detectedFile">
+
+
+                            Waiting for file...
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+
+                    <div class="panel-section">
+
+
+                        <h3>
+
+                            ⭐ Best Choice
+
+                        </h3>
+
+
+
+                        <div id="recommendedFormat">
+
+
+                            Recommendation will appear here.
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <div class="panel-section">
+
+
+                        <h3>
+
+                            Need another format?
+
+                        </h3>
+
+
+
+
+                        <div
+                            id="otherFormats"
+                            class="format-list">
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+                </div>
+
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+
+</section>

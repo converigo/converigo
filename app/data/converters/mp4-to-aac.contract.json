@@ -4,9 +4,15 @@
   "name": "MP4 to AAC",
   "category": "audio",
   "description": "Convert MP4 video files into AAC audio.",
-  "input_formats": ["mp4"],
-  "output_formats": ["aac"],
-  "accepted_mime_types": ["video/mp4"],
+  "input_formats": [
+    "mp4"
+  ],
+  "output_formats": [
+    "aac"
+  ],
+  "accepted_mime_types": [
+    "video/mp4"
+  ],
   "max_upload_size": 104857600,
   "conversion_engine": "ffmpeg",
   "landing_path": "/mp4-to-aac",
@@ -15,6 +21,8 @@
   "schema_status": "ready",
   "faq_status": "ready",
   "regression_sample": "tests/sample.mp4",
-  "supported_platforms": ["web"],
-  "lifecycle_status": "active"
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "certified"
 }

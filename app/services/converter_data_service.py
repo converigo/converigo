@@ -23,7 +23,8 @@ def _is_production_ready(contract: dict[str, Any] | None) -> bool:
         return False
 
     lifecycle_status = str(contract.get("lifecycle_status", "")).strip().lower()
-    if lifecycle_status != "active":
+    # Consider both `active` and `certified` as production-ready for recommendation purposes.
+    if lifecycle_status not in {"active", "certified"}:
         return False
 
     return True

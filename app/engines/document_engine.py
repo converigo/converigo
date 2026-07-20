@@ -30,6 +30,7 @@ class DocumentEngine(BaseEngine):
         source_path: Path,
         target_format: str,
     ) -> Path:
+        logger.info("[CONVERTER_DEBUG] DocumentEngine start conversion source=%s target=%s", str(source_path), target_format)
         target = target_format.lower().lstrip(".")
         if target == "doc":
             target = "docx"
@@ -477,6 +478,8 @@ class DocumentEngine(BaseEngine):
 
         output_path = output_dir / f"{source_path.stem}_page_01.jpg"
 
+        logger.info("[CONVERTER_DEBUG] DocumentEngine PDF->JPG start source=%s output=%s", str(source_path), str(output_path))
+
         try:
             doc = fitz.open(str(source_path))
             try:
@@ -486,8 +489,10 @@ class DocumentEngine(BaseEngine):
                 page = doc.load_page(0)
                 pix = page.get_pixmap(matrix=fitz.Matrix(2, 2), alpha=False)
                 pix.pil_save(str(output_path), format="JPEG", quality=95)
+                logger.info("[CONVERTER_DEBUG] DocumentEngine PDF->JPG success output=%s", str(output_path))
                 return output_path
             finally:
                 doc.close()
         except Exception as exc:
+            logger.exception("[CONVERTER_DEBUG] DocumentEngine PDF->JPG exception source=%s", str(source_path))
             raise RuntimeError(f"PDF to JPG conversion failed: {exc}") from exc

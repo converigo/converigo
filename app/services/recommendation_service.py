@@ -49,6 +49,10 @@ class RecommendationService:
         current_target = str(converter.get("target", "") or "").lower()
 
         ranked_converters = self._rank_converters(self.converter_data_service.list_public_converters())
+        ranked_converters = [
+            tool for tool in ranked_converters
+            if not self._is_pdf_to_pdf(tool)
+        ]
 
         # Filter out any converters that are not actually supported by the plugin registry
         filtered_ranked: list[dict[str, Any]] = []
@@ -266,6 +270,11 @@ class RecommendationService:
         if not current_target and not current_source:
             return False
         return bool(source == current_target or target == current_source)
+
+    def _is_pdf_to_pdf(self, tool: dict[str, Any]) -> bool:
+        source = str(tool.get("source", "") or "").strip().lower()
+        target = str(tool.get("target", "") or "").strip().lower()
+        return source == "pdf" and target == "pdf"
 
     def _empty_recommendations(self) -> dict[str, list[dict[str, Any]]]:
         return {

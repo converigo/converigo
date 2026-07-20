@@ -1,8 +1,10 @@
 {
   "hero": {
     "eyebrow": "プレミアムファイルコンバーター",
-    "title": "プレミアムなシンプルさでファイルをより速く変換します。",
+    "title": "すべてのファイルを変換",
     "subtitle": "Converigoは、安全でレスポンシブ、洗練されたファイル変換を学生、クリエイター、プロフェッショナルに提供します。",
+    "description": "画像、動画、音声、ドキュメントをオンラインで変換します。",
+    "batch_hint": "複数ファイルをまとめて対応",
     "primary_cta": "変換を開始",
     "secondary_cta": "機能を確認"
   },
@@ -15,7 +17,30 @@
     "empty_status": "まだファイルが選択されていません",
     "waiting_status": "ファイルを待っています",
     "size_label": "0 KB",
-    "clear": "クリア"
+    "clear": "クリア",
+    "conversion_title": "変換先",
+    "conversion_instruction": "すべてのファイルを次に変換:",
+    "convert": "変換",
+    "download": "ダウンロード",
+    "empty_state": "ファイルをアップロードして、形式の推奨とすぐに変換できるようにします。",
+    "select_file": "開始するファイルを選択してください",
+    "file_ready": "ファイルが準備できました",
+    "ready": "準備完了",
+    "files_ready": "ファイルの準備ができました",
+    "converting": "変換中...",
+    "conversion_completed": "✓ 変換完了",
+    "conversion_complete": "✓ 変換完了",
+    "download_ready": "ダウンロードの準備ができました",
+    "ready_to_download": "ダウンロードの準備ができました",
+    "select_target_format": "❌ まずターゲット形式を選択してください。",
+    "conversion_failed": "❌ 変換に失敗しました。もう一度お試しください。",
+    "conversion_failed_try_another": "❌ 変換に失敗しました。別の形式でお試しください。",
+    "conversion_all_failed": "❌ すべての変換に失敗しました",
+    "conversion_partial_success": "⚠️ {success}/{total} ファイル変換済み",
+    "file_type_audio": "オーディオファイル",
+    "file_type_video": "ビデオファイル",
+    "file_type_pdf": "PDFファイル",
+    "try_again": "もう一度試す"
   },
   "stats": {
     "formats": "対応フォーマット",
@@ -25,7 +50,57 @@
   "popular": {
     "eyebrow": "人気の変換",
     "heading": "最もリクエストされている変換フロー",
-    "description": "最も必要とされるフォーマットへのクイックアクセス。"
+    "description": "最も必要とされるフォーマットへのクイックアクセス。",
+    "tools": {
+      "jpg_to_png": {
+        "title": "JPG → PNG",
+        "description": "JPG画像をPNG形式に変換します。"
+      },
+      "png_to_jpg": {
+        "title": "PNG → JPG",
+        "description": "PNG画像をJPG形式に変換します。"
+      },
+      "jpg_to_pdf": {
+        "title": "JPG → PDF",
+        "description": "写真を数秒で洗練されたPDFドキュメントに変換します。"
+      },
+      "pdf_to_jpg": {
+        "title": "PDF → JPG",
+        "description": "PDFから画像を抽出してJPGファイルとして保存します。"
+      },
+      "docx_to_pdf": {
+        "title": "DOCX → PDF",
+        "description": "DOCXドキュメントをPDF形式にエクスポートします。"
+      },
+      "xlsx_to_pdf": {
+        "title": "XLSX → PDF",
+        "description": "スプレッドシートを印刷可能なPDFにエクスポートします。"
+      },
+      "mp4_to_mp3": {
+        "title": "MP4 → MP3",
+        "description": "ビデオからオーディオを抽出してMP3として保存します。"
+      },
+      "webp_to_jpg": {
+        "title": "WEBP → JPG",
+        "description": "WEBP画像をより広い互換性のためにJPG形式に変換します。"
+      }
+    }
+  },
+  "how_it_works": {
+    "heading": "使い方",
+    "description": "3つの簡単なステップでファイルを変換します。",
+    "step1": {
+      "title": "ファイルをアップロード",
+      "description": "変換したいファイルをデバイスから選択します。"
+    },
+    "step2": {
+      "title": "形式を選択",
+      "description": "ファイルに必要な出力形式を選択します。"
+    },
+    "step3": {
+      "title": "結果をダウンロード",
+      "description": "変換されたファイルをすぐにダウンロードします。"
+    }
   },
   "features": {
     "eyebrow": "機能",
@@ -40,6 +115,17 @@
   },
   "faq": {
     "heading": "よくある質問",
+    "description": "Converigoに関するよくある質問にお答えします。",
+    "q1": "どのファイルを変換できますか？",
+    "a1": "Converigoは画像、ドキュメント、音声、動画など多くの形式をサポートしています。",
+    "q2": "Converigoは無料で使えますか？",
+    "a2": "はい。ソフトウェアをインストールせずに、ブラウザから無料で変換できます。",
+    "q3": "ファイルは安全ですか？",
+    "a3": "はい。ファイルは安全に処理され、他者と共有されることはありません。",
+    "q4": "ソフトウェアをインストールする必要がありますか？",
+    "a4": "いいえ。Converigoはデスクトップとモバイルのブラウザで直接動作します。",
+    "q5": "複数のファイルを一度に変換できますか？",
+    "a5": "はい。Converigoは複数ファイルのアップロードにも対応しています。",
     "items": [
       {"question": "どのファイル形式を変換できますか？", "answer": "ConverigoはMP4、MP3、WAV、PDF、DOCXなど、人気のあるビデオ、オーディオ、ドキュメント形式に対応しています。"},
       {"question": "データはプライベートですか？", "answer": "アップロードされたすべてのファイルは安全に処理され、UIは変換テスト中のプライバシーを尊重するように設計されています。"},
@@ -49,28 +135,81 @@
   "footer": {
     "brand": "Converigo",
     "description": "学生、クリエイター、プロフェッショナルのためのモダンなファイル変換。",
+    "support": "サポート",
     "product": "製品",
     "company": "会社",
+    "converters": "コンバーター",
+    "resources": "リソース",
     "popular": "人気",
     "features": "機能",
     "faq": "FAQ",
     "upload": "アップロード",
+    "about": "会社情報",
+    "contact": "お問い合わせ",
+    "blog": "ブログ",
+    "privacy_policy": "プライバシーポリシー",
+    "terms": "利用規約",
+    "tagline": "Convert and Go!",
+    "bottom_tagline": "数秒でファイルを変換します。",
     "copyright": "© {year} Converigo。エレガントなファイル変換のために構築。"
   },
   "nav": {
     "home": "ホーム",
     "popular": "人気",
+    "support": "サポート",
     "features": "機能",
     "stats": "統計",
     "faq": "FAQ",
     "upload": "アップロード",
-    "related": "関連"
+    "related": "関連",
+    "tools": "ツール",
+    "api": "API",
+    "pricing": "価格",
+    "toggle_menu": "ナビゲーションを切り替え"
+  },
+  "language": {
+    "selector_label": "言語",
+    "en": "EN",
+    "id": "ID"
+  },
+  "header": {
+    "brand": "Converigo",
+    "logo_alt": "Converigoのロゴ",
+    "logo_label": "Converigoホーム",
+    "sign_in": "サインイン",
+    "get_started": "変換を開始"
+  },
+  "community_support": {
+    "eyebrow": "ユーザーに信頼されています",
+    "heading": "高速でシンプルな変換を必要とするユーザーに信頼されています",
+    "description": "安全で使いやすいオンラインコンバーターでファイルをすばやく変換します。",
+    "support_cta": "Ko-fiでConverigoを支援",
+    "cards": {
+      "fast": {
+        "title": "高速変換",
+        "description": "最適化された処理でファイルをすばやく変換します。"
+      },
+      "secure": {
+        "title": "安全でプライベート",
+        "description": "ファイルは変換中に安全に扱われます。"
+      },
+      "everywhere": {
+        "title": "どこでも動作",
+        "description": "デスクトップ、タブレット、モバイルのブラウザでConverigoを使用できます。"
+      },
+      "no_registration": {
+        "title": "登録不要",
+        "description": "アカウントを作成せずにすぐに変換を開始できます。"
+      }
+    }
   },
   "tool_page": {
     "panel": {
       "label": "変換の準備ができました",
       "title": "ファイルを1つアップロードして変換結果を取得します。"
     },
+    "cta_convert": "変換を開始",
+    "cta_faq": "FAQを読む",
     "upload_label": "ファイルをアップロード",
     "how_it_works": {
       "eyebrow": "使い方",

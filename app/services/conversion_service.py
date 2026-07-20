@@ -90,6 +90,15 @@ class ConversionService:
             except Exception:
                 slug = None
             logger.info("Selected plugin for conversion: %s (%s -> %s)", slug or str(plugin), source_format, target_format)
+            # [CONVERTER_DEBUG] — plugin/engine/input/target
+            engine_name = getattr(plugin, "engine", None)
+            logger.info(
+                "[CONVERTER_DEBUG] ConversionService selected plugin=%s engine=%s input=%s target=%s",
+                slug or str(plugin),
+                engine_name,
+                str(source_path),
+                target_format,
+            )
         except ValueError as exc:
             raise UnsupportedConversionError(source_format, target_format) from exc
 
@@ -105,6 +114,7 @@ class ConversionService:
                 f"Conversion timed out after {timeout_seconds} seconds."
             ) from exc
         except RuntimeError as exc:
+            logger.exception("[CONVERTER_DEBUG] ConversionService runtime error during plugin.convert")
             raise ConversionError(str(exc)) from exc
         except UnsupportedConversionError:
             raise
@@ -112,12 +122,14 @@ class ConversionService:
             message = str(exc)
             if message.startswith("Unsupported ") or "Unsupported" in message:
                 raise UnsupportedConversionError(source_format, target_format) from exc
+            logger.exception("[CONVERTER_DEBUG] ConversionService value error during plugin.convert")
             raise ConversionError(message) from exc
         except Exception as exc:
-            logger.exception("Conversion raised an unexpected exception")
+            logger.exception("[CONVERTER_DEBUG] ConversionService raised an unexpected exception")
             raise ConversionError(f"{type(exc).__name__}: {exc}") from exc
 
         logger.info("Plugin returned output path: %s", str(output_path))
+        logger.info("[CONVERTER_DEBUG] ConversionService output_path=%s", str(output_path))
 
         if not isinstance(output_path, Path):
             raise ConversionError("Invalid output path.")

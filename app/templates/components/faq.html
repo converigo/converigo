@@ -1,30 +1,60 @@
 <section class="section section-white">
-    <div class="container">
+    <div class="container faq-shell">
         <div class="section-header">
-            <h2>Frequently asked questions</h2>
-            <p>Answers to common questions about Converigo's file conversion service.</p>
+            <h2>{{ request.state.t('faq.heading', 'Frequently Asked Questions') }}</h2>
+            <p>{{ request.state.t('faq.description', 'Find answers to common questions about Converigo.') }}</p>
         </div>
 
         <div class="faq-list">
-            <article class="card">
-                <h3>What is Converigo?</h3>
-                <p>Converigo is a fast online file converter that helps you convert documents, images, audio, and video files without installing software.</p>
-            </article>
+            <div class="faq-item">
+                <button class="faq-question" type="button" id="faq-question-1" aria-expanded="false" aria-controls="faq-answer-1">
+                    <span>{{ request.state.t('faq.q1', 'What files can I convert?') }}</span>
+                    <span class="faq-toggle">+</span>
+                </button>
+                <div class="faq-answer" id="faq-answer-1" role="region" aria-labelledby="faq-question-1" hidden>
+                    <p>{{ request.state.t('faq.a1', 'Converigo supports many formats including images, documents, audio, and video files.') }}</p>
+                </div>
+            </div>
 
-            <article class="card">
-                <h3>Is Converigo free?</h3>
-                <p>Yes, Converigo offers free file conversion so you can quickly transform files without paying for basic conversion tasks.</p>
-            </article>
+            <div class="faq-item">
+                <button class="faq-question" type="button" id="faq-question-2" aria-expanded="false" aria-controls="faq-answer-2">
+                    <span>{{ request.state.t('faq.q2', 'Is Converigo free to use?') }}</span>
+                    <span class="faq-toggle">+</span>
+                </button>
+                <div class="faq-answer" id="faq-answer-2" role="region" aria-labelledby="faq-question-2" hidden>
+                    <p>{{ request.state.t('faq.a2', 'Yes. You can convert files online for free without installing any software.') }}</p>
+                </div>
+            </div>
 
-            <article class="card">
-                <h3>Are uploaded files safe?</h3>
-                <p>Uploaded files are processed securely and kept only as long as needed to complete the conversion, with privacy and safety in mind.</p>
-            </article>
+            <div class="faq-item">
+                <button class="faq-question" type="button" id="faq-question-3" aria-expanded="false" aria-controls="faq-answer-3">
+                    <span>{{ request.state.t('faq.q3', 'Are my files secure?') }}</span>
+                    <span class="faq-toggle">+</span>
+                </button>
+                <div class="faq-answer" id="faq-answer-3" role="region" aria-labelledby="faq-question-3" hidden>
+                    <p>{{ request.state.t('faq.a3', 'Yes. Your files are processed safely and are not shared with others.') }}</p>
+                </div>
+            </div>
 
-            <article class="card">
-                <h3>What files can Converigo convert?</h3>
-                <p>Converigo supports many popular formats for images, documents, audio, and video, so you can convert the files you need quickly.</p>
-            </article>
+            <div class="faq-item">
+                <button class="faq-question" type="button" id="faq-question-4" aria-expanded="false" aria-controls="faq-answer-4">
+                    <span>{{ request.state.t('faq.q4', 'Do I need to install software?') }}</span>
+                    <span class="faq-toggle">+</span>
+                </button>
+                <div class="faq-answer" id="faq-answer-4" role="region" aria-labelledby="faq-question-4" hidden>
+                    <p>{{ request.state.t('faq.a4', 'No. Converigo works directly in your browser on desktop and mobile devices.') }}</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" type="button" id="faq-question-5" aria-expanded="false" aria-controls="faq-answer-5">
+                    <span>{{ request.state.t('faq.q5', 'Can I convert multiple files at once?') }}</span>
+                    <span class="faq-toggle">+</span>
+                </button>
+                <div class="faq-answer" id="faq-answer-5" role="region" aria-labelledby="faq-question-5" hidden>
+                    <p>{{ request.state.t('faq.a5', 'Yes. Converigo supports multiple file uploads for faster conversion workflows.') }}</p>
+                </div>
+            </div>
         </div>
     </div>
 </section>

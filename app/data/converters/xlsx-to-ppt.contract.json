@@ -1,0 +1,29 @@
+{
+  "id": "xlsx-to-ppt",
+  "slug": "xlsx-to-ppt",
+  "name": "XLSX to PPT",
+  "description": "Convert XLSX spreadsheets to PPT presentations (deprecated).",
+  "category": "document",
+  "input_formats": [
+    "xlsx"
+  ],
+  "output_formats": [
+    "ppt"
+  ],
+  "accepted_mime_types": [
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+  ],
+  "max_upload_size": 52428800,
+  "conversion_engine": "document",
+  "landing_path": "/xlsx-to-ppt",
+  "canonical_url": "https://converigo.com/xlsx-to-ppt",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/fixtures/sample_valid.xlsx",
+  "supported_platforms": [
+    "web",
+    "api"
+  ],
+  "lifecycle_status": "deprecated"
+}

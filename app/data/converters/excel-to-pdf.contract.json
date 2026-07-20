@@ -4,9 +4,15 @@
   "name": "Excel to PDF",
   "category": "document",
   "description": "Convert Excel spreadsheets into PDF files.",
-  "input_formats": ["xlsx"],
-  "output_formats": ["pdf"],
-  "accepted_mime_types": ["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"],
+  "input_formats": [
+    "xlsx"
+  ],
+  "output_formats": [
+    "pdf"
+  ],
+  "accepted_mime_types": [
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+  ],
   "max_upload_size": 104857600,
   "conversion_engine": "document",
   "landing_path": "/excel-to-pdf",
@@ -15,6 +21,8 @@
   "schema_status": "ready",
   "faq_status": "ready",
   "regression_sample": "tests/sample.xlsx",
-  "supported_platforms": ["web"],
+  "supported_platforms": [
+    "web"
+  ],
   "lifecycle_status": "active"
 }

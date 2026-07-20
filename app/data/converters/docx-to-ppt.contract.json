@@ -1,0 +1,29 @@
+{
+  "id": "docx-to-ppt",
+  "slug": "docx-to-ppt",
+  "name": "DOCX to PPT",
+  "description": "Convert DOCX documents to PPT presentations (deprecated).",
+  "category": "document",
+  "input_formats": [
+    "docx"
+  ],
+  "output_formats": [
+    "ppt"
+  ],
+  "accepted_mime_types": [
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+  ],
+  "max_upload_size": 52428800,
+  "conversion_engine": "document",
+  "landing_path": "/docx-to-ppt",
+  "canonical_url": "https://converigo.com/docx-to-ppt",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.docx",
+  "supported_platforms": [
+    "web",
+    "api"
+  ],
+  "lifecycle_status": "deprecated"
+}

@@ -12,7 +12,7 @@ def test_homepage_default_locale_renders_english():
 
     assert 'lang="en"' in html
     assert 'Upload Your File' in html
-    assert 'Convert Any File' in html
+    assert 'Convert All Files' in html
     assert 'In Seconds' in html
     assert 'window.appLocale' in html
     assert 'window.localeCode = "en"' in html

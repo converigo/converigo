@@ -27,8 +27,11 @@ class CleanupService:
 
     def clean_old_files(self) -> None:
         threshold = datetime.utcnow() - timedelta(seconds=self.retention_seconds)
+        # Clean both temporary uploads and generated outputs so expired files are
+        # removed consistently at startup.
+        directories_to_clean = [self.upload_dir, self.output_dir]
 
-        for directory in (self.upload_dir, self.output_dir):
+        for directory in directories_to_clean:
             if not directory.exists():
                 continue
 

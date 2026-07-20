@@ -1,168 +1,22 @@
-<section class="hero">
-
+<section id="hero" class="hero homepage-hero">
+    {% set hero = hero if hero is defined and hero is not none else {} %}
     <div class="container">
-
-        <div class="hero-content">
-
-
-            <!-- HERO INTRO -->
-
-            <div class="hero-top">
-
-
-                <span class="hero-badge">
-                    {{ request.state.t('hero.badge', '🚀 Fast • Smart • Secure') }}
-                </span>
-
-
-
+        <div class="hero-container">
+            <div class="hero-content">
                 <h1 class="hero-title">
-
-                    {{ request.state.t('hero.title', 'Convert Any File') }}
-
-                    <br>
-
-                    {{ request.state.t('hero.subtitle_line', 'In Seconds') }}
-
+                    {{ request.state.t('hero.title', 'Convert All Files') }}
                 </h1>
 
-
-
-
                 <p class="hero-description">
-
                     {{ request.state.t('hero.description', 'Convert images, videos, audio, and documents online.') }}
-
-                    <br>
-
-                    <strong>{{ request.state.t('hero.callout', 'Convert and Go!') }}<br>{{ request.state.t('hero.callout_tagline', 'Fast, Simple, Ready.') }}</strong>
-
                 </p>
 
-
-
+                <p class="hero-batch-hint">{{ request.state.t('hero.batch_hint', 'Supports many files at once') }}</p>
             </div>
 
-
-
-
-
-            <!-- CONVERTER WORKSPACE -->
-
-            <div class="hero-workspace">
-
-
-
+            <div class="homepage-upload-card">
                 {% include "components/upload_card.html" %}
-
-
-
-
-                <!-- SMART RESULT PANEL -->
-
-                <div
-                    class="smart-panel"
-                    id="smartPanel"
-                    hidden>
-
-
-
-                    <div class="panel-section">
-
-
-                        <h3>
-
-                            📄 Detected File
-
-                        </h3>
-
-
-
-                        <div id="detectedFile">
-
-
-                            Waiting for file...
-
-
-                        </div>
-
-
-
-                    </div>
-
-
-
-
-
-
-                    <div class="panel-section">
-
-
-                        <h3>
-
-                            ⭐ Best Choice
-
-                        </h3>
-
-
-
-                        <div id="recommendedFormat">
-
-
-                            Recommendation will appear here.
-
-
-                        </div>
-
-
-
-                    </div>
-
-
-
-
-
-
-
-                    <div class="panel-section">
-
-
-                        <h3>
-
-                            Need another format?
-
-                        </h3>
-
-
-
-
-                        <div
-                            id="otherFormats"
-                            class="format-list">
-
-
-                        </div>
-
-
-
-                    </div>
-
-
-
-
-                </div>
-
-
-
-
             </div>
-
-
-
         </div>
-
-
     </div>
-
-
 </section>

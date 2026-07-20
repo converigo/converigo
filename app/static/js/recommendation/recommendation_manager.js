@@ -34,6 +34,12 @@ class RecommendationManager {
             );
 
 
+        this.conversionArea =
+            document.getElementById(
+                "conversionArea"
+            );
+
+
         this.convertButton =
             document.getElementById(
                 "convertButton"
@@ -158,7 +164,15 @@ class RecommendationManager {
 
 
 
+        if(window.conversionStateController && typeof window.conversionStateController.setFormatChoicesAvailable === 'function'){
+            window.conversionStateController.setFormatChoicesAvailable(false);
+        } else if(this.conversionArea){
+            this.conversionArea.hidden = true;
+        }
+
         const choices = [];
+        let autoSelectButton = null;
+        let autoSelectTarget = null;
 
 
 
@@ -272,11 +286,25 @@ class RecommendationManager {
 
 
 
-                    if(this.convertButton){
-
-                        this.convertButton.disabled =
-                            false;
-
+                    if(window.conversionStateController && typeof window.conversionStateController.setConvertReady === 'function'){
+                        // Ensure format choices and conversion state are set as well
+                        if (typeof window.conversionStateController.setFormatChoicesAvailable === 'function') {
+                            window.conversionStateController.setFormatChoicesAvailable(true);
+                        }
+                        if (typeof window.conversionStateController.setConversionState === 'function') {
+                            try {
+                                const cs = window.conversionStateController.ConversionState || {};
+                                const fileSelected = cs.FILE_SELECTED || 'FILE_SELECTED';
+                                window.conversionStateController.setConversionState(fileSelected);
+                            } catch (e) {
+                                window.conversionStateController.setConversionState('FILE_SELECTED');
+                            }
+                        }
+                        window.conversionStateController.setConvertReady(true);
+                    } else if(this.convertButton){
+                        this.convertButton.disabled = false;
+                        this.convertButton.hidden = false;
+                        this.convertButton.style.removeProperty('display');
                     }
 
 
@@ -290,12 +318,54 @@ class RecommendationManager {
                     button
                 );
 
+                if (!autoSelectButton) {
+                    autoSelectButton = button;
+                    autoSelectTarget = option.target;
+                }
 
 
             }
         );
 
+        if (autoSelectButton && autoSelectTarget) {
+            autoSelectButton.classList.add("active");
+            this.selectedFormat = autoSelectTarget;
+            window.dispatchEvent(
+                new CustomEvent(
+                    "format-selected",
+                    {
+                        detail:{
+                            target: autoSelectTarget
+                        }
+                    }
+                )
+            );
+            if(window.conversionStateController && typeof window.conversionStateController.setConvertReady === 'function'){
+                if (typeof window.conversionStateController.setFormatChoicesAvailable === 'function') {
+                    window.conversionStateController.setFormatChoicesAvailable(true);
+                }
+                if (typeof window.conversionStateController.setConversionState === 'function') {
+                    try {
+                        const cs = window.conversionStateController.ConversionState || {};
+                        const fileSelected = cs.FILE_SELECTED || 'FILE_SELECTED';
+                        window.conversionStateController.setConversionState(fileSelected);
+                    } catch (e) {
+                        window.conversionStateController.setConversionState('FILE_SELECTED');
+                    }
+                }
+                window.conversionStateController.setConvertReady(true);
+            } else if(this.convertButton){
+                this.convertButton.disabled = false;
+                this.convertButton.hidden = false;
+                this.convertButton.style.removeProperty('display');
+            }
+        }
 
+        if(window.conversionStateController && typeof window.conversionStateController.setFormatChoicesAvailable === 'function'){
+            window.conversionStateController.setFormatChoicesAvailable(choices.length > 0);
+        } else if(this.conversionArea){
+            this.conversionArea.hidden = choices.length === 0;
+        }
 
 
     }

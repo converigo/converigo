@@ -1,0 +1,29 @@
+{
+  "id": "ppt-to-xlsx",
+  "slug": "ppt-to-xlsx",
+  "name": "PPT to XLSX",
+  "description": "Convert PPT presentations to XLSX spreadsheets (deprecated).",
+  "category": "document",
+  "input_formats": [
+    "ppt"
+  ],
+  "output_formats": [
+    "xlsx"
+  ],
+  "accepted_mime_types": [
+    "application/vnd.ms-powerpoint"
+  ],
+  "max_upload_size": 52428800,
+  "conversion_engine": "document",
+  "landing_path": "/ppt-to-xlsx",
+  "canonical_url": "https://converigo.com/ppt-to-xlsx",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.pptx",
+  "supported_platforms": [
+    "web",
+    "api"
+  ],
+  "lifecycle_status": "deprecated"
+}

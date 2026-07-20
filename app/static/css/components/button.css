@@ -139,6 +139,54 @@ SECONDARY
 }
 
 
+.btn-outline{
+
+
+    background:#ffffff;
+
+
+    color:#2563EB;
+
+
+    border:1px solid #2563EB;
+
+
+}
+
+
+.btn-outline:hover{
+
+
+    background:rgba(37,99,235,.08);
+
+
+    color:#1D4ED8;
+
+
+    transform:translateY(-2px);
+
+
+}
+
+
+.btn-outline:disabled{
+
+
+    background:#E5E7EB;
+
+
+    color:#9CA3AF;
+
+
+    border-color:#E5E7EB;
+
+
+    cursor:not-allowed;
+
+
+}
+
+
 
 
 

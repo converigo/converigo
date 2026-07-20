@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="{{ locale.lang_code or 'en' }}">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% include "partials/seo_meta.html" %}
+    <link rel="stylesheet" href="/static/css/style.css">
+    {% include "partials/structured_data.html" %}
+</head>
+
+<body>
+    {% include "components/header.html" %}
+
+    <main class="main" role="main">
+        <section class="section tools-directory-hero">
+            <div class="container section-heading">
+                <span class="eyebrow">Tools Directory</span>
+                <h1>All Converigo tools in one place</h1>
+                <p>Browse image, document, audio, and archive converters with fast access to the workflows you need.</p>
+            </div>
+        </section>
+
+        <section class="section section-white">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Explore by category</h2>
+                    <p>Find the right converter for your file type and workflow, whether you're working with images, documents, audio, or archives.</p>
+                </div>
+
+                <div class="grid tools-directory-grid">
+                    {% for category in categories %}
+                    <article class="card category-card">
+                        <div class="category-card-head">
+                            <div class="category-icon" aria-hidden="true">{{ category.icon }}</div>
+                            <div>
+                                <h3>{{ category.title }}</h3>
+                                <p>{{ category.description }}</p>
+                            </div>
+                        </div>
+
+                        <ul class="category-tools">
+                            {% for tool in category.tools %}
+                            <li>
+                                <div>
+                                    <a href="/tools/{{ tool.slug }}"><strong>{{ tool.title }}</strong></a>
+                                    <p>{{ tool.description or 'Fast, dependable conversion for everyday use.' }}</p>
+                                </div>
+                                <a class="btn btn-outline category-tool-btn" href="/tools/{{ tool.slug }}">Open</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </article>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </main>
+
+    {% include "components/footer.html" %}
+</body>
+
+</html>

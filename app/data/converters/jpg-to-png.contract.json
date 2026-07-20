@@ -4,9 +4,17 @@
   "name": "JPG to PNG",
   "category": "image",
   "description": "Convert JPG images into PNG format.",
-  "input_formats": ["jpg", "jpeg"],
-  "output_formats": ["png"],
-  "accepted_mime_types": ["image/jpeg", "image/png"],
+  "input_formats": [
+    "jpg",
+    "jpeg"
+  ],
+  "output_formats": [
+    "png"
+  ],
+  "accepted_mime_types": [
+    "image/jpeg",
+    "image/png"
+  ],
   "max_upload_size": 104857600,
   "conversion_engine": "image",
   "landing_path": "/jpg-to-png",
@@ -15,6 +23,8 @@
   "schema_status": "ready",
   "faq_status": "ready",
   "regression_sample": "tests/sample.jpg",
-  "supported_platforms": ["web"],
-  "lifecycle_status": "active"
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "certified"
 }

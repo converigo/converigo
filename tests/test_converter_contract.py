@@ -51,7 +51,7 @@ def test_converter_contract_example_exists_and_has_required_fields() -> None:
     assert isinstance(contract["output_formats"], list) and contract["output_formats"]
     assert isinstance(contract["accepted_mime_types"], list) and contract["accepted_mime_types"]
     assert isinstance(contract["supported_platforms"], list) and contract["supported_platforms"]
-    assert contract["lifecycle_status"] in {"active", "deprecated", "beta"}
+    assert contract["lifecycle_status"] in {"active", "deprecated", "beta", "certified"}
 
 
 def test_all_converter_contract_files_in_data_dir_have_required_fields() -> None:
@@ -68,8 +68,8 @@ def test_all_converter_contract_files_in_data_dir_have_required_fields() -> None
         assert isinstance(contract["output_formats"], list) and contract["output_formats"]
         assert isinstance(contract["accepted_mime_types"], list) and contract["accepted_mime_types"]
         assert isinstance(contract["supported_platforms"], list) and contract["supported_platforms"]
-        assert contract["lifecycle_status"] in {"active", "deprecated", "beta"}
+        assert contract["lifecycle_status"] in {"active", "deprecated", "beta", "certified"}
 
-        if contract.get("lifecycle_status") == "active":
+        if contract.get("lifecycle_status") in {"active", "certified"}:
             sample_path = REPO_ROOT / contract["regression_sample"]
             assert sample_path.exists(), f"Regression sample missing for {contract_file.name}"
