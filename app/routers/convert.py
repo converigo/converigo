@@ -127,13 +127,23 @@ async def convert_file(
                     target_format
                 )
 
+                # Build download_path relative to configured OUTPUT_DIR when possible.
+                try:
+                    rel = output_path.relative_to(settings.OUTPUT_DIR)
+                    download_path = "/outputs/" + str(rel).replace('\\\\', '/')
+                except Exception:
+                    # Fallback: preserve previous behavior (use parent folder name)
+                    download_path = "/outputs/" + output_path.parent.name + "/" + output_path.name
+
                 results.append({
                     "filename": output_path.name,
-                    "download_path": "/outputs/" + output_path.parent.name + "/" + output_path.name,
+                    "download_path": download_path,
                     "status": "success",
                 })
 
-            except (UploadError, UnsupportedConversionError, ConversionError) as exc:
+            except UnsupportedConversionError:
+                raise
+            except (UploadError, ConversionError) as exc:
                 logger.warning("Conversion failed for %s: %s", uploaded_file.filename, exc)
                 results.append({
                     "filename": uploaded_file.filename,
@@ -141,7 +151,20 @@ async def convert_file(
                     "error": str(exc),
                 })
 
-        # Return batch results
+        # Return single-file format for 1 file (backward compatibility)
+        # or batch format for multiple files
+        if len(file) == 1 and len(results) == 1:
+            result = results[0]
+            result["status"] = "success" if result["status"] == "success" else "failed"
+            result["target_format"] = target_format
+            if result["status"] == "failed":
+                raise HTTPException(
+                    status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                    detail=result["error"],
+                )
+            return result
+        
+        # Batch response for multiple files
         return {
             "status": "completed",
             "results": results,
@@ -151,6 +174,9 @@ async def convert_file(
         }
 
     except HTTPException:
+        raise
+
+    except UnsupportedConversionError:
         raise
 
     except Exception:

@@ -25,14 +25,22 @@
     "conversion_instruction": "Convert all files to:",
     "convert": "Convert",
     "download": "Download",
+    "empty_state": "Upload a file to get format recommendations and convert it instantly.",
     "select_file": "Choose a file to start",
     "file_ready": "File ready",
+    "ready": "Ready",
+    "files_ready": "Files ready",
     "converting": "Converting...",
     "conversion_completed": "✓ Conversion completed",
+    "conversion_complete": "✓ Conversion complete",
     "download_ready": "Download Ready",
+    "ready_to_download": "Ready to download",
+    "try_again": "Try Again",
     "select_target_format": "❌ Select a target format first.",
     "conversion_failed": "❌ Conversion failed. Please try again later.",
     "conversion_failed_try_another": "❌ Conversion failed. Please try another format.",
+    "conversion_all_failed": "❌ All conversions failed",
+    "conversion_partial_success": "⚠️ {success}/{total} files converted",
     "file_type_audio": "Audio File",
     "file_type_video": "Video File",
     "file_type_pdf": "PDF File"
@@ -45,7 +53,57 @@
   "popular": {
     "eyebrow": "Popular Conversion",
     "heading": "Most requested conversion flows",
-    "description": "Quick access to the formats people need most."
+    "description": "Quick access to the formats people need most.",
+    "tools": {
+      "jpg_to_png": {
+        "title": "JPG → PNG",
+        "description": "Convert JPG images into PNG format."
+      },
+      "png_to_jpg": {
+        "title": "PNG → JPG",
+        "description": "Convert PNG images into JPG format."
+      },
+      "jpg_to_pdf": {
+        "title": "JPG → PDF",
+        "description": "Turn photos into a polished PDF document in seconds."
+      },
+      "pdf_to_jpg": {
+        "title": "PDF → JPG",
+        "description": "Extract images from PDFs and save them as JPG files."
+      },
+      "docx_to_pdf": {
+        "title": "DOCX → PDF",
+        "description": "Export DOCX documents into PDF format."
+      },
+      "xlsx_to_pdf": {
+        "title": "XLSX → PDF",
+        "description": "Export spreadsheets to printable PDFs."
+      },
+      "mp4_to_mp3": {
+        "title": "MP4 → MP3",
+        "description": "Extract audio from videos and save as MP3."
+      },
+      "webp_to_jpg": {
+        "title": "WEBP → JPG",
+        "description": "Convert WEBP images into JPG format for wider compatibility."
+      }
+    }
+  },
+  "how_it_works": {
+    "heading": "How It Works",
+    "description": "Convert your files in three simple steps.",
+    "step1": {
+      "title": "Upload Your File",
+      "description": "Select the file you want to convert from your device."
+    },
+    "step2": {
+      "title": "Choose Format",
+      "description": "Select the output format you need for your file."
+    },
+    "step3": {
+      "title": "Download Result",
+      "description": "Download your converted file instantly."
+    }
   },
   "features": {
     "eyebrow": "Features",
@@ -83,6 +141,8 @@
     "description": "Modern file conversion for students, creators, and professionals.",
     "product": "Product",
     "company": "Company",
+    "converters": "Converters",
+    "resources": "Resources",
     "popular": "Popular",
     "features": "Features",
     "faq": "FAQ",
@@ -92,6 +152,7 @@
     "blog": "Blog",
     "privacy_policy": "Privacy Policy",
     "terms": "Terms",
+    "bottom_tagline": "Convert Files in Seconds.",
     "tagline": "Convert and Go!",
     "support": "Support",
     "made_with_love": "Made with ❤️ for creators around the world.",
@@ -108,14 +169,39 @@
     "tools": "Tools",
     "support": "Support",
     "api": "API",
-    "pricing": "Pricing"
+    "pricing": "Pricing",
+    "toggle_menu": "Toggle navigation"
   },
   "header": {
+    "brand": "Converigo",
+    "logo_alt": "Converigo logo",
+    "logo_label": "Converigo home",
     "sign_in": "Sign In",
     "get_started": "Get Started"
   },
   "community_support": {
-    "support_cta": "Support Converigo on Ko-fi"
+    "eyebrow": "Trusted by users",
+    "heading": "Trusted by users who need fast and simple conversions",
+    "description": "Convert your files quickly with a secure and easy-to-use online converter.",
+    "support_cta": "Support Converigo on Ko-fi",
+    "cards": {
+      "fast": {
+        "title": "Fast Conversion",
+        "description": "Convert files quickly with optimized processing."
+      },
+      "secure": {
+        "title": "Secure & Private",
+        "description": "Your files are handled safely during conversion."
+      },
+      "everywhere": {
+        "title": "Works Everywhere",
+        "description": "Use Converigo on desktop, tablet, and mobile browsers."
+      },
+      "no_registration": {
+        "title": "No Registration Required",
+        "description": "Start converting instantly without creating an account."
+      }
+    }
   },
   "language": {
     "selector_label": "Language",

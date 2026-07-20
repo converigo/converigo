@@ -108,7 +108,21 @@ class ConverterController {
     checkReady() {
         const ready = Boolean(this.file && this.selectedFormat && this.convertBtn);
         if (window.conversionStateController && typeof window.conversionStateController.setConvertReady === 'function') {
+            // Primary API: inform central controller
             window.conversionStateController.setConvertReady(ready);
+            // Defensive: ensure DOM is visible for this button instance
+            if (this.convertBtn) {
+                this.convertBtn.disabled = !ready;
+                if (ready) {
+                    try { this.convertBtn.hidden = false; } catch (e) {}
+                    try { this.convertBtn.style.removeProperty('display'); } catch (e) {}
+                    // Defensive: also attempt to remove hidden after brief delay
+                    try { setTimeout(() => { this.convertBtn.hidden = false; this.convertBtn.style.removeProperty('display'); }, 80); } catch (e) {}
+                } else {
+                    try { this.convertBtn.hidden = true; } catch (e) {}
+                    try { this.convertBtn.style.display = 'none'; } catch (e) {}
+                }
+            }
         } else if (this.convertBtn) {
             this.convertBtn.disabled = !ready;
             if (ready) {
@@ -226,9 +240,12 @@ class ConverterController {
                 if (successCount === totalCount) {
                     this.message.textContent = window.translate('upload.conversion_completed', '✓ Conversion completed') + ` (${successCount}/${totalCount})`;
                 } else if (successCount === 0) {
-                    this.message.textContent = `❌ All conversions failed`;
+                    this.message.textContent = window.translate('upload.conversion_all_failed', '❌ All conversions failed');
                 } else {
-                    this.message.textContent = `⚠️  ${successCount}/${totalCount} files converted`;
+                    const partialMessage = window.translate('upload.conversion_partial_success', '⚠️ {success}/{total} files converted');
+                    this.message.textContent = partialMessage
+                        .replace('{success}', successCount)
+                        .replace('{total}', totalCount);
                 }
                 this.message.classList.add("success");
             }

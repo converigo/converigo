@@ -25,14 +25,22 @@
     "conversion_instruction": "Konversi semua file ke:",
     "convert": "Konversi",
     "download": "Unduh",
+    "empty_state": "Unggah file untuk mendapatkan rekomendasi format dan segera mengonversinya.",
     "select_file": "Pilih file untuk memulai",
     "file_ready": "File siap",
+    "ready": "Siap",
+    "files_ready": "File siap",
     "converting": "Mengonversi...",
     "conversion_completed": "✓ Konversi selesai",
+    "conversion_complete": "✓ Konversi selesai",
     "download_ready": "Unduhan siap",
+    "ready_to_download": "Siap diunduh",
+    "try_again": "Coba lagi",
     "select_target_format": "❌ Pilih format tujuan terlebih dahulu.",
     "conversion_failed": "❌ Konversi gagal. Silakan coba lagi nanti.",
     "conversion_failed_try_another": "❌ Konversi gagal. Silakan coba lagi dengan format lain.",
+    "conversion_all_failed": "❌ Semua konversi gagal",
+    "conversion_partial_success": "⚠️ {success}/{total} file berhasil dikonversi",
     "file_type_audio": "File Audio",
     "file_type_video": "File Video",
     "file_type_pdf": "File PDF"
@@ -45,7 +53,57 @@
   "popular": {
     "eyebrow": "Konversi Populer",
     "heading": "Alur konversi yang paling banyak diminta",
-    "description": "Akses cepat ke format yang paling dibutuhkan orang." 
+    "description": "Akses cepat ke format yang paling dibutuhkan orang.",
+    "tools": {
+      "jpg_to_png": {
+        "title": "JPG → PNG",
+        "description": "Konversi gambar JPG ke format PNG."
+      },
+      "png_to_jpg": {
+        "title": "PNG → JPG",
+        "description": "Konversi gambar PNG ke format JPG."
+      },
+      "jpg_to_pdf": {
+        "title": "JPG → PDF",
+        "description": "Ubah foto menjadi dokumen PDF yang rapi dalam hitungan detik."
+      },
+      "pdf_to_jpg": {
+        "title": "PDF → JPG",
+        "description": "Ekstrak gambar dari PDF dan simpan sebagai file JPG."
+      },
+      "docx_to_pdf": {
+        "title": "DOCX → PDF",
+        "description": "Ekspor dokumen DOCX ke format PDF."
+      },
+      "xlsx_to_pdf": {
+        "title": "XLSX → PDF",
+        "description": "Ekspor spreadsheet ke PDF yang siap cetak."
+      },
+      "mp4_to_mp3": {
+        "title": "MP4 → MP3",
+        "description": "Ekstrak audio dari video dan simpan sebagai MP3."
+      },
+      "webp_to_jpg": {
+        "title": "WEBP → JPG",
+        "description": "Konversi gambar WEBP ke format JPG untuk kompatibilitas lebih luas."
+      }
+    }
+  },
+  "how_it_works": {
+    "heading": "Cara Kerjanya",
+    "description": "Konversi file Anda dalam tiga langkah sederhana.",
+    "step1": {
+      "title": "Unggah File Anda",
+      "description": "Pilih file yang ingin Anda konversi dari perangkat Anda."
+    },
+    "step2": {
+      "title": "Pilih Format",
+      "description": "Pilih format output yang Anda butuhkan untuk file Anda."
+    },
+    "step3": {
+      "title": "Unduh Hasil",
+      "description": "Unduh file konversi Anda secara instan."
+    }
   },
   "features": {
     "eyebrow": "Fitur",
@@ -83,6 +141,9 @@
     "description": "Konversi file modern untuk pelajar, pembuat, dan profesional.",
     "product": "Produk",
     "company": "Perusahaan",
+    "converters": "Konverter",
+    "resources": "Sumber Daya",
+    "tagline": "Convert and Go!",
     "popular": "Populer",
     "features": "Fitur",
     "faq": "FAQ",
@@ -92,6 +153,7 @@
     "blog": "Blog",
     "privacy_policy": "Kebijakan Privasi",
     "terms": "Syarat",
+    "bottom_tagline": "Konversi File dalam Sekejap.",
     "made_with_love": "Dibuat dengan ❤️ untuk para pembuat di seluruh dunia.",
     "copyright": "© {year} Converigo. Dibuat untuk konversi file yang elegan."
   },
@@ -106,14 +168,39 @@
     "tools": "Alat",
     "support": "Dukungan",
     "api": "API",
-    "pricing": "Harga"
+    "pricing": "Harga",
+    "toggle_menu": "Alihkan navigasi"
   },
   "header": {
+    "brand": "Converigo",
+    "logo_alt": "Logo Converigo",
+    "logo_label": "Beranda Converigo",
     "sign_in": "Masuk",
     "get_started": "Mulai"
   },
   "community_support": {
-    "support_cta": "Dukung Converigo di Ko-fi"
+    "eyebrow": "Dipercaya oleh pengguna",
+    "heading": "Dipercaya oleh pengguna yang membutuhkan konversi cepat dan sederhana",
+    "description": "Konversi file Anda dengan cepat menggunakan konverter online yang aman dan mudah digunakan.",
+    "support_cta": "Dukung Converigo di Ko-fi",
+    "cards": {
+      "fast": {
+        "title": "Konversi Cepat",
+        "description": "Konversi file dengan cepat menggunakan pemrosesan yang dioptimalkan."
+      },
+      "secure": {
+        "title": "Aman & Pribadi",
+        "description": "File Anda ditangani dengan aman selama konversi."
+      },
+      "everywhere": {
+        "title": "Berfungsi di Mana Saja",
+        "description": "Gunakan Converigo di desktop, tablet, dan browser seluler."
+      },
+      "no_registration": {
+        "title": "Tanpa Perlu Registrasi",
+        "description": "Mulai konversi secara instan tanpa membuat akun."
+      }
+    }
   },
   "language": {
     "selector_label": "Bahasa",

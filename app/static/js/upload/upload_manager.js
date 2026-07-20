@@ -399,14 +399,14 @@ class UploadManager {
                 <div class="file-item">
                     <div class="file-item-top">
                         <div class="file-item-name truncate" title="${file.name}">${file.name}</div>
-                        <span class="file-item-status">Ready</span>
+                        <span class="file-item-status">${window.translate('upload.ready', 'Ready')}</span>
                     </div>
                     <div class="file-item-meta">${size} · ${typeLabel}</div>
                 </div>
             `;
         }).join('');
 
-        this.fileList.innerHTML = `<div class="file-list-heading">Files ready</div>${items}`;
+        this.fileList.innerHTML = `<div class="file-list-heading">${window.translate('upload.files_ready', 'Files ready')}</div>${items}`;
         this.fileList.hidden = false;
         this.fileList.style.removeProperty('display');
     }

@@ -53,6 +53,12 @@ class DownloadManager {
             return;
         }
 
+        // Handle single-file response (top-level filename/download_path)
+        if (result.filename && result.download_path && !result.results) {
+            this._prepareSingleFile(result);
+            return;
+        }
+
         // Handle batch results (multiple files)
         if (result.results && Array.isArray(result.results)) {
             const successResults = result.results.filter(r => r.status === "success");
