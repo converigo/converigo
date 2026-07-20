@@ -8,12 +8,15 @@ MP4 -> MP3 Plugin
 Converigo Smart Metadata Version
 """
 
+import logging
 import shutil
 import subprocess
 from pathlib import Path
 
 from app.engines.ffmpeg_engine import FFmpegEngine
 from app.plugins.base import ConverterPlugin
+
+logger = logging.getLogger(__name__)
 
 
 class MP4ToMP3Plugin(ConverterPlugin):
@@ -104,21 +107,36 @@ class MP4ToMP3Plugin(ConverterPlugin):
 
     def _ensure_audio_stream(self, source_path: Path) -> None:
         ffprobe = shutil.which("ffprobe")
-        if ffprobe is None:
-            return
+        ffmpeg = shutil.which("ffmpeg")
 
-        command = [
-            ffprobe,
-            "-v",
-            "error",
-            "-select_streams",
-            "a",
-            "-show_entries",
-            "stream=index",
-            "-of",
-            "default=nw=1:nk=1",
-            str(source_path),
-        ]
+        if ffprobe:
+            command = [
+                ffprobe,
+                "-v",
+                "error",
+                "-select_streams",
+                "a",
+                "-show_entries",
+                "stream=index",
+                "-of",
+                "default=nw=1:nk=1",
+                str(source_path),
+            ]
+        elif ffmpeg:
+            command = [
+                ffmpeg,
+                "-v",
+                "error",
+                "-i",
+                str(source_path),
+                "-map",
+                "0:a:0",
+                "-f",
+                "null",
+                "-",
+            ]
+        else:
+            return
 
         try:
             completed = subprocess.run(
@@ -129,11 +147,40 @@ class MP4ToMP3Plugin(ConverterPlugin):
             )
         except subprocess.TimeoutExpired:
             return
+        except (OSError, PermissionError) as exc:
+            if ffprobe and ffmpeg:
+                logger.debug("ffprobe probe failed, falling back to ffmpeg: %s", exc)
+                command = [
+                    ffmpeg,
+                    "-v",
+                    "error",
+                    "-i",
+                    str(source_path),
+                    "-map",
+                    "0:a:0",
+                    "-f",
+                    "null",
+                    "-",
+                ]
+                try:
+                    completed = subprocess.run(
+                        command,
+                        capture_output=True,
+                        text=True,
+                        timeout=30,
+                    )
+                except (OSError, PermissionError):
+                    return
+            else:
+                return
 
-        if completed.returncode != 0 or not completed.stdout.strip():
-            raise RuntimeError(
-                "The selected MP4 file does not contain an audio stream. Please upload a video file that includes audio before converting to MP3."
-            )
+        if completed.returncode != 0:
+            stderr = (completed.stderr or "").lower()
+            if "stream map" in stderr or "matches no streams" in stderr or "invalid argument" in stderr:
+                raise RuntimeError(
+                    "The selected MP4 file does not contain an audio stream. Please upload a video file that includes audio before converting to MP3."
+                )
+            return
 
     async def convert(
         self,

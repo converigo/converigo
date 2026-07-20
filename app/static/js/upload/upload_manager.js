@@ -18,12 +18,12 @@ class UploadManager {
         this.fileList = document.getElementById('fileList');
 
         this.previewContainer = document.getElementById('previewContainer');
-        this.previewCard = document.querySelector('.preview-card');
-        this.previewMedia = document.getElementById('previewMedia');
-        this.previewImage = document.getElementById('previewImage');
-        this.previewName = document.getElementById('previewName');
-        this.previewSize = document.getElementById('previewSize');
-        this.previewStatus = document.getElementById('previewStatus');
+        this.previewCard = null;
+        this.previewMedia = null;
+        this.previewImage = null;
+        this.previewName = null;
+        this.previewSize = null;
+        this.previewStatus = null;
         this.fileType = document.getElementById('fileType');
         this.fileStatus = this.selectedStatus ? this.selectedStatus.querySelector('.file-status') : null;
         this.downloadBtn = document.getElementById('downloadBtn');
@@ -104,6 +104,31 @@ class UploadManager {
         this.fileInput.files = dt.files;
     }
 
+    _inferInputFormat(file){
+        if(!file){ return ''; }
+        const type = (file.type || '').toLowerCase();
+        const name = (file.name || '').toLowerCase();
+        if(type.startsWith('image/')) return 'image';
+        if(type.startsWith('audio/')) return 'audio';
+        if(type.startsWith('video/')) return 'video';
+        if(type === 'application/pdf' || name.endsWith('.pdf')) return 'pdf';
+        if(type.includes('word') || name.endsWith('.docx') || name.endsWith('.doc')) return 'document';
+        if(name.endsWith('.zip')) return 'archive';
+        return type || 'file';
+    }
+
+    _trackUploadStarted(file){
+        if(!file || !window.converigoAnalytics || typeof window.converigoAnalytics.trackEvent !== 'function'){
+            return;
+        }
+        const context = window.converigoAnalytics.getConverterContext();
+        window.converigoAnalytics.trackEvent('upload_started', {
+            converter_name: context.converter_name,
+            category: context.category,
+            input_format: this._inferInputFormat(file)
+        });
+    }
+
     handleFiles(fileList){
         const files = Array.from(fileList || []);
         const seen = new Set();
@@ -127,20 +152,11 @@ class UploadManager {
         // Show selected-status only when a single file is selected and no preview is visible
         let showSelected = false;
         if(this.files.length === 1){
-            const previewVisible = this.previewContainer ? !this.previewContainer.hidden : false;
-            showSelected = !previewVisible;
+            showSelected = true;
         }
         if(this.selectedStatus) this.selectedStatus.hidden = !showSelected;
 
         this.updateFileInfo(this.file);
-        
-        // Hide preview for multi-file, show for single file
-        if(this.files.length > 1){
-            if(this.previewContainer) this.previewContainer.hidden = true;
-        } else {
-            this.showPreview(this.file);
-        }
-        
         this.renderFileList();
         
         // Update layout class for modern converter UI
@@ -154,6 +170,7 @@ class UploadManager {
             this.runRecommendation(this.file);
         }
 
+        this._trackUploadStarted(this.file);
         this._emitFileSelected(this.file, this.files);
     }
 
@@ -178,6 +195,7 @@ class UploadManager {
         if(this.previewContainer){
             this.previewContainer.hidden = false;
             this.previewContainer.style.display = '';
+            this.previewContainer.classList.add('preview-container--single');
         }
         if(this.previewMedia){
             this.previewMedia.classList.remove('audio','video','pdf');
@@ -331,24 +349,8 @@ class UploadManager {
         if(this.fileInput){
             this.fileInput.value = '';
         }
-        if(this.previewContainer){
-            this.previewContainer.hidden = true;
-            this.previewContainer.style.display = 'none';
-        }
         if(this.selectedStatus){
             this.selectedStatus.hidden = true;
-        }
-        if(this.previewName){
-            this.previewName.textContent = '';
-        }
-        if(this.previewSize){
-            this.previewSize.textContent = '';
-        }
-        if(this.previewType){
-            this.previewType.textContent = '';
-        }
-        if(this.previewStatus){
-            this.previewStatus.textContent = window.translate('upload.ready', 'Ready');
         }
         if(this.fileName){
             this.fileName.textContent = '';
@@ -385,12 +387,16 @@ class UploadManager {
             return;
         }
 
-        if(!this.files.length || this.files.length <= 1){
+        if(!this.files.length){
             this.fileList.hidden = true;
             this.fileList.style.display = 'none';
             this.fileList.innerHTML = '';
             return;
         }
+
+        const headingText = this.files.length > 1
+            ? window.translate('upload.files_ready', 'Files ready')
+            : window.translate('upload.file_ready', 'File ready');
 
         const items = this.files.map(file => {
             const size = (file.size / 1024 / 1024).toFixed(2) + ' MB';
@@ -406,7 +412,7 @@ class UploadManager {
             `;
         }).join('');
 
-        this.fileList.innerHTML = `<div class="file-list-heading">${window.translate('upload.files_ready', 'Files ready')}</div>${items}`;
+        this.fileList.innerHTML = `<div class="file-list-heading">${headingText}</div>${items}`;
         this.fileList.hidden = false;
         this.fileList.style.removeProperty('display');
     }

@@ -1,18 +1,86 @@
 {
   "slug": "pdf-to-docx",
-  "hero": { "title": "PDF to DOCX", "subtitle": "Turn PDFs into editable Word documents." },
-  "steps": ["Upload PDF","Choose DOCX","Download editable DOCX"],
-  "benefits": ["Edit content","Reuse text","Preserve original layout where possible"],
-  "supported_formats": {"input": [".pdf"], "output": [".docx"], "description": "PDF input, DOCX output"},
-  "features": [{"title":"OCR when needed","text":"Extracts text from scans."}],
-  "how_to_use": ["Upload your PDF.", "Select OCR options if needed.", "Download the DOCX file."],
-  "about_formats": ["PDF is a fixed-layout format.", "DOCX is editable in common word processors like Microsoft Word."],
+  "hero": {
+    "title": "PDF to DOCX Converter Free Online",
+    "subtitle": "Convert PDF files into editable DOCX documents with a secure online tool.",
+    "description": "Convert PDF files into editable DOCX documents online for free while preserving document structure and creating Word-friendly output."
+  },
+  "steps": ["Upload PDF", "Choose DOCX", "Download editable DOCX"],
+  "benefits": ["Edit content", "Reuse text", "Preserve original layout where possible"],
+  "supported_formats": {
+    "input": [".pdf"],
+    "output": [".docx"],
+    "description": "PDF input, DOCX output"
+  },
+  "features": [
+    {
+      "title": "Convert PDF to editable DOCX",
+      "text": "Turn PDF files into editable Word documents for rewriting, formatting, and collaboration."
+    },
+    {
+      "title": "Preserve document structure",
+      "text": "Keep headings, paragraphs, and layout as intact as possible for a smoother editing experience."
+    },
+    {
+      "title": "Fast secure document conversion",
+      "text": "Convert documents online with no software installation and a secure workflow."
+    }
+  ],
+  "how_to_use": [
+    "Upload your PDF file.",
+    "Select conversion options if needed and review the document output.",
+    "Download the editable DOCX document for Word editing."
+  ],
+  "about_formats": [
+    "PDF is a fixed-layout document format often used for sharing, printing, and archiving.",
+    "DOCX is an editable Word document format designed for rewriting, formatting, and collaborative editing."
+  ],
   "compatibility": "Web and API",
-  "common_problems": ["Scanned PDFs may not be editable","Complex layouts may be approximated"],
+  "common_problems": ["Scanned PDFs may not be editable", "Complex layouts may be approximated"],
   "tips": ["Use higher resolution scans for OCR accuracy"],
-  "faq": [{"question":"Does it perform OCR?","answer":"OCR is applied when needed to extract text from scanned PDFs."}],
-  "related_tools": ["docx-to-pdf","pdf-to-ppt","pdf-to-excel"],
-  "internal_links": {"items": [{"title":"PDF Tools","href":"/pdf-tools"}]},
-  "cta": {"label":"Convert PDF to DOCX","href":"/pdf-to-docx"},
-  "json_ld": {"@context":"https://schema.org","@type":"SoftwareApplication","name":"PDF to DOCX Converter"}
+  "faq": [
+    {
+      "question": "Can I convert PDF files into editable DOCX documents?",
+      "answer": "Yes. This tool converts PDF files into editable DOCX documents so you can revise and format them in Microsoft Word or similar apps."
+    },
+    {
+      "question": "Will the document structure be preserved?",
+      "answer": "The conversion aims to preserve document structure, including text blocks and layout, as closely as possible."
+    },
+    {
+      "question": "Is the output suitable for Word editing?",
+      "answer": "Yes. The DOCX output is designed to be editable in common word processors and easier to revise than a locked PDF."
+    },
+    {
+      "question": "Is the conversion secure and online?",
+      "answer": "Yes. The process is secure, fast, and works online without requiring any software installation."
+    },
+    {
+      "question": "How do I get the converted document?",
+      "answer": "After conversion finishes, you can download the editable DOCX file immediately."
+    }
+  ],
+  "related_tools": ["docx-to-pdf", "pdf-to-ppt", "pdf-to-excel"],
+  "internal_links": {
+    "items": [
+      {
+        "title": "PDF Tools",
+        "href": "/pdf-tools"
+      }
+    ]
+  },
+  "cta": {
+    "label": "Convert PDF to DOCX",
+    "href": "/pdf-to-docx"
+  },
+  "json_ld": {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PDF to DOCX Converter"
+  },
+  "seo": {
+    "title": "PDF to DOCX Converter - Free Online Tool",
+    "description": "Convert PDF files into editable DOCX documents online for free. Preserve document structure, create Word-ready output, and enjoy a secure document conversion with no software installation.",
+    "keywords": "pdf to docx, convert pdf to docx, editable word document, document conversion"
+  }
 }
