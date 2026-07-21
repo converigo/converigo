@@ -49,6 +49,53 @@
             </div>
         </section>
 
+{% if payload.format_knowledge %}
+        <section class="section section-blue">
+            <div class="container section-heading">
+                <span class="eyebrow">Quick answer</span>
+                <h2>What is {{ payload.format_knowledge.name }}?</h2>
+            </div>
+            <div class="container">
+                <p class="lead">{{ payload.format_knowledge.quick_answer }}</p>
+                <p>{{ payload.format_knowledge.definition }}</p>
+            </div>
+        </section>
+
+        {% if payload.format_knowledge.use_cases %}
+        <section class="section">
+            <div class="container section-heading">
+                <span class="eyebrow">Use cases</span>
+                <h2>Common uses of {{ payload.format_knowledge.name }}</h2>
+            </div>
+            <div class="grid features-grid">
+                {% for item in payload.format_knowledge.use_cases %}
+                <article class="feature-card">
+                    <h3>{{ item.title }}</h3>
+                    <p>{{ item.text }}</p>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+        {% if payload.format_knowledge.comparisons %}
+        <section class="section section-white">
+            <div class="container section-heading">
+                <span class="eyebrow">Comparisons</span>
+                <h2>{{ payload.format_knowledge.name }} vs other formats</h2>
+            </div>
+            <div class="grid features-grid">
+                {% for item in payload.format_knowledge.comparisons %}
+                <article class="feature-card hover-card">
+                    <h3>{{ item.title }}</h3>
+                    <p>{{ item.text }}</p>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+        {% endif %}
+
         <section class="section section-white">
             <div class="container section-heading">
                 <span class="eyebrow">Overview</span>

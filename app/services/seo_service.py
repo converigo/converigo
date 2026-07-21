@@ -337,6 +337,20 @@ class SeoService:
 
         if page_type == "trust_page" and page_data is not None:
             title = page_data.get("name", page_data.get("title", ""))
+            faq_items_source = page_data.get("faq_items") or page_data.get("faq") or []
+            faq_items = [
+                {
+                    "@type": "Question",
+                    "name": item.get("question", ""),
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": item.get("answer", ""),
+                    },
+                }
+                for item in faq_items_source
+                if isinstance(item, dict) and item.get("question") and item.get("answer")
+            ]
+
             graph = [
                 organization,
                 website,
@@ -352,6 +366,14 @@ class SeoService:
                     [{"name": "Home", "url": "/"}, {"name": title, "url": page_data.get("url", "")}],
                 ),
             ]
+
+            if faq_items:
+                graph.append(
+                    {
+                        "@type": "FAQPage",
+                        "mainEntity": faq_items,
+                    }
+                )
 
             return {
                 "@context": "https://schema.org",

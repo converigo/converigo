@@ -8,14 +8,20 @@ from fastapi.responses import HTMLResponse
 from app.core.templates import templates
 from app.services.authority_service import AuthorityService
 from app.services.converter_registry_service import ConverterRegistryService
+from app.services.format_knowledge_service import FormatKnowledgeService
 from app.services.language_service import LanguageService
 from app.services.seo_service import PRODUCTION_BASE_URL, SeoService
 
 router = APIRouter(tags=["formats"])
 
 CONTRACTS_DIR = (Path(__file__).resolve().parents[1] / "data" / "converters").resolve()
+FORMAT_KNOWLEDGE_DIR = (Path(__file__).resolve().parents[1] / "data" / "format_knowledge").resolve()
 seo_service = SeoService(CONTRACTS_DIR)
 language_service = LanguageService((Path(__file__).resolve().parents[1] / "locales").resolve())
+
+
+def _format_knowledge_service() -> FormatKnowledgeService:
+    return FormatKnowledgeService(FORMAT_KNOWLEDGE_DIR)
 
 def _authority_service() -> AuthorityService:
     return AuthorityService(CONTRACTS_DIR)
@@ -109,11 +115,29 @@ async def format_page(request: Request, format_name: str) -> HTMLResponse:
     except Exception as exc:
         raise HTTPException(status_code=404, detail="Format encyclopedia page not found") from exc
 
+    # Merge knowledge enrichment if available (graceful fallback)
+    knowledge_service = _format_knowledge_service()
+    try:
+        enrichment = knowledge_service.build_enrichment(normalized)
+        if enrichment is not None:
+            payload["format_knowledge"] = enrichment["format_knowledge"]
+    except (ValueError, OSError):
+        # Graceful degradation: continue without knowledge enrichment
+        pass
+
     seo_meta = dict(payload.get("seo", {}))
     canonical = f"{PRODUCTION_BASE_URL}/formats/{normalized}"
     seo_meta["canonical"] = canonical
     seo_meta["og_url"] = canonical
     seo_meta["keywords"] = seo_meta.get("keywords", f"{normalized}, file format, {normalized} file")
+
+    knowledge_faq = payload.get("format_knowledge", {}).get("faq", []) if payload.get("format_knowledge") else []
+    format_page_data = {
+        "name": payload.get("title", "Format Encyclopedia"),
+        "description": payload.get("description", ""),
+        "url": f"/formats/{normalized}",
+        "faq_items": knowledge_faq,
+    }
 
     locale_data, t, supported_locales = _get_locale_context(request)
     return templates.TemplateResponse(
@@ -131,11 +155,7 @@ async def format_page(request: Request, format_name: str) -> HTMLResponse:
             "structured_data": seo_service.build_structured_data(
                 request,
                 page_type="trust_page",
-                page_data={
-                    "name": payload.get("title", "Format Encyclopedia"),
-                    "description": payload.get("description", ""),
-                    "url": f"/formats/{normalized}",
-                },
+                page_data=format_page_data,
             ),
         },
     )
