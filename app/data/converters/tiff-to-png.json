@@ -8,11 +8,136 @@
   "active": true,
   "popular": false,
   "featured": false,
-    "supported_formats": { "input": ["tiff", "tif"], "output": ["png"] },
-  "how_to_use": [ { "title": "Upload TIFF", "description": "Upload a TIFF image." }, { "title": "Download PNG", "description": "Download the resulting PNG file." } ],
-    "about_formats": [ { "title": "What is TIFF?", "text": "TIFF is a flexible image format commonly used in publishing." } ],
-    "hero": { "title": "Convert TIFF to PNG", "subtitle": "Export high-quality PNGs from TIFF files." },
-    "features": [ { "title": "High fidelity", "text": "Preserve image detail during conversion." } ],
-    "cta": { "eyebrow": "Ready to convert", "title": "Convert TIFF images to PNG with ease.", "primary_text": "Convert now", "primary_href": "#converter" },
-  "seo": { "title": "TIFF to PNG Converter | Converigo", "description": "Convert TIFF images to PNG for web publishing and editing." }
+  "supported_formats": {
+    "input": [
+      "tiff",
+      "tif"
+    ],
+    "output": [
+      "png"
+    ]
+  },
+  "how_to_use": [
+    {
+      "title": "Upload TIFF",
+      "description": "Upload a TIFF image."
+    },
+    {
+      "title": "Download PNG",
+      "description": "Download the resulting PNG file."
+    },
+    {
+      "title": "Upload your tiff",
+      "description": "Select a TIFF file from your device to begin the conversion process."
+    },
+    {
+      "title": "Choose png as format",
+      "description": "Pick PNG as your desired format and review any available options."
+    },
+    {
+      "title": "Convert tiff to png",
+      "description": "Click convert and our engine processes your tiff instantly."
+    },
+    {
+      "title": "Download your png file",
+      "description": "Get your converted PNG immediately for use in your projects."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is TIFF?",
+      "text": "TIFF is a flexible image format commonly used in publishing."
+    },
+    {
+      "title": "What is TIFF format?",
+      "text": "TIFF is a widely used file format known for its versatility and compatibility across many applications."
+    },
+    {
+      "title": "What is PNG format?",
+      "text": "PNG is a popular file format chosen for its broad compatibility and optimized performance."
+    },
+    {
+      "title": "Why convert TIFF to PNG?",
+      "text": "Converting tiff to png enables better compatibility, smaller file sizes, and improved workflow integration."
+    }
+  ],
+  "hero": {
+    "title": "Convert TIFF to PNG",
+    "subtitle": "Export high-quality PNGs from TIFF files.",
+    "description": "Convert TIFF files to PNG online for free. Fast, secure browser-based conversion with no software installation. Get high-quality png output in seconds using Converigo."
+  },
+  "features": [
+    {
+      "title": "High fidelity",
+      "text": "Preserve image detail during conversion."
+    },
+    {
+      "title": "Fast tiff to png conversion",
+      "text": "Convert TIFF to PNG in seconds with our optimized processing engine."
+    },
+    {
+      "title": "No software installation required",
+      "text": "Convert files directly in your browser without downloading or installing any software."
+    },
+    {
+      "title": "High-quality png output",
+      "text": "Receive a polished PNG file ready for immediate use in your workflow."
+    },
+    {
+      "title": "Free tiff to png converter",
+      "text": "Convert TIFF to PNG online completely free with no registration or hidden costs."
+    },
+    {
+      "title": "Secure tiff processing",
+      "text": "Your TIFF files are encrypted during upload and automatically deleted after conversion."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Convert TIFF images to PNG with ease.",
+    "primary_text": "Convert now",
+    "primary_href": "#converter"
+  },
+  "seo": {
+    "title": "Convert TIFF to PNG Online Free | Converigo",
+    "description": "Convert TIFF to PNG online for free using Converigo. Fast, secure and browser-based file conversion from tiff to png with no installation required.",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert TIFF to PNG - Converigo free online converter",
+    "twitter_title": "Convert TIFF to PNG Online Free | Converigo",
+    "twitter_description": "Convert TIFF to PNG online for free using Converigo. Fast, secure and browser-based file conversion from tiff to png with no installation required.",
+    "twitter_image": "/static/images/og-default.png",
+    "keywords": "tiff to png, convert tiff to png, tiff converter, png converter, online file converter",
+    "canonical": "https://converigo.com/tools/tiff-to-png"
+  },
+  "faq": [
+    {
+      "question": "Is this tiff converter free to use?",
+      "answer": "Yes. Converting TIFF to PNG on Converigo is completely free with no hidden charges."
+    },
+    {
+      "question": "Are my uploaded files secure?",
+      "answer": "Yes. All uploaded files are processed securely and automatically deleted from our servers after conversion. Your privacy is protected."
+    },
+    {
+      "question": "Will the png quality be preserved?",
+      "answer": "Yes. The converter is designed to produce a high-quality PNG file while keeping the conversion process simple and reliable."
+    },
+    {
+      "question": "Can I use this converter on mobile devices?",
+      "answer": "Yes. Converigo works on all modern browsers, including mobile phones and tablets, so you can convert files on the go."
+    },
+    {
+      "question": "How do I convert TIFF to PNG?",
+      "answer": "Upload your TIFF, select the conversion options if needed, and download the converted PNG instantly. It only takes a few seconds."
+    },
+    {
+      "question": "What file sizes are supported?",
+      "answer": "We support files up to 100MB for most conversions. Larger files may take longer to process."
+    },
+    {
+      "question": "Why use Converigo for tiff conversion?",
+      "answer": "Converigo offers fast, secure, browser-based tiff conversion with no software installation, no registration, and completely free usage."
+    }
+  ],
+  "lifecycle_status": "active"
 }

@@ -30,6 +30,10 @@ class UploadManager {
         this.wrapper = document.querySelector('.upload-wrapper');
         this.resultCard = null;
         this.resultFileName = null;
+        this.resultMetaName = null;
+        this.resultOutputFormat = null;
+        this.resultFileType = null;
+        this.convertAnotherBtn = null;
         this.errorCard = null;
         this.errorMessage = null;
         this.tryAgainBtn = null;
@@ -65,6 +69,12 @@ class UploadManager {
     bindEvents(){
         if(this.chooseButton){
             this.chooseButton.addEventListener('click', ()=>{
+                if(window.converigoAnalytics && typeof window.converigoAnalytics.trackEvent === 'function'){
+                    window.converigoAnalytics.trackEvent('upload_box_interaction', {
+                        page_path: window.location.pathname || '/',
+                        event_status: 'success'
+                    });
+                }
                 if(this.fileInput){
                     this.fileInput.value = '';
                 }
@@ -86,6 +96,12 @@ class UploadManager {
             this.dropZone.addEventListener('drop', e=>{
                 e.preventDefault();
                 this.dropZone.classList.remove('drag-active');
+                if(window.converigoAnalytics && typeof window.converigoAnalytics.trackEvent === 'function'){
+                    window.converigoAnalytics.trackEvent('upload_box_interaction', {
+                        page_path: window.location.pathname || '/',
+                        event_status: 'success'
+                    });
+                }
                 const files = e.dataTransfer.files;
                 if(files && files.length){ this.setFiles(files); this.handleFiles(files); }
             });
@@ -315,6 +331,18 @@ class UploadManager {
             this.resultFileName.textContent = '';
         }
 
+        if(this.resultMetaName){
+            this.resultMetaName.textContent = '';
+        }
+
+        if(this.resultOutputFormat){
+            this.resultOutputFormat.textContent = '';
+        }
+
+        if(this.resultFileType){
+            this.resultFileType.textContent = '';
+        }
+
         if(this.errorMessage){
             this.errorMessage.textContent = '';
         }
@@ -429,7 +457,31 @@ class UploadManager {
         resultCard.style.display = 'none';
         resultCard.innerHTML = `
             <div class="result-status">${window.translate('upload.conversion_complete', '✓ Conversion complete')}</div>
-            <div id="resultFileName" class="result-file-name"></div>
+            <div class="result-summary">
+                <div id="resultFileName" class="result-file-name"></div>
+                <dl class="result-metadata" aria-label="File details">
+                    <div class="result-metadata-item">
+                        <dt>${window.translate('upload.file_name', 'File name')}</dt>
+                        <dd id="resultMetaName"></dd>
+                    </div>
+                    <div class="result-metadata-item">
+                        <dt>${window.translate('upload.output_format', 'Output format')}</dt>
+                        <dd id="resultOutputFormat"></dd>
+                    </div>
+                    <div class="result-metadata-item">
+                        <dt>${window.translate('upload.file_type', 'File type')}</dt>
+                        <dd id="resultFileType"></dd>
+                    </div>
+                </dl>
+            </div>
+            <div class="result-actions">
+                <button id="convertAnotherBtn" class="btn btn-outline result-secondary-btn" type="button">
+                    ${window.translate('upload.convert_another', 'Convert Another File')}
+                </button>
+                <a class="btn btn-outline result-secondary-btn" href="#uploadSection">
+                    ${window.translate('upload.back_to_upload', 'Back to Upload')}
+                </a>
+            </div>
         `;
 
         const errorCard = document.createElement('div');
@@ -444,7 +496,12 @@ class UploadManager {
         `;
 
         if(this.downloadBtn){
-            resultCard.appendChild(this.downloadBtn);
+            const resultActions = resultCard.querySelector('.result-actions');
+            if(resultActions){
+                resultCard.insertBefore(this.downloadBtn, resultActions);
+            } else {
+                resultCard.appendChild(this.downloadBtn);
+            }
         }
 
         this.wrapper.appendChild(resultCard);
@@ -452,9 +509,22 @@ class UploadManager {
 
         this.resultCard = resultCard;
         this.resultFileName = resultCard.querySelector('#resultFileName');
+        this.resultMetaName = resultCard.querySelector('#resultMetaName');
+        this.resultOutputFormat = resultCard.querySelector('#resultOutputFormat');
+        this.resultFileType = resultCard.querySelector('#resultFileType');
+        this.convertAnotherBtn = resultCard.querySelector('#convertAnotherBtn');
         this.errorCard = errorCard;
         this.errorMessage = errorCard.querySelector('#errorMessage');
         this.tryAgainBtn = errorCard.querySelector('#tryAgainBtn');
+
+        if(this.convertAnotherBtn){
+            this.convertAnotherBtn.addEventListener('click', () => {
+                this.resetUpload();
+                if(this.fileInput){
+                    this.fileInput.click();
+                }
+            });
+        }
 
         if(this.tryAgainBtn){
             this.tryAgainBtn.addEventListener('click', () => this.resetUpload());
@@ -468,10 +538,28 @@ class UploadManager {
         }
         if(this.resultCard){
             if(this.resultFileName){
-                this.resultFileName.textContent = file?.name || '';
+                this.resultFileName.textContent = window.translate('upload.file_ready_for_download', 'File ready for download');
+            }
+            if(this.resultMetaName){
+                this.resultMetaName.textContent = file?.name || '';
+            }
+            if(this.resultOutputFormat){
+                const outputFormat = window.converter?.selectedFormat || '';
+                this.resultOutputFormat.textContent = outputFormat ? outputFormat.toUpperCase() : '';
+            }
+            if(this.resultFileType){
+                const fileType = file?.type || file?.name?.split('.').pop()?.toUpperCase() || '';
+                this.resultFileType.textContent = fileType;
             }
             this.resultCard.hidden = false;
             this.resultCard.style.display = '';
+            if(window.converigoAnalytics && typeof window.converigoAnalytics.trackEvent === 'function'){
+                window.converigoAnalytics.trackEvent('success_popup_view', {
+                    page_path: window.location.pathname || '/',
+                    converter_name: window.converter?.selectedFormat || '',
+                    event_status: 'success'
+                });
+            }
         }
         if(window.conversionStateController && typeof window.conversionStateController.setConversionState === 'function'){
             window.conversionStateController.setConversionState(window.conversionStateController.ConversionState.SUCCESS);
@@ -492,6 +580,13 @@ class UploadManager {
             }
             this.errorCard.hidden = false;
             this.errorCard.style.display = '';
+            if(window.converigoAnalytics && typeof window.converigoAnalytics.trackEvent === 'function'){
+                window.converigoAnalytics.trackEvent('error_popup_view', {
+                    page_path: window.location.pathname || '/',
+                    error_type: 'conversion_error',
+                    event_status: 'failure'
+                });
+            }
         }
         if(window.conversionStateController && typeof window.conversionStateController.setConversionState === 'function'){
             window.conversionStateController.setConversionState(window.conversionStateController.ConversionState.ERROR);

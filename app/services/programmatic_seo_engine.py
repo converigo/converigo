@@ -14,7 +14,7 @@ from app.services.converter_registry_service import ConverterRegistryService
 from app.services.internal_link_service import InternalLinkService
 from app.services.knowledge_service import KnowledgeService
 from app.services.landing_service import LandingPageBuilder
-from app.services.seo_service import SeoService
+from app.services.seo_service import PRODUCTION_BASE_URL, SeoService
 from app.services.topic_cluster_service import TopicClusterService
 
 if TYPE_CHECKING:
@@ -113,6 +113,9 @@ class ProgrammaticSeoEngine:
                     continue
 
         return all_pages
+
+    def _build_canonical(self, path: str) -> str:
+        return f"{PRODUCTION_BASE_URL}{path}"
 
     def generate_page_with_quality_check(
         self, format_name: str, page_type: str
@@ -234,7 +237,7 @@ class ProgrammaticSeoEngine:
             "seo": {
                 "title": title,
                 "meta_description": description,
-                "canonical": f"https://converigo.io/how-to/{format_lower}",
+                "canonical": self._build_canonical(f"/how-to/{format_lower}"),
                 "keywords": [
                     f"how to use {format_lower}",
                     f"how to open {format_lower}",
@@ -280,7 +283,7 @@ class ProgrammaticSeoEngine:
             "seo": {
                 "title": title,
                 "meta_description": description,
-                "canonical": f"https://converigo.io/tutorials/{format_lower}",
+                "canonical": self._build_canonical(f"/tutorials/{format_lower}"),
                 "keywords": [
                     f"{format_lower} tutorial",
                     f"learn {format_lower}",
@@ -321,7 +324,7 @@ class ProgrammaticSeoEngine:
             "seo": {
                 "title": title,
                 "meta_description": description,
-                "canonical": f"https://converigo.io/best-practices/{format_lower}",
+                "canonical": self._build_canonical(f"/best-practices/{format_lower}"),
                 "keywords": [
                     f"{format_lower} best practices",
                     f"{format_lower} tips",
@@ -360,7 +363,7 @@ class ProgrammaticSeoEngine:
             "seo": {
                 "title": title,
                 "meta_description": description,
-                "canonical": f"https://converigo.io/troubleshooting/{format_lower}",
+                "canonical": self._build_canonical(f"/troubleshooting/{format_lower}"),
                 "keywords": [
                     f"{format_lower} troubleshooting",
                     f"fix {format_lower} issues",
@@ -406,7 +409,7 @@ class ProgrammaticSeoEngine:
             "seo": {
                 "title": title,
                 "meta_description": description,
-                "canonical": f"https://converigo.io/formats/{format_lower}/guide",
+                "canonical": self._build_canonical(f"/formats/{format_lower}/guide"),
                 "keywords": [
                     f"{format_lower} file format",
                     f"{format_lower} specification",
@@ -449,7 +452,7 @@ class ProgrammaticSeoEngine:
             "seo": {
                 "title": title,
                 "meta_description": description,
-                "canonical": f"https://converigo.io/use-cases/{format_lower}",
+                "canonical": self._build_canonical(f"/use-cases/{format_lower}"),
                 "keywords": [
                     f"{format_lower} use cases",
                     f"when to use {format_lower}",
@@ -494,7 +497,7 @@ class ProgrammaticSeoEngine:
             "seo": {
                 "title": title,
                 "meta_description": description,
-                "canonical": f"https://converigo.io/faq/{format_lower}",
+                "canonical": self._build_canonical(f"/faq/{format_lower}"),
                 "keywords": [
                     f"{format_lower} faq",
                     f"frequently asked questions {format_lower}",
@@ -538,7 +541,7 @@ class ProgrammaticSeoEngine:
             "seo": {
                 "title": title,
                 "meta_description": description,
-                "canonical": f"https://converigo.io/guides/{format_lower}/metadata",
+                "canonical": self._build_canonical(f"/guides/{format_lower}/metadata"),
                 "keywords": [
                     f"{format_lower} metadata",
                     f"{format_lower} metadata fields",
@@ -580,7 +583,7 @@ class ProgrammaticSeoEngine:
             "seo": {
                 "title": title,
                 "meta_description": description,
-                "canonical": f"https://converigo.io/guides/{format_lower}/mime",
+                "canonical": self._build_canonical(f"/guides/{format_lower}/mime"),
                 "keywords": [
                     f"{format_lower} mime type",
                     f"mime type {format_lower}",
@@ -622,7 +625,7 @@ class ProgrammaticSeoEngine:
             "seo": {
                 "title": title,
                 "meta_description": description,
-                "canonical": f"https://converigo.io/software/{format_lower}",
+                "canonical": self._build_canonical(f"/software/{format_lower}"),
                 "keywords": [
                     f"software for {format_lower}",
                     f"open {format_lower} files",

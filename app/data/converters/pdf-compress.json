@@ -19,12 +19,60 @@
     {
       "question": "What file formats are supported?",
       "answer": "Upload PDF files to receive a smaller PDF output."
+    },
+    {
+      "question": "Is the compression free?",
+      "answer": "Yes. PDF compression is free and works directly in your browser."
+    },
+    {
+      "question": "Will the compressed PDF still print well?",
+      "answer": "Yes. The output remains readable and suitable for printing in most cases."
+    },
+    {
+      "question": "How much smaller can the file become?",
+      "answer": "The file size depends on content, but compression typically reduces PDFs for easier sharing."
+    },
+    {
+      "question": "Can I use this on mobile?",
+      "answer": "Yes. The tool works in modern mobile and desktop browsers."
+    },
+    {
+      "question": "How do I download the compressed PDF?",
+      "answer": "Download the smaller PDF immediately after compression completes."
+    },
+    {
+      "question": "What if compression fails?",
+      "answer": "Try a different PDF file or re-upload the current file and try again."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "pdf-merge",
+      "title": "PDF Merge"
+    },
+    {
+      "slug": "pdf-split",
+      "title": "PDF Split"
+    },
+    {
+      "slug": "pdf-to-jpg",
+      "title": "PDF to JPG"
+    },
+    {
+      "slug": "word-to-pdf",
+      "title": "Word to PDF"
     }
   ],
   "seo": {
-    "title": "PDF Compress | Converigo",
-    "description": "Compress PDF files online to reduce size and improve sharing.",
-    "keywords": "pdf compress, compress pdf, reduce pdf size"
+    "title": "Compress PDF Files Online Free | Converigo",
+    "description": "Compress pdf files online for free using Converigo. Reduce file size while maintaining quality. Fast, secure, browser-based compression.",
+    "keywords": "pdf compress, compress pdf, reduce pdf size, online pdf compressor",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert PDF to PDF - Converigo free online converter",
+    "twitter_title": "Compress PDF Files Online Free | Converigo",
+    "twitter_description": "Compress pdf files online for free using Converigo. Reduce file size while maintaining quality. Fast, secure, browser-based compression.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/pdf-compress"
   },
   "source": "pdf",
   "target": "pdf",
@@ -32,7 +80,7 @@
   "hero": {
     "eyebrow": "Converter tool",
     "title": "Compress PDF Files Online Free",
-    "description": "Reduce the size of your PDF documents in seconds.",
+    "description": "Convert PDF files to PDF online for free. Fast, secure browser-based conversion with no software installation. Get high-quality pdf output in seconds using Converigo.",
     "panel_label": "Ready to convert",
     "panel_title": "Upload a PDF file and receive a compressed result instantly."
   },
@@ -44,11 +92,35 @@
     {
       "title": "Fast workflow",
       "text": "Reduce file size in a few quick steps."
+    },
+    {
+      "title": "Fast pdf to pdf conversion",
+      "text": "Convert PDF to PDF in seconds with our optimized processing engine."
+    },
+    {
+      "title": "No software installation required",
+      "text": "Convert files directly in your browser without downloading or installing any software."
+    },
+    {
+      "title": "High-quality pdf output",
+      "text": "Receive a polished PDF file ready for immediate use in your workflow."
+    },
+    {
+      "title": "Free pdf to pdf converter",
+      "text": "Convert PDF to PDF online completely free with no registration or hidden costs."
+    },
+    {
+      "title": "Secure pdf processing",
+      "text": "Your PDF files are encrypted during upload and automatically deleted after conversion."
     }
   ],
   "supported_formats": {
-    "input": ["PDF"],
-    "output": ["PDF"],
+    "input": [
+      "PDF"
+    ],
+    "output": [
+      "PDF"
+    ],
     "description": "PDF input, PDF output"
   },
   "how_to_use": [
@@ -63,12 +135,32 @@
     {
       "title": "Download the result",
       "description": "Get your compressed PDF file immediately."
+    },
+    {
+      "title": "Upload your pdf",
+      "description": "Select a PDF file from your device to begin the conversion process."
+    },
+    {
+      "title": "Choose pdf as format",
+      "description": "Pick PDF as your desired format and review any available options."
+    },
+    {
+      "title": "Convert pdf to pdf",
+      "description": "Click convert and our engine processes your pdf instantly."
     }
   ],
   "about_formats": [
     {
       "title": "What is PDF?",
       "text": "PDF is the source format used for this conversion workflow."
+    },
+    {
+      "title": "What is PDF format?",
+      "text": "PDF is a widely used file format known for its versatility and compatibility across many applications."
+    },
+    {
+      "title": "Why convert PDF to PDF?",
+      "text": "Converting pdf to pdf enables better compatibility, smaller file sizes, and improved workflow integration."
     }
   ],
   "cta": {
@@ -79,5 +171,6 @@
     "secondary_text": "Read FAQs",
     "primary_href": "#converter",
     "secondary_href": "#faq"
-  }
+  },
+  "lifecycle_status": "active"
 }

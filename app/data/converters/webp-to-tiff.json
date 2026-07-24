@@ -8,11 +8,135 @@
   "active": true,
   "popular": false,
   "featured": false,
-  "supported_formats": { "input": ["webp"], "output": ["tiff"] },
-  "how_to_use": [ { "title": "Upload WEBP", "description": "Upload a WEBP image." }, { "title": "Download TIFF", "description": "Download the resulting TIFF file." } ],
-    "about_formats": [ { "title": "What is TIFF?", "text": "TIFF is a flexible image format commonly used in publishing." } ],
-    "hero": { "title": "Convert WEBP to TIFF", "subtitle": "Save WEBP images as TIFF for editing or archiving." },
-    "features": [ { "title": "Multi-page support", "text": "Handle multi-page TIFFs when required." } ],
-    "cta": { "eyebrow": "Ready to convert", "title": "Convert WEBP to TIFF quickly.", "primary_text": "Convert now", "primary_href": "#converter" },
-  "seo": { "title": "WEBP to TIFF Converter | Converigo", "description": "Convert WEBP images to TIFF for archival or printing." }
+  "supported_formats": {
+    "input": [
+      "webp"
+    ],
+    "output": [
+      "tiff"
+    ]
+  },
+  "how_to_use": [
+    {
+      "title": "Upload WEBP",
+      "description": "Upload a WEBP image."
+    },
+    {
+      "title": "Download TIFF",
+      "description": "Download the resulting TIFF file."
+    },
+    {
+      "title": "Upload your webp",
+      "description": "Select a WEBP file from your device to begin the conversion process."
+    },
+    {
+      "title": "Choose tiff as format",
+      "description": "Pick TIFF as your desired format and review any available options."
+    },
+    {
+      "title": "Convert webp to tiff",
+      "description": "Click convert and our engine processes your webp instantly."
+    },
+    {
+      "title": "Download your tiff file",
+      "description": "Get your converted TIFF immediately for use in your projects."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is TIFF?",
+      "text": "TIFF is a flexible image format commonly used in publishing."
+    },
+    {
+      "title": "What is WEBP format?",
+      "text": "WEBP is a widely used file format known for its versatility and compatibility across many applications."
+    },
+    {
+      "title": "What is TIFF format?",
+      "text": "TIFF is a popular file format chosen for its broad compatibility and optimized performance."
+    },
+    {
+      "title": "Why convert WEBP to TIFF?",
+      "text": "Converting webp to tiff enables better compatibility, smaller file sizes, and improved workflow integration."
+    }
+  ],
+  "hero": {
+    "title": "Convert WEBP to TIFF",
+    "subtitle": "Save WEBP images as TIFF for editing or archiving.",
+    "description": "Convert WEBP files to TIFF online for free. Fast, secure browser-based conversion with no software installation. Get high-quality tiff output in seconds using Converigo."
+  },
+  "features": [
+    {
+      "title": "Multi-page support",
+      "text": "Handle multi-page TIFFs when required."
+    },
+    {
+      "title": "Fast webp to tiff conversion",
+      "text": "Convert WEBP to TIFF in seconds with our optimized processing engine."
+    },
+    {
+      "title": "No software installation required",
+      "text": "Convert files directly in your browser without downloading or installing any software."
+    },
+    {
+      "title": "High-quality tiff output",
+      "text": "Receive a polished TIFF file ready for immediate use in your workflow."
+    },
+    {
+      "title": "Free webp to tiff converter",
+      "text": "Convert WEBP to TIFF online completely free with no registration or hidden costs."
+    },
+    {
+      "title": "Secure webp processing",
+      "text": "Your WEBP files are encrypted during upload and automatically deleted after conversion."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Convert WEBP to TIFF quickly.",
+    "primary_text": "Convert now",
+    "primary_href": "#converter"
+  },
+  "seo": {
+    "title": "Convert WEBP to TIFF Online Free | Converigo",
+    "description": "Convert WEBP to TIFF online for free using Converigo. Fast, secure and browser-based file conversion from webp to tiff with no installation required.",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert WEBP to TIFF - Converigo free online converter",
+    "twitter_title": "Convert WEBP to TIFF Online Free | Converigo",
+    "twitter_description": "Convert WEBP to TIFF online for free using Converigo. Fast, secure and browser-based file conversion from webp to tiff with no installation required.",
+    "twitter_image": "/static/images/og-default.png",
+    "keywords": "webp to tiff, convert webp to tiff, webp converter, tiff converter, online file converter",
+    "canonical": "https://converigo.com/tools/webp-to-tiff"
+  },
+  "faq": [
+    {
+      "question": "Is this webp converter free to use?",
+      "answer": "Yes. Converting WEBP to TIFF on Converigo is completely free with no hidden charges."
+    },
+    {
+      "question": "Are my uploaded files secure?",
+      "answer": "Yes. All uploaded files are processed securely and automatically deleted from our servers after conversion. Your privacy is protected."
+    },
+    {
+      "question": "Will the tiff quality be preserved?",
+      "answer": "Yes. The converter is designed to produce a high-quality TIFF file while keeping the conversion process simple and reliable."
+    },
+    {
+      "question": "Can I use this converter on mobile devices?",
+      "answer": "Yes. Converigo works on all modern browsers, including mobile phones and tablets, so you can convert files on the go."
+    },
+    {
+      "question": "How do I convert WEBP to TIFF?",
+      "answer": "Upload your WEBP, select the conversion options if needed, and download the converted TIFF instantly. It only takes a few seconds."
+    },
+    {
+      "question": "What file sizes are supported?",
+      "answer": "We support files up to 100MB for most conversions. Larger files may take longer to process."
+    },
+    {
+      "question": "Why use Converigo for webp conversion?",
+      "answer": "Converigo offers fast, secure, browser-based webp conversion with no software installation, no registration, and completely free usage."
+    }
+  ],
+  "lifecycle_status": "active"
 }

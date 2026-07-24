@@ -1,0 +1,13 @@
+{
+  "slug": "webp",
+  "name": "WEBP",
+  "extension": ".webp",
+  "mime_type": "image/webp",
+  "category": "image",
+  "description": "WEBP is a modern image format that delivers smaller file sizes for both lossy and lossless images while preserving quality on the web.",
+  "related_formats": ["jpg", "png", "avif"],
+  "related_converters": ["webp-to-jpg", "webp-to-png", "jpg-to-webp", "png-to-webp"],
+  "primary_keywords": ["webp file format", "webp image", "web optimized image"],
+  "secondary_keywords": ["webp conversion", "webp compression", "modern image format"],
+  "search_intent": ["informational", "web image", "image compression"]
+}

@@ -1,0 +1,63 @@
+{
+  "slug": "quality-issues",
+  "title": "How to Fix Quality Issues After Conversion",
+  "description": "Learn how to spot common quality problems after conversion and choose better settings for cleaner output files.",
+  "category": "Troubleshooting",
+  "topics": ["quality", "troubleshooting", "image-audio"],
+  "author": "Converigo",
+  "date_published": "2026-07-08",
+  "date_modified": "2026-07-21",
+  "read_time_minutes": 6,
+  "keywords": ["quality issues", "conversion quality", "bad output file"],
+  "seo_keywords": ["fix quality issues", "improve conversion quality", "quality after conversion"],
+  "og_image": "/static/images/og-quality-issues.png",
+  "og_image_alt": "Guide for fixing conversion quality issues",
+  "canonical": "/learning/quality-issues",
+  "featured": false,
+  "order": 9,
+  "related_formats": ["jpg", "png", "mp3"],
+  "related_converters": ["jpg-to-png", "png-to-jpg", "mp4-to-mp3"],
+  "related_articles": ["png-vs-jpg-explained", "audio-quality-prep", "conversion-fails"],
+  "sections": [
+    {
+      "id": "inspect-the-output",
+      "title": "Inspect the output carefully",
+      "content": "Compare the converted file with the original and look for blurriness, missing elements, or unexpected compression artifacts."
+    },
+    {
+      "id": "adjust-settings",
+      "title": "Adjust settings for better quality",
+      "content": "If the output looks degraded, try a different quality preset or a higher fidelity target format before repeating the conversion."
+    },
+    {
+      "id": "test-a-smaller-sample",
+      "title": "Test a smaller sample first",
+      "content": "A smaller file sample can help you validate settings before processing a large batch or a critical document."
+    }
+  ],
+  "faq": [
+    {
+      "question": "Why does the converted file look worse?",
+      "answer": "Compression, format limits, and source quality can all affect the final appearance or sound."
+    },
+    {
+      "question": "Can I improve quality after conversion?",
+      "answer": "Sometimes the result can be improved by changing settings or trying a different target format, but not every problem is reversible."
+    },
+    {
+      "question": "What if I only need one good result?",
+      "answer": "Try a small sample first so you can compare settings before processing the full file set."
+    }
+  ],
+  "call_to_action": {
+    "text": "Want cleaner output for your next conversion?",
+    "url": "/tools/jpg-to-png",
+    "button_text": "Try a quality-focused workflow"
+  },
+  "breadcrumb_override": [
+    {"name": "Home", "url": "/"},
+    {"name": "Learning", "url": "/learning"},
+    {"name": "Troubleshooting", "url": "/learning/categories/troubleshooting"},
+    {"name": "How to Fix Quality Issues After Conversion", "url": "/learning/quality-issues"}
+  ]
+}

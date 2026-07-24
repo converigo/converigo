@@ -8,11 +8,136 @@
   "active": true,
   "popular": false,
   "featured": false,
-  "supported_formats": { "input": ["tiff"], "output": ["jpg", "jpeg"] },
-  "how_to_use": [ { "title": "Upload TIFF", "description": "Upload a TIFF image." }, { "title": "Download JPG", "description": "Download the resulting JPG file." } ],
-    "about_formats": [ { "title": "What is TIFF?", "text": "TIFF is a flexible image format commonly used in publishing." } ],
-    "hero": { "title": "Convert TIFF to JPG", "subtitle": "Produce compressed JPGs from TIFFs for smaller file sizes." },
-    "features": [ { "title": "Compression", "text": "Reduce file size while keeping quality." } ],
-    "cta": { "eyebrow": "Ready to convert", "title": "Convert TIFF images to JPG quickly.", "primary_text": "Convert now", "primary_href": "#converter" },
-  "seo": { "title": "TIFF to JPG Converter | Converigo", "description": "Convert TIFF images to JPG for web publishing and sharing." }
+  "supported_formats": {
+    "input": [
+      "tiff"
+    ],
+    "output": [
+      "jpg",
+      "jpeg"
+    ]
+  },
+  "how_to_use": [
+    {
+      "title": "Upload TIFF",
+      "description": "Upload a TIFF image."
+    },
+    {
+      "title": "Download JPG",
+      "description": "Download the resulting JPG file."
+    },
+    {
+      "title": "Upload your tiff",
+      "description": "Select a TIFF file from your device to begin the conversion process."
+    },
+    {
+      "title": "Choose jpg as format",
+      "description": "Pick JPG as your desired format and review any available options."
+    },
+    {
+      "title": "Convert tiff to jpg",
+      "description": "Click convert and our engine processes your tiff instantly."
+    },
+    {
+      "title": "Download your jpg file",
+      "description": "Get your converted JPG immediately for use in your projects."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is TIFF?",
+      "text": "TIFF is a flexible image format commonly used in publishing."
+    },
+    {
+      "title": "What is TIFF format?",
+      "text": "TIFF is a widely used file format known for its versatility and compatibility across many applications."
+    },
+    {
+      "title": "What is JPG format?",
+      "text": "JPG is a popular file format chosen for its broad compatibility and optimized performance."
+    },
+    {
+      "title": "Why convert TIFF to JPG?",
+      "text": "Converting tiff to jpg enables better compatibility, smaller file sizes, and improved workflow integration."
+    }
+  ],
+  "hero": {
+    "title": "Convert TIFF to JPG",
+    "subtitle": "Produce compressed JPGs from TIFFs for smaller file sizes.",
+    "description": "Convert TIFF files to JPG online for free. Fast, secure browser-based conversion with no software installation. Get high-quality jpg output in seconds using Converigo."
+  },
+  "features": [
+    {
+      "title": "Compression",
+      "text": "Reduce file size while keeping quality."
+    },
+    {
+      "title": "Fast tiff to jpg conversion",
+      "text": "Convert TIFF to JPG in seconds with our optimized processing engine."
+    },
+    {
+      "title": "No software installation required",
+      "text": "Convert files directly in your browser without downloading or installing any software."
+    },
+    {
+      "title": "High-quality jpg output",
+      "text": "Receive a polished JPG file ready for immediate use in your workflow."
+    },
+    {
+      "title": "Free tiff to jpg converter",
+      "text": "Convert TIFF to JPG online completely free with no registration or hidden costs."
+    },
+    {
+      "title": "Secure tiff processing",
+      "text": "Your TIFF files are encrypted during upload and automatically deleted after conversion."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Convert TIFF images to JPG quickly.",
+    "primary_text": "Convert now",
+    "primary_href": "#converter"
+  },
+  "seo": {
+    "title": "Convert TIFF to JPG Online Free | Converigo",
+    "description": "Convert TIFF to JPG online for free using Converigo. Fast, secure and browser-based file conversion from tiff to jpg with no installation required.",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert TIFF to JPG - Converigo free online converter",
+    "twitter_title": "Convert TIFF to JPG Online Free | Converigo",
+    "twitter_description": "Convert TIFF to JPG online for free using Converigo. Fast, secure and browser-based file conversion from tiff to jpg with no installation required.",
+    "twitter_image": "/static/images/og-default.png",
+    "keywords": "tiff to jpg, convert tiff to jpg, tiff converter, jpg converter, online file converter",
+    "canonical": "https://converigo.com/tools/tiff-to-jpg"
+  },
+  "faq": [
+    {
+      "question": "Is this tiff converter free to use?",
+      "answer": "Yes. Converting TIFF to JPG on Converigo is completely free with no hidden charges."
+    },
+    {
+      "question": "Are my uploaded files secure?",
+      "answer": "Yes. All uploaded files are processed securely and automatically deleted from our servers after conversion. Your privacy is protected."
+    },
+    {
+      "question": "Will the jpg quality be preserved?",
+      "answer": "Yes. The converter is designed to produce a high-quality JPG file while keeping the conversion process simple and reliable."
+    },
+    {
+      "question": "Can I use this converter on mobile devices?",
+      "answer": "Yes. Converigo works on all modern browsers, including mobile phones and tablets, so you can convert files on the go."
+    },
+    {
+      "question": "How do I convert TIFF to JPG?",
+      "answer": "Upload your TIFF, select the conversion options if needed, and download the converted JPG instantly. It only takes a few seconds."
+    },
+    {
+      "question": "What file sizes are supported?",
+      "answer": "We support files up to 100MB for most conversions. Larger files may take longer to process."
+    },
+    {
+      "question": "Why use Converigo for tiff conversion?",
+      "answer": "Converigo offers fast, secure, browser-based tiff conversion with no software installation, no registration, and completely free usage."
+    }
+  ],
+  "lifecycle_status": "certified"
 }

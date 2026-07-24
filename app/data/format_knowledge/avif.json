@@ -1,0 +1,128 @@
+{
+  "slug": "avif",
+  "name": "AVIF",
+  "quick_answer": "AVIF — AV1 Image File Format offering outstanding compression efficiency with support for HDR, wide color gamut, and both lossy and lossless encoding.",
+  "definition": "AVIF is an image file format. AV1 Image File Format offering outstanding compression efficiency with support for HDR, wide color gamut, and both lossy and lossless encoding. It is commonly used in workflows that require reliable image handling and is supported by a wide range of applications and online tools.",
+  "use_cases": [
+    {
+      "title": "Modern web image delivery",
+      "text": "AVIF is used by websites and CDNs to deliver images at significantly smaller file sizes than JPG or PNG, improving page speed and Core Web Vitals."
+    },
+    {
+      "title": "E-commerce and product photography",
+      "text": "AVIF delivers high-quality product images at smaller file sizes, helping online stores load faster without sacrificing visual detail."
+    },
+    {
+      "title": "HDR and wide color gamut images",
+      "text": "AVIF natively supports 10-bit and 12-bit color depth along with HDR, making it suitable for premium photography and display-optimized content."
+    },
+    {
+      "title": "Responsive and adaptive image pipelines",
+      "text": "AVIF is used alongside WebP and JPG in responsive image pipelines, served via the HTML picture element to browsers that support it."
+    },
+    {
+      "title": "Next-generation image optimization",
+      "text": "AVIF is adopted by image optimization services and static site generators as the default output format for maximum compression with quality preservation."
+    }
+  ],
+  "advantages": [
+    {
+      "title": "Best-in-class compression efficiency",
+      "text": "AVIF typically produces files 50% smaller than JPG and 20-30% smaller than WebP at comparable perceptual quality."
+    },
+    {
+      "title": "HDR and wide color gamut support",
+      "text": "AVIF supports 10-bit and 12-bit color depth with HDR metadata, enabling premium image quality on compatible displays."
+    },
+    {
+      "title": "Both lossy and lossless encoding",
+      "text": "AVIF can be used for photographic lossy compression or lossless graphics, covering a wide range of image use cases in a single format."
+    },
+    {
+      "title": "Alpha transparency support",
+      "text": "AVIF supports full alpha channel transparency at smaller file sizes than PNG, making it useful for overlays and web graphics."
+    },
+    {
+      "title": "Based on the open AV1 standard",
+      "text": "AVIF is built on the royalty-free AV1 codec, ensuring long-term availability without licensing costs."
+    }
+  ],
+  "limitations": [
+    {
+      "title": "Slower encoding than JPG and WebP",
+      "text": "AVIF encoding is computationally intensive, which can make it slow to generate in bulk compared to JPG or WebP."
+    },
+    {
+      "title": "Incomplete legacy browser support",
+      "text": "Older browsers and some environments do not support AVIF, requiring fallback images for full compatibility."
+    },
+    {
+      "title": "Limited support in editing tools",
+      "text": "Not all image editors natively support AVIF, which can complicate production and retouching workflows."
+    },
+    {
+      "title": "Newer format with evolving tooling",
+      "text": "As a relatively new format, AVIF tooling, CDN support, and best practices are still maturing compared to JPG or PNG."
+    }
+  ],
+  "comparisons": [
+    {
+      "title": "AVIF vs WEBP",
+      "text": "AVIF compresses images 20-30% more efficiently than WebP at comparable quality and supports HDR, but WebP has wider legacy browser and tool support."
+    },
+    {
+      "title": "AVIF vs JPG",
+      "text": "AVIF produces files roughly 50% smaller than JPG at the same perceptual quality and supports transparency and HDR, but JPG has near-universal compatibility."
+    },
+    {
+      "title": "AVIF vs PNG",
+      "text": "AVIF offers dramatically smaller files than PNG for photographic images while supporting transparency and HDR, but PNG remains the universal lossless standard."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "avif-to-jpg",
+      "title": "AVIF to JPG Converter",
+      "description": "Convert AVIF files to JPG quickly and easily.",
+      "href": "/avif-to-jpg"
+    },
+    {
+      "slug": "avif-to-png",
+      "title": "AVIF to PNG Converter",
+      "description": "Convert AVIF files to PNG quickly and easily.",
+      "href": "/avif-to-png"
+    },
+    {
+      "slug": "jpg-to-avif",
+      "title": "JPG to AVIF Converter",
+      "description": "Convert JPG files to AVIF quickly and easily.",
+      "href": "/jpg-to-avif"
+    }
+  ],
+  "faq": [
+    {
+      "question": "What is an AVIF file?",
+      "answer": "An AVIF (AV1 Image File Format) file is a next-generation image format based on the AV1 video codec that offers outstanding compression efficiency."
+    },
+    {
+      "question": "Is AVIF supported by all browsers?",
+      "answer": "AVIF is supported by Chrome, Firefox, Opera, and Safari 16+. Older browsers such as Internet Explorer and some legacy versions do not support it."
+    },
+    {
+      "question": "How does AVIF compare to WebP?",
+      "answer": "AVIF typically compresses images 20-30% more efficiently than WebP at comparable quality, and it supports HDR. WebP has wider legacy browser support."
+    },
+    {
+      "question": "How does AVIF compare to JPG?",
+      "answer": "AVIF produces files roughly 50% smaller than JPG at the same perceptual quality, with support for transparency and HDR that JPG lacks."
+    },
+    {
+      "question": "Can I use AVIF on my website today?",
+      "answer": "Yes, using the HTML picture element with AVIF as the first source and JPG or WebP as a fallback lets you serve AVIF to supported browsers."
+    },
+    {
+      "question": "Is AVIF royalty-free?",
+      "answer": "Yes, AVIF is based on the AV1 codec which is royalty-free and maintained by the Alliance for Open Media."
+    }
+  ]
+}

@@ -1,0 +1,6722 @@
+[
+  {
+    "path": ".ai/AGENT.md",
+    "extension": ".md",
+    "size": 1324
+  },
+  {
+    "path": ".ai/CONVERTIN_BIBLE.md",
+    "extension": ".md",
+    "size": 0
+  },
+  {
+    "path": ".ai/CURRENT_SPRINT.md",
+    "extension": ".md",
+    "size": 0
+  },
+  {
+    "path": ".ai/DECISIONS.md",
+    "extension": ".md",
+    "size": 0
+  },
+  {
+    "path": ".ai/IDEAS.md",
+    "extension": ".md",
+    "size": 0
+  },
+  {
+    "path": ".ai/KNOWN_ISSUES.md",
+    "extension": ".md",
+    "size": 0
+  },
+  {
+    "path": ".ai/NEXT_SPRINT.md",
+    "extension": ".md",
+    "size": 0
+  },
+  {
+    "path": ".ai/PROJECT_CONTEXT.md",
+    "extension": ".md",
+    "size": 0
+  },
+  {
+    "path": ".ai/SPRINT_002.md",
+    "extension": ".md",
+    "size": 735
+  },
+  {
+    "path": ".ai/SPRINT_BRIEF.md",
+    "extension": ".md",
+    "size": 0
+  },
+  {
+    "path": ".continue/agents/new-config.yaml",
+    "extension": ".yaml",
+    "size": 865
+  },
+  {
+    "path": ".env.example",
+    "extension": ".example",
+    "size": 231
+  },
+  {
+    "path": ".gitignore",
+    "extension": "",
+    "size": 829
+  },
+  {
+    "path": ".pytest_cache/.gitignore",
+    "extension": "",
+    "size": 37
+  },
+  {
+    "path": ".pytest_cache/CACHEDIR.TAG",
+    "extension": ".tag",
+    "size": 191
+  },
+  {
+    "path": ".pytest_cache/README.md",
+    "extension": ".md",
+    "size": 302
+  },
+  {
+    "path": ".pytest_cache/v/cache/lastfailed",
+    "extension": "",
+    "size": 3463
+  },
+  {
+    "path": ".pytest_cache/v/cache/nodeids",
+    "extension": "",
+    "size": 66853
+  },
+  {
+    "path": ".railwayignore",
+    "extension": "",
+    "size": 541
+  },
+  {
+    "path": "AI_BRAIN/README.md",
+    "extension": ".md",
+    "size": 3953
+  },
+  {
+    "path": "AI_BRAIN/config/README.md",
+    "extension": ".md",
+    "size": 0
+  },
+  {
+    "path": "AI_BRAIN/config/scanner_config.yaml",
+    "extension": ".yaml",
+    "size": 509
+  },
+  {
+    "path": "AI_BRAIN/generated/README.md",
+    "extension": ".md",
+    "size": 0
+  },
+  {
+    "path": "AI_BRAIN/knowledge/AI_OVERVIEW.md",
+    "extension": ".md",
+    "size": 1870
+  },
+  {
+    "path": "AI_BRAIN/knowledge/ARCHITECTURE.md",
+    "extension": ".md",
+    "size": 371
+  },
+  {
+    "path": "AI_BRAIN/knowledge/CODING_RULES.md",
+    "extension": ".md",
+    "size": 375
+  },
+  {
+    "path": "AI_BRAIN/knowledge/DECISIONS.md",
+    "extension": ".md",
+    "size": 267
+  },
+  {
+    "path": "AI_BRAIN/knowledge/DEPLOYMENT.md",
+    "extension": ".md",
+    "size": 369
+  },
+  {
+    "path": "AI_BRAIN/knowledge/KNOWN_ISSUES.md",
+    "extension": ".md",
+    "size": 261
+  },
+  {
+    "path": "AI_BRAIN/knowledge/MODULE_INDEX.md",
+    "extension": ".md",
+    "size": 329
+  },
+  {
+    "path": "AI_BRAIN/knowledge/PROJECT_CONTEXT.md",
+    "extension": ".md",
+    "size": 260
+  },
+  {
+    "path": "AI_BRAIN/knowledge/README.md",
+    "extension": ".md",
+    "size": 0
+  },
+  {
+    "path": "AI_BRAIN/knowledge/ROADMAP.md",
+    "extension": ".md",
+    "size": 307
+  },
+  {
+    "path": "AI_BRAIN/knowledge/WORKFLOW.md",
+    "extension": ".md",
+    "size": 366
+  },
+  {
+    "path": "AI_BRAIN/memory/README.md",
+    "extension": ".md",
+    "size": 0
+  },
+  {
+    "path": "AI_BRAIN/memory/architecture.json",
+    "extension": ".json",
+    "size": 4
+  },
+  {
+    "path": "AI_BRAIN/memory/bugs.json",
+    "extension": ".json",
+    "size": 4
+  },
+  {
+    "path": "AI_BRAIN/memory/converters.json",
+    "extension": ".json",
+    "size": 4
+  },
+  {
+    "path": "AI_BRAIN/memory/decisions.json",
+    "extension": ".json",
+    "size": 4
+  },
+  {
+    "path": "AI_BRAIN/memory/dependencies.json",
+    "extension": ".json",
+    "size": 4
+  },
+  {
+    "path": "AI_BRAIN/memory/patterns.json",
+    "extension": ".json",
+    "size": 4
+  },
+  {
+    "path": "AI_BRAIN/memory/plugins.json",
+    "extension": ".json",
+    "size": 4
+  },
+  {
+    "path": "AI_BRAIN/memory/routers.json",
+    "extension": ".json",
+    "size": 4
+  },
+  {
+    "path": "AI_BRAIN/memory/services.json",
+    "extension": ".json",
+    "size": 4
+  },
+  {
+    "path": "AI_BRAIN/memory/tests.json",
+    "extension": ".json",
+    "size": 4
+  },
+  {
+    "path": "AI_BRAIN/prompts/README.md",
+    "extension": ".md",
+    "size": 0
+  },
+  {
+    "path": "AI_BRAIN/rag/README.md",
+    "extension": ".md",
+    "size": 0
+  },
+  {
+    "path": "AI_BRAIN/scripts/README.md",
+    "extension": ".md",
+    "size": 0
+  },
+  {
+    "path": "AI_BRAIN/scripts/build_ai_brain.py",
+    "extension": ".py",
+    "size": 3368
+  },
+  {
+    "path": "AI_BRAIN/scripts/common.py",
+    "extension": ".py",
+    "size": 3238
+  },
+  {
+    "path": "AI_BRAIN/scripts/context_builder.py",
+    "extension": ".py",
+    "size": 4577
+  },
+  {
+    "path": "AI_BRAIN/scripts/converter_scanner.py",
+    "extension": ".py",
+    "size": 3938
+  },
+  {
+    "path": "AI_BRAIN/scripts/health_check.py",
+    "extension": ".py",
+    "size": 3644
+  },
+  {
+    "path": "AI_BRAIN/scripts/knowledge_builder.py",
+    "extension": ".py",
+    "size": 5874
+  },
+  {
+    "path": "AI_BRAIN/scripts/module_summary.py",
+    "extension": ".py",
+    "size": 5607
+  },
+  {
+    "path": "AI_BRAIN/scripts/project_map.py",
+    "extension": ".py",
+    "size": 3858
+  },
+  {
+    "path": "AI_BRAIN/scripts/project_scanner.py",
+    "extension": ".py",
+    "size": 6144
+  },
+  {
+    "path": "AI_BRAIN/scripts/route_scanner.py",
+    "extension": ".py",
+    "size": 4246
+  },
+  {
+    "path": "AI_BRAIN/scripts/service_scanner.py",
+    "extension": ".py",
+    "size": 4025
+  },
+  {
+    "path": "ANALYTICS_IMPLEMENTATION_REPORT.md",
+    "extension": ".md",
+    "size": 15563
+  },
+  {
+    "path": "ARCHITECTURE_EXPLORATION.md",
+    "extension": ".md",
+    "size": 30571
+  },
+  {
+    "path": "AUTHORITY_DATABASE.md",
+    "extension": ".md",
+    "size": 2371
+  },
+  {
+    "path": "BING_IMPLEMENTATION_REPORT.md",
+    "extension": ".md",
+    "size": 1850
+  },
+  {
+    "path": "BING_STATUS.md",
+    "extension": ".md",
+    "size": 3190
+  },
+  {
+    "path": "BLACKBOX_RULES.md",
+    "extension": ".md",
+    "size": 319
+  },
+  {
+    "path": "CHANGELOG.md",
+    "extension": ".md",
+    "size": 13839
+  },
+  {
+    "path": "CHATCOMPLETIONSTREAM_TRACE.md",
+    "extension": ".md",
+    "size": 9960
+  },
+  {
+    "path": "CLINE.md",
+    "extension": ".md",
+    "size": 2586
+  },
+  {
+    "path": "CONTENT_QUALITY_STANDARD.md",
+    "extension": ".md",
+    "size": 10774
+  },
+  {
+    "path": "CONTINUE_STREAMING_DEEP_DIVE.md",
+    "extension": ".md",
+    "size": 14028
+  },
+  {
+    "path": "CONVERTER_JSON_VALIDATION_REPORT.md",
+    "extension": ".md",
+    "size": 77
+  },
+  {
+    "path": "CONVERTER_PRIORITY_CLASSIFICATION.md",
+    "extension": ".md",
+    "size": 1052
+  },
+  {
+    "path": "CONVERTER_READINESS_RECOVERY_REPORT.md",
+    "extension": ".md",
+    "size": 2990
+  },
+  {
+    "path": "CONVERTER_REGRESSION_MATRIX.md",
+    "extension": ".md",
+    "size": 6059
+  },
+  {
+    "path": "DEPLOYMENT.md",
+    "extension": ".md",
+    "size": 920
+  },
+  {
+    "path": "Dockerfile",
+    "extension": "",
+    "size": 830
+  },
+  {
+    "path": "ENTITY_CLUSTER_PLAN.md",
+    "extension": ".md",
+    "size": 3980
+  },
+  {
+    "path": "ENTITY_COMPLETION_CHECKLIST.md",
+    "extension": ".md",
+    "size": 3311
+  },
+  {
+    "path": "ENTITY_CONTENT_ROADMAP.md",
+    "extension": ".md",
+    "size": 19924
+  },
+  {
+    "path": "ENTITY_GAP_REPORT.md",
+    "extension": ".md",
+    "size": 745
+  },
+  {
+    "path": "ENTITY_MATURITY_MATRIX.md",
+    "extension": ".md",
+    "size": 3979
+  },
+  {
+    "path": "ENTITY_PRIORITY_SCORE.md",
+    "extension": ".md",
+    "size": 2005
+  },
+  {
+    "path": "ENTITY_RELATIONSHIP_GRAPH.md",
+    "extension": ".md",
+    "size": 1312
+  },
+  {
+    "path": "EXECUTION-001_Summary.md",
+    "extension": ".md",
+    "size": 2044
+  },
+  {
+    "path": "FAILED_TEST_ANALYSIS.md",
+    "extension": ".md",
+    "size": 11744
+  },
+  {
+    "path": "FILE_PATH_INDEX.md",
+    "extension": ".md",
+    "size": 27275
+  },
+  {
+    "path": "FINAL_PR13_APPROVAL_CHECK.md",
+    "extension": ".md",
+    "size": 1119
+  },
+  {
+    "path": "FORMAT_BATCH01_GENERATION_REPORT.md",
+    "extension": ".md",
+    "size": 2010
+  },
+  {
+    "path": "FORMAT_BATCH02_GENERATION_REPORT.md",
+    "extension": ".md",
+    "size": 1587
+  },
+  {
+    "path": "FORMAT_BATCH03_GENERATION_REPORT.md",
+    "extension": ".md",
+    "size": 2959
+  },
+  {
+    "path": "FORMAT_ENTITY_DATABASE.md",
+    "extension": ".md",
+    "size": 35936
+  },
+  {
+    "path": "FORMAT_INTERNAL_LINKING_STRATEGY.md",
+    "extension": ".md",
+    "size": 6186
+  },
+  {
+    "path": "FORMAT_KNOWLEDGE_COVERAGE_AUDIT.md",
+    "extension": ".md",
+    "size": 6128
+  },
+  {
+    "path": "FORMAT_KNOWLEDGE_GENERATOR_DESIGN.md",
+    "extension": ".md",
+    "size": 7674
+  },
+  {
+    "path": "FORMAT_KNOWLEDGE_GENERATOR_IMPLEMENTATION_REPORT.md",
+    "extension": ".md",
+    "size": 2722
+  },
+  {
+    "path": "FORMAT_KNOWLEDGE_GENERATOR_OVERRIDE_REPORT.md",
+    "extension": ".md",
+    "size": 2437
+  },
+  {
+    "path": "FORMAT_KNOWLEDGE_GENERATOR_QUALITY_REPORT.md",
+    "extension": ".md",
+    "size": 10826
+  },
+  {
+    "path": "FORMAT_KNOWLEDGE_SERVICE_IMPORT_INVESTIGATION.md",
+    "extension": ".md",
+    "size": 2391
+  },
+  {
+    "path": "FORMAT_KNOWLEDGE_SERVICE_RESTORATION_REPORT.md",
+    "extension": ".md",
+    "size": 1417
+  },
+  {
+    "path": "FORMAT_MASTER_DATABASE_DESIGN.md",
+    "extension": ".md",
+    "size": 7171
+  },
+  {
+    "path": "FORMAT_MASTER_DATABASE_IMPLEMENTATION_PLAN.md",
+    "extension": ".md",
+    "size": 7634
+  },
+  {
+    "path": "FORMAT_MASTER_DATABASE_IMPLEMENTATION_REPORT.md",
+    "extension": ".md",
+    "size": 1552
+  },
+  {
+    "path": "FRONTEND_REGRESSION_CURRENT_STATE.png",
+    "extension": ".png",
+    "size": 495848
+  },
+  {
+    "path": "FRONTEND_REGRESSION_FRESH_STATE.png",
+    "extension": ".png",
+    "size": 494668
+  },
+  {
+    "path": "FRONTEND_REGRESSION_FRESH_STATE2.png",
+    "extension": ".png",
+    "size": 494815
+  },
+  {
+    "path": "FRONTEND_REGRESSION_TEST1_INITIAL_LOAD.png",
+    "extension": ".png",
+    "size": 497308
+  },
+  {
+    "path": "FRONTEND_REGRESSION_TEST2_SINGLE_UPLOAD.png",
+    "extension": ".png",
+    "size": 721552
+  },
+  {
+    "path": "FRONTEND_REGRESSION_TEST3_MULTI_UPLOAD.png",
+    "extension": ".png",
+    "size": 495894
+  },
+  {
+    "path": "FRONTEND_REGRESSION_UPLOAD_AFTER_FILESET.png",
+    "extension": ".png",
+    "size": 495894
+  },
+  {
+    "path": "FRONTEND_REGRESSION_UPLOAD_AFTER_FORMAT.png",
+    "extension": ".png",
+    "size": 489362
+  },
+  {
+    "path": "FRONTEND_REGRESSION_UPLOAD_STATE.png",
+    "extension": ".png",
+    "size": 492689
+  },
+  {
+    "path": "GA4_PRODUCTION_FIX_REPORT.md",
+    "extension": ".md",
+    "size": 2113
+  },
+  {
+    "path": "GA4_STATUS.md",
+    "extension": ".md",
+    "size": 5712
+  },
+  {
+    "path": "GAP_ANALYSIS.md",
+    "extension": ".md",
+    "size": 5624
+  },
+  {
+    "path": "IMPLEMENTATION_PLAN.md",
+    "extension": ".md",
+    "size": 5656
+  },
+  {
+    "path": "INDEXABILITY_REPORT.md",
+    "extension": ".md",
+    "size": 9550
+  },
+  {
+    "path": "INTERNAL_LINK_AUDIT.md",
+    "extension": ".md",
+    "size": 21531
+  },
+  {
+    "path": "INTERNAL_LINK_NORMALIZATION_REPORT.md",
+    "extension": ".md",
+    "size": 1381
+  },
+  {
+    "path": "KEYWORD_PRIORITY_DATABASE.md",
+    "extension": ".md",
+    "size": 7287
+  },
+  {
+    "path": "LEARNING_CENTER_ARCHITECTURE_AUDIT.md",
+    "extension": ".md",
+    "size": 27770
+  },
+  {
+    "path": "LEARNING_CENTER_CONTENT_AUDIT.md",
+    "extension": ".md",
+    "size": 13019
+  },
+  {
+    "path": "LEARNING_CENTER_DATA_ARCHITECTURE.md",
+    "extension": ".md",
+    "size": 39483
+  },
+  {
+    "path": "LEARNING_CENTER_FOUNDATION_REPORT.md",
+    "extension": ".md",
+    "size": 995
+  },
+  {
+    "path": "LEARNING_CENTER_ROUTING_REPORT.md",
+    "extension": ".md",
+    "size": 1254
+  },
+  {
+    "path": "LEARNING_CENTER_SCHEMA_REPORT.md",
+    "extension": ".md",
+    "size": 938
+  },
+  {
+    "path": "LEARNING_CENTER_SEO_AUDIT.md",
+    "extension": ".md",
+    "size": 8319
+  },
+  {
+    "path": "LEARNING_CENTER_SITEMAP_REPORT.md",
+    "extension": ".md",
+    "size": 1485
+  },
+  {
+    "path": "LEARNING_CENTER_TEMPLATE_REPORT.md",
+    "extension": ".md",
+    "size": 1093
+  },
+  {
+    "path": "METADATA_COVERAGE.md",
+    "extension": ".md",
+    "size": 23488
+  },
+  {
+    "path": "MOBILE_DOWNLOAD_FAILURE_REPORT.md",
+    "extension": ".md",
+    "size": 6660
+  },
+  {
+    "path": "MOBILE_DOWNLOAD_FIX_REPORT.md",
+    "extension": ".md",
+    "size": 1521
+  },
+  {
+    "path": "NEXT.md",
+    "extension": ".md",
+    "size": 2241
+  },
+  {
+    "path": "OBSERVABILITY_REPORT.md",
+    "extension": ".md",
+    "size": 3701
+  },
+  {
+    "path": "PNG_KNOWLEDGE_CONTENT_CREATION_REPORT.md",
+    "extension": ".md",
+    "size": 945
+  },
+  {
+    "path": "PNG_KNOWLEDGE_RENDER_AUDIT.md",
+    "extension": ".md",
+    "size": 2317
+  },
+  {
+    "path": "PNG_TOPIC_CLUSTER_BLUEPRINT.md",
+    "extension": ".md",
+    "size": 11249
+  },
+  {
+    "path": "PNG_TOPIC_CLUSTER_IMPLEMENTATION_REPORT.md",
+    "extension": ".md",
+    "size": 2020
+  },
+  {
+    "path": "PROJECT_RULES.md",
+    "extension": ".md",
+    "size": 0
+  },
+  {
+    "path": "QUICK_REFERENCE.md",
+    "extension": ".md",
+    "size": 17353
+  },
+  {
+    "path": "RC1_2_CONVERTER_JSON_REPORT.md",
+    "extension": ".md",
+    "size": 77
+  },
+  {
+    "path": "RC3_SIGN_OFF_REPORT.md",
+    "extension": ".md",
+    "size": 6683
+  },
+  {
+    "path": "README.md",
+    "extension": ".md",
+    "size": 2668
+  },
+  {
+    "path": "RECOMMENDATION_ENDPOINT_FIX_VALIDATION.md",
+    "extension": ".md",
+    "size": 1285
+  },
+  {
+    "path": "REFERENCE_ANALYSIS.md",
+    "extension": ".md",
+    "size": 6166
+  },
+  {
+    "path": "RELATED_KNOWLEDGE_IMPLEMENTATION_REPORT.md",
+    "extension": ".md",
+    "size": 1133
+  },
+  {
+    "path": "RELEASE_CANDIDATE_REVIEW.md",
+    "extension": ".md",
+    "size": 8698
+  },
+  {
+    "path": "ROADMAP.md",
+    "extension": ".md",
+    "size": 0
+  },
+  {
+    "path": "SEARCH_CONSOLE_IMPLEMENTATION_REPORT.md",
+    "extension": ".md",
+    "size": 1984
+  },
+  {
+    "path": "SEARCH_CONSOLE_READINESS_REPORT.md",
+    "extension": ".md",
+    "size": 4669
+  },
+  {
+    "path": "SEARCH_CONSOLE_STATUS.md",
+    "extension": ".md",
+    "size": 3509
+  },
+  {
+    "path": "SEO_FACTORY_READINESS_REPORT.md",
+    "extension": ".md",
+    "size": 7410
+  },
+  {
+    "path": "SEO_GROWTH_ENGINE_ARCHITECTURE.md",
+    "extension": ".md",
+    "size": 10444
+  },
+  {
+    "path": "SEO_GROWTH_READINESS_SCORE.md",
+    "extension": ".md",
+    "size": 8507
+  },
+  {
+    "path": "SEO_GROWTH_SPRINT2_SUMMARY.md",
+    "extension": ".md",
+    "size": 1053
+  },
+  {
+    "path": "SEO_GROWTH_SPRINT4_SUMMARY.md",
+    "extension": ".md",
+    "size": 1030
+  },
+  {
+    "path": "SEO_HEALTH_ENGINE_REPORT.md",
+    "extension": ".md",
+    "size": 1087
+  },
+  {
+    "path": "SEO_HEALTH_SCORE.md",
+    "extension": ".md",
+    "size": 1958
+  },
+  {
+    "path": "SEO_HEALTH_SUMMARY.md",
+    "extension": ".md",
+    "size": 1184
+  },
+  {
+    "path": "SEO_OPERATIONS_DASHBOARD_REPORT.md",
+    "extension": ".md",
+    "size": 2718
+  },
+  {
+    "path": "SEO_OPPORTUNITY_REPORT.md",
+    "extension": ".md",
+    "size": 81627
+  },
+  {
+    "path": "SEO_PRIORITY_QUEUE.md",
+    "extension": ".md",
+    "size": 5856
+  },
+  {
+    "path": "SEO_QUICK_WINS.md",
+    "extension": ".md",
+    "size": 914
+  },
+  {
+    "path": "SEO_SPRINT_02B_COMMIT_RESULT.md",
+    "extension": ".md",
+    "size": 688
+  },
+  {
+    "path": "SERVICES_EXPLORATION_SUMMARY.md",
+    "extension": ".md",
+    "size": 25142
+  },
+  {
+    "path": "SPRINT4_VALIDATION.md",
+    "extension": ".md",
+    "size": 2234
+  },
+  {
+    "path": "SPRINT5_VALIDATION_REPORT.md",
+    "extension": ".md",
+    "size": 7585
+  },
+  {
+    "path": "SPRINT_E1_CONVERTER_EXPANSION_ROADMAP.md",
+    "extension": ".md",
+    "size": 34064
+  },
+  {
+    "path": "SPRINT_GROWTH-006_COMPLETION.md",
+    "extension": ".md",
+    "size": 9876
+  },
+  {
+    "path": "STREAMING_PATH_ANALYSIS.md",
+    "extension": ".md",
+    "size": 20230
+  },
+  {
+    "path": "TECHNICAL_SEO_AUDIT.md",
+    "extension": ".md",
+    "size": 10623
+  },
+  {
+    "path": "TODO.md",
+    "extension": ".md",
+    "size": 3010
+  },
+  {
+    "path": "TOP10_SEO_OPTIMIZATION_REPORT.md",
+    "extension": ".md",
+    "size": 3570
+  },
+  {
+    "path": "TOP_100_LONGTAIL_KEYWORDS.md",
+    "extension": ".md",
+    "size": 5152
+  },
+  {
+    "path": "UI_PHASE_007_DESKTOP.png",
+    "extension": ".png",
+    "size": 358391
+  },
+  {
+    "path": "UI_PHASE_007_MOBILE.png",
+    "extension": ".png",
+    "size": 402643
+  },
+  {
+    "path": "UI_PHASE_008_DESKTOP.png",
+    "extension": ".png",
+    "size": 326506
+  },
+  {
+    "path": "UI_PHASE_008_MOBILE.png",
+    "extension": ".png",
+    "size": 341200
+  },
+  {
+    "path": "UI_PHASE_009_DESKTOP.png",
+    "extension": ".png",
+    "size": 298563
+  },
+  {
+    "path": "UI_PHASE_009_MOBILE.png",
+    "extension": ".png",
+    "size": 329750
+  },
+  {
+    "path": "UI_VALIDATION_RESULT.md",
+    "extension": ".md",
+    "size": 616
+  },
+  {
+    "path": "UPLOAD_CARD_PRODUCTION_HTML_FINAL_FIX_REPORT.md",
+    "extension": ".md",
+    "size": 923
+  },
+  {
+    "path": "WEBP_KNOWLEDGE_CONTENT_CREATION_REPORT.md",
+    "extension": ".md",
+    "size": 1485
+  },
+  {
+    "path": "XLSX_TEST_FIXTURE_UPDATE.md",
+    "extension": ".md",
+    "size": 956
+  },
+  {
+    "path": "_make_samples.py",
+    "extension": ".py",
+    "size": 1089
+  },
+  {
+    "path": "actions_raw.json",
+    "extension": ".json",
+    "size": 41
+  },
+  {
+    "path": "addChatCompletion_matches.txt",
+    "extension": ".txt",
+    "size": 2213
+  },
+  {
+    "path": "analyze_contracts.py",
+    "extension": ".py",
+    "size": 1787
+  },
+  {
+    "path": "analyze_converters.py",
+    "extension": ".py",
+    "size": 1447
+  },
+  {
+    "path": "app.zip",
+    "extension": ".zip",
+    "size": 109476
+  },
+  {
+    "path": "app/bootstrap.py",
+    "extension": ".py",
+    "size": 580
+  },
+  {
+    "path": "app/core/engine_registry.py",
+    "extension": ".py",
+    "size": 0
+  },
+  {
+    "path": "app/core/logging_config.py",
+    "extension": ".py",
+    "size": 1602
+  },
+  {
+    "path": "app/core/observability.py",
+    "extension": ".py",
+    "size": 14403
+  },
+  {
+    "path": "app/core/register_default.py",
+    "extension": ".py",
+    "size": 927
+  },
+  {
+    "path": "app/core/registry.py",
+    "extension": ".py",
+    "size": 1350
+  },
+  {
+    "path": "app/core/settings.py",
+    "extension": ".py",
+    "size": 3457
+  },
+  {
+    "path": "app/core/template_context.py",
+    "extension": ".py",
+    "size": 766
+  },
+  {
+    "path": "app/core/templates.py",
+    "extension": ".py",
+    "size": 526
+  },
+  {
+    "path": "app/data/articles/comparisons/mp3-vs-wav-explained.json",
+    "extension": ".json",
+    "size": 2797
+  },
+  {
+    "path": "app/data/articles/comparisons/png-vs-jpg-explained.json",
+    "extension": ".json",
+    "size": 2930
+  },
+  {
+    "path": "app/data/articles/comparisons/png-vs-jpg.json",
+    "extension": ".json",
+    "size": 8305
+  },
+  {
+    "path": "app/data/articles/comparisons/png-vs-webp.json",
+    "extension": ".json",
+    "size": 2771
+  },
+  {
+    "path": "app/data/articles/comparisons/webp-vs-png.json",
+    "extension": ".json",
+    "size": 8579
+  },
+  {
+    "path": "app/data/articles/format-specific/what-is-svg.json",
+    "extension": ".json",
+    "size": 10510
+  },
+  {
+    "path": "app/data/articles/fundamentals/getting-started.json",
+    "extension": ".json",
+    "size": 707
+  },
+  {
+    "path": "app/data/articles/fundamentals/lossy-vs-lossless-compression.json",
+    "extension": ".json",
+    "size": 9264
+  },
+  {
+    "path": "app/data/articles/fundamentals/png.json",
+    "extension": ".json",
+    "size": 3876
+  },
+  {
+    "path": "app/data/articles/fundamentals/raster-vs-vector-images.json",
+    "extension": ".json",
+    "size": 8915
+  },
+  {
+    "path": "app/data/articles/fundamentals/understanding-file-formats.json",
+    "extension": ".json",
+    "size": 3190
+  },
+  {
+    "path": "app/data/articles/fundamentals/understanding-image-quality.json",
+    "extension": ".json",
+    "size": 3031
+  },
+  {
+    "path": "app/data/articles/fundamentals/what-is-file-conversion.json",
+    "extension": ".json",
+    "size": 8865
+  },
+  {
+    "path": "app/data/articles/fundamentals/what-is-png.json",
+    "extension": ".json",
+    "size": 2666
+  },
+  {
+    "path": "app/data/articles/guides/audio-quality-prep.json",
+    "extension": ".json",
+    "size": 2846
+  },
+  {
+    "path": "app/data/articles/guides/batch-conversion-workflow.json",
+    "extension": ".json",
+    "size": 3045
+  },
+  {
+    "path": "app/data/articles/guides/how-to-convert-jpg-to-png.json",
+    "extension": ".json",
+    "size": 8385
+  },
+  {
+    "path": "app/data/articles/guides/how-to-convert-mp4-to-mp3.json",
+    "extension": ".json",
+    "size": 8313
+  },
+  {
+    "path": "app/data/articles/guides/how-to-convert-pdf-to-jpg.json",
+    "extension": ".json",
+    "size": 8357
+  },
+  {
+    "path": "app/data/articles/guides/how-to-convert-png.json",
+    "extension": ".json",
+    "size": 2642
+  },
+  {
+    "path": "app/data/articles/guides/pdf-workflow-checklist.json",
+    "extension": ".json",
+    "size": 2901
+  },
+  {
+    "path": "app/data/articles/guides/png-compression-guide.json",
+    "extension": ".json",
+    "size": 2698
+  },
+  {
+    "path": "app/data/articles/guides/png-transparency-guide.json",
+    "extension": ".json",
+    "size": 2540
+  },
+  {
+    "path": "app/data/articles/troubleshooting/conversion-fails.json",
+    "extension": ".json",
+    "size": 2940
+  },
+  {
+    "path": "app/data/articles/troubleshooting/png-faq.json",
+    "extension": ".json",
+    "size": 2400
+  },
+  {
+    "path": "app/data/articles/troubleshooting/quality-issues.json",
+    "extension": ".json",
+    "size": 2854
+  },
+  {
+    "path": "app/data/articles/troubleshooting/why-file-conversion-fails.json",
+    "extension": ".json",
+    "size": 10136
+  },
+  {
+    "path": "app/data/certified_converters.json",
+    "extension": ".json",
+    "size": 5015
+  },
+  {
+    "path": "app/data/converters/7z-extract.contract.json",
+    "extension": ".json",
+    "size": 668
+  },
+  {
+    "path": "app/data/converters/7z-extract.json",
+    "extension": ".json",
+    "size": 6088
+  },
+  {
+    "path": "app/data/converters/avif-to-jpg.contract.json",
+    "extension": ".json",
+    "size": 671
+  },
+  {
+    "path": "app/data/converters/avif-to-jpg.json",
+    "extension": ".json",
+    "size": 6593
+  },
+  {
+    "path": "app/data/converters/bmp-to-jpg.contract.json",
+    "extension": ".json",
+    "size": 649
+  },
+  {
+    "path": "app/data/converters/bmp-to-jpg.json",
+    "extension": ".json",
+    "size": 6369
+  },
+  {
+    "path": "app/data/converters/bmp-to-jpg.metadata.json",
+    "extension": ".json",
+    "size": 608
+  },
+  {
+    "path": "app/data/converters/bmp-to-png.json",
+    "extension": ".json",
+    "size": 5813
+  },
+  {
+    "path": "app/data/converters/bmp-to-webp.json",
+    "extension": ".json",
+    "size": 5830
+  },
+  {
+    "path": "app/data/converters/docx-to-jpg.contract.json",
+    "extension": ".json",
+    "size": 751
+  },
+  {
+    "path": "app/data/converters/docx-to-jpg.json",
+    "extension": ".json",
+    "size": 6105
+  },
+  {
+    "path": "app/data/converters/docx-to-pdf.contract.json",
+    "extension": ".json",
+    "size": 765
+  },
+  {
+    "path": "app/data/converters/docx-to-pdf.json",
+    "extension": ".json",
+    "size": 5770
+  },
+  {
+    "path": "app/data/converters/docx-to-ppt.contract.json",
+    "extension": ".json",
+    "size": 758
+  },
+  {
+    "path": "app/data/converters/docx-to-ppt.json",
+    "extension": ".json",
+    "size": 6290
+  },
+  {
+    "path": "app/data/converters/docx-to-xlsx.contract.json",
+    "extension": ".json",
+    "size": 764
+  },
+  {
+    "path": "app/data/converters/docx-to-xlsx.json",
+    "extension": ".json",
+    "size": 6276
+  },
+  {
+    "path": "app/data/converters/excel-to-pdf.contract.json",
+    "extension": ".json",
+    "size": 727
+  },
+  {
+    "path": "app/data/converters/excel-to-pdf.json",
+    "extension": ".json",
+    "size": 6750
+  },
+  {
+    "path": "app/data/converters/excel-to-pdf.metadata.json",
+    "extension": ".json",
+    "size": 724
+  },
+  {
+    "path": "app/data/converters/gz-extract.contract.json",
+    "extension": ".json",
+    "size": 712
+  },
+  {
+    "path": "app/data/converters/gz-extract.json",
+    "extension": ".json",
+    "size": 6012
+  },
+  {
+    "path": "app/data/converters/heic-to-jpg.contract.json",
+    "extension": ".json",
+    "size": 676
+  },
+  {
+    "path": "app/data/converters/heic-to-jpg.json",
+    "extension": ".json",
+    "size": 6571
+  },
+  {
+    "path": "app/data/converters/heic-to-jpg.metadata.json",
+    "extension": ".json",
+    "size": 631
+  },
+  {
+    "path": "app/data/converters/jpg-to-ico.json",
+    "extension": ".json",
+    "size": 5549
+  },
+  {
+    "path": "app/data/converters/jpg-to-pdf.json",
+    "extension": ".json",
+    "size": 6908
+  },
+  {
+    "path": "app/data/converters/jpg-to-png.contract.json",
+    "extension": ".json",
+    "size": 681
+  },
+  {
+    "path": "app/data/converters/jpg-to-png.json",
+    "extension": ".json",
+    "size": 6798
+  },
+  {
+    "path": "app/data/converters/jpg-to-tiff.json",
+    "extension": ".json",
+    "size": 5638
+  },
+  {
+    "path": "app/data/converters/jpg-to-webp.json",
+    "extension": ".json",
+    "size": 6587
+  },
+  {
+    "path": "app/data/converters/mp4-to-aac.contract.json",
+    "extension": ".json",
+    "size": 654
+  },
+  {
+    "path": "app/data/converters/mp4-to-aac.json",
+    "extension": ".json",
+    "size": 6453
+  },
+  {
+    "path": "app/data/converters/mp4-to-flac.contract.json",
+    "extension": ".json",
+    "size": 661
+  },
+  {
+    "path": "app/data/converters/mp4-to-flac.json",
+    "extension": ".json",
+    "size": 6471
+  },
+  {
+    "path": "app/data/converters/mp4-to-m4a.contract.json",
+    "extension": ".json",
+    "size": 654
+  },
+  {
+    "path": "app/data/converters/mp4-to-m4a.json",
+    "extension": ".json",
+    "size": 6422
+  },
+  {
+    "path": "app/data/converters/mp4-to-mp3.contract.json",
+    "extension": ".json",
+    "size": 654
+  },
+  {
+    "path": "app/data/converters/mp4-to-mp3.json",
+    "extension": ".json",
+    "size": 6544
+  },
+  {
+    "path": "app/data/converters/mp4-to-ogg.contract.json",
+    "extension": ".json",
+    "size": 654
+  },
+  {
+    "path": "app/data/converters/mp4-to-ogg.json",
+    "extension": ".json",
+    "size": 6416
+  },
+  {
+    "path": "app/data/converters/mp4-to-wav.contract.json",
+    "extension": ".json",
+    "size": 654
+  },
+  {
+    "path": "app/data/converters/mp4-to-wav.json",
+    "extension": ".json",
+    "size": 6417
+  },
+  {
+    "path": "app/data/converters/ods-to-xlsx.contract.json",
+    "extension": ".json",
+    "size": 728
+  },
+  {
+    "path": "app/data/converters/ods-to-xlsx.json",
+    "extension": ".json",
+    "size": 5622
+  },
+  {
+    "path": "app/data/converters/odt-to-pdf.contract.json",
+    "extension": ".json",
+    "size": 700
+  },
+  {
+    "path": "app/data/converters/odt-to-pdf.json",
+    "extension": ".json",
+    "size": 5683
+  },
+  {
+    "path": "app/data/converters/pdf-compress.contract.json",
+    "extension": ".json",
+    "size": 676
+  },
+  {
+    "path": "app/data/converters/pdf-compress.json",
+    "extension": ".json",
+    "size": 6093
+  },
+  {
+    "path": "app/data/converters/pdf-merge.contract.json",
+    "extension": ".json",
+    "size": 666
+  },
+  {
+    "path": "app/data/converters/pdf-merge.json",
+    "extension": ".json",
+    "size": 5955
+  },
+  {
+    "path": "app/data/converters/pdf-split.contract.json",
+    "extension": ".json",
+    "size": 658
+  },
+  {
+    "path": "app/data/converters/pdf-split.json",
+    "extension": ".json",
+    "size": 6007
+  },
+  {
+    "path": "app/data/converters/pdf-to-docx.contract.json",
+    "extension": ".json",
+    "size": 685
+  },
+  {
+    "path": "app/data/converters/pdf-to-docx.json",
+    "extension": ".json",
+    "size": 5856
+  },
+  {
+    "path": "app/data/converters/pdf-to-excel.contract.json",
+    "extension": ".json",
+    "size": 680
+  },
+  {
+    "path": "app/data/converters/pdf-to-excel.json",
+    "extension": ".json",
+    "size": 6727
+  },
+  {
+    "path": "app/data/converters/pdf-to-excel.metadata.json",
+    "extension": ".json",
+    "size": 642
+  },
+  {
+    "path": "app/data/converters/pdf-to-jpg.json",
+    "extension": ".json",
+    "size": 6656
+  },
+  {
+    "path": "app/data/converters/pdf-to-odt.contract.json",
+    "extension": ".json",
+    "size": 695
+  },
+  {
+    "path": "app/data/converters/pdf-to-odt.json",
+    "extension": ".json",
+    "size": 5636
+  },
+  {
+    "path": "app/data/converters/pdf-to-ppt.contract.json",
+    "extension": ".json",
+    "size": 678
+  },
+  {
+    "path": "app/data/converters/pdf-to-ppt.json",
+    "extension": ".json",
+    "size": 6803
+  },
+  {
+    "path": "app/data/converters/pdf-to-ppt.metadata.json",
+    "extension": ".json",
+    "size": 645
+  },
+  {
+    "path": "app/data/converters/pdf-to-pptx.contract.json",
+    "extension": ".json",
+    "size": 686
+  },
+  {
+    "path": "app/data/converters/pdf-to-pptx.json",
+    "extension": ".json",
+    "size": 5648
+  },
+  {
+    "path": "app/data/converters/pdf-to-word.contract.json",
+    "extension": ".json",
+    "size": 676
+  },
+  {
+    "path": "app/data/converters/pdf-to-word.json",
+    "extension": ".json",
+    "size": 6811
+  },
+  {
+    "path": "app/data/converters/pdf-to-word.metadata.json",
+    "extension": ".json",
+    "size": 629
+  },
+  {
+    "path": "app/data/converters/pdf-to-xlsx.contract.json",
+    "extension": ".json",
+    "size": 703
+  },
+  {
+    "path": "app/data/converters/pdf-to-xlsx.json",
+    "extension": ".json",
+    "size": 5745
+  },
+  {
+    "path": "app/data/converters/png-to-bmp.json",
+    "extension": ".json",
+    "size": 5953
+  },
+  {
+    "path": "app/data/converters/png-to-ico.json",
+    "extension": ".json",
+    "size": 6375
+  },
+  {
+    "path": "app/data/converters/png-to-jpg.contract.json",
+    "extension": ".json",
+    "size": 662
+  },
+  {
+    "path": "app/data/converters/png-to-jpg.json",
+    "extension": ".json",
+    "size": 6114
+  },
+  {
+    "path": "app/data/converters/png-to-tiff.json",
+    "extension": ".json",
+    "size": 5823
+  },
+  {
+    "path": "app/data/converters/png-to-webp.contract.json",
+    "extension": ".json",
+    "size": 656
+  },
+  {
+    "path": "app/data/converters/png-to-webp.json",
+    "extension": ".json",
+    "size": 7569
+  },
+  {
+    "path": "app/data/converters/ppt-to-docx.contract.json",
+    "extension": ".json",
+    "size": 716
+  },
+  {
+    "path": "app/data/converters/ppt-to-docx.json",
+    "extension": ".json",
+    "size": 6149
+  },
+  {
+    "path": "app/data/converters/ppt-to-jpg.contract.json",
+    "extension": ".json",
+    "size": 706
+  },
+  {
+    "path": "app/data/converters/ppt-to-jpg.json",
+    "extension": ".json",
+    "size": 6115
+  },
+  {
+    "path": "app/data/converters/ppt-to-pdf.contract.json",
+    "extension": ".json",
+    "size": 688
+  },
+  {
+    "path": "app/data/converters/ppt-to-pdf.json",
+    "extension": ".json",
+    "size": 6838
+  },
+  {
+    "path": "app/data/converters/ppt-to-pdf.metadata.json",
+    "extension": ".json",
+    "size": 740
+  },
+  {
+    "path": "app/data/converters/ppt-to-xlsx.contract.json",
+    "extension": ".json",
+    "size": 719
+  },
+  {
+    "path": "app/data/converters/ppt-to-xlsx.json",
+    "extension": ".json",
+    "size": 6172
+  },
+  {
+    "path": "app/data/converters/pptx-to-pdf.contract.json",
+    "extension": ".json",
+    "size": 753
+  },
+  {
+    "path": "app/data/converters/pptx-to-pdf.json",
+    "extension": ".json",
+    "size": 5695
+  },
+  {
+    "path": "app/data/converters/rar-extract.contract.json",
+    "extension": ".json",
+    "size": 704
+  },
+  {
+    "path": "app/data/converters/rar-extract.json",
+    "extension": ".json",
+    "size": 6087
+  },
+  {
+    "path": "app/data/converters/svg-to-png.contract.json",
+    "extension": ".json",
+    "size": 655
+  },
+  {
+    "path": "app/data/converters/svg-to-png.json",
+    "extension": ".json",
+    "size": 6577
+  },
+  {
+    "path": "app/data/converters/svg-to-png.metadata.json",
+    "extension": ".json",
+    "size": 612
+  },
+  {
+    "path": "app/data/converters/tar-extract.contract.json",
+    "extension": ".json",
+    "size": 667
+  },
+  {
+    "path": "app/data/converters/tar-extract.json",
+    "extension": ".json",
+    "size": 6130
+  },
+  {
+    "path": "app/data/converters/tiff-to-jpg.contract.json",
+    "extension": ".json",
+    "size": 658
+  },
+  {
+    "path": "app/data/converters/tiff-to-jpg.json",
+    "extension": ".json",
+    "size": 5616
+  },
+  {
+    "path": "app/data/converters/tiff-to-jpg.metadata.json",
+    "extension": ".json",
+    "size": 617
+  },
+  {
+    "path": "app/data/converters/tiff-to-png.json",
+    "extension": ".json",
+    "size": 5597
+  },
+  {
+    "path": "app/data/converters/webp-to-ico.json",
+    "extension": ".json",
+    "size": 5579
+  },
+  {
+    "path": "app/data/converters/webp-to-jpg.json",
+    "extension": ".json",
+    "size": 6582
+  },
+  {
+    "path": "app/data/converters/webp-to-png.contract.json",
+    "extension": ".json",
+    "size": 658
+  },
+  {
+    "path": "app/data/converters/webp-to-png.json",
+    "extension": ".json",
+    "size": 7217
+  },
+  {
+    "path": "app/data/converters/webp-to-tiff.json",
+    "extension": ".json",
+    "size": 5634
+  },
+  {
+    "path": "app/data/converters/word-to-pdf.json",
+    "extension": ".json",
+    "size": 6612
+  },
+  {
+    "path": "app/data/converters/word-to-pdf.metadata.json",
+    "extension": ".json",
+    "size": 715
+  },
+  {
+    "path": "app/data/converters/xlsx-to-docx.contract.json",
+    "extension": ".json",
+    "size": 773
+  },
+  {
+    "path": "app/data/converters/xlsx-to-docx.json",
+    "extension": ".json",
+    "size": 6156
+  },
+  {
+    "path": "app/data/converters/xlsx-to-ods.contract.json",
+    "extension": ".json",
+    "size": 765
+  },
+  {
+    "path": "app/data/converters/xlsx-to-ods.json",
+    "extension": ".json",
+    "size": 5685
+  },
+  {
+    "path": "app/data/converters/xlsx-to-pdf.contract.json",
+    "extension": ".json",
+    "size": 736
+  },
+  {
+    "path": "app/data/converters/xlsx-to-pdf.json",
+    "extension": ".json",
+    "size": 5705
+  },
+  {
+    "path": "app/data/converters/xlsx-to-ppt.contract.json",
+    "extension": ".json",
+    "size": 770
+  },
+  {
+    "path": "app/data/converters/xlsx-to-ppt.json",
+    "extension": ".json",
+    "size": 6248
+  },
+  {
+    "path": "app/data/converters/zip-extract.contract.json",
+    "extension": ".json",
+    "size": 702
+  },
+  {
+    "path": "app/data/converters/zip-extract.json",
+    "extension": ".json",
+    "size": 6164
+  },
+  {
+    "path": "app/data/format_knowledge/aac.json",
+    "extension": ".json",
+    "size": 4666
+  },
+  {
+    "path": "app/data/format_knowledge/avif.json",
+    "extension": ".json",
+    "size": 6166
+  },
+  {
+    "path": "app/data/format_knowledge/bmp.json",
+    "extension": ".json",
+    "size": 5661
+  },
+  {
+    "path": "app/data/format_knowledge/csv.json",
+    "extension": ".json",
+    "size": 4254
+  },
+  {
+    "path": "app/data/format_knowledge/doc.json",
+    "extension": ".json",
+    "size": 4979
+  },
+  {
+    "path": "app/data/format_knowledge/docx.json",
+    "extension": ".json",
+    "size": 5164
+  },
+  {
+    "path": "app/data/format_knowledge/flac.json",
+    "extension": ".json",
+    "size": 4656
+  },
+  {
+    "path": "app/data/format_knowledge/gif.json",
+    "extension": ".json",
+    "size": 5955
+  },
+  {
+    "path": "app/data/format_knowledge/heic.json",
+    "extension": ".json",
+    "size": 6039
+  },
+  {
+    "path": "app/data/format_knowledge/ico.json",
+    "extension": ".json",
+    "size": 6115
+  },
+  {
+    "path": "app/data/format_knowledge/jpg.json",
+    "extension": ".json",
+    "size": 5171
+  },
+  {
+    "path": "app/data/format_knowledge/m4a.json",
+    "extension": ".json",
+    "size": 4636
+  },
+  {
+    "path": "app/data/format_knowledge/mp3.json",
+    "extension": ".json",
+    "size": 4672
+  },
+  {
+    "path": "app/data/format_knowledge/odp.json",
+    "extension": ".json",
+    "size": 4210
+  },
+  {
+    "path": "app/data/format_knowledge/ods.json",
+    "extension": ".json",
+    "size": 4428
+  },
+  {
+    "path": "app/data/format_knowledge/odt.json",
+    "extension": ".json",
+    "size": 4754
+  },
+  {
+    "path": "app/data/format_knowledge/ogg.json",
+    "extension": ".json",
+    "size": 4620
+  },
+  {
+    "path": "app/data/format_knowledge/pdf.json",
+    "extension": ".json",
+    "size": 5158
+  },
+  {
+    "path": "app/data/format_knowledge/png.json",
+    "extension": ".json",
+    "size": 5141
+  },
+  {
+    "path": "app/data/format_knowledge/ppt.json",
+    "extension": ".json",
+    "size": 4422
+  },
+  {
+    "path": "app/data/format_knowledge/pptx.json",
+    "extension": ".json",
+    "size": 4635
+  },
+  {
+    "path": "app/data/format_knowledge/rtf.json",
+    "extension": ".json",
+    "size": 4572
+  },
+  {
+    "path": "app/data/format_knowledge/svg.json",
+    "extension": ".json",
+    "size": 6184
+  },
+  {
+    "path": "app/data/format_knowledge/tiff.json",
+    "extension": ".json",
+    "size": 6284
+  },
+  {
+    "path": "app/data/format_knowledge/txt.json",
+    "extension": ".json",
+    "size": 4570
+  },
+  {
+    "path": "app/data/format_knowledge/wav.json",
+    "extension": ".json",
+    "size": 4600
+  },
+  {
+    "path": "app/data/format_knowledge/webp.json",
+    "extension": ".json",
+    "size": 5225
+  },
+  {
+    "path": "app/data/format_knowledge/xls.json",
+    "extension": ".json",
+    "size": 4581
+  },
+  {
+    "path": "app/data/format_knowledge/xlsx.json",
+    "extension": ".json",
+    "size": 4991
+  },
+  {
+    "path": "app/data/formats/aac.json",
+    "extension": ".json",
+    "size": 659
+  },
+  {
+    "path": "app/data/formats/avif.json",
+    "extension": ".json",
+    "size": 641
+  },
+  {
+    "path": "app/data/formats/bmp.json",
+    "extension": ".json",
+    "size": 622
+  },
+  {
+    "path": "app/data/formats/csv.json",
+    "extension": ".json",
+    "size": 566
+  },
+  {
+    "path": "app/data/formats/doc.json",
+    "extension": ".json",
+    "size": 626
+  },
+  {
+    "path": "app/data/formats/docx.json",
+    "extension": ".json",
+    "size": 664
+  },
+  {
+    "path": "app/data/formats/flac.json",
+    "extension": ".json",
+    "size": 659
+  },
+  {
+    "path": "app/data/formats/gif.json",
+    "extension": ".json",
+    "size": 626
+  },
+  {
+    "path": "app/data/formats/heic.json",
+    "extension": ".json",
+    "size": 637
+  },
+  {
+    "path": "app/data/formats/ico.json",
+    "extension": ".json",
+    "size": 608
+  },
+  {
+    "path": "app/data/formats/jpg.json",
+    "extension": ".json",
+    "size": 646
+  },
+  {
+    "path": "app/data/formats/m4a.json",
+    "extension": ".json",
+    "size": 660
+  },
+  {
+    "path": "app/data/formats/mp3.json",
+    "extension": ".json",
+    "size": 690
+  },
+  {
+    "path": "app/data/formats/odp.json",
+    "extension": ".json",
+    "size": 609
+  },
+  {
+    "path": "app/data/formats/ods.json",
+    "extension": ".json",
+    "size": 638
+  },
+  {
+    "path": "app/data/formats/odt.json",
+    "extension": ".json",
+    "size": 616
+  },
+  {
+    "path": "app/data/formats/ogg.json",
+    "extension": ".json",
+    "size": 640
+  },
+  {
+    "path": "app/data/formats/pdf.json",
+    "extension": ".json",
+    "size": 640
+  },
+  {
+    "path": "app/data/formats/png.json",
+    "extension": ".json",
+    "size": 618
+  },
+  {
+    "path": "app/data/formats/ppt.json",
+    "extension": ".json",
+    "size": 621
+  },
+  {
+    "path": "app/data/formats/pptx.json",
+    "extension": ".json",
+    "size": 676
+  },
+  {
+    "path": "app/data/formats/rtf.json",
+    "extension": ".json",
+    "size": 579
+  },
+  {
+    "path": "app/data/formats/svg.json",
+    "extension": ".json",
+    "size": 629
+  },
+  {
+    "path": "app/data/formats/tiff.json",
+    "extension": ".json",
+    "size": 666
+  },
+  {
+    "path": "app/data/formats/txt.json",
+    "extension": ".json",
+    "size": 543
+  },
+  {
+    "path": "app/data/formats/wav.json",
+    "extension": ".json",
+    "size": 644
+  },
+  {
+    "path": "app/data/formats/webp.json",
+    "extension": ".json",
+    "size": 655
+  },
+  {
+    "path": "app/data/formats/xls.json",
+    "extension": ".json",
+    "size": 598
+  },
+  {
+    "path": "app/data/formats/xlsx.json",
+    "extension": ".json",
+    "size": 672
+  },
+  {
+    "path": "app/engines/__init__.py",
+    "extension": ".py",
+    "size": 383
+  },
+  {
+    "path": "app/engines/archive_engine.py",
+    "extension": ".py",
+    "size": 7804
+  },
+  {
+    "path": "app/engines/audio_engine.py",
+    "extension": ".py",
+    "size": 483
+  },
+  {
+    "path": "app/engines/base_engine.py",
+    "extension": ".py",
+    "size": 1023
+  },
+  {
+    "path": "app/engines/document_engine.py",
+    "extension": ".py",
+    "size": 18847
+  },
+  {
+    "path": "app/engines/ffmpeg_engine.py",
+    "extension": ".py",
+    "size": 2001
+  },
+  {
+    "path": "app/engines/image_engine.py",
+    "extension": ".py",
+    "size": 4299
+  },
+  {
+    "path": "app/engines/video_engine.py",
+    "extension": ".py",
+    "size": 2480
+  },
+  {
+    "path": "app/locales/en.json",
+    "extension": ".json",
+    "size": 9545
+  },
+  {
+    "path": "app/locales/es.json",
+    "extension": ".json",
+    "size": 4176
+  },
+  {
+    "path": "app/locales/fr.json",
+    "extension": ".json",
+    "size": 4466
+  },
+  {
+    "path": "app/locales/id.json",
+    "extension": ".json",
+    "size": 9887
+  },
+  {
+    "path": "app/locales/ja.json",
+    "extension": ".json",
+    "size": 11353
+  },
+  {
+    "path": "app/logs/analytics.jsonl",
+    "extension": ".jsonl",
+    "size": 5528
+  },
+  {
+    "path": "app/logs/app.log",
+    "extension": ".log",
+    "size": 837996
+  },
+  {
+    "path": "app/logs/app.log.1",
+    "extension": ".1",
+    "size": 5242837
+  },
+  {
+    "path": "app/main.py",
+    "extension": ".py",
+    "size": 16479
+  },
+  {
+    "path": "app/pipeline/__init__.py",
+    "extension": ".py",
+    "size": 376
+  },
+  {
+    "path": "app/pipeline/base_pipeline.py",
+    "extension": ".py",
+    "size": 1248
+  },
+  {
+    "path": "app/pipeline/pipeline_manager.py",
+    "extension": ".py",
+    "size": 2401
+  },
+  {
+    "path": "app/pipeline/steps/__init__.py",
+    "extension": ".py",
+    "size": 557
+  },
+  {
+    "path": "app/pipeline/steps/cleanup_step.py",
+    "extension": ".py",
+    "size": 276
+  },
+  {
+    "path": "app/pipeline/steps/convert_step.py",
+    "extension": ".py",
+    "size": 799
+  },
+  {
+    "path": "app/pipeline/steps/metadata_step.py",
+    "extension": ".py",
+    "size": 391
+  },
+  {
+    "path": "app/pipeline/steps/optimize_step.py",
+    "extension": ".py",
+    "size": 280
+  },
+  {
+    "path": "app/pipeline/steps/prepare_step.py",
+    "extension": ".py",
+    "size": 374
+  },
+  {
+    "path": "app/pipeline/steps/save_step.py",
+    "extension": ".py",
+    "size": 564
+  },
+  {
+    "path": "app/pipeline/steps/validate_step.py",
+    "extension": ".py",
+    "size": 598
+  },
+  {
+    "path": "app/plugins/__init__.py",
+    "extension": ".py",
+    "size": 1945
+  },
+  {
+    "path": "app/plugins/archive/7z_extract.py",
+    "extension": ".py",
+    "size": 2168
+  },
+  {
+    "path": "app/plugins/archive/__init__.py",
+    "extension": ".py",
+    "size": 48
+  },
+  {
+    "path": "app/plugins/archive/gz_extract.py",
+    "extension": ".py",
+    "size": 2189
+  },
+  {
+    "path": "app/plugins/archive/rar_extract.py",
+    "extension": ".py",
+    "size": 2173
+  },
+  {
+    "path": "app/plugins/archive/tar_extract.py",
+    "extension": ".py",
+    "size": 2174
+  },
+  {
+    "path": "app/plugins/archive/zip_extract.py",
+    "extension": ".py",
+    "size": 2175
+  },
+  {
+    "path": "app/plugins/audio/__init__.py",
+    "extension": ".py",
+    "size": 97
+  },
+  {
+    "path": "app/plugins/audio/mp3_to_wav.py",
+    "extension": ".py",
+    "size": 2631
+  },
+  {
+    "path": "app/plugins/base.py",
+    "extension": ".py",
+    "size": 2915
+  },
+  {
+    "path": "app/plugins/base_plugin.py",
+    "extension": ".py",
+    "size": 0
+  },
+  {
+    "path": "app/plugins/document/__init__.py",
+    "extension": ".py",
+    "size": 655
+  },
+  {
+    "path": "app/plugins/document/excel_to_pdf.py",
+    "extension": ".py",
+    "size": 1298
+  },
+  {
+    "path": "app/plugins/document/jpg_to_pdf.py",
+    "extension": ".py",
+    "size": 3008
+  },
+  {
+    "path": "app/plugins/document/ods_to_xlsx.py",
+    "extension": ".py",
+    "size": 808
+  },
+  {
+    "path": "app/plugins/document/odt_to_pdf.py",
+    "extension": ".py",
+    "size": 784
+  },
+  {
+    "path": "app/plugins/document/pdf_compress.py",
+    "extension": ".py",
+    "size": 1369
+  },
+  {
+    "path": "app/plugins/document/pdf_merge.py",
+    "extension": ".py",
+    "size": 1342
+  },
+  {
+    "path": "app/plugins/document/pdf_split.py",
+    "extension": ".py",
+    "size": 1327
+  },
+  {
+    "path": "app/plugins/document/pdf_to_excel.py",
+    "extension": ".py",
+    "size": 1459
+  },
+  {
+    "path": "app/plugins/document/pdf_to_jpg.py",
+    "extension": ".py",
+    "size": 1292
+  },
+  {
+    "path": "app/plugins/document/pdf_to_odt.py",
+    "extension": ".py",
+    "size": 796
+  },
+  {
+    "path": "app/plugins/document/pdf_to_ppt.py",
+    "extension": ".py",
+    "size": 1305
+  },
+  {
+    "path": "app/plugins/document/pdf_to_word.py",
+    "extension": ".py",
+    "size": 1287
+  },
+  {
+    "path": "app/plugins/document/ppt_to_pdf.py",
+    "extension": ".py",
+    "size": 1287
+  },
+  {
+    "path": "app/plugins/document/word_to_pdf.py",
+    "extension": ".py",
+    "size": 2813
+  },
+  {
+    "path": "app/plugins/document/xlsx_to_ods.py",
+    "extension": ".py",
+    "size": 806
+  },
+  {
+    "path": "app/plugins/image/__init__.py",
+    "extension": ".py",
+    "size": 952
+  },
+  {
+    "path": "app/plugins/image/avif_to_jpg.py",
+    "extension": ".py",
+    "size": 1282
+  },
+  {
+    "path": "app/plugins/image/bmp_to_jpg.py",
+    "extension": ".py",
+    "size": 2407
+  },
+  {
+    "path": "app/plugins/image/bmp_to_png.py",
+    "extension": ".py",
+    "size": 1119
+  },
+  {
+    "path": "app/plugins/image/bmp_to_webp.py",
+    "extension": ".py",
+    "size": 1168
+  },
+  {
+    "path": "app/plugins/image/heic_to_jpg.py",
+    "extension": ".py",
+    "size": 1314
+  },
+  {
+    "path": "app/plugins/image/jpg_to_ico.py",
+    "extension": ".py",
+    "size": 935
+  },
+  {
+    "path": "app/plugins/image/jpg_to_png.py",
+    "extension": ".py",
+    "size": 2405
+  },
+  {
+    "path": "app/plugins/image/jpg_to_tiff.py",
+    "extension": ".py",
+    "size": 948
+  },
+  {
+    "path": "app/plugins/image/jpg_to_webp.py",
+    "extension": ".py",
+    "size": 2394
+  },
+  {
+    "path": "app/plugins/image/png_to_bmp.py",
+    "extension": ".py",
+    "size": 1122
+  },
+  {
+    "path": "app/plugins/image/png_to_ico.py",
+    "extension": ".py",
+    "size": 2387
+  },
+  {
+    "path": "app/plugins/image/png_to_jpg.py",
+    "extension": ".py",
+    "size": 2397
+  },
+  {
+    "path": "app/plugins/image/png_to_tiff.py",
+    "extension": ".py",
+    "size": 1166
+  },
+  {
+    "path": "app/plugins/image/png_to_webp.py",
+    "extension": ".py",
+    "size": 1592
+  },
+  {
+    "path": "app/plugins/image/svg_to_png.py",
+    "extension": ".py",
+    "size": 1275
+  },
+  {
+    "path": "app/plugins/image/tiff_to_jpg.py",
+    "extension": ".py",
+    "size": 945
+  },
+  {
+    "path": "app/plugins/image/tiff_to_png.py",
+    "extension": ".py",
+    "size": 934
+  },
+  {
+    "path": "app/plugins/image/webp_to_ico.py",
+    "extension": ".py",
+    "size": 935
+  },
+  {
+    "path": "app/plugins/image/webp_to_jpg.py",
+    "extension": ".py",
+    "size": 2422
+  },
+  {
+    "path": "app/plugins/image/webp_to_png.py",
+    "extension": ".py",
+    "size": 2403
+  },
+  {
+    "path": "app/plugins/image/webp_to_tiff.py",
+    "extension": ".py",
+    "size": 948
+  },
+  {
+    "path": "app/plugins/pdf/__init__.py",
+    "extension": ".py",
+    "size": 95
+  },
+  {
+    "path": "app/plugins/registry.py",
+    "extension": ".py",
+    "size": 3952
+  },
+  {
+    "path": "app/plugins/video/__init__.py",
+    "extension": ".py",
+    "size": 127
+  },
+  {
+    "path": "app/plugins/video/mp4_to_aac.py",
+    "extension": ".py",
+    "size": 1462
+  },
+  {
+    "path": "app/plugins/video/mp4_to_flac.py",
+    "extension": ".py",
+    "size": 1450
+  },
+  {
+    "path": "app/plugins/video/mp4_to_m4a.py",
+    "extension": ".py",
+    "size": 1452
+  },
+  {
+    "path": "app/plugins/video/mp4_to_mp3.py",
+    "extension": ".py",
+    "size": 5610
+  },
+  {
+    "path": "app/plugins/video/mp4_to_ogg.py",
+    "extension": ".py",
+    "size": 1448
+  },
+  {
+    "path": "app/plugins/video/mp4_to_wav.py",
+    "extension": ".py",
+    "size": 1454
+  },
+  {
+    "path": "app/recommendation/__init__.py",
+    "extension": ".py",
+    "size": 227
+  },
+  {
+    "path": "app/recommendation/engine.py",
+    "extension": ".py",
+    "size": 4758
+  },
+  {
+    "path": "app/recommendation/models.py",
+    "extension": ".py",
+    "size": 923
+  },
+  {
+    "path": "app/recommendation/scorer.py",
+    "extension": ".py",
+    "size": 1340
+  },
+  {
+    "path": "app/routers/comparison.py",
+    "extension": ".py",
+    "size": 2718
+  },
+  {
+    "path": "app/routers/convert.py",
+    "extension": ".py",
+    "size": 10102
+  },
+  {
+    "path": "app/routers/dashboard.py",
+    "extension": ".py",
+    "size": 12572
+  },
+  {
+    "path": "app/routers/formats.py",
+    "extension": ".py",
+    "size": 7303
+  },
+  {
+    "path": "app/routers/home.py",
+    "extension": ".py",
+    "size": 22521
+  },
+  {
+    "path": "app/routers/learning.py",
+    "extension": ".py",
+    "size": 7160
+  },
+  {
+    "path": "app/routers/plugins.py",
+    "extension": ".py",
+    "size": 1937
+  },
+  {
+    "path": "app/routers/recommend.py",
+    "extension": ".py",
+    "size": 1685
+  },
+  {
+    "path": "app/routers/seo.py",
+    "extension": ".py",
+    "size": 818
+  },
+  {
+    "path": "app/routers/tools.py",
+    "extension": ".py",
+    "size": 14925
+  },
+  {
+    "path": "app/routers/upload.py",
+    "extension": ".py",
+    "size": 3348
+  },
+  {
+    "path": "app/services/analytics_intelligence_service.py",
+    "extension": ".py",
+    "size": 20396
+  },
+  {
+    "path": "app/services/analytics_service.py",
+    "extension": ".py",
+    "size": 12202
+  },
+  {
+    "path": "app/services/article_schema.py",
+    "extension": ".py",
+    "size": 8353
+  },
+  {
+    "path": "app/services/article_service.py",
+    "extension": ".py",
+    "size": 2904
+  },
+  {
+    "path": "app/services/authority_service.py",
+    "extension": ".py",
+    "size": 27021
+  },
+  {
+    "path": "app/services/cleanup_service.py",
+    "extension": ".py",
+    "size": 2098
+  },
+  {
+    "path": "app/services/comparison_service.py",
+    "extension": ".py",
+    "size": 11735
+  },
+  {
+    "path": "app/services/content_quality_service.py",
+    "extension": ".py",
+    "size": 25247
+  },
+  {
+    "path": "app/services/conversion_manager.py",
+    "extension": ".py",
+    "size": 3325
+  },
+  {
+    "path": "app/services/conversion_service.py",
+    "extension": ".py",
+    "size": 6374
+  },
+  {
+    "path": "app/services/converter_data_service.py",
+    "extension": ".py",
+    "size": 11730
+  },
+  {
+    "path": "app/services/converter_expansion_service.py",
+    "extension": ".py",
+    "size": 22543
+  },
+  {
+    "path": "app/services/converter_registry_service.py",
+    "extension": ".py",
+    "size": 5600
+  },
+  {
+    "path": "app/services/deployment_validation_service.py",
+    "extension": ".py",
+    "size": 24686
+  },
+  {
+    "path": "app/services/format_knowledge_generator.py",
+    "extension": ".py",
+    "size": 71712
+  },
+  {
+    "path": "app/services/format_knowledge_service.py",
+    "extension": ".py",
+    "size": 1683
+  },
+  {
+    "path": "app/services/growth_dashboard_service.py",
+    "extension": ".py",
+    "size": 17583
+  },
+  {
+    "path": "app/services/hub_page_service.py",
+    "extension": ".py",
+    "size": 7404
+  },
+  {
+    "path": "app/services/hub_service.py",
+    "extension": ".py",
+    "size": 8576
+  },
+  {
+    "path": "app/services/internal_link_service.py",
+    "extension": ".py",
+    "size": 28719
+  },
+  {
+    "path": "app/services/knowledge_schema.py",
+    "extension": ".py",
+    "size": 4064
+  },
+  {
+    "path": "app/services/knowledge_service.py",
+    "extension": ".py",
+    "size": 16783
+  },
+  {
+    "path": "app/services/landing_service.py",
+    "extension": ".py",
+    "size": 21274
+  },
+  {
+    "path": "app/services/language_manager.py",
+    "extension": ".py",
+    "size": 1101
+  },
+  {
+    "path": "app/services/language_service.py",
+    "extension": ".py",
+    "size": 3012
+  },
+  {
+    "path": "app/services/plugin_validation_service.py",
+    "extension": ".py",
+    "size": 16733
+  },
+  {
+    "path": "app/services/production_audit_service.py",
+    "extension": ".py",
+    "size": 18023
+  },
+  {
+    "path": "app/services/programmatic_seo_engine.py",
+    "extension": ".py",
+    "size": 37053
+  },
+  {
+    "path": "app/services/programmatic_seo_service.py",
+    "extension": ".py",
+    "size": 9926
+  },
+  {
+    "path": "app/services/recommendation_service.py",
+    "extension": ".py",
+    "size": 12941
+  },
+  {
+    "path": "app/services/related_converter_service.py",
+    "extension": ".py",
+    "size": 6723
+  },
+  {
+    "path": "app/services/search_console_readiness_service.py",
+    "extension": ".py",
+    "size": 53392
+  },
+  {
+    "path": "app/services/seo_audit_engine.py",
+    "extension": ".py",
+    "size": 42024
+  },
+  {
+    "path": "app/services/seo_content_enhancement_service.py",
+    "extension": ".py",
+    "size": 25866
+  },
+  {
+    "path": "app/services/seo_publication_gate_service.py",
+    "extension": ".py",
+    "size": 8122
+  },
+  {
+    "path": "app/services/seo_service.py",
+    "extension": ".py",
+    "size": 17359
+  },
+  {
+    "path": "app/services/sitemap_service.py",
+    "extension": ".py",
+    "size": 7784
+  },
+  {
+    "path": "app/services/topic_cluster_service.py",
+    "extension": ".py",
+    "size": 23907
+  },
+  {
+    "path": "app/services/upload_service.py",
+    "extension": ".py",
+    "size": 2985
+  },
+  {
+    "path": "app/static/css/components/button.css",
+    "extension": ".css",
+    "size": 2921
+  },
+  {
+    "path": "app/static/css/components/card.css",
+    "extension": ".css",
+    "size": 430
+  },
+  {
+    "path": "app/static/css/components/chip.css",
+    "extension": ".css",
+    "size": 407
+  },
+  {
+    "path": "app/static/css/components/features.css",
+    "extension": ".css",
+    "size": 8845
+  },
+  {
+    "path": "app/static/css/components/footer.css",
+    "extension": ".css",
+    "size": 3034
+  },
+  {
+    "path": "app/static/css/components/header.css",
+    "extension": ".css",
+    "size": 5770
+  },
+  {
+    "path": "app/static/css/components/hero.css",
+    "extension": ".css",
+    "size": 4666
+  },
+  {
+    "path": "app/static/css/components/input.css",
+    "extension": ".css",
+    "size": 318
+  },
+  {
+    "path": "app/static/css/components/popular-tools.css",
+    "extension": ".css",
+    "size": 6149
+  },
+  {
+    "path": "app/static/css/components/progress.css",
+    "extension": ".css",
+    "size": 257
+  },
+  {
+    "path": "app/static/css/components/recommendation.css",
+    "extension": ".css",
+    "size": 12130
+  },
+  {
+    "path": "app/static/css/components/trust-layer.css",
+    "extension": ".css",
+    "size": 8192
+  },
+  {
+    "path": "app/static/css/components/upload-card.css",
+    "extension": ".css",
+    "size": 54261
+  },
+  {
+    "path": "app/static/css/core/base.css",
+    "extension": ".css",
+    "size": 638
+  },
+  {
+    "path": "app/static/css/core/reset.css",
+    "extension": ".css",
+    "size": 344
+  },
+  {
+    "path": "app/static/css/core/typography.css",
+    "extension": ".css",
+    "size": 0
+  },
+  {
+    "path": "app/static/css/core/variables.css",
+    "extension": ".css",
+    "size": 1741
+  },
+  {
+    "path": "app/static/css/pages/home.css",
+    "extension": ".css",
+    "size": 24211
+  },
+  {
+    "path": "app/static/css/style.css",
+    "extension": ".css",
+    "size": 9665
+  },
+  {
+    "path": "app/static/css/upload.css",
+    "extension": ".css",
+    "size": 2322
+  },
+  {
+    "path": "app/static/icons/favicon.ico",
+    "extension": ".ico",
+    "size": 0
+  },
+  {
+    "path": "app/static/images/apple-touch-icon.png",
+    "extension": ".png",
+    "size": 24318
+  },
+  {
+    "path": "app/static/images/converigo-logo.png",
+    "extension": ".png",
+    "size": 87307
+  },
+  {
+    "path": "app/static/images/converigo-og-image.png",
+    "extension": ".png",
+    "size": 1274906
+  },
+  {
+    "path": "app/static/images/favicon-16.png",
+    "extension": ".png",
+    "size": 728
+  },
+  {
+    "path": "app/static/images/favicon-32.png",
+    "extension": ".png",
+    "size": 2017
+  },
+  {
+    "path": "app/static/images/favicon.ico",
+    "extension": ".ico",
+    "size": 754
+  },
+  {
+    "path": "app/static/images/og-default.png",
+    "extension": ".png",
+    "size": 63296
+  },
+  {
+    "path": "app/static/images/og-home.png",
+    "extension": ".png",
+    "size": 61840
+  },
+  {
+    "path": "app/static/js/api/plugin_api.js",
+    "extension": ".js",
+    "size": 1035
+  },
+  {
+    "path": "app/static/js/app.js",
+    "extension": ".js",
+    "size": 31071
+  },
+  {
+    "path": "app/static/js/config.js",
+    "extension": ".js",
+    "size": 457
+  },
+  {
+    "path": "app/static/js/convert/convert_manager.js",
+    "extension": ".js",
+    "size": 1004
+  },
+  {
+    "path": "app/static/js/convert/converter.js",
+    "extension": ".js",
+    "size": 15984
+  },
+  {
+    "path": "app/static/js/converter.disabled.js",
+    "extension": ".js",
+    "size": 343
+  },
+  {
+    "path": "app/static/js/download/download_manager.js",
+    "extension": ".js",
+    "size": 6842
+  },
+  {
+    "path": "app/static/js/recommendation/recommendation_manager.js",
+    "extension": ".js",
+    "size": 8421
+  },
+  {
+    "path": "app/static/js/ui/button_renderer.js",
+    "extension": ".js",
+    "size": 1204
+  },
+  {
+    "path": "app/static/js/upload.js",
+    "extension": ".js",
+    "size": 5650
+  },
+  {
+    "path": "app/static/js/upload/upload.js",
+    "extension": ".js",
+    "size": 2942
+  },
+  {
+    "path": "app/static/js/upload/upload_manager.js",
+    "extension": ".js",
+    "size": 24294
+  },
+  {
+    "path": "app/static/robots.txt",
+    "extension": ".txt",
+    "size": 71
+  },
+  {
+    "path": "app/static/site.webmanifest",
+    "extension": ".webmanifest",
+    "size": 638
+  },
+  {
+    "path": "app/static/sitemap.xml",
+    "extension": ".xml",
+    "size": 574
+  },
+  {
+    "path": "app/templates/components/community_support.html",
+    "extension": ".html",
+    "size": 2328
+  },
+  {
+    "path": "app/templates/components/faq.html",
+    "extension": ".html",
+    "size": 3646
+  },
+  {
+    "path": "app/templates/components/features.html",
+    "extension": ".html",
+    "size": 1961
+  },
+  {
+    "path": "app/templates/components/footer.html",
+    "extension": ".html",
+    "size": 3035
+  },
+  {
+    "path": "app/templates/components/header.html",
+    "extension": ".html",
+    "size": 2446
+  },
+  {
+    "path": "app/templates/components/hero.html",
+    "extension": ".html",
+    "size": 972
+  },
+  {
+    "path": "app/templates/components/how_it_works.html",
+    "extension": ".html",
+    "size": 1214
+  },
+  {
+    "path": "app/templates/components/hub_page.html",
+    "extension": ".html",
+    "size": 4206
+  },
+  {
+    "path": "app/templates/components/hub_page_service_template.html",
+    "extension": ".html",
+    "size": 1308
+  },
+  {
+    "path": "app/templates/components/landing_sections.html",
+    "extension": ".html",
+    "size": 6083
+  },
+  {
+    "path": "app/templates/components/popular_tools.html",
+    "extension": ".html",
+    "size": 6233
+  },
+  {
+    "path": "app/templates/components/supported_formats.html",
+    "extension": ".html",
+    "size": 1998
+  },
+  {
+    "path": "app/templates/components/trust_layer.html",
+    "extension": ".html",
+    "size": 2284
+  },
+  {
+    "path": "app/templates/components/upload_card.html",
+    "extension": ".html",
+    "size": 5103
+  },
+  {
+    "path": "app/templates/index.html",
+    "extension": ".html",
+    "size": 210
+  },
+  {
+    "path": "app/templates/layouts/base.html",
+    "extension": ".html",
+    "size": 9906
+  },
+  {
+    "path": "app/templates/legacy/jpg_to_pdf_landing.html",
+    "extension": ".html",
+    "size": 4863
+  },
+  {
+    "path": "app/templates/legacy/jpg_to_png_landing.html",
+    "extension": ".html",
+    "size": 2800
+  },
+  {
+    "path": "app/templates/legacy/mp4_to_mp3_landing.html",
+    "extension": ".html",
+    "size": 4840
+  },
+  {
+    "path": "app/templates/legacy/pdf_to_jpg_landing.html",
+    "extension": ".html",
+    "size": 5270
+  },
+  {
+    "path": "app/templates/legacy/png_to_jpg_landing.html",
+    "extension": ".html",
+    "size": 4852
+  },
+  {
+    "path": "app/templates/legacy/png_to_webp_landing.html",
+    "extension": ".html",
+    "size": 4603
+  },
+  {
+    "path": "app/templates/legacy/webp_to_jpg_landing.html",
+    "extension": ".html",
+    "size": 2803
+  },
+  {
+    "path": "app/templates/legacy/webp_to_png_landing.html",
+    "extension": ".html",
+    "size": 4622
+  },
+  {
+    "path": "app/templates/legacy/word_to_pdf_landing.html",
+    "extension": ".html",
+    "size": 3194
+  },
+  {
+    "path": "app/templates/pages/404.html",
+    "extension": ".html",
+    "size": 4077
+  },
+  {
+    "path": "app/templates/pages/about.html",
+    "extension": ".html",
+    "size": 1928
+  },
+  {
+    "path": "app/templates/pages/blog_index.html",
+    "extension": ".html",
+    "size": 1450
+  },
+  {
+    "path": "app/templates/pages/blog_jpg_to_pdf.html",
+    "extension": ".html",
+    "size": 3632
+  },
+  {
+    "path": "app/templates/pages/blog_mp4_to_mp3.html",
+    "extension": ".html",
+    "size": 4424
+  },
+  {
+    "path": "app/templates/pages/blog_png_to_jpg.html",
+    "extension": ".html",
+    "size": 3526
+  },
+  {
+    "path": "app/templates/pages/comparison_page.html",
+    "extension": ".html",
+    "size": 6539
+  },
+  {
+    "path": "app/templates/pages/contact.html",
+    "extension": ".html",
+    "size": 1551
+  },
+  {
+    "path": "app/templates/pages/cookies.html",
+    "extension": ".html",
+    "size": 2385
+  },
+  {
+    "path": "app/templates/pages/format_index.html",
+    "extension": ".html",
+    "size": 1846
+  },
+  {
+    "path": "app/templates/pages/format_page.html",
+    "extension": ".html",
+    "size": 12302
+  },
+  {
+    "path": "app/templates/pages/home.html",
+    "extension": ".html",
+    "size": 532
+  },
+  {
+    "path": "app/templates/pages/image_hub.html",
+    "extension": ".html",
+    "size": 7148
+  },
+  {
+    "path": "app/templates/pages/learning_article.html",
+    "extension": ".html",
+    "size": 4584
+  },
+  {
+    "path": "app/templates/pages/learning_index.html",
+    "extension": ".html",
+    "size": 4209
+  },
+  {
+    "path": "app/templates/pages/pricing.html",
+    "extension": ".html",
+    "size": 964
+  },
+  {
+    "path": "app/templates/pages/privacy-policy.html",
+    "extension": ".html",
+    "size": 2652
+  },
+  {
+    "path": "app/templates/pages/privacy.html",
+    "extension": ".html",
+    "size": 3533
+  },
+  {
+    "path": "app/templates/pages/seo_operations_dashboard.html",
+    "extension": ".html",
+    "size": 4934
+  },
+  {
+    "path": "app/templates/pages/terms.html",
+    "extension": ".html",
+    "size": 3193
+  },
+  {
+    "path": "app/templates/pages/tools_directory.html",
+    "extension": ".html",
+    "size": 2636
+  },
+  {
+    "path": "app/templates/pages/trust_page.html",
+    "extension": ".html",
+    "size": 907
+  },
+  {
+    "path": "app/templates/partials/converter_card.html",
+    "extension": ".html",
+    "size": 225
+  },
+  {
+    "path": "app/templates/partials/seo_meta.html",
+    "extension": ".html",
+    "size": 4362
+  },
+  {
+    "path": "app/templates/partials/structured_data.html",
+    "extension": ".html",
+    "size": 87
+  },
+  {
+    "path": "app/templates/tool.html",
+    "extension": ".html",
+    "size": 2227
+  },
+  {
+    "path": "app/templates/tool_page.html",
+    "extension": ".html",
+    "size": 9768
+  },
+  {
+    "path": "app/tools/certification_validator.py",
+    "extension": ".py",
+    "size": 5815
+  },
+  {
+    "path": "app/utils/file_validator.py",
+    "extension": ".py",
+    "size": 14399
+  },
+  {
+    "path": "app/utils/tool_page.py",
+    "extension": ".py",
+    "size": 3481
+  },
+  {
+    "path": "app_start.log",
+    "extension": ".log",
+    "size": 8156
+  },
+  {
+    "path": "backup_before_ui_reset/features.css",
+    "extension": ".css",
+    "size": 4135
+  },
+  {
+    "path": "backup_before_ui_reset/header.css",
+    "extension": ".css",
+    "size": 3975
+  },
+  {
+    "path": "backup_before_ui_reset/hero.css",
+    "extension": ".css",
+    "size": 4666
+  },
+  {
+    "path": "backup_before_ui_reset/hero.html",
+    "extension": ".html",
+    "size": 2118
+  },
+  {
+    "path": "backup_before_ui_reset/style.css",
+    "extension": ".css",
+    "size": 20387
+  },
+  {
+    "path": "backup_before_ui_reset/tool_page.html",
+    "extension": ".html",
+    "size": 11288
+  },
+  {
+    "path": "backup_before_ui_reset/upload-card.css",
+    "extension": ".css",
+    "size": 15059
+  },
+  {
+    "path": "baseline_jpg_to_pdf_1366x768.png",
+    "extension": ".png",
+    "size": 36177
+  },
+  {
+    "path": "baseline_jpg_to_pdf_1920x1080.png",
+    "extension": ".png",
+    "size": 41953
+  },
+  {
+    "path": "baseline_jpg_to_pdf_390x844.png",
+    "extension": ".png",
+    "size": 31985
+  },
+  {
+    "path": "baseline_mp4_to_mp3_1366x768.png",
+    "extension": ".png",
+    "size": 37090
+  },
+  {
+    "path": "baseline_mp4_to_mp3_1920x1080.png",
+    "extension": ".png",
+    "size": 42826
+  },
+  {
+    "path": "baseline_mp4_to_mp3_390x844.png",
+    "extension": ".png",
+    "size": 32819
+  },
+  {
+    "path": "baseline_pdf_to_word_1366x768.png",
+    "extension": ".png",
+    "size": 37382
+  },
+  {
+    "path": "baseline_pdf_to_word_1920x1080.png",
+    "extension": ".png",
+    "size": 43063
+  },
+  {
+    "path": "baseline_pdf_to_word_390x844.png",
+    "extension": ".png",
+    "size": 33014
+  },
+  {
+    "path": "baseline_png_to_jpg_1366x768.png",
+    "extension": ".png",
+    "size": 37076
+  },
+  {
+    "path": "baseline_png_to_jpg_1920x1080.png",
+    "extension": ".png",
+    "size": 42791
+  },
+  {
+    "path": "baseline_png_to_jpg_390x844.png",
+    "extension": ".png",
+    "size": 32779
+  },
+  {
+    "path": "brain/AI_BOOTSTRAP.md",
+    "extension": ".md",
+    "size": 1445
+  },
+  {
+    "path": "brain/AI_BOOT_SEQUENCE.md",
+    "extension": ".md",
+    "size": 12905
+  },
+  {
+    "path": "brain/ARCHITECTURE.md",
+    "extension": ".md",
+    "size": 1732
+  },
+  {
+    "path": "brain/BRAIN_AUDIT_REPORT.md",
+    "extension": ".md",
+    "size": 19480
+  },
+  {
+    "path": "brain/BRAIN_FILE_PURPOSE.md",
+    "extension": ".md",
+    "size": 12793
+  },
+  {
+    "path": "brain/BRAIN_MIGRATION_PLAN.md",
+    "extension": ".md",
+    "size": 12373
+  },
+  {
+    "path": "brain/CHECKPOINTS.md",
+    "extension": ".md",
+    "size": 1738
+  },
+  {
+    "path": "brain/DECISIONS.md",
+    "extension": ".md",
+    "size": 4852
+  },
+  {
+    "path": "brain/DEPLOYMENT_STATUS.md",
+    "extension": ".md",
+    "size": 295
+  },
+  {
+    "path": "brain/DEVELOPMENT_GUIDE.md",
+    "extension": ".md",
+    "size": 1574
+  },
+  {
+    "path": "brain/EXECUTION_INDEX.md",
+    "extension": ".md",
+    "size": 1038
+  },
+  {
+    "path": "brain/KNOWN_BUGS.md",
+    "extension": ".md",
+    "size": 291
+  },
+  {
+    "path": "brain/NEXT.md",
+    "extension": ".md",
+    "size": 1128
+  },
+  {
+    "path": "brain/PROJECT_CHARTER.md",
+    "extension": ".md",
+    "size": 1570
+  },
+  {
+    "path": "brain/PROJECT_MEMORY.md",
+    "extension": ".md",
+    "size": 2423
+  },
+  {
+    "path": "brain/PROJECT_STATE.md",
+    "extension": ".md",
+    "size": 7024
+  },
+  {
+    "path": "brain/SPRINT_D1_DELIVERABLES.md",
+    "extension": ".md",
+    "size": 15016
+  },
+  {
+    "path": "brain/SPRINT_D2_IMPLEMENTATION.md",
+    "extension": ".md",
+    "size": 11742
+  },
+  {
+    "path": "brain/START_HERE.md",
+    "extension": ".md",
+    "size": 1315
+  },
+  {
+    "path": "brain/TODAY.md",
+    "extension": ".md",
+    "size": 2967
+  },
+  {
+    "path": "bs_nonstream.json",
+    "extension": ".json",
+    "size": 346
+  },
+  {
+    "path": "bs_payload.json",
+    "extension": ".json",
+    "size": 92
+  },
+  {
+    "path": "bs_stream_raw.txt",
+    "extension": ".txt",
+    "size": 1730
+  },
+  {
+    "path": "bs_stream_text.txt",
+    "extension": ".txt",
+    "size": 872
+  },
+  {
+    "path": "build/converter_inventory.json",
+    "extension": ".json",
+    "size": 26227
+  },
+  {
+    "path": "build/document_converter_audit_results.json",
+    "extension": ".json",
+    "size": 953
+  },
+  {
+    "path": "build/image_converter_audit_report.md",
+    "extension": ".md",
+    "size": 582
+  },
+  {
+    "path": "build/image_converter_audit_results.json",
+    "extension": ".json",
+    "size": 790
+  },
+  {
+    "path": "build/pytest_output.txt",
+    "extension": ".txt",
+    "size": 130474
+  },
+  {
+    "path": "build/real_conversion_results.json",
+    "extension": ".json",
+    "size": 2339
+  },
+  {
+    "path": "build/real_converter_validation_results.json",
+    "extension": ".json",
+    "size": 5588
+  },
+  {
+    "path": "build/test_results_summary.txt",
+    "extension": ".txt",
+    "size": 273842
+  },
+  {
+    "path": "capture_hero_screenshots.py",
+    "extension": ".py",
+    "size": 639
+  },
+  {
+    "path": "cline-config-search.txt",
+    "extension": ".txt",
+    "size": 2
+  },
+  {
+    "path": "cline-config-search2.txt",
+    "extension": ".txt",
+    "size": 6025111
+  },
+  {
+    "path": "cline-contrib-config-lines.txt",
+    "extension": ".txt",
+    "size": 103
+  },
+  {
+    "path": "cline-getconfig-lines.txt",
+    "extension": ".txt",
+    "size": 15
+  },
+  {
+    "path": "cline-keylines.txt",
+    "extension": ".txt",
+    "size": 3423408
+  },
+  {
+    "path": "cline-ollama-lines.txt",
+    "extension": ".txt",
+    "size": 1586644
+  },
+  {
+    "path": "cline-ollama-paths.txt",
+    "extension": ".txt",
+    "size": 6083
+  },
+  {
+    "path": "cline-ollama-search.txt",
+    "extension": ".txt",
+    "size": 3579759
+  },
+  {
+    "path": "cline-ollama-settings-lines.txt",
+    "extension": ".txt",
+    "size": 2125464
+  },
+  {
+    "path": "cline-ollama-settings.txt",
+    "extension": ".txt",
+    "size": 1630213
+  },
+  {
+    "path": "cline-search-output.txt",
+    "extension": ".txt",
+    "size": 11799926
+  },
+  {
+    "path": "cline-search-output2.txt",
+    "extension": ".txt",
+    "size": 14947699
+  },
+  {
+    "path": "cline-search-output3.txt",
+    "extension": ".txt",
+    "size": 11101916
+  },
+  {
+    "path": "code",
+    "extension": "",
+    "size": 0
+  },
+  {
+    "path": "converigo-og-image.png",
+    "extension": ".png",
+    "size": 1274906
+  },
+  {
+    "path": "convert_after_format.png",
+    "extension": ".png",
+    "size": 773351
+  },
+  {
+    "path": "convert_before_format.png",
+    "extension": ".png",
+    "size": 745561
+  },
+  {
+    "path": "converter_audit_report.json",
+    "extension": ".json",
+    "size": 2255
+  },
+  {
+    "path": "create_test_assets.py",
+    "extension": ".py",
+    "size": 1576
+  },
+  {
+    "path": "deployment_statuses.json",
+    "extension": ".json",
+    "size": 3946
+  },
+  {
+    "path": "deployments.json",
+    "extension": ".json",
+    "size": 81320
+  },
+  {
+    "path": "deployments_raw.json",
+    "extension": ".json",
+    "size": 40662
+  },
+  {
+    "path": "docs/00_PROJECT_VISION.md",
+    "extension": ".md",
+    "size": 0
+  },
+  {
+    "path": "docs/01_ARCHITECTURE.md",
+    "extension": ".md",
+    "size": 0
+  },
+  {
+    "path": "docs/ARCHITECTURE_V4.md",
+    "extension": ".md",
+    "size": 19983
+  },
+  {
+    "path": "docs/CHANGELOG.md",
+    "extension": ".md",
+    "size": 1129
+  },
+  {
+    "path": "docs/COMPONENTS.md",
+    "extension": ".md",
+    "size": 0
+  },
+  {
+    "path": "docs/CONVERIGO_AUTOMATION_FACTORY.md",
+    "extension": ".md",
+    "size": 6966
+  },
+  {
+    "path": "docs/CONVERTER_CONTRACT.md",
+    "extension": ".md",
+    "size": 2788
+  },
+  {
+    "path": "docs/CONVERTER_PLUGIN_STANDARD.md",
+    "extension": ".md",
+    "size": 6436
+  },
+  {
+    "path": "docs/DESIGN.md",
+    "extension": ".md",
+    "size": 0
+  },
+  {
+    "path": "docs/FOUNDATION_COMPLETE.md",
+    "extension": ".md",
+    "size": 17638
+  },
+  {
+    "path": "docs/GROWTH_001_ARCHIVE_CLUSTER_DELIVERY.md",
+    "extension": ".md",
+    "size": 15494
+  },
+  {
+    "path": "docs/GROWTH_002_OFFICE_CLUSTER_DELIVERY.md",
+    "extension": ".md",
+    "size": 1746
+  },
+  {
+    "path": "docs/GROWTH_DASHBOARD_METRICS.md",
+    "extension": ".md",
+    "size": 1933
+  },
+  {
+    "path": "docs/HEALTH_CHECK_REPORT.md",
+    "extension": ".md",
+    "size": 7055
+  },
+  {
+    "path": "docs/JSON_MIGRATION.md",
+    "extension": ".md",
+    "size": 3138
+  },
+  {
+    "path": "docs/JSON_SCHEMA.md",
+    "extension": ".md",
+    "size": 8782
+  },
+  {
+    "path": "docs/JSON_STANDARD.md",
+    "extension": ".md",
+    "size": 7750
+  },
+  {
+    "path": "docs/LANDING_AUDIT.md",
+    "extension": ".md",
+    "size": 7128
+  },
+  {
+    "path": "docs/LANDING_AUTOMATION_ENGINE.md",
+    "extension": ".md",
+    "size": 5731
+  },
+  {
+    "path": "docs/PRODUCTION_STANDARD.md",
+    "extension": ".md",
+    "size": 1543
+  },
+  {
+    "path": "docs/PROJECT.md",
+    "extension": ".md",
+    "size": 1463
+  },
+  {
+    "path": "docs/PROJECT_CHECKPOINT.md",
+    "extension": ".md",
+    "size": 8943
+  },
+  {
+    "path": "docs/QUALITY_ENGINEERING.md",
+    "extension": ".md",
+    "size": 5910
+  },
+  {
+    "path": "docs/RC1_DASHBOARD.md",
+    "extension": ".md",
+    "size": 244
+  },
+  {
+    "path": "docs/RC1_PRODUCTION_AUDIT.md",
+    "extension": ".md",
+    "size": 1189
+  },
+  {
+    "path": "docs/REGRESSION_REPORT.md",
+    "extension": ".md",
+    "size": 240
+  },
+  {
+    "path": "docs/RELEASE_CHECKLIST.md",
+    "extension": ".md",
+    "size": 561
+  },
+  {
+    "path": "docs/RELEASE_NOTES.md",
+    "extension": ".md",
+    "size": 2833
+  },
+  {
+    "path": "docs/RELEASE_PREPARATION.md",
+    "extension": ".md",
+    "size": 9387
+  },
+  {
+    "path": "docs/RELEASE_v0.4.0_FOUNDATION_COMPLETE.md",
+    "extension": ".md",
+    "size": 9460
+  },
+  {
+    "path": "docs/REPOSITORY_HEALTH.md",
+    "extension": ".md",
+    "size": 761
+  },
+  {
+    "path": "docs/ROADMAP.md",
+    "extension": ".md",
+    "size": 0
+  },
+  {
+    "path": "docs/SEO_ENGINE.md",
+    "extension": ".md",
+    "size": 7972
+  },
+  {
+    "path": "docs/SPRINT_DELIVERY_SUMMARY.md",
+    "extension": ".md",
+    "size": 14315
+  },
+  {
+    "path": "docs/TRAFFIC_OPPORTUNITY_MAP.md",
+    "extension": ".md",
+    "size": 6637
+  },
+  {
+    "path": "docs/growth_dashboard.md",
+    "extension": ".md",
+    "size": 903
+  },
+  {
+    "path": "docs/history/Sprint001.md",
+    "extension": ".md",
+    "size": 0
+  },
+  {
+    "path": "docs/programmatic_seo_engine.md",
+    "extension": ".md",
+    "size": 544
+  },
+  {
+    "path": "docs/sitemap_automation.md",
+    "extension": ".md",
+    "size": 614
+  },
+  {
+    "path": "docs/ui/screenshots/tools-desktop-final.png",
+    "extension": ".png",
+    "size": 304881
+  },
+  {
+    "path": "docs/ui/screenshots/tools-mobile-final.png",
+    "extension": ".png",
+    "size": 294632
+  },
+  {
+    "path": "emitFinal_lines.txt",
+    "extension": ".txt",
+    "size": 161
+  },
+  {
+    "path": "emitFinal_occ.txt",
+    "extension": ".txt",
+    "size": 161
+  },
+  {
+    "path": "emit_chunk.txt",
+    "extension": ".txt",
+    "size": 353
+  },
+  {
+    "path": "emit_end_context.txt",
+    "extension": ".txt",
+    "size": 1869
+  },
+  {
+    "path": "emit_end_occurrences.txt",
+    "extension": ".txt",
+    "size": 0
+  },
+  {
+    "path": "emit_end_this.txt",
+    "extension": ".txt",
+    "size": 193
+  },
+  {
+    "path": "enhance_all_converters.py",
+    "extension": ".py",
+    "size": 500
+  },
+  {
+    "path": "eventstream.txt",
+    "extension": ".txt",
+    "size": 0
+  },
+  {
+    "path": "ext_132240_132280.txt",
+    "extension": ".txt",
+    "size": 1603
+  },
+  {
+    "path": "ext_132281_132380.txt",
+    "extension": ".txt",
+    "size": 3430
+  },
+  {
+    "path": "ext_133900_134040.txt",
+    "extension": ".txt",
+    "size": 7630
+  },
+  {
+    "path": "ext_134120_134200.txt",
+    "extension": ".txt",
+    "size": 4183
+  },
+  {
+    "path": "ext_134140_134200.txt",
+    "extension": ".txt",
+    "size": 3051
+  },
+  {
+    "path": "ext_134140_134260.txt",
+    "extension": ".txt",
+    "size": 5558
+  },
+  {
+    "path": "ext_201296_201320.txt",
+    "extension": ".txt",
+    "size": 690
+  },
+  {
+    "path": "ext_202580_202720.txt",
+    "extension": ".txt",
+    "size": 5294
+  },
+  {
+    "path": "ext_326596_326620.txt",
+    "extension": ".txt",
+    "size": 1100
+  },
+  {
+    "path": "ext_328640_328700.txt",
+    "extension": ".txt",
+    "size": 3175
+  },
+  {
+    "path": "ext_551830_551860.txt",
+    "extension": ".txt",
+    "size": 1403
+  },
+  {
+    "path": "ext_56620_56650.txt",
+    "extension": ".txt",
+    "size": 993
+  },
+  {
+    "path": "file1.jpg",
+    "extension": ".jpg",
+    "size": 8229
+  },
+  {
+    "path": "file2.jpg",
+    "extension": ".jpg",
+    "size": 8645
+  },
+  {
+    "path": "file3.jpg",
+    "extension": ".jpg",
+    "size": 8229
+  },
+  {
+    "path": "fix_canonicals_correctly.py",
+    "extension": ".py",
+    "size": 1309
+  },
+  {
+    "path": "fix_homepage_patch.py",
+    "extension": ".py",
+    "size": 2479
+  },
+  {
+    "path": "fix_homepage_patch2.py",
+    "extension": ".py",
+    "size": 2535
+  },
+  {
+    "path": "fix_homepage_patch3.py",
+    "extension": ".py",
+    "size": 2681
+  },
+  {
+    "path": "fix_homepage_patch4.py",
+    "extension": ".py",
+    "size": 1276
+  },
+  {
+    "path": "fix_seo_foundation.py",
+    "extension": ".py",
+    "size": 10957
+  },
+  {
+    "path": "generate_readiness_report.py",
+    "extension": ".py",
+    "size": 1796
+  },
+  {
+    "path": "health_check.py",
+    "extension": ".py",
+    "size": 8308
+  },
+  {
+    "path": "hello.py",
+    "extension": ".py",
+    "size": 21
+  },
+  {
+    "path": "home_en.html",
+    "extension": ".html",
+    "size": 38274
+  },
+  {
+    "path": "home_id.html",
+    "extension": ".html",
+    "size": 38608
+  },
+  {
+    "path": "home_ja.html",
+    "extension": ".html",
+    "size": 42506
+  },
+  {
+    "path": "home_latest.html",
+    "extension": ".html",
+    "size": 30617
+  },
+  {
+    "path": "home_postdeploy.html",
+    "extension": ".html",
+    "size": 41818
+  },
+  {
+    "path": "home_prod.html",
+    "extension": ".html",
+    "size": 30617
+  },
+  {
+    "path": "homepage_after_1366x768.png",
+    "extension": ".png",
+    "size": 456222
+  },
+  {
+    "path": "homepage_after_1920x1080.png",
+    "extension": ".png",
+    "size": 477617
+  },
+  {
+    "path": "homepage_after_390x844.png",
+    "extension": ".png",
+    "size": 510730
+  },
+  {
+    "path": "homepage_before_1366x768.png",
+    "extension": ".png",
+    "size": 456222
+  },
+  {
+    "path": "homepage_before_1920x1080.png",
+    "extension": ".png",
+    "size": 477617
+  },
+  {
+    "path": "homepage_before_390x844.png",
+    "extension": ".png",
+    "size": 427570
+  },
+  {
+    "path": "inspect_fixture.py",
+    "extension": ".py",
+    "size": 347
+  },
+  {
+    "path": "jpg_to_pdf_desktop_1920x1080.png",
+    "extension": ".png",
+    "size": 498042
+  },
+  {
+    "path": "jpg_to_pdf_mobile_390x844.png",
+    "extension": ".png",
+    "size": 309911
+  },
+  {
+    "path": "mobile-after-375x812.png",
+    "extension": ".png",
+    "size": 35294
+  },
+  {
+    "path": "mobile-after-390x844.png",
+    "extension": ".png",
+    "size": 35751
+  },
+  {
+    "path": "mobile-after-412x915.png",
+    "extension": ".png",
+    "size": 35342
+  },
+  {
+    "path": "mobile-result-state-final.png",
+    "extension": ".png",
+    "size": 35751
+  },
+  {
+    "path": "mobile-result-state.png",
+    "extension": ".png",
+    "size": 35751
+  },
+  {
+    "path": "mp4_to_mp3_desktop_1920x1080.png",
+    "extension": ".png",
+    "size": 1025598
+  },
+  {
+    "path": "mp4_to_mp3_mobile_390x844.png",
+    "extension": ".png",
+    "size": 943229
+  },
+  {
+    "path": "multi_headers.txt",
+    "extension": ".txt",
+    "size": 714
+  },
+  {
+    "path": "multi_response.json",
+    "extension": ".json",
+    "size": 504
+  },
+  {
+    "path": "nixpacks.toml",
+    "extension": ".toml",
+    "size": 190
+  },
+  {
+    "path": "patch_test_harness.py",
+    "extension": ".py",
+    "size": 1692
+  },
+  {
+    "path": "pdf_to_word_desktop_1920x1080.png",
+    "extension": ".png",
+    "size": 516991
+  },
+  {
+    "path": "pdf_to_word_mobile_390x844.png",
+    "extension": ".png",
+    "size": 321813
+  },
+  {
+    "path": "png_to_jpg_desktop_1920x1080.png",
+    "extension": ".png",
+    "size": 453104
+  },
+  {
+    "path": "png_to_jpg_mobile_390x844.png",
+    "extension": ".png",
+    "size": 407488
+  },
+  {
+    "path": "prod_convert_response.json",
+    "extension": ".json",
+    "size": 222
+  },
+  {
+    "path": "prod_converter.js",
+    "extension": ".js",
+    "size": 8995
+  },
+  {
+    "path": "prod_download.png",
+    "extension": ".png",
+    "size": 7089
+  },
+  {
+    "path": "pytest-full.log",
+    "extension": ".log",
+    "size": 5406
+  },
+  {
+    "path": "pytest.ini",
+    "extension": ".ini",
+    "size": 115
+  },
+  {
+    "path": "pytest_full.log",
+    "extension": ".log",
+    "size": 2972
+  },
+  {
+    "path": "pytest_results.txt",
+    "extension": ".txt",
+    "size": 21618
+  },
+  {
+    "path": "railway.json",
+    "extension": ".json",
+    "size": 222
+  },
+  {
+    "path": "railway.toml",
+    "extension": ".toml",
+    "size": 130
+  },
+  {
+    "path": "railway_deployments.json",
+    "extension": ".json",
+    "size": 43559
+  },
+  {
+    "path": "railway_status.json",
+    "extension": ".json",
+    "size": 13520
+  },
+  {
+    "path": "real_before_convert.png",
+    "extension": ".png",
+    "size": 745561
+  },
+  {
+    "path": "real_success.png",
+    "extension": ".png",
+    "size": 789233
+  },
+  {
+    "path": "regression_test_1_fresh.png",
+    "extension": ".png",
+    "size": 510037
+  },
+  {
+    "path": "regression_test_2_single_upload.png",
+    "extension": ".png",
+    "size": 795340
+  },
+  {
+    "path": "regression_test_3_multi_upload.png",
+    "extension": ".png",
+    "size": 523350
+  },
+  {
+    "path": "regression_test_3_multi_upload_three_files.png",
+    "extension": ".png",
+    "size": 530307
+  },
+  {
+    "path": "regression_test_4_conversion_outcome.png",
+    "extension": ".png",
+    "size": 544192
+  },
+  {
+    "path": "regression_test_5_try_again.png",
+    "extension": ".png",
+    "size": 511903
+  },
+  {
+    "path": "regression_test_initial_dom.png",
+    "extension": ".png",
+    "size": 508388
+  },
+  {
+    "path": "regression_test_initial_state_after_fix.png",
+    "extension": ".png",
+    "size": 508797
+  },
+  {
+    "path": "regression_test_initial_visibility.png",
+    "extension": ".png",
+    "size": 507373
+  },
+  {
+    "path": "regression_test_upload_init_state.png",
+    "extension": ".png",
+    "size": 509836
+  },
+  {
+    "path": "regression_test_valid_conversion.png",
+    "extension": ".png",
+    "size": 548827
+  },
+  {
+    "path": "release_candidate_validation_data.json",
+    "extension": ".json",
+    "size": 10672
+  },
+  {
+    "path": "reports/AUDIO_CONVERTER_AUDIT_REPORT.md",
+    "extension": ".md",
+    "size": 3850
+  },
+  {
+    "path": "reports/BACKEND_LATENCY_AUDIT_REPORT.md",
+    "extension": ".md",
+    "size": 5045
+  },
+  {
+    "path": "reports/BLOCKING_FILES_REVIEW.md",
+    "extension": ".md",
+    "size": 1004
+  },
+  {
+    "path": "reports/BMP_FIXTURE_REPAIR_REPORT.md",
+    "extension": ".md",
+    "size": 1676
+  },
+  {
+    "path": "reports/CERTIFICATION_CONSISTENCY_REPORT.md",
+    "extension": ".md",
+    "size": 2910
+  },
+  {
+    "path": "reports/CERTIFICATION_REGISTRY_AUDIT_REPORT.md",
+    "extension": ".md",
+    "size": 8721
+  },
+  {
+    "path": "reports/CERTIFICATION_SYSTEM_IMPLEMENTATION_REPORT.md",
+    "extension": ".md",
+    "size": 10197
+  },
+  {
+    "path": "reports/CERTIFICATION_SYSTEM_REPORT.md",
+    "extension": ".md",
+    "size": 173
+  },
+  {
+    "path": "reports/CERTIFICATION_VALIDATOR_PATH_REPORT.md",
+    "extension": ".md",
+    "size": 1002
+  },
+  {
+    "path": "reports/CLEANUP_REPORT.md",
+    "extension": ".md",
+    "size": 4060
+  },
+  {
+    "path": "reports/CLEANUP_SERVICE_FIX_REPORT.md",
+    "extension": ".md",
+    "size": 508
+  },
+  {
+    "path": "reports/CLOUDFLARE_ORIGIN_AUDIT_REPORT.md",
+    "extension": ".md",
+    "size": 5033
+  },
+  {
+    "path": "reports/CONVERIGO_CONVERTER_REGRESSION_REPORT.md",
+    "extension": ".md",
+    "size": 5864
+  },
+  {
+    "path": "reports/CONVERIGO_PDF_ENGINE_FIX_REPORT.md",
+    "extension": ".md",
+    "size": 2004
+  },
+  {
+    "path": "reports/CONVERSION_SERVICE_SCOPE_REVIEW.md",
+    "extension": ".md",
+    "size": 1963
+  },
+  {
+    "path": "reports/CONVERTER_ENGINE_AUDIT_REPORT.md",
+    "extension": ".md",
+    "size": 3301
+  },
+  {
+    "path": "reports/CONVERTER_FAILURE_CLASSIFICATION_REPORT.md",
+    "extension": ".md",
+    "size": 8221
+  },
+  {
+    "path": "reports/CONVERTER_FAILURE_INVENTORY.md",
+    "extension": ".md",
+    "size": 5195
+  },
+  {
+    "path": "reports/CONVERTER_LIFECYCLE_UPDATE_REPORT.md",
+    "extension": ".md",
+    "size": 4299
+  },
+  {
+    "path": "reports/CONVERTER_QA_AUDIT_REPORT.md",
+    "extension": ".md",
+    "size": 1955
+  },
+  {
+    "path": "reports/CONVERTER_REGISTRY_CLEANUP_REPORT.md",
+    "extension": ".md",
+    "size": 3297
+  },
+  {
+    "path": "reports/CONVERTER_RELIABILITY_STABILIZATION_REPORT.md",
+    "extension": ".md",
+    "size": 416
+  },
+  {
+    "path": "reports/CONVERTER_RUNTIME_QA_REVIEW.md",
+    "extension": ".md",
+    "size": 3879
+  },
+  {
+    "path": "reports/CONVERTER_UI_AUDIT_REPORT.md",
+    "extension": ".md",
+    "size": 3130
+  },
+  {
+    "path": "reports/CONVERTER_UX_POLISH_REPORT.md",
+    "extension": ".md",
+    "size": 3836
+  },
+  {
+    "path": "reports/CONVERT_BUTTON_STATE_REPORT.md",
+    "extension": ".md",
+    "size": 1660
+  },
+  {
+    "path": "reports/CONVERT_FLOW_VALIDATION_REPORT.md",
+    "extension": ".md",
+    "size": 2029
+  },
+  {
+    "path": "reports/CORE_CONVERTER_CERTIFICATION_REPORT.md",
+    "extension": ".md",
+    "size": 3587
+  },
+  {
+    "path": "reports/DEPLOYMENT_READINESS_AUDIT.md",
+    "extension": ".md",
+    "size": 658
+  },
+  {
+    "path": "reports/DEPLOYMENT_REPORT.md",
+    "extension": ".md",
+    "size": 1347
+  },
+  {
+    "path": "reports/DOCKERFILE_DEPENDENCY_AUDIT_REPORT.md",
+    "extension": ".md",
+    "size": 2446
+  },
+  {
+    "path": "reports/DOCKER_BUILD_FIX_REPORT.md",
+    "extension": ".md",
+    "size": 945
+  },
+  {
+    "path": "reports/DOCKER_FIX_REVIEW.md",
+    "extension": ".md",
+    "size": 2381
+  },
+  {
+    "path": "reports/DOCKER_PRODUCTION_VALIDATION_REPORT.md",
+    "extension": ".md",
+    "size": 2116
+  },
+  {
+    "path": "reports/DOCUMENT_CONVERTER_AUDIT_REPORT.md",
+    "extension": ".md",
+    "size": 659
+  },
+  {
+    "path": "reports/DOCX_CONVERTER_AUDIT_REPORT.md",
+    "extension": ".md",
+    "size": 1716
+  },
+  {
+    "path": "reports/DOCX_FINAL_DECISION_REPORT.md",
+    "extension": ".md",
+    "size": 3285
+  },
+  {
+    "path": "reports/DOWNLOAD_IMPLEMENTATION_ANALYSIS.md",
+    "extension": ".md",
+    "size": 2619
+  },
+  {
+    "path": "reports/DOWNLOAD_TEST_FIX_REPORT.md",
+    "extension": ".md",
+    "size": 893
+  },
+  {
+    "path": "reports/EXECUTION-001_ROLLOUT_REPORT.md",
+    "extension": ".md",
+    "size": 12013
+  },
+  {
+    "path": "reports/FAILED_CONVERTER_PRODUCTION_AUDIT.md",
+    "extension": ".md",
+    "size": 1771
+  },
+  {
+    "path": "reports/FINAL_COMMIT_PLAN.md",
+    "extension": ".md",
+    "size": 5396
+  },
+  {
+    "path": "reports/FINAL_CONVERSION_PRODUCTION_VERIFICATION.md",
+    "extension": ".md",
+    "size": 10049
+  },
+  {
+    "path": "reports/FINAL_DIFF_REVIEW_REPORT.md",
+    "extension": ".md",
+    "size": 5777
+  },
+  {
+    "path": "reports/FINAL_DOCKER_PR_REVIEW.md",
+    "extension": ".md",
+    "size": 1228
+  },
+  {
+    "path": "reports/FINAL_LOCALIZATION_VERIFICATION_REPORT.md",
+    "extension": ".md",
+    "size": 2514
+  },
+  {
+    "path": "reports/FINAL_PDF_RELEASE_APPROVAL_REPORT.md",
+    "extension": ".md",
+    "size": 2061
+  },
+  {
+    "path": "reports/FINAL_PRODUCTION_BUG_FIX_REPORT.md",
+    "extension": ".md",
+    "size": 9019
+  },
+  {
+    "path": "reports/FINAL_PRODUCTION_CERTIFICATION_REPORT.md",
+    "extension": ".md",
+    "size": 3865
+  },
+  {
+    "path": "reports/FINAL_PRODUCTION_COMMIT_LIST.md",
+    "extension": ".md",
+    "size": 4690
+  },
+  {
+    "path": "reports/FINAL_PRODUCTION_RELEASE_REPORT.md",
+    "extension": ".md",
+    "size": 1418
+  },
+  {
+    "path": "reports/FINAL_PRODUCTION_STABILIZATION_REPORT.md",
+    "extension": ".md",
+    "size": 1936
+  },
+  {
+    "path": "reports/FINAL_REGRESSION_REPORT.md",
+    "extension": ".md",
+    "size": 1434
+  },
+  {
+    "path": "reports/FINAL_RELEASE_CHECKLIST.md",
+    "extension": ".md",
+    "size": 525
+  },
+  {
+    "path": "reports/FINAL_RELEASE_VERIFICATION_REPORT.md",
+    "extension": ".md",
+    "size": 1928
+  },
+  {
+    "path": "reports/FINAL_STAGING_VERIFICATION_REPORT.md",
+    "extension": ".md",
+    "size": 3930
+  },
+  {
+    "path": "reports/FINAL_UI_POLISH_REPORT.md",
+    "extension": ".md",
+    "size": 3140
+  },
+  {
+    "path": "reports/FINAL_UI_PRODUCTION_VERIFICATION.md",
+    "extension": ".md",
+    "size": 3161
+  },
+  {
+    "path": "reports/FINAL_UI_VALIDATION_ENV_FIX_REPORT.md",
+    "extension": ".md",
+    "size": 1202
+  },
+  {
+    "path": "reports/FINAL_UI_VALIDATION_REPORT.md",
+    "extension": ".md",
+    "size": 1984
+  },
+  {
+    "path": "reports/FRONTEND_CONVERSION_QA_REPORT.md",
+    "extension": ".md",
+    "size": 5190
+  },
+  {
+    "path": "reports/FRONTEND_REGRESSION_TEST_REPORT.md",
+    "extension": ".md",
+    "size": 3167
+  },
+  {
+    "path": "reports/FRONTEND_STATE_ROOT_CAUSE_REPORT.md",
+    "extension": ".md",
+    "size": 19468
+  },
+  {
+    "path": "reports/FRONTEND_STATE_VALIDATION_REPORT.md",
+    "extension": ".md",
+    "size": 1909
+  },
+  {
+    "path": "reports/FRONTEND_UI_STATE_CLEANUP_REPORT.md",
+    "extension": ".md",
+    "size": 8694
+  },
+  {
+    "path": "reports/GIT_COMMIT_PREPARATION_REPORT.md",
+    "extension": ".md",
+    "size": 683
+  },
+  {
+    "path": "reports/GROWTH-005_COMPLETION_REPORT.md",
+    "extension": ".md",
+    "size": 15843
+  },
+  {
+    "path": "reports/IMAGE_CONVERTER_AUDIT_REPORT.md",
+    "extension": ".md",
+    "size": 629
+  },
+  {
+    "path": "reports/KOFI_BUTTON_UI_REPORT.md",
+    "extension": ".md",
+    "size": 953
+  },
+  {
+    "path": "reports/KOFI_INTEGRATION_REPORT.md",
+    "extension": ".md",
+    "size": 1202
+  },
+  {
+    "path": "reports/LANGUAGE_AND_CLEANUP_AUDIT_REPORT.md",
+    "extension": ".md",
+    "size": 7147
+  },
+  {
+    "path": "reports/LANGUAGE_LOCALIZATION_REPORT.md",
+    "extension": ".md",
+    "size": 1433
+  },
+  {
+    "path": "reports/MP4_ERROR_HANDLING_FIX_REPORT.md",
+    "extension": ".md",
+    "size": 850
+  },
+  {
+    "path": "reports/MULTI_UPLOAD_REGRESSION_FIX_REPORT.md",
+    "extension": ".md",
+    "size": 11548
+  },
+  {
+    "path": "reports/OFFICE_CONVERTER_CERTIFICATION_REPORT.md",
+    "extension": ".md",
+    "size": 920
+  },
+  {
+    "path": "reports/OFFICE_CONVERTER_DECISION_REPORT.md",
+    "extension": ".md",
+    "size": 1688
+  },
+  {
+    "path": "reports/OFFICE_FINAL_DECISION_REPORT.md",
+    "extension": ".md",
+    "size": 1157
+  },
+  {
+    "path": "reports/PDF_EMPTY_INPUT_VALIDATION_FIX_REPORT.md",
+    "extension": ".md",
+    "size": 1526
+  },
+  {
+    "path": "reports/PDF_ENGINE_AUDIT_REPORT.md",
+    "extension": ".md",
+    "size": 3208
+  },
+  {
+    "path": "reports/PDF_ENGINE_DEPLOYMENT_CHECKLIST.md",
+    "extension": ".md",
+    "size": 2759
+  },
+  {
+    "path": "reports/PDF_ENGINE_PATH_FIX_REPORT.md",
+    "extension": ".md",
+    "size": 1462
+  },
+  {
+    "path": "reports/PDF_OFFICE_REGRESSION_REPORT.md",
+    "extension": ".md",
+    "size": 2382
+  },
+  {
+    "path": "reports/PDF_OFFICE_VALIDATION_REPORT.md",
+    "extension": ".md",
+    "size": 4881
+  },
+  {
+    "path": "reports/PDF_TEST_PATH_NORMALIZATION_REPORT.md",
+    "extension": ".md",
+    "size": 1127
+  },
+  {
+    "path": "reports/PHASE1_AUDIT_REPORT.md",
+    "extension": ".md",
+    "size": 13511
+  },
+  {
+    "path": "reports/PHASE_013_UPLOAD_FLOW_TEST_REPORT.md",
+    "extension": ".md",
+    "size": 4377
+  },
+  {
+    "path": "reports/PHASE_014_1_DEBUG_LOG_REPORT.md",
+    "extension": ".md",
+    "size": 5566
+  },
+  {
+    "path": "reports/PHASE_014_4_LAYOUT_RECOVERY_REPORT.md",
+    "extension": ".md",
+    "size": 3711
+  },
+  {
+    "path": "reports/PHASE_014_5_CONVERTER_UI_REPORT.md",
+    "extension": ".md",
+    "size": 1858
+  },
+  {
+    "path": "reports/PHASE_014_6_FINAL_UI_POLISH_REPORT.md",
+    "extension": ".md",
+    "size": 1882
+  },
+  {
+    "path": "reports/PHASE_014_7_CONVERTER_UX_CLEANUP_REPORT.md",
+    "extension": ".md",
+    "size": 1243
+  },
+  {
+    "path": "reports/PHASE_014_CONVERTER_RUNTIME_REPORT.md",
+    "extension": ".md",
+    "size": 5415
+  },
+  {
+    "path": "reports/PLAYWRIGHT_CONVERT_FLOW_REPORT.md",
+    "extension": ".md",
+    "size": 1443
+  },
+  {
+    "path": "reports/PLAYWRIGHT_FAILURE_ANALYSIS.md",
+    "extension": ".md",
+    "size": 1062
+  },
+  {
+    "path": "reports/PLAYWRIGHT_TEST_ENV_FIX_REPORT.md",
+    "extension": ".md",
+    "size": 1191
+  },
+  {
+    "path": "reports/POPPLER_DEPENDENCY_FIX_REPORT.md",
+    "extension": ".md",
+    "size": 845
+  },
+  {
+    "path": "reports/POPULAR_CONVERTER_PRODUCTION_SYNC_REPORT.md",
+    "extension": ".md",
+    "size": 3182
+  },
+  {
+    "path": "reports/POST_DEPLOYMENT_BUG_FIX_REPORT.md",
+    "extension": ".md",
+    "size": 9072
+  },
+  {
+    "path": "reports/PPT_FINAL_DECISION_REPORT.md",
+    "extension": ".md",
+    "size": 1722
+  },
+  {
+    "path": "reports/PR13_FINAL_REVIEW_REPORT.md",
+    "extension": ".md",
+    "size": 1912
+  },
+  {
+    "path": "reports/PRE_COMMIT_REVIEW_REPORT.md",
+    "extension": ".md",
+    "size": 1284
+  },
+  {
+    "path": "reports/PRODUCTION_ALIGNMENT_CHECKPOINT_REPORT.md",
+    "extension": ".md",
+    "size": 7325
+  },
+  {
+    "path": "reports/PRODUCTION_CERTIFICATION_REPORT.md",
+    "extension": ".md",
+    "size": 774
+  },
+  {
+    "path": "reports/PRODUCTION_CONVERSION_FLOW_REPORT.md",
+    "extension": ".md",
+    "size": 2276
+  },
+  {
+    "path": "reports/PRODUCTION_ENVIRONMENT_AUDIT_REPORT.md",
+    "extension": ".md",
+    "size": 5764
+  },
+  {
+    "path": "reports/PRODUCTION_LOADING_AUDIT_REPORT.md",
+    "extension": ".md",
+    "size": 6842
+  },
+  {
+    "path": "reports/PRODUCTION_RELEASE_CHECKLIST.md",
+    "extension": ".md",
+    "size": 558
+  },
+  {
+    "path": "reports/PRODUCTION_STABILIZATION_ROUND2_REPORT.md",
+    "extension": ".md",
+    "size": 5336
+  },
+  {
+    "path": "reports/PRODUCTION_TTFB_AUDIT_REPORT.md",
+    "extension": ".md",
+    "size": 4464
+  },
+  {
+    "path": "reports/PYTEST_FAILURE_CLASSIFICATION_REPORT.md",
+    "extension": ".md",
+    "size": 3680
+  },
+  {
+    "path": "reports/RAILWAY_CONTAINER_FAILURE_REPORT.md",
+    "extension": ".md",
+    "size": 5376
+  },
+  {
+    "path": "reports/RAILWAY_DEPLOYMENT_FAILURE_REPORT.md",
+    "extension": ".md",
+    "size": 1385
+  },
+  {
+    "path": "reports/RAILWAY_FINAL_VALIDATION_REPORT.md",
+    "extension": ".md",
+    "size": 1301
+  },
+  {
+    "path": "reports/RAILWAY_ORIGIN_LATENCY_REPORT.md",
+    "extension": ".md",
+    "size": 5523
+  },
+  {
+    "path": "reports/RAILWAY_PORT_FIX_FINAL_REPORT.md",
+    "extension": ".md",
+    "size": 1046
+  },
+  {
+    "path": "reports/RAILWAY_PRODUCTION_VALIDATION_REPORT.md",
+    "extension": ".md",
+    "size": 1143
+  },
+  {
+    "path": "reports/RAILWAY_UPLOAD_CONTEXT_REPORT.md",
+    "extension": ".md",
+    "size": 1173
+  },
+  {
+    "path": "reports/REAL_CONVERSION_TEST_REPORT.md",
+    "extension": ".md",
+    "size": 976
+  },
+  {
+    "path": "reports/REAL_CONVERTER_VALIDATION_REPORT.md",
+    "extension": ".md",
+    "size": 5264
+  },
+  {
+    "path": "reports/RECOMMENDATION_CLEANUP_PLAN.md",
+    "extension": ".md",
+    "size": 1509
+  },
+  {
+    "path": "reports/RECOMMENDATION_ENDPOINT_DEBUG_REPORT.md",
+    "extension": ".md",
+    "size": 1692
+  },
+  {
+    "path": "reports/RECOMMENDATION_ENGINE_FIX_REPORT.md",
+    "extension": ".md",
+    "size": 1355
+  },
+  {
+    "path": "reports/RELEASE_CANDIDATE_VALIDATION_REPORT.md",
+    "extension": ".md",
+    "size": 14696
+  },
+  {
+    "path": "reports/RELEASE_CHANGE_AUDIT.md",
+    "extension": ".md",
+    "size": 4298
+  },
+  {
+    "path": "reports/RELEASE_CLEANUP_PLAN.md",
+    "extension": ".md",
+    "size": 2034
+  },
+  {
+    "path": "reports/RELEASE_COMMIT_SCOPE_REPORT.md",
+    "extension": ".md",
+    "size": 3943
+  },
+  {
+    "path": "reports/ROUTE_REGISTRATION_AUDIT_REPORT.md",
+    "extension": ".md",
+    "size": 4035
+  },
+  {
+    "path": "reports/SOCIAL_PREVIEW_IMAGE_REPLACEMENT_REPORT.md",
+    "extension": ".md",
+    "size": 1057
+  },
+  {
+    "path": "reports/SPRINT_PR1_PRODUCTION_READINESS_AUDIT.md",
+    "extension": ".md",
+    "size": 32609
+  },
+  {
+    "path": "reports/STATIC_ASSET_PRODUCTION_FIX_REPORT.md",
+    "extension": ".md",
+    "size": 1339
+  },
+  {
+    "path": "reports/STEP1_CONVERT_BUTTON_VALIDATION_REPORT.md",
+    "extension": ".md",
+    "size": 2647
+  },
+  {
+    "path": "reports/STEP1_FINAL_FIX_REPORT.md",
+    "extension": ".md",
+    "size": 2363
+  },
+  {
+    "path": "reports/STEP3_POPULAR_ACCORDION_FIX_REPORT.md",
+    "extension": ".md",
+    "size": 1768
+  },
+  {
+    "path": "reports/STEP4_LANGUAGE_AUDIT_REPORT.md",
+    "extension": ".md",
+    "size": 4236
+  },
+  {
+    "path": "reports/TRY_AGAIN_RESET_REPORT.md",
+    "extension": ".md",
+    "size": 886
+  },
+  {
+    "path": "reports/UI_FREEZE_REPORT.md",
+    "extension": ".md",
+    "size": 1397
+  },
+  {
+    "path": "reports/UI_LAYOUT_REFINEMENT_REPORT.md",
+    "extension": ".md",
+    "size": 12917
+  },
+  {
+    "path": "reports/UI_PERFORMANCE_AUDIT_REPORT.md",
+    "extension": ".md",
+    "size": 3759
+  },
+  {
+    "path": "reports/UI_PHASE_001_REPORT.md",
+    "extension": ".md",
+    "size": 3424
+  },
+  {
+    "path": "reports/UI_PHASE_002_REPORT.md",
+    "extension": ".md",
+    "size": 1899
+  },
+  {
+    "path": "reports/UI_PHASE_003_REPORT.md",
+    "extension": ".md",
+    "size": 1570
+  },
+  {
+    "path": "reports/UI_PHASE_004_REPORT.md",
+    "extension": ".md",
+    "size": 2529
+  },
+  {
+    "path": "reports/UI_PHASE_005_NAVIGATION_REPORT.md",
+    "extension": ".md",
+    "size": 1713
+  },
+  {
+    "path": "reports/UI_PHASE_006_VISUAL_REVIEW_REPORT.md",
+    "extension": ".md",
+    "size": 1940
+  },
+  {
+    "path": "reports/UI_PHASE_007_FINAL_VISUAL_REPORT.md",
+    "extension": ".md",
+    "size": 1857
+  },
+  {
+    "path": "reports/UI_PHASE_008_REPORT.md",
+    "extension": ".md",
+    "size": 1684
+  },
+  {
+    "path": "reports/UI_PHASE_009_FINAL_REVIEW.md",
+    "extension": ".md",
+    "size": 1797
+  },
+  {
+    "path": "reports/UI_PHASE_010_APPROVAL_REPORT.md",
+    "extension": ".md",
+    "size": 1479
+  },
+  {
+    "path": "reports/UI_UPLOAD_LAYOUT_REPORT.md",
+    "extension": ".md",
+    "size": 1268
+  },
+  {
+    "path": "reports/UX_CONVERSION_FLOW_DECISION.md",
+    "extension": ".md",
+    "size": 5151
+  },
+  {
+    "path": "reports/XLSX_FINAL_DECISION_REPORT.md",
+    "extension": ".md",
+    "size": 4079
+  },
+  {
+    "path": "reports/artifacts/headers_cf.txt",
+    "extension": ".txt",
+    "size": 1528
+  },
+  {
+    "path": "reports/artifacts/headers_converigo.txt",
+    "extension": ".txt",
+    "size": 799
+  },
+  {
+    "path": "reports/artifacts/headers_origin.txt",
+    "extension": ".txt",
+    "size": 576
+  },
+  {
+    "path": "reports/artifacts/validate_final_checks.py",
+    "extension": ".py",
+    "size": 5913
+  },
+  {
+    "path": "reports/artifacts/validation_jpg.png",
+    "extension": ".png",
+    "size": 601727
+  },
+  {
+    "path": "reports/artifacts/validation_multi.png",
+    "extension": ".png",
+    "size": 611528
+  },
+  {
+    "path": "reports/artifacts/validation_pdf.png",
+    "extension": ".png",
+    "size": 601726
+  },
+  {
+    "path": "reports/artifacts/validation_png.png",
+    "extension": ".png",
+    "size": 602214
+  },
+  {
+    "path": "reports/converter_audit_report.md",
+    "extension": ".md",
+    "size": 493
+  },
+  {
+    "path": "repro_conversion.py",
+    "extension": ".py",
+    "size": 895
+  },
+  {
+    "path": "requirements.txt",
+    "extension": ".txt",
+    "size": 332
+  },
+  {
+    "path": "run_local_convert.py",
+    "extension": ".py",
+    "size": 1713
+  },
+  {
+    "path": "run_readiness_comparison.py",
+    "extension": ".py",
+    "size": 3844
+  },
+  {
+    "path": "run_tests_summary.py",
+    "extension": ".py",
+    "size": 406
+  },
+  {
+    "path": "runtime.txt",
+    "extension": ".txt",
+    "size": 13
+  },
+  {
+    "path": "screenshots/features-desktop.png",
+    "extension": ".png",
+    "size": 55800
+  },
+  {
+    "path": "screenshots/features-mobile.png",
+    "extension": ".png",
+    "size": 29482
+  },
+  {
+    "path": "screenshots/features-tablet.png",
+    "extension": ".png",
+    "size": 48341
+  },
+  {
+    "path": "screenshots/hero-1366x768.png",
+    "extension": ".png",
+    "size": 288416
+  },
+  {
+    "path": "screenshots/hero-1920x1080.png",
+    "extension": ".png",
+    "size": 298296
+  },
+  {
+    "path": "screenshots/hero-390x844.png",
+    "extension": ".png",
+    "size": 286538
+  },
+  {
+    "path": "screenshots/home_1920x1080.png",
+    "extension": ".png",
+    "size": 199882
+  },
+  {
+    "path": "screenshots/home_desktop.png",
+    "extension": ".png",
+    "size": 406684
+  },
+  {
+    "path": "screenshots/home_laptop.png",
+    "extension": ".png",
+    "size": 395196
+  },
+  {
+    "path": "screenshots/home_mobile.png",
+    "extension": ".png",
+    "size": 266166
+  },
+  {
+    "path": "screenshots/how-it-works-desktop.png",
+    "extension": ".png",
+    "size": 54990
+  },
+  {
+    "path": "screenshots/how-it-works-mobile.png",
+    "extension": ".png",
+    "size": 29736
+  },
+  {
+    "path": "screenshots/how-it-works-tablet.png",
+    "extension": ".png",
+    "size": 48707
+  },
+  {
+    "path": "screenshots/supported-formats-desktop.png",
+    "extension": ".png",
+    "size": 54990
+  },
+  {
+    "path": "screenshots/supported-formats-mobile.png",
+    "extension": ".png",
+    "size": 29722
+  },
+  {
+    "path": "screenshots/supported-formats-tablet.png",
+    "extension": ".png",
+    "size": 48707
+  },
+  {
+    "path": "screenshots/tool_desktop.png",
+    "extension": ".png",
+    "size": 451151
+  },
+  {
+    "path": "screenshots/tool_laptop.png",
+    "extension": ".png",
+    "size": 438023
+  },
+  {
+    "path": "screenshots/tool_mobile.png",
+    "extension": ".png",
+    "size": 248831
+  },
+  {
+    "path": "scripts/convert_smoke_tests.py",
+    "extension": ".py",
+    "size": 2193
+  },
+  {
+    "path": "scripts/create_sample_pdf.py",
+    "extension": ".py",
+    "size": 422
+  },
+  {
+    "path": "scripts/create_social_images.py",
+    "extension": ".py",
+    "size": 2652
+  },
+  {
+    "path": "scripts/create_test_files.py",
+    "extension": ".py",
+    "size": 1115
+  },
+  {
+    "path": "scripts/document_converter_audit.py",
+    "extension": ".py",
+    "size": 5685
+  },
+  {
+    "path": "scripts/enrich_converter_json.py",
+    "extension": ".py",
+    "size": 5765
+  },
+  {
+    "path": "scripts/fix_logo.py",
+    "extension": ".py",
+    "size": 585
+  },
+  {
+    "path": "scripts/generate_seo_reports.py",
+    "extension": ".py",
+    "size": 39167
+  },
+  {
+    "path": "scripts/image_converter_audit.py",
+    "extension": ".py",
+    "size": 3657
+  },
+  {
+    "path": "scripts/integration_test.py",
+    "extension": ".py",
+    "size": 6988
+  },
+  {
+    "path": "scripts/inventory_converters.py",
+    "extension": ".py",
+    "size": 1669
+  },
+  {
+    "path": "scripts/list_plugins.py",
+    "extension": ".py",
+    "size": 361
+  },
+  {
+    "path": "scripts/pdf_converter_audit.py",
+    "extension": ".py",
+    "size": 1921
+  },
+  {
+    "path": "scripts/print_audit.py",
+    "extension": ".py",
+    "size": 575
+  },
+  {
+    "path": "scripts/real_conversion_validation.py",
+    "extension": ".py",
+    "size": 5882
+  },
+  {
+    "path": "scripts/run_deployment_validation.py",
+    "extension": ".py",
+    "size": 872
+  },
+  {
+    "path": "scripts/verify_plugin_imports.py",
+    "extension": ".py",
+    "size": 926
+  },
+  {
+    "path": "single_headers.txt",
+    "extension": ".txt",
+    "size": 672
+  },
+  {
+    "path": "single_response.json",
+    "extension": ".json",
+    "size": 222
+  },
+  {
+    "path": "state_initial_final.png",
+    "extension": ".png",
+    "size": 497308
+  },
+  {
+    "path": "state_multi_final.png",
+    "extension": ".png",
+    "size": 664734
+  },
+  {
+    "path": "state_multi_final_fixed.png",
+    "extension": ".png",
+    "size": 780013
+  },
+  {
+    "path": "state_single_final.png",
+    "extension": ".png",
+    "size": 677947
+  },
+  {
+    "path": "state_test_error_flow.png",
+    "extension": ".png",
+    "size": 713082
+  },
+  {
+    "path": "state_test_initial.png",
+    "extension": ".png",
+    "size": 710933
+  },
+  {
+    "path": "state_test_multi_file.png",
+    "extension": ".png",
+    "size": 713032
+  },
+  {
+    "path": "state_test_multi_file_layout.png",
+    "extension": ".png",
+    "size": 714677
+  },
+  {
+    "path": "state_test_multi_file_layout_updated.png",
+    "extension": ".png",
+    "size": 714677
+  },
+  {
+    "path": "state_test_multi_file_mobile.png",
+    "extension": ".png",
+    "size": 526657
+  },
+  {
+    "path": "state_test_try_again.png",
+    "extension": ".png",
+    "size": 685608
+  },
+  {
+    "path": "state_test_uploaded.png",
+    "extension": ".png",
+    "size": 710933
+  },
+  {
+    "path": "temp_faq.txt",
+    "extension": ".txt",
+    "size": 1578
+  },
+  {
+    "path": "test_conversion_fix.py",
+    "extension": ".py",
+    "size": 3534
+  },
+  {
+    "path": "test_document.pdf",
+    "extension": ".pdf",
+    "size": 328
+  },
+  {
+    "path": "test_files/debug_sample.avif",
+    "extension": ".avif",
+    "size": 317
+  },
+  {
+    "path": "test_files/invalid_test.txt",
+    "extension": ".txt",
+    "size": 20
+  },
+  {
+    "path": "test_files/sample.bmp",
+    "extension": ".bmp",
+    "size": 72054
+  },
+  {
+    "path": "test_files/sample.jpg",
+    "extension": ".jpg",
+    "size": 19869
+  },
+  {
+    "path": "test_files/sample.mp3",
+    "extension": ".mp3",
+    "size": 40559
+  },
+  {
+    "path": "test_files/sample.mp4",
+    "extension": ".mp4",
+    "size": 54791
+  },
+  {
+    "path": "test_files/sample.odt",
+    "extension": ".odt",
+    "size": 1425
+  },
+  {
+    "path": "test_files/sample.pdf",
+    "extension": ".pdf",
+    "size": 1402
+  },
+  {
+    "path": "test_files/sample.png",
+    "extension": ".png",
+    "size": 3991
+  },
+  {
+    "path": "test_files/sample.pptx",
+    "extension": ".pptx",
+    "size": 28326
+  },
+  {
+    "path": "test_files/sample.svg",
+    "extension": ".svg",
+    "size": 175
+  },
+  {
+    "path": "test_files/sample.tiff",
+    "extension": ".tiff",
+    "size": 72140
+  },
+  {
+    "path": "test_files/sample.webp",
+    "extension": ".webp",
+    "size": 2224
+  },
+  {
+    "path": "test_files/sample.xlsx",
+    "extension": ".xlsx",
+    "size": 4846
+  },
+  {
+    "path": "test_files/test.heif",
+    "extension": ".heif",
+    "size": 465
+  },
+  {
+    "path": "test_files/test.png",
+    "extension": ".png",
+    "size": 730347
+  },
+  {
+    "path": "test_image.png",
+    "extension": ".png",
+    "size": 71
+  },
+  {
+    "path": "test_multi_upload.py",
+    "extension": ".py",
+    "size": 3322
+  },
+  {
+    "path": "test_multi_upload_validation.py",
+    "extension": ".py",
+    "size": 3708
+  },
+  {
+    "path": "test_output.log",
+    "extension": ".log",
+    "size": 57560
+  },
+  {
+    "path": "test_plugin_attrs.py",
+    "extension": ".py",
+    "size": 404
+  },
+  {
+    "path": "test_results.txt",
+    "extension": ".txt",
+    "size": 6460
+  },
+  {
+    "path": "tests/assets/real-test.jpg",
+    "extension": ".jpg",
+    "size": 8229
+  },
+  {
+    "path": "tests/assets/real-test.pdf",
+    "extension": ".pdf",
+    "size": 9122
+  },
+  {
+    "path": "tests/assets/real-test.png",
+    "extension": ".png",
+    "size": 2790
+  },
+  {
+    "path": "tests/assets/regression/generated_tone.m4a",
+    "extension": ".m4a",
+    "size": 18638
+  },
+  {
+    "path": "tests/assets/regression/sample.docx",
+    "extension": ".docx",
+    "size": 36646
+  },
+  {
+    "path": "tests/assets/regression/sample.jpg",
+    "extension": ".jpg",
+    "size": 8645
+  },
+  {
+    "path": "tests/assets/regression/sample.mp4",
+    "extension": ".mp4",
+    "size": 2926
+  },
+  {
+    "path": "tests/assets/regression/sample.pdf",
+    "extension": ".pdf",
+    "size": 9480
+  },
+  {
+    "path": "tests/assets/regression/sample.png",
+    "extension": ".png",
+    "size": 3697
+  },
+  {
+    "path": "tests/assets/regression/sample.pptx",
+    "extension": ".pptx",
+    "size": 28342
+  },
+  {
+    "path": "tests/assets/regression/sample.webp",
+    "extension": ".webp",
+    "size": 1398
+  },
+  {
+    "path": "tests/assets/regression/sample.xlsx",
+    "extension": ".xlsx",
+    "size": 4838
+  },
+  {
+    "path": "tests/assets/regression/sample_with_audio.mp4",
+    "extension": ".mp4",
+    "size": 21970
+  },
+  {
+    "path": "tests/certified/archive/test_archive_limits.py",
+    "extension": ".py",
+    "size": 986
+  },
+  {
+    "path": "tests/certified/archive/test_tar_security.py",
+    "extension": ".py",
+    "size": 1411
+  },
+  {
+    "path": "tests/certified/archive/test_zip_security.py",
+    "extension": ".py",
+    "size": 1437
+  },
+  {
+    "path": "tests/certified/audio/_helpers.py",
+    "extension": ".py",
+    "size": 2369
+  },
+  {
+    "path": "tests/certified/audio/test_aac_to_mp3.py",
+    "extension": ".py",
+    "size": 693
+  },
+  {
+    "path": "tests/certified/audio/test_flac_to_mp3.py",
+    "extension": ".py",
+    "size": 696
+  },
+  {
+    "path": "tests/certified/audio/test_m4a_to_mp3.py",
+    "extension": ".py",
+    "size": 693
+  },
+  {
+    "path": "tests/certified/audio/test_mp3_to_wav.py",
+    "extension": ".py",
+    "size": 692
+  },
+  {
+    "path": "tests/certified/audio/test_ogg_to_mp3.py",
+    "extension": ".py",
+    "size": 693
+  },
+  {
+    "path": "tests/certified/audio/test_wav_to_mp3.py",
+    "extension": ".py",
+    "size": 693
+  },
+  {
+    "path": "tests/certified/document/test_pdf_to_odt.py",
+    "extension": ".py",
+    "size": 977
+  },
+  {
+    "path": "tests/certified/document/test_pdf_to_pptx.py",
+    "extension": ".py",
+    "size": 1257
+  },
+  {
+    "path": "tests/certified/image/test_avif_to_jpg.py",
+    "extension": ".py",
+    "size": 1310
+  },
+  {
+    "path": "tests/certified/image/test_heic_to_jpg.py",
+    "extension": ".py",
+    "size": 1329
+  },
+  {
+    "path": "tests/certified/image/test_svg_to_png.py",
+    "extension": ".py",
+    "size": 1241
+  },
+  {
+    "path": "tests/certified/office/test_ppt_to_pdf_certified.py",
+    "extension": ".py",
+    "size": 1215
+  },
+  {
+    "path": "tests/certified/pdf/__init__.py",
+    "extension": ".py",
+    "size": 39
+  },
+  {
+    "path": "tests/certified/pdf/test_pdf_to_docx_certified.py",
+    "extension": ".py",
+    "size": 9328
+  },
+  {
+    "path": "tests/certified/pdf/test_pdf_to_excel_certified.py",
+    "extension": ".py",
+    "size": 3399
+  },
+  {
+    "path": "tests/certified/pdf/test_pdf_to_jpg_certified.py",
+    "extension": ".py",
+    "size": 3432
+  },
+  {
+    "path": "tests/certified/pdf/test_pdf_to_odt_certified.py",
+    "extension": ".py",
+    "size": 3324
+  },
+  {
+    "path": "tests/certified/pdf/test_pdf_to_ppt_certified.py",
+    "extension": ".py",
+    "size": 3388
+  },
+  {
+    "path": "tests/certified/video/__init__.py",
+    "extension": ".py",
+    "size": 0
+  },
+  {
+    "path": "tests/certified/video/_helpers.py",
+    "extension": ".py",
+    "size": 2138
+  },
+  {
+    "path": "tests/certified/video/test_avi_to_mp4.py",
+    "extension": ".py",
+    "size": 782
+  },
+  {
+    "path": "tests/certified/video/test_mkv_to_mp4.py",
+    "extension": ".py",
+    "size": 772
+  },
+  {
+    "path": "tests/certified/video/test_mov_to_mp4.py",
+    "extension": ".py",
+    "size": 772
+  },
+  {
+    "path": "tests/certified/video/test_mp4_to_gif.py",
+    "extension": ".py",
+    "size": 891
+  },
+  {
+    "path": "tests/certified/video/test_mp4_to_mp3.py",
+    "extension": ".py",
+    "size": 933
+  },
+  {
+    "path": "tests/certified/video/test_webm_to_mp4.py",
+    "extension": ".py",
+    "size": 775
+  },
+  {
+    "path": "tests/conftest.py",
+    "extension": ".py",
+    "size": 3315
+  },
+  {
+    "path": "tests/e2e/test_convert_flow.py",
+    "extension": ".py",
+    "size": 2661
+  },
+  {
+    "path": "tests/fixtures/sample_valid.xlsx",
+    "extension": ".xlsx",
+    "size": 5164
+  },
+  {
+    "path": "tests/generate_real_assets.py",
+    "extension": ".py",
+    "size": 522
+  },
+  {
+    "path": "tests/generate_regression_assets.py",
+    "extension": ".py",
+    "size": 3034
+  },
+  {
+    "path": "tests/integration/report.json",
+    "extension": ".json",
+    "size": 7734
+  },
+  {
+    "path": "tests/media/INDEX.md",
+    "extension": ".md",
+    "size": 818
+  },
+  {
+    "path": "tests/media/README.md",
+    "extension": ".md",
+    "size": 915
+  },
+  {
+    "path": "tests/media/damaged/README.md",
+    "extension": ".md",
+    "size": 555
+  },
+  {
+    "path": "tests/media/edge_case/README.md",
+    "extension": ".md",
+    "size": 553
+  },
+  {
+    "path": "tests/media/large/README.md",
+    "extension": ".md",
+    "size": 577
+  },
+  {
+    "path": "tests/media/real_world/README.md",
+    "extension": ".md",
+    "size": 575
+  },
+  {
+    "path": "tests/media/real_world/audio/README.md",
+    "extension": ".md",
+    "size": 555
+  },
+  {
+    "path": "tests/media/real_world/codec/README.md",
+    "extension": ".md",
+    "size": 548
+  },
+  {
+    "path": "tests/media/real_world/container/README.md",
+    "extension": ".md",
+    "size": 506
+  },
+  {
+    "path": "tests/media/real_world/device/README.md",
+    "extension": ".md",
+    "size": 616
+  },
+  {
+    "path": "tests/media/real_world/editor/README.md",
+    "extension": ".md",
+    "size": 533
+  },
+  {
+    "path": "tests/media/regression/README.md",
+    "extension": ".md",
+    "size": 630
+  },
+  {
+    "path": "tests/sample.7z",
+    "extension": ".7z",
+    "size": 14
+  },
+  {
+    "path": "tests/sample.avif",
+    "extension": ".avif",
+    "size": 23
+  },
+  {
+    "path": "tests/sample.bmp",
+    "extension": ".bmp",
+    "size": 72054
+  },
+  {
+    "path": "tests/sample.docx",
+    "extension": ".docx",
+    "size": 58
+  },
+  {
+    "path": "tests/sample.gz",
+    "extension": ".gz",
+    "size": 39
+  },
+  {
+    "path": "tests/sample.heic",
+    "extension": ".heic",
+    "size": 11
+  },
+  {
+    "path": "tests/sample.jpg",
+    "extension": ".jpg",
+    "size": 22
+  },
+  {
+    "path": "tests/sample.mp4",
+    "extension": ".mp4",
+    "size": 1128375
+  },
+  {
+    "path": "tests/sample.ods",
+    "extension": ".ods",
+    "size": 46
+  },
+  {
+    "path": "tests/sample.odt",
+    "extension": ".odt",
+    "size": 46
+  },
+  {
+    "path": "tests/sample.pdf",
+    "extension": ".pdf",
+    "size": 49
+  },
+  {
+    "path": "tests/sample.png",
+    "extension": ".png",
+    "size": 22
+  },
+  {
+    "path": "tests/sample.ppt",
+    "extension": ".ppt",
+    "size": 11
+  },
+  {
+    "path": "tests/sample.pptx",
+    "extension": ".pptx",
+    "size": 28274
+  },
+  {
+    "path": "tests/sample.rar",
+    "extension": ".rar",
+    "size": 14
+  },
+  {
+    "path": "tests/sample.svg",
+    "extension": ".svg",
+    "size": 11
+  },
+  {
+    "path": "tests/sample.tar",
+    "extension": ".tar",
+    "size": 10240
+  },
+  {
+    "path": "tests/sample.tar.gz",
+    "extension": ".gz",
+    "size": 120
+  },
+  {
+    "path": "tests/sample.tiff",
+    "extension": ".tiff",
+    "size": 11
+  },
+  {
+    "path": "tests/sample.webp",
+    "extension": ".webp",
+    "size": 23
+  },
+  {
+    "path": "tests/sample.xlsx",
+    "extension": ".xlsx",
+    "size": 58
+  },
+  {
+    "path": "tests/sample.zip",
+    "extension": ".zip",
+    "size": 126
+  },
+  {
+    "path": "tests/test_adsense_pages.py",
+    "extension": ".py",
+    "size": 416
+  },
+  {
+    "path": "tests/test_allowed_hosts.py",
+    "extension": ".py",
+    "size": 449
+  },
+  {
+    "path": "tests/test_analytics_import.py",
+    "extension": ".py",
+    "size": 172
+  },
+  {
+    "path": "tests/test_analytics_intelligence.py",
+    "extension": ".py",
+    "size": 19231
+  },
+  {
+    "path": "tests/test_analytics_service.py",
+    "extension": ".py",
+    "size": 2932
+  },
+  {
+    "path": "tests/test_analytics_smoke.py",
+    "extension": ".py",
+    "size": 599
+  },
+  {
+    "path": "tests/test_archive_converter_cluster.py",
+    "extension": ".py",
+    "size": 16044
+  },
+  {
+    "path": "tests/test_article_schema.py",
+    "extension": ".py",
+    "size": 2157
+  },
+  {
+    "path": "tests/test_article_service.py",
+    "extension": ".py",
+    "size": 3211
+  },
+  {
+    "path": "tests/test_authority_service.py",
+    "extension": ".py",
+    "size": 4723
+  },
+  {
+    "path": "tests/test_blog_pages.py",
+    "extension": ".py",
+    "size": 462
+  },
+  {
+    "path": "tests/test_comparison_engine.py",
+    "extension": ".py",
+    "size": 1187
+  },
+  {
+    "path": "tests/test_content_quality_service.py",
+    "extension": ".py",
+    "size": 22762
+  },
+  {
+    "path": "tests/test_conversion_timeout.py",
+    "extension": ".py",
+    "size": 2074
+  },
+  {
+    "path": "tests/test_convert_button_state.py",
+    "extension": ".py",
+    "size": 985
+  },
+  {
+    "path": "tests/test_convert_unsupported.py",
+    "extension": ".py",
+    "size": 3757
+  },
+  {
+    "path": "tests/test_converter_catalog_ranking.py",
+    "extension": ".py",
+    "size": 2050
+  },
+  {
+    "path": "tests/test_converter_contract.py",
+    "extension": ".py",
+    "size": 2760
+  },
+  {
+    "path": "tests/test_converter_expansion_service.py",
+    "extension": ".py",
+    "size": 25036
+  },
+  {
+    "path": "tests/test_converter_json_enrichment.py",
+    "extension": ".py",
+    "size": 1051
+  },
+  {
+    "path": "tests/test_converter_json_validator.py",
+    "extension": ".py",
+    "size": 353
+  },
+  {
+    "path": "tests/test_converter_progress_integration.py",
+    "extension": ".py",
+    "size": 778
+  },
+  {
+    "path": "tests/test_converter_registry_service.py",
+    "extension": ".py",
+    "size": 3365
+  },
+  {
+    "path": "tests/test_dashboard_route.py",
+    "extension": ".py",
+    "size": 612
+  },
+  {
+    "path": "tests/test_deployment_validation_service.py",
+    "extension": ".py",
+    "size": 3263
+  },
+  {
+    "path": "tests/test_engine_dedupe.py",
+    "extension": ".py",
+    "size": 2273
+  },
+  {
+    "path": "tests/test_final_ui_validation.py",
+    "extension": ".py",
+    "size": 19505
+  },
+  {
+    "path": "tests/test_formats_pages.py",
+    "extension": ".py",
+    "size": 3516
+  },
+  {
+    "path": "tests/test_google_analytics.py",
+    "extension": ".py",
+    "size": 1245
+  },
+  {
+    "path": "tests/test_growth_dashboard_production_audit.py",
+    "extension": ".py",
+    "size": 3780
+  },
+  {
+    "path": "tests/test_growth_dashboard_service.py",
+    "extension": ".py",
+    "size": 3964
+  },
+  {
+    "path": "tests/test_health.py",
+    "extension": ".py",
+    "size": 2135
+  },
+  {
+    "path": "tests/test_homepage_faq.py",
+    "extension": ".py",
+    "size": 464
+  },
+  {
+    "path": "tests/test_hreflang.py",
+    "extension": ".py",
+    "size": 2084
+  },
+  {
+    "path": "tests/test_hub_page_service.py",
+    "extension": ".py",
+    "size": 2169
+  },
+  {
+    "path": "tests/test_i18n.py",
+    "extension": ".py",
+    "size": 1846
+  },
+  {
+    "path": "tests/test_image_cluster.py",
+    "extension": ".py",
+    "size": 2425
+  },
+  {
+    "path": "tests/test_image_hub.py",
+    "extension": ".py",
+    "size": 1406
+  },
+  {
+    "path": "tests/test_internal_link_service.py",
+    "extension": ".py",
+    "size": 15069
+  },
+  {
+    "path": "tests/test_jpg_to_pdf.py",
+    "extension": ".py",
+    "size": 939
+  },
+  {
+    "path": "tests/test_jpg_to_pdf_landing.py",
+    "extension": ".py",
+    "size": 545
+  },
+  {
+    "path": "tests/test_jpg_to_png_landing.py",
+    "extension": ".py",
+    "size": 1102
+  },
+  {
+    "path": "tests/test_knowledge_schema.py",
+    "extension": ".py",
+    "size": 1940
+  },
+  {
+    "path": "tests/test_knowledge_service.py",
+    "extension": ".py",
+    "size": 4096
+  },
+  {
+    "path": "tests/test_landing_contract.py",
+    "extension": ".py",
+    "size": 2212
+  },
+  {
+    "path": "tests/test_landing_seo.py",
+    "extension": ".py",
+    "size": 1045
+  },
+  {
+    "path": "tests/test_learning_router.py",
+    "extension": ".py",
+    "size": 1277
+  },
+  {
+    "path": "tests/test_mobile_download_flow.py",
+    "extension": ".py",
+    "size": 782
+  },
+  {
+    "path": "tests/test_mobile_header_template.py",
+    "extension": ".py",
+    "size": 1066
+  },
+  {
+    "path": "tests/test_mp4_audio_cluster.py",
+    "extension": ".py",
+    "size": 1826
+  },
+  {
+    "path": "tests/test_mp4_to_mp3_landing.py",
+    "extension": ".py",
+    "size": 2706
+  },
+  {
+    "path": "tests/test_observability.py",
+    "extension": ".py",
+    "size": 1816
+  },
+  {
+    "path": "tests/test_office_converter_cluster.py",
+    "extension": ".py",
+    "size": 3448
+  },
+  {
+    "path": "tests/test_output_cleanup.py",
+    "extension": ".py",
+    "size": 1520
+  },
+  {
+    "path": "tests/test_pdf_cluster.py",
+    "extension": ".py",
+    "size": 2398
+  },
+  {
+    "path": "tests/test_pdf_to_jpg.py",
+    "extension": ".py",
+    "size": 985
+  },
+  {
+    "path": "tests/test_pdf_to_jpg_landing.py",
+    "extension": ".py",
+    "size": 928
+  },
+  {
+    "path": "tests/test_plugin_discovery_resilience.py",
+    "extension": ".py",
+    "size": 2774
+  },
+  {
+    "path": "tests/test_plugin_validation_service.py",
+    "extension": ".py",
+    "size": 16971
+  },
+  {
+    "path": "tests/test_png_to_jpg_landing.py",
+    "extension": ".py",
+    "size": 922
+  },
+  {
+    "path": "tests/test_png_to_webp_landing.py",
+    "extension": ".py",
+    "size": 1104
+  },
+  {
+    "path": "tests/test_production_audit_service.py",
+    "extension": ".py",
+    "size": 3474
+  },
+  {
+    "path": "tests/test_programmatic_seo_engine.py",
+    "extension": ".py",
+    "size": 16060
+  },
+  {
+    "path": "tests/test_programmatic_seo_service.py",
+    "extension": ".py",
+    "size": 4376
+  },
+  {
+    "path": "tests/test_recommend_endpoint.py",
+    "extension": ".py",
+    "size": 748
+  },
+  {
+    "path": "tests/test_recommendation_certified_only.py",
+    "extension": ".py",
+    "size": 8702
+  },
+  {
+    "path": "tests/test_recommendation_service.py",
+    "extension": ".py",
+    "size": 10550
+  },
+  {
+    "path": "tests/test_recommendations.py",
+    "extension": ".py",
+    "size": 2960
+  },
+  {
+    "path": "tests/test_related_converter_service.py",
+    "extension": ".py",
+    "size": 1585
+  },
+  {
+    "path": "tests/test_robots.py",
+    "extension": ".py",
+    "size": 468
+  },
+  {
+    "path": "tests/test_runtime_image_and_doc_conversion.py",
+    "extension": ".py",
+    "size": 4567
+  },
+  {
+    "path": "tests/test_search_console_readiness.py",
+    "extension": ".py",
+    "size": 17479
+  },
+  {
+    "path": "tests/test_seo_audit_engine.py",
+    "extension": ".py",
+    "size": 17537
+  },
+  {
+    "path": "tests/test_seo_crawlability.py",
+    "extension": ".py",
+    "size": 1459
+  },
+  {
+    "path": "tests/test_seo_urls.py",
+    "extension": ".py",
+    "size": 710
+  },
+  {
+    "path": "tests/test_sitemap.py",
+    "extension": ".py",
+    "size": 2023
+  },
+  {
+    "path": "tests/test_sitemap_service.py",
+    "extension": ".py",
+    "size": 3857
+  },
+  {
+    "path": "tests/test_social_meta.py",
+    "extension": ".py",
+    "size": 2053
+  },
+  {
+    "path": "tests/test_static_files.py",
+    "extension": ".py",
+    "size": 1426
+  },
+  {
+    "path": "tests/test_supported_converter_filtering.py",
+    "extension": ".py",
+    "size": 2754
+  },
+  {
+    "path": "tests/test_topic_cluster_service.py",
+    "extension": ".py",
+    "size": 18741
+  },
+  {
+    "path": "tests/test_traffic_batch_001.py",
+    "extension": ".py",
+    "size": 1363
+  },
+  {
+    "path": "tests/test_universal_route.py",
+    "extension": ".py",
+    "size": 971
+  },
+  {
+    "path": "tests/test_upload_security.py",
+    "extension": ".py",
+    "size": 5622
+  },
+  {
+    "path": "tests/test_video_runtime_engine.py",
+    "extension": ".py",
+    "size": 789
+  },
+  {
+    "path": "tests/test_webp_to_jpg_landing.py",
+    "extension": ".py",
+    "size": 1105
+  },
+  {
+    "path": "tests/test_webp_to_png_landing.py",
+    "extension": ".py",
+    "size": 1107
+  },
+  {
+    "path": "tests/test_word_to_pdf.py",
+    "extension": ".py",
+    "size": 1190
+  },
+  {
+    "path": "tests/test_word_to_pdf_landing.py",
+    "extension": ".py",
+    "size": 526
+  },
+  {
+    "path": "tests/tmp_registry/invalid.contract.json",
+    "extension": ".json",
+    "size": 15
+  },
+  {
+    "path": "tests/tools/validate_converters.py",
+    "extension": ".py",
+    "size": 2675
+  },
+  {
+    "path": "tests/validate_outputs.py",
+    "extension": ".py",
+    "size": 625
+  },
+  {
+    "path": "tmp_compare_logo.py",
+    "extension": ".py",
+    "size": 493
+  },
+  {
+    "path": "tmp_conversion_diff.txt",
+    "extension": ".txt",
+    "size": 6582
+  },
+  {
+    "path": "tmp_convert_endpoint_repro.py",
+    "extension": ".py",
+    "size": 442
+  },
+  {
+    "path": "tmp_debug_document_engine.py",
+    "extension": ".py",
+    "size": 685
+  },
+  {
+    "path": "tmp_deploy_test/contracts/jpg-to-png.contract.json",
+    "extension": ".json",
+    "size": 538
+  },
+  {
+    "path": "tmp_deploy_test/contracts/jpg-to-png.json",
+    "extension": ".json",
+    "size": 342
+  },
+  {
+    "path": "tmp_diff.txt",
+    "extension": ".txt",
+    "size": 992
+  },
+  {
+    "path": "tmp_disabled/test_recommendations.py",
+    "extension": ".py",
+    "size": 2960
+  },
+  {
+    "path": "tmp_doc_engine_diff.txt",
+    "extension": ".txt",
+    "size": 9320
+  },
+  {
+    "path": "tmp_execution_007.py",
+    "extension": ".py",
+    "size": 2895
+  },
+  {
+    "path": "tmp_execution_007_out.txt",
+    "extension": ".txt",
+    "size": 0
+  },
+  {
+    "path": "tmp_execution_008_analysis.py",
+    "extension": ".py",
+    "size": 1208
+  },
+  {
+    "path": "tmp_execution_008_analysis2.py",
+    "extension": ".py",
+    "size": 1072
+  },
+  {
+    "path": "tmp_final_verification.py",
+    "extension": ".py",
+    "size": 10310
+  },
+  {
+    "path": "tmp_full_test.txt",
+    "extension": ".txt",
+    "size": 5384
+  },
+  {
+    "path": "tmp_image_audit_run.py",
+    "extension": ".py",
+    "size": 2744
+  },
+  {
+    "path": "tmp_included_router_inspect.py",
+    "extension": ".py",
+    "size": 1082
+  },
+  {
+    "path": "tmp_jpg_png.json",
+    "extension": ".json",
+    "size": 209
+  },
+  {
+    "path": "tmp_large_upload_tests.py",
+    "extension": ".py",
+    "size": 1990
+  },
+  {
+    "path": "tmp_large_upload_tests2.py",
+    "extension": ".py",
+    "size": 2126
+  },
+  {
+    "path": "tmp_large_upload_tests3.py",
+    "extension": ".py",
+    "size": 2069
+  },
+  {
+    "path": "tmp_lighthouse_home.json",
+    "extension": ".json",
+    "size": 504825
+  },
+  {
+    "path": "tmp_patch_recommend.py",
+    "extension": ".py",
+    "size": 3641
+  },
+  {
+    "path": "tmp_pdf_jpg.json",
+    "extension": ".json",
+    "size": 228
+  },
+  {
+    "path": "tmp_png_jpg.json",
+    "extension": ".json",
+    "size": 209
+  },
+  {
+    "path": "tmp_prod_test.py",
+    "extension": ".py",
+    "size": 1610
+  },
+  {
+    "path": "tmp_prod_test_real.py",
+    "extension": ".py",
+    "size": 1492
+  },
+  {
+    "path": "tmp_pytest.txt",
+    "extension": ".txt",
+    "size": 5396
+  },
+  {
+    "path": "tmp_recommend_test.py",
+    "extension": ".py",
+    "size": 571
+  },
+  {
+    "path": "tmp_registry_check.py",
+    "extension": ".py",
+    "size": 238
+  },
+  {
+    "path": "tmp_route_check.py",
+    "extension": ".py",
+    "size": 399
+  },
+  {
+    "path": "tmp_route_check2.py",
+    "extension": ".py",
+    "size": 962
+  },
+  {
+    "path": "tmp_route_check2_out.txt",
+    "extension": ".txt",
+    "size": 6478
+  },
+  {
+    "path": "tmp_route_check3.py",
+    "extension": ".py",
+    "size": 1005
+  },
+  {
+    "path": "tmp_route_check4.py",
+    "extension": ".py",
+    "size": 382
+  },
+  {
+    "path": "tmp_route_debug.py",
+    "extension": ".py",
+    "size": 1216
+  },
+  {
+    "path": "tmp_route_inspect5.py",
+    "extension": ".py",
+    "size": 1124
+  },
+  {
+    "path": "tmp_route_list_recursive.py",
+    "extension": ".py",
+    "size": 971
+  },
+  {
+    "path": "tmp_seo_audit.py",
+    "extension": ".py",
+    "size": 4293
+  },
+  {
+    "path": "tmp_status.txt",
+    "extension": ".txt",
+    "size": 0
+  },
+  {
+    "path": "tmp_test_image.jpg",
+    "extension": ".jpg",
+    "size": 293
+  },
+  {
+    "path": "tmp_test_image.png",
+    "extension": ".png",
+    "size": 68
+  },
+  {
+    "path": "tmp_test_image2.png",
+    "extension": ".png",
+    "size": 68
+  },
+  {
+    "path": "tmp_validate_mp4.py",
+    "extension": ".py",
+    "size": 789
+  },
+  {
+    "path": "tmp_validation/sample.jpg",
+    "extension": ".jpg",
+    "size": 693
+  },
+  {
+    "path": "tmp_validation/sample.tiff",
+    "extension": ".tiff",
+    "size": 12428
+  },
+  {
+    "path": "tmp_validation/sample.webp",
+    "extension": ".webp",
+    "size": 90
+  },
+  {
+    "path": "tmp_validation/sample_for_jpg.jpg",
+    "extension": ".jpg",
+    "size": 4
+  },
+  {
+    "path": "tmp_validation/sample_for_tiff.jpg",
+    "extension": ".jpg",
+    "size": 4
+  },
+  {
+    "path": "tmp_validation/sample_for_webp.jpg",
+    "extension": ".jpg",
+    "size": 4
+  },
+  {
+    "path": "tmp_verify_pdf_engine.py",
+    "extension": ".py",
+    "size": 3850
+  },
+  {
+    "path": "tmp_video_repro.py",
+    "extension": ".py",
+    "size": 639
+  },
+  {
+    "path": "tool_png_to_jpg_1920x1080.png",
+    "extension": ".png",
+    "size": 295256
+  },
+  {
+    "path": "tool_png_to_jpg_390x844.png",
+    "extension": ".png",
+    "size": 396656
+  },
+  {
+    "path": "try_again_reset_final.png",
+    "extension": ".png",
+    "size": 736400
+  },
+  {
+    "path": "ui_initial_clean.png",
+    "extension": ".png",
+    "size": 0
+  },
+  {
+    "path": "ui_mobile_clean.png",
+    "extension": ".png",
+    "size": 0
+  },
+  {
+    "path": "ui_multifile_clean.png",
+    "extension": ".png",
+    "size": 0
+  },
+  {
+    "path": "update_lifecycle_status.py",
+    "extension": ".py",
+    "size": 1817
+  },
+  {
+    "path": "updated_jpg_to_pdf_1366x768.png",
+    "extension": ".png",
+    "size": 50600
+  },
+  {
+    "path": "updated_jpg_to_pdf_1920x1080.png",
+    "extension": ".png",
+    "size": 56859
+  },
+  {
+    "path": "updated_jpg_to_pdf_390x844.png",
+    "extension": ".png",
+    "size": 32314
+  },
+  {
+    "path": "updated_mp4_to_mp3_1366x768.png",
+    "extension": ".png",
+    "size": 52659
+  },
+  {
+    "path": "updated_mp4_to_mp3_1920x1080.png",
+    "extension": ".png",
+    "size": 59118
+  },
+  {
+    "path": "updated_mp4_to_mp3_390x844.png",
+    "extension": ".png",
+    "size": 33366
+  },
+  {
+    "path": "updated_pdf_to_word_1366x768.png",
+    "extension": ".png",
+    "size": 52373
+  },
+  {
+    "path": "updated_pdf_to_word_1920x1080.png",
+    "extension": ".png",
+    "size": 58754
+  },
+  {
+    "path": "updated_pdf_to_word_390x844.png",
+    "extension": ".png",
+    "size": 33032
+  },
+  {
+    "path": "updated_png_to_jpg_1366x768.png",
+    "extension": ".png",
+    "size": 53642
+  },
+  {
+    "path": "updated_png_to_jpg_1920x1080.png",
+    "extension": ".png",
+    "size": 60008
+  },
+  {
+    "path": "updated_png_to_jpg_390x844.png",
+    "extension": ".png",
+    "size": 32890
+  },
+  {
+    "path": "valid_test_image.jpg",
+    "extension": ".jpg",
+    "size": 417
+  },
+  {
+    "path": "valid_test_image.png",
+    "extension": ".png",
+    "size": 68
+  },
+  {
+    "path": "validate_release_candidate.py",
+    "extension": ".py",
+    "size": 11287
+  },
+  {
+    "path": "validate_ui_screenshots.py",
+    "extension": ".py",
+    "size": 2277
+  },
+  {
+    "path": "validation_initial.png",
+    "extension": ".png",
+    "size": 556744
+  },
+  {
+    "path": "validation_mobile.png",
+    "extension": ".png",
+    "size": 535490
+  },
+  {
+    "path": "validation_multifile.png",
+    "extension": ".png",
+    "size": 585183
+  },
+  {
+    "path": "verify_canonicals.py",
+    "extension": ".py",
+    "size": 1787
+  },
+  {
+    "path": "video_headers.txt",
+    "extension": ".txt",
+    "size": 674
+  },
+  {
+    "path": "video_headers2.txt",
+    "extension": ".txt",
+    "size": 698
+  },
+  {
+    "path": "video_headers3.txt",
+    "extension": ".txt",
+    "size": 701
+  },
+  {
+    "path": "video_response.json",
+    "extension": ".json",
+    "size": 186
+  },
+  {
+    "path": "video_response2.json",
+    "extension": ".json",
+    "size": 264
+  },
+  {
+    "path": "video_response3.json",
+    "extension": ".json",
+    "size": 222
+  }
+]

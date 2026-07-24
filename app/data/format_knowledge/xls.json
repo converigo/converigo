@@ -1,0 +1,112 @@
+{
+  "slug": "xls",
+  "name": "XLS",
+  "quick_answer": "XLS — Legacy Microsoft Excel binary spreadsheet format for data analysis, formulas, charts, and tables in older versions of Excel.",
+  "definition": "XLS is a spreadsheet file format. Legacy Microsoft Excel binary spreadsheet format for data analysis, formulas, charts, and tables in older versions of Excel. It is commonly used in workflows that require reliable spreadsheet handling and is supported by a wide range of applications and online tools.",
+  "use_cases": [
+    {
+      "title": "Official document sharing",
+      "text": "XLS is used to share documents that need to look the same on every device and operating system."
+    },
+    {
+      "title": "Business reports and proposals",
+      "text": "XLS is a reliable format for distributing professional reports, contracts, and formal documents."
+    },
+    {
+      "title": "Form and template publishing",
+      "text": "XLS is commonly used for fillable forms, legal documents, and templates with fixed structure."
+    },
+    {
+      "title": "Archive and long-term storage",
+      "text": "XLS is a trusted choice for archiving documents that need to remain readable over many years."
+    },
+    {
+      "title": "Printing and publishing",
+      "text": "XLS is used in print workflows because it preserves layout, fonts, and formatting across different printers."
+    }
+  ],
+  "advantages": [
+    {
+      "title": "Layout preservation",
+      "text": "XLS preserves fonts, formatting, and page layout across different operating systems and devices."
+    },
+    {
+      "title": "Universal compatibility",
+      "text": "XLS can be opened on virtually any device without requiring the authoring software."
+    },
+    {
+      "title": "Security features",
+      "text": "XLS can include password protection, permissions, and digital signatures for sensitive documents."
+    },
+    {
+      "title": "Print-ready output",
+      "text": "XLS is reliable for printing because it accurately represents the intended page design."
+    }
+  ],
+  "limitations": [
+    {
+      "title": "Limited editability",
+      "text": "XLS is not always easy to edit directly, especially for users without compatible software."
+    },
+    {
+      "title": "Complex formatting may not transfer",
+      "text": "Converting from or to XLS can sometimes lose custom styles, fonts, or layout elements."
+    },
+    {
+      "title": "Large file sizes",
+      "text": "XLS files with many embedded images or assets can be large and slow to load or send."
+    }
+  ],
+  "comparisons": [
+    {
+      "title": "XLS vs XLSX",
+      "text": "XLS and XLSX are both widely used file formats. Choosing between them depends on your compatibility needs, quality requirements, and the tools available in your workflow."
+    },
+    {
+      "title": "XLS vs CSV",
+      "text": "XLS and CSV are both widely used file formats. Choosing between them depends on your compatibility needs, quality requirements, and the tools available in your workflow."
+    },
+    {
+      "title": "XLS vs ODS",
+      "text": "XLS and ODS are both widely used file formats. Choosing between them depends on your compatibility needs, quality requirements, and the tools available in your workflow."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "xlsx-to-pdf",
+      "title": "XLSX to PDF Converter",
+      "description": "Convert XLSX files to PDF quickly and easily.",
+      "href": "/xlsx-to-pdf"
+    },
+    {
+      "slug": "excel-to-pdf",
+      "title": "EXCEL to PDF Converter",
+      "description": "Convert EXCEL files to PDF quickly and easily.",
+      "href": "/excel-to-pdf"
+    },
+    {
+      "slug": "pdf-to-excel",
+      "title": "PDF to EXCEL Converter",
+      "description": "Convert PDF files to EXCEL quickly and easily.",
+      "href": "/pdf-to-excel"
+    }
+  ],
+  "faq": [
+    {
+      "question": "What is a XLS file?",
+      "answer": "A XLS file is a spreadsheet format used for storing and sharing content."
+    },
+    {
+      "question": "How do I open a XLS file?",
+      "answer": "You can open a XLS file using compatible software for the spreadsheet category."
+    },
+    {
+      "question": "Can I convert XLS to other formats?",
+      "answer": "Yes, XLS can be converted to other formats using online tools or dedicated software."
+    },
+    {
+      "question": "Is XLS widely supported?",
+      "answer": "XLS is supported by many modern applications and platforms."
+    }
+  ]
+}

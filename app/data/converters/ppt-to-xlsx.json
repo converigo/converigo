@@ -1,0 +1,185 @@
+{
+  "title": "PPT to XLSX Converter",
+  "description": "Convert PPT presentations into XLSX spreadsheets online for data extraction and reuse.",
+  "hero": {
+    "title": "PPT to XLSX Converter Free Online",
+    "subtitle": "Extract slide data into Excel format.",
+    "description": "Convert  files to  online for free. Fast, secure browser-based conversion with no software installation. Get high-quality  output in seconds using Converigo."
+  },
+  "steps": [
+    "Upload your PPT file.",
+    "Choose XLSX as output.",
+    "Download your XLSX spreadsheet."
+  ],
+  "benefits": [
+    "Reuse slide content in Excel",
+    "Extract tabular data quickly",
+    "No installation required"
+  ],
+  "supported_formats": {
+    "input": [
+      ".ppt"
+    ],
+    "output": [
+      ".xlsx"
+    ],
+    "description": "PPT input, XLSX output"
+  },
+  "tips": [
+    "Review converted tables in Excel",
+    "Use simpler slides for better extraction",
+    "Adjust workbook cells after download"
+  ],
+  "features": [
+    {
+      "title": "Extracts table and text data from slides",
+      "text": "Extracts table and text data from slides"
+    },
+    {
+      "title": "Produces editable XLSX output",
+      "text": "Produces editable XLSX output"
+    },
+    {
+      "title": "No PowerPoint required",
+      "text": "No PowerPoint required"
+    },
+    {
+      "title": "Fast  to  conversion",
+      "text": "Convert  to  in seconds with our optimized processing engine."
+    },
+    {
+      "title": "No software installation required",
+      "text": "Convert files directly in your browser without downloading or installing any software."
+    },
+    {
+      "title": "High-quality  output",
+      "text": "Receive a polished  file ready for immediate use in your workflow."
+    },
+    {
+      "title": "Free  to  converter",
+      "text": "Convert  to  online completely free with no registration or hidden costs."
+    },
+    {
+      "title": "Secure  processing",
+      "text": "Your  files are encrypted during upload and automatically deleted after conversion."
+    }
+  ],
+  "how_to_use": [
+    {
+      "title": "Upload your PPT file",
+      "description": "Upload your PPT file"
+    },
+    {
+      "title": "Select XLSX as the output format",
+      "description": "Select XLSX as the output format"
+    },
+    {
+      "title": "Download the XLSX file",
+      "description": "Download the XLSX file"
+    },
+    {
+      "title": "Upload your file",
+      "description": "Select a  file from your device to begin the conversion process."
+    },
+    {
+      "title": "Choose output as format",
+      "description": "Pick the output as your desired format and review any available options."
+    },
+    {
+      "title": "Convert  to ",
+      "description": "Click convert and our engine processes your file instantly."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "PPT is a presentation format",
+      "text": "PPT is a presentation format"
+    },
+    {
+      "title": "XLSX is an Excel spreadsheet format",
+      "text": "XLSX is an Excel spreadsheet format"
+    }
+  ],
+  "common_problems": [
+    "Complex slide layouts may shift",
+    "Images and charts may not map exactly",
+    "Large presentations can take longer to convert"
+  ],
+  "faq": [
+    {
+      "question": "Can I convert PPT to XLSX online?",
+      "answer": "Yes, this tool converts PowerPoint slides into Excel spreadsheets online."
+    },
+    {
+      "question": "Will table data transfer?",
+      "answer": "Tables and structured text are converted into spreadsheet format where possible."
+    },
+    {
+      "question": "Is this converter free?",
+      "answer": "Yes, use the PPT to XLSX conversion free for standard files."
+    },
+    {
+      "question": "Do I need Excel installed?",
+      "answer": "No, the output XLSX file can be opened in Excel or compatible spreadsheet apps."
+    },
+    {
+      "question": "What if layout changes?",
+      "answer": "Open the spreadsheet and adjust rows and columns after conversion."
+    },
+    {
+      "question": "Can I edit the spreadsheet after conversion?",
+      "answer": "Yes, Excel or Google Sheets can edit the downloaded XLSX file."
+    },
+    {
+      "question": "What file sizes are supported?",
+      "answer": "Standard PPT files are supported; large files may take longer to process."
+    },
+    {
+      "question": "Are charts preserved?",
+      "answer": "Some chart content is preserved, but charts may require manual adjustment."
+    }
+  ],
+  "related_tools": [
+    "ppt-to-pdf",
+    "xlsx-to-pdf",
+    "ppt-to-docx",
+    "xlsx-to-docx"
+  ],
+  "internal_links": {
+    "items": [
+      {
+        "title": "Document Conversion hub",
+        "href": "/document-conversion"
+      },
+      {
+        "title": "PPT format guide",
+        "href": "/formats/ppt"
+      },
+      {
+        "title": "XLSX format guide",
+        "href": "/formats/xlsx"
+      }
+    ]
+  },
+  "cta": {
+    "label": "Convert PPT to XLSX",
+    "href": "/ppt-to-xlsx"
+  },
+  "json_ld": {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PPT to XLSX Converter"
+  },
+  "seo": {
+    "title": "Ppt To Xlsx Online Free | Converigo",
+    "description": "Convert PPT presentations into XLSX spreadsheets online for data extraction and reuse. Fast, secure and browser-based file conversion with no installation required. Try Converigo for free today.",
+    "keywords": "ppt to xlsx, convert ppt to xlsx, powerpoint to excel",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Converigo free online file converter",
+    "twitter_title": "Ppt To Xlsx Online Free | Converigo",
+    "twitter_description": "Convert PPT presentations into XLSX spreadsheets online for data extraction and reuse. Fast, secure and browser-based file conversion with no installation required. Try Converigo for free today.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/ppt-to-xlsx"
+  },
+  "lifecycle_status": "deprecated"
+}

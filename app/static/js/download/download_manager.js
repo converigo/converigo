@@ -30,8 +30,10 @@ class DownloadManager {
             return;
         }
         const context = window.converigoAnalytics.getConverterContext();
-        window.converigoAnalytics.trackEvent('download_completed', {
-            converter_name: context.converter_name
+        window.converigoAnalytics.trackEvent('download_button_click', {
+            converter_name: context.converter_name,
+            page_path: window.location.pathname || '/',
+            event_status: 'success'
         });
     }
 

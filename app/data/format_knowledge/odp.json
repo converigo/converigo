@@ -1,0 +1,100 @@
+{
+  "slug": "odp",
+  "name": "ODP",
+  "quick_answer": "ODP — OpenDocument Presentation format used by LibreOffice Impress and OpenOffice for slideshows with text, images, charts, and transition effects.",
+  "definition": "ODP is a presentation file format. OpenDocument Presentation format used by LibreOffice Impress and OpenOffice for slideshows with text, images, charts, and transition effects. It is commonly used in workflows that require reliable presentation handling and is supported by a wide range of applications and online tools.",
+  "use_cases": [
+    {
+      "title": "Official document sharing",
+      "text": "ODP is used to share documents that need to look the same on every device and operating system."
+    },
+    {
+      "title": "Business reports and proposals",
+      "text": "ODP is a reliable format for distributing professional reports, contracts, and formal documents."
+    },
+    {
+      "title": "Form and template publishing",
+      "text": "ODP is commonly used for fillable forms, legal documents, and templates with fixed structure."
+    },
+    {
+      "title": "Archive and long-term storage",
+      "text": "ODP is a trusted choice for archiving documents that need to remain readable over many years."
+    },
+    {
+      "title": "Printing and publishing",
+      "text": "ODP is used in print workflows because it preserves layout, fonts, and formatting across different printers."
+    }
+  ],
+  "advantages": [
+    {
+      "title": "Layout preservation",
+      "text": "ODP preserves fonts, formatting, and page layout across different operating systems and devices."
+    },
+    {
+      "title": "Universal compatibility",
+      "text": "ODP can be opened on virtually any device without requiring the authoring software."
+    },
+    {
+      "title": "Security features",
+      "text": "ODP can include password protection, permissions, and digital signatures for sensitive documents."
+    },
+    {
+      "title": "Print-ready output",
+      "text": "ODP is reliable for printing because it accurately represents the intended page design."
+    }
+  ],
+  "limitations": [
+    {
+      "title": "Limited editability",
+      "text": "ODP is not always easy to edit directly, especially for users without compatible software."
+    },
+    {
+      "title": "Complex formatting may not transfer",
+      "text": "Converting from or to ODP can sometimes lose custom styles, fonts, or layout elements."
+    },
+    {
+      "title": "Large file sizes",
+      "text": "ODP files with many embedded images or assets can be large and slow to load or send."
+    }
+  ],
+  "comparisons": [
+    {
+      "title": "ODP vs PPTX",
+      "text": "ODP and PPTX are both widely used file formats. Choosing between them depends on your compatibility needs, quality requirements, and the tools available in your workflow."
+    },
+    {
+      "title": "ODP vs PPT",
+      "text": "ODP and PPT are both widely used file formats. Choosing between them depends on your compatibility needs, quality requirements, and the tools available in your workflow."
+    },
+    {
+      "title": "ODP vs PDF",
+      "text": "ODP and PDF are both widely used file formats. Choosing between them depends on your compatibility needs, quality requirements, and the tools available in your workflow."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "odp",
+      "title": "ODP Converter",
+      "description": "Convert ODP files to other formats online.",
+      "href": "/odp"
+    }
+  ],
+  "faq": [
+    {
+      "question": "What is a ODP file?",
+      "answer": "A ODP file is a presentation format used for storing and sharing content."
+    },
+    {
+      "question": "How do I open a ODP file?",
+      "answer": "You can open a ODP file using compatible software for the presentation category."
+    },
+    {
+      "question": "Can I convert ODP to other formats?",
+      "answer": "Yes, ODP can be converted to other formats using online tools or dedicated software."
+    },
+    {
+      "question": "Is ODP widely supported?",
+      "answer": "ODP is supported by many modern applications and platforms."
+    }
+  ]
+}

@@ -9,6 +9,7 @@ from app.core.templates import templates
 from app.services.authority_service import AuthorityService
 from app.services.converter_registry_service import ConverterRegistryService
 from app.services.format_knowledge_service import FormatKnowledgeService
+from app.services.internal_link_service import InternalLinkService
 from app.services.language_service import LanguageService
 from app.services.seo_service import PRODUCTION_BASE_URL, SeoService
 
@@ -30,6 +31,10 @@ def _authority_service() -> AuthorityService:
 
 def _converter_registry() -> ConverterRegistryService:
     return ConverterRegistryService(CONTRACTS_DIR)
+
+
+def _internal_link_service() -> InternalLinkService:
+    return InternalLinkService(CONTRACTS_DIR)
 
 
 def _known_formats() -> list[str]:
@@ -139,7 +144,15 @@ async def format_page(request: Request, format_name: str) -> HTMLResponse:
         "faq_items": knowledge_faq,
     }
 
+    link_service = _internal_link_service()
+    format_links = link_service.get_links_for_format(normalized)
+
     locale_data, t, supported_locales = _get_locale_context(request)
+    breadcrumb = [
+        {"name": "Home", "url": "/"},
+        {"name": "Formats", "url": "/formats"},
+        {"name": payload.get("title", normalized.title()), "url": f"/formats/{normalized}"},
+    ]
     return templates.TemplateResponse(
         request=request,
         name="pages/format_page.html",
@@ -151,7 +164,10 @@ async def format_page(request: Request, format_name: str) -> HTMLResponse:
             "meta": seo_meta,
             "payload": payload,
             "canonical": canonical,
-            "related_converters": _build_related_converters(normalized),
+            "related_converters": format_links.get("related_converters", []),
+            "related_formats": format_links.get("related_formats", []),
+            "related_knowledge": format_links.get("related_knowledge", []),
+            "related_hubs": format_links.get("related_hubs", []),
             "structured_data": seo_service.build_structured_data(
                 request,
                 page_type="trust_page",

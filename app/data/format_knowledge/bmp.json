@@ -1,0 +1,120 @@
+{
+  "slug": "bmp",
+  "name": "BMP",
+  "quick_answer": "BMP — Bitmap image format that stores uncompressed raster graphics with lossless quality, primarily used on Windows for simple graphics.",
+  "definition": "BMP is an image file format. Bitmap image format that stores uncompressed raster graphics with lossless quality, primarily used on Windows for simple graphics. It is commonly used in workflows that require reliable image handling and is supported by a wide range of applications and online tools.",
+  "use_cases": [
+    {
+      "title": "Legacy Windows application graphics",
+      "text": "BMP is the native raster format on Windows and is used in legacy applications and system interfaces that require uncompressed images."
+    },
+    {
+      "title": "Uncompressed image editing",
+      "text": "BMP stores pixel data without compression, making it suitable for workflows that need to avoid any quality change during editing or saving."
+    },
+    {
+      "title": "Intermediate format in image pipelines",
+      "text": "BMP is sometimes used as an intermediate format between processing steps where lossless fidelity matters and file size is not a concern."
+    },
+    {
+      "title": "Printing and scanning workflows",
+      "text": "BMP can be used in scanning and basic print workflows on Windows where compatibility with legacy drivers is required."
+    },
+    {
+      "title": "Simple system and desktop graphics",
+      "text": "BMP is used for basic desktop wallpapers, system splash screens, and simple graphics in Windows environments."
+    }
+  ],
+  "advantages": [
+    {
+      "title": "Lossless pixel-perfect quality",
+      "text": "BMP stores every pixel without compression, guaranteeing that image data is never altered when saving or loading the file."
+    },
+    {
+      "title": "Native Windows support",
+      "text": "BMP is built into Windows at the OS level and can be opened by any Windows application without additional software."
+    },
+    {
+      "title": "Simple and well-documented format",
+      "text": "BMP has a straightforward file structure that is easy to parse and widely understood across development environments."
+    },
+    {
+      "title": "No compression artifacts",
+      "text": "Because BMP is uncompressed, there are never any encoding artifacts or quality degradation regardless of how many times the file is saved."
+    }
+  ],
+  "limitations": [
+    {
+      "title": "Very large file sizes",
+      "text": "BMP stores uncompressed pixel data, resulting in files far larger than PNG, JPG, or WebP for the same image dimensions."
+    },
+    {
+      "title": "Not suitable for the web",
+      "text": "BMP files are rarely used on websites because their large size makes page loading slow and bandwidth usage high."
+    },
+    {
+      "title": "Limited metadata support",
+      "text": "BMP has minimal support for embedded metadata compared to TIFF or JPG, making it unsuitable for professional image management workflows."
+    },
+    {
+      "title": "Limited cross-platform compatibility",
+      "text": "BMP was designed for Windows and is not as universally supported on macOS, Linux, or mobile platforms as PNG or JPG."
+    }
+  ],
+  "comparisons": [
+    {
+      "title": "BMP vs PNG",
+      "text": "PNG is lossless like BMP but uses efficient compression to produce files many times smaller, making PNG almost always the better choice for uncompressed-quality images."
+    },
+    {
+      "title": "BMP vs JPG",
+      "text": "BMP stores uncompressed data with no quality loss, while JPG uses lossy compression to produce much smaller files suitable for sharing and web use."
+    },
+    {
+      "title": "BMP vs TIFF",
+      "text": "Both BMP and TIFF can store lossless images, but TIFF supports richer metadata, CMYK color, multi-page documents, and compression options that BMP lacks."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "bmp-to-jpg",
+      "title": "BMP to JPG Converter",
+      "description": "Convert BMP files to JPG quickly and easily.",
+      "href": "/bmp-to-jpg"
+    },
+    {
+      "slug": "bmp-to-png",
+      "title": "BMP to PNG Converter",
+      "description": "Convert BMP files to PNG quickly and easily.",
+      "href": "/bmp-to-png"
+    },
+    {
+      "slug": "bmp-to-webp",
+      "title": "BMP to WEBP Converter",
+      "description": "Convert BMP files to WEBP quickly and easily.",
+      "href": "/bmp-to-webp"
+    }
+  ],
+  "faq": [
+    {
+      "question": "What is a BMP file?",
+      "answer": "A BMP (Bitmap) file is an uncompressed raster image format developed by Microsoft that stores pixel data directly without any quality loss."
+    },
+    {
+      "question": "Why are BMP files so large?",
+      "answer": "BMP files store every pixel without compression. A 1920x1080 24-bit BMP is over 6 MB, compared to under 1 MB for an equivalent JPG."
+    },
+    {
+      "question": "Should I use BMP or PNG?",
+      "answer": "PNG is almost always preferable to BMP. PNG is also lossless but uses efficient compression that dramatically reduces file size with no quality loss."
+    },
+    {
+      "question": "Is BMP supported on Mac?",
+      "answer": "macOS can open BMP files with Preview, but BMP is a Windows-native format and is less common in Mac or Linux workflows."
+    },
+    {
+      "question": "When would I use BMP instead of other formats?",
+      "answer": "BMP is relevant when working with legacy Windows software, system-level graphics, or pipelines that specifically require uncompressed bitmap data."
+    }
+  ]
+}

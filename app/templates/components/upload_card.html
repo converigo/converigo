@@ -84,7 +84,7 @@ Convert API
 
             id="chooseFile"
 
-            class="btn btn-success"
+            class="btn btn-primary"
 
         >
 
@@ -133,6 +133,23 @@ Convert API
 
 <div id="uploadHint" class="upload-hint" hidden>
     {{ request.state.t('upload.empty_state', 'Upload a file to get format recommendations and convert it instantly.') }}
+</div>
+
+<!-- UX-S2-002 Premium Validation Experience Card -->
+<div class="validation-card" hidden>
+    <div class="validation-file-row">
+        <div class="validation-file-icon">📄</div>
+        <div class="validation-file-info">
+            <span class="validation-file-name"></span>
+            <span class="validation-file-size"></span>
+        </div>
+        <div class="validation-status-badge">Uploaded</div>
+    </div>
+    <div class="validation-checklist">
+        <div class="validation-step">File received</div>
+        <div class="validation-step">Format detected</div>
+        <div class="validation-step">Validation complete</div>
+    </div>
 </div>
 
 
@@ -216,7 +233,7 @@ contoh:
 
     id="convertButton"
 
-    class="btn btn-success"
+    class="btn btn-primary"
 
     type="button"
 
@@ -297,5 +314,21 @@ contoh:
 
 </div>
 
+    <!-- UX-S2-005 Premium Recommendation Experience -->
+    <section
+        id="recommendationSection"
+        class="recommendation-section"
+        hidden
+        aria-label="Recommended next converters"
+    >
+        <h3 class="recommendation-heading">
+            <span class="recommendation-heading-icon">⚡</span>
+            <span id="recommendationHeadingText">{{ request.state.t('upload.recommended_next', 'Recommended Next') }}</span>
+        </h3>
+        <div
+            id="recommendationGrid"
+            class="recommendation-grid"
+        ></div>
+    </section>
 </div>
 </section>

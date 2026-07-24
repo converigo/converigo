@@ -26,6 +26,9 @@ def test_pdf_to_pptx_conversion_creates_pptx(tmp_path: Path):
 
     # download_path uses /outputs/... absolute-like path; convert to local filesystem path
     local_path = Path(str(download_path).lstrip("/"))
+    download_resp = client.get(download_path)
+    assert download_resp.status_code == 200, download_resp.text
+    assert download_resp.content, "Downloaded content is empty"
 
     assert local_path.exists(), f"Expected output PPTX not found: {local_path}"
     assert local_path.stat().st_size > 0, "Output PPTX is empty"

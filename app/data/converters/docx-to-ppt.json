@@ -1,0 +1,185 @@
+{
+  "title": "DOCX to PPT Converter",
+  "description": "Convert DOCX documents to PPT presentations online with a simple workflow.",
+  "hero": {
+    "title": "DOCX to PPT Converter Free Online",
+    "subtitle": "Turn Word documents into PowerPoint slides quickly.",
+    "description": "Convert  files to  online for free. Fast, secure browser-based conversion with no software installation. Get high-quality  output in seconds using Converigo."
+  },
+  "steps": [
+    "Upload your DOCX file.",
+    "Choose PPT as the output format.",
+    "Download your PPT presentation."
+  ],
+  "benefits": [
+    "Create editable PowerPoint slides",
+    "Save time reformatting manually",
+    "No software installation required"
+  ],
+  "supported_formats": {
+    "input": [
+      ".docx"
+    ],
+    "output": [
+      ".ppt"
+    ],
+    "description": "DOCX input, PPT output"
+  },
+  "tips": [
+    "Review slide formatting after conversion",
+    "Use simple document layouts for best results",
+    "Adjust fonts in PowerPoint as needed"
+  ],
+  "features": [
+    {
+      "title": "Quick DOCX to PPT conversion",
+      "text": "Quick DOCX to PPT conversion"
+    },
+    {
+      "title": "Preserves images and text",
+      "text": "Preserves images and text"
+    },
+    {
+      "title": "Editable output in PowerPoint",
+      "text": "Editable output in PowerPoint"
+    },
+    {
+      "title": "Fast  to  conversion",
+      "text": "Convert  to  in seconds with our optimized processing engine."
+    },
+    {
+      "title": "No software installation required",
+      "text": "Convert files directly in your browser without downloading or installing any software."
+    },
+    {
+      "title": "High-quality  output",
+      "text": "Receive a polished  file ready for immediate use in your workflow."
+    },
+    {
+      "title": "Free  to  converter",
+      "text": "Convert  to  online completely free with no registration or hidden costs."
+    },
+    {
+      "title": "Secure  processing",
+      "text": "Your  files are encrypted during upload and automatically deleted after conversion."
+    }
+  ],
+  "how_to_use": [
+    {
+      "title": "Upload your DOCX file",
+      "description": "Upload your DOCX file"
+    },
+    {
+      "title": "Choose PPT as the output format",
+      "description": "Choose PPT as the output format"
+    },
+    {
+      "title": "Download the PPT file",
+      "description": "Download the PPT file"
+    },
+    {
+      "title": "Upload your file",
+      "description": "Select a  file from your device to begin the conversion process."
+    },
+    {
+      "title": "Choose output as format",
+      "description": "Pick the output as your desired format and review any available options."
+    },
+    {
+      "title": "Convert  to ",
+      "description": "Click convert and our engine processes your file instantly."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "DOCX is a Word document format",
+      "text": "DOCX is a Word document format"
+    },
+    {
+      "title": "PPT is a PowerPoint presentation format",
+      "text": "PPT is a PowerPoint presentation format"
+    }
+  ],
+  "common_problems": [
+    "Complex page layouts may shift",
+    "Embedded images may need repositioning",
+    "Large documents can take longer to convert"
+  ],
+  "faq": [
+    {
+      "question": "Can I convert DOCX to PPT online?",
+      "answer": "Yes, this tool converts DOCX documents into PPT presentations without downloading software."
+    },
+    {
+      "question": "Will my text and images transfer correctly?",
+      "answer": "The conversion transfers the page content into slide format, though some layout adjustments may be needed."
+    },
+    {
+      "question": "Is this converter free?",
+      "answer": "Yes, use the DOCX to PPT converter free online for standard conversions."
+    },
+    {
+      "question": "Do I need PowerPoint installed?",
+      "answer": "No. Conversion happens online and gives you a PPT file to download."
+    },
+    {
+      "question": "What if the conversion is not perfect?",
+      "answer": "Open the PPT file and fine-tune the slide layout in PowerPoint or another editor."
+    },
+    {
+      "question": "Can I convert multiple documents?",
+      "answer": "This tool supports one DOCX file at a time for best results."
+    },
+    {
+      "question": "Can I edit the result in PowerPoint?",
+      "answer": "Yes, the downloaded PPT is editable in Microsoft PowerPoint and compatible editors."
+    },
+    {
+      "question": "What file sizes are supported?",
+      "answer": "Standard Word documents are supported; large files may take longer to process."
+    }
+  ],
+  "related_tools": [
+    "docx-to-pdf",
+    "pptx-to-pdf",
+    "ppt-to-pdf",
+    "docx-to-xlsx"
+  ],
+  "internal_links": {
+    "items": [
+      {
+        "title": "Document Conversion hub",
+        "href": "/document-conversion"
+      },
+      {
+        "title": "DOCX format guide",
+        "href": "/formats/docx"
+      },
+      {
+        "title": "PPT format guide",
+        "href": "/formats/ppt"
+      }
+    ]
+  },
+  "cta": {
+    "label": "Convert DOCX to PPT",
+    "href": "/docx-to-ppt"
+  },
+  "json_ld": {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "DOCX to PPT Converter"
+  },
+  "seo": {
+    "title": "Docx To Ppt Online Free | Converigo",
+    "description": "Convert DOCX documents to PPT presentations online with a simple workflow. Fast, secure and browser-based file conversion with no installation required. Try Converigo for free today.",
+    "keywords": "docx to ppt, convert docx to ppt, word to powerpoint",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Converigo free online file converter",
+    "twitter_title": "Docx To Ppt Online Free | Converigo",
+    "twitter_description": "Convert DOCX documents to PPT presentations online with a simple workflow. Fast, secure and browser-based file conversion with no installation required. Try Converigo for free today.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/docx-to-ppt"
+  },
+  "lifecycle_status": "deprecated"
+}

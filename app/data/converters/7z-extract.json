@@ -57,9 +57,15 @@
     }
   ],
   "seo": {
-    "title": "7Z File Extractor | Converigo",
-    "description": "Extract 7Z files online for free. Fast, secure, and no installation required.",
-    "keywords": "7z extractor, extract 7z, 7z files, archive extraction, 7-zip"
+    "title": "Extract 7Z Files Online Free | Converigo",
+    "description": "Extract files from 7Z archives online for free using Converigo. Fast, secure browser-based 7Z extraction with no software installation required.",
+    "keywords": "7z extractor, extract 7z, 7z files, archive extraction, 7-zip",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert 7Z to 7Z - Converigo free online converter",
+    "twitter_title": "Extract 7Z Files Online Free | Converigo",
+    "twitter_description": "Extract files from 7Z archives online for free using Converigo. Fast, secure browser-based 7Z extraction with no software installation required.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/7z-extract"
   },
   "source": "7z",
   "target": "7z",
@@ -70,7 +76,7 @@
   "hero": {
     "eyebrow": "Archive tool",
     "title": "Extract 7Z Files Online Free",
-    "description": "Extract files from 7Z archives in seconds with Converigo. No installation needed.",
+    "description": "Convert 7Z files to 7Z online for free. Fast, secure browser-based conversion with no software installation. Get high-quality 7z output in seconds using Converigo.",
     "panel_label": "Ready to extract",
     "panel_title": "Upload a 7Z file and receive extracted contents instantly."
   },
@@ -101,8 +107,12 @@
     }
   ],
   "supported_formats": {
-    "input": ["7Z"],
-    "output": ["7Z"],
+    "input": [
+      "7Z"
+    ],
+    "output": [
+      "7Z"
+    ],
     "description": "7Z input, extracted files output"
   },
   "how_to_use": [
@@ -117,6 +127,18 @@
     {
       "title": "Download extracted files",
       "description": "Get all extracted files as a folder ready to download immediately."
+    },
+    {
+      "title": "Upload your 7z",
+      "description": "Select a 7Z file from your device to begin the conversion process."
+    },
+    {
+      "title": "Choose 7z as format",
+      "description": "Pick 7Z as your desired format and review any available options."
+    },
+    {
+      "title": "Convert 7z to 7z",
+      "description": "Click convert and our engine processes your 7z instantly."
     }
   ],
   "about_formats": [
@@ -141,5 +163,6 @@
     "secondary_text": "Read FAQs",
     "primary_href": "#converter",
     "secondary_href": "#faq"
-  }
+  },
+  "lifecycle_status": "active"
 }

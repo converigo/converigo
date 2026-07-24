@@ -10,6 +10,7 @@ Converigo Smart Metadata Version
 
 from pathlib import Path
 
+from app.core.settings import settings
 from app.engines.ffmpeg_engine import FFmpegEngine
 from app.plugins.base import ConverterPlugin
 
@@ -118,7 +119,7 @@ class MP3ToWAVPlugin(ConverterPlugin):
 
 
         output_path = (
-            Path("outputs")
+            settings.OUTPUT_DIR
             / "audio"
             / f"{source_path.stem}.wav"
         )

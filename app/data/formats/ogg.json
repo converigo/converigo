@@ -1,0 +1,14 @@
+{
+  "slug": "ogg",
+  "name": "OGG",
+  "extension": ".ogg",
+  "mime_type": "audio/ogg",
+  "category": "audio",
+  "description": "OGG is a free open container format that often carries Vorbis compressed audio, commonly used for streaming, gaming, and open-source multimedia applications.",
+  "related_formats": ["aac", "flac", "m4a", "mp3", "wav"],
+  "related_converters": ["mp4-to-ogg"],
+  "primary_keywords": ["ogg audio format", "ogg file format", "ogg vorbis"],
+  "secondary_keywords": ["free audio format", "ogg converter", "open source audio"],
+  "search_intent": ["audio conversion", "audio streaming", "open format"]
+}
+

@@ -1,0 +1,13 @@
+{
+  "slug": "bmp",
+  "name": "BMP",
+  "extension": ".bmp",
+  "mime_type": "image/bmp",
+  "category": "image",
+  "description": "Bitmap image format that stores uncompressed raster graphics with lossless quality, primarily used on Windows for simple graphics.",
+  "related_formats": ["png", "jpg", "tiff"],
+  "related_converters": ["bmp-to-jpg", "bmp-to-png", "bmp-to-webp"],
+  "primary_keywords": ["bmp file format", "bitmap image", "bmp image"],
+  "secondary_keywords": ["bmp conversion", "bmp compatibility", "uncompressed image"],
+  "search_intent": ["informational", "image format", "image conversion"]
+}

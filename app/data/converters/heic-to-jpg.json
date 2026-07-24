@@ -1,0 +1,185 @@
+{
+  "slug": "heic-to-jpg",
+  "title": "HEIC to JPG Converter",
+  "description": "Convert HEIC images into JPG format online for free.",
+  "upload_form": {
+    "action": "/convert",
+    "method": "post",
+    "accept": ".heic,.heif",
+    "button_text": "Convert HEIC to JPG"
+  },
+  "faq": [
+    {
+      "question": "Can I convert HEIC photos to JPG?",
+      "answer": "Yes. This converter easily converts HEIC/HEIF images into widely compatible JPG format."
+    },
+    {
+      "question": "Why convert HEIC to JPG?",
+      "answer": "JPG is universally supported across all devices, platforms, and applications, unlike HEIC."
+    },
+    {
+      "question": "Will image quality be preserved?",
+      "answer": "Yes. The conversion maintains high image quality while producing standard JPG files."
+    },
+    {
+      "question": "Is the conversion secure and online?",
+      "answer": "Yes. The process is secure, fast, and works directly in your browser with no software installation."
+    },
+    {
+      "question": "How do I get my JPG file?",
+      "answer": "Once the conversion finishes, you can download your JPG image right away."
+    },
+    {
+      "question": "Is this converter free to use?",
+      "answer": "Yes. Converting HEIC to JPG on Converigo is completely free."
+    },
+    {
+      "question": "Can I convert files on mobile?",
+      "answer": "Yes. The tool works in modern mobile and desktop browsers."
+    },
+    {
+      "question": "What if my upload fails?",
+      "answer": "Try refreshing the page, re-uploading your HEIC image, and converting again."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "jpg-to-png",
+      "title": "JPG to PNG"
+    },
+    {
+      "slug": "png-to-jpg",
+      "title": "PNG to JPG"
+    },
+    {
+      "slug": "bmp-to-jpg",
+      "title": "BMP to JPG"
+    },
+    {
+      "slug": "webp-to-jpg",
+      "title": "WebP to JPG"
+    }
+  ],
+  "seo": {
+    "title": "Convert HEIC to JPG Online Free | Converigo",
+    "description": "Convert HEIC images to JPG format online for free. Make iPhone photos compatible with any device. No software installation required.",
+    "keywords": "heic to jpg, convert heic to jpg, heif to jpg, iphone photo converter, heic converter",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert HEIC to JPG - Converigo free online converter",
+    "twitter_title": "Convert HEIC to JPG Online Free | Converigo",
+    "twitter_description": "Convert HEIC images to JPG format online for free. Make iPhone photos compatible with any device. No software installation required.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/heic-to-jpg"
+  },
+  "source": "heic",
+  "target": "jpg",
+  "category": "image",
+  "active": true,
+  "popular": true,
+  "featured": false,
+  "hero": {
+    "eyebrow": "Converter tool",
+    "title": "HEIC to JPG Converter Free Online",
+    "description": "Convert HEIC and HEIF images to widely compatible JPG format quickly and easily.",
+    "panel_label": "Ready to convert",
+    "panel_title": "Upload an HEIC file and receive a standard JPG image in seconds."
+  },
+  "features": [
+    {
+      "title": "Convert iPhone photos to JPG",
+      "text": "Make HEIC photos from your iPhone or iPad compatible with any device or platform."
+    },
+    {
+      "title": "Preserve image quality",
+      "text": "Get high-quality JPG output while maintaining the original image clarity and detail."
+    },
+    {
+      "title": "Fast secure online conversion",
+      "text": "Convert files in your browser with no software installation and a secure workflow."
+    },
+    {
+      "title": "Support for heic and heif",
+      "text": "Convert both .heic and .heif image formats with full compatibility."
+    },
+    {
+      "title": "No software installation required",
+      "text": "Convert files directly in your browser without downloading or installing any software."
+    },
+    {
+      "title": "Free heic to jpg converter",
+      "text": "Convert HEIC to JPG online completely free with no registration or hidden costs."
+    },
+    {
+      "title": "Secure image processing",
+      "text": "Your images are encrypted during upload and automatically deleted after conversion."
+    },
+    {
+      "title": "Universal jpg compatibility",
+      "text": "Receive standard JPG files that work on all devices, websites, and applications."
+    }
+  ],
+  "supported_formats": {
+    "input": [
+      "HEIC",
+      "HEIF"
+    ],
+    "output": [
+      "JPG"
+    ],
+    "description": "HEIC/HEIF input, JPG output"
+  },
+  "how_to_use": [
+    {
+      "title": "Upload your HEIC file",
+      "description": "Select a HEIC or HEIF image from your device to begin."
+    },
+    {
+      "title": "Convert to JPG",
+      "description": "Choose JPG as the output format and convert your image."
+    },
+    {
+      "title": "Download your JPG",
+      "description": "Get your converted JPG image instantly for sharing or uploading."
+    },
+    {
+      "title": "Upload your heic photo",
+      "description": "Select an HEIC image from your device to begin the conversion process."
+    },
+    {
+      "title": "Choose jpg as format",
+      "description": "Pick JPG as your desired format and review any available options."
+    },
+    {
+      "title": "Convert heic to jpg",
+      "description": "Click convert and our engine processes your image instantly."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is HEIC?",
+      "text": "HEIC is a modern image format used by Apple devices for efficient photo storage."
+    },
+    {
+      "title": "What is JPG?",
+      "text": "JPG is the most widely supported image format, compatible with virtually all devices and software."
+    },
+    {
+      "title": "What is HEIF format?",
+      "text": "HEIF is a high-efficiency image format developed as a successor to JPEG."
+    },
+    {
+      "title": "What is JPG format?",
+      "text": "JPG is a universal file format chosen for its broad compatibility and optimized performance."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Convert HEIC files to JPG in seconds",
+    "text": "Upload your image and receive a standard JPG file instantly.",
+    "primary_text": "Convert now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  },
+  "lifecycle_status": "certified"
+}

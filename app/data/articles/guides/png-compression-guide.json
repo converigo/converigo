@@ -1,0 +1,54 @@
+{
+  "slug": "png-compression-guide",
+  "title": "PNG Compression Guide: Keep Files Small Without Losing Quality",
+  "description": "Learn how to reduce PNG file size while preserving image quality, transparency, and sharp design details.",
+  "category": "Guides",
+  "topics": ["PNG", "compression", "optimization", "file size", "web performance"],
+  "author": "Converigo",
+  "date_published": "2026-07-04",
+  "date_modified": "2026-07-21",
+  "read_time_minutes": 6,
+  "order": 4,
+  "keywords": ["PNG compression", "optimize PNG", "reduce PNG size", "PNG file size"],
+  "seo_keywords": ["png compression guide", "optimize png file", "reduce png file size", "png file size optimization"],
+  "related_formats": ["png", "webp", "jpg"],
+  "related_converters": ["png-to-webp", "jpg-to-png", "png-to-jpg"],
+  "related_articles": ["png", "png-transparency-guide", "png-vs-webp"],
+  "sections": [
+    {
+      "id": "why-optimize",
+      "title": "Why PNG Compression Matters",
+      "content": "PNG files can become large when they contain lots of detail or metadata. Optimizing them helps reduce storage use and improves web performance without sacrificing the image's visible quality."
+    },
+    {
+      "id": "methods",
+      "title": "Practical Compression Methods",
+      "content": "Common approaches include reducing image dimensions, removing unnecessary metadata, trimming color depth when possible, and choosing better compression settings. These steps can reduce file size without changing the visual result."
+    },
+    {
+      "id": "when-to-convert",
+      "title": "When to Convert PNG to WebP",
+      "content": "If a PNG is being used mainly on the web and file size is a concern, converting it to WebP may be a smarter option. WebP can deliver strong visual quality at a smaller size for many images."
+    }
+  ],
+  "faq": [
+    {
+      "question": "Can PNG files be compressed without losing quality?",
+      "answer": "Yes. PNG compression can reduce file size without changing the image data, as long as you use efficient settings and remove irrelevant metadata."
+    },
+    {
+      "question": "Should I convert PNG to WebP for the web?",
+      "answer": "If your audience supports WebP, it can be a strong choice for smaller, faster-loading files."
+    }
+  ],
+  "call_to_action": {
+    "text": "Optimize or convert PNG files with a simple online workflow.",
+    "url": "/png-to-webp",
+    "button_text": "Convert PNG"
+  },
+  "breadcrumb_override": [
+    { "name": "Home", "url": "/" },
+    { "name": "Learning Center", "url": "/learning" },
+    { "name": "PNG Compression Guide", "url": "/learning/png-compression-guide" }
+  ]
+}

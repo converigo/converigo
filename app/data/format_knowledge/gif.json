@@ -1,0 +1,124 @@
+{
+  "slug": "gif",
+  "name": "GIF",
+  "quick_answer": "GIF — Graphics Interchange Format supporting animation, transparency, and lossless compression for simple graphics and short animated clips on the web.",
+  "definition": "GIF is an image file format. Graphics Interchange Format supporting animation, transparency, and lossless compression for simple graphics and short animated clips on the web. It is commonly used in workflows that require reliable image handling and is supported by a wide range of applications and online tools.",
+  "use_cases": [
+    {
+      "title": "Animated web content",
+      "text": "GIF is widely used for short animated clips, looping animations, and reaction images on websites and social platforms."
+    },
+    {
+      "title": "Memes and social media posts",
+      "text": "GIF has become the standard format for shareable memes, humorous clips, and short visual reactions across messaging apps and social feeds."
+    },
+    {
+      "title": "Email and newsletter animations",
+      "text": "GIF adds lightweight animation to email campaigns and newsletters where video is not supported by most email clients."
+    },
+    {
+      "title": "UI micro-interactions and loading indicators",
+      "text": "GIF is used in app interfaces for small animations such as loading spinners, progress indicators, and onboarding illustrations."
+    },
+    {
+      "title": "Simple graphics with limited colors",
+      "text": "GIF works well for flat graphics, logos, and icons with a limited number of distinct colors where its 256-color palette is sufficient."
+    }
+  ],
+  "advantages": [
+    {
+      "title": "Native animation support",
+      "text": "GIF is one of the oldest and most universally supported animation formats, playable in every browser and email client without plugins."
+    },
+    {
+      "title": "Universal compatibility",
+      "text": "GIF is recognized by virtually every platform, device, messaging app, and browser, making it the safest choice for animated images."
+    },
+    {
+      "title": "Lossless for flat graphics",
+      "text": "GIF uses lossless compression for images with up to 256 colors, preserving the exact appearance of logos, icons, and simple diagrams."
+    },
+    {
+      "title": "Transparency support",
+      "text": "GIF supports binary transparency, allowing one color to be designated as transparent for use over different backgrounds."
+    }
+  ],
+  "limitations": [
+    {
+      "title": "256-color palette limit",
+      "text": "GIF supports only 256 colors per frame, making it unsuitable for photographs and images with gradients or rich color detail."
+    },
+    {
+      "title": "Large file size for long animations",
+      "text": "Animated GIFs can become very large compared to equivalent video formats like MP4 or WebP, especially for longer or higher-resolution clips."
+    },
+    {
+      "title": "No audio support",
+      "text": "GIF cannot carry an audio track, so any content requiring synchronized sound must use a video format instead."
+    },
+    {
+      "title": "Not suitable for photographs",
+      "text": "The 256-color restriction causes visible banding and dithering artifacts in photographic content with continuous tones."
+    }
+  ],
+  "comparisons": [
+    {
+      "title": "GIF vs PNG",
+      "text": "GIF supports animation but is limited to 256 colors per frame, while PNG is lossless with full color depth and transparency but has no animation support."
+    },
+    {
+      "title": "GIF vs WEBP",
+      "text": "WebP offers far better compression and full color depth at smaller sizes, while GIF remains more universally supported for animation in legacy environments."
+    },
+    {
+      "title": "GIF vs JPG",
+      "text": "JPG is optimized for photographic images with millions of colors, while GIF is limited to 256 colors but uniquely supports looping animation."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "gif-to-mp4",
+      "title": "GIF to MP4 Converter",
+      "description": "Convert GIF files to MP4 quickly and easily.",
+      "href": "/gif-to-mp4"
+    },
+    {
+      "slug": "gif-to-webp",
+      "title": "GIF to WEBP Converter",
+      "description": "Convert GIF files to WEBP quickly and easily.",
+      "href": "/gif-to-webp"
+    },
+    {
+      "slug": "gif-to-png",
+      "title": "GIF to PNG Converter",
+      "description": "Convert GIF files to PNG quickly and easily.",
+      "href": "/gif-to-png"
+    }
+  ],
+  "faq": [
+    {
+      "question": "What is a GIF file?",
+      "answer": "A GIF (Graphics Interchange Format) file is a raster image format that supports animation, transparency, and lossless compression for up to 256 colors."
+    },
+    {
+      "question": "Does GIF support animation?",
+      "answer": "Yes, GIF is one of the most widely supported animation formats. Multiple frames can be stored in a single file and played back in a loop."
+    },
+    {
+      "question": "Why does GIF only use 256 colors?",
+      "answer": "GIF was designed in 1987 when 256 colors were standard. Its palette-based color model is fixed at 8 bits per pixel, which limits photographic quality."
+    },
+    {
+      "question": "Is GIF better than MP4 for animations?",
+      "answer": "MP4 is far more efficient for longer or higher-quality animations. GIF is preferred when broad compatibility without video player controls is required."
+    },
+    {
+      "question": "Can I convert GIF to WebP for smaller file size?",
+      "answer": "Yes, converting GIF to animated WebP typically reduces file size significantly while retaining animation and supporting full color depth."
+    },
+    {
+      "question": "Is GIF lossless?",
+      "answer": "GIF uses lossless LZW compression, but because it is limited to 256 colors, photographic images are visually degraded by dithering."
+    }
+  ]
+}

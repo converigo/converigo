@@ -1,0 +1,471 @@
+/*
+====================================================
+Project : Converigo
+Component : Premium Recommendation
+Version : 1.0.0
+
+UX-S2-005 Premium Recommendation Experience
+
+Requirements:
+- Premium heading "Recommended Next" / "Continue Working"
+- Premium glass cards with icon, name, description, CTA
+- Card hover: lift, glow, premium shadow, border highlight
+- Grid: 2-4 cols desktop, 2 cols tablet, 1 col mobile
+- Animations: transform & opacity only, 160-220ms
+- Accessibility: prefers-reduced-motion, focus-visible
+- Consistent with Hero/Upload/Validation/Success design system
+====================================================
+*/
+
+/* ================================================
+   RECOMMENDATION SECTION
+   ================================================ */
+
+.recommendation-section {
+    position: relative;
+    margin-top: 28px;
+    padding-top: 20px;
+    isolation: isolate;
+}
+
+/* Subtle separator line above recommendations */
+.recommendation-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(37, 99, 235, 0.15) 20%,
+        rgba(37, 99, 235, 0.2) 50%,
+        rgba(37, 99, 235, 0.15) 80%,
+        transparent
+    );
+    pointer-events: none;
+}
+
+/* Section heading - premium typography consistent with hero */
+.recommendation-heading {
+    margin: 0 0 18px;
+    font-size: clamp(1.05rem, 1.4vw, 1.15rem);
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.recommendation-heading-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    background: rgba(37, 99, 235, 0.1);
+    font-size: 0.85rem;
+    flex-shrink: 0;
+}
+
+/* ================================================
+   RECOMMENDATION GRID
+   ================================================ */
+
+.recommendation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* ================================================
+   PREMIUM RECOMMENDATION CARD
+   ================================================ */
+
+.recommendation-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 18px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(37, 99, 235, 0.16);
+    background:
+        linear-gradient(156deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.72)),
+        linear-gradient(138deg, rgba(191, 219, 254, 0.12), rgba(125, 211, 252, 0.08));
+    box-shadow:
+        0 14px 32px rgba(15, 23, 42, 0.08),
+        0 4px 12px rgba(37, 99, 235, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition:
+        transform 180ms ease,
+        box-shadow 180ms ease,
+        border-color 180ms ease;
+    will-change: transform, opacity;
+    text-decoration: none;
+    color: inherit;
+    overflow: hidden;
+}
+
+/* Reflection layer via ::before */
+.recommendation-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(125deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0) 55%);
+    opacity: 0.85;
+    z-index: 0;
+}
+
+/* Top-left lighting accent */
+.recommendation-card::after {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    background: radial-gradient(circle at 35% 35%, rgba(37, 99, 235, 0.18), rgba(37, 99, 235, 0) 70%);
+    filter: blur(1px);
+    opacity: 0.7;
+}
+
+/* Ensure children sit above pseudo-elements */
+.recommendation-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* ================================================
+   CARD HOVER EFFECTS
+   ================================================ */
+
+.recommendation-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(37, 99, 235, 0.38);
+    box-shadow:
+        0 20px 44px rgba(15, 23, 42, 0.14),
+        0 8px 22px rgba(37, 99, 235, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.86);
+}
+
+/* Glow effect on hover - premium blue ambient glow */
+.recommendation-card:hover::after {
+    opacity: 1;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle at 35% 35%, rgba(37, 99, 235, 0.25), rgba(37, 99, 235, 0) 70%);
+    transition:
+        opacity 180ms ease,
+        width 180ms ease,
+        height 180ms ease;
+}
+
+/* Focus-visible state for keyboard navigation */
+.recommendation-card:focus-visible {
+    outline: none;
+    transform: translateY(-3px);
+    border-color: rgba(37, 99, 235, 0.55);
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.2),
+        0 18px 40px rgba(15, 23, 42, 0.12),
+        0 8px 22px rgba(37, 99, 235, 0.14),
+        inset 0 1px 0 rgba(255, 255, 255, 0.86);
+}
+
+/* ================================================
+   CARD CONTENT
+   ================================================ */
+
+/* Icon row */
+.recommendation-card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    background: rgba(37, 99, 235, 0.1);
+    border: 1px solid rgba(37, 99, 235, 0.12);
+    font-size: 1.3rem;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+/* Converter name */
+.recommendation-card-title {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #0f172a;
+    letter-spacing: -0.01em;
+}
+
+/* Short description */
+.recommendation-card-desc {
+    margin: 0;
+    font-size: 0.82rem;
+    line-height: 1.55;
+    color: #475569;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* CTA button */
+.recommendation-card-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    align-self: flex-start;
+    margin-top: auto;
+    padding: 7px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(37, 99, 235, 0.2);
+    background: rgba(255, 255, 255, 0.8);
+    color: #1d4ed8;
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 1.2;
+    cursor: pointer;
+    transition:
+        transform 160ms ease,
+        box-shadow 160ms ease,
+        background 160ms ease;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.recommendation-card-cta:hover {
+    transform: translateY(-1px);
+    background: rgba(239, 246, 255, 0.95);
+    box-shadow: 0 8px 18px rgba(37, 99, 235, 0.14);
+    border-color: rgba(37, 99, 235, 0.32);
+}
+
+.recommendation-card-cta:focus-visible {
+    outline: none;
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.18),
+        0 8px 18px rgba(37, 99, 235, 0.12);
+}
+
+.recommendation-card-cta:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.1);
+}
+
+/* Arrow icon on CTA */
+.recommendation-card-cta-arrow {
+    font-size: 0.7rem;
+    line-height: 1;
+    transition: transform 160ms ease;
+}
+
+.recommendation-card-cta:hover .recommendation-card-cta-arrow {
+    transform: translateX(2px);
+}
+
+/* Badge (e.g. "Best Choice", "Popular") */
+.recommendation-card-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-start;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: rgba(37, 99, 235, 0.1);
+    color: #1d4ed8;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.015em;
+    line-height: 1.4;
+    text-transform: uppercase;
+}
+
+/* ================================================
+   CARD ENTRANCE ANIMATION
+   ================================================ */
+
+@keyframes recommendationCardIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.recommendation-card {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+}
+
+.recommendation-card.recommendation-visible {
+    animation: recommendationCardIn 220ms ease-out forwards;
+}
+
+/* Stagger delays for each card */
+.recommendation-card:nth-child(1) { animation-delay: 0ms; }
+.recommendation-card:nth-child(2) { animation-delay: 60ms; }
+.recommendation-card:nth-child(3) { animation-delay: 120ms; }
+.recommendation-card:nth-child(4) { animation-delay: 180ms; }
+.recommendation-card:nth-child(5) { animation-delay: 240ms; }
+.recommendation-card:nth-child(6) { animation-delay: 300ms; }
+
+/* ================================================
+   EMPTY / ERROR STATE
+   ================================================ */
+
+.recommendation-empty {
+    padding: 16px;
+    text-align: center;
+    color: #64748b;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    border-radius: 16px;
+    border: 1px dashed rgba(148, 163, 184, 0.3);
+    background: rgba(248, 250, 252, 0.6);
+}
+
+/* ================================================
+   RESPONSIVE
+   ================================================ */
+
+/* Desktop large: up to 4 columns */
+@media (min-width: 1280px) {
+    .recommendation-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Desktop medium: 3 columns */
+@media (min-width: 1025px) and (max-width: 1279px) {
+    .recommendation-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Tablet: 2 columns */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .recommendation-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile: 1 column (auto-fill fallback for very small screens) */
+@media (max-width: 768px) {
+    .recommendation-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .recommendation-section {
+        margin-top: 22px;
+        padding-top: 16px;
+    }
+
+    .recommendation-heading {
+        font-size: 1rem;
+        margin-bottom: 14px;
+    }
+
+    .recommendation-card {
+        padding: 16px 14px;
+        border-radius: 18px;
+    }
+
+    .recommendation-card-title {
+        font-size: 0.92rem;
+    }
+
+    .recommendation-card-desc {
+        font-size: 0.8rem;
+    }
+}
+
+/* Narrow mobile */
+@media (max-width: 430px) {
+    .recommendation-section {
+        margin-top: 18px;
+        padding-top: 14px;
+    }
+
+    .recommendation-card {
+        padding: 14px 12px;
+        gap: 10px;
+    }
+
+    .recommendation-card-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 1.1rem;
+    }
+
+    .recommendation-card-cta {
+        padding: 6px 12px;
+        font-size: 0.78rem;
+    }
+}
+
+@media (max-width: 390px) {
+    .recommendation-section {
+        margin-top: 14px;
+        padding-top: 12px;
+    }
+
+    .recommendation-heading {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .recommendation-card {
+        padding: 12px 10px;
+    }
+}
+
+/* ================================================
+   ACCESSIBILITY: REDUCED MOTION
+   ================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    .recommendation-card,
+    .recommendation-card:hover,
+    .recommendation-card:focus-visible,
+    .recommendation-card-cta,
+    .recommendation-card-cta:hover,
+    .recommendation-card-cta .recommendation-card-cta-arrow,
+    .recommendation-card::after {
+        animation: none !important;
+        transition: none !important;
+        transform: none !important;
+        opacity: 1;
+    }
+
+    .recommendation-card,
+    .recommendation-card.recommendation-visible {
+        opacity: 1;
+        transform: none;
+    }
+}
+

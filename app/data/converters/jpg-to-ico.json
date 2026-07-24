@@ -8,11 +8,136 @@
   "active": true,
   "popular": true,
   "featured": false,
-  "supported_formats": { "input": ["jpg", "jpeg"], "output": ["ico"] },
-  "how_to_use": [ { "title": "Upload JPG", "description": "Upload a JPG image." }, { "title": "Download ICO", "description": "Download the resulting ICO file." } ],
-  "about_formats": [ { "title": "What is ICO?", "text": "ICO files are used for website favicons and application icons." } ],
-  "hero": { "title": "Convert JPG to ICO", "subtitle": "Create favicons and icons from JPG images." },
-  "features": [ { "title": "Fast conversion", "text": "Quickly produce ICO files." } ],
-  "cta": { "eyebrow": "Ready to convert", "title": "Convert JPG images to ICO in seconds.", "primary_text": "Convert now", "primary_href": "#converter" },
-  "seo": { "title": "JPG to ICO Converter | Converigo", "description": "Convert JPG images to ICO icons for websites and applications." }
+  "supported_formats": {
+    "input": [
+      "jpg",
+      "jpeg"
+    ],
+    "output": [
+      "ico"
+    ]
+  },
+  "how_to_use": [
+    {
+      "title": "Upload JPG",
+      "description": "Upload a JPG image."
+    },
+    {
+      "title": "Download ICO",
+      "description": "Download the resulting ICO file."
+    },
+    {
+      "title": "Upload your jpg",
+      "description": "Select a JPG file from your device to begin the conversion process."
+    },
+    {
+      "title": "Choose ico as format",
+      "description": "Pick ICO as your desired format and review any available options."
+    },
+    {
+      "title": "Convert jpg to ico",
+      "description": "Click convert and our engine processes your jpg instantly."
+    },
+    {
+      "title": "Download your ico file",
+      "description": "Get your converted ICO immediately for use in your projects."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is ICO?",
+      "text": "ICO files are used for website favicons and application icons."
+    },
+    {
+      "title": "What is JPG format?",
+      "text": "JPG is a widely used file format known for its versatility and compatibility across many applications."
+    },
+    {
+      "title": "What is ICO format?",
+      "text": "ICO is a popular file format chosen for its broad compatibility and optimized performance."
+    },
+    {
+      "title": "Why convert JPG to ICO?",
+      "text": "Converting jpg to ico enables better compatibility, smaller file sizes, and improved workflow integration."
+    }
+  ],
+  "hero": {
+    "title": "Convert JPG to ICO",
+    "subtitle": "Create favicons and icons from JPG images.",
+    "description": "Convert JPG files to ICO online for free. Fast, secure browser-based conversion with no software installation. Get high-quality ico output in seconds using Converigo."
+  },
+  "features": [
+    {
+      "title": "Fast conversion",
+      "text": "Quickly produce ICO files."
+    },
+    {
+      "title": "Fast jpg to ico conversion",
+      "text": "Convert JPG to ICO in seconds with our optimized processing engine."
+    },
+    {
+      "title": "No software installation required",
+      "text": "Convert files directly in your browser without downloading or installing any software."
+    },
+    {
+      "title": "High-quality ico output",
+      "text": "Receive a polished ICO file ready for immediate use in your workflow."
+    },
+    {
+      "title": "Free jpg to ico converter",
+      "text": "Convert JPG to ICO online completely free with no registration or hidden costs."
+    },
+    {
+      "title": "Secure jpg processing",
+      "text": "Your JPG files are encrypted during upload and automatically deleted after conversion."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Convert JPG images to ICO in seconds.",
+    "primary_text": "Convert now",
+    "primary_href": "#converter"
+  },
+  "seo": {
+    "title": "Convert JPG to ICO Online Free | Converigo",
+    "description": "Convert JPG to ICO online for free using Converigo. Fast, secure and browser-based file conversion from jpg to ico with no installation required.",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert JPG to ICO - Converigo free online converter",
+    "twitter_title": "Convert JPG to ICO Online Free | Converigo",
+    "twitter_description": "Convert JPG to ICO online for free using Converigo. Fast, secure and browser-based file conversion from jpg to ico with no installation required.",
+    "twitter_image": "/static/images/og-default.png",
+    "keywords": "jpg to ico, convert jpg to ico, jpg converter, ico converter, online file converter",
+    "canonical": "https://converigo.com/tools/jpg-to-ico"
+  },
+  "faq": [
+    {
+      "question": "Is this jpg converter free to use?",
+      "answer": "Yes. Converting JPG to ICO on Converigo is completely free with no hidden charges."
+    },
+    {
+      "question": "Are my uploaded files secure?",
+      "answer": "Yes. All uploaded files are processed securely and automatically deleted from our servers after conversion. Your privacy is protected."
+    },
+    {
+      "question": "Will the ico quality be preserved?",
+      "answer": "Yes. The converter is designed to produce a high-quality ICO file while keeping the conversion process simple and reliable."
+    },
+    {
+      "question": "Can I use this converter on mobile devices?",
+      "answer": "Yes. Converigo works on all modern browsers, including mobile phones and tablets, so you can convert files on the go."
+    },
+    {
+      "question": "How do I convert JPG to ICO?",
+      "answer": "Upload your JPG, select the conversion options if needed, and download the converted ICO instantly. It only takes a few seconds."
+    },
+    {
+      "question": "What file sizes are supported?",
+      "answer": "We support files up to 100MB for most conversions. Larger files may take longer to process."
+    },
+    {
+      "question": "Why use Converigo for jpg conversion?",
+      "answer": "Converigo offers fast, secure, browser-based jpg conversion with no software installation, no registration, and completely free usage."
+    }
+  ],
+  "lifecycle_status": "active"
 }

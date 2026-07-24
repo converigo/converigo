@@ -1,0 +1,14 @@
+{
+  "AI_BRAIN": {
+    "command": "C:\\converigo\\.venv\\Scripts\\python.exe",
+    "args": [
+      "-m",
+      "AI_BRAIN.mcp_server.server",
+      "--transport",
+      "stdio"
+    ],
+    "env": {
+      "PYTHONPATH": "C:\\converigo"
+    }
+  }
+}

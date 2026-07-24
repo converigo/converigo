@@ -1,0 +1,104 @@
+{
+  "slug": "txt",
+  "name": "TXT",
+  "quick_answer": "TXT — Plain text format for unformatted content, storing raw characters without styling, images, or layout information for maximum compatibility across platforms.",
+  "definition": "TXT is a document file format. Plain text format for unformatted content, storing raw characters without styling, images, or layout information for maximum compatibility across platforms. It is commonly used in workflows that require reliable document handling and is supported by a wide range of applications and online tools.",
+  "use_cases": [
+    {
+      "title": "Official document sharing",
+      "text": "TXT is used to share documents that need to look the same on every device and operating system."
+    },
+    {
+      "title": "Business reports and proposals",
+      "text": "TXT is a reliable format for distributing professional reports, contracts, and formal documents."
+    },
+    {
+      "title": "Form and template publishing",
+      "text": "TXT is commonly used for fillable forms, legal documents, and templates with fixed structure."
+    },
+    {
+      "title": "Archive and long-term storage",
+      "text": "TXT is a trusted choice for archiving documents that need to remain readable over many years."
+    },
+    {
+      "title": "Printing and publishing",
+      "text": "TXT is used in print workflows because it preserves layout, fonts, and formatting across different printers."
+    }
+  ],
+  "advantages": [
+    {
+      "title": "Layout preservation",
+      "text": "TXT preserves fonts, formatting, and page layout across different operating systems and devices."
+    },
+    {
+      "title": "Universal compatibility",
+      "text": "TXT can be opened on virtually any device without requiring the authoring software."
+    },
+    {
+      "title": "Security features",
+      "text": "TXT can include password protection, permissions, and digital signatures for sensitive documents."
+    },
+    {
+      "title": "Print-ready output",
+      "text": "TXT is reliable for printing because it accurately represents the intended page design."
+    }
+  ],
+  "limitations": [
+    {
+      "title": "Limited editability",
+      "text": "TXT is not always easy to edit directly, especially for users without compatible software."
+    },
+    {
+      "title": "Complex formatting may not transfer",
+      "text": "Converting from or to TXT can sometimes lose custom styles, fonts, or layout elements."
+    },
+    {
+      "title": "Large file sizes",
+      "text": "TXT files with many embedded images or assets can be large and slow to load or send."
+    }
+  ],
+  "comparisons": [
+    {
+      "title": "TXT vs DOCX",
+      "text": "TXT and DOCX are both widely used file formats. Choosing between them depends on your compatibility needs, quality requirements, and the tools available in your workflow."
+    },
+    {
+      "title": "TXT vs PDF",
+      "text": "TXT and PDF are both widely used file formats. Choosing between them depends on your compatibility needs, quality requirements, and the tools available in your workflow."
+    },
+    {
+      "title": "TXT vs RTF",
+      "text": "TXT and RTF are both widely used file formats. Choosing between them depends on your compatibility needs, quality requirements, and the tools available in your workflow."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "txt",
+      "title": "TXT Converter",
+      "description": "Convert TXT files to other formats online.",
+      "href": "/txt"
+    }
+  ],
+  "faq": [
+    {
+      "question": "What is a TXT file?",
+      "answer": "A TXT file is a document format used to store and share formatted content in a consistent, device-independent layout."
+    },
+    {
+      "question": "How do I open a TXT file?",
+      "answer": "You can open a TXT file using a compatible viewer or editor such as Adobe Acrobat, LibreOffice, or a browser-based tool."
+    },
+    {
+      "question": "Can I convert TXT to other formats?",
+      "answer": "Yes, TXT can be converted to other document and image formats using conversion tools online or in desktop applications."
+    },
+    {
+      "question": "Is TXT good for printing?",
+      "answer": "TXT is often a reliable format for printing because it preserves document layout and fonts."
+    },
+    {
+      "question": "Can TXT files be password protected?",
+      "answer": "Many TXT formats support password protection or permission controls for sensitive documents."
+    }
+  ]
+}

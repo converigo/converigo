@@ -12,9 +12,15 @@
     "button_text": "Upload PNG"
   },
   "seo": {
-    "title": "PNG to BMP | Converigo",
-    "description": "Free online PNG to BMP converter.",
-    "keywords": "png to bmp, convert png, image converter"
+    "title": "Convert PNG to BMP Online Free | Converigo",
+    "description": "Convert PNG to BMP online for free using Converigo. Fast, secure and browser-based file conversion from png to bmp with no installation required.",
+    "keywords": "png to bmp, convert png, image converter",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert PNG to BMP - Converigo free online converter",
+    "twitter_title": "Convert PNG to BMP Online Free | Converigo",
+    "twitter_description": "Convert PNG to BMP online for free using Converigo. Fast, secure and browser-based file conversion from png to bmp with no installation required.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/png-to-bmp"
   },
   "source": "png",
   "target": "bmp",
@@ -22,7 +28,7 @@
   "hero": {
     "eyebrow": "Converter tool",
     "title": "Convert PNG to BMP",
-    "description": "Quickly convert PNG images to BMP format for legacy compatibility.",
+    "description": "Convert PNG files to BMP online for free. Fast, secure browser-based conversion with no software installation. Get high-quality bmp output in seconds using Converigo.",
     "panel_label": "Ready to convert",
     "panel_title": "Upload a PNG file and receive a BMP result in seconds."
   },
@@ -30,6 +36,26 @@
     {
       "title": "Simple conversion",
       "text": "Upload PNG and get BMP with a single click."
+    },
+    {
+      "title": "Fast png to bmp conversion",
+      "text": "Convert PNG to BMP in seconds with our optimized processing engine."
+    },
+    {
+      "title": "No software installation required",
+      "text": "Convert files directly in your browser without downloading or installing any software."
+    },
+    {
+      "title": "High-quality bmp output",
+      "text": "Receive a polished BMP file ready for immediate use in your workflow."
+    },
+    {
+      "title": "Free png to bmp converter",
+      "text": "Convert PNG to BMP online completely free with no registration or hidden costs."
+    },
+    {
+      "title": "Secure png processing",
+      "text": "Your PNG files are encrypted during upload and automatically deleted after conversion."
     }
   ],
   "how_to_use": [
@@ -40,6 +66,22 @@
     {
       "title": "Download the result",
       "description": "Receive the BMP file and download it immediately."
+    },
+    {
+      "title": "Upload your png",
+      "description": "Select a PNG file from your device to begin the conversion process."
+    },
+    {
+      "title": "Choose bmp as format",
+      "description": "Pick BMP as your desired format and review any available options."
+    },
+    {
+      "title": "Convert png to bmp",
+      "description": "Click convert and our engine processes your png instantly."
+    },
+    {
+      "title": "Download your bmp file",
+      "description": "Get your converted BMP immediately for use in your projects."
     }
   ],
   "about_formats": [
@@ -50,6 +92,14 @@
     {
       "title": "What is BMP?",
       "text": "BMP is a legacy bitmap image format supported in many older systems."
+    },
+    {
+      "title": "What is PNG format?",
+      "text": "PNG is a widely used file format known for its versatility and compatibility across many applications."
+    },
+    {
+      "title": "What is BMP format?",
+      "text": "BMP is a popular file format chosen for its broad compatibility and optimized performance."
     }
   ],
   "cta": {
@@ -60,8 +110,43 @@
     "primary_href": "#converter"
   },
   "supported_formats": {
-    "input": ["PNG"],
-    "output": ["BMP"],
+    "input": [
+      "PNG"
+    ],
+    "output": [
+      "BMP"
+    ],
     "description": "PNG input, BMP output"
-  }
+  },
+  "faq": [
+    {
+      "question": "Is this png converter free to use?",
+      "answer": "Yes. Converting PNG to BMP on Converigo is completely free with no hidden charges."
+    },
+    {
+      "question": "Are my uploaded files secure?",
+      "answer": "Yes. All uploaded files are processed securely and automatically deleted from our servers after conversion. Your privacy is protected."
+    },
+    {
+      "question": "Will the bmp quality be preserved?",
+      "answer": "Yes. The converter is designed to produce a high-quality BMP file while keeping the conversion process simple and reliable."
+    },
+    {
+      "question": "Can I use this converter on mobile devices?",
+      "answer": "Yes. Converigo works on all modern browsers, including mobile phones and tablets, so you can convert files on the go."
+    },
+    {
+      "question": "How do I convert PNG to BMP?",
+      "answer": "Upload your PNG, select the conversion options if needed, and download the converted BMP instantly. It only takes a few seconds."
+    },
+    {
+      "question": "What file sizes are supported?",
+      "answer": "We support files up to 100MB for most conversions. Larger files may take longer to process."
+    },
+    {
+      "question": "Why use Converigo for png conversion?",
+      "answer": "Converigo offers fast, secure, browser-based png conversion with no software installation, no registration, and completely free usage."
+    }
+  ],
+  "lifecycle_status": "active"
 }

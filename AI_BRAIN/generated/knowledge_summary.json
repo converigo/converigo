@@ -1,0 +1,98 @@
+{
+  "generated_at": "2026-07-23T10:42:15+00:00",
+  "source_directory": "C:/converigo/AI_BRAIN/generated",
+  "inputs": {
+    "project_index": {
+      "status": "ok",
+      "path": "C:/converigo/AI_BRAIN/generated/project_index.json",
+      "file_size_bytes": 138637,
+      "summary": {
+        "container_type": "list",
+        "record_count": 1344,
+        "record_type_counts": {
+          "dict": 1344
+        },
+        "keys_present": [
+          "extension",
+          "path",
+          "size"
+        ],
+        "key_presence_count": {
+          "extension": 1344,
+          "path": 1344,
+          "size": 1344
+        },
+        "path_field_count": 1344,
+        "size_field_count": 1344,
+        "extension_counts": {
+          "": 7,
+          ".1": 1,
+          ".7z": 1,
+          ".avif": 2,
+          ".bmp": 2,
+          ".css": 25,
+          ".docx": 2,
+          ".example": 1,
+          ".gz": 2,
+          ".heic": 1,
+          ".heif": 1,
+          ".html": 60,
+          ".ico": 2,
+          ".ini": 1,
+          ".jpg": 13,
+          ".js": 13,
+          ".json": 248,
+          ".jsonl": 1,
+          ".log": 5,
+          ".m4a": 1,
+          ".md": 361,
+          ".mp3": 1,
+          ".mp4": 4,
+          ".ods": 1,
+          ".odt": 2,
+          ".pdf": 5,
+          ".png": 137,
+          ".ppt": 1,
+          ".pptx": 3,
+          ".py": 356,
+          ".rar": 1,
+          ".svg": 2,
+          ".tag": 1,
+          ".tar": 1,
+          ".tiff": 3,
+          ".toml": 2,
+          ".txt": 60,
+          ".webmanifest": 1,
+          ".webp": 4,
+          ".xlsx": 4,
+          ".xml": 1,
+          ".yaml": 2,
+          ".zip": 2
+        }
+      }
+    },
+    "module_index": {
+      "status": "missing",
+      "path": "C:/converigo/AI_BRAIN/generated/module_index.json"
+    },
+    "routes": {
+      "status": "missing",
+      "path": "C:/converigo/AI_BRAIN/generated/routes.json"
+    },
+    "services": {
+      "status": "missing",
+      "path": "C:/converigo/AI_BRAIN/generated/services.json"
+    },
+    "converters": {
+      "status": "missing",
+      "path": "C:/converigo/AI_BRAIN/generated/converters.json"
+    }
+  },
+  "totals": {
+    "input_files_expected": 5,
+    "input_files_by_status": {
+      "missing": 4,
+      "ok": 1
+    }
+  }
+}

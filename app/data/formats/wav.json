@@ -1,0 +1,14 @@
+{
+  "slug": "wav",
+  "name": "WAV",
+  "extension": ".wav",
+  "mime_type": "audio/wav",
+  "category": "audio",
+  "description": "WAV is an uncompressed lossless audio format that stores raw waveform data, commonly used in professional audio production, editing, and archiving.",
+  "related_formats": ["aac", "flac", "m4a", "mp3", "ogg"],
+  "related_converters": ["mp4-to-wav"],
+  "primary_keywords": ["lossless audio format", "wav audio format", "wav file format"],
+  "secondary_keywords": ["audio editing", "uncompressed audio", "wav converter"],
+  "search_intent": ["audio conversion", "audio editing", "high fidelity audio"]
+}
+

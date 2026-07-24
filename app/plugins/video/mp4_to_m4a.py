@@ -8,6 +8,7 @@ MP4 -> M4A Plugin
 
 from pathlib import Path
 
+from app.core.settings import settings
 from app.engines.ffmpeg_engine import FFmpegEngine
 from app.plugins.base import ConverterPlugin
 
@@ -37,7 +38,7 @@ class MP4ToM4APlugin(ConverterPlugin):
         if not self.supports(source_path.suffix, target_format):
             raise RuntimeError("MP4ToM4APlugin only supports MP4 -> M4A.")
 
-        output_path = Path("outputs") / "audio" / f"{source_path.stem}.m4a"
+        output_path = settings.OUTPUT_DIR / "audio" / f"{source_path.stem}.m4a"
         return await FFmpegEngine.convert(
             source_path=source_path,
             output_path=output_path,

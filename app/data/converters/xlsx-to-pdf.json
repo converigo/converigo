@@ -1,18 +1,166 @@
 {
   "slug": "xlsx-to-pdf",
-  "hero": { "title": "XLSX to PDF", "subtitle": "Export spreadsheets to PDF for sharing and printing." },
-  "steps": ["Upload XLSX","Choose PDF","Download PDF"],
-  "benefits": ["Fixed layout","Easy sharing","Printable"],
-  "supported_formats": {"input": [".xlsx", ".xls"], "output": [".pdf"], "description": "XLSX input, PDF output"},
-  "features": [{"title":"Print-ready export","text":"Preserves sheet layout for printing."}],
-  "how_to_use": ["Upload your XLSX.", "Choose page and print settings.", "Download the PDF."],
-  "about_formats": ["XLSX is Microsoft Excel's workbook format.", "PDF is ideal for sharing and printing spreadsheets."],
+  "hero": {
+    "title": "XLSX to PDF",
+    "subtitle": "Export spreadsheets to PDF for sharing and printing.",
+    "description": "Convert  files to  online for free. Fast, secure browser-based conversion with no software installation. Get high-quality  output in seconds using Converigo."
+  },
+  "steps": [
+    "Upload XLSX",
+    "Choose PDF",
+    "Download PDF"
+  ],
+  "benefits": [
+    "Fixed layout",
+    "Easy sharing",
+    "Printable"
+  ],
+  "supported_formats": {
+    "input": [
+      ".xlsx",
+      ".xls"
+    ],
+    "output": [
+      ".pdf"
+    ],
+    "description": "XLSX input, PDF output"
+  },
+  "features": [
+    {
+      "title": "Print-ready export",
+      "text": "Preserves sheet layout for printing."
+    },
+    {
+      "title": "Fast  to  conversion",
+      "text": "Convert  to  in seconds with our optimized processing engine."
+    },
+    {
+      "title": "No software installation required",
+      "text": "Convert files directly in your browser without downloading or installing any software."
+    },
+    {
+      "title": "High-quality  output",
+      "text": "Receive a polished  file ready for immediate use in your workflow."
+    },
+    {
+      "title": "Free  to  converter",
+      "text": "Convert  to  online completely free with no registration or hidden costs."
+    },
+    {
+      "title": "Secure  processing",
+      "text": "Your  files are encrypted during upload and automatically deleted after conversion."
+    }
+  ],
+  "how_to_use": [
+    {
+      "title": "Upload your XLSX.",
+      "description": "Upload your XLSX."
+    },
+    {
+      "title": "Choose page and print settings.",
+      "description": "Choose page and print settings."
+    },
+    {
+      "title": "Download the PDF.",
+      "description": "Download the PDF."
+    },
+    {
+      "title": "Upload your file",
+      "description": "Select a  file from your device to begin the conversion process."
+    },
+    {
+      "title": "Choose output as format",
+      "description": "Pick the output as your desired format and review any available options."
+    },
+    {
+      "title": "Convert  to ",
+      "description": "Click convert and our engine processes your file instantly."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "XLSX is Microsoft Excel's workbook format.",
+      "text": "XLSX is Microsoft Excel's workbook format."
+    },
+    {
+      "title": "PDF is ideal for sharing and printing spreadsheets.",
+      "text": "PDF is ideal for sharing and printing spreadsheets."
+    }
+  ],
   "compatibility": "Web and API",
-  "common_problems": ["Complex formulas may not translate to static PDF","Large sheets may produce multiple pages"],
-  "tips": ["Adjust print area before conversion","Remove hidden rows/columns"],
-  "faq": [{"question":"Are formulas preserved?","answer":"PDF is static; formulas are not preserved in the PDF output."}],
-  "related_tools": ["pdf-to-excel","docx-to-pdf"],
-  "internal_links": {"items": [{"title":"PDF Tools","href":"/pdf-tools"}]},
-  "cta": {"label":"Convert XLSX to PDF","href":"/xlsx-to-pdf"},
-  "json_ld": {"@context":"https://schema.org","@type":"SoftwareApplication","name":"XLSX to PDF Converter"}
+  "common_problems": [
+    "Complex formulas may not translate to static PDF",
+    "Large sheets may produce multiple pages"
+  ],
+  "tips": [
+    "Adjust print area before conversion",
+    "Remove hidden rows/columns"
+  ],
+  "faq": [
+    {
+      "question": "Are formulas preserved?",
+      "answer": "PDF is static; formulas are not preserved in the PDF output."
+    },
+    {
+      "question": "Is this file converter free to use?",
+      "answer": "Yes. Converting files to different formats on Converigo is completely free with no hidden charges."
+    },
+    {
+      "question": "Are my uploaded files secure?",
+      "answer": "Yes. All uploaded files are processed securely and automatically deleted from our servers after conversion. Your privacy is protected."
+    },
+    {
+      "question": "Will the output quality be preserved?",
+      "answer": "Yes. The converter is designed to produce a high-quality output file while keeping the conversion process simple and reliable."
+    },
+    {
+      "question": "Can I use this converter on mobile devices?",
+      "answer": "Yes. Converigo works on all modern browsers, including mobile phones and tablets, so you can convert files on the go."
+    },
+    {
+      "question": "How do I convert files to another format?",
+      "answer": "Upload your file, select the conversion options if needed, and download the converted result instantly. It only takes a few seconds."
+    },
+    {
+      "question": "What file sizes are supported?",
+      "answer": "We support files up to 100MB for most conversions. Larger files may take longer to process."
+    },
+    {
+      "question": "Why use Converigo for file conversion?",
+      "answer": "Converigo offers fast, secure, browser-based file conversion with no software installation, no registration, and completely free usage."
+    }
+  ],
+  "related_tools": [
+    "pdf-to-excel",
+    "docx-to-pdf"
+  ],
+  "internal_links": {
+    "items": [
+      {
+        "title": "PDF Tools",
+        "href": "/pdf-tools"
+      }
+    ]
+  },
+  "cta": {
+    "label": "Convert XLSX to PDF",
+    "href": "/xlsx-to-pdf"
+  },
+  "json_ld": {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "XLSX to PDF Converter"
+  },
+  "seo": {
+    "title": "Xlsx To Pdf Online Free | Converigo",
+    "description": " Fast, secure and browser-based file conversion with no installation required. Try Converigo for free today.",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Converigo free online file converter",
+    "twitter_title": "Xlsx To Pdf Online Free | Converigo",
+    "twitter_description": " Fast, secure and browser-based file conversion with no installation required. Try Converigo for free today.",
+    "twitter_image": "/static/images/og-default.png",
+    "keywords": "xlsx to pdf, online converter, file conversion, free converter, Converigo",
+    "canonical": "https://converigo.com/tools/xlsx-to-pdf"
+  },
+  "lifecycle_status": "certified"
 }

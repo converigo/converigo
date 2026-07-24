@@ -10,6 +10,21 @@
     {% include "components/header.html" %}
 
     <main class="main" role="main">
+        {% set breadcrumb = breadcrumb if breadcrumb is defined else landing.breadcrumb if landing is defined and landing.breadcrumb else [] %}
+    {% if breadcrumb %}
+        <section class="section section-white">
+            <div class="container">
+                <nav aria-label="Breadcrumb">
+                    <ol class="breadcrumb">
+                        {% for item in breadcrumb %}
+                        <li><a href="{{ item.url }}">{{ item.name }}</a></li>
+                        {% endfor %}
+                    </ol>
+                </nav>
+            </div>
+        </section>
+    {% endif %}
+
         <section class="tool-hero section">
             <div class="container tool-hero-inner">
                 <div class="hero-copy">

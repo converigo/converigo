@@ -108,6 +108,45 @@ async def _render_trust_page(
     )
 
 
+async def _render_not_found_page(request: Request, path: str | None = None) -> HTMLResponse:
+    locale_data, t, supported_locales = _get_locale_context(request)
+    popular = converter_data_service.list_popular_converters(limit=6)
+    metadata = {
+        "title": "Page Not Found | Converigo",
+        "description": "The page you requested could not be found. Explore popular converters and help articles instead.",
+        "canonical": f"{PRODUCTION_BASE_URL}/404",
+        "og_url": f"{PRODUCTION_BASE_URL}/404",
+        "keywords": "404 page, page not found, converter help",
+        "author": "Converigo",
+        "robots": "noindex,follow",
+    }
+    return templates.TemplateResponse(
+        request=request,
+        name="pages/404.html",
+        status_code=404,
+        context={
+            "request": request,
+            "locale": locale_data,
+            "t": t,
+            "supported_locales": supported_locales,
+            "meta": metadata,
+            "path": path or "",
+            "popular_converters": popular,
+            "structured_data": seo_service.build_structured_data(
+                request,
+                page_type="trust_page",
+                page_data={
+                    "title": metadata["title"],
+                    "description": metadata["description"],
+                    "url": "/404",
+                    "name": "Page Not Found",
+                },
+            ),
+            "year": datetime.utcnow().year,
+        },
+    )
+
+
 @router.get("/", response_class=HTMLResponse)
 async def home(request: Request):
 
@@ -177,7 +216,13 @@ async def home(request: Request):
             "popular_converters": popular,
             "latest_converters": latest,
             "structured_data": seo_service.build_structured_data(
-                request
+                request,
+                page_data={
+                    "name": "Converigo",
+                    "description": metadata["description"],
+                    "url": "/",
+                    "breadcrumb": [{"name": "Home", "url": "/"}],
+                },
             ),
             "year": datetime.utcnow().year,
         },
@@ -561,11 +606,11 @@ async def jpg_to_pdf_landing(request: Request):
 @router.get("/{slug}", response_class=HTMLResponse)
 async def universal_converter_route(request: Request, slug: str):
     if slug in RESERVED_PATHS:
-        raise HTTPException(status_code=404, detail="Not found")
+        return await _render_not_found_page(request, path=f"/{slug}")
 
     try:
         converter_data_service.load_converter_by_slug(slug)
     except FileNotFoundError:
-        raise HTTPException(status_code=404, detail="Converter not found")
+        return await _render_not_found_page(request, path=f"/{slug}")
 
     return await render_universal_tool_page(request, slug, canonical_path=f"/{slug}")

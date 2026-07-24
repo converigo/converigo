@@ -1,0 +1,117 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}{{ meta.title }}{% endblock %}
+
+{% block content %}
+{% include "components/header.html" %}
+
+<main class="main" role="main">
+    <section class="hero section">
+        <div class="container hero-inner">
+            <div class="hero-copy">
+                <span class="eyebrow">Learning Center</span>
+                <h1 class="hero-title">{{ article.title }}</h1>
+                <p class="hero-sub">{{ article.description }}</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-white">
+        <div class="container">
+            <div class="card card-lg">
+                <nav aria-label="Breadcrumb">
+                    <ol class="breadcrumb">
+                        {% for item in article.breadcrumb %}
+                        <li><a href="{{ item.url }}">{{ item.name }}</a></li>
+                        {% endfor %}
+                    </ol>
+                </nav>
+
+                <div class="section-header">
+                    <p class="eyebrow">{{ article.category|default('Learning') }}</p>
+                    <p>By {{ article.author|default('Converigo') }} · {{ article.read_time_minutes|default(5) }} min read</p>
+                </div>
+
+                {% if article.sections %}
+                    {% for section in article.sections %}
+                    <section class="card" style="margin-bottom: 1rem;">
+                        <h2>{{ section.title }}</h2>
+                        <p>{{ section.content }}</p>
+                    </section>
+                    {% endfor %}
+                {% endif %}
+
+                {% if article.faq %}
+                <section class="section">
+                    <div class="section-header">
+                        <h2>FAQ</h2>
+                    </div>
+                    {% for item in article.faq %}
+                    <div class="card" style="margin-bottom: 0.75rem;">
+                        <h3>{{ item.question }}</h3>
+                        <p>{{ item.answer }}</p>
+                    </div>
+                    {% endfor %}
+                </section>
+                {% endif %}
+
+                {% if article.related_articles %}
+                <section class="section">
+                    <div class="section-header">
+                        <h2>Related articles</h2>
+                    </div>
+                    <div class="popular-tools-grid">
+                        {% for related in article.related_articles %}
+                        <article class="card">
+                            <h3>{{ related }}</h3>
+                        </article>
+                        {% endfor %}
+                    </div>
+                </section>
+                {% endif %}
+
+                {% if article.related_converters %}
+                <section class="section">
+                    <div class="section-header">
+                        <h2>Related converters</h2>
+                    </div>
+                    <div class="popular-tools-grid">
+                        {% for converter in article.related_converters %}
+                        <article class="card">
+                            <h3>{{ converter }}</h3>
+                        </article>
+                        {% endfor %}
+                    </div>
+                </section>
+                {% endif %}
+
+                {% if article.related_formats %}
+                <section class="section">
+                    <div class="section-header">
+                        <h2>Related formats</h2>
+                    </div>
+                    <div class="popular-tools-grid">
+                        {% for format in article.related_formats %}
+                        <article class="card">
+                            <h3>{{ format }}</h3>
+                        </article>
+                        {% endfor %}
+                    </div>
+                </section>
+                {% endif %}
+
+                {% if article.call_to_action %}
+                <section class="section">
+                    <div class="card card-lg">
+                        <h2>{{ article.call_to_action.text }}</h2>
+                        <a class="btn btn-primary" href="{{ article.call_to_action.url }}">{{ article.call_to_action.button_text }}</a>
+                    </div>
+                </section>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+</main>
+
+{% include "components/footer.html" %}
+{% endblock %}

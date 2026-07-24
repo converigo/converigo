@@ -1,0 +1,119 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}{{ meta.title }}{% endblock %}
+
+{% block content %}
+{% include "components/header.html" %}
+
+<main class="main" role="main">
+    <section class="section section-white">
+        <div class="container">
+            <div class="section-header">
+                <h1>SEO Operations Dashboard</h1>
+                <p>Internal metrics for the content, SEO, product, and quality teams.</p>
+            </div>
+
+            <div class="dashboard-grid">
+                <article class="card">
+                    <h2>CONTENT</h2>
+                    <dl>
+                        <dt>Total Learning Articles</dt>
+                        <dd>{{ total_learning_articles }}</dd>
+                        <dt>Topic Clusters</dt>
+                        <dd>{{ topic_clusters_total }}</dd>
+                        <dt>Published This Month</dt>
+                        <dd>{{ published_this_month }}</dd>
+                    </dl>
+                </article>
+
+                <article class="card">
+                    <h2>SEO</h2>
+                    <dl>
+                        <dt>Sitemap URLs</dt>
+                        <dd>{{ sitemap_urls }}</dd>
+                        <dt>Internal Link Count</dt>
+                        <dd>{{ internal_link_count }}</dd>
+                        <dt>Indexed URLs</dt>
+                        <dd>{{ indexed_urls }}</dd>
+                    </dl>
+                </article>
+
+                <article class="card">
+                    <h2>PRODUCT</h2>
+                    <dl>
+                        <dt>Total Converters</dt>
+                        <dd>{{ total_converters }}</dd>
+                        <dt>Certified Converters</dt>
+                        <dd>{{ certified_converters }}</dd>
+                    </dl>
+                </article>
+
+                <article class="card">
+                    <h2>ANALYTICS</h2>
+                    <dl>
+                        <dt>Total Visitor</dt>
+                        <dd>{{ analytics_metrics.total_visitor }}</dd>
+                        <dt>Unique Visitor</dt>
+                        <dd>{{ analytics_metrics.unique_visitor }}</dd>
+                        <dt>Download Count</dt>
+                        <dd>{{ analytics_metrics.download_count }}</dd>
+                    </dl>
+                </article>
+
+                <article class="card">
+                    <h2>QUALITY</h2>
+                    <dl>
+                        <dt>Articles Missing FAQ</dt>
+                        <dd>{{ articles_missing_faq }}</dd>
+                        <dt>Articles Missing CTA</dt>
+                        <dd>{{ articles_missing_cta }}</dd>
+                        <dt>Articles Missing Related Articles</dt>
+                        <dd>{{ articles_missing_related_articles }}</dd>
+                    </dl>
+                </article>
+
+                <article class="card">
+                    <h2>SEO AUDIT</h2>
+                    <dl>
+                        <dt>Average SEO Score</dt>
+                        <dd>{{ seo_audit.average_score }} / 100</dd>
+                        <dt>Pages Audited</dt>
+                        <dd>{{ seo_audit.pages_audited }}</dd>
+                        <dt>Overall Status</dt>
+                        <dd class="status-{{ seo_audit.overall_status | lower }}">{{ seo_audit.overall_status }}</dd>
+                        <dt>Critical Issues</dt>
+                        <dd>{{ seo_audit.critical_count }}</dd>
+                        <dt>Warnings</dt>
+                        <dd>{{ seo_audit.warnings_count }}</dd>
+                        <dt>Passed Pages</dt>
+                        <dd>{{ seo_audit.pass_count }}</dd>
+                    </dl>
+                    {% if seo_audit.top_issues %}
+                    <h3>Top Issues</h3>
+                    <ul>
+                        {% for issue in seo_audit.top_issues %}
+                        <li>{{ issue.check }}: {{ issue.count }} pages</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </article>
+            </div>
+
+            <section class="section">
+                <div class="card card-lg">
+                    <div class="section-header">
+                        <h2>Dashboard details</h2>
+                        <p>This internal dashboard is built from existing services, content metadata, and analytics event history.</p>
+                    </div>
+                    <div class="content-block">
+                        <pre>{{ dashboard | tojson(indent=2) }}</pre>
+                        <pre>{{ analytics_metrics | tojson(indent=2) }}</pre>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+</main>
+
+{% include "components/footer.html" %}
+{% endblock %}

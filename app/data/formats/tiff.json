@@ -1,0 +1,13 @@
+{
+  "slug": "tiff",
+  "name": "TIFF",
+  "extension": ".tiff",
+  "mime_type": "image/tiff",
+  "category": "image",
+  "description": "Tagged Image File Format used in professional photography, print publishing, and archiving where lossless quality and flexible metadata are required.",
+  "related_formats": ["png", "jpg", "bmp"],
+  "related_converters": ["tiff-to-jpg", "tiff-to-png", "png-to-tiff"],
+  "primary_keywords": ["tiff file format", "tagged image file", "tiff image"],
+  "secondary_keywords": ["tiff conversion", "tiff print format", "high quality image"],
+  "search_intent": ["informational", "professional photography", "print publishing"]
+}

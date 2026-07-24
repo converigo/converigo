@@ -1,0 +1,185 @@
+{
+  "slug": "ppt-to-pdf",
+  "title": "PowerPoint to PDF Converter",
+  "description": "Convert PowerPoint presentations into PDF documents online for free.",
+  "upload_form": {
+    "action": "/convert",
+    "method": "post",
+    "accept": ".ppt,.pptx",
+    "button_text": "Convert PowerPoint to PDF"
+  },
+  "faq": [
+    {
+      "question": "Can I convert PowerPoint to PDF without losing formatting?",
+      "answer": "Yes. This converter preserves your slide layouts, fonts, images, and overall presentation design."
+    },
+    {
+      "question": "What PowerPoint formats are supported?",
+      "answer": "Both .ppt and .pptx formats are supported for conversion to PDF."
+    },
+    {
+      "question": "Why convert PowerPoint to PDF?",
+      "answer": "PDF files maintain formatting across devices, are easy to share, and prevent layout changes."
+    },
+    {
+      "question": "Is the conversion secure and online?",
+      "answer": "Yes. The process is secure, fast, and works directly in your browser with no software installation."
+    },
+    {
+      "question": "How do I get my PDF file?",
+      "answer": "Once the conversion finishes, you can download your PDF document right away."
+    },
+    {
+      "question": "Is this converter free to use?",
+      "answer": "Yes. Converting PowerPoint to PDF on Converigo is completely free."
+    },
+    {
+      "question": "Can I convert files on mobile?",
+      "answer": "Yes. The tool works in modern mobile and desktop browsers."
+    },
+    {
+      "question": "What if my upload fails?",
+      "answer": "Try refreshing the page, re-uploading your presentation, and converting again."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "pdf-to-ppt",
+      "title": "PDF to PowerPoint"
+    },
+    {
+      "slug": "word-to-pdf",
+      "title": "Word to PDF"
+    },
+    {
+      "slug": "excel-to-pdf",
+      "title": "Excel to PDF"
+    },
+    {
+      "slug": "jpg-to-pdf",
+      "title": "JPG to PDF"
+    }
+  ],
+  "seo": {
+    "title": "Convert PowerPoint to PDF Online Free | Converigo",
+    "description": "Convert PowerPoint presentations to PDF documents online for free. Preserve slide formatting, images, and layout. No software installation required.",
+    "keywords": "powerpoint to pdf, ppt to pdf, pptx to pdf, convert presentation to pdf, slide converter",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert PowerPoint to PDF - Converigo free online converter",
+    "twitter_title": "Convert PowerPoint to PDF Online Free | Converigo",
+    "twitter_description": "Convert PowerPoint presentations to PDF documents online for free. Preserve slide formatting, images, and layout. No software installation required.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/ppt-to-pdf"
+  },
+  "source": "ppt",
+  "target": "pdf",
+  "category": "document",
+  "active": true,
+  "popular": true,
+  "featured": false,
+  "hero": {
+    "eyebrow": "Converter tool",
+    "title": "PowerPoint to PDF Converter Free Online",
+    "description": "Convert PowerPoint presentations to PDF documents quickly while preserving all slide formatting and design.",
+    "panel_label": "Ready to convert",
+    "panel_title": "Upload a PowerPoint file and receive a professional PDF in seconds."
+  },
+  "features": [
+    {
+      "title": "Preserve slide formatting",
+      "text": "Keep your slide layouts, images, fonts, and animations intact when converting to PDF."
+    },
+    {
+      "title": "Support for ppt and pptx",
+      "text": "Convert both legacy .ppt and modern .pptx files with full compatibility."
+    },
+    {
+      "title": "Fast secure online conversion",
+      "text": "Convert files in your browser with no software installation and a secure workflow."
+    },
+    {
+      "title": "Professional PDF output",
+      "text": "Receive a polished PDF document ready for sharing, printing, or presenting."
+    },
+    {
+      "title": "No software installation required",
+      "text": "Convert files directly in your browser without downloading or installing any software."
+    },
+    {
+      "title": "Free powerpoint to pdf converter",
+      "text": "Convert PPT to PDF online completely free with no registration or hidden costs."
+    },
+    {
+      "title": "Secure document processing",
+      "text": "Your presentation files are encrypted during upload and automatically deleted after conversion."
+    },
+    {
+      "title": "Reliable presentation conversion",
+      "text": "Our engine handles presentations with complex layouts, images, and formatting."
+    }
+  ],
+  "supported_formats": {
+    "input": [
+      "PPT",
+      "PPTX"
+    ],
+    "output": [
+      "PDF"
+    ],
+    "description": "PowerPoint input, PDF output"
+  },
+  "how_to_use": [
+    {
+      "title": "Upload your PowerPoint file",
+      "description": "Select a .ppt or .pptx presentation from your device to begin."
+    },
+    {
+      "title": "Convert to PDF",
+      "description": "Choose PDF as the output format and convert your presentation."
+    },
+    {
+      "title": "Download your PDF",
+      "description": "Get your converted PDF document instantly for sharing or printing."
+    },
+    {
+      "title": "Upload your presentation",
+      "description": "Select a PowerPoint file from your device to begin the conversion process."
+    },
+    {
+      "title": "Choose pdf as format",
+      "description": "Pick PDF as your desired format and review any available options."
+    },
+    {
+      "title": "Convert ppt to pdf",
+      "description": "Click convert and our engine processes your presentation instantly."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is PPT/PPTX?",
+      "text": "PowerPoint is a presentation format used for slideshows, pitches, and educational content."
+    },
+    {
+      "title": "What is PDF?",
+      "text": "PDF is a portable document format ideal for sharing, printing, and preserving document layout."
+    },
+    {
+      "title": "What is PowerPoint format?",
+      "text": "PowerPoint is a widely used file format known for its rich slide creation capabilities."
+    },
+    {
+      "title": "What is PDF format?",
+      "text": "PDF is a popular file format chosen for its universal compatibility and layout preservation."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Convert PowerPoint files to PDF in seconds",
+    "text": "Upload your presentation and receive a ready-to-share PDF instantly.",
+    "primary_text": "Convert now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  },
+  "lifecycle_status": "certified"
+}

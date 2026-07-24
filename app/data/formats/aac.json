@@ -1,0 +1,14 @@
+{
+  "slug": "aac",
+  "name": "AAC",
+  "extension": ".aac",
+  "mime_type": "audio/aac",
+  "category": "audio",
+  "description": "AAC is a lossy compressed audio format that delivers improved sound quality over MP3 at similar bit rates, widely adopted for streaming, mobile devices, and modern media platforms.",
+  "related_formats": ["flac", "m4a", "mp3", "ogg", "wav"],
+  "related_converters": ["mp4-to-aac"],
+  "primary_keywords": ["aac audio format", "aac file format", "advanced audio coding"],
+  "secondary_keywords": ["aac vs mp3", "audio streaming", "he-aac"],
+  "search_intent": ["audio conversion", "audio streaming", "mobile audio"]
+}
+

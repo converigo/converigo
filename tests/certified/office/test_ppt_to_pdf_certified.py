@@ -25,6 +25,9 @@ def test_ppt_to_pdf_conversion_creates_pdf(tmp_path: Path):
     assert download_path.endswith(".pdf")
 
     local_path = Path(str(download_path).lstrip("/"))
+    download_resp = client.get(download_path)
+    assert download_resp.status_code == 200, download_resp.text
+    assert download_resp.content, "Downloaded content is empty"
 
     assert local_path.exists(), f"Expected output PDF not found: {local_path}"
     assert local_path.stat().st_size > 0, "Output PDF is empty"

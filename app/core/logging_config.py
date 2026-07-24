@@ -2,18 +2,19 @@ import logging
 import sys
 from logging.handlers import RotatingFileHandler
 
+from app.core.observability import JsonLogFormatter, ObservabilityFilter
 from app.core.settings import settings
 
 
 def configure_logging() -> None:
     settings.LOG_DIR.mkdir(parents=True, exist_ok=True)
 
-    formatter = logging.Formatter(
-        "%(asctime)s %(levelname)s %(name)s %(message)s"
-    )
+    formatter = JsonLogFormatter()
+    observability_filter = ObservabilityFilter()
 
     stream_handler = logging.StreamHandler()
     stream_handler.setFormatter(formatter)
+    stream_handler.addFilter(observability_filter)
 
     root_logger = logging.getLogger()
     root_logger.setLevel(logging.INFO)
@@ -33,7 +34,11 @@ def configure_logging() -> None:
             delay=True,
         )
         file_handler.setFormatter(formatter)
+        file_handler.addFilter(observability_filter)
         root_logger.addHandler(file_handler)
         logging.getLogger("uvicorn").handlers = [stream_handler, file_handler]
     else:
         logging.getLogger("uvicorn").handlers = [stream_handler]
+
+    logging.getLogger("uvicorn.error").handlers = list(logging.getLogger("uvicorn").handlers)
+    logging.getLogger("uvicorn.access").handlers = list(logging.getLogger("uvicorn").handlers)

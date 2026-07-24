@@ -1,0 +1,63 @@
+{
+  "slug": "pdf-workflow-checklist",
+  "title": "PDF Workflow Checklist for Reliable Document Conversion",
+  "description": "Follow a practical checklist for preparing PDFs, choosing the right output, and verifying quality after conversion.",
+  "category": "Guides",
+  "topics": ["pdf", "documents", "quality-check"],
+  "author": "Converigo",
+  "date_published": "2026-07-03",
+  "date_modified": "2026-07-21",
+  "read_time_minutes": 6,
+  "keywords": ["PDF workflow", "document conversion", "PDF checklist"],
+  "seo_keywords": ["PDF workflow checklist", "convert PDF to image", "document conversion guide"],
+  "og_image": "/static/images/og-pdf-workflow-checklist.png",
+  "og_image_alt": "Checklist for PDF conversion workflow",
+  "canonical": "/learning/pdf-workflow-checklist",
+  "featured": false,
+  "order": 4,
+  "related_formats": ["pdf", "docx", "jpg"],
+  "related_converters": ["pdf-to-jpg", "word-to-pdf"],
+  "related_articles": ["getting-started", "understanding-file-formats", "understanding-pdf"],
+  "sections": [
+    {
+      "id": "check-source-file",
+      "title": "Check the source file",
+      "content": "A clean source PDF is easier to convert and less likely to produce formatting issues. Make sure the file opens correctly and contains the pages you intend to preserve."
+    },
+    {
+      "id": "choose-output-format",
+      "title": "Choose the output format carefully",
+      "content": "If you need easy sharing, JPG or PNG may be helpful. If you need layout fidelity, choose a format that preserves page structure better."
+    },
+    {
+      "id": "verify-the-result",
+      "title": "Verify the result",
+      "content": "After conversion, confirm that text, images, and page order still look correct. A quick preview often catches problems before the output is shared."
+    }
+  ],
+  "faq": [
+    {
+      "question": "Do PDF conversions always preserve formatting?",
+      "answer": "They usually preserve the main structure, but some visual details may vary depending on the target format."
+    },
+    {
+      "question": "Which format should I use for sharing?",
+      "answer": "PDF is often ideal for sharing documents, while JPG or PNG are better when you need image-based outputs."
+    },
+    {
+      "question": "Should I convert scanned PDFs differently?",
+      "answer": "Sometimes. Scanned files may need extra review, especially if text recognition or image quality matters."
+    }
+  ],
+  "call_to_action": {
+    "text": "Need a reliable document conversion workflow?",
+    "url": "/tools/word-to-pdf",
+    "button_text": "Open the tool"
+  },
+  "breadcrumb_override": [
+    {"name": "Home", "url": "/"},
+    {"name": "Learning", "url": "/learning"},
+    {"name": "Guides", "url": "/learning/categories/guides"},
+    {"name": "PDF Workflow Checklist", "url": "/learning/pdf-workflow-checklist"}
+  ]
+}

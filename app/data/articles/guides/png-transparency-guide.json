@@ -1,0 +1,54 @@
+{
+  "slug": "png-transparency-guide",
+  "title": "PNG Transparency Guide: Working with Transparent Backgrounds",
+  "description": "Understand PNG transparency, alpha channels, and how to create clean transparent images for web and design projects.",
+  "category": "Guides",
+  "topics": ["PNG", "transparency", "alpha channel", "design", "web graphics"],
+  "author": "Converigo",
+  "date_published": "2026-07-05",
+  "date_modified": "2026-07-21",
+  "read_time_minutes": 5,
+  "order": 5,
+  "keywords": ["PNG transparency", "transparent PNG", "alpha channel", "transparent background"],
+  "seo_keywords": ["png transparency guide", "transparent png guide", "png alpha channel", "transparent background png"],
+  "related_formats": ["png", "svg", "jpg", "webp"],
+  "related_converters": ["jpg-to-png", "png-to-jpg", "png-to-webp"],
+  "related_articles": ["what-is-png", "png", "png-vs-jpg"],
+  "sections": [
+    {
+      "id": "alpha",
+      "title": "What Transparency Means in PNG",
+      "content": "PNG transparency is powered by an alpha channel, which stores information about how transparent each pixel should be. This allows smooth edges and soft backgrounds for logos, overlays, and UI elements."
+    },
+    {
+      "id": "use-cases",
+      "title": "Common Use Cases",
+      "content": "Transparent PNGs are used for logos, icons, watermarks, product cutouts, and interface graphics that need to blend with any background."
+    },
+    {
+      "id": "limitations",
+      "title": "Transparency Limitations",
+      "content": "While PNG supports transparency well, it is still a raster format, so the transparency is tied to the pixel data. For scalable graphics, SVG may be better in some design workflows."
+    }
+  ],
+  "faq": [
+    {
+      "question": "Does PNG preserve transparency?",
+      "answer": "Yes. PNG is a common choice for transparent images because it preserves alpha transparency."
+    },
+    {
+      "question": "What is an alpha channel?",
+      "answer": "An alpha channel stores opacity information for each pixel, allowing partial transparency in PNG images."
+    }
+  ],
+  "call_to_action": {
+    "text": "Create transparent PNG files for your design workflow with Converigo.",
+    "url": "/jpg-to-png",
+    "button_text": "Create Transparent PNG"
+  },
+  "breadcrumb_override": [
+    { "name": "Home", "url": "/" },
+    { "name": "Learning Center", "url": "/learning" },
+    { "name": "PNG Transparency Guide", "url": "/learning/png-transparency-guide" }
+  ]
+}

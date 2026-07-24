@@ -1,0 +1,185 @@
+{
+  "slug": "excel-to-pdf",
+  "title": "Excel to PDF Converter",
+  "description": "Convert Excel spreadsheets into PDF documents online for free.",
+  "upload_form": {
+    "action": "/convert",
+    "method": "post",
+    "accept": ".xls,.xlsx",
+    "button_text": "Convert Excel to PDF"
+  },
+  "faq": [
+    {
+      "question": "Can I convert Excel files to PDF without losing formatting?",
+      "answer": "Yes. This converter preserves your spreadsheet layout, tables, and formatting when converting Excel to PDF."
+    },
+    {
+      "question": "What Excel formats are supported?",
+      "answer": "Both .xls and .xlsx formats are supported for conversion to PDF."
+    },
+    {
+      "question": "Why convert Excel to PDF?",
+      "answer": "PDF files maintain formatting across devices, are easy to share, and prevent unintended edits to your data."
+    },
+    {
+      "question": "Is the conversion secure and online?",
+      "answer": "Yes. The process is secure, fast, and works directly in your browser with no software installation needed."
+    },
+    {
+      "question": "How do I get my PDF file?",
+      "answer": "Once the conversion finishes, you can download your PDF document right away."
+    },
+    {
+      "question": "Is this converter free to use?",
+      "answer": "Yes. Converting Excel to PDF on Converigo is completely free."
+    },
+    {
+      "question": "Can I convert files on mobile?",
+      "answer": "Yes. The tool works in modern mobile and desktop browsers."
+    },
+    {
+      "question": "What if my upload fails?",
+      "answer": "Try refreshing the page, re-uploading your spreadsheet, and converting again."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "pdf-to-excel",
+      "title": "PDF to Excel"
+    },
+    {
+      "slug": "word-to-pdf",
+      "title": "Word to PDF"
+    },
+    {
+      "slug": "ppt-to-pdf",
+      "title": "PowerPoint to PDF"
+    },
+    {
+      "slug": "jpg-to-pdf",
+      "title": "JPG to PDF"
+    }
+  ],
+  "seo": {
+    "title": "Convert Excel to PDF Online Free | Converigo",
+    "description": "Convert Excel spreadsheets to PDF documents online for free. Preserve formatting, tables, and layout. No software installation required.",
+    "keywords": "excel to pdf, convert excel to pdf, xls to pdf, xlsx to pdf, spreadsheet converter",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert Excel to PDF - Converigo free online converter",
+    "twitter_title": "Convert Excel to PDF Online Free | Converigo",
+    "twitter_description": "Convert Excel spreadsheets to PDF documents online for free. Preserve formatting, tables, and layout. No software installation required.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/excel-to-pdf"
+  },
+  "source": "xls",
+  "target": "pdf",
+  "category": "document",
+  "active": true,
+  "popular": true,
+  "featured": false,
+  "hero": {
+    "eyebrow": "Converter tool",
+    "title": "Excel to PDF Converter Free Online",
+    "description": "Convert Excel spreadsheets to PDF documents quickly while preserving all formatting, tables, and layout.",
+    "panel_label": "Ready to convert",
+    "panel_title": "Upload an Excel file and receive a professional PDF result in seconds."
+  },
+  "features": [
+    {
+      "title": "Preserve spreadsheet formatting",
+      "text": "Keep your tables, fonts, and layout intact when converting Excel to PDF."
+    },
+    {
+      "title": "Support for xls and xlsx",
+      "text": "Convert both legacy .xls and modern .xlsx files with full compatibility."
+    },
+    {
+      "title": "Fast secure online conversion",
+      "text": "Convert files in your browser with no software installation and a secure workflow."
+    },
+    {
+      "title": "Professional PDF output",
+      "text": "Receive a polished PDF document ready for sharing, printing, or archiving."
+    },
+    {
+      "title": "No software installation required",
+      "text": "Convert files directly in your browser without downloading or installing any software."
+    },
+    {
+      "title": "Free excel to pdf converter",
+      "text": "Convert Excel to PDF online completely free with no registration or hidden costs."
+    },
+    {
+      "title": "Secure document processing",
+      "text": "Your spreadsheet files are encrypted during upload and automatically deleted after conversion."
+    },
+    {
+      "title": "Reliable excel conversion",
+      "text": "Our engine handles complex spreadsheets with multiple sheets and formatting."
+    }
+  ],
+  "supported_formats": {
+    "input": [
+      "XLS",
+      "XLSX"
+    ],
+    "output": [
+      "PDF"
+    ],
+    "description": "Excel input, PDF output"
+  },
+  "how_to_use": [
+    {
+      "title": "Upload your Excel file",
+      "description": "Select an .xls or .xlsx spreadsheet from your device to begin."
+    },
+    {
+      "title": "Convert to PDF",
+      "description": "Choose PDF as the output format and convert your spreadsheet."
+    },
+    {
+      "title": "Download your PDF",
+      "description": "Get your converted PDF document instantly for sharing or printing."
+    },
+    {
+      "title": "Upload your spreadsheet",
+      "description": "Select an Excel file from your device to begin the conversion process."
+    },
+    {
+      "title": "Choose pdf as format",
+      "description": "Pick PDF as your desired format and review any available options."
+    },
+    {
+      "title": "Convert excel to pdf",
+      "description": "Click convert and our engine processes your spreadsheet instantly."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is XLS/XLSX?",
+      "text": "Excel is a spreadsheet format used for data organization, calculations, and analysis."
+    },
+    {
+      "title": "What is PDF?",
+      "text": "PDF is a portable document format ideal for sharing, printing, and preserving document layout."
+    },
+    {
+      "title": "What is Excel format?",
+      "text": "Excel is a widely used file format known for its data management and calculation capabilities."
+    },
+    {
+      "title": "What is PDF format?",
+      "text": "PDF is a popular file format chosen for its universal compatibility and layout preservation."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Convert Excel files to PDF in seconds",
+    "text": "Upload your spreadsheet and receive a ready-to-use PDF result instantly.",
+    "primary_text": "Convert now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  },
+  "lifecycle_status": "active"
+}

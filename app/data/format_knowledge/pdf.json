@@ -1,0 +1,122 @@
+{
+  "slug": "pdf",
+  "name": "PDF",
+  "quick_answer": "PDF is a document file format. Portable Document Format for fixed-layout documents, preserving typography, images, and page design across devices. It is widely used across tools and platforms in the document category.",
+  "definition": "PDF is a document file format. Portable Document Format for fixed-layout documents, preserving typography, images, and page design across devices. It is commonly used in workflows that require reliable document handling and is supported by a wide range of applications and online tools.",
+  "use_cases": [
+    {
+      "title": "Official document sharing",
+      "text": "PDF is used to share documents that need to look the same on every device and operating system."
+    },
+    {
+      "title": "Business reports and proposals",
+      "text": "PDF is a reliable format for distributing professional reports, contracts, and formal documents."
+    },
+    {
+      "title": "Form and template publishing",
+      "text": "PDF is commonly used for fillable forms, legal documents, and templates with fixed structure."
+    },
+    {
+      "title": "Archive and long-term storage",
+      "text": "PDF is a trusted choice for archiving documents that need to remain readable over many years."
+    },
+    {
+      "title": "Printing and publishing",
+      "text": "PDF is used in print workflows because it preserves layout, fonts, and formatting across different printers."
+    }
+  ],
+  "advantages": [
+    {
+      "title": "Layout preservation",
+      "text": "PDF preserves fonts, formatting, and page layout across different operating systems and devices."
+    },
+    {
+      "title": "Universal compatibility",
+      "text": "PDF can be opened on virtually any device without requiring the authoring software."
+    },
+    {
+      "title": "Security features",
+      "text": "PDF can include password protection, permissions, and digital signatures for sensitive documents."
+    },
+    {
+      "title": "Print-ready output",
+      "text": "PDF is reliable for printing because it accurately represents the intended page design."
+    }
+  ],
+  "limitations": [
+    {
+      "title": "Limited editability",
+      "text": "PDF is not always easy to edit directly, especially for users without compatible software."
+    },
+    {
+      "title": "Complex formatting may not transfer",
+      "text": "Converting from or to PDF can sometimes lose custom styles, fonts, or layout elements."
+    },
+    {
+      "title": "Large file sizes",
+      "text": "PDF files with many embedded images or assets can be large and slow to load or send."
+    }
+  ],
+  "comparisons": [
+    {
+      "title": "PDF vs DOCX",
+      "text": "PDF and DOCX are both widely used file formats. Choosing between them depends on your compatibility needs, quality requirements, and the tools available in your workflow."
+    },
+    {
+      "title": "PDF vs TXT",
+      "text": "PDF and TXT are both widely used file formats. Choosing between them depends on your compatibility needs, quality requirements, and the tools available in your workflow."
+    },
+    {
+      "title": "PDF vs PNG",
+      "text": "PDF and PNG are both widely used file formats. Choosing between them depends on your compatibility needs, quality requirements, and the tools available in your workflow."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "pdf-to-docx",
+      "title": "PDF to DOCX Converter",
+      "description": "Convert PDF files to DOCX quickly and easily.",
+      "href": "/pdf-to-docx"
+    },
+    {
+      "slug": "pdf-to-jpg",
+      "title": "PDF to JPG Converter",
+      "description": "Convert PDF files to JPG quickly and easily.",
+      "href": "/pdf-to-jpg"
+    },
+    {
+      "slug": "jpg-to-pdf",
+      "title": "JPG to PDF Converter",
+      "description": "Convert JPG files to PDF quickly and easily.",
+      "href": "/jpg-to-pdf"
+    },
+    {
+      "slug": "png-to-pdf",
+      "title": "PNG to PDF Converter",
+      "description": "Convert PNG files to PDF quickly and easily.",
+      "href": "/png-to-pdf"
+    }
+  ],
+  "faq": [
+    {
+      "question": "What is a PDF file?",
+      "answer": "A PDF file is a document format used to store and share formatted content in a consistent, device-independent layout."
+    },
+    {
+      "question": "How do I open a PDF file?",
+      "answer": "You can open a PDF file using a compatible viewer or editor such as Adobe Acrobat, LibreOffice, or a browser-based tool."
+    },
+    {
+      "question": "Can I convert PDF to other formats?",
+      "answer": "Yes, PDF can be converted to other document and image formats using conversion tools online or in desktop applications."
+    },
+    {
+      "question": "Is PDF good for printing?",
+      "answer": "PDF is often a reliable format for printing because it preserves document layout and fonts."
+    },
+    {
+      "question": "Can PDF files be password protected?",
+      "answer": "Many PDF formats support password protection or permission controls for sensitive documents."
+    }
+  ]
+}

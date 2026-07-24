@@ -41,3 +41,18 @@
 - **Decision:** Move legacy landing templates into a dedicated legacy folder without changing routes, URLs, SEO, or runtime behavior.
 - **Rationale:** This cleans up template structure while preserving compatibility and avoiding regressions.
 - **Outcome:** Legacy landing templates are preserved under the legacy folder and the active landing experience remains centered on the universal tool page.
+
+### D009 — SEO Audit Engine as read-only service
+- **Decision:** Create a standalone, read-only SEO audit engine (`SeoAuditEngine`) that inspects converter pages without modifying any existing architecture.
+- **Rationale:** A separate audit layer provides deterministic SEO health metrics without risk of altering routing, converters, or plugins.
+- **Outcome:** All 46 converter pages are audited with 15 check types each. Average score 84.2/100 (GOOD). No architecture changes required.
+
+### D010 — SEO Content Enhancement via JSON data files
+- **Decision:** Enhance converter landing pages by modifying only the JSON data files (`app/data/converters/*.json`) without changing any templates, routes, or backend logic.
+- **Rationale:** JSON data files are the single source of truth for page content. Enhancing them is data-only, requires no code changes, and the SEO Audit Engine automatically reflects improvements.
+- **Outcome:** Average SEO score improved from 84.2 → 98.9/100. All 46 pages now EXCELLENT (90-100). Dashboard updated with SEO Audit section. No architecture changes.
+
+### D011 — Search Console Readiness as separate read-only audit service
+- **Decision:** Create a separate `SearchConsoleReadinessService` dedicated to validating Search Console requirements (sitemap, robots, indexability, structured data, canonical, core SEO) without modifying the existing SEO Audit Engine.
+- **Rationale:** Search Console readiness is a distinct concern from SEO scoring. A separate service keeps concerns separated, uses a weighted scoring model (100 points across 6 categories), and provides actionable recommendations specific to Search Console verification.
+- **Outcome:** 24 tests PASS. 61 pages audited with 736 checks. Readiness Score: 41.2/100 (CRITICAL) — baseline established. API endpoint and dashboard integration complete. No architecture changes.

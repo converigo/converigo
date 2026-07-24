@@ -1,0 +1,13 @@
+{
+  "slug": "pdf",
+  "name": "PDF",
+  "extension": ".pdf",
+  "mime_type": "application/pdf",
+  "category": "document",
+  "description": "Portable Document Format for fixed-layout documents, preserving typography, images, and page design across devices.",
+  "related_formats": ["docx", "txt", "png"],
+  "related_converters": ["pdf-to-docx", "pdf-to-jpg", "jpg-to-pdf", "png-to-pdf"],
+  "primary_keywords": ["pdf file format", "portable document format", "pdf document"],
+  "secondary_keywords": ["pdf conversion", "pdf viewer", "pdf compatibility"],
+  "search_intent": ["informational", "document conversion", "file sharing"]
+}

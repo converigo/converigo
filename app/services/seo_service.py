@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any
 from xml.sax.saxutils import escape
 
+from app.services.article_service import ArticleService
 from app.services.converter_data_service import ConverterDataService
 
 PRODUCTION_BASE_URL = "https://converigo.com"
@@ -13,6 +14,7 @@ PRODUCTION_BASE_URL = "https://converigo.com"
 class SeoService:
     def __init__(self, data_dir: Path) -> None:
         self.data_service = ConverterDataService(data_dir)
+        self.article_service = ArticleService(Path("app/data/articles"))
 
     def _build_base_url(self, request: Any) -> str:
         """
@@ -40,6 +42,9 @@ class SeoService:
             "twitter_card": "summary_large_image",
             "twitter_site": "@converigo",
             "twitter_creator": "@converigo",
+            "keywords": "online file converter, file conversion, document conversion, image conversion, audio conversion, video conversion",
+            "author": "Converigo",
+            "robots": "index,follow",
         }
 
     def build_tool_meta(
@@ -132,12 +137,29 @@ class SeoService:
             for path in paths
         ]
 
+    def _build_learning_entries(self, base_url: str) -> list[dict[str, str]]:
+        today = datetime.utcnow().date().isoformat()
+        articles = self.article_service.list_articles()
+        entries: list[dict[str, str]] = []
+
+        if articles:
+            entries.append({"loc": base_url.rstrip("/") + "/learning", "lastmod": today})
+
+        for article in articles:
+            slug = str(article.get("slug", "")).strip()
+            if not slug:
+                continue
+            entries.append({"loc": base_url.rstrip("/") + f"/learning/{slug}", "lastmod": today})
+
+        return entries
+
     def build_sitemap_xml(self, request: Any) -> str:
 
         base_url = self._build_base_url(request)
 
         entries = self.data_service.sitemap_entries(base_url)
         entries.extend(self._build_blog_entries(base_url))
+        entries.extend(self._build_learning_entries(base_url))
 
         lines = [
             '<?xml version="1.0" encoding="UTF-8"?>',
@@ -255,16 +277,21 @@ class SeoService:
                 },
             ]
 
+            graph = [
+                organization,
+                website,
+                {
+                    "@type": "FAQPage",
+                    "mainEntity": faq_items,
+                },
+            ]
+
+            if page_data and page_data.get("breadcrumb"):
+                graph.append(self._build_breadcrumb_list(base_url, page_data["breadcrumb"]))
+
             return {
                 "@context": "https://schema.org",
-                "@graph": [
-                    organization,
-                    website,
-                    {
-                        "@type": "FAQPage",
-                        "mainEntity": faq_items,
-                    },
-                ],
+                "@graph": graph,
             }
 
         if page_type == "blog_index" and page_data is not None:

@@ -8,6 +8,7 @@ MP4 -> AAC Plugin
 
 from pathlib import Path
 
+from app.core.settings import settings
 from app.engines.ffmpeg_engine import FFmpegEngine
 from app.plugins.base import ConverterPlugin
 
@@ -37,7 +38,7 @@ class MP4ToAACPlugin(ConverterPlugin):
         if not self.supports(source_path.suffix, target_format):
             raise RuntimeError("MP4ToAACPlugin only supports MP4 -> AAC.")
 
-        output_path = Path("outputs") / "audio" / f"{source_path.stem}.aac"
+        output_path = settings.OUTPUT_DIR / "audio" / f"{source_path.stem}.aac"
         return await FFmpegEngine.convert(
             source_path=source_path,
             output_path=output_path,

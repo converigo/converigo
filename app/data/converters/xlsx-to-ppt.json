@@ -1,0 +1,185 @@
+{
+  "title": "XLSX to PPT Converter",
+  "description": "Convert XLSX spreadsheets to PPT presentations online for data-driven slide creation.",
+  "hero": {
+    "title": "XLSX to PPT Converter Free Online",
+    "subtitle": "Build PowerPoint slides from Excel data.",
+    "description": "Convert  files to  online for free. Fast, secure browser-based conversion with no software installation. Get high-quality  output in seconds using Converigo."
+  },
+  "steps": [
+    "Upload your XLSX file.",
+    "Choose PPT as output.",
+    "Download your PPT presentation."
+  ],
+  "benefits": [
+    "Use spreadsheet data in slides",
+    "Create presentations faster",
+    "No installation required"
+  ],
+  "supported_formats": {
+    "input": [
+      ".xlsx"
+    ],
+    "output": [
+      ".ppt"
+    ],
+    "description": "XLSX input, PPT output"
+  },
+  "tips": [
+    "Review chart and table placement in slides",
+    "Simplify spreadsheet layouts before conversion",
+    "Adjust slide formatting in PowerPoint if needed"
+  ],
+  "features": [
+    {
+      "title": "Converts tables into slide content",
+      "text": "Converts tables into slide content"
+    },
+    {
+      "title": "Preserves basic text and images",
+      "text": "Preserves basic text and images"
+    },
+    {
+      "title": "Produces editable PPT output",
+      "text": "Produces editable PPT output"
+    },
+    {
+      "title": "Fast  to  conversion",
+      "text": "Convert  to  in seconds with our optimized processing engine."
+    },
+    {
+      "title": "No software installation required",
+      "text": "Convert files directly in your browser without downloading or installing any software."
+    },
+    {
+      "title": "High-quality  output",
+      "text": "Receive a polished  file ready for immediate use in your workflow."
+    },
+    {
+      "title": "Free  to  converter",
+      "text": "Convert  to  online completely free with no registration or hidden costs."
+    },
+    {
+      "title": "Secure  processing",
+      "text": "Your  files are encrypted during upload and automatically deleted after conversion."
+    }
+  ],
+  "how_to_use": [
+    {
+      "title": "Upload your XLSX file",
+      "description": "Upload your XLSX file"
+    },
+    {
+      "title": "Choose PPT as the output format",
+      "description": "Choose PPT as the output format"
+    },
+    {
+      "title": "Download the PPT file",
+      "description": "Download the PPT file"
+    },
+    {
+      "title": "Upload your file",
+      "description": "Select a  file from your device to begin the conversion process."
+    },
+    {
+      "title": "Choose output as format",
+      "description": "Pick the output as your desired format and review any available options."
+    },
+    {
+      "title": "Convert  to ",
+      "description": "Click convert and our engine processes your file instantly."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "XLSX is an Excel spreadsheet format",
+      "text": "XLSX is an Excel spreadsheet format"
+    },
+    {
+      "title": "PPT is a PowerPoint presentation format",
+      "text": "PPT is a PowerPoint presentation format"
+    }
+  ],
+  "common_problems": [
+    "Charts may require manual editing",
+    "Complex tables can shift",
+    "Large files may take longer to convert"
+  ],
+  "faq": [
+    {
+      "question": "Can I convert XLSX to PPT online?",
+      "answer": "Yes, this tool converts Excel spreadsheets into PowerPoint slides using an online workflow."
+    },
+    {
+      "question": "Will tables and charts transfer?",
+      "answer": "Tables and charts are exported into slide-friendly formats where possible."
+    },
+    {
+      "question": "Is this converter free?",
+      "answer": "Yes, use the XLSX to PPT converter free for standard conversions."
+    },
+    {
+      "question": "Do I need PowerPoint installed?",
+      "answer": "No, the output PPT can be opened in PowerPoint or compatible apps."
+    },
+    {
+      "question": "Can I edit the presentation after download?",
+      "answer": "Yes, the resulting PPT file is editable in PowerPoint."
+    },
+    {
+      "question": "What file sizes are supported?",
+      "answer": "Standard spreadsheets are supported; very large workbooks may take longer."
+    },
+    {
+      "question": "Can I preserve spreadsheet formatting?",
+      "answer": "Basic formatting is preserved, but complex layouts may require manual adjustment."
+    },
+    {
+      "question": "Are formulas preserved?",
+      "answer": "Formulas are not preserved; the tool converts data values into slide content."
+    }
+  ],
+  "related_tools": [
+    "xlsx-to-pdf",
+    "ppt-to-pdf",
+    "xlsx-to-docx",
+    "pptx-to-pdf"
+  ],
+  "internal_links": {
+    "items": [
+      {
+        "title": "Document Conversion hub",
+        "href": "/document-conversion"
+      },
+      {
+        "title": "XLSX format guide",
+        "href": "/formats/xlsx"
+      },
+      {
+        "title": "PPT format guide",
+        "href": "/formats/ppt"
+      }
+    ]
+  },
+  "cta": {
+    "label": "Convert XLSX to PPT",
+    "href": "/xlsx-to-ppt"
+  },
+  "json_ld": {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "XLSX to PPT Converter"
+  },
+  "seo": {
+    "title": "Xlsx To Ppt Online Free | Converigo",
+    "description": "Convert XLSX spreadsheets to PPT presentations online for data-driven slide creation. Fast, secure and browser-based file conversion with no installation required. Try Converigo for free today.",
+    "keywords": "xlsx to ppt, convert xlsx to ppt, excel to powerpoint",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Converigo free online file converter",
+    "twitter_title": "Xlsx To Ppt Online Free | Converigo",
+    "twitter_description": "Convert XLSX spreadsheets to PPT presentations online for data-driven slide creation. Fast, secure and browser-based file conversion with no installation required. Try Converigo for free today.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/xlsx-to-ppt"
+  },
+  "lifecycle_status": "deprecated"
+}

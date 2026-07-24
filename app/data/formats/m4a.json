@@ -1,0 +1,14 @@
+{
+  "slug": "m4a",
+  "name": "M4A",
+  "extension": ".m4a",
+  "mime_type": "audio/mp4",
+  "category": "audio",
+  "description": "M4A is an audio-only container format from the MPEG-4 specification, typically containing AAC-encoded audio for efficient compression and broad device compatibility.",
+  "related_formats": ["aac", "flac", "mp3", "ogg", "wav"],
+  "related_converters": ["mp4-to-m4a"],
+  "primary_keywords": ["aac audio container", "m4a audio format", "m4a file format"],
+  "secondary_keywords": ["apple audio format", "itunes audio", "m4a converter"],
+  "search_intent": ["audio conversion", "device compatibility", "music library"]
+}
+

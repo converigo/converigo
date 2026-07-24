@@ -1,0 +1,122 @@
+{
+  "slug": "jpg",
+  "name": "JPG",
+  "quick_answer": "JPG is a image file format. JPG is a lossy image format optimized for photographs and rich color images with broad compatibility across devices and services. It is widely used across tools and platforms in the image category.",
+  "definition": "JPG is a image file format. JPG is a lossy image format optimized for photographs and rich color images with broad compatibility across devices and services. It is commonly used in workflows that require reliable image handling and is supported by a wide range of applications and online tools.",
+  "use_cases": [
+    {
+      "title": "Web graphics and page assets",
+      "text": "JPG is used to deliver visual assets on websites, including banners, illustrations, and content images."
+    },
+    {
+      "title": "Photography and creative work",
+      "text": "JPG is widely used by photographers and designers for storing, sharing, and publishing images."
+    },
+    {
+      "title": "Screenshots and documentation",
+      "text": "JPG is a practical choice for capturing screenshots and creating visual documentation for tutorials and guides."
+    },
+    {
+      "title": "Social media and marketing",
+      "text": "JPG is commonly used for sharing images on social platforms, email campaigns, and marketing content."
+    },
+    {
+      "title": "E-commerce product images",
+      "text": "JPG files are used for product visuals on online stores where image quality and loading speed matter."
+    }
+  ],
+  "advantages": [
+    {
+      "title": "Broad compatibility",
+      "text": "JPG is supported by virtually all image editors, browsers, and operating systems."
+    },
+    {
+      "title": "Reliable rendering",
+      "text": "JPG files render consistently across different platforms and viewing conditions."
+    },
+    {
+      "title": "Good compression options",
+      "text": "JPG offers practical file size options depending on the use case."
+    },
+    {
+      "title": "Easy to share and embed",
+      "text": "JPG is one of the most widely accepted formats for embedding in websites, documents, and presentations."
+    }
+  ],
+  "limitations": [
+    {
+      "title": "Quality tradeoffs with compression",
+      "text": "Compressing JPG images too aggressively may produce visible artifacts or quality loss."
+    },
+    {
+      "title": "Not suitable for all use cases",
+      "text": "JPG is optimized for certain image types and may not be the best choice for every workflow."
+    },
+    {
+      "title": "Limited editing metadata",
+      "text": "JPG may not retain all editing metadata or layers needed for complex image workflows."
+    }
+  ],
+  "comparisons": [
+    {
+      "title": "JPG vs PNG",
+      "text": "JPG and PNG are both widely used file formats. Choosing between them depends on your compatibility needs, quality requirements, and the tools available in your workflow."
+    },
+    {
+      "title": "JPG vs WEBP",
+      "text": "JPG and WEBP are both widely used file formats. Choosing between them depends on your compatibility needs, quality requirements, and the tools available in your workflow."
+    },
+    {
+      "title": "JPG vs GIF",
+      "text": "JPG and GIF are both widely used file formats. Choosing between them depends on your compatibility needs, quality requirements, and the tools available in your workflow."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "jpg-to-png",
+      "title": "JPG to PNG Converter",
+      "description": "Convert JPG files to PNG quickly and easily.",
+      "href": "/jpg-to-png"
+    },
+    {
+      "slug": "jpg-to-webp",
+      "title": "JPG to WEBP Converter",
+      "description": "Convert JPG files to WEBP quickly and easily.",
+      "href": "/jpg-to-webp"
+    },
+    {
+      "slug": "png-to-jpg",
+      "title": "PNG to JPG Converter",
+      "description": "Convert PNG files to JPG quickly and easily.",
+      "href": "/png-to-jpg"
+    },
+    {
+      "slug": "pdf-to-jpg",
+      "title": "PDF to JPG Converter",
+      "description": "Convert PDF files to JPG quickly and easily.",
+      "href": "/pdf-to-jpg"
+    }
+  ],
+  "faq": [
+    {
+      "question": "What is a JPG file?",
+      "answer": "A JPG file is a image format used for storing images with broad support across devices and software."
+    },
+    {
+      "question": "When should I use JPG?",
+      "answer": "JPG is a good choice when you need a widely compatible image format for web, design, or photography workflows."
+    },
+    {
+      "question": "Can I convert JPG to other formats?",
+      "answer": "Yes, JPG can be converted to many other image formats using an online converter or image editing software."
+    },
+    {
+      "question": "Is JPG supported by all browsers?",
+      "answer": "Most modern browsers support JPG natively for displaying images on web pages."
+    },
+    {
+      "question": "How do I reduce the size of a JPG file?",
+      "answer": "You can reduce the size of a JPG file by compressing it, resizing the image, or converting to a more compact format."
+    }
+  ]
+}

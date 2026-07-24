@@ -27,7 +27,7 @@ def run_conversion_flow(page, file_paths):
     errors = []
     collect_js_errors(page, errors)
 
-    page.goto(BASE_URL, wait_until="networkidle")
+    page.goto(BASE_URL, wait_until="domcontentloaded", timeout=60000)
 
     page.wait_for_selector("#fileInput", state="attached", timeout=TIMEOUT)
     page.locator("#fileInput").set_input_files([str(path) for path in file_paths])

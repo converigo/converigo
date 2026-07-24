@@ -162,9 +162,35 @@ class ConverterController {
             return;
         }
         const context = window.converigoAnalytics.getConverterContext();
-        window.converigoAnalytics.trackEvent('conversion_completed', {
+        window.converigoAnalytics.trackEvent('conversion_success', {
             converter_name: context.converter_name,
-            output_format: this.selectedFormat || ''
+            output_format: this.selectedFormat || '',
+            event_status: 'success'
+        });
+    }
+
+    _trackConversionStarted(){
+        if(!window.converigoAnalytics || typeof window.converigoAnalytics.trackEvent !== 'function'){
+            return;
+        }
+        const context = window.converigoAnalytics.getConverterContext();
+        window.converigoAnalytics.trackEvent('conversion_start', {
+            converter_name: context.converter_name,
+            output_format: this.selectedFormat || '',
+            event_status: 'started'
+        });
+    }
+
+    _trackConversionFailed(errorMessage){
+        if(!window.converigoAnalytics || typeof window.converigoAnalytics.trackEvent !== 'function'){
+            return;
+        }
+        const context = window.converigoAnalytics.getConverterContext();
+        window.converigoAnalytics.trackEvent('conversion_failed', {
+            converter_name: context.converter_name,
+            output_format: this.selectedFormat || '',
+            error_type: errorMessage || 'conversion_error',
+            event_status: 'failure'
         });
     }
 
@@ -189,6 +215,7 @@ class ConverterController {
             if (window.conversionStateController && typeof window.conversionStateController.setConversionState === 'function') {
                 window.conversionStateController.setConversionState(window.conversionStateController.ConversionState.CONVERTING);
             }
+            this._trackConversionStarted();
             if (this.convertBtn) {
                 this.convertBtn.disabled = true;
                 this.convertBtn.classList.add("loading");
@@ -273,6 +300,16 @@ class ConverterController {
             if (window.downloadManager) {
                 window.downloadManager.prepare(data);
             }
+
+            // UX-S2-005: Dispatch conversion-completed event for recommendations
+            window.dispatchEvent(
+                new CustomEvent('conversion-completed', {
+                    detail: {
+                        outputFormat: this.selectedFormat || '',
+                        success: true
+                    }
+                })
+            );
             if (window.uploadManager && typeof window.uploadManager.showResult === 'function') {
                 // Show result for all converted files
                 for (const file of this.files) {
@@ -305,6 +342,7 @@ class ConverterController {
                 this.message.textContent = errorMessage;
                 this.message.classList.add("error");
             }
+            this._trackConversionFailed(errorMessage);
             if (window.uploadManager && typeof window.uploadManager.showError === 'function') {
                 window.uploadManager.showError(errorMessage);
             }

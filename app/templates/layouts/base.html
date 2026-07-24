@@ -3,13 +3,17 @@
 
 <head>
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-64B5XMNF03"></script>
+    {% set disable_analytics = disable_analytics or request.query_params.get('dev') == 'true' %}
+    {% set runtime_ga_measurement_id = ga_measurement_id or get_template_globals().ga_measurement_id %}
+    {% if not disable_analytics and runtime_ga_measurement_id %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ runtime_ga_measurement_id }}"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-64B5XMNF03');
+    gtag('config', '{{ runtime_ga_measurement_id }}');
     </script>
+    {% endif %}
 
     <meta charset="UTF-8">
 
@@ -18,14 +22,6 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-
-    <title>
-
-        {% block title %}
-        Converigo
-        {% endblock %}
-
-    </title>
 
     {% include "partials/seo_meta.html" %}
     {% if structured_data %}
@@ -42,17 +38,6 @@
     <link
         rel="manifest"
         href="/static/site.webmanifest">
-
-    {% set template_globals = get_template_globals() %}
-    {% if template_globals.ga_measurement_id %}
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{ template_globals.ga_measurement_id }}"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', '{{ template_globals.ga_measurement_id }}');
-    </script>
-    {% endif %}
 
     <link
         rel="icon"
@@ -164,6 +149,20 @@
         rel="stylesheet"
         href="/static/css/components/footer.css">
 
+    <link
+        rel="stylesheet"
+        href="/static/css/components/recommendation.css">
+
+    <link
+        rel="stylesheet"
+        href="/static/css/components/trust-layer.css">
+
+
+
+
+
+
+
 
 
 
@@ -267,6 +266,42 @@
             return '';
         };
 
+        const normalizeRichParam = (key, value) => {
+            if (value === null || value === undefined) {
+                return '';
+            }
+            if (typeof value === 'number') {
+                return String(value);
+            }
+            if (typeof value !== 'string') {
+                return normalizeParam(value);
+            }
+
+            const trimmed = value.trim();
+            if (!trimmed) {
+                return '';
+            }
+
+            const richKeys = new Set([
+                'page_path',
+                'page_title',
+                'page_location',
+                'search_query',
+                'link_href',
+                'faq_id',
+                'metric_name',
+                'error_type',
+                'event_status',
+                'entry_type'
+            ]);
+
+            if (richKeys.has(key)) {
+                return trimmed.slice(0, 512);
+            }
+
+            return normalizeParam(trimmed);
+        };
+
         window.converigoAnalytics = {
             isConverterRoute,
             getConverterContext,
@@ -275,10 +310,26 @@
                     return;
                 }
                 const safeParams = {};
-                const allowedKeys = ['converter_name', 'category', 'input_format', 'output_format', 'error_type', 'event_status'];
+                const allowedKeys = [
+                    'converter_name',
+                    'category',
+                    'input_format',
+                    'output_format',
+                    'error_type',
+                    'event_status',
+                    'page_path',
+                    'page_title',
+                    'page_location',
+                    'search_query',
+                    'link_href',
+                    'faq_id',
+                    'metric_name',
+                    'metric_value',
+                    'entry_type'
+                ];
                 Object.entries(params || {}).forEach(([key, value]) => {
                     if (allowedKeys.includes(key)) {
-                        const normalizedValue = normalizeParam(value);
+                        const normalizedValue = normalizeRichParam(key, value);
                         if (normalizedValue) {
                             safeParams[key] = normalizedValue;
                         }

@@ -1,0 +1,110 @@
+{
+  "slug": "odt",
+  "name": "ODT",
+  "quick_answer": "ODT — OpenDocument Text format used by LibreOffice and OpenOffice for editable word processing documents with formatting, styles, and embedded objects.",
+  "definition": "ODT is a document file format. OpenDocument Text format used by LibreOffice and OpenOffice for editable word processing documents with formatting, styles, and embedded objects. It is commonly used in workflows that require reliable document handling and is supported by a wide range of applications and online tools.",
+  "use_cases": [
+    {
+      "title": "Official document sharing",
+      "text": "ODT is used to share documents that need to look the same on every device and operating system."
+    },
+    {
+      "title": "Business reports and proposals",
+      "text": "ODT is a reliable format for distributing professional reports, contracts, and formal documents."
+    },
+    {
+      "title": "Form and template publishing",
+      "text": "ODT is commonly used for fillable forms, legal documents, and templates with fixed structure."
+    },
+    {
+      "title": "Archive and long-term storage",
+      "text": "ODT is a trusted choice for archiving documents that need to remain readable over many years."
+    },
+    {
+      "title": "Printing and publishing",
+      "text": "ODT is used in print workflows because it preserves layout, fonts, and formatting across different printers."
+    }
+  ],
+  "advantages": [
+    {
+      "title": "Layout preservation",
+      "text": "ODT preserves fonts, formatting, and page layout across different operating systems and devices."
+    },
+    {
+      "title": "Universal compatibility",
+      "text": "ODT can be opened on virtually any device without requiring the authoring software."
+    },
+    {
+      "title": "Security features",
+      "text": "ODT can include password protection, permissions, and digital signatures for sensitive documents."
+    },
+    {
+      "title": "Print-ready output",
+      "text": "ODT is reliable for printing because it accurately represents the intended page design."
+    }
+  ],
+  "limitations": [
+    {
+      "title": "Limited editability",
+      "text": "ODT is not always easy to edit directly, especially for users without compatible software."
+    },
+    {
+      "title": "Complex formatting may not transfer",
+      "text": "Converting from or to ODT can sometimes lose custom styles, fonts, or layout elements."
+    },
+    {
+      "title": "Large file sizes",
+      "text": "ODT files with many embedded images or assets can be large and slow to load or send."
+    }
+  ],
+  "comparisons": [
+    {
+      "title": "ODT vs DOCX",
+      "text": "ODT and DOCX are both widely used file formats. Choosing between them depends on your compatibility needs, quality requirements, and the tools available in your workflow."
+    },
+    {
+      "title": "ODT vs PDF",
+      "text": "ODT and PDF are both widely used file formats. Choosing between them depends on your compatibility needs, quality requirements, and the tools available in your workflow."
+    },
+    {
+      "title": "ODT vs DOC",
+      "text": "ODT and DOC are both widely used file formats. Choosing between them depends on your compatibility needs, quality requirements, and the tools available in your workflow."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "odt-to-pdf",
+      "title": "ODT to PDF Converter",
+      "description": "Convert ODT files to PDF quickly and easily.",
+      "href": "/odt-to-pdf"
+    },
+    {
+      "slug": "pdf-to-odt",
+      "title": "PDF to ODT Converter",
+      "description": "Convert PDF files to ODT quickly and easily.",
+      "href": "/pdf-to-odt"
+    }
+  ],
+  "faq": [
+    {
+      "question": "What is a ODT file?",
+      "answer": "A ODT file is a document format used to store and share formatted content in a consistent, device-independent layout."
+    },
+    {
+      "question": "How do I open a ODT file?",
+      "answer": "You can open a ODT file using a compatible viewer or editor such as Adobe Acrobat, LibreOffice, or a browser-based tool."
+    },
+    {
+      "question": "Can I convert ODT to other formats?",
+      "answer": "Yes, ODT can be converted to other document and image formats using conversion tools online or in desktop applications."
+    },
+    {
+      "question": "Is ODT good for printing?",
+      "answer": "ODT is often a reliable format for printing because it preserves document layout and fonts."
+    },
+    {
+      "question": "Can ODT files be password protected?",
+      "answer": "Many ODT formats support password protection or permission controls for sensitive documents."
+    }
+  ]
+}

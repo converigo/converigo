@@ -1,0 +1,253 @@
+{
+  "totals": {
+    "files_scanned": 49,
+    "converters_discovered": 49
+  },
+  "converters": [
+    {
+      "converter_name": "GZExtractPlugin",
+      "category": "archive",
+      "source_file": "app/plugins/archive/gz_extract.py"
+    },
+    {
+      "converter_name": "RARExtractPlugin",
+      "category": "archive",
+      "source_file": "app/plugins/archive/rar_extract.py"
+    },
+    {
+      "converter_name": "SevenZExtractPlugin",
+      "category": "archive",
+      "source_file": "app/plugins/archive/7z_extract.py"
+    },
+    {
+      "converter_name": "TARExtractPlugin",
+      "category": "archive",
+      "source_file": "app/plugins/archive/tar_extract.py"
+    },
+    {
+      "converter_name": "ZIPExtractPlugin",
+      "category": "archive",
+      "source_file": "app/plugins/archive/zip_extract.py"
+    },
+    {
+      "converter_name": "MP3ToWAVPlugin",
+      "category": "audio",
+      "source_file": "app/plugins/audio/mp3_to_wav.py"
+    },
+    {
+      "converter_name": "ExcelToPDFPlugin",
+      "category": "document",
+      "source_file": "app/plugins/document/excel_to_pdf.py"
+    },
+    {
+      "converter_name": "JPGToPDFPlugin",
+      "category": "document",
+      "source_file": "app/plugins/document/jpg_to_pdf.py"
+    },
+    {
+      "converter_name": "ODSToXLSXPlugin",
+      "category": "document",
+      "source_file": "app/plugins/document/ods_to_xlsx.py"
+    },
+    {
+      "converter_name": "ODTToPDFPlugin",
+      "category": "document",
+      "source_file": "app/plugins/document/odt_to_pdf.py"
+    },
+    {
+      "converter_name": "PDFCompressPlugin",
+      "category": "document",
+      "source_file": "app/plugins/document/pdf_compress.py"
+    },
+    {
+      "converter_name": "PDFMergePlugin",
+      "category": "document",
+      "source_file": "app/plugins/document/pdf_merge.py"
+    },
+    {
+      "converter_name": "PDFSplitPlugin",
+      "category": "document",
+      "source_file": "app/plugins/document/pdf_split.py"
+    },
+    {
+      "converter_name": "PDFToExcelPlugin",
+      "category": "document",
+      "source_file": "app/plugins/document/pdf_to_excel.py"
+    },
+    {
+      "converter_name": "PDFToJPGPlugin",
+      "category": "document",
+      "source_file": "app/plugins/document/pdf_to_jpg.py"
+    },
+    {
+      "converter_name": "PDFToODTPlugin",
+      "category": "document",
+      "source_file": "app/plugins/document/pdf_to_odt.py"
+    },
+    {
+      "converter_name": "PDFToPPTPlugin",
+      "category": "document",
+      "source_file": "app/plugins/document/pdf_to_ppt.py"
+    },
+    {
+      "converter_name": "PDFToWordPlugin",
+      "category": "document",
+      "source_file": "app/plugins/document/pdf_to_word.py"
+    },
+    {
+      "converter_name": "PPTToPDFPlugin",
+      "category": "document",
+      "source_file": "app/plugins/document/ppt_to_pdf.py"
+    },
+    {
+      "converter_name": "WordToPDFPlugin",
+      "category": "document",
+      "source_file": "app/plugins/document/word_to_pdf.py"
+    },
+    {
+      "converter_name": "XLSXToODSPlugin",
+      "category": "document",
+      "source_file": "app/plugins/document/xlsx_to_ods.py"
+    },
+    {
+      "converter_name": "AVIFToJPGPlugin",
+      "category": "image",
+      "source_file": "app/plugins/image/avif_to_jpg.py"
+    },
+    {
+      "converter_name": "BMPToJPGPlugin",
+      "category": "image",
+      "source_file": "app/plugins/image/bmp_to_jpg.py"
+    },
+    {
+      "converter_name": "BMPToPNGPlugin",
+      "category": "image",
+      "source_file": "app/plugins/image/bmp_to_png.py"
+    },
+    {
+      "converter_name": "BMPToWEBPPlugin",
+      "category": "image",
+      "source_file": "app/plugins/image/bmp_to_webp.py"
+    },
+    {
+      "converter_name": "HEICToJPGPlugin",
+      "category": "image",
+      "source_file": "app/plugins/image/heic_to_jpg.py"
+    },
+    {
+      "converter_name": "JPGToICOPlugin",
+      "category": "image",
+      "source_file": "app/plugins/image/jpg_to_ico.py"
+    },
+    {
+      "converter_name": "JPGToPNGPlugin",
+      "category": "image",
+      "source_file": "app/plugins/image/jpg_to_png.py"
+    },
+    {
+      "converter_name": "JPGToTIFFPlugin",
+      "category": "image",
+      "source_file": "app/plugins/image/jpg_to_tiff.py"
+    },
+    {
+      "converter_name": "JPGToWEBPPlugin",
+      "category": "image",
+      "source_file": "app/plugins/image/jpg_to_webp.py"
+    },
+    {
+      "converter_name": "PNGToBMPPlugin",
+      "category": "image",
+      "source_file": "app/plugins/image/png_to_bmp.py"
+    },
+    {
+      "converter_name": "PNGToICOPlugin",
+      "category": "image",
+      "source_file": "app/plugins/image/png_to_ico.py"
+    },
+    {
+      "converter_name": "PNGToJPGPlugin",
+      "category": "image",
+      "source_file": "app/plugins/image/png_to_jpg.py"
+    },
+    {
+      "converter_name": "PNGToTIFFPlugin",
+      "category": "image",
+      "source_file": "app/plugins/image/png_to_tiff.py"
+    },
+    {
+      "converter_name": "PNGToWEBPPlugin",
+      "category": "image",
+      "source_file": "app/plugins/image/png_to_webp.py"
+    },
+    {
+      "converter_name": "SVGToPNGPlugin",
+      "category": "image",
+      "source_file": "app/plugins/image/svg_to_png.py"
+    },
+    {
+      "converter_name": "TIFFToJPGPlugin",
+      "category": "image",
+      "source_file": "app/plugins/image/tiff_to_jpg.py"
+    },
+    {
+      "converter_name": "TIFFToPNGPlugin",
+      "category": "image",
+      "source_file": "app/plugins/image/tiff_to_png.py"
+    },
+    {
+      "converter_name": "WEBPToICOPlugin",
+      "category": "image",
+      "source_file": "app/plugins/image/webp_to_ico.py"
+    },
+    {
+      "converter_name": "WEBPToJPGPlugin",
+      "category": "image",
+      "source_file": "app/plugins/image/webp_to_jpg.py"
+    },
+    {
+      "converter_name": "WEBPToPNGPlugin",
+      "category": "image",
+      "source_file": "app/plugins/image/webp_to_png.py"
+    },
+    {
+      "converter_name": "WEBPToTIFFPlugin",
+      "category": "image",
+      "source_file": "app/plugins/image/webp_to_tiff.py"
+    },
+    {
+      "converter_name": "base_plugin",
+      "category": "root",
+      "source_file": "app/plugins/base_plugin.py"
+    },
+    {
+      "converter_name": "MP4ToAACPlugin",
+      "category": "video",
+      "source_file": "app/plugins/video/mp4_to_aac.py"
+    },
+    {
+      "converter_name": "MP4ToFLACPlugin",
+      "category": "video",
+      "source_file": "app/plugins/video/mp4_to_flac.py"
+    },
+    {
+      "converter_name": "MP4ToM4APlugin",
+      "category": "video",
+      "source_file": "app/plugins/video/mp4_to_m4a.py"
+    },
+    {
+      "converter_name": "MP4ToMP3Plugin",
+      "category": "video",
+      "source_file": "app/plugins/video/mp4_to_mp3.py"
+    },
+    {
+      "converter_name": "MP4ToOGGPlugin",
+      "category": "video",
+      "source_file": "app/plugins/video/mp4_to_ogg.py"
+    },
+    {
+      "converter_name": "MP4ToWAVPlugin",
+      "category": "video",
+      "source_file": "app/plugins/video/mp4_to_wav.py"
+    }
+  ]
+}

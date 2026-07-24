@@ -19,12 +19,60 @@
     {
       "question": "What file formats are supported?",
       "answer": "Upload PDF files to receive split PDF output."
+    },
+    {
+      "question": "Is PDF split free?",
+      "answer": "Yes. Splitting PDF files is free and works directly in your browser."
+    },
+    {
+      "question": "Can I choose specific pages?",
+      "answer": "Yes. Select the pages you want to split into a new document."
+    },
+    {
+      "question": "Will the split files stay readable?",
+      "answer": "Yes. Each output file remains a standard PDF suitable for sharing."
+    },
+    {
+      "question": "Can I use this on mobile?",
+      "answer": "Yes. The converter works in modern mobile and desktop browsers."
+    },
+    {
+      "question": "How do I download split pages?",
+      "answer": "Download the smaller PDF files immediately after the split completes."
+    },
+    {
+      "question": "What if splitting fails?",
+      "answer": "Try re-uploading the PDF or using a smaller file and try again."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "pdf-compress",
+      "title": "PDF Compress"
+    },
+    {
+      "slug": "pdf-merge",
+      "title": "PDF Merge"
+    },
+    {
+      "slug": "pdf-to-jpg",
+      "title": "PDF to JPG"
+    },
+    {
+      "slug": "word-to-pdf",
+      "title": "Word to PDF"
     }
   ],
   "seo": {
-    "title": "PDF Split | Converigo",
-    "description": "Split PDF files into smaller documents online.",
-    "keywords": "pdf split, split pdf, separate pdf"
+    "title": "Split PDF Files Online Free | Converigo",
+    "description": "Convert PDF to PDF online for free using Converigo. Fast, secure and browser-based file conversion from pdf to pdf with no installation required.",
+    "keywords": "pdf split, split pdf, separate pdf, online pdf splitter",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert PDF to PDF - Converigo free online converter",
+    "twitter_title": "Split PDF Files Online Free | Converigo",
+    "twitter_description": "Convert PDF to PDF online for free using Converigo. Fast, secure and browser-based file conversion from pdf to pdf with no installation required.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/pdf-split"
   },
   "source": "pdf",
   "target": "pdf",
@@ -32,7 +80,7 @@
   "hero": {
     "eyebrow": "Converter tool",
     "title": "Split PDF Files Online Free",
-    "description": "Break a large PDF into smaller, easier-to-manage files.",
+    "description": "Convert PDF files to PDF online for free. Fast, secure browser-based conversion with no software installation. Get high-quality pdf output in seconds using Converigo.",
     "panel_label": "Ready to convert",
     "panel_title": "Upload a PDF file and receive a split result instantly."
   },
@@ -44,11 +92,35 @@
     {
       "title": "Organized sharing",
       "text": "Share only the parts of a PDF that matter."
+    },
+    {
+      "title": "Fast pdf to pdf conversion",
+      "text": "Convert PDF to PDF in seconds with our optimized processing engine."
+    },
+    {
+      "title": "No software installation required",
+      "text": "Convert files directly in your browser without downloading or installing any software."
+    },
+    {
+      "title": "High-quality pdf output",
+      "text": "Receive a polished PDF file ready for immediate use in your workflow."
+    },
+    {
+      "title": "Free pdf to pdf converter",
+      "text": "Convert PDF to PDF online completely free with no registration or hidden costs."
+    },
+    {
+      "title": "Secure pdf processing",
+      "text": "Your PDF files are encrypted during upload and automatically deleted after conversion."
     }
   ],
   "supported_formats": {
-    "input": ["PDF"],
-    "output": ["PDF"],
+    "input": [
+      "PDF"
+    ],
+    "output": [
+      "PDF"
+    ],
     "description": "PDF input, PDF output"
   },
   "how_to_use": [
@@ -63,12 +135,32 @@
     {
       "title": "Download the result",
       "description": "Get your separate PDF files immediately."
+    },
+    {
+      "title": "Upload your pdf",
+      "description": "Select a PDF file from your device to begin the conversion process."
+    },
+    {
+      "title": "Choose pdf as format",
+      "description": "Pick PDF as your desired format and review any available options."
+    },
+    {
+      "title": "Convert pdf to pdf",
+      "description": "Click convert and our engine processes your pdf instantly."
     }
   ],
   "about_formats": [
     {
       "title": "What is PDF?",
       "text": "PDF is the source format used for this conversion workflow."
+    },
+    {
+      "title": "What is PDF format?",
+      "text": "PDF is a widely used file format known for its versatility and compatibility across many applications."
+    },
+    {
+      "title": "Why convert PDF to PDF?",
+      "text": "Converting pdf to pdf enables better compatibility, smaller file sizes, and improved workflow integration."
     }
   ],
   "cta": {
@@ -79,5 +171,6 @@
     "secondary_text": "Read FAQs",
     "primary_href": "#converter",
     "secondary_href": "#faq"
-  }
+  },
+  "lifecycle_status": "active"
 }

@@ -599,6 +599,8 @@ class InternalLinkService:
 
         for category, link in all_links:
             href = link.get("href", "")
+            if not self._is_routable_href(href):
+                continue
             if href and href not in seen_hrefs:
                 if category not in deduplicated:
                     deduplicated[category] = []
@@ -606,6 +608,18 @@ class InternalLinkService:
                 seen_hrefs.add(href)
 
         return deduplicated
+
+    def _is_routable_href(self, href: str) -> bool:
+        """Filter out links that are known to be non-routable in the current app."""
+        normalized = str(href or "").strip().lower()
+        if not normalized:
+            return False
+
+        # Knowledge routes are not currently exposed by routers.
+        if normalized == "/knowledge" or normalized.startswith("/knowledge/"):
+            return False
+
+        return True
 
     def _empty_links(self) -> dict[str, list[dict[str, Any]]]:
         """Return empty links structure."""

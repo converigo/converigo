@@ -7,14 +7,17 @@ from app.main import app
 from app.plugins.registry import registry
 
 
-def _assert_output_exists(response):
+def _assert_output_exists(response, client):
     assert response.status_code == 201
     data = response.json()
     assert data.get("status") == "success"
     assert "download_path" in data
-    download = data["download_path"].lstrip("/")
-    out_path = Path(download)
-    assert out_path.exists()
+    download = data["download_path"]
+
+    # Verify that the download URL is served by the app and returns content
+    dl_resp = client.get(download)
+    assert dl_resp.status_code == 200
+    assert dl_resp.content, "Downloaded content is empty"
 
 
 def test_jpg_to_png_runtime_conversion():
@@ -30,8 +33,7 @@ def test_jpg_to_png_runtime_conversion():
             files={"file": (sample_path.name, sample_file, "image/jpeg")},
             data={"target_format": "png"},
         )
-
-    _assert_output_exists(response)
+    _assert_output_exists(response, client)
 
 
 def test_png_to_jpg_runtime_conversion():
@@ -47,8 +49,7 @@ def test_png_to_jpg_runtime_conversion():
             files={"file": (sample_path.name, sample_file, "image/png")},
             data={"target_format": "jpg"},
         )
-
-    _assert_output_exists(response)
+    _assert_output_exists(response, client)
 
 
 def test_xlsx_to_pdf_runtime_conversion():
@@ -69,8 +70,7 @@ def test_xlsx_to_pdf_runtime_conversion():
             files={"file": (sample_path.name, sample_file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")},
             data={"target_format": "pdf"},
         )
-
-    _assert_output_exists(response)
+    _assert_output_exists(response, client)
 
 
 def test_pptx_to_pdf_runtime_conversion():
@@ -88,8 +88,7 @@ def test_pptx_to_pdf_runtime_conversion():
             files={"file": (sample_path.name, sample_file, "application/vnd.openxmlformats-officedocument.presentationml.presentation")},
             data={"target_format": "pdf"},
         )
-
-    _assert_output_exists(response)
+    _assert_output_exists(response, client)
 
 
 def test_odt_to_pdf_runtime_conversion():
@@ -107,8 +106,7 @@ def test_odt_to_pdf_runtime_conversion():
             files={"file": (sample_path.name, sample_file, "application/vnd.oasis.opendocument.text")},
             data={"target_format": "pdf"},
         )
-
-    _assert_output_exists(response)
+    _assert_output_exists(response, client)
 
 
 def test_mp4_to_mp3_runtime_placeholder():
@@ -127,5 +125,4 @@ def test_mp4_to_mp3_runtime_placeholder():
             files={"file": (sample_path.name, sample_file, "video/mp4")},
             data={"target_format": "mp3"},
         )
-
-    _assert_output_exists(response)
+    _assert_output_exists(response, client)

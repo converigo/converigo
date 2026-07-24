@@ -1,0 +1,54 @@
+{
+  "slug": "what-is-png",
+  "title": "What Is PNG? Understanding the Popular Image Format",
+  "description": "Discover what PNG is, how it works, and why it is commonly used for transparent graphic files and lossless image editing.",
+  "category": "Fundamentals",
+  "topics": ["PNG", "image format", "transparency", "lossless compression", "graphics"],
+  "author": "Converigo",
+  "date_published": "2026-07-02",
+  "date_modified": "2026-07-21",
+  "read_time_minutes": 5,
+  "order": 2,
+  "keywords": ["what is PNG", "PNG explained", "PNG format", "PNG definition"],
+  "seo_keywords": ["what is png image format", "png definition explained", "png meaning", "png file format explained"],
+  "related_formats": ["png", "jpg", "webp", "svg"],
+  "related_converters": ["jpg-to-png", "png-to-jpg", "webp-to-png"],
+  "related_articles": ["png", "png-vs-jpg", "png-transparency-guide", "png-compression-guide"],
+  "sections": [
+    {
+      "id": "definition",
+      "title": "PNG at a Glance",
+      "content": "PNG stands for Portable Network Graphics. It is a widely used raster image format designed for web graphics, transparent images, and lossless editing workflows. PNG is known for preserving sharp detail, supporting alpha transparency, and avoiding quality loss when re-saved."
+    },
+    {
+      "id": "benefits",
+      "title": "Benefits of PNG",
+      "content": "The main benefits of PNG are quality preservation, transparent backgrounds, and strong compatibility with web design tools. PNG files are especially useful for logos, icons, screenshots, and UI graphics where precise edges and color fidelity matter."
+    },
+    {
+      "id": "tradeoffs",
+      "title": "When PNG Is Not the Best Choice",
+      "content": "PNG may be too large for photographic images that need to load quickly. In those cases, JPG or WebP can be more practical. The best format depends on whether you need perfect preservation or the smallest file size."
+    }
+  ],
+  "faq": [
+    {
+      "question": "What does PNG stand for?",
+      "answer": "PNG stands for Portable Network Graphics."
+    },
+    {
+      "question": "Why do designers use PNG?",
+      "answer": "Designers use PNG because it preserves quality and supports transparency for logos and interface graphics."
+    }
+  ],
+  "call_to_action": {
+    "text": "Convert your image to PNG and keep quality intact.",
+    "url": "/jpg-to-png",
+    "button_text": "Convert to PNG"
+  },
+  "breadcrumb_override": [
+    { "name": "Home", "url": "/" },
+    { "name": "Learning Center", "url": "/learning" },
+    { "name": "What Is PNG", "url": "/learning/what-is-png" }
+  ]
+}

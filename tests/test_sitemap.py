@@ -31,6 +31,8 @@ def test_sitemap_contains_homepage_converter_and_trust_pages():
     assert any(loc.endswith("/blog/how-to-convert-mp4-to-mp3") for loc in locations)
     assert any(loc.endswith("/blog/jpg-to-pdf-guide") for loc in locations)
     assert any(loc.endswith("/blog/png-to-jpg-guide") for loc in locations)
+    assert any(loc.endswith("/learning") for loc in locations)
+    assert any(loc.endswith("/learning/what-is-file-conversion") for loc in locations)
     assert not any(loc.endswith("/tools/mp4-to-mp3") for loc in locations)
     assert not any(loc.endswith("/tools/jpg-to-pdf") for loc in locations)
     assert not any(loc.endswith("/tools/png-to-jpg") for loc in locations)

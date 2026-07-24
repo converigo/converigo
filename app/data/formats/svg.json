@@ -1,0 +1,13 @@
+{
+  "slug": "svg",
+  "name": "SVG",
+  "extension": ".svg",
+  "mime_type": "image/svg+xml",
+  "category": "image",
+  "description": "Scalable Vector Graphics format for resolution-independent vector artwork, icons, and illustrations that scale cleanly at any size.",
+  "related_formats": ["png", "pdf", "webp"],
+  "related_converters": ["svg-to-png", "svg-to-jpg", "svg-to-pdf"],
+  "primary_keywords": ["svg file format", "scalable vector graphics", "svg image"],
+  "secondary_keywords": ["svg conversion", "svg web graphics", "vector format"],
+  "search_intent": ["informational", "web graphics", "vector design"]
+}

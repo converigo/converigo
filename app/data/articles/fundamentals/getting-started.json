@@ -1,0 +1,24 @@
+{
+  "slug": "getting-started",
+  "title": "Getting Started with File Conversion",
+  "description": "Learn the basics of file conversion and how to get started with Converigo.",
+  "category": "Fundamentals",
+  "topics": ["basics", "getting-started"],
+  "author": "Converigo",
+  "date_published": "2026-07-01",
+  "read_time_minutes": 5,
+  "keywords": ["conversion", "basics"],
+  "sections": [
+    {
+      "id": "intro",
+      "title": "Introduction",
+      "content": "This article introduces the basics of file conversion."
+    }
+  ],
+  "faq": [
+    {
+      "question": "Why convert files?",
+      "answer": "To work with files in a more compatible or convenient format."
+    }
+  ]
+}

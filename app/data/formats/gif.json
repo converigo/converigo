@@ -1,0 +1,13 @@
+{
+  "slug": "gif",
+  "name": "GIF",
+  "extension": ".gif",
+  "mime_type": "image/gif",
+  "category": "image",
+  "description": "Graphics Interchange Format supporting animation, transparency, and lossless compression for simple graphics and short animated clips on the web.",
+  "related_formats": ["png", "webp", "jpg"],
+  "related_converters": ["gif-to-mp4", "gif-to-webp", "gif-to-png"],
+  "primary_keywords": ["gif file format", "animated gif", "gif image"],
+  "secondary_keywords": ["gif animation", "gif compatibility", "gif vs webp"],
+  "search_intent": ["informational", "web animation", "image format"]
+}

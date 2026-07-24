@@ -2,6 +2,16 @@
     {% set hero = hero if hero is defined and hero is not none else {} %}
     <div class="container">
         <div class="hero-container">
+            <div class="floating-format-cards" aria-hidden="true">
+                <span class="floating-format-card card-pdf">PDF</span>
+                <span class="floating-format-card card-docx">DOCX</span>
+                <span class="floating-format-card card-xlsx">XLSX</span>
+                <span class="floating-format-card card-mp3">MP3</span>
+                <span class="floating-format-card card-mp4">MP4</span>
+                <span class="floating-format-card card-jpg">JPG</span>
+                <span class="floating-format-card card-zip">ZIP</span>
+                <span class="floating-format-card card-pptx">PPTX</span>
+            </div>
             <div class="hero-content">
                 <h1 class="hero-title">
                     {{ request.state.t('hero.title', 'Convert All Files') }}
@@ -19,4 +29,7 @@
             </div>
         </div>
     </div>
+
+    <!-- UX-S3-001 Trust Layer Experience -->
+    {% include "components/trust_layer.html" %}
 </section>

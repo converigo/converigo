@@ -1,0 +1,13 @@
+{
+  "slug": "avif",
+  "name": "AVIF",
+  "extension": ".avif",
+  "mime_type": "image/avif",
+  "category": "image",
+  "description": "AV1 Image File Format offering outstanding compression efficiency with support for HDR, wide color gamut, and both lossy and lossless encoding.",
+  "related_formats": ["webp", "jpg", "png"],
+  "related_converters": ["avif-to-jpg", "avif-to-png", "jpg-to-avif"],
+  "primary_keywords": ["avif file format", "avif image", "next gen image format"],
+  "secondary_keywords": ["avif conversion", "avif compression", "av1 image"],
+  "search_intent": ["informational", "web image", "image compression"]
+}

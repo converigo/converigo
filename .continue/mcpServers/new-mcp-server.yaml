@@ -1,0 +1,14 @@
+name: AI_BRAIN MCP
+version: 0.0.1
+schema: v1
+
+mcpServers:
+  - name: AI_BRAIN
+    command: "C:\\converigo\\.venv\\Scripts\\python.exe"
+    args:
+      - -m
+      - AI_BRAIN.mcp_server.server
+      - --transport
+      - stdio
+    env:
+      PYTHONPATH: "C:\\converigo"

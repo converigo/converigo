@@ -12,6 +12,7 @@ import tarfile
 import zipfile
 from pathlib import Path
 
+from app.core.settings import settings
 from app.engines.base_engine import BaseEngine
 
 
@@ -125,7 +126,7 @@ class ArchiveEngine(BaseEngine):
         else:
             extract_dir_name = stem
 
-        output_dir = Path("outputs") / "archive"
+        output_dir = settings.OUTPUT_DIR / "archive"
         output_dir.mkdir(parents=True, exist_ok=True)
 
         extract_path = output_dir / extract_dir_name

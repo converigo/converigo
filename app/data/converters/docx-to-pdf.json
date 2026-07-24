@@ -5,11 +5,24 @@
     "subtitle": "Convert Word documents to PDF with a secure, easy online workflow.",
     "description": "Convert DOCX files to PDF online for free while preserving formatting and creating printable documents."
   },
-  "steps": ["Upload your DOCX file", "Choose PDF as output", "Download the PDF"],
-  "benefits": ["Preserve layout", "Easy to share", "Print ready"],
+  "steps": [
+    "Upload your DOCX file",
+    "Choose PDF as output",
+    "Download the PDF"
+  ],
+  "benefits": [
+    "Preserve layout",
+    "Easy to share",
+    "Print ready"
+  ],
   "supported_formats": {
-    "input": [".docx", ".doc"],
-    "output": [".pdf"],
+    "input": [
+      ".docx",
+      ".doc"
+    ],
+    "output": [
+      ".pdf"
+    ],
     "description": "DOCX input, PDF output"
   },
   "features": [
@@ -24,20 +37,73 @@
     {
       "title": "Secure online document conversion",
       "text": "Convert files quickly in your browser with an easy workflow and no software installation."
+    },
+    {
+      "title": "Fast  to  conversion",
+      "text": "Convert  to  in seconds with our optimized processing engine."
+    },
+    {
+      "title": "No software installation required",
+      "text": "Convert files directly in your browser without downloading or installing any software."
+    },
+    {
+      "title": "High-quality  output",
+      "text": "Receive a polished  file ready for immediate use in your workflow."
+    },
+    {
+      "title": "Free  to  converter",
+      "text": "Convert  to  online completely free with no registration or hidden costs."
+    },
+    {
+      "title": "Secure  processing",
+      "text": "Your  files are encrypted during upload and automatically deleted after conversion."
     }
   ],
   "how_to_use": [
-    "Upload your DOCX file.",
-    "Choose PDF as the output format and review the conversion options.",
-    "Download the generated PDF for sharing or printing."
+    {
+      "title": "Upload your DOCX file.",
+      "description": "Upload your DOCX file."
+    },
+    {
+      "title": "Choose PDF as the output format and review the conversion options.",
+      "description": "Choose PDF as the output format and review the conversion options."
+    },
+    {
+      "title": "Download the generated PDF for sharing or printing.",
+      "description": "Download the generated PDF for sharing or printing."
+    },
+    {
+      "title": "Upload your file",
+      "description": "Select a  file from your device to begin the conversion process."
+    },
+    {
+      "title": "Choose output as format",
+      "description": "Pick the output as your desired format and review any available options."
+    },
+    {
+      "title": "Convert  to ",
+      "description": "Click convert and our engine processes your file instantly."
+    }
   ],
   "about_formats": [
-    "DOCX is the Microsoft Word document format used for editing and collaboration.",
-    "PDF is a portable document format made for easy sharing, printing, and reliable presentation."
+    {
+      "title": "DOCX is the Microsoft Word document format used for editing and collaboration.",
+      "text": "DOCX is the Microsoft Word document format used for editing and collaboration."
+    },
+    {
+      "title": "PDF is a portable document format made for easy sharing, printing, and reliable presentation.",
+      "text": "PDF is a portable document format made for easy sharing, printing, and reliable presentation."
+    }
   ],
   "compatibility": "Works on web and API",
-  "common_problems": ["Large images causing layout shifts", "Unsupported macros"],
-  "tips": ["Remove unnecessary embedded fonts", "Flatten images before conversion"],
+  "common_problems": [
+    "Large images causing layout shifts",
+    "Unsupported macros"
+  ],
+  "tips": [
+    "Remove unnecessary embedded fonts",
+    "Flatten images before conversion"
+  ],
   "faq": [
     {
       "question": "Can I convert Word documents to PDF online?",
@@ -60,7 +126,11 @@
       "answer": "No. You can complete the conversion directly online with no software installation required."
     }
   ],
-  "related_tools": ["pdf-to-docx", "pdf-to-ppt", "excel-to-pdf"],
+  "related_tools": [
+    "pdf-to-docx",
+    "pdf-to-ppt",
+    "excel-to-pdf"
+  ],
   "internal_links": {
     "items": [
       {
@@ -79,8 +149,15 @@
     "name": "DOCX to PDF Converter"
   },
   "seo": {
-    "title": "DOCX to PDF Converter - Free Online Tool",
+    "title": "Docx To Pdf Online Free | Converigo",
     "description": "Convert Word documents to PDF online for free. Preserve document formatting, create printable documents, and enjoy a secure easy online workflow.",
-    "keywords": "docx to pdf, convert docx to pdf, word to pdf, printable documents"
-  }
+    "keywords": "docx to pdf, convert docx to pdf, word to pdf, printable documents",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Converigo free online file converter",
+    "twitter_title": "Docx To Pdf Online Free | Converigo",
+    "twitter_description": "Convert Word documents to PDF online for free. Preserve document formatting, create printable documents, and enjoy a secure easy online workflow.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/docx-to-pdf"
+  },
+  "lifecycle_status": "certified"
 }
