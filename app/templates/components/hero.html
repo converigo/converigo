@@ -2,29 +2,89 @@
     {% set hero = hero if hero is defined and hero is not none else {} %}
     <div class="container">
         <div class="hero-container">
-            <div class="floating-format-cards" aria-hidden="true">
-                <span class="floating-format-card card-pdf">PDF</span>
-                <span class="floating-format-card card-docx">DOCX</span>
-                <span class="floating-format-card card-xlsx">XLSX</span>
-                <span class="floating-format-card card-mp3">MP3</span>
-                <span class="floating-format-card card-mp4">MP4</span>
-                <span class="floating-format-card card-jpg">JPG</span>
-                <span class="floating-format-card card-zip">ZIP</span>
-                <span class="floating-format-card card-pptx">PPTX</span>
+            <div class="floating-format-cards hero-orbit" aria-hidden="true">
+                <!-- Left column cards -->
+                <div class="floating-format-card card-pdf" role="presentation">
+                    <div class="file-card">
+                        <div class="file-icon file-icon-pdf" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6 2h7l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="#EF4444"/><path d="M13 2v5h5" fill="#fff" opacity="0.9"/></svg>
+                        </div>
+                        <div class="file-ext">PDF</div>
+                    </div>
+                </div>
+
+                <div class="floating-format-card card-docx" role="presentation">
+                    <div class="file-card">
+                        <div class="file-icon file-icon-docx" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="3" fill="#3B82F6"/><text x="50%" y="62%" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">W</text></svg>
+                        </div>
+                        <div class="file-ext">DOCX</div>
+                    </div>
+                </div>
+
+                <div class="floating-format-card card-xlsx" role="presentation">
+                    <div class="file-card">
+                        <div class="file-icon file-icon-xlsx" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="3" fill="#10B981"/><text x="50%" y="62%" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">X</text></svg>
+                        </div>
+                        <div class="file-ext">XLSX</div>
+                    </div>
+                </div>
+
+                <div class="floating-format-card card-mp3" role="presentation">
+                    <div class="file-card">
+                        <div class="file-icon file-icon-mp3" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="3" fill="#7C3AED"/><path d="M9 8v8l6-4-6-4z" fill="#fff"/></svg>
+                        </div>
+                        <div class="file-ext">MP3</div>
+                    </div>
+                </div>
+
+                <!-- Right column cards -->
+                <div class="floating-format-card card-pptx" role="presentation">
+                    <div class="file-card">
+                        <div class="file-icon file-icon-pptx" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="3" fill="#F97316"/><text x="50%" y="62%" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">P</text></svg>
+                        </div>
+                        <div class="file-ext">PPTX</div>
+                    </div>
+                </div>
+
+                <div class="floating-format-card card-mp4" role="presentation">
+                    <div class="file-card">
+                        <div class="file-icon file-icon-mp4" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="3" fill="#7C3AED"/><path d="M9 8v8l6-4-6-4z" fill="#fff"/></svg>
+                        </div>
+                        <div class="file-ext">MP4</div>
+                    </div>
+                </div>
+
+                <div class="floating-format-card card-jpg" role="presentation">
+                    <div class="file-card">
+                        <div class="file-icon file-icon-jpg" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="3" fill="#3B82F6"/><circle cx="9.5" cy="10" r="2" fill="#fff"/><path d="M16 7v8l-4-3-4 3V7" stroke="#fff" stroke-width="0.8" fill="none"/></svg>
+                        </div>
+                        <div class="file-ext">JPG</div>
+                    </div>
+                </div>
+
+                <div class="floating-format-card card-zip" role="presentation">
+                    <div class="file-card">
+                        <div class="file-icon file-icon-zip" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="3" fill="#FBBF24"/><path d="M8 7h8v2H8zM8 11h8v6H8z" fill="#fff"/></svg>
+                        </div>
+                        <div class="file-ext">ZIP</div>
+                    </div>
+                </div>
             </div>
             <div class="hero-content">
-                <h1 class="hero-title">
-                    {{ request.state.t('hero.title', 'Convert All Files') }}
-                </h1>
+                <h1 class="hero-title">Convert Files<br>in Seconds</h1>
 
-                <p class="hero-description">
-                    {{ request.state.t('hero.description', 'Convert images, videos, audio, and documents online.') }}
-                </p>
+                <p class="hero-description">Fast, free & secure online file converter<br>that supports 100+ formats.</p>
 
-                <p class="hero-batch-hint">{{ request.state.t('hero.batch_hint', 'Supports many files at once') }}</p>
             </div>
 
-            <div class="homepage-upload-card">
+            <div class="homepage-upload-card upload-card">
                 {% include "components/upload_card.html" %}
             </div>
         </div>
@@ -33,3 +93,83 @@
     <!-- UX-S3-001 Trust Layer Experience -->
     {% include "components/trust_layer.html" %}
 </section>
+
+<script>
+(function () {
+    const initHeroOrbit = () => {
+        const orbit = document.querySelector('.hero-orbit');
+        if (!orbit) return;
+
+        const cards = Array.from(orbit.querySelectorAll('.floating-format-card'));
+        if (!cards.length) return;
+
+        const updateOrbit = () => {
+            const centerX = orbit.offsetWidth / 2;
+            const centerY = orbit.offsetHeight / 2;
+            const radiusX = window.innerWidth >= 1024 ? 430 : window.innerWidth >= 768 ? 250 : 210;
+            const radiusY = window.innerWidth >= 1024 ? 300 : window.innerWidth >= 768 ? 180 : 140;
+            const orbitRect = orbit.getBoundingClientRect();
+            const headline = document.querySelector('.hero-title');
+            const subtitle = document.querySelector('.hero-description');
+            const headlineRect = headline ? headline.getBoundingClientRect() : null;
+            const subtitleRect = subtitle ? subtitle.getBoundingClientRect() : null;
+            const headlineBottom = headlineRect ? headlineRect.bottom - orbitRect.top : null;
+            const subtitleTop = subtitleRect ? subtitleRect.top - orbitRect.top : null;
+            const margin = 24;
+            let topRowCenterY = centerY;
+
+            if (headlineBottom !== null && subtitleTop !== null) {
+                const availableTop = headlineBottom + margin;
+                const availableBottom = subtitleTop - margin;
+                if (availableBottom >= availableTop) {
+                    topRowCenterY = Math.min(Math.max((availableTop + availableBottom) / 2, availableTop), availableBottom);
+                }
+            }
+
+            console.log('[hero-orbit] Calculate orbit', {
+                offsetWidth: orbit.offsetWidth,
+                offsetHeight: orbit.offsetHeight,
+                centerX,
+                centerY,
+                radiusX,
+                radiusY
+            });
+
+            cards.forEach((card) => {
+                const angleRaw = getComputedStyle(card).getPropertyValue('--angle').trim();
+                const angleDeg = parseFloat(angleRaw) || 0;
+                const angleRad = angleDeg * (Math.PI / 180);
+                const x = centerX + radiusX * Math.cos(angleRad);
+                let y = centerY + radiusY * Math.sin(angleRad);
+
+                if (card.classList.contains('card-pdf') || card.classList.contains('card-pptx')) {
+                    y = topRowCenterY;
+                }
+
+                card.style.setProperty('--x', `${x}px`);
+                card.style.setProperty('--y', `${y}px`);
+            });
+        };
+
+        let frameId = null;
+        const scheduleUpdate = () => {
+            if (frameId !== null) {
+                window.cancelAnimationFrame(frameId);
+            }
+            frameId = window.requestAnimationFrame(updateOrbit);
+        };
+
+        window.addEventListener('resize', scheduleUpdate, { passive: true });
+        window.addEventListener('load', () => {
+            scheduleUpdate();
+        }, { once: true });
+        scheduleUpdate();
+    };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initHeroOrbit, { once: true });
+    } else {
+        initHeroOrbit();
+    }
+})();
+</script>

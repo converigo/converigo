@@ -1,255 +1,396 @@
 /*
 ====================================================
 Project : Converigo
-Component : Upload Card
-Version : 3.9.0
-Premium glass upload experience
+
+Component :
+Upload Card
+
+Version :
+2.4.0
+
+Update:
+- Balanced upload card proportions
+- Stronger button prominence
+- Clear drag state feedback
+- More polished preview spacing
 ====================================================
 */
 
+/*
+================================
+UPLOAD WRAPPER
+================================
+*/
+
 .upload-wrapper {
-    margin-top: 0;
+    margin-top: 16px;
     padding: 0;
 }
 
-.upload-card {
-    position: relative;
-    width: 100%;
-    max-width: 560px;
-    margin: 0 auto;
-    padding: 20px;
-    border-radius: 34px;
-    border: 1px solid rgba(37, 99, 235, 0.18);
-    background:
-        linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(241, 247, 255, 0.84)),
-        linear-gradient(145deg, rgba(37, 99, 235, 0.1), rgba(14, 165, 233, 0.06));
-    box-shadow:
-        0 36px 82px rgba(15, 23, 42, 0.16),
-        0 16px 36px rgba(37, 99, 235, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.94);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    overflow: hidden;
-}
-
-.upload-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    pointer-events: none;
-    background: linear-gradient(128deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0) 68%);
-    opacity: 0.9;
-}
-
 .upload-main {
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(320px, 1fr);
+    gap: 24px;
+    align-items: start;
     justify-content: center;
-    align-items: center;
-    gap: 22px;
-    flex-wrap: wrap;
-    max-width: 960px;
+    max-width: 940px;
     margin: 0 auto;
+    transition: max-width 0.3s ease;
+}
+
+/* Initial state: Only upload card centered */
+.upload-main.upload-initial {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: min(100%, 640px);
+    max-width: 640px;
+}
+
+/* After file selected: stacked layout */
+.upload-main.upload-active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: min(100%, 720px);
+    max-width: 720px;
+}
+
+.upload-stage {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
 }
 
 .drop-zone {
     width: 100%;
     max-width: 100%;
-    min-height: 244px;
+    min-height: 220px;
+    border: 1.5px dashed rgba(37, 99, 235, .38);
+    border-radius: 24px;
+    background: #f8fbff;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 18px;
-    padding: 22px 20px;
-    border: 1.5px dashed rgba(37, 99, 235, 0.4);
-    border-radius: 26px;
-    background:
-        radial-gradient(120% 100% at 0% 0%, rgba(37, 99, 235, 0.1), rgba(37, 99, 235, 0) 56%),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 251, 255, 0.88));
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.74),
-        0 22px 44px rgba(15, 23, 42, 0.1);
+    gap: 16px;
     cursor: pointer;
-    transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease, background 220ms ease;
+    padding: 24px 20px;
+    transition: .2s ease, border-color .2s ease, background .2s ease, box-shadow .2s ease, transform .2s ease;
 }
 
 .drop-zone:hover,
 .drop-zone:focus-visible {
-    transform: translateY(-2px);
-    border-color: rgba(37, 99, 235, 0.7);
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(243, 248, 255, 0.92));
-    box-shadow:
-        0 18px 36px rgba(37, 99, 235, 0.14),
-        inset 0 1px 0 rgba(255, 255, 255, 0.86);
-    outline: none;
-}
-
-.drop-zone:hover .upload-support,
-.drop-zone:focus-visible .upload-support {
-    color: #475569;
+    border-color:#2563eb;
+    background:#f3f7ff;
+    box-shadow:0 10px 24px rgba(37,99,235,.08);
+    outline:none;
 }
 
 .drop-zone.drag-active {
-    transform: translateY(-2px) scale(1.004);
-    border-color: #1d4ed8;
-    background: #eff6ff;
-    box-shadow:
-        0 20px 42px rgba(37, 99, 235, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.88);
+    border-color:#1d4ed8;
+    background:#eff6ff;
+    box-shadow:0 12px 28px rgba(37,99,235,.1);
 }
 
 .upload-icon {
-    font-size: 40px;
-    margin-bottom: 10px;
+    font-size:38px;
+    margin-bottom:16px;
+}
+
+.drop-zone-copy {
+    text-align:center;
+    max-width:320px;
+}
+
+.drop-zone-copy h2 {
+    font-size:22px;
+    color:#0f172a;
+    margin:0 0 10px;
+}
+
+.drop-zone-copy p {
+    color:#475569;
+    font-size:15px;
+    margin:0;
+    line-height:1.65;
+}
+
+.upload-support {
+    margin-top:16px;
+    color:#64748b;
+    font-size:0.95rem;
+    line-height:1.65;
+    text-align:center;
+    max-width:340px;
+    padding:0 4px;
+}
+
+.drop-zone button {
+    margin-top: 18px;
+    min-width: 160px;
+    width: auto;
+    padding: 12px 22px;
+    font-weight:700;
+}
+
+.drop-zone:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, .2);
+    outline-offset: 4px;
+}
+
+.drop-zone .upload-icon {
+    font-size: 42px;
 }
 
 .drop-zone-copy {
     text-align: center;
-    max-width: 320px;
+    max-width: 340px;
 }
 
 .drop-zone-copy h2 {
-    margin: 0 0 8px;
-    font-size: 1.1rem;
-    color: #0f172a;
-}
-
-.drop-zone-copy p {
-    margin: 0;
-    color: #475569;
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 24px;
+    letter-spacing: -0.02em;
 }
 
 .upload-support {
-    max-width: 320px;
-    margin-top: 4px;
-    padding: 0 4px;
-    color: #64748b;
-    font-size: 0.88rem;
-    line-height: 1.58;
+    margin-top: 18px;
+    color: #475569;
+    font-size: 0.96rem;
+    line-height: 1.7;
     text-align: center;
+    max-width: 360px;
+    padding: 0 4px;
 }
 
-.drop-zone button {
-    min-width: 146px;
-    margin-top: 6px;
-    padding: 11px 18px;
-    font-weight: 700;
-    border-radius: 999px;
-    box-shadow: 0 10px 24px rgba(37, 99, 235, 0.2);
-}
+/*
+================================
+PREVIEW
+================================
+*/
 
 .preview-container {
-    display: none;
+    display:none;
 }
 
 .preview-container:not([hidden]) {
-    display: block;
+    display:block;
 }
 
 .preview-card {
-    width: min(100%, 290px);
-    text-align: center;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 26px;
-    padding: 24px;
-    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+    width:100%;
+    max-width: 360px;
+    margin: 0 auto;
+    text-align:left;
+    background:#ffffff;
+    border-radius:20px;
+    padding:16px;
+    border:1px solid rgba(148,163,184,.18);
+    box-shadow:0 10px 24px rgba(15,23,42,.04);
+    display:flex;
+    align-items:center;
+    gap:14px;
 }
 
 .preview-media {
-    width: 100%;
-    height: 240px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 18px;
-    border-radius: 22px;
-    background: #f8fafc;
-    overflow: hidden;
+    width:72px;
+    height:72px;
+    border-radius:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#f8fafc;
+    overflow:hidden;
+    flex-shrink:0;
 }
 
 .preview-media.audio {
-    background: #eef2ff;
+    background:#eef2ff;
 }
 
 .preview-media.video {
-    background: #fff7ed;
+    background:#fff7ed;
 }
 
 .preview-media.pdf {
-    background: #eef9ff;
+    background:#eef9ff;
 }
 
 .preview-image {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
 }
 
 .preview-icon {
-    margin: 0;
-    font-size: 60px;
+    font-size:60px;
+    margin:0;
 }
 
 .preview-details {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    text-align: center;
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+    text-align:left;
 }
 
 .preview-name {
-    font-size: 15px;
-    font-weight: 700;
-    color: #0f172a;
-    word-break: break-word;
+    font-size:15px;
+    font-weight:700;
+    color:#0f172a;
+    word-break:break-word;
+}
+
+.file-list {
+    width:100%;
+    margin:0;
+    padding:16px 18px;
+    background:#ffffff;
+    border:1px solid rgba(148,163,184,.22);
+    border-radius:20px;
+    box-shadow:0 10px 24px rgba(15,23,42,.04);
+}
+
+.file-list-heading {
+    font-size:0.98rem;
+    font-weight:700;
+    color:#0f172a;
+    margin-bottom:14px;
+}
+
+.file-item {
+    padding:12px 0;
+    border-top:1px solid rgba(148,163,184,.16);
+}
+
+.file-item:first-child {
+    border-top:none;
+}
+
+.file-item-top {
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.file-item-name {
+    font-size:0.95rem;
+    font-weight:700;
+    color:#0f172a;
+    word-break:break-word;
+}
+
+.file-item-meta {
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:10px;
+    color:#64748b;
+    font-size:0.92rem;
+    margin-top:8px;
+}
+
+.file-item-status {
+    font-weight:700;
+    color:#2563eb;
+}
+
+@media (max-width: 520px) {
+    .file-list {
+        width:100%;
+        padding:16px;
+    }
+
+    .file-item-top {
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .preview-card {
+        width:100%;
+        max-width:100%;
+        padding:14px;
+    }
+
+    .preview-media {
+        width:64px;
+        height:64px;
+    }
 }
 
 .preview-type,
 .preview-size,
 .preview-status {
-    font-size: 0.95rem;
-    color: #64748b;
+    font-size:0.95rem;
+    color:#64748b;
 }
 
 .preview-status {
-    margin-top: 6px;
-    font-weight: 600;
-    color: #2563eb;
+    font-weight:600;
+    margin-top:6px;
+    color:#2563eb;
 }
 
+/*
+================================
+FILE INFO
+================================
+*/
+
 .selected-file {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    max-width: 690px;
-    margin: 20px auto 0;
-    padding: 16px 22px;
-    border: 1px solid rgba(148, 163, 184, 0.24);
-    border-radius: 18px;
-    background: rgba(15, 23, 42, 0.03);
-    color: #334155;
-    font-size: 0.95rem;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+    margin-top:20px;
+    color:#334155;
+    font-size:0.95rem;
+    background:rgba(15,23,42,.03);
+    border:1px solid rgba(148,163,184,.2);
+    border-radius:18px;
+    padding:16px 22px;
+    max-width:680px;
+    margin-left:auto;
+    margin-right:auto;
 }
 
 .upload-hint {
-    max-width: 620px;
-    margin: 16px auto 0;
-    padding: 0 10px;
-    color: #475569;
-    font-size: 0.96rem;
-    line-height: 1.7;
-    text-align: center;
+    margin:16px auto 0;
+    max-width:620px;
+    color:#475569;
+    font-size:0.96rem;
+    line-height:1.7;
+    text-align:center;
+    padding:0 10px;
 }
 
+/*
+================================
+CONVERSION AREA
+================================
+*/
+
 #conversionArea {
-    text-align: center;
+    text-align:center;
     margin-top:24px;
     transition:opacity .25s ease, visibility .25s ease;
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Hide conversion area on initial load */
+#conversionArea[hidden] {
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+    margin: 0;
+    display: none;
 }
 
 #conversionArea h3 {
@@ -257,14 +398,24 @@ Premium glass upload experience
     margin-bottom:18px;
 }
 
-@supports selector(#conversionArea:has(#formatOptions:empty)) {
-    #conversionArea:has(#formatOptions:empty) {
-        display:none;
-        opacity:0;
-        visibility:hidden;
-        height:0;
-        overflow:hidden;
-    }
+.format-instruction {
+    margin-bottom:10px;
+    color:#334155;
+    font-size:0.98rem;
+    font-weight:600;
+}
+
+/* Truncate long file names in lists while preserving full title on hover */
+.truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.file-item-name.truncate {
+    max-width: calc(100% - 120px);
+    display: inline-block;
+    vertical-align: middle;
 }
 
 /*
@@ -377,289 +528,156 @@ PROGRESS
     transition:.3s;
 }
 
-/*
-================================
-PREMIUM SAAS UPLOAD POLISH
-UI-S1-002
-================================
-*/
-
-.upload-main {
-    position: relative;
-}
-
-.drop-zone {
-    position: relative;
-    isolation: isolate;
-    border: 1.5px solid rgba(37,99,235,.28);
-    background:
-        radial-gradient(130% 95% at 5% 0%, rgba(37,99,235,.11), rgba(37,99,235,0) 56%),
-        linear-gradient(165deg, rgba(255,255,255,.94), rgba(248,251,255,.78));
-    box-shadow:
-        0 18px 38px rgba(15,23,42,.1),
-        inset 0 1px 0 rgba(255,255,255,.78);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    transition:
-        transform .2s ease,
-        border-color .2s ease,
-        background .2s ease,
-        box-shadow .2s ease;
-}
-
-.drop-zone::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    pointer-events: none;
-    background: linear-gradient(130deg, rgba(255,255,255,.44), rgba(255,255,255,0));
-    opacity: .82;
-    z-index: -1;
-}
-
-.drop-zone:hover {
-    transform: translateY(-2px);
-    border-color: rgba(37,99,235,.62);
-    background:
-        radial-gradient(130% 95% at 5% 0%, rgba(37,99,235,.13), rgba(37,99,235,0) 56%),
-        linear-gradient(165deg, rgba(255,255,255,.96), rgba(243,248,255,.9));
-    box-shadow:
-        0 24px 46px rgba(15,23,42,.13),
-        0 8px 22px rgba(37,99,235,.12),
-        inset 0 1px 0 rgba(255,255,255,.84);
-}
-
-.drop-zone:focus-visible {
-    outline: none;
-    transform: translateY(-1px);
-    border-color: rgba(37,99,235,.78);
-    box-shadow:
-        0 0 0 4px rgba(37,99,235,.2),
-        0 22px 42px rgba(15,23,42,.12),
-        inset 0 1px 0 rgba(255,255,255,.85);
-}
-
-.drop-zone.drag-active {
-    transform: translateY(-2px) scale(1.005);
-    border-style: solid;
-    border-color: #1d4ed8;
-    background:
-        radial-gradient(130% 95% at 5% 0%, rgba(37,99,235,.2), rgba(37,99,235,0) 58%),
-        linear-gradient(180deg, rgba(239,246,255,.95), rgba(219,234,254,.75));
-    box-shadow:
-        0 0 0 1px rgba(37,99,235,.22),
-        0 28px 56px rgba(37,99,235,.2),
-        inset 0 1px 0 rgba(255,255,255,.92);
-}
-
-
-
-.selected-file,
-.file-ready-card,
-.result-card {
-    border: 1px solid rgba(148,163,184,.26);
-    background:
-        linear-gradient(165deg, rgba(255,255,255,.96), rgba(248,251,255,.92));
-    box-shadow:
-        0 16px 36px rgba(15,23,42,.08),
-        inset 0 1px 0 rgba(255,255,255,.76);
-}
-
-#selectedStatus:not([hidden]),
-.file-ready-card,
-.status-text.success,
-.result-card {
-    animation: uploadStateReveal .26s ease-out both;
-}
-
-.status-text.success {
-    color: #15803d;
-    font-weight: 700;
-}
-
-.status-text.success::before {
-    content: "✓ ";
-    font-weight: 800;
-}
-
-.result-status {
-    color: #0f172a;
-}
-
-.result-card {
-    border-color: rgba(34,197,94,.22);
-}
-
-.progress {
-    background: linear-gradient(90deg, rgba(226,232,240,.84), rgba(203,213,225,.84));
-}
-
-.progress-bar {
-    background: linear-gradient(90deg, #2563eb, #0ea5e9);
-    box-shadow: 0 0 0 1px rgba(37,99,235,.12), 0 6px 16px rgba(14,165,233,.25);
-}
-
-@keyframes uploadStateReveal {
-    from {
-        opacity: 0;
-        transform: translateY(5px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .drop-zone,
-    .drop-zone button,
-    #convertButton,
-    .download-btn,
-    #selectedStatus:not([hidden]),
-    .file-ready-card,
-    .status-text.success,
-    .result-card {
-        animation: none !important;
-        transition: none !important;
-        transform: none !important;
-    }
-}
-
-@media (max-width: 480px) {
+@media (max-width: 520px) {
     .upload-wrapper {
-        margin-top:0;
-        padding-bottom:20px;
+        margin-top: 12px;
+        padding-bottom: 16px;
     }
 
     .upload-main {
-        flex-direction:column;
-        align-items:stretch;
-        gap:18px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
     }
 
     .drop-zone {
-        width:100%;
-        max-width:100%;
-        min-height:200px;
-        height:auto;
-        padding:20px 16px;
+        width: calc(100% - 32px);
+        max-width: calc(100% - 32px);
+        min-height: 200px;
+        border-radius: 20px;
+        padding: 18px 16px;
     }
 
     .drop-zone h2 {
-        font-size:20px;
-    }
-
-    .drop-zone p {
-        font-size:14px;
-        margin-bottom:14px;
-    }
-
-    .preview-container:not([hidden]) {
-        display:flex;
-        justify-content:center;
-    }
-
-    .preview-card {
-        width:min(100%, 240px);
-    }
-
-    .preview-media {
-        width:min(100%, 240px);
-        height:220px;
-        margin:0 auto;
-    }
-
-    .supported-formats {
-        gap:8px;
-    }
-
-    .format-chip {
-        min-height:44px;
-        padding:10px 12px;
-        font-size:12px;
-    }
-
-    .conversion-actions {
-        width:100%;
-        gap:12px;
-    }
-
-    .download-btn {
-        width:100%;
-        max-width:280px;
-    }
-
-    .progress {
-        width:min(100%, 260px);
-    }
-}
-
-/* UI-S1-005 — Narrow viewport drop-zone fixes (no clipping at 390/375/360) */
-@media (max-width: 390px) {
-    .homepage-hero .homepage-upload-card .drop-zone {
-        min-height: 170px;
-        padding: 14px 10px;
-        gap: 12px;
-    }
-
-    .homepage-hero .homepage-upload-card .drop-zone h2 {
-        font-size: 18px;
-    }
-
-    .homepage-hero .homepage-upload-card .drop-zone p {
-        font-size: 13px;
-        margin-bottom: 10px;
-    }
-
-    .homepage-hero .homepage-upload-card .drop-zone .upload-icon {
-        font-size: 32px;
-        margin-bottom: 6px;
-    }
-
-    .homepage-hero .homepage-upload-card .drop-zone .upload-support {
-        font-size: 0.82rem;
-        max-width: 260px;
-    }
-
-    .homepage-hero .homepage-upload-card .drop-zone button {
-        min-width: 130px;
-        padding: 9px 16px;
-        font-size: 0.9rem;
-    }
-}
-
-@media (max-width: 360px) {
-    .homepage-hero .homepage-upload-card .drop-zone {
-        min-height: 150px;
-        padding: 10px 8px;
-        gap: 8px;
-    }
-
-    .homepage-hero .homepage-upload-card .drop-zone h2 {
-        font-size: 16px;
-        margin-bottom: 6px;
-    }
-
-    .homepage-hero .homepage-upload-card .drop-zone p {
-        font-size: 12px;
+        font-size: 20px;
         margin-bottom: 8px;
     }
 
-    .homepage-hero .homepage-upload-card .drop-zone .upload-icon {
-        font-size: 28px;
-        margin-bottom: 4px;
+    .drop-zone p {
+        font-size: 14px;
+        margin-bottom: 10px;
+        line-height: 1.5;
     }
 
-    .homepage-hero .homepage-upload-card .drop-zone .upload-support {
-        font-size: 0.78rem;
-        max-width: 220px;
+    .drop-zone button {
+        width: 100%;
+        max-width: 100%;
+        min-width: auto;
     }
 
-    .homepage-hero .homepage-upload-card .drop-zone button {
-        min-width: 110px;
-        padding: 8px 12px;
-        font-size: 0.85rem;
+    .upload-support {
+        font-size: 0.92rem;
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .preview-container:not([hidden]) {
+        display: flex;
+        justify-content: center;
+    }
+
+    .preview-card {
+        width: 100%;
+        max-width: 100%;
+        padding: 14px;
+    }
+
+    .preview-media {
+        width: 64px;
+        height: 64px;
+        margin: 0;
+    }
+
+    .supported-formats {
+        gap: 8px;
+    }
+
+    .format-chip {
+        min-height: 44px;
+        padding: 10px 12px;
+        font-size: 12px;
+    }
+
+    .conversion-actions {
+        width: 100%;
+        gap: 12px;
+        align-items: stretch;
+    }
+
+    .conversion-actions .btn {
+        width: 100%;
+        min-width: auto;
+        max-width: 100%;
+        height: 48px;
+    }
+
+    .download-btn {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .result-card,
+    .error-card,
+    .file-ready-card {
+        width: calc(100% - 32px);
+        margin: 16px auto 0;
+    }
+
+    .result-card,
+    .error-card {
+        padding: 18px;
+        border-radius: 22px;
+    }
+
+    .progress {
+        width: min(100%, 260px);
+    }
+}
+
+@media (max-width: 900px) {
+    .upload-main {
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .drop-zone {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .file-list {
+        width: 100%;
+        margin: 0;
+    }
+
+    .conversion-actions {
+        width: calc(100% - 32px);
+        max-width: 100%;
+    }
+
+    .conversion-actions .btn {
+        width: 100%;
+    }
+
+    .download-btn {
+        align-self: center;
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 412px) {
+    .drop-zone {
+        width: calc(100% - 24px);
+        max-width: calc(100% - 24px);
+    }
+
+    .file-ready-card,
+    .result-card,
+    .error-card {
+        width: calc(100% - 24px);
     }
 }
 
@@ -688,12 +706,12 @@ MOBILE
     .upload-main {
         flex-direction:column;
         align-items:center;
-        gap:20px;
+        gap:25px;
     }
 
     .drop-zone {
-        width:min(100%, 440px);
-        max-width:100%;
+        width:90%;
+        max-width:420px;
     }
 
     .preview-card {
@@ -718,1143 +736,6 @@ MOBILE
         align-self:center;
     }
 
-}
-
-/*
-================================
-UX-S2-003 PREMIUM CONVERSION EXPERIENCE
-================================
-*/
-
-/* Keep conversion area height stable to avoid visual jumps between states. */
-.conversion-actions {
-    position: relative;
-    width: min(100%, 720px);
-    min-height: 168px;
-    padding: 16px 14px 14px;
-    border-radius: 18px;
-    border: 1px solid rgba(148, 163, 184, 0.26);
-    background:
-        linear-gradient(165deg, rgba(255, 255, 255, 0.9), rgba(248, 251, 255, 0.78));
-    box-shadow:
-        0 16px 34px rgba(15, 23, 42, 0.08),
-        inset 0 1px 0 rgba(255, 255, 255, 0.78);
-}
-
-#conversionArea h3 {
-    letter-spacing: -0.014em;
-}
-
-.status-text {
-    position: relative;
-    width: 100%;
-    max-width: 620px;
-    margin: 0 auto;
-    min-height: 46px;
-    border-radius: 12px;
-    padding: 10px 12px;
-    background: rgba(255, 255, 255, 0.72);
-    border: 1px solid rgba(148, 163, 184, 0.24);
-}
-
-/* Conversion card (real app states only): appears when app marks converting. */
-.upload-wrapper:has(.drop-zone.is-converting) #selectedStatus:not([hidden]) {
-    position: relative;
-    display: grid;
-    grid-template-columns: 44px minmax(0, 1fr);
-    align-items: center;
-    gap: 10px;
-    text-align: left;
-    border: 1px solid rgba(37, 99, 235, 0.28);
-    background:
-        radial-gradient(120% 90% at 10% 0%, rgba(191, 219, 254, 0.34), rgba(191, 219, 254, 0) 58%),
-        linear-gradient(166deg, rgba(255, 255, 255, 0.95), rgba(246, 250, 255, 0.88));
-    box-shadow:
-        0 20px 44px rgba(15, 23, 42, 0.12),
-        0 8px 20px rgba(37, 99, 235, 0.12),
-        inset 0 1px 0 rgba(255, 255, 255, 0.84);
-    opacity: 1;
-    transform: translate3d(0, -2px, 0);
-}
-
-.upload-wrapper:has(.drop-zone.is-converting) #selectedStatus:not([hidden])::before {
-    content: "📄";
-    width: 44px;
-    height: 44px;
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    background: rgba(37, 99, 235, 0.12);
-    border: 1px solid rgba(37, 99, 235, 0.22);
-}
-
-.upload-wrapper:has(.drop-zone.is-converting) #selectedStatus:not([hidden])::after {
-    content: "Converting file";
-    grid-column: 2;
-    color: #1d4ed8;
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.01em;
-}
-
-/* Output format remains truthful by only styling existing active choice. */
-.upload-wrapper:has(.drop-zone.is-converting) #formatOptions .format-chip.active {
-    box-shadow:
-        0 10px 24px rgba(37, 99, 235, 0.28),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    transform: translate3d(0, -1px, 0);
-}
-
-/* Progress visual: premium glass panel only when real progress DOM is visible. */
-.upload-wrapper:has(#convertProgress:not([hidden])) #convertProgress {
-    position: relative;
-    width: min(100%, 560px);
-    height: 10px;
-    border-radius: 999px;
-    border: 1px solid rgba(148, 163, 184, 0.24);
-    background:
-        linear-gradient(90deg, rgba(226, 232, 240, 0.9), rgba(203, 213, 225, 0.86));
-    box-shadow:
-        0 0 0 1px rgba(255, 255, 255, 0.52),
-        0 8px 20px rgba(15, 23, 42, 0.08);
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-    animation: conversionCardLift 220ms ease-out both;
-}
-
-.upload-wrapper:has(#convertProgress:not([hidden])) .progress-bar {
-    background: linear-gradient(90deg, #2563eb, #0ea5e9);
-    box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.12), 0 6px 16px rgba(14, 165, 233, 0.24);
-}
-
-/* Non-fake loading indicator: shown only while convert button is in real loading state. */
-.conversion-actions:has(#convertButton.loading) .status-text {
-    color: #1e293b;
-    font-weight: 600;
-    border-color: rgba(37, 99, 235, 0.24);
-}
-
-.conversion-actions:has(#convertButton.loading) .status-text::before {
-    content: "";
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    border: 2px solid rgba(37, 99, 235, 0.28);
-    border-top-color: #2563eb;
-    display: inline-block;
-    margin-right: 8px;
-    transform: translate3d(0, 0, 0);
-    animation: conversionSpinner 0.85s linear infinite;
-}
-
-.conversion-actions:has(#convertButton.loading) .status-text::after {
-    content: "Please wait...";
-    display: inline;
-    color: #64748b;
-    font-size: 0.86rem;
-    font-weight: 500;
-    margin-left: 6px;
-}
-
-/* Ready transition: gracefully prioritize download without changing DOM flow. */
-.upload-wrapper:has(.drop-zone.is-complete) #convertProgress,
-.upload-wrapper:has(#resultCard:not([hidden])) #convertProgress {
-    opacity: 0;
-    transform: translate3d(0, -4px, 0);
-    transition: opacity 200ms ease, transform 200ms ease;
-}
-
-.upload-wrapper:has(#resultCard:not([hidden])) #resultCard {
-    border-color: rgba(34, 197, 94, 0.24);
-    box-shadow:
-        0 18px 40px rgba(15, 23, 42, 0.1),
-        0 10px 24px rgba(34, 197, 94, 0.12),
-        inset 0 1px 0 rgba(255, 255, 255, 0.86);
-    animation: conversionCardLift 240ms ease-out both;
-}
-
-.upload-wrapper:has(#resultCard:not([hidden])) #downloadBtn:not([hidden]) {
-    box-shadow:
-        0 0 0 4px rgba(37, 99, 235, 0.16),
-        0 12px 28px rgba(37, 99, 235, 0.2);
-    transform: translate3d(0, -1px, 0);
-}
-
-/* Error state keeps clarity while preserving same layout container. */
-.upload-wrapper:has(#errorCard:not([hidden])) .status-text {
-    border-color: rgba(220, 38, 38, 0.24);
-    color: #7f1d1d;
-}
-
-@keyframes conversionSpinner {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-@keyframes conversionCardLift {
-    from {
-        opacity: 0;
-        transform: translate3d(0, 6px, 0);
-    }
-    to {
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
-    }
-}
-
-@media (max-width: 1024px) {
-    .conversion-actions {
-        min-height: 158px;
-    }
-}
-
-@media (max-width: 768px) {
-    .conversion-actions {
-        min-height: 146px;
-        padding: 12px;
-    }
-
-    .status-text {
-        min-height: 42px;
-        padding: 9px 10px;
-    }
-}
-
-@media (max-width: 430px) {
-    .conversion-actions {
-        min-height: 136px;
-    }
-
-    .upload-wrapper:has(.drop-zone.is-converting) #selectedStatus:not([hidden]) {
-        grid-template-columns: 38px minmax(0, 1fr);
-        gap: 8px;
-        padding: 12px 14px;
-    }
-
-    .upload-wrapper:has(.drop-zone.is-converting) #selectedStatus:not([hidden])::before {
-        width: 38px;
-        height: 38px;
-        font-size: 18px;
-    }
-}
-
-@media (max-width: 390px) {
-    .status-text {
-        font-size: 0.88rem;
-    }
-}
-
-@media (max-width: 375px) {
-    .conversion-actions {
-        padding: 10px;
-    }
-}
-
-@media (max-width: 360px) {
-    .conversion-actions {
-        min-height: 128px;
-    }
-
-    .status-text {
-        font-size: 0.84rem;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .upload-wrapper:has(#convertProgress:not([hidden])) #convertProgress,
-    .upload-wrapper:has(#resultCard:not([hidden])) #resultCard,
-    .upload-wrapper:has(#resultCard:not([hidden])) #downloadBtn:not([hidden]),
-    .conversion-actions:has(#convertButton.loading) .status-text::before {
-        animation: none !important;
-        transition: none !important;
-        transform: none !important;
-    }
-}
-
-/*
-================================
-UX-S2-001 PREMIUM UPLOAD EXPERIENCE
-================================
-*/
-
-.upload-wrapper {
-    position: relative;
-    isolation: isolate;
-}
-
-.upload-wrapper::before {
-    content: "";
-    position: absolute;
-    inset: -24px -18px -18px;
-    border-radius: 30px;
-    z-index: -1;
-    pointer-events: none;
-    opacity: 0.55;
-    background-image:
-        linear-gradient(124deg, rgba(37, 99, 235, 0.08) 1px, transparent 1px),
-        linear-gradient(28deg, rgba(14, 165, 233, 0.07) 1px, transparent 1px),
-        radial-gradient(130% 110% at 8% 0%, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0));
-    background-size: 48px 48px, 56px 56px, 100% 100%;
-}
-
-.upload-main {
-    position: relative;
-}
-
-/* IDLE */
-.upload-main.upload-initial .drop-zone,
-.drop-zone {
-    transform: translate3d(0, 0, 0);
-    transition:
-        transform 170ms ease,
-        box-shadow 170ms ease,
-        border-color 170ms ease,
-        background 170ms ease,
-        filter 170ms ease;
-    border: 1.5px solid rgba(37, 99, 235, 0.26);
-    background:
-        radial-gradient(130% 100% at 12% 2%, rgba(191, 219, 254, 0.32), rgba(191, 219, 254, 0) 56%),
-        linear-gradient(165deg, rgba(255, 255, 255, 0.95), rgba(247, 251, 255, 0.86));
-    box-shadow:
-        -16px -14px 30px rgba(255, 255, 255, 0.62),
-        0 20px 48px rgba(15, 23, 42, 0.12),
-        0 8px 22px rgba(37, 99, 235, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.86);
-}
-
-.upload-main.upload-initial .drop-zone-copy h2,
-.drop-zone-copy h2 {
-    letter-spacing: -0.01em;
-}
-
-.upload-main.upload-initial .drop-zone-copy p,
-.drop-zone-copy p {
-    line-height: 1.7;
-    letter-spacing: 0.002em;
-}
-
-.drop-zone-copy::after {
-    content: "Supports images, videos, audio, and documents";
-    display: block;
-    margin-top: 10px;
-    font-size: 0.8rem;
-    line-height: 1.5;
-    color: #1d4ed8;
-    font-weight: 600;
-    letter-spacing: 0.01em;
-}
-
-.upload-support {
-    position: relative;
-    padding-top: 30px;
-}
-
-.upload-support::before {
-    content: "Secure upload";
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5px 12px;
-    border-radius: 999px;
-    border: 1px solid rgba(37, 99, 235, 0.22);
-    background: rgba(255, 255, 255, 0.82);
-    color: #1e40af;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.015em;
-}
-
-.upload-support::after {
-    content: "Privacy note: files are processed for conversion and removed automatically by system cleanup.";
-    display: block;
-    margin-top: 8px;
-    font-size: 0.78rem;
-    line-height: 1.5;
-    color: #64748b;
-}
-
-/* HOVER */
-.drop-zone:hover,
-.drop-zone:focus-visible {
-    transform: translate3d(0, -3px, 0);
-    border-color: rgba(37, 99, 235, 0.7);
-    filter: saturate(1.04);
-    box-shadow:
-        -16px -14px 30px rgba(255, 255, 255, 0.65),
-        0 28px 58px rgba(15, 23, 42, 0.16),
-        0 12px 28px rgba(37, 99, 235, 0.16),
-        inset 0 1px 0 rgba(255, 255, 255, 0.9);
-}
-
-/* DRAG */
-.drop-zone.drag-active {
-    transform: translate3d(0, -2px, 0) scale(1.01);
-    border-color: #2563eb;
-    background:
-        radial-gradient(130% 100% at 12% 2%, rgba(191, 219, 254, 0.4), rgba(191, 219, 254, 0) 56%),
-        linear-gradient(165deg, rgba(255, 255, 255, 0.97), rgba(239, 246, 255, 0.92));
-    box-shadow:
-        -16px -14px 30px rgba(255, 255, 255, 0.68),
-        0 30px 62px rgba(15, 23, 42, 0.16),
-        0 14px 34px rgba(37, 99, 235, 0.22),
-        inset 0 1px 0 rgba(255, 255, 255, 0.92);
-}
-
-/* UPLOADING */
-.upload-wrapper:has(#convertProgress:not([hidden])) .status-text {
-    color: #1e293b;
-    font-weight: 600;
-}
-
-.upload-wrapper:has(#convertProgress:not([hidden])) .status-text::after {
-    content: "Please wait...";
-    display: block;
-    margin-top: 4px;
-    color: #64748b;
-    font-size: 0.86rem;
-    font-weight: 500;
-}
-
-.upload-wrapper:has(#convertProgress:not([hidden])) .progress {
-    box-shadow:
-        0 0 0 1px rgba(37, 99, 235, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.75);
-}
-
-.upload-wrapper:has(#convertProgress:not([hidden])) .progress-bar {
-    animation: uploadProgressGlow 1.4s ease-in-out infinite;
-}
-
-/* VALIDATION */
-.upload-wrapper:has(#convertProgress:not([hidden])) .status-text::before {
-    content: "File received\AChecking format...\APreparing conversion...";
-    display: block;
-    white-space: pre-line;
-    line-height: 1.45;
-    max-height: 1.45em;
-    overflow: hidden;
-    margin-bottom: 4px;
-    color: #2563eb;
-    font-size: 0.83rem;
-    font-weight: 700;
-    animation: validationTicker 2.4s steps(3, end) infinite;
-}
-
-/* READY */
-.upload-wrapper:has(.upload-main.upload-active):has(#conversionArea:not([hidden])) #selectedStatus:not([hidden]) {
-    border-color: rgba(37, 99, 235, 0.28);
-    box-shadow:
-        0 16px 38px rgba(15, 23, 42, 0.08),
-        0 8px 20px rgba(37, 99, 235, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.82);
-}
-
-.upload-wrapper:has(.upload-main.upload-active):has(#conversionArea:not([hidden])) #selectedStatus:not([hidden])::after {
-    content: "Ready - Choose output format";
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 8px;
-    padding: 4px 10px;
-    border-radius: 999px;
-    border: 1px solid rgba(22, 163, 74, 0.24);
-    background: rgba(240, 253, 244, 0.8);
-    color: #166534;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.01em;
-}
-
-.upload-wrapper:has(.upload-main.upload-active):has(#conversionArea:not([hidden])) #conversionArea h3 {
-    letter-spacing: -0.015em;
-}
-
-@keyframes validationTicker {
-    0% {
-        transform: translate3d(0, 0, 0);
-    }
-    34% {
-        transform: translate3d(0, -1.45em, 0);
-    }
-    68%,
-    100% {
-        transform: translate3d(0, -2.9em, 0);
-    }
-}
-
-@keyframes uploadProgressGlow {
-    0%,
-    100% {
-        filter: brightness(1);
-        opacity: 0.92;
-    }
-    50% {
-        filter: brightness(1.12);
-        opacity: 1;
-    }
-}
-
-/* Responsive stabilization across required widths */
-@media (max-width: 1024px) {
-    .drop-zone {
-        max-width: 100%;
-        min-height: 230px;
-    }
-}
-
-@media (max-width: 768px) {
-    .upload-wrapper::before {
-        inset: -12px -8px -8px;
-        opacity: 0.44;
-    }
-
-    .drop-zone-copy::after {
-        font-size: 0.76rem;
-    }
-
-    .upload-support::after {
-        font-size: 0.74rem;
-    }
-}
-
-@media (max-width: 430px) {
-    .drop-zone {
-        min-height: 178px;
-        padding: 14px 12px;
-        gap: 12px;
-    }
-
-    .upload-support {
-        padding-top: 26px;
-    }
-
-    .upload-support::before {
-        font-size: 0.7rem;
-        padding: 4px 10px;
-    }
-}
-
-@media (max-width: 390px) {
-    .drop-zone {
-        min-height: 164px;
-        padding: 12px 10px;
-    }
-
-    .drop-zone-copy h2 {
-        font-size: 18px;
-    }
-
-    .drop-zone-copy p,
-    .upload-support,
-    .upload-support::after {
-        font-size: 0.78rem;
-    }
-
-    .drop-zone-copy::after {
-        font-size: 0.72rem;
-    }
-
-    .upload-wrapper:has(.upload-main.upload-active):has(#conversionArea:not([hidden])) #selectedStatus:not([hidden])::after {
-        margin-top: 6px;
-        margin-left: 0;
-    }
-}
-
-@media (max-width: 375px) {
-    .drop-zone {
-        min-height: 154px;
-        gap: 10px;
-    }
-
-    .drop-zone button {
-        min-width: 126px;
-        padding: 9px 14px;
-    }
-}
-
-@media (max-width: 360px) {
-    .drop-zone {
-        min-height: 148px;
-        padding: 10px 8px;
-    }
-
-    .drop-zone-copy h2 {
-        font-size: 17px;
-    }
-
-    .drop-zone-copy p,
-    .drop-zone-copy::after,
-    .upload-support,
-    .upload-support::after {
-        font-size: 0.72rem;
-        line-height: 1.45;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .drop-zone,
-    .drop-zone:hover,
-    .drop-zone.drag-active,
-    .upload-wrapper:has(#convertProgress:not([hidden])) .progress-bar,
-    .upload-wrapper:has(#convertProgress:not([hidden])) .status-text::before {
-        animation: none !important;
-        transition: none !important;
-        transform: none !important;
-        filter: none !important;
-    }
-}
-
-/* ================================================
-   UX-S2-002 — Premium Validation Experience
-   ================================================
-   Requirements:
-   - Glass card with reflection
-   - Sequential checklist (3 steps: received → detected → complete)
-   - Only transform & opacity for animations
-   - Collapses smoothly when format options appear
-   - Consistent with Hero design system
-   ================================================ */
-
-/*
-   Implementation approach:
-   Uses #uploadHint element as the validation card container.
-   #uploadHint is hidden by default (hidden attribute).
-   When file is selected (upload-main.upload-active) and no formats yet,
-   we reveal #uploadHint as a premium glass card.
-   When formats appear (#conversionArea:not([hidden])), the card collapses.
-   This avoids ::before/::after conflicts on #selectedStatus.
-*/
-
-/* --- Premium File Info Card — shown after file selected --- */
-.upload-main.upload-active .validation-card:not([hidden]) {
-    display: block !important;
-    position: relative;
-    margin: 18px auto 0;
-    padding: 16px 20px;
-    max-width: 100%;
-    border-radius: 22px;
-    border: 1px solid rgba(37, 99, 235, 0.26);
-    background:
-        linear-gradient(156deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.64)),
-        linear-gradient(138deg, rgba(191, 219, 254, 0.16), rgba(125, 211, 252, 0.12));
-    box-shadow:
-        0 18px 40px rgba(15, 23, 42, 0.08),
-        0 8px 20px rgba(37, 99, 235, 0.08),
-        inset 0 1px 0 rgba(255, 255, 255, 0.86);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    overflow: hidden;
-}
-
-@keyframes validationCardEnter {
-    0% {
-        opacity: 0;
-        transform: translateY(8px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Animate the card on appear */
-.upload-main.upload-active .validation-card:not([hidden]) {
-    opacity: 0;
-    transform: translateY(8px);
-    animation: validationCardEnter 300ms ease-out 0.08s forwards;
-}
-
-/* Reflection layer via ::before */
-.upload-main.upload-active .validation-card:not([hidden])::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    pointer-events: none;
-    background: linear-gradient(125deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 60%);
-    opacity: 0.82;
-    z-index: 0;
-}
-
-/* Ensure content sits above reflection */
-.upload-main.upload-active .validation-card:not([hidden]) > * {
-    position: relative;
-    z-index: 1;
-}
-
-/* File info row: icon | name + size | status badge */
-.validation-file-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 0;
-}
-
-/* File icon */
-.validation-file-icon {
-    font-size: 24px;
-    line-height: 1;
-    flex-shrink: 0;
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 14px;
-    background: rgba(37, 99, 235, 0.08);
-}
-
-/* File details (name + size) */
-.validation-file-info {
-    flex: 1;
-    min-width: 0;
-}
-
-.validation-file-name {
-    display: block;
-    font-size: 0.92rem;
-    font-weight: 700;
-    color: #0f172a;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: 1.4;
-}
-
-.validation-file-size {
-    display: block;
-    font-size: 0.82rem;
-    color: #475569;
-    font-weight: 600;
-    margin-top: 2px;
-}
-
-/* "Uploaded" badge */
-.validation-status-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    padding: 3px 10px;
-    border-radius: 999px;
-    border: 1px solid rgba(22, 163, 74, 0.22);
-    background: rgba(240, 253, 244, 0.82);
-    color: #166534;
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.01em;
-    white-space: nowrap;
-    line-height: 1.4;
-}
-
-/* --- Step 2: Validation Checklist --- */
-.validation-checklist {
-    display: block;
-    margin-top: 14px;
-    padding-top: 14px;
-    border-top: 1px solid rgba(37, 99, 235, 0.1);
-}
-
-.validation-step {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.86rem;
-    color: #166534;
-    font-weight: 600;
-    line-height: 1.55;
-    opacity: 0;
-    transform: translateY(3px);
-}
-
-.validation-step + .validation-step {
-    margin-top: 4px;
-}
-
-/* Step checkmark icon */
-.validation-step::before {
-    content: "✓";
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 18px;
-    height: 18px;
-    border-radius: 999px;
-    background: rgba(22, 163, 74, 0.12);
-    color: #16a34a;
-    font-size: 0.72rem;
-    font-weight: 800;
-    flex-shrink: 0;
-}
-
-/* Step 1: appears immediately */
-.validation-step:nth-child(1) {
-    animation: stepFadeIn 220ms ease-out 0.2s forwards;
-}
-
-/* Step 2: appears with delay */
-.validation-step:nth-child(2) {
-    animation: stepFadeIn 220ms ease-out 0.55s forwards;
-}
-
-/* Step 3: appears with longer delay */
-.validation-step:nth-child(3) {
-    animation: stepFadeIn 220ms ease-out 0.9s forwards;
-}
-
-@keyframes stepFadeIn {
-    0% {
-        opacity: 0;
-        transform: translateY(3px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* --- Step 3: Collapse when format options appear --- */
-.upload-wrapper:has(#conversionArea:not([hidden])) .validation-card:not([hidden]) {
-    animation: validationCardCollapse 280ms ease-in forwards;
-    pointer-events: none;
-}
-
-@keyframes validationCardCollapse {
-    0% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        max-height: 200px;
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(-8px) scale(0.97);
-        max-height: 0;
-        margin: 0;
-        padding: 0;
-        border-width: 0;
-    }
-}
-
-/* --- Step 4: Conversion area focus transition --- */
-.upload-wrapper:has(#conversionArea:not([hidden])) #conversionArea {
-    animation: conversionAreaFadeIn 360ms ease-out 0.12s both;
-}
-
-@keyframes conversionAreaFadeIn {
-    0% {
-        opacity: 0.65;
-        transform: translateY(8px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Format chips enter with staggered delay */
-.upload-wrapper:has(#conversionArea:not([hidden])) .format-chip {
-    opacity: 0;
-    transform: translateY(8px) scale(0.95);
-    animation: chipStaggerIn 280ms ease-out forwards;
-}
-
-.upload-wrapper:has(#conversionArea:not([hidden])) .format-chip:nth-child(1) { animation-delay: 0.08s; }
-.upload-wrapper:has(#conversionArea:not([hidden])) .format-chip:nth-child(2) { animation-delay: 0.14s; }
-.upload-wrapper:has(#conversionArea:not([hidden])) .format-chip:nth-child(3) { animation-delay: 0.2s; }
-.upload-wrapper:has(#conversionArea:not([hidden])) .format-chip:nth-child(4) { animation-delay: 0.26s; }
-.upload-wrapper:has(#conversionArea:not([hidden])) .format-chip:nth-child(5) { animation-delay: 0.32s; }
-.upload-wrapper:has(#conversionArea:not([hidden])) .format-chip:nth-child(6) { animation-delay: 0.38s; }
-
-@keyframes chipStaggerIn {
-    0% {
-        opacity: 0;
-        transform: translateY(8px) scale(0.95);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-/* --- Responsive adjustments for validation card --- */
-@media (max-width: 768px) {
-    .upload-main.upload-active .validation-card:not([hidden]) {
-        padding: 14px 16px;
-        border-radius: 18px;
-    }
-
-    .validation-file-icon {
-        width: 38px;
-        height: 38px;
-        font-size: 20px;
-    }
-
-    .validation-file-name {
-        font-size: 0.86rem;
-    }
-
-    .validation-file-size {
-        font-size: 0.78rem;
-    }
-
-    .validation-status-badge {
-        font-size: 0.65rem;
-        padding: 2px 8px;
-    }
-
-    .validation-step {
-        font-size: 0.82rem;
-    }
-}
-
-@media (max-width: 430px) {
-    .upload-main.upload-active .validation-card:not([hidden]) {
-        padding: 12px 14px;
-        border-radius: 16px;
-    }
-
-    .validation-file-row {
-        gap: 10px;
-    }
-
-    .validation-file-icon {
-        width: 34px;
-        height: 34px;
-        font-size: 18px;
-    }
-
-    .validation-file-name {
-        font-size: 0.82rem;
-    }
-
-    .validation-file-size {
-        font-size: 0.75rem;
-    }
-
-    .validation-status-badge {
-        font-size: 0.6rem;
-        padding: 2px 7px;
-    }
-
-    .validation-checklist {
-        margin-top: 12px;
-        padding-top: 12px;
-    }
-
-    .validation-step {
-        font-size: 0.78rem;
-    }
-
-    .validation-step + .validation-step {
-        margin-top: 3px;
-    }
-
-    .validation-step::before {
-        width: 16px;
-        height: 16px;
-        font-size: 0.65rem;
-    }
-}
-
-@media (max-width: 390px) {
-    .upload-main.upload-active .validation-card:not([hidden]) {
-        padding: 10px 12px;
-    }
-
-    .validation-file-icon {
-        width: 30px;
-        height: 30px;
-        font-size: 16px;
-    }
-
-    .validation-file-name {
-        font-size: 0.78rem;
-    }
-
-    .validation-file-size {
-        font-size: 0.72rem;
-    }
-
-    .validation-status-badge {
-        font-size: 0.58rem;
-        padding: 1px 6px;
-    }
-
-    .validation-step {
-        font-size: 0.75rem;
-    }
-
-    .validation-step::before {
-        width: 14px;
-        height: 14px;
-        font-size: 0.6rem;
-    }
-}
-
-@media (max-width: 375px) {
-    .upload-main.upload-active .validation-card:not([hidden]) {
-        padding: 8px 10px;
-    }
-
-    .validation-file-icon {
-        width: 26px;
-        height: 26px;
-        font-size: 14px;
-    }
-
-    .validation-file-name {
-        font-size: 0.74rem;
-    }
-
-    .validation-file-size {
-        font-size: 0.7rem;
-    }
-
-    .validation-status-badge {
-        font-size: 0.55rem;
-        padding: 1px 5px;
-    }
-
-    .validation-step {
-        font-size: 0.72rem;
-    }
-}
-
-@media (max-width: 360px) {
-    .upload-main.upload-active .validation-card:not([hidden]) {
-        padding: 8px 8px;
-        border-radius: 14px;
-    }
-
-    .validation-file-icon {
-        width: 24px;
-        height: 24px;
-        font-size: 13px;
-    }
-
-    .validation-file-name {
-        font-size: 0.72rem;
-    }
-
-    .validation-step {
-        font-size: 0.7rem;
-    }
-}
-
-/* --- Accessibility: prefers-reduced-motion --- */
-@media (prefers-reduced-motion: reduce) {
-    .upload-main.upload-active .validation-card:not([hidden]),
-    .upload-wrapper:has(#conversionArea:not([hidden])) .validation-card:not([hidden]),
-    .upload-wrapper:has(#conversionArea:not([hidden])) #conversionArea,
-    .upload-wrapper:has(#conversionArea:not([hidden])) .format-chip,
-    .validation-step {
-        animation: none !important;
-        transition: none !important;
-        transform: none !important;
-        opacity: 1 !important;
-    }
-
-    .upload-wrapper:has(#conversionArea:not([hidden])) .validation-card:not([hidden]) {
-        max-height: none;
-        margin: 18px auto 0;
-        padding: 16px 20px;
-        border-width: 1px;
-    }
-}
-
-/* UI-S1-003 Premium Motion */
-.drop-zone {
-    will-change: transform, opacity;
-    animation: uploadBreath 6.5s ease-in-out infinite;
-}
-
-.upload-icon {
-    will-change: transform, opacity;
-    animation: floatingFile 5.8s ease-in-out infinite;
-    transform-origin: 50% 58%;
-}
-
-.drop-zone.drag-active .upload-icon {
-    animation-duration: 3.4s;
-}
-
-.drop-zone.drag-active {
-    animation: dragPulse 2.6s ease-in-out infinite;
-}
-
-.status-text.success,
-.result-status {
-    will-change: transform, opacity;
-    animation: successBreath 2.8s ease-in-out 2;
-}
-
-@keyframes floatingFile {
-    0%,
-    100% {
-        opacity: 0.92;
-        transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
-    }
-    30% {
-        opacity: 1;
-        transform: translate3d(0, -4px, 0) rotate(-2deg) scale(1.02);
-    }
-    60% {
-        opacity: 0.98;
-        transform: translate3d(0, -6px, 0) rotate(1.5deg) scale(1.02);
-    }
-}
-
-@keyframes uploadBreath {
-    0%,
-    100% {
-        transform: translate3d(0, 0, 0) scale(1);
-    }
-    50% {
-        transform: translate3d(0, -1px, 0) scale(1.005);
-    }
-}
-
-@keyframes dragPulse {
-    0%,
-    100% {
-        transform: translate3d(0, -2px, 0) scale(1.005);
-    }
-    50% {
-        transform: translate3d(0, -3px, 0) scale(1.01);
-    }
-}
-
-@keyframes successBreath {
-    0% {
-        opacity: 0.7;
-        transform: translate3d(0, 1px, 0) scale(0.995);
-    }
-    100% {
-        opacity: 1;
-        transform: translate3d(0, 0, 0) scale(1);
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .drop-zone,
-    .upload-icon,
-    .drop-zone.drag-active,
-    .status-text.success,
-    .result-status {
-        animation: none !important;
-        transform: none !important;
-        opacity: 1;
-    }
 }
 
 .file-ready-card {
@@ -1925,47 +806,15 @@ UX-S2-001 PREMIUM UPLOAD EXPERIENCE
 .error-card {
     width:min(100%, 720px);
     margin:18px auto 0;
-    padding:22px;
-    border-radius:28px;
-    background:
-        radial-gradient(120% 100% at 0% 0%, rgba(37,99,235,.14), rgba(37,99,235,0) 42%),
-        linear-gradient(165deg, rgba(255,255,255,.98), rgba(248,251,255,.9));
-    border:1px solid rgba(37,99,235,.18);
-    box-shadow:
-        0 22px 48px rgba(15,23,42,.12),
-        0 10px 24px rgba(37,99,235,.1),
-        inset 0 1px 0 rgba(255,255,255,.82);
+    padding:20px;
+    border-radius:24px;
+    background:#ffffff;
+    border:1px solid rgba(148,163,184,.25);
+    box-shadow:0 18px 36px rgba(15,23,42,.04);
     display:flex;
     flex-direction:column;
-    gap:16px;
+    gap:14px;
     text-align:left;
-    position:relative;
-    overflow:hidden;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-}
-
-.result-card::before,
-.result-card::after {
-    content:"";
-    position:absolute;
-    pointer-events:none;
-    border-radius:inherit;
-}
-
-.result-card::before {
-    inset:0;
-    background: linear-gradient(135deg, rgba(255,255,255,.72), rgba(255,255,255,0) 38%);
-    opacity:.9;
-}
-
-.result-card::after {
-    inset:auto auto 14px 14px;
-    width:72px;
-    height:72px;
-    background: radial-gradient(circle, rgba(59,130,246,.18), rgba(59,130,246,0) 70%);
-    filter: blur(2px);
-    opacity:.9;
 }
 
 .result-status,
@@ -1973,8 +822,6 @@ UX-S2-001 PREMIUM UPLOAD EXPERIENCE
     font-size:18px;
     font-weight:700;
     color:var(--text);
-    position:relative;
-    z-index:1;
 }
 
 .error-card {
@@ -1988,126 +835,29 @@ UX-S2-001 PREMIUM UPLOAD EXPERIENCE
 }
 
 .result-file-name {
-    color:#0f172a;
-    font-size:18px;
-    font-weight:700;
-    line-height:1.35;
-    word-break:break-word;
-    position:relative;
-    z-index:1;
+    color:#334155;
+    font-size:15px;
 }
 
-.result-summary,
-.result-actions,
+.result-card .download-btn,
 .error-card .btn {
-    position:relative;
-    z-index:1;
-}
-
-.result-summary {
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-}
-
-.result-metadata {
-    display:grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap:12px;
-    margin:0;
-}
-
-.result-metadata-item {
-    margin:0;
-    padding:12px 14px;
-    border-radius:18px;
-    border:1px solid rgba(148,163,184,.22);
-    background:rgba(255,255,255,.68);
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.72);
-}
-
-.result-metadata-item dt {
-    margin:0 0 4px;
-    color:#1d4ed8;
-    font-size:.76rem;
-    font-weight:700;
-    letter-spacing:.02em;
-    text-transform:uppercase;
-}
-
-.result-metadata-item dd {
-    margin:0;
-    color:#0f172a;
-    font-size:.95rem;
-    font-weight:600;
-    line-height:1.45;
-    word-break:break-word;
-}
-
-.result-actions {
-    display:flex;
-    flex-wrap:wrap;
-    gap:12px;
-    align-items:center;
+    width:100%;
+    max-width:100%;
+    align-self:stretch;
 }
 
 .result-card .download-btn {
-    width:max-content;
-    min-width:220px;
-    justify-content:center;
-    padding-inline:18px;
-    background:linear-gradient(180deg, #3b82f6, #2563eb 58%, #1d4ed8);
-    border-color:rgba(14,53,143,.26);
-    box-shadow:0 16px 34px rgba(37,99,235,.28), inset 0 1px 0 rgba(255,255,255,.36);
-    position:relative;
-    z-index:1;
-}
-
-.result-card .download-btn::before {
-    content:"⬇";
-    margin-right:10px;
-    font-size:1rem;
-    line-height:1;
-}
-
-.result-card .download-btn:hover:not(:disabled) {
-    box-shadow:0 20px 40px rgba(37,99,235,.32), inset 0 1px 0 rgba(255,255,255,.4);
-}
-
-.result-card .download-btn:focus-visible {
-    box-shadow:
-        0 0 0 4px rgba(37,99,235,.22),
-        0 20px 40px rgba(37,99,235,.32),
-        inset 0 1px 0 rgba(255,255,255,.4);
-}
-
-.result-secondary-btn {
-    min-width: 180px;
-    justify-content:center;
-    border:1px solid rgba(37,99,235,.2);
-    background:rgba(255,255,255,.72);
-    color:#1d4ed8;
-    box-shadow:0 10px 22px rgba(15,23,42,.08), inset 0 1px 0 rgba(255,255,255,.78);
-}
-
-.result-secondary-btn:hover:not(:disabled) {
-    background:rgba(239,246,255,.94);
-    box-shadow:0 14px 28px rgba(37,99,235,.14), inset 0 1px 0 rgba(255,255,255,.84);
-}
-
-.result-secondary-btn:focus-visible {
-    box-shadow:
-        0 0 0 4px rgba(37,99,235,.18),
-        0 14px 28px rgba(37,99,235,.14),
-        inset 0 1px 0 rgba(255,255,255,.84);
+    margin-top:14px;
+    padding:14px 18px;
 }
 
 @media(max-width: 768px) {
     .file-ready-card,
     .result-card,
     .error-card {
-        width:100%;
+        width:calc(100% - 32px);
         padding:18px;
+        border-radius:20px;
     }
 
     .file-ready-row {
@@ -2115,17 +865,13 @@ UX-S2-001 PREMIUM UPLOAD EXPERIENCE
         align-items:flex-start;
     }
 
-    .result-metadata {
-        grid-template-columns: 1fr;
-    }
-
     .result-card .download-btn,
-    .result-secondary-btn {
+    .error-card .btn {
         width:100%;
-        min-width:0;
+        max-width:100%;
+        height:48px;
     }
 }
-
 .selected-file strong {
     font-size:15px;
 }
@@ -2275,8 +1021,9 @@ PROGRESS
 
     .upload-main {
         flex-direction:column;
-        align-items:stretch;
+        align-items:center;
         gap:16px;
+        width:100%;
     }
 
     .drop-zone {
@@ -2302,13 +1049,15 @@ PROGRESS
     }
 
     .preview-card {
-        width:min(100%, 240px);
+        width:100%;
+        max-width:100%;
+        padding:14px;
     }
 
     .preview-media {
-        width:min(100%, 240px);
-        height:220px;
-        margin:0 auto;
+        width:64px;
+        height:64px;
+        margin:0;
     }
 
     .supported-formats {
