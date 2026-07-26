@@ -464,6 +464,7 @@ body {
     }
 }
 
+/* Hero responsive adjustments */
 @media (max-width: 430px) {
     .homepage-hero .hero-title {
         font-size: clamp(1.95rem, 8vw, 2.45rem);
