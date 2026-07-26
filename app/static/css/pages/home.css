@@ -48,6 +48,51 @@ body {
         linear-gradient(180deg, #fdfefe 0%, #f4f8ff 58%, #edf3ff 100%);
 }
 
+@media (max-width: 768px) {
+    .homepage-hero::before,
+    .homepage-hero::after {
+        display: none;
+    }
+
+    .homepage-hero .hero-container,
+    .homepage-hero .hero-content,
+    .homepage-hero .homepage-upload-card,
+    .homepage-hero .homepage-upload-card .drop-zone {
+        box-sizing: border-box;
+    }
+
+    .homepage-hero .hero-container {
+        min-height: auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding-top: 0;
+        padding-inline: 0 !important;
+        margin-inline: 0 !important;
+    }
+
+    .homepage-hero .homepage-upload-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        left: 0;
+        top: auto;
+        transform: none !important;
+        position: relative;
+        margin: 0 auto !important;
+    }
+
+    .homepage-hero .upload-wrapper {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .homepage-hero .homepage-upload-card.upload-card {
+        left: 0;
+        top: auto;
+        transform: none !important;
+        position: relative;
+    }
+}
+
 .homepage-hero::before,
 .homepage-hero::after {
     content: "";
