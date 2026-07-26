@@ -38,6 +38,10 @@ body {
     justify-content: flex-start !important;
     padding: 12px 0 24px !important;
     min-height: clamp(760px, 88vh, 940px);
+}
+
+/* Hero background and decorative blobs */
+.homepage-hero {
     background:
         radial-gradient(160% 140% at 8% -12%, rgba(56, 189, 248, 0.14) 0%, rgba(56, 189, 248, 0) 46%),
         radial-gradient(120% 110% at 92% 4%, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0) 62%),
