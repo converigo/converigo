@@ -114,6 +114,7 @@ body {
     z-index: 2;
 }
 
+/* Hero floating format cards */
 .homepage-hero .floating-format-cards {
     inset: 0;
     width: 100%;
