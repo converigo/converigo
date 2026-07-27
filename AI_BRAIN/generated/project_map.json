@@ -1,0 +1,154 @@
+{
+  "categories": {
+    "Frontend": {
+      "file_count": 3,
+      "folders": [
+        "app/static/js/ui",
+        "docs/ui/screenshots"
+      ]
+    },
+    "Backend": {
+      "file_count": 1128,
+      "folders": [
+        ".",
+        ".ai",
+        ".continue/agents",
+        ".pytest_cache",
+        ".pytest_cache/v/cache",
+        "AI_BRAIN",
+        "AI_BRAIN/generated",
+        "AI_BRAIN/knowledge",
+        "AI_BRAIN/memory",
+        "AI_BRAIN/prompts",
+        "AI_BRAIN/rag",
+        "AI_BRAIN/scripts",
+        "app",
+        "app/core",
+        "app/data",
+        "app/data/articles/comparisons",
+        "app/data/articles/format-specific",
+        "app/data/articles/fundamentals",
+        "app/data/articles/guides",
+        "app/data/articles/troubleshooting",
+        "app/data/converters",
+        "app/data/format_knowledge",
+        "app/data/formats",
+        "app/engines",
+        "app/locales",
+        "app/logs",
+        "app/pipeline",
+        "app/pipeline/steps",
+        "app/plugins",
+        "app/plugins/archive",
+        "app/plugins/audio",
+        "app/plugins/document",
+        "app/plugins/image",
+        "app/plugins/pdf",
+        "app/plugins/video",
+        "app/recommendation",
+        "app/routers",
+        "app/services",
+        "app/static",
+        "app/static/css",
+        "app/static/css/components",
+        "app/static/css/core",
+        "app/static/css/pages",
+        "app/static/icons",
+        "app/static/images",
+        "app/static/js",
+        "app/static/js/api",
+        "app/static/js/convert",
+        "app/static/js/download",
+        "app/static/js/recommendation",
+        "app/static/js/upload",
+        "app/templates",
+        "app/templates/components",
+        "app/templates/layouts",
+        "app/templates/legacy",
+        "app/templates/pages",
+        "app/templates/partials",
+        "app/tools",
+        "app/utils",
+        "backup_before_ui_reset",
+        "brain",
+        "build",
+        "reports",
+        "reports/artifacts",
+        "screenshots",
+        "scripts",
+        "test_files",
+        "tmp_deploy_test/contracts",
+        "tmp_disabled",
+        "tmp_validation"
+      ]
+    },
+    "Services": {
+      "file_count": 0,
+      "folders": []
+    },
+    "Routers": {
+      "file_count": 0,
+      "folders": []
+    },
+    "Plugins": {
+      "file_count": 0,
+      "folders": []
+    },
+    "Templates": {
+      "file_count": 0,
+      "folders": []
+    },
+    "Tests": {
+      "file_count": 175,
+      "folders": [
+        "tests",
+        "tests/assets",
+        "tests/assets/regression",
+        "tests/certified/archive",
+        "tests/certified/audio",
+        "tests/certified/document",
+        "tests/certified/image",
+        "tests/certified/office",
+        "tests/certified/pdf",
+        "tests/certified/video",
+        "tests/e2e",
+        "tests/fixtures",
+        "tests/integration",
+        "tests/media",
+        "tests/media/damaged",
+        "tests/media/edge_case",
+        "tests/media/large",
+        "tests/media/real_world",
+        "tests/media/real_world/audio",
+        "tests/media/real_world/codec",
+        "tests/media/real_world/container",
+        "tests/media/real_world/device",
+        "tests/media/real_world/editor",
+        "tests/media/regression",
+        "tests/tmp_registry",
+        "tests/tools"
+      ]
+    },
+    "Static": {
+      "file_count": 0,
+      "folders": []
+    },
+    "Configuration": {
+      "file_count": 2,
+      "folders": [
+        "AI_BRAIN/config"
+      ]
+    },
+    "Documentation": {
+      "file_count": 39,
+      "folders": [
+        "docs",
+        "docs/history"
+      ]
+    }
+  },
+  "totals": {
+    "files_classified": 1347,
+    "categories": 10
+  }
+}

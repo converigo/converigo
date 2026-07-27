@@ -1,340 +1,158 @@
 /*
 ====================================================
 Converigo
-Button Components
-Version : 2.0.0
+Button System
+Version : 3.0.0
 
-UX Polish Sprint 4.5
-- Primary button
-- Secondary button
-- Convert button
-- Disabled state
-- Hover animation
+Canonical buttons:
+- primary
+- secondary
+- outline
+- ghost
+- icon
+
+Shared states:
+- default
+- hover
+- active
+- focus-visible
+- disabled
+- loading
 ====================================================
 */
 
-
-.btn{
-
-
-    display:inline-flex;
-
-
-    align-items:center;
-
-
-    justify-content:center;
-
-
-    min-width:140px;
-
-
-    height:48px;
-
-
-    padding:0 24px;
-
-
-    border-radius:14px;
-
-
-    border:none;
-
-
-    cursor:pointer;
-
-
-    font-size:16px;
-
-
-    font-weight:600;
-
-
-    transition:all .25s ease;
-
-
-    font-family:inherit;
-
-
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 140px;
+    height: 48px;
+    padding: 0 24px;
+    border-radius: 14px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1;
+    font-family: inherit;
+    text-decoration: none;
+    user-select: none;
+    transition: transform 180ms ease, opacity 180ms ease;
 }
 
-
-
-
-
-/*
-==============================
-PRIMARY
-==============================
-*/
-
-
-.btn-primary{
-
-
-    background:#2563EB;
-
-
-    color:#ffffff;
-
-
+.btn:hover,
+.btn:focus-visible,
+.btn:active {
+    transform: translateY(-2px);
 }
 
-
-
-
-
-.btn-primary:hover{
-
-
-    background:#1D4ED8;
-
-
-    transform:translateY(-2px);
-
-
+.btn:active {
+    transform: translateY(0);
 }
 
-
-
-
-
-/*
-==============================
-SECONDARY
-==============================
-*/
-
-
-.btn-secondary{
-
-
-    background:#ffffff;
-
-
-    color:#111827;
-
-
-    border:1px solid #E5E7EB;
-
-
+.btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.22);
 }
 
-
-
-
-
-.btn-secondary:hover{
-
-
-    border-color:#2563EB;
-
-
-    color:#2563EB;
-
-
-    transform:translateY(-2px);
-
-
+.btn-primary,
+.btn-success {
+    background: #2563EB;
+    color: #ffffff;
 }
 
-
-.btn-outline{
-
-
-    background:#ffffff;
-
-
-    color:#2563EB;
-
-
-    border:1px solid #2563EB;
-
-
+.btn-primary:hover:not(:disabled),
+.btn-success:hover:not(:disabled) {
+    background: #1D4ED8;
 }
 
-
-.btn-outline:hover{
-
-
-    background:rgba(37,99,235,.08);
-
-
-    color:#1D4ED8;
-
-
-    transform:translateY(-2px);
-
-
+.btn-secondary {
+    background: #ffffff;
+    color: #111827;
+    border-color: #E5E7EB;
 }
 
-
-.btn-outline:disabled{
-
-
-    background:#E5E7EB;
-
-
-    color:#9CA3AF;
-
-
-    border-color:#E5E7EB;
-
-
-    cursor:not-allowed;
-
-
+.btn-secondary:hover:not(:disabled) {
+    border-color: #2563EB;
+    color: #2563EB;
 }
 
-
-
-
-
-/*
-==============================
-CONVERT BUTTON
-==============================
-*/
-
-
-.btn-success{
-
-
-    background:#2563EB;
-
-
-    color:white;
-
-
-    margin-top:32px;
-
-
+.btn-outline {
+    background: #ffffff;
+    color: #2563EB;
+    border-color: #2563EB;
 }
 
-
-
-
-
-.btn-success:hover:not(:disabled){
-
-
-    background:#1D4ED8;
-
-
-    transform:translateY(-3px);
-
-
-    box-shadow:0 12px 25px rgba(37,99,235,.25);
-
-
+.btn-outline:hover:not(:disabled) {
+    background: rgba(37, 99, 235, 0.08);
+    color: #1D4ED8;
 }
 
+.btn-ghost {
+    background: transparent;
+    color: #2563EB;
+    border-color: transparent;
+}
 
+.btn-ghost:hover:not(:disabled) {
+    background: rgba(37, 99, 235, 0.08);
+}
 
+.btn-icon {
+    min-width: 48px;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border-radius: 14px;
+    background: #ffffff;
+    color: #111827;
+    border-color: #E5E7EB;
+}
 
-
-/*
-==============================
-DISABLED STATE
-==============================
-*/
-
+.btn-icon:hover:not(:disabled) {
+    border-color: #2563EB;
+    color: #2563EB;
+}
 
 .btn:disabled,
-.btn-success:disabled{
-
-
-    background:#E5E7EB;
-
-
-    color:#9CA3AF;
-
-
-    cursor:not-allowed;
-
-
-    transform:none;
-
-
-    box-shadow:none;
-
-
+.btn-primary:disabled,
+.btn-secondary:disabled,
+.btn-outline:disabled,
+.btn-ghost:disabled,
+.btn-icon:disabled,
+.btn-success:disabled {
+    background: #E5E7EB;
+    color: #9CA3AF;
+    border-color: #E5E7EB;
+    cursor: not-allowed;
+    opacity: 0.65;
+    transform: none;
+    box-shadow: none;
 }
 
-
-
-
-
-/*
-==============================
-LOADING STATE
-==============================
-*/
-
-
-.btn.loading{
-
-
-    pointer-events:none;
-
-
-    opacity:.8;
-
-
+.btn.loading {
+    pointer-events: none;
+    opacity: 0.88;
 }
 
-
-
-
-
-.btn.loading::after{
-
-
-    content:"";
-
-
-    width:16px;
-
-
-    height:16px;
-
-
-    margin-left:10px;
-
-
-    border:2px solid white;
-
-
-    border-top-color:transparent;
-
-
-    border-radius:50%;
-
-
-    animation:spin .8s linear infinite;
-
-
+.btn.loading::after {
+    content: "";
+    width: 16px;
+    height: 16px;
+    margin-left: 10px;
+    border: 2px solid currentColor;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
 }
 
-
-
-
-
-@keyframes spin{
-
-
-    from{
-
-        transform:rotate(0deg);
-
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
     }
 
-
-    to{
-
-        transform:rotate(360deg);
-
+    to {
+        transform: rotate(360deg);
     }
-
-
 }

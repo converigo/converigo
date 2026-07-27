@@ -1,0 +1,37 @@
+ignored_directories:
+  - .git
+  - venv
+  - .venv
+  - node_modules
+  - __pycache__
+  - outputs
+
+ignored_files:
+  - .DS_Store
+  - Thumbs.db
+  - desktop.ini
+
+supported_extensions:
+  - .py
+  - .md
+  - .json
+  - .yaml
+  - .yml
+  - .toml
+  - .ini
+  - .txt
+  - .js
+  - .ts
+  - .tsx
+  - .jsx
+  - .css
+  - .scss
+  - .html
+  - .sql
+  - .sh
+  - .ps1
+  - .dockerfile
+
+output_paths:
+  project_index: AI_BRAIN/generated/project_index.json
+  file_tree: AI_BRAIN/generated/file_tree.json

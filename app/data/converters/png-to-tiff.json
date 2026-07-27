@@ -12,9 +12,15 @@
     "button_text": "Upload PNG"
   },
   "seo": {
-    "title": "PNG to TIFF | Converigo",
-    "description": "Free online PNG to TIFF converter.",
-    "keywords": "png to tiff, convert png, image converter"
+    "title": "Convert PNG to TIFF Online Free | Converigo",
+    "description": "Convert PNG to TIFF online for free using Converigo. Fast, secure and browser-based file conversion from png to tiff with no installation required.",
+    "keywords": "png to tiff, convert png, image converter",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert PNG to TIFF - Converigo free online converter",
+    "twitter_title": "Convert PNG to TIFF Online Free | Converigo",
+    "twitter_description": "Convert PNG to TIFF online for free using Converigo. Fast, secure and browser-based file conversion from png to tiff with no installation required.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/png-to-tiff"
   },
   "source": "png",
   "target": "tiff",
@@ -22,7 +28,7 @@
   "hero": {
     "eyebrow": "Converter tool",
     "title": "Convert PNG to TIFF",
-    "description": "Convert PNG files to TIFF for archival, printing, and high-fidelity needs.",
+    "description": "Convert PNG files to TIFF online for free. Fast, secure browser-based conversion with no software installation. Get high-quality tiff output in seconds using Converigo.",
     "panel_label": "Ready to convert",
     "panel_title": "Upload a PNG file and receive a TIFF result in seconds."
   },
@@ -30,6 +36,26 @@
     {
       "title": "High-fidelity output",
       "text": "TIFF preserves image quality for printing and archival purposes."
+    },
+    {
+      "title": "Fast png to tiff conversion",
+      "text": "Convert PNG to TIFF in seconds with our optimized processing engine."
+    },
+    {
+      "title": "No software installation required",
+      "text": "Convert files directly in your browser without downloading or installing any software."
+    },
+    {
+      "title": "High-quality tiff output",
+      "text": "Receive a polished TIFF file ready for immediate use in your workflow."
+    },
+    {
+      "title": "Free png to tiff converter",
+      "text": "Convert PNG to TIFF online completely free with no registration or hidden costs."
+    },
+    {
+      "title": "Secure png processing",
+      "text": "Your PNG files are encrypted during upload and automatically deleted after conversion."
     }
   ],
   "how_to_use": [
@@ -40,6 +66,18 @@
     {
       "title": "Download the TIFF",
       "description": "Receive the TIFF file ready for high-quality workflows."
+    },
+    {
+      "title": "Choose tiff as format",
+      "description": "Pick TIFF as your desired format and review any available options."
+    },
+    {
+      "title": "Convert png to tiff",
+      "description": "Click convert and our engine processes your png instantly."
+    },
+    {
+      "title": "Download your tiff file",
+      "description": "Get your converted TIFF immediately for use in your projects."
     }
   ],
   "about_formats": [
@@ -50,6 +88,14 @@
     {
       "title": "What is TIFF?",
       "text": "TIFF is commonly used for high-quality images in printing and archiving."
+    },
+    {
+      "title": "What is PNG format?",
+      "text": "PNG is a widely used file format known for its versatility and compatibility across many applications."
+    },
+    {
+      "title": "What is TIFF format?",
+      "text": "TIFF is a popular file format chosen for its broad compatibility and optimized performance."
     }
   ],
   "cta": {
@@ -60,8 +106,43 @@
     "primary_href": "#converter"
   },
   "supported_formats": {
-    "input": ["PNG"],
-    "output": ["TIFF"],
+    "input": [
+      "PNG"
+    ],
+    "output": [
+      "TIFF"
+    ],
     "description": "PNG input, TIFF output"
-  }
+  },
+  "faq": [
+    {
+      "question": "Is this png converter free to use?",
+      "answer": "Yes. Converting PNG to TIFF on Converigo is completely free with no hidden charges."
+    },
+    {
+      "question": "Are my uploaded files secure?",
+      "answer": "Yes. All uploaded files are processed securely and automatically deleted from our servers after conversion. Your privacy is protected."
+    },
+    {
+      "question": "Will the tiff quality be preserved?",
+      "answer": "Yes. The converter is designed to produce a high-quality TIFF file while keeping the conversion process simple and reliable."
+    },
+    {
+      "question": "Can I use this converter on mobile devices?",
+      "answer": "Yes. Converigo works on all modern browsers, including mobile phones and tablets, so you can convert files on the go."
+    },
+    {
+      "question": "How do I convert PNG to TIFF?",
+      "answer": "Upload your PNG, select the conversion options if needed, and download the converted TIFF instantly. It only takes a few seconds."
+    },
+    {
+      "question": "What file sizes are supported?",
+      "answer": "We support files up to 100MB for most conversions. Larger files may take longer to process."
+    },
+    {
+      "question": "Why use Converigo for png conversion?",
+      "answer": "Converigo offers fast, secure, browser-based png conversion with no software installation, no registration, and completely free usage."
+    }
+  ],
+  "lifecycle_status": "active"
 }

@@ -1,0 +1,185 @@
+{
+  "title": "PPT to DOCX Converter",
+  "description": "Convert PPT presentations to DOCX documents online for editing and reuse.",
+  "hero": {
+    "title": "PPT to DOCX Converter Free Online",
+    "subtitle": "Turn PowerPoint slides into Word documents.",
+    "description": "Convert  files to  online for free. Fast, secure browser-based conversion with no software installation. Get high-quality  output in seconds using Converigo."
+  },
+  "steps": [
+    "Upload your PPT file.",
+    "Select DOCX as output.",
+    "Download your editable Word document."
+  ],
+  "benefits": [
+    "Reuse presentation content in Word",
+    "Edit text and images easily",
+    "No software installation required"
+  ],
+  "supported_formats": {
+    "input": [
+      ".ppt"
+    ],
+    "output": [
+      ".docx"
+    ],
+    "description": "PPT input, DOCX output"
+  },
+  "tips": [
+    "Review slide text after conversion",
+    "Edit the generated DOCX in Word or compatible editors",
+    "Use simple slide layouts for best results"
+  ],
+  "features": [
+    {
+      "title": "Extracts text from slides",
+      "text": "Extracts text from slides"
+    },
+    {
+      "title": "Converts simple tables and images",
+      "text": "Converts simple tables and images"
+    },
+    {
+      "title": "Produces editable DOCX output",
+      "text": "Produces editable DOCX output"
+    },
+    {
+      "title": "Fast  to  conversion",
+      "text": "Convert  to  in seconds with our optimized processing engine."
+    },
+    {
+      "title": "No software installation required",
+      "text": "Convert files directly in your browser without downloading or installing any software."
+    },
+    {
+      "title": "High-quality  output",
+      "text": "Receive a polished  file ready for immediate use in your workflow."
+    },
+    {
+      "title": "Free  to  converter",
+      "text": "Convert  to  online completely free with no registration or hidden costs."
+    },
+    {
+      "title": "Secure  processing",
+      "text": "Your  files are encrypted during upload and automatically deleted after conversion."
+    }
+  ],
+  "how_to_use": [
+    {
+      "title": "Upload your PPT file",
+      "description": "Upload your PPT file"
+    },
+    {
+      "title": "Choose DOCX as output format",
+      "description": "Choose DOCX as output format"
+    },
+    {
+      "title": "Download the DOCX file",
+      "description": "Download the DOCX file"
+    },
+    {
+      "title": "Upload your file",
+      "description": "Select a  file from your device to begin the conversion process."
+    },
+    {
+      "title": "Choose output as format",
+      "description": "Pick the output as your desired format and review any available options."
+    },
+    {
+      "title": "Convert  to ",
+      "description": "Click convert and our engine processes your file instantly."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "PPT is a PowerPoint presentation format",
+      "text": "PPT is a PowerPoint presentation format"
+    },
+    {
+      "title": "DOCX is a Word document format",
+      "text": "DOCX is a Word document format"
+    }
+  ],
+  "common_problems": [
+    "Complex slide layouts may shift",
+    "Animations are not preserved",
+    "Images may need repositioning"
+  ],
+  "faq": [
+    {
+      "question": "Can I convert PPT to DOCX online?",
+      "answer": "Yes, this tool converts PPT presentations into DOCX documents without extra software."
+    },
+    {
+      "question": "Will slide text become editable?",
+      "answer": "Yes, the output DOCX contains editable text extracted from slides."
+    },
+    {
+      "question": "Is this converter free?",
+      "answer": "Yes, use the PPT to DOCX converter free for standard conversions."
+    },
+    {
+      "question": "Do animations transfer?",
+      "answer": "No. Animations and slide transitions are not preserved in DOCX output."
+    },
+    {
+      "question": "What if formatting changes?",
+      "answer": "Open the DOCX file and adjust formatting as needed in Word."
+    },
+    {
+      "question": "Can I edit tables after conversion?",
+      "answer": "Yes, tables from slides become editable table content in Word."
+    },
+    {
+      "question": "What file sizes are supported?",
+      "answer": "Standard PPT files are supported, though large presentations may take longer."
+    },
+    {
+      "question": "Can I use this without PowerPoint?",
+      "answer": "Yes, the conversion happens online and produces a downloadable DOCX file."
+    }
+  ],
+  "related_tools": [
+    "ppt-to-pdf",
+    "pdf-to-docx",
+    "pptx-to-pdf",
+    "ppt-to-xlsx"
+  ],
+  "internal_links": {
+    "items": [
+      {
+        "title": "Document Conversion hub",
+        "href": "/document-conversion"
+      },
+      {
+        "title": "PPT format guide",
+        "href": "/formats/ppt"
+      },
+      {
+        "title": "DOCX format guide",
+        "href": "/formats/docx"
+      }
+    ]
+  },
+  "cta": {
+    "label": "Convert PPT to DOCX",
+    "href": "/ppt-to-docx"
+  },
+  "json_ld": {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PPT to DOCX Converter"
+  },
+  "seo": {
+    "title": "Ppt To Docx Online Free | Converigo",
+    "description": "Convert PPT presentations to DOCX documents online for editing and reuse. Fast, secure and browser-based file conversion with no installation required. Try Converigo for free today.",
+    "keywords": "ppt to docx, convert ppt to docx, powerpoint to word",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Converigo free online file converter",
+    "twitter_title": "Ppt To Docx Online Free | Converigo",
+    "twitter_description": "Convert PPT presentations to DOCX documents online for editing and reuse. Fast, secure and browser-based file conversion with no installation required. Try Converigo for free today.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/ppt-to-docx"
+  },
+  "lifecycle_status": "deprecated"
+}

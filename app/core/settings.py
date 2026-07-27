@@ -8,8 +8,11 @@ class Settings:
         self.APP_VERSION = os.getenv("APP_VERSION", "3.0.0")
         self.UPLOAD_DIR = Path(os.getenv("UPLOAD_DIR", "uploads"))
         self.OUTPUT_DIR = Path(os.getenv("OUTPUT_DIR", "outputs"))
+        self.TEMP_DIR = Path(os.getenv("TEMP_DIR", "temp"))
         self.LOG_DIR = Path(os.getenv("LOG_DIR", "app/logs"))
         self.LOG_FILE = self.LOG_DIR / os.getenv("LOG_FILE", "app.log")
+        self.IP_HASH_SALT = os.getenv("IP_HASH_SALT", self.APP_NAME).strip() or self.APP_NAME
+        self.SLOW_REQUEST_THRESHOLD_MS = int(os.getenv("SLOW_REQUEST_THRESHOLD_MS", "1000"))
         self.MAX_UPLOAD_SIZE_MB = int(os.getenv("MAX_UPLOAD_SIZE_MB", "100"))
         self.MAX_UPLOAD_SIZE = self.MAX_UPLOAD_SIZE_MB * 1024 * 1024
         self.FILE_RETENTION_SECONDS = int(os.getenv("FILE_RETENTION_SECONDS", "3600"))
@@ -21,7 +24,11 @@ class Settings:
         self.IMAGE_CONVERSION_TIMEOUT_SECONDS = int(os.getenv("IMAGE_CONVERSION_TIMEOUT_SECONDS", str(self.CONVERSION_TIMEOUT_SECONDS)))
         self.DOCUMENT_CONVERSION_TIMEOUT_SECONDS = int(os.getenv("DOCUMENT_CONVERSION_TIMEOUT_SECONDS", str(self.CONVERSION_TIMEOUT_SECONDS)))
         self.MAX_FILENAME_LENGTH = int(os.getenv("MAX_FILENAME_LENGTH", "255"))
-        self.GA_MEASUREMENT_ID = os.getenv("GA_MEASUREMENT_ID", "")
+        self.ANALYTICS_LOG_FILE = Path(os.getenv("ANALYTICS_LOG_FILE", str(self.LOG_DIR / "analytics.jsonl")))
+        self.GA_MEASUREMENT_ID = os.getenv("GA4_MEASUREMENT_ID", os.getenv("GA_MEASUREMENT_ID", "")).strip()
+        self.GOOGLE_SITE_VERIFICATION = os.getenv("GOOGLE_SITE_VERIFICATION", "").strip()
+        self.BING_SITE_VERIFICATION = os.getenv("BING_SITE_VERIFICATION", "").strip()
+        self.DISABLE_ANALYTICS = str(os.getenv("DISABLE_ANALYTICS", "")).strip().lower() in {"1", "true", "yes", "on"}
         self.RATE_LIMIT_CONVERT_REQUESTS_PER_MINUTE = int(os.getenv("RATE_LIMIT_CONVERT_REQUESTS_PER_MINUTE", "30"))
         self.RATE_LIMIT_UPLOAD_REQUESTS_PER_MINUTE = int(os.getenv("RATE_LIMIT_UPLOAD_REQUESTS_PER_MINUTE", "20"))
         self.RATE_LIMIT_API_REQUESTS_PER_MINUTE = int(os.getenv("RATE_LIMIT_API_REQUESTS_PER_MINUTE", "60"))

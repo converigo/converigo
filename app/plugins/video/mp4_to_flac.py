@@ -8,6 +8,7 @@ MP4 -> FLAC Plugin
 
 from pathlib import Path
 
+from app.core.settings import settings
 from app.engines.ffmpeg_engine import FFmpegEngine
 from app.plugins.base import ConverterPlugin
 
@@ -37,7 +38,7 @@ class MP4ToFLACPlugin(ConverterPlugin):
         if not self.supports(source_path.suffix, target_format):
             raise RuntimeError("MP4ToFLACPlugin only supports MP4 -> FLAC.")
 
-        output_path = Path("outputs") / "audio" / f"{source_path.stem}.flac"
+        output_path = settings.OUTPUT_DIR / "audio" / f"{source_path.stem}.flac"
         return await FFmpegEngine.convert(
             source_path=source_path,
             output_path=output_path,

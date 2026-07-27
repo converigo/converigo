@@ -57,9 +57,15 @@
     }
   ],
   "seo": {
-    "title": "GZIP File Extractor | Converigo",
-    "description": "Extract GZIP files online for free. Fast, secure, and no installation required.",
-    "keywords": "gzip extractor, extract gz, gzip files, file compression, decompress"
+    "title": "Extract GZ Files Online Free | Converigo",
+    "description": "Extract files from GZ archives online for free using Converigo. Fast, secure browser-based GZ extraction with no software installation required.",
+    "keywords": "gzip extractor, extract gz, gzip files, file compression, decompress",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert GZ to GZ - Converigo free online converter",
+    "twitter_title": "Extract GZ Files Online Free | Converigo",
+    "twitter_description": "Extract files from GZ archives online for free using Converigo. Fast, secure browser-based GZ extraction with no software installation required.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/gz-extract"
   },
   "source": "gz",
   "target": "gz",
@@ -70,7 +76,7 @@
   "hero": {
     "eyebrow": "Archive tool",
     "title": "Extract GZIP Files Online Free",
-    "description": "Extract files from GZIP archives in seconds with Converigo. No installation needed.",
+    "description": "Convert GZ files to GZ online for free. Fast, secure browser-based conversion with no software installation. Get high-quality gz output in seconds using Converigo.",
     "panel_label": "Ready to extract",
     "panel_title": "Upload a GZIP file and receive extracted contents instantly."
   },
@@ -101,8 +107,12 @@
     }
   ],
   "supported_formats": {
-    "input": ["GZIP"],
-    "output": ["GZIP"],
+    "input": [
+      "GZIP"
+    ],
+    "output": [
+      "GZIP"
+    ],
     "description": "GZIP input, extracted files output"
   },
   "how_to_use": [
@@ -117,6 +127,18 @@
     {
       "title": "Download extracted file",
       "description": "Get your extracted file ready to download immediately."
+    },
+    {
+      "title": "Upload your gz",
+      "description": "Select a GZ file from your device to begin the conversion process."
+    },
+    {
+      "title": "Choose gz as format",
+      "description": "Pick GZ as your desired format and review any available options."
+    },
+    {
+      "title": "Convert gz to gz",
+      "description": "Click convert and our engine processes your gz instantly."
     }
   ],
   "about_formats": [
@@ -141,5 +163,6 @@
     "secondary_text": "Read FAQs",
     "primary_href": "#converter",
     "secondary_href": "#faq"
-  }
+  },
+  "lifecycle_status": "active"
 }

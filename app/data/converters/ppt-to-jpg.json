@@ -1,0 +1,185 @@
+{
+  "title": "PPT to JPG Converter",
+  "description": "Convert PPT slides to JPG images online with a fast and simple workflow.",
+  "hero": {
+    "title": "PPT to JPG Converter Free Online",
+    "subtitle": "Export presentation slides as images.",
+    "description": "Convert  files to  online for free. Fast, secure browser-based conversion with no software installation. Get high-quality  output in seconds using Converigo."
+  },
+  "steps": [
+    "Upload your PPT file.",
+    "Choose JPG as output.",
+    "Download your JPG images."
+  ],
+  "benefits": [
+    "Share slides as images",
+    "Use slides in documents or email",
+    "No software installation required"
+  ],
+  "supported_formats": {
+    "input": [
+      ".ppt"
+    ],
+    "output": [
+      ".jpg"
+    ],
+    "description": "PPT input, JPG output"
+  },
+  "tips": [
+    "Check image quality after export",
+    "Use JPG for easy distribution",
+    "Adjust slide size before conversion if needed"
+  ],
+  "features": [
+    {
+      "title": "Export slides to high-quality JPG images",
+      "text": "Export slides to high-quality JPG images"
+    },
+    {
+      "title": "Batch-export all slides",
+      "text": "Batch-export all slides"
+    },
+    {
+      "title": "No PowerPoint required",
+      "text": "No PowerPoint required"
+    },
+    {
+      "title": "Fast  to  conversion",
+      "text": "Convert  to  in seconds with our optimized processing engine."
+    },
+    {
+      "title": "No software installation required",
+      "text": "Convert files directly in your browser without downloading or installing any software."
+    },
+    {
+      "title": "High-quality  output",
+      "text": "Receive a polished  file ready for immediate use in your workflow."
+    },
+    {
+      "title": "Free  to  converter",
+      "text": "Convert  to  online completely free with no registration or hidden costs."
+    },
+    {
+      "title": "Secure  processing",
+      "text": "Your  files are encrypted during upload and automatically deleted after conversion."
+    }
+  ],
+  "how_to_use": [
+    {
+      "title": "Upload your PPT file",
+      "description": "Upload your PPT file"
+    },
+    {
+      "title": "Select JPG as the output format",
+      "description": "Select JPG as the output format"
+    },
+    {
+      "title": "Download the JPG images",
+      "description": "Download the JPG images"
+    },
+    {
+      "title": "Upload your file",
+      "description": "Select a  file from your device to begin the conversion process."
+    },
+    {
+      "title": "Choose output as format",
+      "description": "Pick the output as your desired format and review any available options."
+    },
+    {
+      "title": "Convert  to ",
+      "description": "Click convert and our engine processes your file instantly."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "PPT is a PowerPoint presentation format",
+      "text": "PPT is a PowerPoint presentation format"
+    },
+    {
+      "title": "JPG is a common image format for photos",
+      "text": "JPG is a common image format for photos"
+    }
+  ],
+  "common_problems": [
+    "Text may appear smaller in images",
+    "Slide formatting can change in JPG output",
+    "Large presentations may take longer to process"
+  ],
+  "faq": [
+    {
+      "question": "Can I convert PPT to JPG online?",
+      "answer": "Yes, this tool exports PowerPoint slides to JPG images in your browser."
+    },
+    {
+      "question": "Will slide content be preserved?",
+      "answer": "The conversion captures slide content as images, preserving visual appearance."
+    },
+    {
+      "question": "Is this converter free?",
+      "answer": "Yes, use the PPT to JPG converter free for standard slide exports."
+    },
+    {
+      "question": "Do I need PowerPoint installed?",
+      "answer": "No, the conversion runs online and gives you JPG files to download."
+    },
+    {
+      "question": "Can I export all slides?",
+      "answer": "Yes, all slides are converted into JPG images that you can download."
+    },
+    {
+      "question": "What file sizes are supported?",
+      "answer": "Standard PPT files are supported; large presentations may take longer."
+    },
+    {
+      "question": "Can I edit the JPG output?",
+      "answer": "Yes, the resulting JPG images can be edited with any image editor."
+    },
+    {
+      "question": "Are animations preserved?",
+      "answer": "No, animations and transitions are not preserved in JPG images."
+    }
+  ],
+  "related_tools": [
+    "ppt-to-pdf",
+    "png-to-jpg",
+    "pdf-to-jpg",
+    "ppt-to-xlsx"
+  ],
+  "internal_links": {
+    "items": [
+      {
+        "title": "Document Conversion hub",
+        "href": "/document-conversion"
+      },
+      {
+        "title": "PPT format guide",
+        "href": "/formats/ppt"
+      },
+      {
+        "title": "JPG format guide",
+        "href": "/formats/jpg"
+      }
+    ]
+  },
+  "cta": {
+    "label": "Convert PPT to JPG",
+    "href": "/ppt-to-jpg"
+  },
+  "json_ld": {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PPT to JPG Converter"
+  },
+  "seo": {
+    "title": "Ppt To Jpg Online Free | Converigo",
+    "description": "Convert PPT slides to JPG images online with a fast and simple workflow. Fast, secure and browser-based file conversion with no installation required. Try Converigo for free today.",
+    "keywords": "ppt to jpg, convert ppt to jpg, powerpoint to image",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Converigo free online file converter",
+    "twitter_title": "Ppt To Jpg Online Free | Converigo",
+    "twitter_description": "Convert PPT slides to JPG images online with a fast and simple workflow. Fast, secure and browser-based file conversion with no installation required. Try Converigo for free today.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/ppt-to-jpg"
+  },
+  "lifecycle_status": "deprecated"
+}

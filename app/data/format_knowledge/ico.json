@@ -1,0 +1,124 @@
+{
+  "slug": "ico",
+  "name": "ICO",
+  "quick_answer": "ICO — Icon file format used for application icons, favicons, and desktop shortcut images, storing multiple resolutions in a single container.",
+  "definition": "ICO is an image file format. Icon file format used for application icons, favicons, and desktop shortcut images, storing multiple resolutions in a single container. It is commonly used in workflows that require reliable image handling and is supported by a wide range of applications and online tools.",
+  "use_cases": [
+    {
+      "title": "Website favicons",
+      "text": "ICO is the standard format for the favicon displayed in browser tabs, bookmarks, and address bars for websites."
+    },
+    {
+      "title": "Windows application icons",
+      "text": "ICO is the native icon format on Windows, used for executable files, desktop shortcuts, folders, and taskbar icons."
+    },
+    {
+      "title": "Multi-resolution icon containers",
+      "text": "ICO files store multiple icon sizes (16x16 to 256x256) in a single file so the OS automatically uses the most appropriate resolution."
+    },
+    {
+      "title": "Browser tab and bookmark icons",
+      "text": "Browsers request favicon.ico automatically from the website root and display it in tabs, bookmarks, and history entries."
+    },
+    {
+      "title": "Desktop shortcut and system graphics",
+      "text": "ICO is used for custom desktop shortcut icons on Windows, giving applications and files a recognizable visual identity on the desktop."
+    }
+  ],
+  "advantages": [
+    {
+      "title": "Multi-resolution container",
+      "text": "ICO stores multiple icon sizes (typically 16x16 up to 256x256) in one file so the OS and browser always use the most appropriate size."
+    },
+    {
+      "title": "Native OS integration on Windows",
+      "text": "ICO is recognized natively by Windows Explorer, the taskbar, and the Start menu without any additional software."
+    },
+    {
+      "title": "Transparency support",
+      "text": "ICO supports full alpha transparency in 32-bit variants, allowing icons to appear cleanly over any background color or wallpaper."
+    },
+    {
+      "title": "Universal browser favicon support",
+      "text": "Every browser automatically requests favicon.ico from the website root, making ICO the most broadly compatible favicon format."
+    }
+  ],
+  "limitations": [
+    {
+      "title": "Not suitable for general images",
+      "text": "ICO is designed exclusively for icons and favicons and is not appropriate for photographs, illustrations, or everyday image sharing."
+    },
+    {
+      "title": "Complex to create without dedicated tools",
+      "text": "Generating a valid multi-resolution ICO file manually is non-trivial; dedicated tools or converters are typically required."
+    },
+    {
+      "title": "Limited color depth in small sizes",
+      "text": "Older ICO sizes (16x16, 32x32) have historically supported limited color depths, which can reduce visual quality for complex icons."
+    },
+    {
+      "title": "Primarily a Windows-centric format",
+      "text": "Outside of favicons and Windows applications, ICO has limited use on macOS, Linux, or cross-platform systems."
+    }
+  ],
+  "comparisons": [
+    {
+      "title": "ICO vs PNG",
+      "text": "ICO stores multiple icon resolutions in a single container optimized for Windows and browser favicons, while PNG is simpler and preferred for single-size modern web favicons."
+    },
+    {
+      "title": "ICO vs SVG",
+      "text": "ICO is a raster container optimized for Windows and multi-resolution browser favicons, while SVG is a resolution-independent vector format preferred for scalable icons on modern devices."
+    },
+    {
+      "title": "ICO vs BMP",
+      "text": "ICO is a specialized icon container with multi-resolution support and transparency, while BMP is a simple uncompressed raster format without icon-specific features."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "png-to-ico",
+      "title": "PNG to ICO Converter",
+      "description": "Convert PNG files to ICO quickly and easily.",
+      "href": "/png-to-ico"
+    },
+    {
+      "slug": "ico-to-png",
+      "title": "ICO to PNG Converter",
+      "description": "Convert ICO files to PNG quickly and easily.",
+      "href": "/ico-to-png"
+    },
+    {
+      "slug": "jpg-to-ico",
+      "title": "JPG to ICO Converter",
+      "description": "Convert JPG files to ICO quickly and easily.",
+      "href": "/jpg-to-ico"
+    }
+  ],
+  "faq": [
+    {
+      "question": "What is an ICO file?",
+      "answer": "An ICO file is an icon container format used for website favicons, Windows application icons, and desktop shortcuts, storing multiple resolutions in one file."
+    },
+    {
+      "question": "What size should a favicon ICO be?",
+      "answer": "A favicon.ico typically contains 16x16 and 32x32 pixel images at minimum. Including 48x48 and 256x256 improves appearance on high-DPI displays and taskbars."
+    },
+    {
+      "question": "Can ICO files contain multiple sizes?",
+      "answer": "Yes, ICO is specifically designed to bundle multiple resolutions in a single file so the operating system or browser picks the most suitable size automatically."
+    },
+    {
+      "question": "Should I use ICO or PNG for my favicon?",
+      "answer": "ICO provides the best compatibility across all browsers including older IE versions. PNG favicons are supported by modern browsers and are simpler to produce."
+    },
+    {
+      "question": "How do I create an ICO file from PNG?",
+      "answer": "You can convert a PNG to ICO using online converters or image editors that support ICO export. Many favicon generators accept PNG input and produce multi-size ICO files."
+    },
+    {
+      "question": "Is ICO supported on macOS?",
+      "answer": "macOS uses ICNS as its native icon format. ICO files can be opened with some tools on macOS but the format is primarily used in Windows and web contexts."
+    }
+  ]
+}

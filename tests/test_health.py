@@ -9,6 +9,7 @@ def test_health_endpoint_returns_expected_payload():
 
     assert response.status_code == 200
     assert response.json() == {"status": "ok", "service": "converigo"}
+    assert response.headers["x-request-id"]
 
 
 def test_health_endpoint_allows_loopback_host():
@@ -17,6 +18,7 @@ def test_health_endpoint_allows_loopback_host():
 
     assert response.status_code == 200
     assert response.json() == {"status": "ok", "service": "converigo"}
+    assert response.headers["x-request-id"]
 
 
 def test_health_endpoint_accepts_unconfigured_hosts():
@@ -25,6 +27,7 @@ def test_health_endpoint_accepts_unconfigured_hosts():
 
     assert response.status_code == 200
     assert response.json() == {"status": "ok", "service": "converigo"}
+    assert response.headers["x-request-id"]
 
 
 def test_health_endpoint_allows_railway_internal_host():
@@ -33,6 +36,7 @@ def test_health_endpoint_allows_railway_internal_host():
 
     assert response.status_code == 200
     assert response.json() == {"status": "ok", "service": "converigo"}
+    assert response.headers["x-request-id"]
 
 
 def test_health_endpoint_allows_railway_internal_host_with_port():
@@ -41,6 +45,7 @@ def test_health_endpoint_allows_railway_internal_host_with_port():
 
     assert response.status_code == 200
     assert response.json() == {"status": "ok", "service": "converigo"}
+    assert response.headers["x-request-id"]
 
 
 def test_non_health_routes_still_require_allowed_host():
@@ -56,3 +61,4 @@ def test_manifest_endpoint_serves_webmanifest():
 
     assert response.status_code == 200
     assert '"name": "Converigo"' in response.text
+    assert response.headers["x-request-id"]

@@ -57,9 +57,15 @@
     }
   ],
   "seo": {
-    "title": "TAR File Extractor | Converigo",
-    "description": "Extract TAR files online for free. Fast, secure, and no installation required.",
-    "keywords": "tar extractor, extract tar, tar files, archive extraction, unix"
+    "title": "Extract TAR Files Online Free | Converigo",
+    "description": "Extract files from TAR archives online for free using Converigo. Fast, secure browser-based TAR extraction with no software installation required.",
+    "keywords": "tar extractor, extract tar, tar files, archive extraction, unix",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert TAR to TAR - Converigo free online converter",
+    "twitter_title": "Extract TAR Files Online Free | Converigo",
+    "twitter_description": "Extract files from TAR archives online for free using Converigo. Fast, secure browser-based TAR extraction with no software installation required.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/tar-extract"
   },
   "source": "tar",
   "target": "tar",
@@ -70,7 +76,7 @@
   "hero": {
     "eyebrow": "Archive tool",
     "title": "Extract TAR Files Online Free",
-    "description": "Extract files from TAR archives in seconds with Converigo. No installation needed.",
+    "description": "Convert TAR files to TAR online for free. Fast, secure browser-based conversion with no software installation. Get high-quality tar output in seconds using Converigo.",
     "panel_label": "Ready to extract",
     "panel_title": "Upload a TAR file and receive extracted contents instantly."
   },
@@ -101,8 +107,12 @@
     }
   ],
   "supported_formats": {
-    "input": ["TAR"],
-    "output": ["TAR"],
+    "input": [
+      "TAR"
+    ],
+    "output": [
+      "TAR"
+    ],
     "description": "TAR input, extracted files output"
   },
   "how_to_use": [
@@ -117,6 +127,18 @@
     {
       "title": "Download extracted files",
       "description": "Get all extracted files as a folder ready to download immediately."
+    },
+    {
+      "title": "Upload your tar",
+      "description": "Select a TAR file from your device to begin the conversion process."
+    },
+    {
+      "title": "Choose tar as format",
+      "description": "Pick TAR as your desired format and review any available options."
+    },
+    {
+      "title": "Convert tar to tar",
+      "description": "Click convert and our engine processes your tar instantly."
     }
   ],
   "about_formats": [
@@ -141,5 +163,6 @@
     "secondary_text": "Read FAQs",
     "primary_href": "#converter",
     "secondary_href": "#faq"
-  }
+  },
+  "lifecycle_status": "active"
 }

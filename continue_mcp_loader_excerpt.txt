@@ -1,0 +1,1151 @@
+  const configJsContents = await buildConfigTsandReadConfigJs(
+    ide,
+    ideInfo.ideType
+  );
+  if (configJsContents) {
+    try {
+      const configJsPath = getConfigJsPath();
+      let module2;
+      try {
+        module2 = await Promise.resolve().then(() => __toESM(require(configJsPath)));
+      } catch (e14) {
+        console.log(e14);
+        console.log(
+          "Could not load config.ts as absolute path, retrying as file url ..."
+        );
+        try {
+          module2 = await Promise.resolve().then(() => __toESM(require(localPathToUri(configJsPath))));
+        } catch (e15) {
+          throw new Error("Could not load config.ts as file url either", {
+            cause: e15
+          });
+        }
+      }
+      if (typeof require !== "undefined") {
+        delete require.cache[require.resolve(configJsPath)];
+      }
+      if (!module2.modifyConfig) {
+        throw new Error("config.ts does not export a modifyConfig function.");
+      }
+      intermediate = module2.modifyConfig(intermediate);
+    } catch (e14) {
+      console.log("Error loading config.ts: ", e14);
+    }
+  }
+  if (ideSettings.remoteConfigServerUrl) {
+    try {
+      const configJsPathForRemote = getConfigJsPathForRemote(
+        ideSettings.remoteConfigServerUrl
+      );
+      const module2 = await Promise.resolve().then(() => __toESM(require(configJsPathForRemote)));
+      if (typeof require !== "undefined") {
+        delete require.cache[require.resolve(configJsPathForRemote)];
+      }
+      if (!module2.modifyConfig) {
+        throw new Error("config.ts does not export a modifyConfig function.");
+      }
+      intermediate = module2.modifyConfig(intermediate);
+    } catch (e14) {
+      console.log("Error loading remotely set config.js: ", e14);
+    }
+  }
+  const { config: finalConfig, errors: finalErrors } = await intermediateToFinalConfig({
+    config: intermediate,
+    ide,
+    ideSettings,
+    ideInfo,
+    uniqueId,
+    llmLogger
+  });
+  return {
+    config: finalConfig,
+    errors: [...errors2 ?? [], ...finalErrors],
+    configLoadInterrupted: false
+  };
+}
+var import_child_process5, fs29, import_os7, import_path41, JSONC4, configMergeKeys;
+var init_load2 = __esm({
+  "../../core/config/load.ts"() {
+    "use strict";
+    init_importMetaUrl();
+    import_child_process5 = require("child_process");
+    fs29 = __toESM(require("fs"), 1);
+    import_os7 = __toESM(require("os"), 1);
+    import_path41 = __toESM(require("path"), 1);
+    init_dist17();
+    JSONC4 = __toESM(require_src2(), 1);
+    init_built_in_legacy();
+    init_customSlashCommand();
+    init_promptFileSlashCommand();
+    init_MCPManagerSingleton();
+    init_llms();
+    init_CustomLLM();
+    init_llm2();
+    init_TransformersJsEmbeddingsProvider();
+    init_getPromptFiles();
+    init_util7();
+    init_GlobalContext();
+    init_merge2();
+    init_paths();
+    init_pathToUri();
+    init_loadJsonMcpConfigs();
+    init_CustomContextProvider();
+    init_tools();
+    init_ideUtils();
+    init_loadRcConfigs();
+    init_loadContextProviders();
+    init_sharedConfig();
+    init_util11();
+    init_validation3();
+    configMergeKeys = {
+      models: (a11, b11) => a11.title === b11.title,
+      contextProviders: (a11, b11) => {
+        if (a11.name !== "http" || b11.name !== "http") {
+          return a11.name === b11.name;
+        }
+        return a11.name === b11.name && a11.params?.url === b11.params?.url;
+      },
+      slashCommands: (a11, b11) => a11.name === b11.name,
+      customCommands: (a11, b11) => a11.name === b11.name
+    };
+  }
+});
+
+// ../../core/config/markdown/loadCodebaseRules.ts
+async function loadCodebaseRules(ide) {
+  const errors2 = [];
+  const rules = [];
+  try {
+    const allFiles = await walkDirs(ide);
+    const rulesMdFiles = allFiles.filter((file2) => {
+      const filename = getUriPathBasename(file2);
+      return filename === RULES_MARKDOWN_FILENAME;
+    });
+    for (const filePath of rulesMdFiles) {
+      try {
+        const content = await ide.readFile(filePath);
+        const { relativePathOrBasename, foundInDir, uri } = findUriInDirs(
+          filePath,
+          await ide.getWorkspaceDirs()
+        );
+        if (foundInDir) {
+          const lastSlashIndex = relativePathOrBasename.lastIndexOf("/");
+          const parentDir = relativePathOrBasename.substring(0, lastSlashIndex);
+          const rule = markdownToRule(
+            content,
+            {
+              uriType: "file",
+              fileUri: uri
+            },
+            parentDir
+          );
+          rules.push({
+            ...rule,
+            source: "colocated-markdown",
+            sourceFile: filePath
+          });
+        } else {
+          console.warn(
+            `Failed to load codebase rule ${uri}: URI not found in workspace dirs`
+          );
+        }
+      } catch (e14) {
+        errors2.push({
+          fatal: false,
+          message: `Failed to parse colocated rule file ${filePath}: ${e14 instanceof Error ? e14.message : e14}`
+        });
+      }
+    }
+  } catch (e14) {
+    errors2.push({
+      fatal: false,
+      message: `Error loading colocated rule files: ${e14 instanceof Error ? e14.message : e14}`
+    });
+  }
+  return { rules, errors: errors2 };
+}
+var CodebaseRulesCache;
+var init_loadCodebaseRules = __esm({
+  "../../core/config/markdown/loadCodebaseRules.ts"() {
+    "use strict";
+    init_importMetaUrl();
+    init_dist17();
+    init_walkDir();
+    init_constants3();
+    init_uri();
+    CodebaseRulesCache = class _CodebaseRulesCache {
+      static instance = null;
+      constructor() {
+      }
+      static getInstance() {
+        if (_CodebaseRulesCache.instance === null) {
+          _CodebaseRulesCache.instance = new _CodebaseRulesCache();
+        }
+        return _CodebaseRulesCache.instance;
+      }
+      rules = [];
+      errors = [];
+      async refresh(ide) {
+        const { rules, errors: errors2 } = await loadCodebaseRules(ide);
+        this.rules = rules;
+        this.errors = errors2;
+      }
+      async update(ide, uri) {
+        const content = await ide.readFile(uri);
+        const workspaceDirs = await ide.getWorkspaceDirs();
+        const { relativePathOrBasename, foundInDir } = findUriInDirs(
+          uri,
+          workspaceDirs
+        );
+        if (!foundInDir) {
+          console.warn(
+            `Failed to load codebase rule ${uri}: URI not found in workspace`
+          );
+        }
+        const rule = markdownToRule(
+          content,
+          {
+            uriType: "file",
+            fileUri: uri
+          },
+          relativePathOrBasename
+        );
+        const ruleWithSource = {
+          ...rule,
+          source: "colocated-markdown",
+          sourceFile: uri
+        };
+        const matchIdx = this.rules.findIndex((r14) => r14.sourceFile === uri);
+        if (matchIdx === -1) {
+          this.rules.push(ruleWithSource);
+        } else {
+          this.rules[matchIdx] = ruleWithSource;
+        }
+      }
+      remove(uri) {
+        this.rules = this.rules.filter((r14) => r14.sourceFile !== uri);
+      }
+    };
+  }
+});
+
+// ../../core/config/migrateSharedConfig.ts
+function migrateJsonSharedConfig(filepath, ide) {
+  const globalContext = new GlobalContext();
+  const currentSharedConfig = globalContext.getSharedConfig();
+  try {
+    let config3 = resolveSerializedConfig(filepath);
+    const shareConfigUpdates = {};
+    let effected = false;
+    const { allowAnonymousTelemetry, ...withoutAllowTelemetry } = config3;
+    if (allowAnonymousTelemetry !== void 0) {
+      if (currentSharedConfig.allowAnonymousTelemetry !== false) {
+        shareConfigUpdates.allowAnonymousTelemetry = allowAnonymousTelemetry;
+      }
+      config3 = withoutAllowTelemetry;
+      effected = true;
+    }
+    const { disableIndexing, ...withoutDisableIndexing } = config3;
+    if (disableIndexing !== void 0) {
+      if (currentSharedConfig.disableIndexing !== true) {
+        shareConfigUpdates.disableIndexing = disableIndexing;
+      }
+      config3 = withoutDisableIndexing;
+      effected = true;
+    }
+    const { disableSessionTitles, ...withoutDisableSessionTitles } = config3;
+    if (config3.disableSessionTitles !== void 0) {
+      if (currentSharedConfig.disableSessionTitles !== true) {
+        shareConfigUpdates.disableSessionTitles = config3.disableSessionTitles;
+      }
+      config3 = withoutDisableSessionTitles;
+      effected = true;
+    }
+    const { tabAutocompleteOptions, ...withoutAutocompleteOptions } = config3;
+    if (tabAutocompleteOptions !== void 0) {
+      let migratedAutocomplete = { ...tabAutocompleteOptions };
+      const { useCache, ...withoutUseCache } = migratedAutocomplete;
+      if (useCache !== void 0) {
+        shareConfigUpdates.useAutocompleteCache = useCache;
+        migratedAutocomplete = withoutUseCache;
+        effected = true;
+      }
+      const { multilineCompletions, ...withoutMultiline } = migratedAutocomplete;
+      if (multilineCompletions !== void 0) {
+        shareConfigUpdates.useAutocompleteMultilineCompletions = multilineCompletions;
+        migratedAutocomplete = withoutMultiline;
+        effected = true;
+      }
+      const { disableInFiles, ...withoutDisableInFiles } = migratedAutocomplete;
+      if (disableInFiles !== void 0) {
+        if (currentSharedConfig.disableAutocompleteInFiles !== void 0) {
+          shareConfigUpdates.disableAutocompleteInFiles = deduplicateArray(
+            [
+              ...currentSharedConfig.disableAutocompleteInFiles,
+              ...disableInFiles
+            ],
+            (a11, b11) => a11 === b11
+          );
+        } else {
+          shareConfigUpdates.disableAutocompleteInFiles = disableInFiles;
+        }
+        shareConfigUpdates.disableAutocompleteInFiles = disableInFiles;
+        migratedAutocomplete = withoutDisableInFiles;
+        effected = true;
+      }
+      if (Object.keys(migratedAutocomplete).length > 0) {
+        config3 = {
+          ...withoutAutocompleteOptions,
+          tabAutocompleteOptions: migratedAutocomplete
+        };
+      } else {
+        config3 = withoutAutocompleteOptions;
+      }
+    }
+    const { experimental, ...withoutExperimental } = config3;
+    if (experimental !== void 0) {
+      let migratedExperimental = { ...experimental };
+      const { useChromiumForDocsCrawling, ...rest10 } = migratedExperimental;
+      if (useChromiumForDocsCrawling !== void 0) {
+        shareConfigUpdates.useChromiumForDocsCrawling = useChromiumForDocsCrawling;
+        migratedExperimental = rest10;
+        effected = true;
+      }
+      const { promptPath, ...withoutPromptPath } = migratedExperimental;
+      if (promptPath !== void 0) {
+        shareConfigUpdates.promptPath = promptPath;
+        migratedExperimental = withoutPromptPath;
+        effected = true;
+      }
+      const { readResponseTTS, ...withoutReadTTS } = migratedExperimental;
+      if (readResponseTTS !== void 0) {
+        shareConfigUpdates.readResponseTTS = readResponseTTS;
+        migratedExperimental = withoutReadTTS;
+        effected = true;
+      }
+      if (Object.keys(migratedExperimental).length > 0) {
+        config3 = {
+          ...withoutExperimental,
+          experimental: migratedExperimental
+        };
+      } else {
+        config3 = withoutExperimental;
+      }
+    }
+    const { ui, ...withoutUI } = config3;
+    if (ui !== void 0) {
+      let migratedUI = { ...ui };
+      const { codeBlockToolbarPosition, ...withoutToolbarPosition } = migratedUI;
+      if (codeBlockToolbarPosition !== void 0) {
+        shareConfigUpdates.codeBlockToolbarPosition = codeBlockToolbarPosition;
+        migratedUI = withoutToolbarPosition;
+        effected = true;
+      }
+      const { fontSize, ...withoutFontSize } = migratedUI;
+      if (fontSize !== void 0) {
+        shareConfigUpdates.fontSize = fontSize;
+        migratedUI = withoutFontSize;
+        effected = true;
+      }
+      const { codeWrap, ...withoutCodeWrap } = migratedUI;
+      if (codeWrap !== void 0) {
+        shareConfigUpdates.codeWrap = codeWrap;
+        migratedUI = withoutCodeWrap;
+        effected = true;
+      }
+      const { displayRawMarkdown, ...withoutMD } = migratedUI;
+      if (displayRawMarkdown !== void 0) {
+        shareConfigUpdates.displayRawMarkdown = displayRawMarkdown;
+        migratedUI = withoutMD;
+        effected = true;
+      }
+      const { showChatScrollbar, ...withoutShowChatScrollbar } = migratedUI;
+      if (showChatScrollbar !== void 0) {
+        shareConfigUpdates.showChatScrollbar = showChatScrollbar;
+        migratedUI = withoutShowChatScrollbar;
+        effected = true;
+      }
+      if ("getChatTitles" in migratedUI) {
+        const { getChatTitles, ...withoutChatTitles } = migratedUI;
+        if (getChatTitles === false) {
+          shareConfigUpdates.disableSessionTitles = true;
+          migratedUI = withoutChatTitles;
+          effected = true;
+        }
+      }
+      if (Object.keys(migratedUI).length > 0) {
+        config3 = {
+          ...withoutUI,
+          ui: migratedUI
+        };
+      } else {
+        config3 = withoutUI;
+      }
+    }
+    if (effected) {
+      new GlobalContext().updateSharedConfig(shareConfigUpdates);
+    }
+  } catch (e14) {
+    console.error(`Migration: Failed to parse config.json: ${e14}`);
+  }
+}
+var init_migrateSharedConfig = __esm({
+  "../../core/config/migrateSharedConfig.ts"() {
+    "use strict";
+    init_importMetaUrl();
+    init_util7();
+    init_GlobalContext();
+    init_load2();
+  }
+});
+
+// ../../core/config/selectedModels.ts
+function rectifySelectedModelsFromGlobalContext(continueConfig, profileId) {
+  const configCopy = { ...continueConfig };
+  const globalContext = new GlobalContext();
+  const currentSelectedModels = globalContext.get("selectedModelsByProfileId");
+  const currentForProfile = currentSelectedModels?.[profileId] ?? {};
+  let fellBack = false;
+  const roles = [
+    "autocomplete",
+    "apply",
+    "edit",
+    "embed",
+    "rerank",
+    "chat"
+  ];
+  for (const role of roles) {
+    let newModel = null;
+    const currentSelection = currentForProfile[role] ?? null;
+    if (currentSelection) {
+      const match2 = continueConfig.modelsByRole[role].find(
+        (m12) => m12.title === currentSelection
+      );
+      if (match2) {
+        newModel = match2;
+      }
+    }
+    if (!newModel && continueConfig.modelsByRole[role].length > 0) {
+      newModel = continueConfig.modelsByRole[role][0];
+    }
+    if (!(currentSelection === (newModel?.title ?? null))) {
+      fellBack = true;
+    }
+    if (role === "apply" && newModel?.getConfigurationStatus() !== "valid" /* VALID */) {
+      continue;
+    }
+    configCopy.selectedModelByRole[role] = newModel;
+  }
+  if (fellBack) {
+    globalContext.update("selectedModelsByProfileId", {
+      ...currentSelectedModels,
+      [profileId]: Object.fromEntries(
+        Object.entries(configCopy.selectedModelByRole).map(([key2, value2]) => [
+          key2,
+          value2?.title ?? null
+        ])
+      )
+    });
+  }
+  return configCopy;
+}
+var init_selectedModels = __esm({
+  "../../core/config/selectedModels.ts"() {
+    "use strict";
+    init_importMetaUrl();
+    init_constants2();
+    init_GlobalContext();
+  }
+});
+
+// ../../core/commands/slash/promptBlockSlashCommand.ts
+function convertPromptBlockToSlashCommand(prompt2) {
+  return {
+    name: prompt2.name,
+    description: prompt2.description ?? "",
+    prompt: prompt2.prompt,
+    source: "yaml-prompt-block",
+    sourceFile: prompt2.sourceFile
+  };
+}
+var init_promptBlockSlashCommand = __esm({
+  "../../core/commands/slash/promptBlockSlashCommand.ts"() {
+    "use strict";
+    init_importMetaUrl();
+  }
+});
+
+// ../../core/config/yaml/LocalPlatformClient.ts
+var dotenv3, LocalPlatformClient;
+var init_LocalPlatformClient = __esm({
+  "../../core/config/yaml/LocalPlatformClient.ts"() {
+    "use strict";
+    init_importMetaUrl();
+    init_dist17();
+    dotenv3 = __toESM(require_main(), 1);
+    init_paths();
+    init_uri();
+    LocalPlatformClient = class {
+      constructor(ide) {
+        this.ide = ide;
+      }
+      /**
+       * searches for the first valid secret file in order of ~/.continue/.env, <workspace>/.continue/.env, <workspace>/.env
+       */
+      async findSecretInEnvFiles(fqsn) {
+        const secretValue = this.findSecretInLocalEnvFile(fqsn) ?? await this.findSecretInWorkspaceEnvFiles(fqsn, true) ?? await this.findSecretInWorkspaceEnvFiles(fqsn, false);
+        if (secretValue) {
+          return {
+            found: true,
+            fqsn,
+            value: secretValue,
+            secretLocation: {
+              secretName: fqsn.secretName,
+              secretType: SecretType.LocalEnv
+            }
+          };
+        }
+        return void 0;
+      }
+      findSecretInLocalEnvFile(fqsn) {
+        try {
+          const dotEnv = getContinueDotEnv();
+          return dotEnv[fqsn.secretName];
+        } catch (error43) {
+          console.warn(
+            `Error reading ~/.continue/.env file: ${error43 instanceof Error ? error43.message : String(error43)}`
+          );
+          return void 0;
+        }
+      }
+      async findSecretInWorkspaceEnvFiles(fqsn, insideContinue) {
+        try {
+          const workspaceDirs = await this.ide.getWorkspaceDirs();
+          for (const folder of workspaceDirs) {
+            const envFilePath = joinPathsToUri(
+              folder,
+              insideContinue ? ".continue" : "",
+              ".env"
+            );
+            try {
+              const fileExists = await this.ide.fileExists(envFilePath);
+              if (fileExists) {
+                const envContent = await this.ide.readFile(envFilePath);
+                const env12 = dotenv3.parse(envContent);
+                if (fqsn.secretName in env12) {
+                  return env12[fqsn.secretName];
+                }
+              }
+            } catch (error43) {
+              console.warn(
+                `Error reading workspace .env file at ${envFilePath}: ${error43 instanceof Error ? error43.message : String(error43)}`
+              );
+            }
+          }
+          return void 0;
+        } catch (error43) {
+          console.warn(
+            `Error searching workspace .env files: ${error43 instanceof Error ? error43.message : String(error43)}`
+          );
+          return void 0;
+        }
+      }
+      async resolveFQSNs(fqsns) {
+        if (fqsns.length === 0) {
+          return [];
+        }
+        const results = [];
+        for (let i15 = 0; i15 < fqsns.length; i15++) {
+          let secretResult = await this.findSecretInEnvFiles(fqsns[i15]);
+          if (!secretResult?.found) {
+            const secretValueFromProcessEnv = process.env[fqsns[i15].secretName];
+            if (secretValueFromProcessEnv !== void 0) {
+              secretResult = {
+                found: true,
+                fqsn: fqsns[i15],
+                value: secretValueFromProcessEnv,
+                secretLocation: {
+                  secretName: fqsns[i15].secretName,
+                  secretType: SecretType.ProcessEnv
+                }
+              };
+            }
+          }
+          results[i15] = secretResult;
+        }
+        return results;
+      }
+    };
+  }
+});
+
+// ../../core/config/yaml/loadLocalYamlBlocks.ts
+async function unrollLocalYamlBlocks(packageIdentifiers, ide, registryClient) {
+  try {
+    const unrollResult = await unrollAssistantFromContent(
+      {
+        uriType: "file",
+        fileUri: ""
+      },
+      "name: FILLER\nschema: v1\nversion: 0.0.1",
+      registryClient,
+      {
+        currentUserSlug: "",
+        platformClient: new LocalPlatformClient(ide),
+        renderSecrets: true,
+        injectBlocks: packageIdentifiers
+      }
+    );
+    const config3 = "config" in unrollResult ? unrollResult.config : unrollResult;
+    const errors2 = "errors" in unrollResult ? unrollResult.errors : [];
+    return {
+      config: config3,
+      errors: errors2,
+      configLoadInterrupted: false
+    };
+  } catch (error43) {
+    let message = "An unknown error occurred while loading local YAML blocks";
+    if (error43 instanceof Error) {
+      message += ": " + error43.message;
+    }
+    return {
+      config: void 0,
+      errors: [{ message, fatal: false }],
+      configLoadInterrupted: false
+    };
+  }
+}
+var init_loadLocalYamlBlocks = __esm({
+  "../../core/config/yaml/loadLocalYamlBlocks.ts"() {
+    "use strict";
+    init_importMetaUrl();
+    init_dist17();
+    init_LocalPlatformClient();
+  }
+});
+
+// ../../core/config/yaml/models.ts
+function applyEnvOptions(options, env12) {
+  if ("useLegacyCompletionsEndpoint" in env12 && typeof env12.useLegacyCompletionsEndpoint === "boolean") {
+    options.useLegacyCompletionsEndpoint = env12.useLegacyCompletionsEndpoint;
+  }
+  for (const key2 of ENV_STRING_KEYS) {
+    if (key2 in env12 && typeof env12[key2] === "string") {
+      options[key2] = env12[key2];
+    }
+  }
+}
+function getModelClass(model) {
+  return LLMClasses.find((llm) => llm.providerName === model.provider);
+}
+async function modelConfigToBaseLLM({
+  model,
+  uniqueId,
+  llmLogger,
+  config: config3,
+  isFromAutoDetect
+}) {
+  const cls = getModelClass(model);
+  if (!cls) {
+    return void 0;
+  }
+  const { capabilities, ...rest } = model;
+  const mergedRequestOptions = mergeConfigYamlRequestOptions(
+    rest.requestOptions,
+    config3.requestOptions
+  );
+  const contextLength = model.contextLength ?? model.defaultCompletionOptions?.contextLength;
+  let options = {
+    ...rest,
+    contextLength,
+    completionOptions: {
+      ...model.defaultCompletionOptions ?? {},
+      model: model.model,
+      maxTokens: model.defaultCompletionOptions?.maxTokens ?? cls.defaultOptions?.completionOptions?.maxTokens
+    },
+    logger: llmLogger,
+    uniqueId,
+    title: model.name,
+    template: model.promptTemplates?.chat,
+    promptTemplates: model.promptTemplates,
+    baseAgentSystemMessage: model.chatOptions?.baseAgentSystemMessage,
+    basePlanSystemMessage: model.chatOptions?.basePlanSystemMessage,
+    baseChatSystemMessage: model.chatOptions?.baseSystemMessage,
+    toolOverrides: model.chatOptions?.toolOverrides ? Object.entries(model.chatOptions.toolOverrides).map(([name21, o7]) => ({
+      name: name21,
+      ...o7
+    })) : void 0,
+    capabilities: {
+      tools: model.capabilities?.includes("tool_use"),
+      uploadImage: model.capabilities?.includes("image_input"),
+      nextEdit: model.capabilities?.includes("next_edit")
+    },
+    autocompleteOptions: model.autocompleteOptions,
+    isFromAutoDetect,
+    requestOptions: mergedRequestOptions
+  };
+  if (capabilities?.includes("tool_use")) {
+    options.capabilities = {
+      ...options.capabilities,
+      tools: true
+    };
+  }
+  if (capabilities?.includes("image_input")) {
+    options.capabilities = {
+      ...options.capabilities,
+      uploadImage: true
+    };
+  }
+  if (model.embedOptions?.maxBatchSize) {
+    options.maxEmbeddingBatchSize = model.embedOptions.maxBatchSize;
+  }
+  if (model.embedOptions?.maxChunkSize) {
+    options.maxEmbeddingChunkSize = model.embedOptions.maxChunkSize;
+  }
+  if (model.env) {
+    applyEnvOptions(options, model.env);
+  }
+  const llm = new cls(options);
+  return llm;
+}
+async function autodetectModels({
+  llm,
+  model,
+  uniqueId,
+  llmLogger,
+  config: config3
+}) {
+  try {
+    const modelNames = await llm.listModels();
+    const detectedModels = await Promise.all(
+      modelNames.map(async (modelName) => {
+        if (modelName === AUTODETECT) {
+          return void 0;
+        }
+        return await modelConfigToBaseLLM({
+          model: {
+            ...model,
+            model: modelName,
+            name: modelName
+          },
+          uniqueId,
+          llmLogger,
+          config: config3,
+          isFromAutoDetect: true
+        });
+      })
+    );
+    return detectedModels.filter((x9) => typeof x9 !== "undefined");
+  } catch (e14) {
+    console.warn("Error listing models: ", e14);
+    return [];
+  }
+}
+async function llmsFromModelConfig({
+  model,
+  uniqueId,
+  llmLogger,
+  config: config3
+}) {
+  const baseLlm = await modelConfigToBaseLLM({
+    model,
+    uniqueId,
+    llmLogger,
+    config: config3
+  });
+  if (!baseLlm) {
+    return [];
+  }
+  if (model.model === AUTODETECT) {
+    const models = await autodetectModels({
+      llm: baseLlm,
+      model,
+      uniqueId,
+      llmLogger,
+      config: config3
+    });
+    return models;
+  } else {
+    return [baseLlm];
+  }
+}
+var AUTODETECT, ENV_STRING_KEYS;
+var init_models4 = __esm({
+  "../../core/config/yaml/models.ts"() {
+    "use strict";
+    init_importMetaUrl();
+    init_dist17();
+    init_llms();
+    AUTODETECT = "AUTODETECT";
+    ENV_STRING_KEYS = [
+      "apiType",
+      "apiVersion",
+      "deployment",
+      "deploymentId",
+      "projectId",
+      "region",
+      "profile",
+      "accessKeyId",
+      "secretAccessKey",
+      "modelArn",
+      "aiGatewaySlug",
+      "accountId"
+    ];
+  }
+});
+
+// ../../core/config/yaml/loadYaml.ts
+async function loadConfigYaml(options) {
+  const { overrideConfigYaml, ideSettings, ide, packageIdentifier } = options;
+  const localBlockPromises = BLOCK_TYPES.map(async (blockType) => {
+    const localBlocks = await getAllDotContinueDefinitionFiles(
+      ide,
+      { includeGlobal: true, includeWorkspace: true, fileExtType: "yaml" },
+      blockType
+    );
+    return localBlocks.map((b11) => ({
+      uriType: "file",
+      fileUri: b11.path,
+      content: b11.content
+    }));
+  });
+  const localPackageIdentifiers = (await Promise.all(localBlockPromises)).flat();
+  const getRegistryClient = async () => {
+    const rootPath = packageIdentifier.uriType === "file" ? (0, import_node_path12.dirname)(getCleanUriPath(packageIdentifier.fileUri)) : void 0;
+    return new RegistryClient({
+      rootPath
+    });
+  };
+  const errors2 = [];
+  let config3;
+  if (overrideConfigYaml) {
+    config3 = overrideConfigYaml;
+    if (localPackageIdentifiers.length > 0) {
+      const unrolledLocal = await unrollLocalYamlBlocks(
+        localPackageIdentifiers,
+        ide,
+        await getRegistryClient()
+      );
+      if (unrolledLocal.errors) {
+        errors2.push(...unrolledLocal.errors);
+      }
+      if (unrolledLocal.config) {
+        config3 = mergeUnrolledAssistants(config3, unrolledLocal.config);
+      }
+    }
+  } else {
+    const unrollResult = await unrollAssistant(
+      packageIdentifier,
+      await getRegistryClient(),
+      {
+        renderSecrets: true,
+        currentUserSlug: "",
+        platformClient: new LocalPlatformClient(ide),
+        injectBlocks: localPackageIdentifiers
+      }
+    );
+    config3 = unrollResult.config;
+    if (unrollResult.errors) {
+      errors2.push(...unrollResult.errors);
+    }
+  }
+  if (config3) {
+    errors2.push(...validateConfigYaml(nonNullifyConfigYaml(config3)));
+  }
+  if (errors2?.some((error43) => error43.fatal)) {
+    return {
+      errors: errors2,
+      config: void 0,
+      configLoadInterrupted: true
+    };
+  }
+  return {
+    config: config3,
+    errors: errors2,
+    configLoadInterrupted: false
+  };
+}
+function nonNullifyConfigYaml(unrolledAssistant) {
+  return {
+    ...unrolledAssistant,
+    data: unrolledAssistant.data?.filter((k12) => !!k12),
+    context: unrolledAssistant.context?.filter((k12) => !!k12),
+    docs: unrolledAssistant.docs?.filter((k12) => !!k12),
+    mcpServers: unrolledAssistant.mcpServers?.filter((k12) => !!k12),
+    models: unrolledAssistant.models?.filter((k12) => !!k12),
+    prompts: unrolledAssistant.prompts?.filter((k12) => !!k12),
+    rules: unrolledAssistant.rules?.filter((k12) => !!k12).map((k12) => k12)
+  };
+}
+async function configYamlToContinueConfig(options) {
+  let { unrolledAssistant, ide, ideInfo, uniqueId, llmLogger } = options;
+  const localErrors = [];
+  const continueConfig = {
+    slashCommands: [],
+    tools: getBaseToolDefinitions(),
+    mcpServerStatuses: [],
+    contextProviders: [],
+    modelsByRole: {
+      chat: [],
+      edit: [],
+      apply: [],
+      embed: [],
+      autocomplete: [],
+      rerank: [],
+      summarize: [],
+      subagent: []
+    },
+    selectedModelByRole: {
+      chat: null,
+      edit: null,
+      // not currently used
+      apply: null,
+      embed: null,
+      autocomplete: null,
+      rerank: null,
+      summarize: null,
+      subagent: null
+    },
+    rules: [],
+    requestOptions: { ...unrolledAssistant.requestOptions }
+  };
+  const config3 = nonNullifyConfigYaml(unrolledAssistant);
+  for (const rule of config3.rules ?? []) {
+    const convertedRule = convertYamlRuleToContinueRule(rule);
+    continueConfig.rules.push(convertedRule);
+  }
+  continueConfig.data = config3.data?.map((d11) => ({
+    ...d11,
+    requestOptions: mergeConfigYamlRequestOptions(
+      d11.requestOptions,
+      continueConfig.requestOptions
+    )
+  }));
+  continueConfig.docs = config3.docs?.map((doc) => ({
+    title: doc.name,
+    startUrl: doc.startUrl,
+    rootUrl: doc.rootUrl,
+    faviconUrl: doc.faviconUrl,
+    useLocalCrawling: doc.useLocalCrawling,
+    sourceFile: doc.sourceFile
+  }));
+  try {
+    const promptFiles = await getAllPromptFiles(ide, void 0, true);
+    promptFiles.forEach((file2) => {
+      try {
+        const slashCommand = slashCommandFromPromptFile(
+          file2.path,
+          file2.content
+        );
+        if (slashCommand) {
+          continueConfig.slashCommands?.push(slashCommand);
+        }
+      } catch (e14) {
+        const isRuleFile = file2.path.toLowerCase().includes("/rules/") || file2.path.toLowerCase().includes("\\rules\\");
+        let message = `Failed to convert prompt file ${file2.path} to slash command: ${e14 instanceof Error ? e14.message : e14}`;
+        if (isRuleFile) {
+          const isYamlError = e14 instanceof Error && (e14.name?.includes("YAML") || e14.message.includes("flow sequence"));
+          const prefix = isYamlError ? "Failed to parse rule definition" : "Failed to process rule definition";
+          const errorDetails = e14 instanceof Error ? e14.message : String(e14);
+          message = `${prefix} ${file2.path}: ${errorDetails}`;
+        }
+        localErrors.push({
+          fatal: false,
+          message
+        });
+      }
+    });
+  } catch (e14) {
+    localErrors.push({
+      fatal: false,
+      message: `Error loading local prompt files: ${e14 instanceof Error ? e14.message : e14}`
+    });
+  }
+  config3.prompts?.forEach((prompt2) => {
+    try {
+      const slashCommand = convertPromptBlockToSlashCommand(prompt2);
+      continueConfig.slashCommands?.push(slashCommand);
+    } catch (e14) {
+      localErrors.push({
+        message: `Error loading prompt ${prompt2.name}: ${e14 instanceof Error ? e14.message : e14}`,
+        fatal: false
+      });
+    }
+  });
+  const defaultModelRoles = ["chat", "summarize", "apply", "edit"];
+  for (const model of config3.models ?? []) {
+    model.roles = model.roles ?? defaultModelRoles;
+    try {
+      const llms = await llmsFromModelConfig({
+        model,
+        uniqueId,
+        llmLogger,
+        config: continueConfig
+      });
+      if (model.roles?.includes("chat")) {
+        continueConfig.modelsByRole.chat.push(...llms);
+      }
+      if (model.roles?.includes("summarize")) {
+        continueConfig.modelsByRole.summarize.push(...llms);
+      }
+      if (model.roles?.includes("apply")) {
+        continueConfig.modelsByRole.apply.push(...llms);
+      }
+      if (model.roles?.includes("edit")) {
+        continueConfig.modelsByRole.edit.push(...llms);
+      }
+      if (model.roles?.includes("autocomplete")) {
+        continueConfig.modelsByRole.autocomplete.push(...llms);
+      }
+      if (model.roles?.includes("embed")) {
+        const { provider } = model;
+        if (provider === "transformers.js") {
+          if (ideInfo.ideType === "vscode") {
+            continueConfig.modelsByRole.embed.push(
+              new TransformersJsEmbeddingsProvider_default()
+            );
+          } else {
+            localErrors.push({
+              fatal: false,
+              message: `Transformers.js embeddings provider not supported in this IDE.`
+            });
+          }
+        } else {
+          continueConfig.modelsByRole.embed.push(...llms);
+        }
+      }
+      if (model.roles?.includes("rerank")) {
+        continueConfig.modelsByRole.rerank.push(...llms);
+      }
+      if (model.roles?.includes("subagent")) {
+        continueConfig.modelsByRole.subagent.push(...llms);
+      }
+    } catch (e14) {
+      localErrors.push({
+        fatal: false,
+        message: `Failed to load model:
+Name: ${model.name}
+Model: ${model.model}
+Provider: ${model.provider}
+${e14 instanceof Error ? e14.message : e14}`
+      });
+    }
+  }
+  if (ideInfo.ideType === "vscode" && !continueConfig.modelsByRole.embed.find(
+    (m12) => m12.providerName === "transformers.js"
+  )) {
+    continueConfig.modelsByRole.embed.push(
+      new TransformersJsEmbeddingsProvider_default()
+    );
+  }
+  const { providers, errors: contextErrors } = loadConfigContextProviders(
+    config3.context,
+    !!config3.docs?.length,
+    ideInfo.ideType
+  );
+  continueConfig.contextProviders = providers;
+  localErrors.push(...contextErrors);
+  const mcpManager = MCPManagerSingleton.getInstance();
+  const mcpOptions = (config3.mcpServers ?? []).map(
+    (server) => convertYamlMcpConfigToInternalMcpOptions(server, config3.requestOptions)
+  );
+  const { errors: jsonMcpErrors, mcpServers } = await loadJsonMcpConfigs(
+    ide,
+    true,
+    config3.requestOptions
+  );
+  localErrors.push(...jsonMcpErrors);
+  mcpOptions.push(...mcpServers);
+  mcpManager.setConnections(mcpOptions, false, { ide });
+  return { config: continueConfig, errors: localErrors };
+}
+async function loadContinueConfigFromYaml(options) {
+  const {
+    ide,
+    ideSettings,
+    ideInfo,
+    uniqueId,
+    llmLogger,
+    overrideConfigYaml,
+    packageIdentifier
+  } = options;
+  const configYamlResult = await loadConfigYaml({
+    overrideConfigYaml,
+    ideSettings,
+    ide,
+    packageIdentifier
+  });
+  if (!configYamlResult.config || configYamlResult.configLoadInterrupted) {
+    return {
+      errors: configYamlResult.errors,
+      config: void 0,
+      configLoadInterrupted: true,
+      configName: configYamlResult.configName
+    };
+  }
+  const { config: continueConfig, errors: localErrors } = await configYamlToContinueConfig({
+    unrolledAssistant: configYamlResult.config,
+    ide,
+    ideInfo,
+    uniqueId,
+    llmLogger
+  });
+  const sharedConfig = new GlobalContext().getSharedConfig();
+  const withShared = modifyAnyConfigWithSharedConfig(
+    continueConfig,
+    sharedConfig
+  );
+  if (withShared.allowAnonymousTelemetry === void 0) {
+    withShared.allowAnonymousTelemetry = true;
+  }
+  return {
+    config: withShared,
+    errors: [...configYamlResult.errors ?? [], ...localErrors],
+    configLoadInterrupted: false,
+    configName: configYamlResult.configName
+  };
+}
+var import_node_path12;
+var init_loadYaml = __esm({
+  "../../core/config/yaml/loadYaml.ts"() {
+    "use strict";
+    init_importMetaUrl();
+    init_dist17();
+    import_node_path12 = require("node:path");
+    init_MCPManagerSingleton();
+    init_TransformersJsEmbeddingsProvider();
+    init_getPromptFiles();
+    init_GlobalContext();
+    init_sharedConfig();
+    init_promptBlockSlashCommand();
+    init_promptFileSlashCommand();
+    init_loadJsonMcpConfigs();
+    init_tools();
+    init_uri();
+    init_loadContextProviders();
+    init_loadLocalAssistants();
+    init_loadLocalYamlBlocks();
+    init_LocalPlatformClient();
+    init_models4();
+    init_yamlToContinueConfig();
+  }
+});
+
+// ../../core/config/profile/doLoadConfig.ts
+async function loadRules(ide) {
+  const rules = [];
+  const errors2 = [];
+  const { rules: yamlRules, errors: continueRulesErrors } = await getWorkspaceContinueRuleDotFiles(ide);
+  rules.unshift(...yamlRules);
+  errors2.push(...continueRulesErrors);
+  const { rules: markdownRules, errors: markdownRulesErrors } = await loadMarkdownRules(ide);
+  rules.unshift(...markdownRules);
+  errors2.push(...markdownRulesErrors);
+  const codebaseRulesCache = CodebaseRulesCache.getInstance();
+  rules.unshift(...codebaseRulesCache.rules);
+  errors2.push(...codebaseRulesCache.errors);
+  return { rules, errors: errors2 };
+}
+async function doLoadConfig(options) {
+  const {
+    ide,

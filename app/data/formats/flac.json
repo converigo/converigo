@@ -1,0 +1,14 @@
+{
+  "slug": "flac",
+  "name": "FLAC",
+  "extension": ".flac",
+  "mime_type": "audio/flac",
+  "category": "audio",
+  "description": "FLAC is a lossless compressed audio format that reduces file size without sacrificing audio quality, preferred for music archiving and high-fidelity playback.",
+  "related_formats": ["aac", "m4a", "mp3", "ogg", "wav"],
+  "related_converters": ["mp4-to-flac"],
+  "primary_keywords": ["flac audio format", "flac file format", "lossless audio compression"],
+  "secondary_keywords": ["audio archiving", "flac converter", "flac vs mp3"],
+  "search_intent": ["audio archiving", "audio conversion", "lossless audio"]
+}
+

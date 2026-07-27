@@ -1,0 +1,20 @@
+AI_BRAIN Metadata Health Check
+==============================
+Generated directory: C:/converigo/AI_BRAIN/generated
+Valid files: 8/9
+
+File Status
+------------------------------
+[OK] project_index.json | exists=True | valid_json=True | size=138637 | ok
+[FAIL] module_index.json | exists=False | valid_json=False | size=0 | missing
+[OK] project_map.json | exists=True | valid_json=True | size=3880 | ok
+[OK] routes.json | exists=True | valid_json=True | size=7754 | ok
+[OK] services.json | exists=True | valid_json=True | size=13609 | ok
+[OK] converters.json | exists=True | valid_json=True | size=7232 | ok
+[OK] import_map.json | exists=True | valid_json=True | size=353720 | ok
+[OK] knowledge_summary.json | exists=True | valid_json=True | size=2370 | ok
+[OK] context.json | exists=True | valid_json=True | size=1338168 | ok
+
+Overall
+------------------------------
+FAIL

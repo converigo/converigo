@@ -1,0 +1,13 @@
+{
+  "slug": "ico",
+  "name": "ICO",
+  "extension": ".ico",
+  "mime_type": "image/x-icon",
+  "category": "image",
+  "description": "Icon file format used for application icons, favicons, and desktop shortcut images, storing multiple resolutions in a single container.",
+  "related_formats": ["png", "svg", "bmp"],
+  "related_converters": ["png-to-ico", "ico-to-png", "jpg-to-ico"],
+  "primary_keywords": ["ico file format", "icon file", "favicon format"],
+  "secondary_keywords": ["ico conversion", "favicon ico", "windows icon"],
+  "search_intent": ["informational", "favicon", "icon design"]
+}

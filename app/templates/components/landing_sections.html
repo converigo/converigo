@@ -155,4 +155,22 @@
         </div>
     </div>
 </section>
+
+{% set internal_link_items = landing.internal_links.get('items', []) if landing.internal_links else [] %}
+{% if internal_link_items %}
+<section id="more-resources" class="section section-white">
+    <div class="container section-heading">
+        <span class="eyebrow">More resources</span>
+        <h2>{{ landing.internal_links.get('title', 'Related resources') }}</h2>
+    </div>
+    <div class="grid popular-grid">
+        {% for item in internal_link_items %}
+        <article class="card card-lg hover-card">
+            <h3><a href="{{ item.href }}">{{ item.title }}</a></h3>
+            <p>{{ item.description }}</p>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
 {% endif %}

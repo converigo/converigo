@@ -1,0 +1,100 @@
+{
+  "slug": "csv",
+  "name": "CSV",
+  "quick_answer": "CSV — Comma-Separated Values format for tabular data exchange where each row represents a record and columns are separated by commas, widely supported across applications.",
+  "definition": "CSV is a spreadsheet file format. Comma-Separated Values format for tabular data exchange where each row represents a record and columns are separated by commas, widely supported across applications. It is commonly used in workflows that require reliable spreadsheet handling and is supported by a wide range of applications and online tools.",
+  "use_cases": [
+    {
+      "title": "Official document sharing",
+      "text": "CSV is used to share documents that need to look the same on every device and operating system."
+    },
+    {
+      "title": "Business reports and proposals",
+      "text": "CSV is a reliable format for distributing professional reports, contracts, and formal documents."
+    },
+    {
+      "title": "Form and template publishing",
+      "text": "CSV is commonly used for fillable forms, legal documents, and templates with fixed structure."
+    },
+    {
+      "title": "Archive and long-term storage",
+      "text": "CSV is a trusted choice for archiving documents that need to remain readable over many years."
+    },
+    {
+      "title": "Printing and publishing",
+      "text": "CSV is used in print workflows because it preserves layout, fonts, and formatting across different printers."
+    }
+  ],
+  "advantages": [
+    {
+      "title": "Layout preservation",
+      "text": "CSV preserves fonts, formatting, and page layout across different operating systems and devices."
+    },
+    {
+      "title": "Universal compatibility",
+      "text": "CSV can be opened on virtually any device without requiring the authoring software."
+    },
+    {
+      "title": "Security features",
+      "text": "CSV can include password protection, permissions, and digital signatures for sensitive documents."
+    },
+    {
+      "title": "Print-ready output",
+      "text": "CSV is reliable for printing because it accurately represents the intended page design."
+    }
+  ],
+  "limitations": [
+    {
+      "title": "Limited editability",
+      "text": "CSV is not always easy to edit directly, especially for users without compatible software."
+    },
+    {
+      "title": "Complex formatting may not transfer",
+      "text": "Converting from or to CSV can sometimes lose custom styles, fonts, or layout elements."
+    },
+    {
+      "title": "Large file sizes",
+      "text": "CSV files with many embedded images or assets can be large and slow to load or send."
+    }
+  ],
+  "comparisons": [
+    {
+      "title": "CSV vs XLSX",
+      "text": "CSV and XLSX are both widely used file formats. Choosing between them depends on your compatibility needs, quality requirements, and the tools available in your workflow."
+    },
+    {
+      "title": "CSV vs XLS",
+      "text": "CSV and XLS are both widely used file formats. Choosing between them depends on your compatibility needs, quality requirements, and the tools available in your workflow."
+    },
+    {
+      "title": "CSV vs ODS",
+      "text": "CSV and ODS are both widely used file formats. Choosing between them depends on your compatibility needs, quality requirements, and the tools available in your workflow."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "csv",
+      "title": "CSV Converter",
+      "description": "Convert CSV files to other formats online.",
+      "href": "/csv"
+    }
+  ],
+  "faq": [
+    {
+      "question": "What is a CSV file?",
+      "answer": "A CSV file is a spreadsheet format used for storing and sharing content."
+    },
+    {
+      "question": "How do I open a CSV file?",
+      "answer": "You can open a CSV file using compatible software for the spreadsheet category."
+    },
+    {
+      "question": "Can I convert CSV to other formats?",
+      "answer": "Yes, CSV can be converted to other formats using online tools or dedicated software."
+    },
+    {
+      "question": "Is CSV widely supported?",
+      "answer": "CSV is supported by many modern applications and platforms."
+    }
+  ]
+}

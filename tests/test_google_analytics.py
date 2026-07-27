@@ -17,6 +17,15 @@ def test_build_template_context_exposes_ga_values(monkeypatch):
     assert context["ga_measurement_id"] == "G-TEST123"
 
 
+def test_build_template_context_uses_ga4_env_alias(monkeypatch):
+    monkeypatch.delenv("GA_MEASUREMENT_ID", raising=False)
+    monkeypatch.setenv("GA4_MEASUREMENT_ID", "G-ALIAS123")
+
+    context = build_template_context()
+
+    assert context["ga_measurement_id"] == "G-ALIAS123"
+
+
 def test_home_page_renders_ga_snippet_when_configured(monkeypatch):
     monkeypatch.setattr(settings, "GA_MEASUREMENT_ID", "G-TEST123")
 

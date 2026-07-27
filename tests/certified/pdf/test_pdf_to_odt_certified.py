@@ -19,6 +19,19 @@ from app.main import app
 from app.plugins.registry import registry
 
 
+def _resolve_public_output_path(response) -> Path:
+    payload = response.json()
+    download_path = payload.get("download_path")
+    assert download_path, payload
+    assert download_path.startswith("/download/")
+    relative_parts = Path(download_path.removeprefix("/download/")).parts
+    assert len(relative_parts) == 2, f"Unexpected download path shape: {download_path}"
+    conversion_id, filename = relative_parts
+    output_path = settings.OUTPUT_DIR / conversion_id / filename
+    assert output_path.exists(), f"Expected output file not found: {output_path}"
+    return output_path
+
+
 def create_simple_pdf() -> BytesIO:
     """Create a simple valid PDF."""
     buffer = BytesIO()
@@ -63,8 +76,7 @@ def test_pdf_to_odt_output_exists():
         data={"target_format": "odt"},
     )
     
-    filename = response.json()["filename"]
-    output_path = settings.OUTPUT_DIR / "document" / filename
+    output_path = _resolve_public_output_path(response)
     assert output_path.exists()
     
     output_path.unlink(missing_ok=True)
@@ -84,7 +96,7 @@ def test_pdf_to_odt_extension_correct():
     filename = response.json()["filename"]
     assert filename.endswith(".odt")
     
-    output_path = settings.OUTPUT_DIR / "document" / filename
+    output_path = _resolve_public_output_path(response)
     assert output_path.suffix == ".odt"
     output_path.unlink(missing_ok=True)
 
@@ -100,8 +112,7 @@ def test_pdf_to_odt_not_corrupted():
         data={"target_format": "odt"},
     )
     
-    filename = response.json()["filename"]
-    output_path = settings.OUTPUT_DIR / "document" / filename
+    output_path = _resolve_public_output_path(response)
     
     # File must be readable as valid ODT
     try:

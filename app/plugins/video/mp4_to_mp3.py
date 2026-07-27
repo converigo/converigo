@@ -13,6 +13,7 @@ import shutil
 import subprocess
 from pathlib import Path
 
+from app.core.settings import settings
 from app.engines.ffmpeg_engine import FFmpegEngine
 from app.plugins.base import ConverterPlugin
 
@@ -198,7 +199,7 @@ class MP4ToMP3Plugin(ConverterPlugin):
         self._ensure_audio_stream(source_path)
 
         output_path = (
-            Path("outputs")
+            settings.OUTPUT_DIR
             / "audio"
             / f"{source_path.stem}.mp3"
         )

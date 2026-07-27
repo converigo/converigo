@@ -1,0 +1,128 @@
+{
+  "slug": "tiff",
+  "name": "TIFF",
+  "quick_answer": "TIFF — Tagged Image File Format used in professional photography, print publishing, and archiving where lossless quality and flexible metadata are required.",
+  "definition": "TIFF is an image file format. Tagged Image File Format used in professional photography, print publishing, and archiving where lossless quality and flexible metadata are required. It is commonly used in workflows that require reliable image handling and is supported by a wide range of applications and online tools.",
+  "use_cases": [
+    {
+      "title": "Professional photography and retouching",
+      "text": "TIFF is the industry standard for professional photographers who need lossless quality and full color depth when editing and archiving master images."
+    },
+    {
+      "title": "Print production and pre-press",
+      "text": "TIFF is widely used in print workflows because it supports CMYK color, high resolution, and lossless compression required by commercial printers."
+    },
+    {
+      "title": "Document and artwork archiving",
+      "text": "TIFF is a trusted long-term archival format for digitized documents, artworks, and scanned records that must be preserved without any quality loss."
+    },
+    {
+      "title": "Medical and scientific imaging",
+      "text": "TIFF is used in medical imaging, microscopy, and scientific research where pixel-accurate lossless images are required for analysis."
+    },
+    {
+      "title": "High-resolution scanning",
+      "text": "Flatbed and document scanners commonly output TIFF files to preserve the full detail of scanned photographs, negatives, and printed materials."
+    }
+  ],
+  "advantages": [
+    {
+      "title": "Lossless image quality",
+      "text": "TIFF preserves every pixel without lossy compression, making it the preferred archival format for professional photography and print."
+    },
+    {
+      "title": "Rich metadata support",
+      "text": "TIFF supports extensive metadata including EXIF, IPTC, XMP, GPS data, and custom tags used in professional and scientific workflows."
+    },
+    {
+      "title": "CMYK and multi-channel color",
+      "text": "TIFF supports CMYK color profiles and multi-channel images required by commercial printing, prepress, and color-managed workflows."
+    },
+    {
+      "title": "Multi-page and multi-image support",
+      "text": "A single TIFF file can contain multiple pages or images, making it suitable for scanned documents and image stacks."
+    },
+    {
+      "title": "Industry standard for archiving",
+      "text": "TIFF is widely mandated by libraries, museums, and government agencies as the long-term archival format for digitized cultural assets."
+    }
+  ],
+  "limitations": [
+    {
+      "title": "Very large file sizes",
+      "text": "TIFF files with lossless compression can be extremely large, making them impractical for web delivery, email, or everyday sharing."
+    },
+    {
+      "title": "Not supported in web browsers",
+      "text": "Browsers do not natively display TIFF files, so TIFF images must be converted to JPG, PNG, or WebP for use on websites."
+    },
+    {
+      "title": "Slow to open and process",
+      "text": "High-resolution TIFF files can take significant time to open, save, and export, especially on lower-powered hardware."
+    },
+    {
+      "title": "Not suitable for everyday sharing",
+      "text": "TIFF is a professional format and is rarely the right choice for casual sharing via email, messaging apps, or social media."
+    }
+  ],
+  "comparisons": [
+    {
+      "title": "TIFF vs PNG",
+      "text": "TIFF is the professional archival standard with CMYK support and extensive metadata, while PNG is more efficient for web use and everyday lossless graphics."
+    },
+    {
+      "title": "TIFF vs JPG",
+      "text": "TIFF is lossless and ideal for professional editing and archiving, while JPG uses lossy compression to produce small files suited for sharing and the web."
+    },
+    {
+      "title": "TIFF vs BMP",
+      "text": "Both TIFF and BMP can store lossless images, but TIFF supports richer metadata, CMYK color, multi-page documents, and compression options that BMP lacks."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "tiff-to-jpg",
+      "title": "TIFF to JPG Converter",
+      "description": "Convert TIFF files to JPG quickly and easily.",
+      "href": "/tiff-to-jpg"
+    },
+    {
+      "slug": "tiff-to-png",
+      "title": "TIFF to PNG Converter",
+      "description": "Convert TIFF files to PNG quickly and easily.",
+      "href": "/tiff-to-png"
+    },
+    {
+      "slug": "png-to-tiff",
+      "title": "PNG to TIFF Converter",
+      "description": "Convert PNG files to TIFF quickly and easily.",
+      "href": "/png-to-tiff"
+    }
+  ],
+  "faq": [
+    {
+      "question": "What is a TIFF file?",
+      "answer": "A TIFF (Tagged Image File Format) file is a flexible raster image format designed for professional photography, print production, and archiving."
+    },
+    {
+      "question": "Is TIFF lossless?",
+      "answer": "Yes, TIFF supports lossless compression options including LZW and ZIP, preserving image data exactly. It can also store uncompressed data."
+    },
+    {
+      "question": "Can TIFF files support layers?",
+      "answer": "Some applications such as Adobe Photoshop save TIFF files with layer data embedded as proprietary metadata, but not all TIFF readers support layers."
+    },
+    {
+      "question": "Is TIFF good for printing?",
+      "answer": "Yes, TIFF is the standard format for high-resolution print production, supporting CMYK color profiles and the precision required by commercial printers."
+    },
+    {
+      "question": "Can I use TIFF on a website?",
+      "answer": "Web browsers do not support TIFF natively. TIFF images must be converted to JPG, PNG, or WebP before being used on a website."
+    },
+    {
+      "question": "How does TIFF compare to JPG for photography?",
+      "answer": "TIFF is lossless and preserves full image quality, making it ideal for editing and archiving. JPG uses lossy compression and is better for sharing and web use."
+    }
+  ]
+}

@@ -3,8 +3,12 @@
     "eyebrow": "プレミアムファイルコンバーター",
     "title": "すべてのファイルを変換",
     "subtitle": "Converigoは、安全でレスポンシブ、洗練されたファイル変換を学生、クリエイター、プロフェッショナルに提供します。",
+    "subtitle_line": "数秒で",
     "description": "画像、動画、音声、ドキュメントをオンラインで変換します。",
+    "description_secondary": "100種類以上の形式に対応しています。",
     "batch_hint": "複数ファイルをまとめて対応",
+    "callout": "変換してすぐに使いましょう！",
+    "callout_tagline": "高速・シンプル・すぐに使えます。",
     "primary_cta": "変換を開始",
     "secondary_cta": "機能を確認"
   },
@@ -13,7 +17,10 @@
     "subtext": "ファイルをドラッグ＆ドロップするか、参照して選択してください。",
     "badge": "インスタント",
     "drop_title": "ここにファイルをドロップ",
+    "drag_drop": "ここにファイルをドロップ",
     "browse": "参照",
+    "or": "または",
+    "supports_100": "100種類以上の形式に対応",
     "empty_status": "まだファイルが選択されていません",
     "waiting_status": "ファイルを待っています",
     "size_label": "0 KB",
@@ -40,7 +47,33 @@
     "file_type_audio": "オーディオファイル",
     "file_type_video": "ビデオファイル",
     "file_type_pdf": "PDFファイル",
-    "try_again": "もう一度試す"
+    "recommended_next": "次におすすめ",
+    "recommended_next_label": "おすすめの次のコンバーター",
+    "validation_status_uploaded": "アップロード済み",
+    "validation_step_received": "ファイルを受信しました",
+    "validation_step_detected": "形式が検出されました",
+    "validation_step_complete": "検証が完了しました",
+    "settings": "設定",
+    "remove_file": "ファイルを削除",
+    "convert_all_to": "{count} 件のファイルを次に変換:",
+    "convert_file_to": "ファイルを次に変換:",
+    "file_name": "ファイル名",
+    "output_format": "出力形式",
+    "file_type": "ファイルタイプ",
+    "convert_another": "別のファイルを変換",
+    "back_to_upload": "アップロードに戻る",
+    "file_ready_for_download": "ダウンロードの準備ができました",
+    "ready_to_convert": "変換の準備ができました"
+  },
+  "supported_formats": {
+    "heading": "対応フォーマット",
+    "description": "画像、ドキュメント、音声、動画などの人気のファイル形式を変換します。",
+    "categories": {
+      "images": "画像",
+      "documents": "ドキュメント",
+      "audio": "オーディオ",
+      "video": "ビデオ"
+    }
   },
   "stats": {
     "formats": "対応フォーマット",
@@ -151,6 +184,9 @@
     "terms": "利用規約",
     "tagline": "Convert and Go!",
     "bottom_tagline": "数秒でファイルを変換します。",
+    "how_it_works": "使い方",
+    "supported_formats": "対応フォーマット",
+    "support_cta": "Ko-fiでConverigoを支援",
     "copyright": "© {year} Converigo。エレガントなファイル変換のために構築。"
   },
   "nav": {
@@ -166,6 +202,16 @@
     "api": "API",
     "pricing": "価格",
     "toggle_menu": "ナビゲーションを切り替え"
+  },
+  "trust": {
+    "secure_processing": "安全な処理",
+    "secure_processing_desc": "ファイルはメモリ内で処理され、変換後にディスクに保存されることはありません。",
+    "browser_based": "ブラウザベース",
+    "browser_based_desc": "ソフトウェアのインストールは不要です。すべてがブラウザ内で直接動作します。",
+    "fast_conversion": "高速変換",
+    "fast_conversion_desc": "最適化された変換エンジンにより、ファイルを迅速かつ効率的に処理します。",
+    "wide_format": "幅広いフォーマット対応",
+    "wide_format_desc": "画像、動画、音声、ドキュメント間を広い互換性で変換できます。"
   },
   "language": {
     "selector_label": "言語",

@@ -57,9 +57,15 @@
     }
   ],
   "seo": {
-    "title": "ZIP File Extractor | Converigo",
-    "description": "Extract ZIP files online for free. Fast, secure, and no installation required.",
-    "keywords": "zip extractor, extract zip, zip files, archive extraction, file compression"
+    "title": "Extract ZIP Files Online Free | Converigo",
+    "description": "Extract files from ZIP archives online for free using Converigo. Fast, secure browser-based ZIP extraction with no software installation required.",
+    "keywords": "zip extractor, extract zip, zip files, archive extraction, file compression",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert ZIP to ZIP - Converigo free online converter",
+    "twitter_title": "Extract ZIP Files Online Free | Converigo",
+    "twitter_description": "Extract files from ZIP archives online for free using Converigo. Fast, secure browser-based ZIP extraction with no software installation required.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/zip-extract"
   },
   "source": "zip",
   "target": "zip",
@@ -70,7 +76,7 @@
   "hero": {
     "eyebrow": "Archive tool",
     "title": "Extract ZIP Files Online Free",
-    "description": "Extract files from ZIP archives in seconds with Converigo. No installation needed.",
+    "description": "Convert ZIP files to ZIP online for free. Fast, secure browser-based conversion with no software installation. Get high-quality zip output in seconds using Converigo.",
     "panel_label": "Ready to extract",
     "panel_title": "Upload a ZIP file and receive extracted contents instantly."
   },
@@ -101,8 +107,12 @@
     }
   ],
   "supported_formats": {
-    "input": ["ZIP"],
-    "output": ["ZIP"],
+    "input": [
+      "ZIP"
+    ],
+    "output": [
+      "ZIP"
+    ],
     "description": "ZIP input, extracted files output"
   },
   "how_to_use": [
@@ -117,6 +127,18 @@
     {
       "title": "Download extracted files",
       "description": "Get all extracted files as a folder ready to download immediately."
+    },
+    {
+      "title": "Upload your zip",
+      "description": "Select a ZIP file from your device to begin the conversion process."
+    },
+    {
+      "title": "Choose zip as format",
+      "description": "Pick ZIP as your desired format and review any available options."
+    },
+    {
+      "title": "Convert zip to zip",
+      "description": "Click convert and our engine processes your zip instantly."
     }
   ],
   "about_formats": [
@@ -141,5 +163,6 @@
     "secondary_text": "Read FAQs",
     "primary_href": "#converter",
     "secondary_href": "#faq"
-  }
+  },
+  "lifecycle_status": "active"
 }

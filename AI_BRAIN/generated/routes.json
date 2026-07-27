@@ -1,0 +1,314 @@
+{
+  "totals": {
+    "files_scanned": 144,
+    "routes_discovered": 51
+  },
+  "routes": [
+    {
+      "router": "app",
+      "endpoint": "/apple-touch-icon.png",
+      "http_method": "GET",
+      "source_file": "app/main.py"
+    },
+    {
+      "router": "app",
+      "endpoint": "/download/{path:path}",
+      "http_method": "GET",
+      "source_file": "app/main.py"
+    },
+    {
+      "router": "app",
+      "endpoint": "/health",
+      "http_method": "GET",
+      "source_file": "app/main.py"
+    },
+    {
+      "router": "app",
+      "endpoint": "/metrics",
+      "http_method": "GET",
+      "source_file": "app/main.py"
+    },
+    {
+      "router": "app",
+      "endpoint": "/ready",
+      "http_method": "GET",
+      "source_file": "app/main.py"
+    },
+    {
+      "router": "app",
+      "endpoint": "/static/site.webmanifest",
+      "http_method": "GET",
+      "source_file": "app/main.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/mp3-vs-wav",
+      "http_method": "GET",
+      "source_file": "app/routers/comparison.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/mp4-vs-mov",
+      "http_method": "GET",
+      "source_file": "app/routers/comparison.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/pdf-vs-docx",
+      "http_method": "GET",
+      "source_file": "app/routers/comparison.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/png-vs-jpg",
+      "http_method": "GET",
+      "source_file": "app/routers/comparison.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/webp-vs-png",
+      "http_method": "GET",
+      "source_file": "app/routers/comparison.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "",
+      "http_method": "POST",
+      "source_file": "app/routers/convert.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/dashboard/api/search-console-readiness",
+      "http_method": "GET",
+      "source_file": "app/routers/dashboard.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/dashboard/api/seo-audit",
+      "http_method": "GET",
+      "source_file": "app/routers/dashboard.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/dashboard/seo-operations",
+      "http_method": "GET",
+      "source_file": "app/routers/dashboard.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/formats",
+      "http_method": "GET",
+      "source_file": "app/routers/formats.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/formats/{format_name}",
+      "http_method": "GET",
+      "source_file": "app/routers/formats.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/",
+      "http_method": "GET",
+      "source_file": "app/routers/home.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/about",
+      "http_method": "GET",
+      "source_file": "app/routers/home.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/audio-conversion",
+      "http_method": "GET",
+      "source_file": "app/routers/home.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/blog",
+      "http_method": "GET",
+      "source_file": "app/routers/home.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/blog/{slug}",
+      "http_method": "GET",
+      "source_file": "app/routers/home.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/contact",
+      "http_method": "GET",
+      "source_file": "app/routers/home.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/cookies",
+      "http_method": "GET",
+      "source_file": "app/routers/home.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/document-conversion",
+      "http_method": "GET",
+      "source_file": "app/routers/home.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/image-conversion",
+      "http_method": "GET",
+      "source_file": "app/routers/home.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/jpg-to-pdf",
+      "http_method": "GET",
+      "source_file": "app/routers/home.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/jpg-to-png",
+      "http_method": "GET",
+      "source_file": "app/routers/home.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/mp4-to-mp3",
+      "http_method": "GET",
+      "source_file": "app/routers/home.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/pdf-conversion",
+      "http_method": "GET",
+      "source_file": "app/routers/home.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/pdf-to-jpg",
+      "http_method": "GET",
+      "source_file": "app/routers/home.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/png-to-jpg",
+      "http_method": "GET",
+      "source_file": "app/routers/home.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/png-to-webp",
+      "http_method": "GET",
+      "source_file": "app/routers/home.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/pricing",
+      "http_method": "GET",
+      "source_file": "app/routers/home.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/privacy",
+      "http_method": "GET",
+      "source_file": "app/routers/home.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/privacy-policy",
+      "http_method": "GET",
+      "source_file": "app/routers/home.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/terms",
+      "http_method": "GET",
+      "source_file": "app/routers/home.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/video-conversion",
+      "http_method": "GET",
+      "source_file": "app/routers/home.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/webp-to-jpg",
+      "http_method": "GET",
+      "source_file": "app/routers/home.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/webp-to-png",
+      "http_method": "GET",
+      "source_file": "app/routers/home.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/word-to-pdf",
+      "http_method": "GET",
+      "source_file": "app/routers/home.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/{slug}",
+      "http_method": "GET",
+      "source_file": "app/routers/home.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/learning",
+      "http_method": "GET",
+      "source_file": "app/routers/learning.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/learning/{slug}",
+      "http_method": "GET",
+      "source_file": "app/routers/learning.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "",
+      "http_method": "GET",
+      "source_file": "app/routers/plugins.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/{source_format}",
+      "http_method": "GET",
+      "source_file": "app/routers/recommend.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/robots.txt",
+      "http_method": "GET",
+      "source_file": "app/routers/seo.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/sitemap.xml",
+      "http_method": "GET",
+      "source_file": "app/routers/seo.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "",
+      "http_method": "GET",
+      "source_file": "app/routers/tools.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "/{slug}",
+      "http_method": "GET",
+      "source_file": "app/routers/tools.py"
+    },
+    {
+      "router": "router",
+      "endpoint": "",
+      "http_method": "POST",
+      "source_file": "app/routers/upload.py"
+    }
+  ]
+}

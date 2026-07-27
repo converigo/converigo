@@ -1,0 +1,273 @@
+/*
+====================================================
+Project : Converigo
+Component : Trust Layer
+Version : 1.1.0
+Premium trust section treatment
+====================================================
+*/
+
+.trust-layer {
+    position: relative;
+    margin-top: clamp(24px, 2.8vw, 40px);
+    padding: 0;
+    isolation: isolate;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.trust-layer::before {
+    content: "";
+    position: absolute;
+    inset: -12px -8px -8px;
+    border-radius: 28px;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.42;
+    background-image:
+        linear-gradient(124deg, rgba(37, 99, 235, 0.06) 1px, transparent 1px),
+        linear-gradient(28deg, rgba(14, 165, 233, 0.05) 1px, transparent 1px),
+        radial-gradient(130% 110% at 8% 0%, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
+    background-size: 44px 44px, 52px 52px, 100% 100%;
+}
+
+.trust-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(10px, 0.9vw, 14px);
+    max-width: 1160px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+.trust-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding: 14px 14px 15px;
+    border-radius: 18px;
+    border: 1px solid rgba(37, 99, 235, 0.16);
+    background:
+        linear-gradient(150deg, rgba(255, 255, 255, 0.98), rgba(241, 245, 255, 0.88)),
+        linear-gradient(140deg, rgba(191, 219, 254, 0.16), rgba(125, 211, 252, 0.08));
+    box-shadow:
+        0 12px 28px rgba(15, 23, 42, 0.08),
+        0 4px 12px rgba(37, 99, 235, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    text-decoration: none;
+    color: inherit;
+    overflow: hidden;
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    will-change: transform, opacity;
+}
+
+.trust-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(128deg, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0) 58%);
+    opacity: 0.86;
+    z-index: 0;
+}
+
+.trust-card::after {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    background: radial-gradient(circle at 30% 30%, rgba(37, 99, 235, 0.16), rgba(37, 99, 235, 0) 66%);
+    opacity: 0.5;
+    transition: opacity 180ms ease, width 180ms ease, height 180ms ease;
+}
+
+.trust-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.trust-card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 14px;
+    border: 1px solid rgba(37, 99, 235, 0.14);
+    background: rgba(37, 99, 235, 0.12);
+    font-size: 1.14rem;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.trust-card-title {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.25;
+    color: #0f172a;
+    letter-spacing: -0.01em;
+}
+
+.trust-card-desc {
+    margin: 0;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: #475569;
+}
+
+.trust-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(37, 99, 235, 0.28);
+    box-shadow:
+        0 14px 30px rgba(15, 23, 42, 0.1),
+        0 6px 16px rgba(37, 99, 235, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.86);
+}
+
+.trust-card:hover::after {
+    opacity: 0.95;
+    width: 64px;
+    height: 64px;
+    background: radial-gradient(circle at 30% 30%, rgba(37, 99, 235, 0.18), rgba(37, 99, 235, 0) 66%);
+}
+
+.trust-card:focus-visible {
+    outline: none;
+    transform: translateY(-2px);
+    border-color: rgba(37, 99, 235, 0.5);
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.18),
+        0 16px 36px rgba(15, 23, 42, 0.1),
+        0 8px 20px rgba(37, 99, 235, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.86);
+}
+
+@media (min-width: 1025px) and (max-width: 1279px) {
+    .trust-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .trust-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .trust-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .trust-layer {
+        margin-top: 20px;
+    }
+
+    .trust-card {
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 14px;
+        border-radius: 16px;
+    }
+
+    .trust-card-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+        flex-shrink: 0;
+    }
+
+    .trust-card-title {
+        font-size: 0.86rem;
+    }
+
+    .trust-card-desc {
+        font-size: 0.76rem;
+    }
+}
+
+@media (max-width: 430px) {
+    .trust-layer {
+        margin-top: 16px;
+    }
+
+    .trust-card {
+        padding: 11px 12px;
+        gap: 10px;
+    }
+
+    .trust-card-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 390px) {
+    .trust-card {
+        padding: 10px 11px;
+        gap: 9px;
+    }
+}
+
+@media (max-width: 375px) {
+    .trust-card {
+        padding: 9px 10px;
+    }
+
+    .trust-card-title {
+        font-size: 0.82rem;
+    }
+
+    .trust-card-desc {
+        font-size: 0.74rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .trust-card {
+        padding: 8px 8px;
+        gap: 8px;
+        border-radius: 14px;
+    }
+
+    .trust-card-icon {
+        width: 28px;
+        height: 28px;
+        font-size: 0.9rem;
+        border-radius: 10px;
+    }
+
+    .trust-card-title {
+        font-size: 0.8rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .trust-card,
+    .trust-card:hover,
+    .trust-card:focus-visible,
+    .trust-card::after {
+        animation: none !important;
+        transition: none !important;
+        transform: none !important;
+        opacity: 1;
+    }
+}
+

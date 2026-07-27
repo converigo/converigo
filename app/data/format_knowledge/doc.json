@@ -1,0 +1,116 @@
+{
+  "slug": "doc",
+  "name": "DOC",
+  "quick_answer": "DOC — Legacy Microsoft Word binary document format for word processing files, supporting basic formatting, tables, and embedded objects across older versions of Word.",
+  "definition": "DOC is a document file format. Legacy Microsoft Word binary document format for word processing files, supporting basic formatting, tables, and embedded objects across older versions of Word. It is commonly used in workflows that require reliable document handling and is supported by a wide range of applications and online tools.",
+  "use_cases": [
+    {
+      "title": "Official document sharing",
+      "text": "DOC is used to share documents that need to look the same on every device and operating system."
+    },
+    {
+      "title": "Business reports and proposals",
+      "text": "DOC is a reliable format for distributing professional reports, contracts, and formal documents."
+    },
+    {
+      "title": "Form and template publishing",
+      "text": "DOC is commonly used for fillable forms, legal documents, and templates with fixed structure."
+    },
+    {
+      "title": "Archive and long-term storage",
+      "text": "DOC is a trusted choice for archiving documents that need to remain readable over many years."
+    },
+    {
+      "title": "Printing and publishing",
+      "text": "DOC is used in print workflows because it preserves layout, fonts, and formatting across different printers."
+    }
+  ],
+  "advantages": [
+    {
+      "title": "Layout preservation",
+      "text": "DOC preserves fonts, formatting, and page layout across different operating systems and devices."
+    },
+    {
+      "title": "Universal compatibility",
+      "text": "DOC can be opened on virtually any device without requiring the authoring software."
+    },
+    {
+      "title": "Security features",
+      "text": "DOC can include password protection, permissions, and digital signatures for sensitive documents."
+    },
+    {
+      "title": "Print-ready output",
+      "text": "DOC is reliable for printing because it accurately represents the intended page design."
+    }
+  ],
+  "limitations": [
+    {
+      "title": "Limited editability",
+      "text": "DOC is not always easy to edit directly, especially for users without compatible software."
+    },
+    {
+      "title": "Complex formatting may not transfer",
+      "text": "Converting from or to DOC can sometimes lose custom styles, fonts, or layout elements."
+    },
+    {
+      "title": "Large file sizes",
+      "text": "DOC files with many embedded images or assets can be large and slow to load or send."
+    }
+  ],
+  "comparisons": [
+    {
+      "title": "DOC vs DOCX",
+      "text": "DOC and DOCX are both widely used file formats. Choosing between them depends on your compatibility needs, quality requirements, and the tools available in your workflow."
+    },
+    {
+      "title": "DOC vs PDF",
+      "text": "DOC and PDF are both widely used file formats. Choosing between them depends on your compatibility needs, quality requirements, and the tools available in your workflow."
+    },
+    {
+      "title": "DOC vs TXT",
+      "text": "DOC and TXT are both widely used file formats. Choosing between them depends on your compatibility needs, quality requirements, and the tools available in your workflow."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "word-to-pdf",
+      "title": "WORD to PDF Converter",
+      "description": "Convert WORD files to PDF quickly and easily.",
+      "href": "/word-to-pdf"
+    },
+    {
+      "slug": "docx-to-pdf",
+      "title": "DOCX to PDF Converter",
+      "description": "Convert DOCX files to PDF quickly and easily.",
+      "href": "/docx-to-pdf"
+    },
+    {
+      "slug": "pdf-to-docx",
+      "title": "PDF to DOCX Converter",
+      "description": "Convert PDF files to DOCX quickly and easily.",
+      "href": "/pdf-to-docx"
+    }
+  ],
+  "faq": [
+    {
+      "question": "What is a DOC file?",
+      "answer": "A DOC file is a document format used to store and share formatted content in a consistent, device-independent layout."
+    },
+    {
+      "question": "How do I open a DOC file?",
+      "answer": "You can open a DOC file using a compatible viewer or editor such as Adobe Acrobat, LibreOffice, or a browser-based tool."
+    },
+    {
+      "question": "Can I convert DOC to other formats?",
+      "answer": "Yes, DOC can be converted to other document and image formats using conversion tools online or in desktop applications."
+    },
+    {
+      "question": "Is DOC good for printing?",
+      "answer": "DOC is often a reliable format for printing because it preserves document layout and fonts."
+    },
+    {
+      "question": "Can DOC files be password protected?",
+      "answer": "Many DOC formats support password protection or permission controls for sensitive documents."
+    }
+  ]
+}

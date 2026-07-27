@@ -1,0 +1,2 @@
+{"slug":"csv","name":"CSV","extension":".csv","mime_type":"text/csv","category":"spreadsheet","description":"Comma-Separated Values format for tabular data exchange where each row represents a record and columns are separated by commas, widely supported across applications.","related_formats":["xlsx","xls","ods","txt"],"related_converters":[],"primary_keywords":["csv file format","comma separated values","csv file"],"secondary_keywords":["csv to excel","csv converter","tabular data"],"search_intent":["informational","data export","spreadsheet conversion"]}
+

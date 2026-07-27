@@ -1,0 +1,104 @@
+{
+  "slug": "rtf",
+  "name": "RTF",
+  "quick_answer": "RTF — Rich Text Format for cross-platform documents that preserves basic formatting such as bold, italic, fonts, and colors without requiring proprietary software.",
+  "definition": "RTF is a document file format. Rich Text Format for cross-platform documents that preserves basic formatting such as bold, italic, fonts, and colors without requiring proprietary software. It is commonly used in workflows that require reliable document handling and is supported by a wide range of applications and online tools.",
+  "use_cases": [
+    {
+      "title": "Official document sharing",
+      "text": "RTF is used to share documents that need to look the same on every device and operating system."
+    },
+    {
+      "title": "Business reports and proposals",
+      "text": "RTF is a reliable format for distributing professional reports, contracts, and formal documents."
+    },
+    {
+      "title": "Form and template publishing",
+      "text": "RTF is commonly used for fillable forms, legal documents, and templates with fixed structure."
+    },
+    {
+      "title": "Archive and long-term storage",
+      "text": "RTF is a trusted choice for archiving documents that need to remain readable over many years."
+    },
+    {
+      "title": "Printing and publishing",
+      "text": "RTF is used in print workflows because it preserves layout, fonts, and formatting across different printers."
+    }
+  ],
+  "advantages": [
+    {
+      "title": "Layout preservation",
+      "text": "RTF preserves fonts, formatting, and page layout across different operating systems and devices."
+    },
+    {
+      "title": "Universal compatibility",
+      "text": "RTF can be opened on virtually any device without requiring the authoring software."
+    },
+    {
+      "title": "Security features",
+      "text": "RTF can include password protection, permissions, and digital signatures for sensitive documents."
+    },
+    {
+      "title": "Print-ready output",
+      "text": "RTF is reliable for printing because it accurately represents the intended page design."
+    }
+  ],
+  "limitations": [
+    {
+      "title": "Limited editability",
+      "text": "RTF is not always easy to edit directly, especially for users without compatible software."
+    },
+    {
+      "title": "Complex formatting may not transfer",
+      "text": "Converting from or to RTF can sometimes lose custom styles, fonts, or layout elements."
+    },
+    {
+      "title": "Large file sizes",
+      "text": "RTF files with many embedded images or assets can be large and slow to load or send."
+    }
+  ],
+  "comparisons": [
+    {
+      "title": "RTF vs DOCX",
+      "text": "RTF and DOCX are both widely used file formats. Choosing between them depends on your compatibility needs, quality requirements, and the tools available in your workflow."
+    },
+    {
+      "title": "RTF vs DOC",
+      "text": "RTF and DOC are both widely used file formats. Choosing between them depends on your compatibility needs, quality requirements, and the tools available in your workflow."
+    },
+    {
+      "title": "RTF vs PDF",
+      "text": "RTF and PDF are both widely used file formats. Choosing between them depends on your compatibility needs, quality requirements, and the tools available in your workflow."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "rtf",
+      "title": "RTF Converter",
+      "description": "Convert RTF files to other formats online.",
+      "href": "/rtf"
+    }
+  ],
+  "faq": [
+    {
+      "question": "What is a RTF file?",
+      "answer": "A RTF file is a document format used to store and share formatted content in a consistent, device-independent layout."
+    },
+    {
+      "question": "How do I open a RTF file?",
+      "answer": "You can open a RTF file using a compatible viewer or editor such as Adobe Acrobat, LibreOffice, or a browser-based tool."
+    },
+    {
+      "question": "Can I convert RTF to other formats?",
+      "answer": "Yes, RTF can be converted to other document and image formats using conversion tools online or in desktop applications."
+    },
+    {
+      "question": "Is RTF good for printing?",
+      "answer": "RTF is often a reliable format for printing because it preserves document layout and fonts."
+    },
+    {
+      "question": "Can RTF files be password protected?",
+      "answer": "Many RTF formats support password protection or permission controls for sensitive documents."
+    }
+  ]
+}

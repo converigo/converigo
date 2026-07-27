@@ -1,0 +1,76 @@
+          validJsonConfigs.push(
+            ...Object.entries(claudeDesktopFileParsed.data.mcpServers).map(
+              ([name21, mcpJson]) => ({
+                name: name21,
+                mcpJson,
+                uri
+              })
+            )
+          );
+        } else {
+          const singleConfigParsed = mcpServersJsonSchema.safeParse(json3);
+          if (singleConfigParsed.success) {
+            validJsonConfigs.push({
+              mcpJson: singleConfigParsed.data,
+              name: getUriPathBasename(uri).replace(".json", ""),
+              uri
+            });
+          } else {
+            errors2.push({
+              fatal: false,
+              message: `MCP JSON file at ${uri} doesn't match a supported MCP JSON configuration format`
+            });
+          }
+        }
+      }
+    } catch (e14) {
+      errors2.push({
+        fatal: false,
+        message: `Error parsing MCP JSON file at ${uri}: ${e14 instanceof Error ? e14.message : String(e14)}`
+      });
+    }
+  }
+  const deduplicatedJsonConfigs = deduplicateArray(
+    validJsonConfigs,
+    (a11, b11) => a11.name === b11.name
+  );
+  const yamlConfigs = deduplicatedJsonConfigs.map((c11) => {
+    const { warnings, yamlConfig } = convertJsonMcpConfigToYamlMcpConfig(
+      c11.name,
+      c11.mcpJson
+    );
+    return {
+      warnings,
+      yamlConfig: {
+        ...yamlConfig,
+        sourceFile: c11.uri
+      }
+    };
+  });
+  const mcpServers = yamlConfigs.map((c11) => {
+    errors2.push(
+      ...c11.warnings.map((warning2) => ({
+        fatal: false,
+        message: warning2,
+        uri: c11.yamlConfig.sourceFile
+      }))
+    );
+    return convertYamlMcpConfigToInternalMcpOptions(
+      c11.yamlConfig,
+      globalRequestOptions
+    );
+  });
+  return {
+    mcpServers,
+    errors: errors2
+  };
+}
+var JSONC2, import_ignore16;
+var init_loadJsonMcpConfigs = __esm({
+  "../../core/context/mcp/json/loadJsonMcpConfigs.ts"() {
+    "use strict";
+    init_importMetaUrl();
+    init_dist17();
+    JSONC2 = __toESM(require_src2(), 1);
+    import_ignore16 = __toESM(require_ignore(), 1);
+    init_yamlToContinueConfig();

@@ -1,0 +1,63 @@
+{
+  "slug": "conversion-fails",
+  "title": "What to Do When Conversion Fails",
+  "description": "Troubleshoot common conversion failures with practical checks that help you identify file issues, browser problems, and format mismatches.",
+  "category": "Troubleshooting",
+  "topics": ["troubleshooting", "errors", "support"],
+  "author": "Converigo",
+  "date_published": "2026-07-07",
+  "date_modified": "2026-07-21",
+  "read_time_minutes": 7,
+  "keywords": ["conversion fails", "troubleshooting conversion", "file conversion issues"],
+  "seo_keywords": ["conversion fails", "fix file conversion errors", "troubleshoot conversion"],
+  "og_image": "/static/images/og-conversion-fails.png",
+  "og_image_alt": "Troubleshooting guide for conversion failures",
+  "canonical": "/learning/conversion-fails",
+  "featured": false,
+  "order": 8,
+  "related_formats": ["pdf", "jpg", "mp3"],
+  "related_converters": ["pdf-to-jpg", "png-to-jpg", "mp4-to-mp3"],
+  "related_articles": ["getting-started", "batch-conversion-workflow", "pdf-workflow-checklist"],
+  "sections": [
+    {
+      "id": "check-the-file",
+      "title": "Check the source file",
+      "content": "A damaged, encrypted, or oversized file can stop conversion before it starts. Verify that the file opens normally and is not protected by unusual restrictions."
+    },
+    {
+      "id": "verify-format-support",
+      "title": "Verify format support",
+      "content": "Some converters support certain source and target combinations better than others. Confirm that the file type and output target are compatible with your chosen workflow."
+    },
+    {
+      "id": "retry-with-a-clean-browser-session",
+      "title": "Retry with a clean browser session",
+      "content": "Browser caching and temporary storage issues can interfere with processing. A fresh session or a simple retry often resolves transient failures."
+    }
+  ],
+  "faq": [
+    {
+      "question": "What is the first thing I should check?",
+      "answer": "Verify that the uploaded file opens normally and is not corrupted, locked, or protected."
+    },
+    {
+      "question": "Can unsupported formats cause failure?",
+      "answer": "Yes. If the source or target format is not supported by the selected converter, the process may fail."
+    },
+    {
+      "question": "Should I retry immediately?",
+      "answer": "Sometimes, but it is also useful to confirm the file itself is valid before trying again."
+    }
+  ],
+  "call_to_action": {
+    "text": "Need help getting a conversion to work?",
+    "url": "/tools/pdf-to-jpg",
+    "button_text": "Try the converter"
+  },
+  "breadcrumb_override": [
+    {"name": "Home", "url": "/"},
+    {"name": "Learning", "url": "/learning"},
+    {"name": "Troubleshooting", "url": "/learning/categories/troubleshooting"},
+    {"name": "What to Do When Conversion Fails", "url": "/learning/conversion-fails"}
+  ]
+}

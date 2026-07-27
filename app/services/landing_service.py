@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Any
 
 from app.services.converter_data_service import ConverterDataService
-from app.services.seo_service import SeoService
+from app.services.seo_service import PRODUCTION_BASE_URL, SeoService
 
 
 class LandingContractError(ValueError):
@@ -403,6 +403,10 @@ class LandingPageBuilder:
         seo_data = self.seo_service.build_tool_meta(request, tool_data, canonical_path=canonical_path)
         if meta_overrides:
             seo_data.update(meta_overrides)
+
+        resolved_path = canonical_path or f"/tools/{tool_data.get('slug', '')}"
+        seo_data["canonical"] = f"{PRODUCTION_BASE_URL}{resolved_path}"
+        seo_data["og_url"] = seo_data["canonical"]
 
         faq = self._prepare_faq(tool_data, faq_items)
         related_tools = self.converter_data_service.resolve_related_tools(tool_data, limit=4)

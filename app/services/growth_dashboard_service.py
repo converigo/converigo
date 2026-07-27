@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any, TYPE_CHECKING
 
 from app.core.registry import ConverterRegistry, registry
+from app.core.settings import settings
 from app.services.authority_service import AuthorityService
 from app.services.hub_page_service import HubPageService
 from app.services.production_audit_service import ProductionAuditService
@@ -31,7 +32,7 @@ class GrowthDashboardService:
         converter_data_dir: Path | str | None = None,
     ) -> None:
         self.registry = registry_instance or registry
-        self.output_dir = Path(output_dir or "outputs")
+        self.output_dir = Path(output_dir) if output_dir is not None else settings.OUTPUT_DIR
         self.sitemap_service = sitemap_service or SitemapService(output_dir=self.output_dir / "sitemaps", registry_instance=self.registry)
         self.hub_service = HubPageService(registry_instance=self.registry)
         self.seo_service = ProgrammaticSEOService(

@@ -328,6 +328,25 @@ class TestPluginValidationService:
 
         assert "missing-plugin" in missing
 
+    def test_office_document_converters_have_plugins(self) -> None:
+        """Regression test for office document converter coverage."""
+        service = PluginValidationService(Path("app/data/converters"))
+        missing = service.check_missing_plugins()
+
+        for slug in [
+            "docx-to-jpg",
+            "docx-to-ppt",
+            "docx-to-xlsx",
+            "pdf-to-word",
+            "ppt-to-docx",
+            "ppt-to-jpg",
+            "ppt-to-xlsx",
+            "word-to-pdf",
+            "xlsx-to-docx",
+            "xlsx-to-ppt",
+        ]:
+            assert slug not in missing, f"Expected plugin coverage for {slug}"
+
     def test_validate_all_returns_results_for_all_converters(self, tmp_path: Path) -> None:
         """Test validate_all processes all active converters."""
         data_dir = tmp_path

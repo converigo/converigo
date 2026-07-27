@@ -62,6 +62,8 @@ class ConverterController {
             const current = parseInt(this.progressBar?.style.width || '0', 10) || 0;
             const next = current + (current < 70 ? 8 : 2);
             this.setProgress(next);
+            // Emit progress events for DevTools verification
+            try { window.dispatchEvent(new CustomEvent('upload-progress', { detail: { progress: Math.min(100, next) } })); } catch (e) {}
             if (current >= 90) {
                 clearInterval(this.progressTimer);
             }
@@ -78,10 +80,16 @@ class ConverterController {
             this.convertProgress.hidden = true;
             this.convertProgress.setAttribute("aria-hidden", "true");
         }
+        // Dispatch upload-finished for observability with success flag
+        try { window.dispatchEvent(new CustomEvent('upload-finished', { detail: { success: !!complete } })); } catch (e) {}
     }
 
     init() {
         console.log("Converter controller ready");
+
+        this._findUploadCard = function() {
+            return document.querySelector('.upload-card') || document.querySelector('#converter') || document.querySelector('.homepage-upload-card') || document.querySelector('.upload-wrapper');
+        };
 
         if (this.convertBtn) {
             this.convertBtn.addEventListener("click", () => {
@@ -162,9 +170,35 @@ class ConverterController {
             return;
         }
         const context = window.converigoAnalytics.getConverterContext();
-        window.converigoAnalytics.trackEvent('conversion_completed', {
+        window.converigoAnalytics.trackEvent('conversion_success', {
             converter_name: context.converter_name,
-            output_format: this.selectedFormat || ''
+            output_format: this.selectedFormat || '',
+            event_status: 'success'
+        });
+    }
+
+    _trackConversionStarted(){
+        if(!window.converigoAnalytics || typeof window.converigoAnalytics.trackEvent !== 'function'){
+            return;
+        }
+        const context = window.converigoAnalytics.getConverterContext();
+        window.converigoAnalytics.trackEvent('conversion_start', {
+            converter_name: context.converter_name,
+            output_format: this.selectedFormat || '',
+            event_status: 'started'
+        });
+    }
+
+    _trackConversionFailed(errorMessage){
+        if(!window.converigoAnalytics || typeof window.converigoAnalytics.trackEvent !== 'function'){
+            return;
+        }
+        const context = window.converigoAnalytics.getConverterContext();
+        window.converigoAnalytics.trackEvent('conversion_failed', {
+            converter_name: context.converter_name,
+            output_format: this.selectedFormat || '',
+            error_type: errorMessage || 'conversion_error',
+            event_status: 'failure'
         });
     }
 
@@ -189,6 +223,24 @@ class ConverterController {
             if (window.conversionStateController && typeof window.conversionStateController.setConversionState === 'function') {
                 window.conversionStateController.setConversionState(window.conversionStateController.ConversionState.CONVERTING);
             }
+
+            // UI: indicate uploading/processing state on the upload card
+            try {
+                const uploadCard = (this._findUploadCard && typeof this._findUploadCard === 'function') ? this._findUploadCard() : (document.querySelector('.upload-card') || document.querySelector('#converter') || document.querySelector('.homepage-upload-card') || document.querySelector('.upload-wrapper'));
+                if (uploadCard) {
+                    uploadCard.classList.remove('state-success');
+                    uploadCard.classList.add('state-uploading');
+                }
+                // Broadcast an explicit upload-started event for runtime observability
+                try { window.dispatchEvent(new CustomEvent('upload-started', { detail: { files: this.files } })); } catch (e) {}
+                // fade the primary heading to indicate work in progress
+                const heading = document.querySelector('.drop-zone .drop-zone-copy h2');
+                if (heading) {
+                    heading.style.transition = 'opacity 220ms ease';
+                    heading.style.opacity = '0.4';
+                }
+            } catch (e) { /* non-fatal UI enhancement */ }
+            this._trackConversionStarted();
             if (this.convertBtn) {
                 this.convertBtn.disabled = true;
                 this.convertBtn.classList.add("loading");
@@ -273,6 +325,16 @@ class ConverterController {
             if (window.downloadManager) {
                 window.downloadManager.prepare(data);
             }
+
+            // UX-S2-005: Dispatch conversion-completed event for recommendations
+            window.dispatchEvent(
+                new CustomEvent('conversion-completed', {
+                    detail: {
+                        outputFormat: this.selectedFormat || '',
+                        success: true
+                    }
+                })
+            );
             if (window.uploadManager && typeof window.uploadManager.showResult === 'function') {
                 // Show result for all converted files
                 for (const file of this.files) {
@@ -305,6 +367,7 @@ class ConverterController {
                 this.message.textContent = errorMessage;
                 this.message.classList.add("error");
             }
+            this._trackConversionFailed(errorMessage);
             if (window.uploadManager && typeof window.uploadManager.showError === 'function') {
                 window.uploadManager.showError(errorMessage);
             }
@@ -325,6 +388,28 @@ class ConverterController {
             if (wasSuccess && window.conversionStateController && typeof window.conversionStateController.setConversionState === 'function') {
                 window.conversionStateController.setConversionState(window.conversionStateController.ConversionState.SUCCESS);
             }
+            // UI: mark success state and show "Ready to Convert" in heading without layout shift
+            try {
+                const uploadCard = (this._findUploadCard && typeof this._findUploadCard === 'function') ? this._findUploadCard() : (document.querySelector('.upload-card') || document.querySelector('#converter') || document.querySelector('.homepage-upload-card') || document.querySelector('.upload-wrapper'));
+                if (uploadCard) {
+                    uploadCard.classList.remove('state-uploading');
+                    uploadCard.classList.add('state-success');
+                }
+                const heading = document.querySelector('.drop-zone .drop-zone-copy h2');
+                if (heading) {
+                    // smooth text swap: fade out, change, fade in
+                    heading.style.transition = 'opacity 260ms ease';
+                    heading.style.opacity = '0';
+                    setTimeout(() => {
+                        try {
+                            heading.textContent = window.translate('upload.ready_to_convert', 'Ready to Convert');
+                            heading.style.opacity = '1';
+                        } catch (e) {}
+                    }, 260);
+                }
+                // conversion-ready event for final UI-ready state
+                try { window.dispatchEvent(new CustomEvent('conversion-ready', { detail: { outputFormat: this.selectedFormat || '', success: wasSuccess } })); } catch (e) {}
+            } catch (e) { /* non-fatal UI enhancement */ }
         }
     }
 }

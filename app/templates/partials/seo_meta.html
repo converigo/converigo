@@ -6,6 +6,9 @@
 
 {% set current_path = request.url.path if request is defined and request.url is defined else '/' %}
 {% set page_canonical = page_meta.canonical | default('https://converigo.com' ~ current_path) %}
+{% if current_path.startswith('/tools/') %}
+{% set page_canonical = 'https://converigo.com' ~ current_path %}
+{% endif %}
 
 {% set page_keywords = page_meta.keywords | default('convert files, file conversion, online converter, convert video, convert image') %}
 
@@ -44,6 +47,21 @@
 
 <meta name="robots" content="{{ page_robots }}">
 
+{% set verification_token_value = verification_token | default('') %}
+{% if request is defined and request.state is defined and request.state.verification_token is defined %}
+{% set verification_token_value = request.state.verification_token %}
+{% endif %}
+{% if verification_token_value %}
+<meta name="google-site-verification" content="{{ verification_token_value }}">
+{% endif %}
+
+{% set bing_verification_token_value = bing_verification_token | default('') %}
+{% if request is defined and request.state is defined and request.state.bing_verification_token is defined %}
+{% set bing_verification_token_value = request.state.bing_verification_token %}
+{% endif %}
+{% if bing_verification_token_value %}
+<meta name="msvalidate.01" content="{{ bing_verification_token_value }}">
+{% endif %}
 
 <link rel="canonical" href="{{ page_canonical }}">
 

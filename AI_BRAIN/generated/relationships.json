@@ -1,0 +1,3463 @@
+{
+  "inputs": {
+    "project_index": "ok",
+    "routes": "ok",
+    "services": "ok",
+    "converters": "ok",
+    "import_map": "ok"
+  },
+  "totals": {
+    "module_count": 356,
+    "relationship_count": 431
+  },
+  "relationships": [
+    {
+      "source_type": "converter",
+      "source": "AVIFToJPGPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:image/avif_to_jpg",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "BMPToJPGPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:image/bmp_to_jpg",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "BMPToPNGPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:image/bmp_to_png",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "BMPToWEBPPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:image/bmp_to_webp",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "ExcelToPDFPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:document/excel_to_pdf",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "GZExtractPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:archive/gz_extract",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "HEICToJPGPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:image/heic_to_jpg",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "JPGToICOPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:image/jpg_to_ico",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "JPGToPDFPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:document/jpg_to_pdf",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "JPGToPNGPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:image/jpg_to_png",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "JPGToTIFFPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:image/jpg_to_tiff",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "JPGToWEBPPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:image/jpg_to_webp",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "MP3ToWAVPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:audio/mp3_to_wav",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "MP4ToAACPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:video/mp4_to_aac",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "MP4ToFLACPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:video/mp4_to_flac",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "MP4ToM4APlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:video/mp4_to_m4a",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "MP4ToMP3Plugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:video/mp4_to_mp3",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "MP4ToOGGPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:video/mp4_to_ogg",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "MP4ToWAVPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:video/mp4_to_wav",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "ODSToXLSXPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:document/ods_to_xlsx",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "ODTToPDFPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:document/odt_to_pdf",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "PDFCompressPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:document/pdf_compress",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "PDFMergePlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:document/pdf_merge",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "PDFSplitPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:document/pdf_split",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "PDFToExcelPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:document/pdf_to_excel",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "PDFToJPGPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:document/pdf_to_jpg",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "PDFToODTPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:document/pdf_to_odt",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "PDFToPPTPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:document/pdf_to_ppt",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "PDFToWordPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:document/pdf_to_word",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "PNGToBMPPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:image/png_to_bmp",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "PNGToICOPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:image/png_to_ico",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "PNGToJPGPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:image/png_to_jpg",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "PNGToTIFFPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:image/png_to_tiff",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "PNGToWEBPPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:image/png_to_webp",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "PPTToPDFPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:document/ppt_to_pdf",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "RARExtractPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:archive/rar_extract",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "SVGToPNGPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:image/svg_to_png",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "SevenZExtractPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:archive/7z_extract",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "TARExtractPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:archive/tar_extract",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "TIFFToJPGPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:image/tiff_to_jpg",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "TIFFToPNGPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:image/tiff_to_png",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "WEBPToICOPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:image/webp_to_ico",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "WEBPToJPGPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:image/webp_to_jpg",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "WEBPToPNGPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:image/webp_to_png",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "WEBPToTIFFPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:image/webp_to_tiff",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "WordToPDFPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:document/word_to_pdf",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "XLSXToODSPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:document/xlsx_to_ods",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "ZIPExtractPlugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:archive/zip_extract",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "converter",
+      "source": "base_plugin",
+      "relationship": "converter_to_plugin",
+      "target_type": "plugin",
+      "target": "plugin:root/base_plugin",
+      "evidence": "converters.category+source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/bootstrap.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "PluginRegistry",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/main.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /apple-touch-icon.png",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/main.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /download/{path:path}",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/main.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /health",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/main.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /metrics",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/main.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /ready",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/main.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /static/site.webmanifest",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/main.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "AnalyticsService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/main.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "CleanupService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/main.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "LanguageManager",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/main.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "UnsupportedConversionError",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/pipeline/steps/convert_step.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "PluginRegistry",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/recommendation/engine.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterRegistryService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/comparison.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /mp3-vs-wav",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/comparison.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /mp4-vs-mov",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/comparison.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /pdf-vs-docx",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/comparison.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /png-vs-jpg",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/comparison.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /webp-vs-png",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/comparison.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ComparisonService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/comparison.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "LanguageService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/comparison.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SeoService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/convert.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "POST",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/convert.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "AnalyticsService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/convert.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "UnsupportedConversionError",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/convert.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "UploadService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/dashboard.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /dashboard/api/search-console-readiness",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/dashboard.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /dashboard/api/seo-audit",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/dashboard.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /dashboard/seo-operations",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/dashboard.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "AnalyticsService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/dashboard.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ArticleService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/dashboard.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterRegistryService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/dashboard.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "GrowthDashboardService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/dashboard.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "LanguageService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/dashboard.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SearchConsoleReadinessService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/dashboard.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SeoAuditEngine",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/dashboard.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SeoService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/formats.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /formats",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/formats.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /formats/{format_name}",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/formats.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "AuthorityService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/formats.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterRegistryService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/formats.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "FormatKnowledgeService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/formats.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "InternalLinkService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/formats.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "LanguageService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/formats.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SeoService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/home.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/home.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /about",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/home.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /audio-conversion",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/home.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /blog",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/home.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /blog/{slug}",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/home.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /contact",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/home.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /cookies",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/home.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /document-conversion",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/home.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /image-conversion",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/home.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /jpg-to-pdf",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/home.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /jpg-to-png",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/home.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /mp4-to-mp3",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/home.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /pdf-conversion",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/home.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /pdf-to-jpg",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/home.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /png-to-jpg",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/home.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /png-to-webp",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/home.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /pricing",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/home.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /privacy",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/home.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /privacy-policy",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/home.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /terms",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/home.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /video-conversion",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/home.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /webp-to-jpg",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/home.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /webp-to-png",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/home.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /word-to-pdf",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/home.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /{slug}",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/home.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterDataService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/home.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "HubService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/home.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "LanguageService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/home.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SeoService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/learning.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /learning",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/learning.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /learning/{slug}",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/learning.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ArticleService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/learning.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "InternalLinkService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/learning.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "LanguageService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/learning.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SeoService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/plugins.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/recommend.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /{source_format}",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/seo.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /robots.txt",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/seo.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /sitemap.xml",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/seo.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SeoService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/tools.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/tools.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "GET /{slug}",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/tools.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterDataService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/tools.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "InternalLinkService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/tools.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "LandingPageBuilder",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/tools.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "LanguageService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/tools.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SeoService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/upload.py",
+      "relationship": "module_to_router",
+      "target_type": "router",
+      "target": "POST",
+      "evidence": "routes.source_file"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/upload.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "AnalyticsService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/routers/upload.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "UploadService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/analytics_intelligence_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "AnalyticsService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/article_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ArticleSchemaValidator",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/authority_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterRegistryService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/comparison_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "AuthorityService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/comparison_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterDataService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/comparison_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterRegistryService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/comparison_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "KnowledgeService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/comparison_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "LandingPageBuilder",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/comparison_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ProgrammaticSEOService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/comparison_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "RelatedConverterService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/comparison_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SeoService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/content_quality_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ComparisonService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/content_quality_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterRegistryService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/content_quality_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "InternalLinkService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/content_quality_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "KnowledgeService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/content_quality_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ProgrammaticSeoEngine",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/content_quality_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "TopicClusterService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/converter_data_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterRegistryService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/converter_data_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "RelatedConverterService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/converter_expansion_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ComparisonService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/converter_expansion_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ContentQualityService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/converter_expansion_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterRegistryService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/converter_expansion_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "InternalLinkService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/converter_expansion_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "KnowledgeService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/converter_expansion_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ProgrammaticSeoEngine",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/converter_expansion_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "TopicClusterService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/deployment_validation_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ContentQualityService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/deployment_validation_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterDataService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/deployment_validation_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterRegistryService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/deployment_validation_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "HubPageService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/deployment_validation_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ProductionAuditService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/deployment_validation_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ProgrammaticSeoEngine",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/deployment_validation_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SeoPublicationGateService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/deployment_validation_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SeoService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/deployment_validation_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SitemapService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/deployment_validation_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "TopicClusterService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/deployment_validation_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ValidationResult",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/format_knowledge_generator.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "knowledge_schema",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/format_knowledge_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "knowledge_schema",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/growth_dashboard_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "AuthorityService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/growth_dashboard_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ContentQualityService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/growth_dashboard_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterMetadata",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/growth_dashboard_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "HubPageService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/growth_dashboard_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "InternalLinkService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/growth_dashboard_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ProductionAuditService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/growth_dashboard_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ProgrammaticSEOService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/growth_dashboard_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ProgrammaticSeoEngine",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/growth_dashboard_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SitemapService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/growth_dashboard_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "TopicClusterService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/hub_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterDataService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/internal_link_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "AuthorityService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/internal_link_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ComparisonService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/internal_link_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterDataService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/internal_link_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterRegistryService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/internal_link_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "HubPageService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/internal_link_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "KnowledgeService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/internal_link_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "LandingPageBuilder",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/internal_link_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "RelatedConverterService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/internal_link_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SeoService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/knowledge_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterRegistryService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/knowledge_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "knowledge_schema",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/landing_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterDataService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/landing_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SeoService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/language_manager.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "LanguageService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/plugin_validation_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterDataService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/plugin_validation_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "HubService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/plugin_validation_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "RecommendationService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/plugin_validation_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SeoService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/production_audit_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "AuthorityService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/production_audit_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ContentQualityService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/production_audit_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterDataService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/production_audit_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterRegistryService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/production_audit_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "HubPageService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/production_audit_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "InternalLinkService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/production_audit_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "KnowledgeService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/production_audit_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "LandingPageBuilder",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/production_audit_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ProgrammaticSeoEngine",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/production_audit_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "RelatedConverterService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/production_audit_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SeoService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/production_audit_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SitemapService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/production_audit_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "TopicClusterService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/programmatic_seo_engine.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "AuthorityService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/programmatic_seo_engine.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ComparisonService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/programmatic_seo_engine.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ContentQualityService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/programmatic_seo_engine.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterDataService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/programmatic_seo_engine.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterRegistryService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/programmatic_seo_engine.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "InternalLinkService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/programmatic_seo_engine.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "KnowledgeService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/programmatic_seo_engine.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "LandingPageBuilder",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/programmatic_seo_engine.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SeoService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/programmatic_seo_engine.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "TopicClusterService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/programmatic_seo_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterRegistryService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/recommendation_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterDataService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/related_converter_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterDataService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/seo_audit_engine.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterDataService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/seo_audit_engine.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterRegistryService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/seo_audit_engine.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "InternalLinkService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/seo_audit_engine.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SeoService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/seo_content_enhancement_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterRegistryService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/seo_content_enhancement_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "InternalLinkService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/seo_publication_gate_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ContentQualityService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/seo_publication_gate_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ProgrammaticSeoEngine",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/seo_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ArticleService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/seo_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterDataService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/topic_cluster_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "AuthorityService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/topic_cluster_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ComparisonService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/topic_cluster_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterDataService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/topic_cluster_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterRegistryService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/topic_cluster_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "InternalLinkService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/topic_cluster_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "KnowledgeService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/topic_cluster_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "LandingPageBuilder",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "app/services/topic_cluster_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SeoService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "enhance_all_converters.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SeoContentEnhancementService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "generate_readiness_report.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SearchConsoleReadinessService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "health_check.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterRegistryService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "repro_conversion.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "UnsupportedConversionError",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "repro_conversion.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "UploadService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "run_readiness_comparison.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SearchConsoleReadinessService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "scripts/generate_seo_reports.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ArticleService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "scripts/generate_seo_reports.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "AuthorityService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "scripts/generate_seo_reports.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ComparisonService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "scripts/generate_seo_reports.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterDataService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "scripts/generate_seo_reports.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "InternalLinkService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "scripts/generate_seo_reports.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "LanguageService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "scripts/generate_seo_reports.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SeoService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "scripts/print_audit.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ProductionAuditService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "scripts/real_conversion_validation.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "PluginRegistry",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "scripts/run_deployment_validation.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "DeploymentValidationService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_analytics_import.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "AnalyticsService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_analytics_intelligence.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "AnalyticsIntelligenceService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_analytics_intelligence.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "AnalyticsService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_analytics_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "AnalyticsService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_archive_converter_cluster.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterDataService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_archive_converter_cluster.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterRegistryService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_archive_converter_cluster.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ProductionAuditService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_archive_converter_cluster.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "RelatedConverterService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_article_schema.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ArticleSchemaValidator",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_article_schema.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ArticleService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_article_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ArticleService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_authority_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "AuthorityService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_comparison_engine.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ComparisonService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_content_quality_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ContentQualityService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_content_quality_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "GrowthDashboardService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_content_quality_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ProductionAuditService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_content_quality_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ProgrammaticSeoEngine",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_conversion_timeout.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "UnsupportedConversionError",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_converter_catalog_ranking.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterDataService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_converter_expansion_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterMetadata",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_converter_registry_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterRegistryService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_deployment_validation_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "DeploymentValidationService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_formats_pages.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "AuthorityService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_growth_dashboard_production_audit.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "GrowthDashboardService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_growth_dashboard_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "GrowthDashboardService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_growth_dashboard_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SitemapService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_hub_page_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "HubPageService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_image_cluster.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterDataService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_image_cluster.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterRegistryService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_image_cluster.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "LandingPageBuilder",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_image_cluster.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "RelatedConverterService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_image_cluster.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SeoService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_internal_link_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "GrowthDashboardService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_internal_link_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "InternalLinkService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_internal_link_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ProductionAuditService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_knowledge_schema.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "KnowledgeService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_knowledge_schema.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "knowledge_schema",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_knowledge_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterRegistryService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_knowledge_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "KnowledgeService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_landing_contract.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterDataService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_landing_contract.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "LandingPageBuilder",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_landing_contract.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SeoService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_mp4_audio_cluster.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterDataService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_mp4_audio_cluster.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterRegistryService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_mp4_audio_cluster.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "LandingPageBuilder",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_mp4_audio_cluster.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SeoService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_office_converter_cluster.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterDataService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_office_converter_cluster.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterRegistryService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_office_converter_cluster.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "HubPageService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_office_converter_cluster.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "KnowledgeService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_office_converter_cluster.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "LandingPageBuilder",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_office_converter_cluster.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ProductionAuditService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_office_converter_cluster.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "RelatedConverterService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_office_converter_cluster.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SeoService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_office_converter_cluster.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SitemapService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_output_cleanup.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "CleanupService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_pdf_cluster.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterDataService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_pdf_cluster.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterRegistryService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_pdf_cluster.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "LandingPageBuilder",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_pdf_cluster.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "RelatedConverterService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_pdf_cluster.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SeoService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_plugin_validation_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterDataService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_plugin_validation_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ValidationResult",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_production_audit_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ProductionAuditService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_programmatic_seo_engine.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "GrowthDashboardService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_programmatic_seo_engine.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ProductionAuditService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_programmatic_seo_engine.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ProgrammaticSeoEngine",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_programmatic_seo_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ProgrammaticSEOService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_recommendation_certified_only.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterRegistryService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_recommendation_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterDataService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_recommendation_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "RecommendationService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_recommendations.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "RecommendationService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_related_converter_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterDataService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_related_converter_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "RelatedConverterService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_search_console_readiness.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SearchConsoleReadinessService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_seo_audit_engine.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "AnalyticsService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_seo_audit_engine.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterRegistryService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_seo_audit_engine.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SeoAuditEngine",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_seo_urls.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SeoService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_sitemap_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SitemapService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_supported_converter_filtering.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterDataService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_topic_cluster_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "GrowthDashboardService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_topic_cluster_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ProductionAuditService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_topic_cluster_service.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "TopicClusterService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_traffic_batch_001.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterDataService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_traffic_batch_001.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ValidationResult",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_upload_security.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "UnsupportedConversionError",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tests/test_upload_security.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "UploadService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tmp_disabled/test_recommendations.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "RecommendationService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tmp_execution_007.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ContentQualityService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tmp_execution_007.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ProgrammaticSeoEngine",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tmp_execution_008_analysis.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ContentQualityService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tmp_execution_008_analysis2.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ContentQualityService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tmp_seo_audit.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ArticleService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tmp_seo_audit.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "AuthorityService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tmp_seo_audit.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterDataService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tmp_seo_audit.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterRegistryService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tmp_seo_audit.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "InternalLinkService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tmp_seo_audit.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ProductionAuditService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tmp_seo_audit.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SeoService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "tmp_seo_audit.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "SitemapService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "module",
+      "source": "validate_release_candidate.py",
+      "relationship": "module_to_service",
+      "target_type": "service",
+      "target": "ConverterRegistryService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/main.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "AnalyticsService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/main.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "CleanupService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/main.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "LanguageManager",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/main.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "UnsupportedConversionError",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/comparison.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "ComparisonService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/comparison.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "LanguageService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/comparison.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "SeoService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/convert.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "AnalyticsService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/convert.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "UnsupportedConversionError",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/convert.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "UploadService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/dashboard.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "AnalyticsService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/dashboard.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "ArticleService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/dashboard.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "ConverterRegistryService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/dashboard.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "GrowthDashboardService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/dashboard.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "LanguageService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/dashboard.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "SearchConsoleReadinessService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/dashboard.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "SeoAuditEngine",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/dashboard.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "SeoService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/formats.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "AuthorityService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/formats.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "ConverterRegistryService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/formats.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "FormatKnowledgeService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/formats.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "InternalLinkService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/formats.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "LanguageService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/formats.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "SeoService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/home.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "ConverterDataService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/home.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "HubService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/home.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "LanguageService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/home.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "SeoService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/learning.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "ArticleService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/learning.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "InternalLinkService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/learning.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "LanguageService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/learning.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "SeoService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/seo.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "SeoService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/tools.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "ConverterDataService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/tools.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "InternalLinkService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/tools.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "LandingPageBuilder",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/tools.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "LanguageService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/tools.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "SeoService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/upload.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "AnalyticsService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "router",
+      "source": "app/routers/upload.py",
+      "relationship": "router_to_service",
+      "target_type": "service",
+      "target": "UploadService",
+      "evidence": "import_map.module=app.services.*"
+    },
+    {
+      "source_type": "service",
+      "source": "ConversionError",
+      "relationship": "service_to_converter",
+      "target_type": "converter",
+      "target": "registry",
+      "evidence": "import_map.module=app.plugins.*"
+    },
+    {
+      "source_type": "service",
+      "source": "ConversionManager",
+      "relationship": "service_to_converter",
+      "target_type": "converter",
+      "target": "ConverterPlugin",
+      "evidence": "import_map.module=app.plugins.*"
+    },
+    {
+      "source_type": "service",
+      "source": "ConversionManager",
+      "relationship": "service_to_converter",
+      "target_type": "converter",
+      "target": "discover_plugin_classes",
+      "evidence": "import_map.module=app.plugins.*"
+    },
+    {
+      "source_type": "service",
+      "source": "ConversionService",
+      "relationship": "service_to_converter",
+      "target_type": "converter",
+      "target": "registry",
+      "evidence": "import_map.module=app.plugins.*"
+    },
+    {
+      "source_type": "service",
+      "source": "ConverterDataService",
+      "relationship": "service_to_converter",
+      "target_type": "converter",
+      "target": "registry",
+      "evidence": "import_map.module=app.plugins.*"
+    },
+    {
+      "source_type": "service",
+      "source": "EngineRegistry",
+      "relationship": "service_to_converter",
+      "target_type": "converter",
+      "target": "ConverterPlugin",
+      "evidence": "import_map.module=app.plugins.*"
+    },
+    {
+      "source_type": "service",
+      "source": "EngineRegistry",
+      "relationship": "service_to_converter",
+      "target_type": "converter",
+      "target": "discover_plugin_classes",
+      "evidence": "import_map.module=app.plugins.*"
+    },
+    {
+      "source_type": "service",
+      "source": "PDFEmptyError",
+      "relationship": "service_to_converter",
+      "target_type": "converter",
+      "target": "registry",
+      "evidence": "import_map.module=app.plugins.*"
+    },
+    {
+      "source_type": "service",
+      "source": "PDFPasswordProtectedError",
+      "relationship": "service_to_converter",
+      "target_type": "converter",
+      "target": "registry",
+      "evidence": "import_map.module=app.plugins.*"
+    },
+    {
+      "source_type": "service",
+      "source": "PDFValidationError",
+      "relationship": "service_to_converter",
+      "target_type": "converter",
+      "target": "registry",
+      "evidence": "import_map.module=app.plugins.*"
+    },
+    {
+      "source_type": "service",
+      "source": "PluginRegistry",
+      "relationship": "service_to_converter",
+      "target_type": "converter",
+      "target": "ConverterPlugin",
+      "evidence": "import_map.module=app.plugins.*"
+    },
+    {
+      "source_type": "service",
+      "source": "PluginRegistry",
+      "relationship": "service_to_converter",
+      "target_type": "converter",
+      "target": "discover_plugin_classes",
+      "evidence": "import_map.module=app.plugins.*"
+    },
+    {
+      "source_type": "service",
+      "source": "PluginValidationService",
+      "relationship": "service_to_converter",
+      "target_type": "converter",
+      "target": "PluginRegistry",
+      "evidence": "import_map.module=app.plugins.*"
+    },
+    {
+      "source_type": "service",
+      "source": "PluginValidationService",
+      "relationship": "service_to_converter",
+      "target_type": "converter",
+      "target": "discover_plugin_classes",
+      "evidence": "import_map.module=app.plugins.*"
+    },
+    {
+      "source_type": "service",
+      "source": "RecommendationService",
+      "relationship": "service_to_converter",
+      "target_type": "converter",
+      "target": "registry",
+      "evidence": "import_map.module=app.plugins.*"
+    },
+    {
+      "source_type": "service",
+      "source": "UnsupportedConversionError",
+      "relationship": "service_to_converter",
+      "target_type": "converter",
+      "target": "registry",
+      "evidence": "import_map.module=app.plugins.*"
+    },
+    {
+      "source_type": "service",
+      "source": "ValidationResult",
+      "relationship": "service_to_converter",
+      "target_type": "converter",
+      "target": "PluginRegistry",
+      "evidence": "import_map.module=app.plugins.*"
+    },
+    {
+      "source_type": "service",
+      "source": "ValidationResult",
+      "relationship": "service_to_converter",
+      "target_type": "converter",
+      "target": "discover_plugin_classes",
+      "evidence": "import_map.module=app.plugins.*"
+    }
+  ]
+}

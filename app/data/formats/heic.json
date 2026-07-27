@@ -1,0 +1,13 @@
+{
+  "slug": "heic",
+  "name": "HEIC",
+  "extension": ".heic",
+  "mime_type": "image/heic",
+  "category": "image",
+  "description": "High Efficiency Image Container format used by Apple devices that delivers higher quality than JPG at roughly half the file size.",
+  "related_formats": ["jpg", "png", "webp"],
+  "related_converters": ["heic-to-jpg", "heic-to-png", "heic-to-pdf"],
+  "primary_keywords": ["heic file format", "heic image", "apple image format"],
+  "secondary_keywords": ["heic conversion", "heic to jpg", "iphone image format"],
+  "search_intent": ["informational", "image conversion", "mobile photography"]
+}

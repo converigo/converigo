@@ -1,0 +1,76 @@
+  if (fromGoogleMaps != null) {
+    setValueByPath(toObject, ["googleMaps"], googleMapsToMldev$4(fromGoogleMaps));
+  }
+  const fromCodeExecution = getValueByPath(fromObject, [
+    "codeExecution"
+  ]);
+  if (fromCodeExecution != null) {
+    setValueByPath(toObject, ["codeExecution"], fromCodeExecution);
+  }
+  if (getValueByPath(fromObject, ["enterpriseWebSearch"]) !== void 0) {
+    throw new Error("enterpriseWebSearch parameter is not supported in Gemini API.");
+  }
+  const fromFunctionDeclarations = getValueByPath(fromObject, [
+    "functionDeclarations"
+  ]);
+  if (fromFunctionDeclarations != null) {
+    let transformedList = fromFunctionDeclarations;
+    if (Array.isArray(transformedList)) {
+      transformedList = transformedList.map((item) => {
+        return item;
+      });
+    }
+    setValueByPath(toObject, ["functionDeclarations"], transformedList);
+  }
+  const fromGoogleSearchRetrieval = getValueByPath(fromObject, [
+    "googleSearchRetrieval"
+  ]);
+  if (fromGoogleSearchRetrieval != null) {
+    setValueByPath(toObject, ["googleSearchRetrieval"], fromGoogleSearchRetrieval);
+  }
+  if (getValueByPath(fromObject, ["parallelAiSearch"]) !== void 0) {
+    throw new Error("parallelAiSearch parameter is not supported in Gemini API.");
+  }
+  const fromUrlContext = getValueByPath(fromObject, ["urlContext"]);
+  if (fromUrlContext != null) {
+    setValueByPath(toObject, ["urlContext"], fromUrlContext);
+  }
+  const fromMcpServers = getValueByPath(fromObject, ["mcpServers"]);
+  if (fromMcpServers != null) {
+    let transformedList = fromMcpServers;
+    if (Array.isArray(transformedList)) {
+      transformedList = transformedList.map((item) => {
+        return item;
+      });
+    }
+    setValueByPath(toObject, ["mcpServers"], transformedList);
+  }
+  return toObject;
+}
+function authConfigToMldev$3(fromObject) {
+  const toObject = {};
+  const fromApiKey = getValueByPath(fromObject, ["apiKey"]);
+  if (fromApiKey != null) {
+    setValueByPath(toObject, ["apiKey"], fromApiKey);
+  }
+  if (getValueByPath(fromObject, ["apiKeyConfig"]) !== void 0) {
+    throw new Error("apiKeyConfig parameter is not supported in Gemini API.");
+  }
+  if (getValueByPath(fromObject, ["authType"]) !== void 0) {
+    throw new Error("authType parameter is not supported in Gemini API.");
+  }
+  if (getValueByPath(fromObject, ["googleServiceAccountConfig"]) !== void 0) {
+    throw new Error("googleServiceAccountConfig parameter is not supported in Gemini API.");
+  }
+  if (getValueByPath(fromObject, ["httpBasicAuthConfig"]) !== void 0) {
+    throw new Error("httpBasicAuthConfig parameter is not supported in Gemini API.");
+  }
+  if (getValueByPath(fromObject, ["oauthConfig"]) !== void 0) {
+    throw new Error("oauthConfig parameter is not supported in Gemini API.");
+  }
+  if (getValueByPath(fromObject, ["oidcConfig"]) !== void 0) {
+    throw new Error("oidcConfig parameter is not supported in Gemini API.");
+  }
+  return toObject;
+}
+function blobToMldev$3(fromObject) {

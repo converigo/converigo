@@ -7,6 +7,7 @@ from fastapi.responses import HTMLResponse
 
 from app.core.templates import templates
 from app.services.converter_data_service import ConverterDataService
+from app.services.internal_link_service import InternalLinkService
 from app.services.language_service import LanguageService
 from app.services.landing_service import LandingPageBuilder
 from app.services.seo_service import PRODUCTION_BASE_URL, SeoService
@@ -277,6 +278,11 @@ async def render_universal_tool_page(
             faq_items.append(fallback_item)
 
     page_sections = _build_tool_page_sections(tool_data)
+    breadcrumb = [
+        {"name": "Home", "url": "/"},
+        {"name": "Converters", "url": "/tools"},
+        {"name": tool_data.get("title", label or slug), "url": canonical_path or f"/{slug}"},
+    ]
     landing_context = landing_page_builder.build_context(
         request,
         tool_data,
@@ -287,9 +293,20 @@ async def render_universal_tool_page(
     related_tools = landing_context["related_tools"]
     faq_items = landing_context["faq"]
 
+    try:
+        internal_link_service = InternalLinkService(CONTRACTS_DIR)
+        internal_links = internal_link_service.get_links_for_landing(slug, tool_data)
+        if internal_links:
+            landing_context["internal_links"] = internal_links
+            if internal_links.get("related_converters"):
+                related_tools = internal_links["related_converters"]
+    except Exception:
+        pass
+
     if meta_overrides:
         seo_data.update(meta_overrides)
 
+    canonical_path = canonical_path or f"/tools/{slug}"
     if canonical_path is not None:
         seo_data["canonical"] = f"{PRODUCTION_BASE_URL}{canonical_path}"
         seo_data["og_url"] = seo_data["canonical"]

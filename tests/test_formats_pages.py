@@ -80,6 +80,8 @@ def test_format_index_and_each_format_page(tmp_path: Path, monkeypatch) -> None:
         assert payloads[fmt]["title"] in response.text
         assert payloads[fmt]["description"] in response.text
         assert payloads[fmt]["mime_type"] in response.text
+        assert "Related Format Guides" in response.text
+        assert response.text.count('href="/formats/') >= 2
 
 
 def test_format_page_404_for_unknown_format() -> None:

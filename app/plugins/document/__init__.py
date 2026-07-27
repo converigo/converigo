@@ -2,6 +2,18 @@ from __future__ import annotations
 
 from app.plugins.document.excel_to_pdf import ExcelToPDFPlugin
 from app.plugins.document.jpg_to_pdf import JPGToPDFPlugin
+from app.plugins.document.office_conversion_plugins import (
+    DOCXToJPGPlugin,
+    DOCXToPPTPlugin,
+    DOCXToXLSXPlugin,
+    PDFToWordPlugin,
+    PPTToDOCXPlugin,
+    PPTToJPGPlugin,
+    PPTToXLSXPlugin,
+    WordToPDFPlugin,
+    XLSXToDOCXPlugin,
+    XLSXToPPTPlugin,
+)
 from app.plugins.document.pdf_to_excel import PDFToExcelPlugin
 from app.plugins.document.pdf_to_ppt import PDFToPPTPlugin
 from app.plugins.document.pdf_to_word import PDFToWordPlugin
@@ -16,4 +28,12 @@ __all__ = [
     "PDFToWordPlugin",
     "PPTToPDFPlugin",
     "WordToPDFPlugin",
+    "DOCXToJPGPlugin",
+    "DOCXToPPTPlugin",
+    "DOCXToXLSXPlugin",
+    "PPTToDOCXPlugin",
+    "PPTToJPGPlugin",
+    "PPTToXLSXPlugin",
+    "XLSXToDOCXPlugin",
+    "XLSXToPPTPlugin",
 ]

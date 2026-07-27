@@ -27,7 +27,7 @@ Convert API
 ====================================================
 -->
 
-<section class="upload-wrapper">
+<section id="uploadSection" class="upload-wrapper">
 
 
 <div class="upload-main">
@@ -37,30 +37,28 @@ Convert API
 
     <div
         class="drop-zone"
-        hidden
+        id="dropZone"
         tabindex="0"
         aria-label="{{ request.state.t('upload.label', 'Upload File') }}"
     >
 
 
-        <div class="upload-icon">
-            📁
-        </div>
+        <div class="upload-icon" aria-hidden="true"></div>
 
 
         <div class="drop-zone-copy">
             <h2>
-                {{ request.state.t('upload.label', 'Upload File') }}
+                {{ request.state.t('upload.drop_title', 'Drop your file here') }}
             </h2>
 
             <p>
-                {{ request.state.t('upload.subtext', 'Drag & Drop or click') }}
+                {{ request.state.t('upload.or', 'or') }}
             </p>
         </div>
 
 
         <div class="upload-support">
-            {{ request.state.t('upload.empty_state', 'Upload a file to get format recommendations and convert it instantly.') }}
+            {{ request.state.t('upload.supports_100', 'Supports 100+ formats') }}
         </div>
 
 
@@ -84,7 +82,7 @@ Convert API
 
             id="chooseFile"
 
-            class="btn btn-success"
+            class="btn btn-primary"
 
         >
 
@@ -96,7 +94,9 @@ Convert API
     </div>
 
     <div class="upload-stage">
-        <div class="file-list" id="fileList" hidden></div>
+        <div class="file-list-panel" id="fileListPanel" hidden>
+            <div class="file-list" id="fileList" tabindex="0"></div>
+        </div>
         <div class="preview-container" id="previewContainer" hidden></div>
     </div>
 
@@ -131,8 +131,25 @@ Convert API
 </div>
 
 
-<div id="uploadHint" class="upload-hint" hidden>
-    {{ request.state.t('upload.empty_state', 'Upload a file to get format recommendations and convert it instantly.') }}
+    <div id="uploadHint" class="upload-hint" hidden>
+        {{ request.state.t('upload.supports_100', 'Supports 100+ formats') }}
+    </div>
+
+<!-- UX-S2-002 Premium Validation Experience Card -->
+<div class="validation-card" hidden>
+    <div class="validation-file-row">
+        <div class="validation-file-icon">📄</div>
+        <div class="validation-file-info">
+            <span class="validation-file-name"></span>
+            <span class="validation-file-size"></span>
+        </div>
+        <div class="validation-status-badge">{{ request.state.t('upload.validation_status_uploaded', 'Uploaded') }}</div>
+    </div>
+    <div class="validation-checklist">
+        <div class="validation-step">{{ request.state.t('upload.validation_step_received', 'File received') }}</div>
+        <div class="validation-step">{{ request.state.t('upload.validation_step_detected', 'Format detected') }}</div>
+        <div class="validation-step">{{ request.state.t('upload.validation_step_complete', 'Validation complete') }}</div>
+    </div>
 </div>
 
 
@@ -174,7 +191,7 @@ Convert API
     {{ request.state.t('upload.conversion_title', 'Convert To') }}
 </h3>
 
-    <div class="format-instruction">
+    <div id="conversionInstructionText" class="format-instruction">
         {{ request.state.t('upload.conversion_instruction', 'Convert all files to:') }}
     </div>
 
@@ -196,6 +213,16 @@ contoh:
 
 -->
 
+<input
+    type="search"
+    id="formatSearch"
+    class="format-search"
+    placeholder="Search formats"
+    autocomplete="off"
+    hidden
+    aria-label="Search formats"
+>
+
 <div
 
     id="formatOptions"
@@ -210,25 +237,29 @@ contoh:
 
 
 
-<div class="conversion-actions">
+<div class="conversion-actions" id="conversionStickyBar">
+    <div class="conversion-summary" aria-label="Conversion summary">
+        <span class="conversion-summary-label">{{ request.state.t('upload.convert_all', 'Convert All') }}</span>
+        <span class="conversion-summary-value" id="conversionSummaryOutput">—</span>
+    </div>
 
-<button
+    <button
 
-    id="convertButton"
+        id="convertButton"
 
-    class="btn btn-success"
+        class="btn btn-primary"
 
-    type="button"
+        type="button"
 
-    disabled
+        disabled
 
->
-
-
-    {{ request.state.t('upload.convert', 'Convert') }}
+    >
 
 
-</button>
+        {{ request.state.t('upload.convert', 'Convert') }}
+
+
+    </button>
 
 
 
@@ -297,5 +328,21 @@ contoh:
 
 </div>
 
+    <!-- UX-S2-005 Premium Recommendation Experience -->
+    <section
+        id="recommendationSection"
+        class="recommendation-section"
+        hidden
+        aria-label="{{ request.state.t('upload.recommended_next_label', 'Recommended next converters') }}"
+    >
+        <h3 class="recommendation-heading">
+            <span class="recommendation-heading-icon">⚡</span>
+            <span id="recommendationHeadingText">{{ request.state.t('upload.recommended_next', 'Recommended Next') }}</span>
+        </h3>
+        <div
+            id="recommendationGrid"
+            class="recommendation-grid"
+        ></div>
+    </section>
 </div>
 </section>

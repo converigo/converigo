@@ -1,22 +1,111 @@
 <section id="hero" class="hero homepage-hero">
     {% set hero = hero if hero is defined and hero is not none else {} %}
+    {% set hero_title = hero.title if hero is defined and hero is not none and hero.title is defined and hero.title else (t('hero.title', 'Convert All Files') if t is defined else 'Convert All Files') %}
+    {% set hero_description = hero.description if hero is defined and hero is not none and hero.description is defined and hero.description else (t('hero.description', 'Convert images, videos, audio, and documents online.') if t is defined else 'Convert images, videos, audio, and documents online.') %}
+    {% set hero_description_secondary = hero.description_secondary if hero is defined and hero is not none and hero.description_secondary is defined and hero.description_secondary else '' %}
     <div class="container">
         <div class="hero-container">
             <div class="hero-content">
-                <h1 class="hero-title">
-                    {{ request.state.t('hero.title', 'Convert All Files') }}
-                </h1>
+                <h1 class="hero-title">{{ hero_title }}</h1>
 
-                <p class="hero-description">
-                    {{ request.state.t('hero.description', 'Convert images, videos, audio, and documents online.') }}
-                </p>
-
-                <p class="hero-batch-hint">{{ request.state.t('hero.batch_hint', 'Supports many files at once') }}</p>
+                <p class="hero-description">{{ hero_description }}{% if hero_description_secondary %}<br>{{ hero_description_secondary }}{% endif %}</p>
             </div>
+            <div class="hero-main">
+                <div class="hero-card-group left-row" aria-hidden="true">
+                    <div class="floating-format-card card-pdf" role="presentation">
+                        <div class="file-card">
+                            <div class="floating-format-glyph">
+                                <div class="file-icon file-icon-pdf" aria-hidden="true">
+                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6 2h7l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="#EF4444"/><path d="M13 2v5h5" fill="#fff" opacity="0.9"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-            <div class="homepage-upload-card">
-                {% include "components/upload_card.html" %}
+                    <div class="floating-format-card card-docx" role="presentation">
+                        <div class="file-card">
+                            <div class="floating-format-glyph">
+                                <div class="file-icon file-icon-docx" aria-hidden="true">
+                                    <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="3" fill="#3B82F6"/><text x="50%" y="62%" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">W</text></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="floating-format-card card-xlsx" role="presentation">
+                        <div class="file-card">
+                            <div class="floating-format-glyph">
+                                <div class="file-icon file-icon-xlsx" aria-hidden="true">
+                                    <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="3" fill="#10B981"/><text x="50%" y="62%" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">X</text></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="floating-format-card card-mp3" role="presentation">
+                        <div class="file-card">
+                            <div class="floating-format-glyph">
+                                <div class="file-icon file-icon-mp3" aria-hidden="true">
+                                    <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="3" fill="#7C3AED"/><path d="M9 8v8l6-4-6-4z" fill="#fff"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="homepage-upload-card upload-card">
+                    {% include "components/upload_card.html" %}
+                </div>
+
+                <div class="hero-card-group right-row" aria-hidden="true">
+                    <div class="floating-format-card card-pptx" role="presentation">
+                        <div class="file-card">
+                            <div class="floating-format-glyph">
+                                <div class="file-icon file-icon-pptx" aria-hidden="true">
+                                    <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="3" fill="#F97316"/><text x="50%" y="62%" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">P</text></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="floating-format-card card-mp4" role="presentation">
+                        <div class="file-card">
+                            <div class="floating-format-glyph">
+                                <div class="file-icon file-icon-mp4" aria-hidden="true">
+                                    <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="3" fill="#7C3AED"/><path d="M9 8v8l6-4-6-4z" fill="#fff"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="floating-format-card card-jpg" role="presentation">
+                        <div class="file-card">
+                            <div class="floating-format-glyph">
+                                <div class="file-icon file-icon-jpg" aria-hidden="true">
+                                    <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="3" fill="#3B82F6"/><circle cx="9.5" cy="10" r="2" fill="#fff"/><path d="M16 7v8l-4-3-4 3V7" stroke="#fff" stroke-width="0.8" fill="none"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="floating-format-card card-zip" role="presentation">
+                        <div class="file-card">
+                            <div class="floating-format-glyph">
+                                <div class="file-icon file-icon-zip" aria-hidden="true">
+                                    <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="3" fill="#FBBF24"/><path d="M8 7h8v2H8zM8 11h8v6H8z" fill="#fff"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- UX-S3-001 Trust Layer Experience -->
+    {% include "components/trust_layer.html" %}
 </section>
+
+
+
+

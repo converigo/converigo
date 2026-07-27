@@ -1,0 +1,185 @@
+{
+  "title": "XLSX to DOCX Converter",
+  "description": "Convert XLSX spreadsheets to DOCX documents online for easier editing and reporting.",
+  "hero": {
+    "title": "XLSX to DOCX Converter Free Online",
+    "subtitle": "Turn spreadsheet data into Word documents.",
+    "description": "Convert  files to  online for free. Fast, secure browser-based conversion with no software installation. Get high-quality  output in seconds using Converigo."
+  },
+  "steps": [
+    "Upload your XLSX file.",
+    "Choose DOCX as output.",
+    "Download your DOCX document."
+  ],
+  "benefits": [
+    "Reuse spreadsheet data in Word",
+    "Create reports from tables",
+    "No installation required"
+  ],
+  "supported_formats": {
+    "input": [
+      ".xlsx"
+    ],
+    "output": [
+      ".docx"
+    ],
+    "description": "XLSX input, DOCX output"
+  },
+  "tips": [
+    "Review table layout in the Word document",
+    "Adjust headings after conversion",
+    "Use clearly structured spreadsheets for best results"
+  ],
+  "features": [
+    {
+      "title": "Converts tables into Word format",
+      "text": "Converts tables into Word format"
+    },
+    {
+      "title": "Preserves basic text and layout",
+      "text": "Preserves basic text and layout"
+    },
+    {
+      "title": "Produces editable DOCX output",
+      "text": "Produces editable DOCX output"
+    },
+    {
+      "title": "Fast  to  conversion",
+      "text": "Convert  to  in seconds with our optimized processing engine."
+    },
+    {
+      "title": "No software installation required",
+      "text": "Convert files directly in your browser without downloading or installing any software."
+    },
+    {
+      "title": "High-quality  output",
+      "text": "Receive a polished  file ready for immediate use in your workflow."
+    },
+    {
+      "title": "Free  to  converter",
+      "text": "Convert  to  online completely free with no registration or hidden costs."
+    },
+    {
+      "title": "Secure  processing",
+      "text": "Your  files are encrypted during upload and automatically deleted after conversion."
+    }
+  ],
+  "how_to_use": [
+    {
+      "title": "Upload your XLSX file",
+      "description": "Upload your XLSX file"
+    },
+    {
+      "title": "Select DOCX as output",
+      "description": "Select DOCX as output"
+    },
+    {
+      "title": "Download the DOCX file",
+      "description": "Download the DOCX file"
+    },
+    {
+      "title": "Upload your file",
+      "description": "Select a  file from your device to begin the conversion process."
+    },
+    {
+      "title": "Choose output as format",
+      "description": "Pick the output as your desired format and review any available options."
+    },
+    {
+      "title": "Convert  to ",
+      "description": "Click convert and our engine processes your file instantly."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "XLSX is an Excel spreadsheet format",
+      "text": "XLSX is an Excel spreadsheet format"
+    },
+    {
+      "title": "DOCX is a Word document format",
+      "text": "DOCX is a Word document format"
+    }
+  ],
+  "common_problems": [
+    "Complex formulas are not preserved",
+    "Tables may need formatting",
+    "Large workbooks can take longer to convert"
+  ],
+  "faq": [
+    {
+      "question": "Can I convert XLSX to DOCX online?",
+      "answer": "Yes, this tool converts Excel spreadsheets into Word documents directly online."
+    },
+    {
+      "question": "Will tables transfer to Word?",
+      "answer": "Tables are converted into Word table layout where possible."
+    },
+    {
+      "question": "Is this converter free?",
+      "answer": "Yes, use the XLSX to DOCX converter free for standard files."
+    },
+    {
+      "question": "Do I need Word installed?",
+      "answer": "No, the conversion runs online and produces a DOCX file to download."
+    },
+    {
+      "question": "Can I edit the generated DOCX?",
+      "answer": "Yes, open it in Word or compatible editors to make changes."
+    },
+    {
+      "question": "What file sizes are supported?",
+      "answer": "Standard XLSX files are supported; very large workbooks may take longer."
+    },
+    {
+      "question": "Does it preserve formulas?",
+      "answer": "Formulas are not preserved; value output is converted into document content."
+    },
+    {
+      "question": "Can I work with charts after conversion?",
+      "answer": "Charts may be exported as images or require manual re-creation in Word."
+    }
+  ],
+  "related_tools": [
+    "xlsx-to-pdf",
+    "docx-to-pdf",
+    "xlsx-to-ods",
+    "xlsx-to-ppt"
+  ],
+  "internal_links": {
+    "items": [
+      {
+        "title": "Document Conversion hub",
+        "href": "/document-conversion"
+      },
+      {
+        "title": "XLSX format guide",
+        "href": "/formats/xlsx"
+      },
+      {
+        "title": "DOCX format guide",
+        "href": "/formats/docx"
+      }
+    ]
+  },
+  "cta": {
+    "label": "Convert XLSX to DOCX",
+    "href": "/xlsx-to-docx"
+  },
+  "json_ld": {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "XLSX to DOCX Converter"
+  },
+  "seo": {
+    "title": "Xlsx To Docx Online Free | Converigo",
+    "description": "Convert XLSX spreadsheets to DOCX documents online for easier editing and reporting. Fast, secure and browser-based file conversion with no installation required. Try Converigo for free today.",
+    "keywords": "xlsx to docx, convert xlsx to docx, excel to word",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Converigo free online file converter",
+    "twitter_title": "Xlsx To Docx Online Free | Converigo",
+    "twitter_description": "Convert XLSX spreadsheets to DOCX documents online for easier editing and reporting. Fast, secure and browser-based file conversion with no installation required. Try Converigo for free today.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/xlsx-to-docx"
+  },
+  "lifecycle_status": "deprecated"
+}

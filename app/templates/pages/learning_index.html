@@ -1,0 +1,103 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}{{ meta.title }}{% endblock %}
+
+{% block content %}
+{% include "components/header.html" %}
+
+<main class="main" role="main">
+    <section class="hero section">
+        <div class="container hero-inner">
+            <div class="hero-copy">
+                <span class="eyebrow">Learning Center</span>
+                <h1 class="hero-title">Practical guides for file conversion and format workflows</h1>
+                <p class="hero-sub">Browse beginner-friendly articles, step-by-step guides, and practical tips that help you get more from Converigo.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-white">
+        <div class="container">
+            <div class="card card-lg">
+                <div class="section-header">
+                    <h2>Search learning resources</h2>
+                    <p>Use the search experience later to discover articles by topic, converter, or format.</p>
+                </div>
+                <form class="card" style="padding: 1rem;" aria-label="Learning Center search placeholder">
+                    <label class="sr-only" for="learning-search">Search learning articles</label>
+                    <input id="learning-search" type="text" placeholder="Search articles" disabled>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    {% set categories = namespace(items=[]) %}
+    {% for article in articles %}
+        {% if article.category not in categories.items %}
+            {% set categories.items = categories.items + [article.category] %}
+        {% endif %}
+    {% endfor %}
+
+    {% if categories.items %}
+    <section class="section">
+        <div class="container">
+            <div class="card card-lg">
+                <div class="section-header">
+                    <h2>Categories</h2>
+                    <p>Browse articles by the main learning category.</p>
+                </div>
+                <div class="popular-tools-grid">
+                    {% for category in categories.items %}
+                    <article class="card">
+                        <h3>{{ category }}</h3>
+                        <p>Explore articles in this learning category.</p>
+                    </article>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    {% if articles %}
+    <section class="section section-white">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured article</h2>
+                <p>The most relevant starting point for new readers.</p>
+            </div>
+            {% set featured_article = articles[0] %}
+            <article class="card card-lg">
+                <p class="eyebrow">{{ featured_article.category|default('Learning') }}</p>
+                <h3><a href="/learning/{{ featured_article.slug }}">{{ featured_article.title }}</a></h3>
+                <p>{{ featured_article.description }}</p>
+                <a href="/learning/{{ featured_article.slug }}">Read article</a>
+            </article>
+        </div>
+    </section>
+    {% endif %}
+
+    <section class="section">
+        <div class="container">
+            <div class="card card-lg">
+                <div class="section-header">
+                    <h2>All articles</h2>
+                    <p>Browse the current Learning Center collection.</p>
+                </div>
+                <div class="popular-tools-grid">
+                    {% for article in articles %}
+                    <article class="card">
+                        <p class="eyebrow">{{ article.category|default('Learning') }}</p>
+                        <h3><a href="/learning/{{ article.slug }}">{{ article.title }}</a></h3>
+                        <p>{{ article.description }}</p>
+                        <a href="/learning/{{ article.slug }}">Open article</a>
+                    </article>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% include "components/footer.html" %}
+{% endblock %}

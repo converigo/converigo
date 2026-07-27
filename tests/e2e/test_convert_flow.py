@@ -1,10 +1,16 @@
 import os
 from pathlib import Path
 
+import pytest
 from playwright.sync_api import sync_playwright
 
-BASE_URL = os.environ.get("CONVERIGO_BASE_URL", "http://127.0.0.1:8000")
+pytestmark = pytest.mark.usefixtures("app_base_url")
+
 TIMEOUT = 180000
+
+
+def get_base_url() -> str:
+    return os.environ.get("CONVERIGO_BASE_URL", "http://127.0.0.1:8000")
 
 ASSETS = {
     "jpg": Path("tests/assets/real-test.jpg").resolve(),
@@ -27,7 +33,7 @@ def run_conversion_flow(page, file_paths):
     errors = []
     collect_js_errors(page, errors)
 
-    page.goto(BASE_URL, wait_until="networkidle")
+    page.goto(get_base_url(), wait_until="domcontentloaded", timeout=60000)
 
     page.wait_for_selector("#fileInput", state="attached", timeout=TIMEOUT)
     page.locator("#fileInput").set_input_files([str(path) for path in file_paths])

@@ -2,6 +2,18 @@
 <html lang="{{ locale.lang_code or 'en' }}">
 
 <head>
+    {% set template_globals = get_template_globals() %}
+    {% set disable_analytics = template_globals.disable_analytics or request.query_params.get('dev') == 'true' %}
+    {% set runtime_ga_measurement_id = template_globals.ga_measurement_id %}
+    {% if not disable_analytics and runtime_ga_measurement_id %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ runtime_ga_measurement_id }}"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ runtime_ga_measurement_id }}');
+    </script>
+    {% endif %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% include "partials/seo_meta.html" %}
@@ -27,6 +39,19 @@
     </header>
 
     <main class="main" role="main">
+        {% if breadcrumb %}
+        <section class="section section-white">
+            <div class="container">
+                <nav aria-label="Breadcrumb">
+                    <ol class="breadcrumb">
+                        {% for item in breadcrumb %}
+                        <li><a href="{{ item.url }}">{{ item.name }}</a></li>
+                        {% endfor %}
+                    </ol>
+                </nav>
+            </div>
+        </section>
+        {% endif %}
         <section class="hero section">
             <div class="container hero-inner">
                 <div class="hero-copy">
@@ -48,6 +73,53 @@
                 </div>
             </div>
         </section>
+
+{% if payload.format_knowledge %}
+        <section class="section section-blue">
+            <div class="container section-heading">
+                <span class="eyebrow">Quick answer</span>
+                <h2>What is {{ payload.format_knowledge.name }}?</h2>
+            </div>
+            <div class="container">
+                <p class="lead">{{ payload.format_knowledge.quick_answer }}</p>
+                <p>{{ payload.format_knowledge.definition }}</p>
+            </div>
+        </section>
+
+        {% if payload.format_knowledge.use_cases %}
+        <section class="section">
+            <div class="container section-heading">
+                <span class="eyebrow">Use cases</span>
+                <h2>Common uses of {{ payload.format_knowledge.name }}</h2>
+            </div>
+            <div class="grid features-grid">
+                {% for item in payload.format_knowledge.use_cases %}
+                <article class="feature-card">
+                    <h3>{{ item.title }}</h3>
+                    <p>{{ item.text }}</p>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+        {% if payload.format_knowledge.comparisons %}
+        <section class="section section-white">
+            <div class="container section-heading">
+                <span class="eyebrow">Comparisons</span>
+                <h2>{{ payload.format_knowledge.name }} vs other formats</h2>
+            </div>
+            <div class="grid features-grid">
+                {% for item in payload.format_knowledge.comparisons %}
+                <article class="feature-card hover-card">
+                    <h3>{{ item.title }}</h3>
+                    <p>{{ item.text }}</p>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+        {% endif %}
 
         <section class="section section-white">
             <div class="container section-heading">
@@ -172,10 +244,10 @@
         <section class="section section-white">
             <div class="container section-heading">
                 <span class="eyebrow">Related formats</span>
-                <h2>Format connections</h2>
+                <h2>Related Format Guides</h2>
             </div>
             <div class="grid cards-grid">
-                {% for item in payload.related_formats or [] %}
+                {% for item in related_formats[:4] or [] %}
                 <article class="card">
                     <h3><a href="{{ item.href }}">{{ item.title }}</a></h3>
                     <p>{{ item.description }}</p>

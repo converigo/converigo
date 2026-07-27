@@ -1,0 +1,46 @@
+<!--
+====================================================
+Project : Converigo
+Component : Trust Layer
+Version : 1.0.0
+
+UX-S3-001 Trust Layer Experience
+
+Content (app-supported features only):
+- Secure Processing
+- Browser Based
+- Fast Conversion
+- Wide Format Support
+
+No fake statistics or invented numbers.
+====================================================
+-->
+
+<section class="trust-layer" aria-label="Trust and security information">
+    <div class="trust-grid" role="list">
+        <div class="trust-card" role="listitem" tabindex="0">
+            <div class="trust-card-icon" aria-hidden="true">🔒</div>
+            <h4 class="trust-card-title">{{ request.state.t('trust.secure_processing', 'Secure Processing') }}</h4>
+            <p class="trust-card-desc">{{ request.state.t('trust.secure_processing_desc', 'Files are processed in memory and never stored on disk after conversion.') }}</p>
+        </div>
+
+        <div class="trust-card" role="listitem" tabindex="0">
+            <div class="trust-card-icon" aria-hidden="true">☁️</div>
+            <h4 class="trust-card-title">{{ request.state.t('trust.browser_based', 'Browser Based') }}</h4>
+            <p class="trust-card-desc">{{ request.state.t('trust.browser_based_desc', 'No software installation needed. Everything runs directly in your browser.') }}</p>
+        </div>
+
+        <div class="trust-card" role="listitem" tabindex="0">
+            <div class="trust-card-icon" aria-hidden="true">⚡</div>
+            <h4 class="trust-card-title">{{ request.state.t('trust.fast_conversion', 'Fast Conversion') }}</h4>
+            <p class="trust-card-desc">{{ request.state.t('trust.fast_conversion_desc', 'Optimized conversion engine that processes files quickly and efficiently.') }}</p>
+        </div>
+
+        <div class="trust-card" role="listitem" tabindex="0">
+            <div class="trust-card-icon" aria-hidden="true">📄</div>
+            <h4 class="trust-card-title">{{ request.state.t('trust.wide_format', 'Wide Format Support') }}</h4>
+            <p class="trust-card-desc">{{ request.state.t('trust.wide_format_desc', 'Convert between images, videos, audio, and documents with broad compatibility.') }}</p>
+        </div>
+    </div>
+</section>
+

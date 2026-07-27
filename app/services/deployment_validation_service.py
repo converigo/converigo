@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Any
 
 from app.core.registry import ConverterInfo, ConverterRegistry
+from app.core.settings import settings
 from app.services.content_quality_service import ContentQualityService
 from app.services.converter_data_service import ConverterDataService
 from app.services.converter_registry_service import ConverterRegistryService
@@ -27,7 +28,7 @@ class DeploymentValidationService:
         registry_instance: ConverterRegistry | None = None,
     ) -> None:
         self.contracts_dir = Path(contracts_dir or "app/data/converters")
-        self.output_dir = Path(output_dir or "outputs")
+        self.output_dir = Path(output_dir) if output_dir is not None else settings.OUTPUT_DIR
         self.output_dir.mkdir(parents=True, exist_ok=True)
         self.registry = registry_instance or ConverterRegistry()
 

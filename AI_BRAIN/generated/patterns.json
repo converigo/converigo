@@ -1,0 +1,52 @@
+{
+  "inputs": {
+    "project_index": "ok",
+    "services": "ok",
+    "routes": "ok",
+    "converters": "ok"
+  },
+  "totals": {
+    "patterns_evaluated": 5,
+    "patterns_detected": 5
+  },
+  "patterns": [
+    {
+      "pattern": "Service Layer",
+      "detected": true,
+      "evidence": {
+        "services_discovered": 54,
+        "service_files": 39
+      }
+    },
+    {
+      "pattern": "Router Layer",
+      "detected": true,
+      "evidence": {
+        "routes_discovered": 51,
+        "router_files": 11
+      }
+    },
+    {
+      "pattern": "Plugin Layer",
+      "detected": true,
+      "evidence": {
+        "converters_discovered": 49,
+        "plugin_files": 58
+      }
+    },
+    {
+      "pattern": "Template Layer",
+      "detected": true,
+      "evidence": {
+        "template_files": 52
+      }
+    },
+    {
+      "pattern": "Testing Layer",
+      "detected": true,
+      "evidence": {
+        "test_files": 175
+      }
+    }
+  ]
+}

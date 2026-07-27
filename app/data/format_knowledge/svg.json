@@ -1,0 +1,128 @@
+{
+  "slug": "svg",
+  "name": "SVG",
+  "quick_answer": "SVG — Scalable Vector Graphics format for resolution-independent vector artwork, icons, and illustrations that scale cleanly at any size.",
+  "definition": "SVG is an image file format. Scalable Vector Graphics format for resolution-independent vector artwork, icons, and illustrations that scale cleanly at any size. It is commonly used in workflows that require reliable image handling and is supported by a wide range of applications and online tools.",
+  "use_cases": [
+    {
+      "title": "Logos and brand identity assets",
+      "text": "SVG is the preferred format for logos and brand assets because it scales perfectly from a small favicon to a billboard without any quality loss."
+    },
+    {
+      "title": "Icons and interface graphics",
+      "text": "SVG is widely used for UI icons in web applications and design systems because the files are tiny and render sharply at every screen density."
+    },
+    {
+      "title": "Data visualizations and charts",
+      "text": "SVG is used for interactive charts, graphs, and infographics on the web because it can be manipulated with CSS and JavaScript."
+    },
+    {
+      "title": "Responsive web illustrations",
+      "text": "SVG illustrations adapt to any container size, making them ideal for responsive web pages and high-DPI displays."
+    },
+    {
+      "title": "Animated and interactive graphics",
+      "text": "SVG supports CSS and SMIL animation as well as JavaScript-driven interactions, enabling rich visual experiences without video."
+    }
+  ],
+  "advantages": [
+    {
+      "title": "Infinite scalability",
+      "text": "SVG images scale to any size without pixelation or quality loss because they are defined by mathematical paths, not pixels."
+    },
+    {
+      "title": "Very small file sizes for line art",
+      "text": "SVG files for icons and logos are typically a few kilobytes, far smaller than equivalent raster images at the same visual quality."
+    },
+    {
+      "title": "Editable and accessible text",
+      "text": "SVG markup is human-readable XML, making it easy to edit in a text editor, inspect in browser devtools, and index by search engines."
+    },
+    {
+      "title": "CSS and JavaScript integration",
+      "text": "SVG elements can be styled with CSS and animated or manipulated with JavaScript directly in the browser DOM."
+    },
+    {
+      "title": "Resolution-independent on all displays",
+      "text": "SVG renders sharply on standard, Retina, and high-DPI screens without requiring separate image assets for different pixel densities."
+    }
+  ],
+  "limitations": [
+    {
+      "title": "Not suitable for photographs",
+      "text": "SVG is a vector format and is not designed for photographic images with complex color gradients or camera-captured detail."
+    },
+    {
+      "title": "Complex SVGs can be slow to render",
+      "text": "SVG files with many paths, filters, or animations can cause rendering performance issues in browsers when used at scale."
+    },
+    {
+      "title": "Security risk with embedded scripts",
+      "text": "SVG files can contain JavaScript and external references, making user-submitted SVGs a potential security risk if not sanitized."
+    },
+    {
+      "title": "Limited support in some email clients",
+      "text": "Most email clients do not render inline SVG, requiring fallback raster images for HTML email campaigns."
+    }
+  ],
+  "comparisons": [
+    {
+      "title": "SVG vs PNG",
+      "text": "SVG is a resolution-independent vector format ideal for logos and icons at any size, while PNG is a raster format best suited to detailed photographs and screenshots."
+    },
+    {
+      "title": "SVG vs PDF",
+      "text": "SVG is optimized for interactive and scalable web graphics and is rendered by browsers natively, while PDF is a document format designed for fixed-layout print and sharing."
+    },
+    {
+      "title": "SVG vs WEBP",
+      "text": "SVG is a vector format that scales infinitely and is ideal for line art and icons, while WebP is a raster format optimized for photographic compression on the web."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "svg-to-png",
+      "title": "SVG to PNG Converter",
+      "description": "Convert SVG files to PNG quickly and easily.",
+      "href": "/svg-to-png"
+    },
+    {
+      "slug": "svg-to-jpg",
+      "title": "SVG to JPG Converter",
+      "description": "Convert SVG files to JPG quickly and easily.",
+      "href": "/svg-to-jpg"
+    },
+    {
+      "slug": "svg-to-pdf",
+      "title": "SVG to PDF Converter",
+      "description": "Convert SVG files to PDF quickly and easily.",
+      "href": "/svg-to-pdf"
+    }
+  ],
+  "faq": [
+    {
+      "question": "What is an SVG file?",
+      "answer": "An SVG (Scalable Vector Graphics) file is an XML-based vector image format that describes shapes, paths, and text mathematically rather than as pixels."
+    },
+    {
+      "question": "Is SVG a vector or raster format?",
+      "answer": "SVG is a vector format. It stores image data as mathematical descriptions of shapes, so it scales to any size without loss of quality."
+    },
+    {
+      "question": "Can SVG be used directly on websites?",
+      "answer": "Yes, SVG can be embedded directly in HTML or referenced as a src attribute, and all modern browsers render it natively."
+    },
+    {
+      "question": "Can I edit SVG files in a text editor?",
+      "answer": "Yes, SVG is plain XML text. You can open and edit it with any text editor, though vector design tools like Inkscape or Figma are more practical."
+    },
+    {
+      "question": "When should I use SVG instead of PNG?",
+      "answer": "Use SVG for logos, icons, and line art that need to scale at multiple sizes. Use PNG for photographs and complex raster images."
+    },
+    {
+      "question": "Can SVG files contain animation?",
+      "answer": "Yes, SVG supports animation using CSS transitions, SMIL animation attributes, or JavaScript, making it useful for interactive web graphics."
+    }
+  ]
+}

@@ -11,11 +11,13 @@ body {
     margin: 0 auto;
     padding-left: 24px;
     padding-right: 24px;
+    box-sizing: border-box;
 }
 
 .section {
     padding: 48px 0;
     scroll-margin-top: 96px;
+    box-sizing: border-box;
 }
 
 .section-header {

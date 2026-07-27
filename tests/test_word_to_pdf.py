@@ -4,6 +4,7 @@ from pathlib import Path
 from docx import Document
 from fastapi.testclient import TestClient
 
+from app.core.settings import settings
 from app.main import app
 from app.plugins.registry import registry
 
@@ -39,5 +40,9 @@ def test_word_to_pdf_plugin_is_discovered_and_converts():
     assert response.json()["status"] == "success"
     assert response.json()["target_format"] == "pdf"
 
-    output_path = Path("outputs/document") / response.json()["filename"]
+    download_path = response.json()["download_path"]
+    relative_parts = Path(download_path.removeprefix("/download/")).parts
+    assert len(relative_parts) == 2
+    conversion_id, filename = relative_parts
+    output_path = settings.OUTPUT_DIR / conversion_id / filename
     assert output_path.exists()

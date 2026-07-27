@@ -1,18 +1,164 @@
 {
   "slug": "ods-to-xlsx",
-  "hero": { "title": "ODS to XLSX", "subtitle": "Convert OpenOffice spreadsheets to Excel format." },
-  "steps": ["Upload ODS","Choose XLSX","Download XLSX"],
-  "benefits": ["Edit in Excel","Preserve formulas","Data portability"],
-  "supported_formats": {"input": [".ods"], "output": [".xlsx"], "description": "ODS input, XLSX output"},
-  "features": [{"title":"OpenDocument compatibility","text":"Converts ODS to Excel without losing basic data."}],
-  "how_to_use": ["Upload ODS file.", "Review sheet mapping.", "Download XLSX."],
-  "about_formats": ["ODS is the OpenDocument Spreadsheet format.", "XLSX is Microsoft's spreadsheet format used in Excel."],
+  "hero": {
+    "title": "ODS to XLSX",
+    "subtitle": "Convert OpenOffice spreadsheets to Excel format.",
+    "description": "Convert  files to  online for free. Fast, secure browser-based conversion with no software installation. Get high-quality  output in seconds using Converigo."
+  },
+  "steps": [
+    "Upload ODS",
+    "Choose XLSX",
+    "Download XLSX"
+  ],
+  "benefits": [
+    "Edit in Excel",
+    "Preserve formulas",
+    "Data portability"
+  ],
+  "supported_formats": {
+    "input": [
+      ".ods"
+    ],
+    "output": [
+      ".xlsx"
+    ],
+    "description": "ODS input, XLSX output"
+  },
+  "features": [
+    {
+      "title": "OpenDocument compatibility",
+      "text": "Converts ODS to Excel without losing basic data."
+    },
+    {
+      "title": "Fast  to  conversion",
+      "text": "Convert  to  in seconds with our optimized processing engine."
+    },
+    {
+      "title": "No software installation required",
+      "text": "Convert files directly in your browser without downloading or installing any software."
+    },
+    {
+      "title": "High-quality  output",
+      "text": "Receive a polished  file ready for immediate use in your workflow."
+    },
+    {
+      "title": "Free  to  converter",
+      "text": "Convert  to  online completely free with no registration or hidden costs."
+    },
+    {
+      "title": "Secure  processing",
+      "text": "Your  files are encrypted during upload and automatically deleted after conversion."
+    }
+  ],
+  "how_to_use": [
+    {
+      "title": "Upload ODS file.",
+      "description": "Upload ODS file."
+    },
+    {
+      "title": "Review sheet mapping.",
+      "description": "Review sheet mapping."
+    },
+    {
+      "title": "Download XLSX.",
+      "description": "Download XLSX."
+    },
+    {
+      "title": "Upload your file",
+      "description": "Select a  file from your device to begin the conversion process."
+    },
+    {
+      "title": "Choose output as format",
+      "description": "Pick the output as your desired format and review any available options."
+    },
+    {
+      "title": "Convert  to ",
+      "description": "Click convert and our engine processes your file instantly."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "ODS is the OpenDocument Spreadsheet format.",
+      "text": "ODS is the OpenDocument Spreadsheet format."
+    },
+    {
+      "title": "XLSX is Microsoft's spreadsheet format used in Excel.",
+      "text": "XLSX is Microsoft's spreadsheet format used in Excel."
+    }
+  ],
   "compatibility": "Web and API",
-  "common_problems": ["Advanced formulas may differ","Cell styles may vary"],
-  "tips": ["Review formulas after conversion"],
-  "faq": [{"question":"Are formulas preserved?","answer":"Most formulas are preserved but complex macros are not supported."}],
-  "related_tools": ["xlsx-to-ods","xlsx-to-pdf"],
-  "internal_links": {"items": [{"title":"PDF Tools","href":"/pdf-tools"}]},
-  "cta": {"label":"Convert ODS to XLSX","href":"/ods-to-xlsx"},
-  "json_ld": {"@context":"https://schema.org","@type":"SoftwareApplication","name":"ODS to XLSX Converter"}
+  "common_problems": [
+    "Advanced formulas may differ",
+    "Cell styles may vary"
+  ],
+  "tips": [
+    "Review formulas after conversion"
+  ],
+  "faq": [
+    {
+      "question": "Are formulas preserved?",
+      "answer": "Most formulas are preserved but complex macros are not supported."
+    },
+    {
+      "question": "Is this file converter free to use?",
+      "answer": "Yes. Converting files to different formats on Converigo is completely free with no hidden charges."
+    },
+    {
+      "question": "Are my uploaded files secure?",
+      "answer": "Yes. All uploaded files are processed securely and automatically deleted from our servers after conversion. Your privacy is protected."
+    },
+    {
+      "question": "Will the output quality be preserved?",
+      "answer": "Yes. The converter is designed to produce a high-quality output file while keeping the conversion process simple and reliable."
+    },
+    {
+      "question": "Can I use this converter on mobile devices?",
+      "answer": "Yes. Converigo works on all modern browsers, including mobile phones and tablets, so you can convert files on the go."
+    },
+    {
+      "question": "How do I convert files to another format?",
+      "answer": "Upload your file, select the conversion options if needed, and download the converted result instantly. It only takes a few seconds."
+    },
+    {
+      "question": "What file sizes are supported?",
+      "answer": "We support files up to 100MB for most conversions. Larger files may take longer to process."
+    },
+    {
+      "question": "Why use Converigo for file conversion?",
+      "answer": "Converigo offers fast, secure, browser-based file conversion with no software installation, no registration, and completely free usage."
+    }
+  ],
+  "related_tools": [
+    "xlsx-to-ods",
+    "xlsx-to-pdf"
+  ],
+  "internal_links": {
+    "items": [
+      {
+        "title": "PDF Tools",
+        "href": "/pdf-tools"
+      }
+    ]
+  },
+  "cta": {
+    "label": "Convert ODS to XLSX",
+    "href": "/ods-to-xlsx"
+  },
+  "json_ld": {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "ODS to XLSX Converter"
+  },
+  "seo": {
+    "title": "Ods To Xlsx Online Free | Converigo",
+    "description": " Fast, secure and browser-based file conversion with no installation required. Try Converigo for free today.",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Converigo free online file converter",
+    "twitter_title": "Ods To Xlsx Online Free | Converigo",
+    "twitter_description": " Fast, secure and browser-based file conversion with no installation required. Try Converigo for free today.",
+    "twitter_image": "/static/images/og-default.png",
+    "keywords": "ods to xlsx, online converter, file conversion, free converter, Converigo",
+    "canonical": "https://converigo.com/tools/ods-to-xlsx"
+  },
+  "lifecycle_status": "active"
 }

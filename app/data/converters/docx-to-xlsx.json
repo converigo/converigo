@@ -1,0 +1,185 @@
+{
+  "title": "DOCX to XLSX Converter",
+  "description": "Convert DOCX documents to XLSX spreadsheets online in a few clicks.",
+  "hero": {
+    "title": "DOCX to XLSX Converter Free Online",
+    "subtitle": "Extract data from Word into Excel format.",
+    "description": "Convert  files to  online for free. Fast, secure browser-based conversion with no software installation. Get high-quality  output in seconds using Converigo."
+  },
+  "steps": [
+    "Upload your DOCX file.",
+    "Choose XLSX as the output format.",
+    "Download your XLSX spreadsheet."
+  ],
+  "benefits": [
+    "Reuse document content in spreadsheets",
+    "Quickly extract tables and text",
+    "No installation required"
+  ],
+  "supported_formats": {
+    "input": [
+      ".docx"
+    ],
+    "output": [
+      ".xlsx"
+    ],
+    "description": "DOCX input, XLSX output"
+  },
+  "tips": [
+    "Review table and text placement in the spreadsheet",
+    "Use cleanly formatted documents for best conversion",
+    "Resize columns as needed after download"
+  ],
+  "features": [
+    {
+      "title": "Extracts tables into spreadsheet format",
+      "text": "Extracts tables into spreadsheet format"
+    },
+    {
+      "title": "Preserves textual data",
+      "text": "Preserves textual data"
+    },
+    {
+      "title": "Supports common DOCX elements",
+      "text": "Supports common DOCX elements"
+    },
+    {
+      "title": "Fast  to  conversion",
+      "text": "Convert  to  in seconds with our optimized processing engine."
+    },
+    {
+      "title": "No software installation required",
+      "text": "Convert files directly in your browser without downloading or installing any software."
+    },
+    {
+      "title": "High-quality  output",
+      "text": "Receive a polished  file ready for immediate use in your workflow."
+    },
+    {
+      "title": "Free  to  converter",
+      "text": "Convert  to  online completely free with no registration or hidden costs."
+    },
+    {
+      "title": "Secure  processing",
+      "text": "Your  files are encrypted during upload and automatically deleted after conversion."
+    }
+  ],
+  "how_to_use": [
+    {
+      "title": "Upload your DOCX file",
+      "description": "Upload your DOCX file"
+    },
+    {
+      "title": "Choose XLSX as the output format",
+      "description": "Choose XLSX as the output format"
+    },
+    {
+      "title": "Download the XLSX file",
+      "description": "Download the XLSX file"
+    },
+    {
+      "title": "Upload your file",
+      "description": "Select a  file from your device to begin the conversion process."
+    },
+    {
+      "title": "Choose output as format",
+      "description": "Pick the output as your desired format and review any available options."
+    },
+    {
+      "title": "Convert  to ",
+      "description": "Click convert and our engine processes your file instantly."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "DOCX is a Word document format",
+      "text": "DOCX is a Word document format"
+    },
+    {
+      "title": "XLSX is an Excel spreadsheet format",
+      "text": "XLSX is an Excel spreadsheet format"
+    }
+  ],
+  "common_problems": [
+    "Tables may require column adjustments",
+    "Complex formatting can shift in spreadsheets",
+    "Large documents may need more time to convert"
+  ],
+  "faq": [
+    {
+      "question": "Can I convert DOCX to XLSX online?",
+      "answer": "Yes, this converter transforms DOCX files into XLSX spreadsheets directly in your browser."
+    },
+    {
+      "question": "Will tables transfer into Excel?",
+      "answer": "Tables and structured text are converted into spreadsheet cells where possible."
+    },
+    {
+      "question": "Is this converter free?",
+      "answer": "Yes, DOCX to XLSX conversion is available free for standard files."
+    },
+    {
+      "question": "Do I need Excel installed?",
+      "answer": "No, you can download the output XLSX file and open it in Excel or compatible apps."
+    },
+    {
+      "question": "Can I edit the spreadsheet after conversion?",
+      "answer": "Yes, Excel or Google Sheets can edit the downloaded XLSX file."
+    },
+    {
+      "question": "What file sizes are supported?",
+      "answer": "Standard Word documents are supported; very large files may take longer to process."
+    },
+    {
+      "question": "What if the layout is disrupted?",
+      "answer": "Open the spreadsheet and adjust rows or columns as needed."
+    },
+    {
+      "question": "Does it preserve text formatting?",
+      "answer": "Text content is preserved, but complex Word formatting may be simplified in the spreadsheet."
+    }
+  ],
+  "related_tools": [
+    "docx-to-pdf",
+    "xlsx-to-pdf",
+    "docx-to-xlsx",
+    "xlsx-to-docx"
+  ],
+  "internal_links": {
+    "items": [
+      {
+        "title": "Document Conversion hub",
+        "href": "/document-conversion"
+      },
+      {
+        "title": "DOCX format guide",
+        "href": "/formats/docx"
+      },
+      {
+        "title": "XLSX format guide",
+        "href": "/formats/xlsx"
+      }
+    ]
+  },
+  "cta": {
+    "label": "Convert DOCX to XLSX",
+    "href": "/docx-to-xlsx"
+  },
+  "json_ld": {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "DOCX to XLSX Converter"
+  },
+  "seo": {
+    "title": "Docx To Xlsx Online Free | Converigo",
+    "description": "Convert DOCX documents to XLSX spreadsheets online in a few clicks. Fast, secure and browser-based file conversion with no installation required. Try Converigo for free today.",
+    "keywords": "docx to xlsx, convert docx to xlsx, word to excel",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Converigo free online file converter",
+    "twitter_title": "Docx To Xlsx Online Free | Converigo",
+    "twitter_description": "Convert DOCX documents to XLSX spreadsheets online in a few clicks. Fast, secure and browser-based file conversion with no installation required. Try Converigo for free today.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/docx-to-xlsx"
+  },
+  "lifecycle_status": "deprecated"
+}

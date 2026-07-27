@@ -1,18 +1,164 @@
 {
   "slug": "odt-to-pdf",
-  "hero": { "title": "ODT to PDF", "subtitle": "Convert ODT files from LibreOffice/OpenOffice to PDF." },
-  "steps": ["Upload ODT","Choose PDF","Download PDF"],
-  "benefits": ["Portable format","Preserve layout","Easy sharing"],
-  "supported_formats": {"input": [".odt"], "output": [".pdf"], "description": "ODT input, PDF output"},
-  "features": [{"title":"LibreOffice compatibility","text":"Convert ODT files without installing LibreOffice."}],
-  "how_to_use": ["Upload your ODT file.", "Confirm conversion options.", "Download the PDF."],
-  "about_formats": ["ODT is the OpenDocument Text format used by LibreOffice.", "PDF is suitable for sharing and printing documents."],
+  "hero": {
+    "title": "ODT to PDF",
+    "subtitle": "Convert ODT files from LibreOffice/OpenOffice to PDF.",
+    "description": "Convert  files to  online for free. Fast, secure browser-based conversion with no software installation. Get high-quality  output in seconds using Converigo."
+  },
+  "steps": [
+    "Upload ODT",
+    "Choose PDF",
+    "Download PDF"
+  ],
+  "benefits": [
+    "Portable format",
+    "Preserve layout",
+    "Easy sharing"
+  ],
+  "supported_formats": {
+    "input": [
+      ".odt"
+    ],
+    "output": [
+      ".pdf"
+    ],
+    "description": "ODT input, PDF output"
+  },
+  "features": [
+    {
+      "title": "LibreOffice compatibility",
+      "text": "Convert ODT files without installing LibreOffice."
+    },
+    {
+      "title": "Fast  to  conversion",
+      "text": "Convert  to  in seconds with our optimized processing engine."
+    },
+    {
+      "title": "No software installation required",
+      "text": "Convert files directly in your browser without downloading or installing any software."
+    },
+    {
+      "title": "High-quality  output",
+      "text": "Receive a polished  file ready for immediate use in your workflow."
+    },
+    {
+      "title": "Free  to  converter",
+      "text": "Convert  to  online completely free with no registration or hidden costs."
+    },
+    {
+      "title": "Secure  processing",
+      "text": "Your  files are encrypted during upload and automatically deleted after conversion."
+    }
+  ],
+  "how_to_use": [
+    {
+      "title": "Upload your ODT file.",
+      "description": "Upload your ODT file."
+    },
+    {
+      "title": "Confirm conversion options.",
+      "description": "Confirm conversion options."
+    },
+    {
+      "title": "Download the PDF.",
+      "description": "Download the PDF."
+    },
+    {
+      "title": "Upload your file",
+      "description": "Select a  file from your device to begin the conversion process."
+    },
+    {
+      "title": "Choose output as format",
+      "description": "Pick the output as your desired format and review any available options."
+    },
+    {
+      "title": "Convert  to ",
+      "description": "Click convert and our engine processes your file instantly."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "ODT is the OpenDocument Text format used by LibreOffice.",
+      "text": "ODT is the OpenDocument Text format used by LibreOffice."
+    },
+    {
+      "title": "PDF is suitable for sharing and printing documents.",
+      "text": "PDF is suitable for sharing and printing documents."
+    }
+  ],
   "compatibility": "Web and API",
-  "common_problems": ["Macros are not supported","Complex styles may vary"],
-  "tips": ["Flatten embedded objects before conversion"],
-  "faq": [{"question":"Do I need LibreOffice installed?","answer":"No — server-side conversion is handled by the engine when available."}],
-  "related_tools": ["docx-to-pdf","pdf-to-docx"],
-  "internal_links": {"items": [{"title":"PDF Tools","href":"/pdf-tools"}]},
-  "cta": {"label":"Convert ODT to PDF","href":"/odt-to-pdf"},
-  "json_ld": {"@context":"https://schema.org","@type":"SoftwareApplication","name":"ODT to PDF Converter"}
+  "common_problems": [
+    "Macros are not supported",
+    "Complex styles may vary"
+  ],
+  "tips": [
+    "Flatten embedded objects before conversion"
+  ],
+  "faq": [
+    {
+      "question": "Do I need LibreOffice installed?",
+      "answer": "No — server-side conversion is handled by the engine when available."
+    },
+    {
+      "question": "Is this file converter free to use?",
+      "answer": "Yes. Converting files to different formats on Converigo is completely free with no hidden charges."
+    },
+    {
+      "question": "Are my uploaded files secure?",
+      "answer": "Yes. All uploaded files are processed securely and automatically deleted from our servers after conversion. Your privacy is protected."
+    },
+    {
+      "question": "Will the output quality be preserved?",
+      "answer": "Yes. The converter is designed to produce a high-quality output file while keeping the conversion process simple and reliable."
+    },
+    {
+      "question": "Can I use this converter on mobile devices?",
+      "answer": "Yes. Converigo works on all modern browsers, including mobile phones and tablets, so you can convert files on the go."
+    },
+    {
+      "question": "How do I convert files to another format?",
+      "answer": "Upload your file, select the conversion options if needed, and download the converted result instantly. It only takes a few seconds."
+    },
+    {
+      "question": "What file sizes are supported?",
+      "answer": "We support files up to 100MB for most conversions. Larger files may take longer to process."
+    },
+    {
+      "question": "Why use Converigo for file conversion?",
+      "answer": "Converigo offers fast, secure, browser-based file conversion with no software installation, no registration, and completely free usage."
+    }
+  ],
+  "related_tools": [
+    "docx-to-pdf",
+    "pdf-to-docx"
+  ],
+  "internal_links": {
+    "items": [
+      {
+        "title": "PDF Tools",
+        "href": "/pdf-tools"
+      }
+    ]
+  },
+  "cta": {
+    "label": "Convert ODT to PDF",
+    "href": "/odt-to-pdf"
+  },
+  "json_ld": {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "ODT to PDF Converter"
+  },
+  "seo": {
+    "title": "Odt To Pdf Online Free | Converigo",
+    "description": " Fast, secure and browser-based file conversion with no installation required. Try Converigo for free today.",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Converigo free online file converter",
+    "twitter_title": "Odt To Pdf Online Free | Converigo",
+    "twitter_description": " Fast, secure and browser-based file conversion with no installation required. Try Converigo for free today.",
+    "twitter_image": "/static/images/og-default.png",
+    "keywords": "odt to pdf, online converter, file conversion, free converter, Converigo",
+    "canonical": "https://converigo.com/tools/odt-to-pdf"
+  },
+  "lifecycle_status": "active"
 }

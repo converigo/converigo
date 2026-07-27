@@ -1,0 +1,171 @@
+  "../../core/config/yaml/yamlToContinueConfig.ts"() {
+    "use strict";
+    init_importMetaUrl();
+    init_dist17();
+  }
+});
+
+// ../../core/context/mcp/json/loadJsonMcpConfigs.ts
+async function loadJsonMcpConfigs(ide, includeGlobal, globalRequestOptions = void 0) {
+  const errors2 = [];
+  const workspaceDirs = await ide.getWorkspaceDirs();
+  const mcpDirs = workspaceDirs.map(
+    (dir) => joinPathsToUri(dir, ".continue", "mcpServers")
+  );
+  if (includeGlobal) {
+    mcpDirs.push(localPathToUri(getGlobalFolderWithName("mcpServers")));
+  }
+  const overrideDefaultIgnores = (0, import_ignore16.default)().add(
+    DEFAULT_IGNORE_FILETYPES.filter(
+      (val2) => !["config.json", "settings.json"].includes(val2)
+    )
+  ).add(DEFAULT_IGNORE_DIRS);
+  const jsonFiles = [];
+  await Promise.all(
+    mcpDirs.map(async (dir) => {
+      const exists2 = await ide.fileExists(dir);
+      if (!exists2) {
+        return;
+      }
+      try {
+        const uris = await walkDir(dir, ide, {
+          overrideDefaultIgnores,
+          source: "get mcp json files"
+        });
+        const jsonUris = uris.filter((uri) => uri.endsWith(".json"));
+        await Promise.all(
+          jsonUris.map(async (uri) => {
+            try {
+              const content = await ide.readFile(uri);
+              jsonFiles.push({ uri, content });
+            } catch (e14) {
+              errors2.push({
+                fatal: false,
+                message: `Failed to read MCP server JSON file at ${uri}: ${e14 instanceof Error ? e14.message : String(e14)}`
+              });
+            }
+          })
+        );
+      } catch (e14) {
+        errors2.push({
+          fatal: false,
+          message: `Failed to check for MCP JSON files in ${dir}: ${e14 instanceof Error ? e14.message : String(e14)}`
+        });
+      }
+    })
+  );
+  const validJsonConfigs = [];
+  for (const { content, uri } of jsonFiles) {
+    try {
+      const json3 = JSONC2.parse(content);
+      const claudeCodeFileParsed = claudeCodeLikeConfigFileSchema.safeParse(json3);
+      if (claudeCodeFileParsed.success) {
+        if (claudeCodeFileParsed.data.mcpServers) {
+          validJsonConfigs.push(
+            ...Object.entries(claudeCodeFileParsed.data.mcpServers).map(
+              ([name21, mcpJson]) => ({
+                name: name21,
+                mcpJson,
+                uri
+              })
+            )
+          );
+        }
+        const projectServers = Object.values(
+          claudeCodeFileParsed.data.projects
+        ).map((v7) => v7.mcpServers);
+        for (const mcpServers2 of projectServers) {
+          if (mcpServers2) {
+            validJsonConfigs.push(
+              ...Object.entries(mcpServers2).map(([name21, mcpJson]) => ({
+                name: name21,
+                mcpJson,
+                uri
+              }))
+            );
+          }
+        }
+      } else {
+        const claudeDesktopFileParsed = claudeDesktopLikeConfigFileSchema.safeParse(json3);
+        if (claudeDesktopFileParsed.success) {
+          validJsonConfigs.push(
+            ...Object.entries(claudeDesktopFileParsed.data.mcpServers).map(
+              ([name21, mcpJson]) => ({
+                name: name21,
+                mcpJson,
+                uri
+              })
+            )
+          );
+        } else {
+          const singleConfigParsed = mcpServersJsonSchema.safeParse(json3);
+          if (singleConfigParsed.success) {
+            validJsonConfigs.push({
+              mcpJson: singleConfigParsed.data,
+              name: getUriPathBasename(uri).replace(".json", ""),
+              uri
+            });
+          } else {
+            errors2.push({
+              fatal: false,
+              message: `MCP JSON file at ${uri} doesn't match a supported MCP JSON configuration format`
+            });
+          }
+        }
+      }
+    } catch (e14) {
+      errors2.push({
+        fatal: false,
+        message: `Error parsing MCP JSON file at ${uri}: ${e14 instanceof Error ? e14.message : String(e14)}`
+      });
+    }
+  }
+  const deduplicatedJsonConfigs = deduplicateArray(
+    validJsonConfigs,
+    (a11, b11) => a11.name === b11.name
+  );
+  const yamlConfigs = deduplicatedJsonConfigs.map((c11) => {
+    const { warnings, yamlConfig } = convertJsonMcpConfigToYamlMcpConfig(
+      c11.name,
+      c11.mcpJson
+    );
+    return {
+      warnings,
+      yamlConfig: {
+        ...yamlConfig,
+        sourceFile: c11.uri
+      }
+    };
+  });
+  const mcpServers = yamlConfigs.map((c11) => {
+    errors2.push(
+      ...c11.warnings.map((warning2) => ({
+        fatal: false,
+        message: warning2,
+        uri: c11.yamlConfig.sourceFile
+      }))
+    );
+    return convertYamlMcpConfigToInternalMcpOptions(
+      c11.yamlConfig,
+      globalRequestOptions
+    );
+  });
+  return {
+    mcpServers,
+    errors: errors2
+  };
+}
+var JSONC2, import_ignore16;
+var init_loadJsonMcpConfigs = __esm({
+  "../../core/context/mcp/json/loadJsonMcpConfigs.ts"() {
+    "use strict";
+    init_importMetaUrl();
+    init_dist17();
+    JSONC2 = __toESM(require_src2(), 1);
+    import_ignore16 = __toESM(require_ignore(), 1);
+    init_yamlToContinueConfig();
+    init_ignore();
+    init_walkDir();
+    init_util7();
+    init_paths();
+    init_pathToUri();

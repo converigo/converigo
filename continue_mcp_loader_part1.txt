@@ -1,0 +1,451 @@
+        return new cls(llmOptions);
+      } else {
+        errors2.push({
+          fatal: false,
+          message: `Unknown reranking provider ${name21}`
+        });
+      }
+    }
+    return null;
+  }
+  const newReranker = getRerankingILLM(config3.reranker);
+  const continueConfig = {
+    ...config3,
+    contextProviders,
+    tools: getBaseToolDefinitions(),
+    mcpServerStatuses: [],
+    slashCommands: [],
+    modelsByRole: {
+      chat: models,
+      edit: models,
+      apply: models,
+      summarize: models,
+      autocomplete: [...tabAutocompleteModels],
+      embed: newEmbedder ? [newEmbedder] : [],
+      rerank: newReranker ? [newReranker] : [],
+      subagent: []
+    },
+    selectedModelByRole: {
+      chat: null,
+      // Not implemented (uses GUI defaultModel)
+      edit: null,
+      apply: null,
+      embed: newEmbedder ?? null,
+      autocomplete: null,
+      rerank: newReranker ?? null,
+      summarize: null,
+      // Not implemented
+      subagent: null
+    },
+    rules: []
+  };
+  for (const cmd of config3.slashCommands ?? []) {
+    if ("source" in cmd) {
+      continueConfig.slashCommands.push(cmd);
+    } else {
+      continueConfig.slashCommands.push({
+        ...cmd,
+        source: "config-ts-slash-command"
+      });
+    }
+  }
+  if (config3.systemMessage) {
+    continueConfig.rules.unshift({
+      rule: config3.systemMessage,
+      source: "json-systemMessage"
+    });
+  }
+  const mcpManager = MCPManagerSingleton.getInstance();
+  {
+    const mcpOptions = (config3.experimental?.modelContextProtocolServers ?? []).map((server, index2) => ({
+      id: `continue-mcp-server-${index2 + 1}`,
+      name: `MCP Server`,
+      requestOptions: mergeConfigYamlRequestOptions(
+        server.transport.type !== "stdio" ? server.transport.requestOptions : void 0,
+        config3.requestOptions
+      ),
+      ...server.transport
+    }));
+    const { errors: jsonMcpErrors, mcpServers } = await loadJsonMcpConfigs(
+      ide,
+      true,
+      config3.requestOptions
+    );
+    errors2.push(...jsonMcpErrors);
+    mcpOptions.push(...mcpServers);
+    mcpManager.setConnections(mcpOptions, false);
+  }
+  const inlineEditModel = getModelByRole(continueConfig, "inlineEdit")?.title;
+  if (inlineEditModel) {
+    const match2 = continueConfig.modelsByRole.chat.find(
+      (m12) => m12.title === inlineEditModel
+    );
+    if (match2) {
+      continueConfig.selectedModelByRole.edit = match2;
+      continueConfig.modelsByRole.edit = [match2];
+    } else {
+      errors2.push({
+        fatal: false,
+        message: `experimental.modelRoles.inlineEdit model title ${inlineEditModel} not found in models array`
+      });
+    }
+  }
+  const applyBlockModel = getModelByRole(
+    continueConfig,
+    "applyCodeBlock"
+  )?.title;
+  if (applyBlockModel) {
+    const match2 = continueConfig.modelsByRole.chat.find(
+      (m12) => m12.title === applyBlockModel
+    );
+    if (match2) {
+      continueConfig.selectedModelByRole.apply = match2;
+      continueConfig.modelsByRole.apply = [match2];
+    } else {
+      errors2.push({
+        fatal: false,
+        message: `experimental.modelRoles.applyCodeBlock model title ${inlineEditModel} not found in models array`
+      });
+    }
+  }
+  if (ideInfo.ideType === "vscode" && !continueConfig.modelsByRole.embed.find(
+    (m12) => m12.providerName === "transformers.js"
+  )) {
+    continueConfig.modelsByRole.embed.push(
+      new TransformersJsEmbeddingsProvider_default()
+    );
+  }
+  return { config: continueConfig, errors: errors2 };
+}
+function llmToSerializedModelDescription(llm) {
+  return {
+    provider: llm.providerName,
+    underlyingProviderName: llm.underlyingProviderName,
+    model: llm.model,
+    title: llm.title ?? llm.model,
+    apiKey: llm.apiKey,
+    apiBase: llm.apiBase,
+    contextLength: llm.contextLength,
+    template: llm.template,
+    completionOptions: llm.completionOptions,
+    baseAgentSystemMessage: llm.baseAgentSystemMessage,
+    basePlanSystemMessage: llm.basePlanSystemMessage,
+    baseChatSystemMessage: llm.baseChatSystemMessage,
+    requestOptions: llm.requestOptions,
+    promptTemplates: serializePromptTemplates(llm.promptTemplates),
+    capabilities: llm.capabilities,
+    roles: llm.roles,
+    configurationStatus: llm.getConfigurationStatus(),
+    apiKeyLocation: llm.apiKeyLocation,
+    envSecretLocations: llm.envSecretLocations,
+    sourceFile: llm.sourceFile,
+    isFromAutoDetect: llm.isFromAutoDetect,
+    toolOverrides: llm.toolOverrides
+  };
+}
+async function finalToBrowserConfig(final, ide) {
+  return {
+    allowAnonymousTelemetry: final.allowAnonymousTelemetry,
+    completionOptions: final.completionOptions,
+    slashCommands: final.slashCommands?.map(({ run: run2, ...rest }) => ({
+      ...rest,
+      isLegacy: !!run2
+    })),
+    contextProviders: final.contextProviders?.map((c11) => c11.description),
+    disableIndexing: final.disableIndexing,
+    disableSessionTitles: final.disableSessionTitles,
+    userToken: final.userToken,
+    ui: final.ui,
+    experimental: final.experimental,
+    rules: final.rules,
+    docs: final.docs,
+    tools: final.tools.map(serializeTool),
+    mcpServerStatuses: final.mcpServerStatuses,
+    tabAutocompleteOptions: final.tabAutocompleteOptions,
+    modelsByRole: Object.fromEntries(
+      Object.entries(final.modelsByRole).map(([k12, v7]) => [
+        k12,
+        v7.map(llmToSerializedModelDescription)
+      ])
+    ),
+    // TODO better types here
+    selectedModelByRole: Object.fromEntries(
+      Object.entries(final.selectedModelByRole).map(([k12, v7]) => [
+        k12,
+        v7 ? llmToSerializedModelDescription(v7) : null
+      ])
+    )
+    // TODO better types here
+    // data not included here because client doesn't need
+  };
+}
+function escapeSpacesInPath(p8) {
+  return p8.replace(/ /g, "\\ ");
+}
+async function handleEsbuildInstallation(ide, _ideType) {
+  const installCmd = "npm i esbuild@x.x.x --prefix ~/.continue";
+  try {
+    await Promise.resolve().then(() => __toESM(require("esbuild"), 1));
+    return true;
+  } catch {
+    try {
+      const userEsbuild = import_path41.default.join(
+        import_os7.default.homedir(),
+        ".continue",
+        "node_modules",
+        "esbuild"
+      );
+      const candidate = require.resolve("esbuild", { paths: [userEsbuild] });
+      require(candidate);
+      return true;
+    } catch {
+      await ide.showToast(
+        "error",
+        [
+          "config.ts has been deprecated and esbuild is no longer automatically installed by Continue.",
+          "To use config.ts, install esbuild manually:",
+          "",
+          `    ${installCmd}`
+        ].join("\n")
+      );
+      return false;
+    }
+  }
+}
+async function tryBuildConfigTs() {
+  try {
+    if (process.env.IS_BINARY === "true") {
+      await buildConfigTsWithBinary();
+    } else {
+      await buildConfigTsWithNodeModule();
+    }
+  } catch (e14) {
+    console.log(
+      `Build error. Please check your ~/.continue/config.ts file: ${e14}`
+    );
+  }
+}
+async function buildConfigTsWithBinary() {
+  const cmd = [
+    escapeSpacesInPath(getEsbuildBinaryPath()),
+    escapeSpacesInPath(getConfigTsPath()),
+    "--bundle",
+    `--outfile=${escapeSpacesInPath(getConfigJsPath())}`,
+    "--platform=node",
+    "--format=cjs",
+    "--sourcemap",
+    "--external:fetch",
+    "--external:fs",
+    "--external:path",
+    "--external:os",
+    "--external:child_process"
+  ].join(" ");
+  (0, import_child_process5.execSync)(cmd);
+}
+async function buildConfigTsWithNodeModule() {
+  const { build: build2 } = await Promise.resolve().then(() => __toESM(require("esbuild"), 1));
+  await build2({
+    entryPoints: [getConfigTsPath()],
+    bundle: true,
+    platform: "node",
+    format: "cjs",
+    outfile: getConfigJsPath(),
+    external: ["fetch", "fs", "path", "os", "child_process"],
+    sourcemap: true
+  });
+}
+function readConfigJs() {
+  const configJsPath = getConfigJsPath();
+  if (!fs29.existsSync(configJsPath)) {
+    return void 0;
+  }
+  return fs29.readFileSync(configJsPath, "utf8");
+}
+async function buildConfigTsandReadConfigJs(ide, ideType) {
+  const configTsPath = getConfigTsPath();
+  if (!fs29.existsSync(configTsPath)) {
+    return;
+  }
+  const currentContent = fs29.readFileSync(configTsPath, "utf8");
+  if (currentContent.trim() === DEFAULT_CONFIG_TS_CONTENTS.trim()) {
+    return;
+  }
+  if (currentContent.trim() !== DEFAULT_CONFIG_TS_CONTENTS.trim()) {
+    const ok = await handleEsbuildInstallation(ide, ideType);
+    if (!ok) {
+      return;
+    }
+    await tryBuildConfigTs();
+  }
+  return readConfigJs();
+}
+async function loadContinueConfigFromJson(ide, ideSettings, ideInfo, uniqueId, llmLogger, overrideConfigJson) {
+  const workspaceConfigs = await getWorkspaceRcConfigs(ide);
+  let {
+    config: serialized,
+    errors: errors2,
+    configLoadInterrupted
+  } = loadSerializedConfig(
+    workspaceConfigs,
+    ideSettings,
+    ideInfo.ideType,
+    overrideConfigJson,
+    ide
+  );
+  if (!serialized || configLoadInterrupted) {
+    return { errors: errors2, config: void 0, configLoadInterrupted: true };
+  }
+  const sharedConfig = new GlobalContext().getSharedConfig();
+  const withShared = modifyAnyConfigWithSharedConfig(serialized, sharedConfig);
+  let intermediate = await serializedToIntermediateConfig(withShared, ide);
+  const configJsContents = await buildConfigTsandReadConfigJs(
+    ide,
+    ideInfo.ideType
+  );
+  if (configJsContents) {
+    try {
+      const configJsPath = getConfigJsPath();
+      let module2;
+      try {
+        module2 = await Promise.resolve().then(() => __toESM(require(configJsPath)));
+      } catch (e14) {
+        console.log(e14);
+        console.log(
+          "Could not load config.ts as absolute path, retrying as file url ..."
+        );
+        try {
+          module2 = await Promise.resolve().then(() => __toESM(require(localPathToUri(configJsPath))));
+        } catch (e15) {
+          throw new Error("Could not load config.ts as file url either", {
+            cause: e15
+          });
+        }
+      }
+      if (typeof require !== "undefined") {
+        delete require.cache[require.resolve(configJsPath)];
+      }
+      if (!module2.modifyConfig) {
+        throw new Error("config.ts does not export a modifyConfig function.");
+      }
+      intermediate = module2.modifyConfig(intermediate);
+    } catch (e14) {
+      console.log("Error loading config.ts: ", e14);
+    }
+  }
+  if (ideSettings.remoteConfigServerUrl) {
+    try {
+      const configJsPathForRemote = getConfigJsPathForRemote(
+        ideSettings.remoteConfigServerUrl
+      );
+      const module2 = await Promise.resolve().then(() => __toESM(require(configJsPathForRemote)));
+      if (typeof require !== "undefined") {
+        delete require.cache[require.resolve(configJsPathForRemote)];
+      }
+      if (!module2.modifyConfig) {
+        throw new Error("config.ts does not export a modifyConfig function.");
+      }
+      intermediate = module2.modifyConfig(intermediate);
+    } catch (e14) {
+      console.log("Error loading remotely set config.js: ", e14);
+    }
+  }
+  const { config: finalConfig, errors: finalErrors } = await intermediateToFinalConfig({
+    config: intermediate,
+    ide,
+    ideSettings,
+    ideInfo,
+    uniqueId,
+    llmLogger
+  });
+  return {
+    config: finalConfig,
+    errors: [...errors2 ?? [], ...finalErrors],
+    configLoadInterrupted: false
+  };
+}
+var import_child_process5, fs29, import_os7, import_path41, JSONC4, configMergeKeys;
+var init_load2 = __esm({
+  "../../core/config/load.ts"() {
+    "use strict";
+    init_importMetaUrl();
+    import_child_process5 = require("child_process");
+    fs29 = __toESM(require("fs"), 1);
+    import_os7 = __toESM(require("os"), 1);
+    import_path41 = __toESM(require("path"), 1);
+    init_dist17();
+    JSONC4 = __toESM(require_src2(), 1);
+    init_built_in_legacy();
+    init_customSlashCommand();
+    init_promptFileSlashCommand();
+    init_MCPManagerSingleton();
+    init_llms();
+    init_CustomLLM();
+    init_llm2();
+    init_TransformersJsEmbeddingsProvider();
+    init_getPromptFiles();
+    init_util7();
+    init_GlobalContext();
+    init_merge2();
+    init_paths();
+    init_pathToUri();
+    init_loadJsonMcpConfigs();
+    init_CustomContextProvider();
+    init_tools();
+    init_ideUtils();
+    init_loadRcConfigs();
+    init_loadContextProviders();
+    init_sharedConfig();
+    init_util11();
+    init_validation3();
+    configMergeKeys = {
+      models: (a11, b11) => a11.title === b11.title,
+      contextProviders: (a11, b11) => {
+        if (a11.name !== "http" || b11.name !== "http") {
+          return a11.name === b11.name;
+        }
+        return a11.name === b11.name && a11.params?.url === b11.params?.url;
+      },
+      slashCommands: (a11, b11) => a11.name === b11.name,
+      customCommands: (a11, b11) => a11.name === b11.name
+    };
+  }
+});
+
+// ../../core/config/markdown/loadCodebaseRules.ts
+async function loadCodebaseRules(ide) {
+  const errors2 = [];
+  const rules = [];
+  try {
+    const allFiles = await walkDirs(ide);
+    const rulesMdFiles = allFiles.filter((file2) => {
+      const filename = getUriPathBasename(file2);
+      return filename === RULES_MARKDOWN_FILENAME;
+    });
+    for (const filePath of rulesMdFiles) {
+      try {
+        const content = await ide.readFile(filePath);
+        const { relativePathOrBasename, foundInDir, uri } = findUriInDirs(
+          filePath,
+          await ide.getWorkspaceDirs()
+        );
+        if (foundInDir) {
+          const lastSlashIndex = relativePathOrBasename.lastIndexOf("/");
+          const parentDir = relativePathOrBasename.substring(0, lastSlashIndex);
+          const rule = markdownToRule(
+            content,
+            {
+              uriType: "file",
+              fileUri: uri
+            },
+            parentDir
+          );
+          rules.push({
+            ...rule,
+            source: "colocated-markdown",
+            sourceFile: filePath
+          });
+        } else {
+          console.warn(
+            `Failed to load codebase rule ${uri}: URI not found in workspace dirs`
+          );
+        }

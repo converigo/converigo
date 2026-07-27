@@ -1,0 +1,492 @@
+{
+  "totals": {
+    "files_scanned": 39,
+    "services_discovered": 54
+  },
+  "services": [
+    {
+      "service_name": "AnalyticsIntelligenceService",
+      "source_file": "app/services/analytics_intelligence_service.py",
+      "public_methods": [
+        "build_device_analytics",
+        "build_error_analytics",
+        "build_funnel",
+        "build_geographic_analytics",
+        "build_growth",
+        "build_intelligence",
+        "build_performance_insights",
+        "build_seo_insights",
+        "build_top_converters"
+      ]
+    },
+    {
+      "service_name": "AnalyticsService",
+      "source_file": "app/services/analytics_service.py",
+      "public_methods": [
+        "build_dashboard_metrics",
+        "track_conversion_failed",
+        "track_conversion_start",
+        "track_conversion_success",
+        "track_download",
+        "track_error",
+        "track_event",
+        "track_page_view",
+        "track_upload_start",
+        "track_upload_success"
+      ]
+    },
+    {
+      "service_name": "ArticleSchemaValidator",
+      "source_file": "app/services/article_schema.py",
+      "public_methods": [
+        "validate_article"
+      ]
+    },
+    {
+      "service_name": "ArticleService",
+      "source_file": "app/services/article_service.py",
+      "public_methods": [
+        "discover_article_files",
+        "list_articles",
+        "list_articles_by_category",
+        "load_article",
+        "validate_article"
+      ]
+    },
+    {
+      "service_name": "AuthorityService",
+      "source_file": "app/services/authority_service.py",
+      "public_methods": [
+        "generate_all",
+        "generate_payload",
+        "validate_payload"
+      ]
+    },
+    {
+      "service_name": "CleanupService",
+      "source_file": "app/services/cleanup_service.py",
+      "public_methods": [
+        "clean_old_files"
+      ]
+    },
+    {
+      "service_name": "ComparisonService",
+      "source_file": "app/services/comparison_service.py",
+      "public_methods": [
+        "build_payload",
+        "render_context"
+      ]
+    },
+    {
+      "service_name": "ContentQualityService",
+      "source_file": "app/services/content_quality_service.py",
+      "public_methods": [
+        "evaluate_all_pages",
+        "evaluate_page",
+        "seo_engine"
+      ]
+    },
+    {
+      "service_name": "ConversionManager",
+      "source_file": "app/services/conversion_manager.py",
+      "public_methods": [
+        "create_converter",
+        "create_engine",
+        "engines",
+        "plugins"
+      ]
+    },
+    {
+      "service_name": "EngineRegistry",
+      "source_file": "app/services/conversion_manager.py",
+      "public_methods": [
+        "get",
+        "list",
+        "register"
+      ]
+    },
+    {
+      "service_name": "PluginRegistry",
+      "source_file": "app/services/conversion_manager.py",
+      "public_methods": [
+        "discover",
+        "get",
+        "list",
+        "register",
+        "resolve"
+      ]
+    },
+    {
+      "service_name": "ConversionError",
+      "source_file": "app/services/conversion_service.py",
+      "public_methods": []
+    },
+    {
+      "service_name": "ConversionService",
+      "source_file": "app/services/conversion_service.py",
+      "public_methods": [
+        "convert_file"
+      ]
+    },
+    {
+      "service_name": "PDFEmptyError",
+      "source_file": "app/services/conversion_service.py",
+      "public_methods": []
+    },
+    {
+      "service_name": "PDFPasswordProtectedError",
+      "source_file": "app/services/conversion_service.py",
+      "public_methods": []
+    },
+    {
+      "service_name": "PDFValidationError",
+      "source_file": "app/services/conversion_service.py",
+      "public_methods": []
+    },
+    {
+      "service_name": "UnsupportedConversionError",
+      "source_file": "app/services/conversion_service.py",
+      "public_methods": []
+    },
+    {
+      "service_name": "ConverterDataService",
+      "source_file": "app/services/converter_data_service.py",
+      "public_methods": [
+        "list_active_converters",
+        "list_all_converters",
+        "list_latest_converters",
+        "list_popular_converters",
+        "list_public_converters",
+        "list_supported_converters",
+        "load_converter_by_slug",
+        "resolve_related_tools",
+        "sitemap_entries"
+      ]
+    },
+    {
+      "service_name": "ConverterExpansionService",
+      "source_file": "app/services/converter_expansion_service.py",
+      "public_methods": [
+        "content_quality_service",
+        "expand_converters",
+        "get_expansion_summary",
+        "seo_engine"
+      ]
+    },
+    {
+      "service_name": "ConverterMetadata",
+      "source_file": "app/services/converter_expansion_service.py",
+      "public_methods": []
+    },
+    {
+      "service_name": "ConverterRegistryError",
+      "source_file": "app/services/converter_registry_service.py",
+      "public_methods": []
+    },
+    {
+      "service_name": "ConverterRegistryService",
+      "source_file": "app/services/converter_registry_service.py",
+      "public_methods": [
+        "get_active",
+        "get_beta",
+        "get_by_category",
+        "get_by_id",
+        "get_by_slug",
+        "list_all"
+      ]
+    },
+    {
+      "service_name": "DeploymentValidationService",
+      "source_file": "app/services/deployment_validation_service.py",
+      "public_methods": [
+        "content_quality_service",
+        "converter_registry_error",
+        "converter_registry_service",
+        "generate_markdown_report",
+        "hub_service",
+        "plugin_validation_service",
+        "production_audit_service",
+        "programmatic_seo_engine",
+        "run_all_checks",
+        "seo_publication_gate_service",
+        "seo_service",
+        "sitemap_service",
+        "topic_cluster_service"
+      ]
+    },
+    {
+      "service_name": "FormatKnowledgeGenerator",
+      "source_file": "app/services/format_knowledge_generator.py",
+      "public_methods": [
+        "generate",
+        "generate_all",
+        "validate"
+      ]
+    },
+    {
+      "service_name": "FormatKnowledgeService",
+      "source_file": "app/services/format_knowledge_service.py",
+      "public_methods": [
+        "build_enrichment"
+      ]
+    },
+    {
+      "service_name": "GrowthDashboardService",
+      "source_file": "app/services/growth_dashboard_service.py",
+      "public_methods": [
+        "build_dashboard",
+        "content_quality_service",
+        "expansion_service"
+      ]
+    },
+    {
+      "service_name": "HubPageService",
+      "source_file": "app/services/hub_page_service.py",
+      "public_methods": [
+        "build_all"
+      ]
+    },
+    {
+      "service_name": "HubService",
+      "source_file": "app/services/hub_service.py",
+      "public_methods": [
+        "get_hub_definition",
+        "get_hub_definitions",
+        "get_hub_page_data",
+        "list_hub_links"
+      ]
+    },
+    {
+      "service_name": "InternalLinkService",
+      "source_file": "app/services/internal_link_service.py",
+      "public_methods": [
+        "build_internal_link_coverage_report",
+        "get_links_for_comparison",
+        "get_links_for_format",
+        "get_links_for_hub",
+        "get_links_for_knowledge",
+        "get_links_for_landing"
+      ]
+    },
+    {
+      "service_name": "knowledge_schema",
+      "source_file": "app/services/knowledge_schema.py",
+      "public_methods": [
+        "validate_format_knowledge"
+      ]
+    },
+    {
+      "service_name": "KnowledgeService",
+      "source_file": "app/services/knowledge_service.py",
+      "public_methods": [
+        "generate_all",
+        "generate_payload",
+        "validate_payload"
+      ]
+    },
+    {
+      "service_name": "LandingContractError",
+      "source_file": "app/services/landing_service.py",
+      "public_methods": []
+    },
+    {
+      "service_name": "LandingPageBuilder",
+      "source_file": "app/services/landing_service.py",
+      "public_methods": [
+        "build_context",
+        "validate_contract"
+      ]
+    },
+    {
+      "service_name": "LanguageManager",
+      "source_file": "app/services/language_manager.py",
+      "public_methods": [
+        "determine_locale",
+        "get_supported_locales",
+        "load_locale",
+        "locale_exists",
+        "translate"
+      ]
+    },
+    {
+      "service_name": "LanguageService",
+      "source_file": "app/services/language_service.py",
+      "public_methods": [
+        "determine_locale",
+        "get_supported_locales",
+        "load_locale",
+        "locale_exists",
+        "translate"
+      ]
+    },
+    {
+      "service_name": "PluginValidationService",
+      "source_file": "app/services/plugin_validation_service.py",
+      "public_methods": [
+        "check_duplicate_slugs",
+        "check_missing_plugins",
+        "generate_report",
+        "validate_all",
+        "validate_converter",
+        "validate_hub",
+        "validate_json",
+        "validate_metadata",
+        "validate_plugin",
+        "validate_recommendation",
+        "validate_route",
+        "validate_seo",
+        "validate_sitemap"
+      ]
+    },
+    {
+      "service_name": "ValidationResult",
+      "source_file": "app/services/plugin_validation_service.py",
+      "public_methods": [
+        "add_check",
+        "add_error",
+        "add_warning",
+        "is_valid",
+        "to_dict"
+      ]
+    },
+    {
+      "service_name": "ProductionAuditService",
+      "source_file": "app/services/production_audit_service.py",
+      "public_methods": [
+        "audit_all",
+        "audit_converter",
+        "content_quality_service",
+        "get_internal_linking_report",
+        "get_seo_pages_report",
+        "get_topic_cluster_report"
+      ]
+    },
+    {
+      "service_name": "ProgrammaticSeoEngine",
+      "source_file": "app/services/programmatic_seo_engine.py",
+      "public_methods": [
+        "content_quality_service",
+        "generate_all_pages",
+        "generate_all_pages_with_quality_control",
+        "generate_page",
+        "generate_page_with_quality_check",
+        "get_quality_report",
+        "get_seo_page_coverage_report"
+      ]
+    },
+    {
+      "service_name": "ProgrammaticSEOService",
+      "source_file": "app/services/programmatic_seo_service.py",
+      "public_methods": [
+        "generate_all",
+        "generate_payload"
+      ]
+    },
+    {
+      "service_name": "RecommendationService",
+      "source_file": "app/services/recommendation_service.py",
+      "public_methods": [
+        "recommend_for_format",
+        "recommend_for_slug"
+      ]
+    },
+    {
+      "service_name": "RelatedConverterService",
+      "source_file": "app/services/related_converter_service.py",
+      "public_methods": [
+        "get_related_converters"
+      ]
+    },
+    {
+      "service_name": "AuditSummary",
+      "source_file": "app/services/search_console_readiness_service.py",
+      "public_methods": []
+    },
+    {
+      "service_name": "CheckResult",
+      "source_file": "app/services/search_console_readiness_service.py",
+      "public_methods": []
+    },
+    {
+      "service_name": "SearchConsoleReadinessService",
+      "source_file": "app/services/search_console_readiness_service.py",
+      "public_methods": [
+        "generate_report",
+        "run_full_audit"
+      ]
+    },
+    {
+      "service_name": "AuditCheck",
+      "source_file": "app/services/seo_audit_engine.py",
+      "public_methods": [
+        "to_dict"
+      ]
+    },
+    {
+      "service_name": "SeoAuditEngine",
+      "source_file": "app/services/seo_audit_engine.py",
+      "public_methods": [
+        "generate_report_markdown",
+        "run_audit_for_slug",
+        "run_full_audit",
+        "write_report"
+      ]
+    },
+    {
+      "service_name": "SeoContentEnhancementService",
+      "source_file": "app/services/seo_content_enhancement_service.py",
+      "public_methods": [
+        "enhance_all_converters"
+      ]
+    },
+    {
+      "service_name": "SeoPublicationGateService",
+      "source_file": "app/services/seo_publication_gate_service.py",
+      "public_methods": [
+        "evaluate_all_pages",
+        "evaluate_page"
+      ]
+    },
+    {
+      "service_name": "SeoService",
+      "source_file": "app/services/seo_service.py",
+      "public_methods": [
+        "build_home_meta",
+        "build_sitemap_xml",
+        "build_structured_data",
+        "build_tool_meta"
+      ]
+    },
+    {
+      "service_name": "SitemapService",
+      "source_file": "app/services/sitemap_service.py",
+      "public_methods": [
+        "discover_active_converters",
+        "generate_all",
+        "validate"
+      ]
+    },
+    {
+      "service_name": "TopicClusterService",
+      "source_file": "app/services/topic_cluster_service.py",
+      "public_methods": [
+        "build_all_clusters",
+        "build_cluster",
+        "build_cluster_coverage_report",
+        "get_cluster"
+      ]
+    },
+    {
+      "service_name": "UploadError",
+      "source_file": "app/services/upload_service.py",
+      "public_methods": []
+    },
+    {
+      "service_name": "UploadService",
+      "source_file": "app/services/upload_service.py",
+      "public_methods": [
+        "process_upload"
+      ]
+    }
+  ]
+}

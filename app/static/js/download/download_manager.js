@@ -30,8 +30,10 @@ class DownloadManager {
             return;
         }
         const context = window.converigoAnalytics.getConverterContext();
-        window.converigoAnalytics.trackEvent('download_completed', {
-            converter_name: context.converter_name
+        window.converigoAnalytics.trackEvent('download_button_click', {
+            converter_name: context.converter_name,
+            page_path: window.location.pathname || '/',
+            event_status: 'success'
         });
     }
 
@@ -42,10 +44,46 @@ class DownloadManager {
         if(element.dataset.ga4Bound === 'true'){
             return;
         }
-        element.addEventListener('click', () => {
+        element.addEventListener('click', (event) => {
             this._trackDownloadCompleted();
-        }, { passive: true });
+            const downloadUrl = element.getAttribute('href') || '';
+            const filename = element.getAttribute('download') || '';
+            if (downloadUrl) {
+                event.preventDefault();
+                this._triggerDownload(downloadUrl, filename);
+            }
+        }, { passive: false });
         element.dataset.ga4Bound = 'true';
+    }
+
+    _triggerDownload(downloadUrl, filename = ''){
+        if (!downloadUrl) {
+            return;
+        }
+
+        const anchor = document.createElement('a');
+        anchor.href = downloadUrl;
+        anchor.download = filename;
+        anchor.rel = 'noopener noreferrer';
+        anchor.target = '_self';
+        anchor.style.display = 'none';
+        document.body.appendChild(anchor);
+
+        try {
+            anchor.click();
+        } catch (error) {
+            console.warn('Direct download click failed', error);
+        } finally {
+            anchor.remove();
+        }
+
+        window.setTimeout(() => {
+            try {
+                window.location.assign(downloadUrl);
+            } catch (error) {
+                console.warn('Fallback download navigation failed', error);
+            }
+        }, 350);
     }
 
     clear(){

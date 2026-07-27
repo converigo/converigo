@@ -16,4 +16,5 @@ def get_template_globals() -> dict:
     return build_template_context()
 
 
+templates.env.globals.update(build_template_context())
 templates.env.globals.update({"get_template_globals": get_template_globals})

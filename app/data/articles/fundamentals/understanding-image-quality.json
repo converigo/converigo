@@ -1,0 +1,63 @@
+{
+  "slug": "understanding-image-quality",
+  "title": "Understanding Image Quality for Better Conversion Choices",
+  "description": "Learn how image resolution, compression, and format selection affect the quality of converted images.",
+  "category": "Fundamentals",
+  "topics": ["images", "quality", "basics"],
+  "author": "Converigo",
+  "date_published": "2026-07-09",
+  "date_modified": "2026-07-21",
+  "read_time_minutes": 6,
+  "keywords": ["image quality", "resolution", "image conversion"],
+  "seo_keywords": ["understand image quality", "image resolution guide", "convert images with quality"],
+  "og_image": "/static/images/og-understanding-image-quality.png",
+  "og_image_alt": "Visual explanation of image quality factors",
+  "canonical": "/learning/understanding-image-quality",
+  "featured": false,
+  "order": 10,
+  "related_formats": ["jpg", "png", "webp"],
+  "related_converters": ["jpg-to-png", "png-to-webp", "png-to-jpg"],
+  "related_articles": ["getting-started", "png-vs-jpg-explained", "quality-issues"],
+  "sections": [
+    {
+      "id": "resolution-and-detail",
+      "title": "Resolution and detail",
+      "content": "Higher resolution usually preserves more detail, but it also increases file size. Balancing detail and size is a common part of image conversion work."
+    },
+    {
+      "id": "compression-effects",
+      "title": "Compression effects",
+      "content": "Compression can make file sizes smaller, but it may also reduce visible quality. The best setting depends on how the image will be used."
+    },
+    {
+      "id": "match-format-to-purpose",
+      "title": "Match the format to the purpose",
+      "content": "Photography and web graphics often need different approaches. Choosing the right format and quality setting is important for both appearance and performance."
+    }
+  ],
+  "faq": [
+    {
+      "question": "What is the difference between resolution and quality?",
+      "answer": "Resolution affects the amount of detail captured, while quality depends on how that detail is preserved during compression and conversion."
+    },
+    {
+      "question": "Should I always choose the highest quality setting?",
+      "answer": "Not always. High quality is useful for archival or print workflows, but it may create large files for web sharing."
+    },
+    {
+      "question": "How can I tell if a conversion reduced quality too much?",
+      "answer": "Compare the output on screen for blur, artifacts, or visible blockiness, especially in sharp edges and small text."
+    }
+  ],
+  "call_to_action": {
+    "text": "Ready to improve your image conversions?",
+    "url": "/tools/jpg-to-png",
+    "button_text": "Try an image converter"
+  },
+  "breadcrumb_override": [
+    {"name": "Home", "url": "/"},
+    {"name": "Learning", "url": "/learning"},
+    {"name": "Fundamentals", "url": "/learning/categories/fundamentals"},
+    {"name": "Understanding Image Quality", "url": "/learning/understanding-image-quality"}
+  ]
+}

@@ -1,0 +1,184 @@
+{
+  "slug": "pdf-to-excel",
+  "title": "PDF to Excel Converter",
+  "description": "Convert PDF documents into Excel spreadsheets online for free.",
+  "upload_form": {
+    "action": "/convert",
+    "method": "post",
+    "accept": ".pdf",
+    "button_text": "Convert PDF to Excel"
+  },
+  "faq": [
+    {
+      "question": "Can I extract tables from PDF to Excel?",
+      "answer": "Yes. This converter extracts tabular data from PDF documents and converts it into editable Excel spreadsheets."
+    },
+    {
+      "question": "Will formatting be preserved?",
+      "answer": "The converter works to preserve table structures, columns, and data for easy editing in Excel."
+    },
+    {
+      "question": "Why convert PDF to Excel?",
+      "answer": "Converting PDF to Excel allows you to edit, analyze, and manipulate data that was previously locked in a PDF."
+    },
+    {
+      "question": "Is the conversion secure and online?",
+      "answer": "Yes. The process is secure, fast, and works directly in your browser with no software installation."
+    },
+    {
+      "question": "How do I get my Excel file?",
+      "answer": "Once the conversion finishes, you can download your .xlsx spreadsheet right away."
+    },
+    {
+      "question": "Is this converter free to use?",
+      "answer": "Yes. Converting PDF to Excel on Converigo is completely free."
+    },
+    {
+      "question": "Can I convert files on mobile?",
+      "answer": "Yes. The tool works in modern mobile and desktop browsers."
+    },
+    {
+      "question": "What if my upload fails?",
+      "answer": "Try refreshing the page, re-uploading your PDF document, and converting again."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "excel-to-pdf",
+      "title": "Excel to PDF"
+    },
+    {
+      "slug": "pdf-to-word",
+      "title": "PDF to Word"
+    },
+    {
+      "slug": "pdf-to-jpg",
+      "title": "PDF to JPG"
+    },
+    {
+      "slug": "pdf-to-ppt",
+      "title": "PDF to PowerPoint"
+    }
+  ],
+  "seo": {
+    "title": "Convert PDF to Excel Online Free | Converigo",
+    "description": "Convert PDF documents to Excel spreadsheets online for free. Extract tables and data from PDF files. No software installation required.",
+    "keywords": "pdf to excel, convert pdf to excel, extract pdf to excel, pdf to xlsx, document converter",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert PDF to Excel - Converigo free online converter",
+    "twitter_title": "Convert PDF to Excel Online Free | Converigo",
+    "twitter_description": "Convert PDF documents to Excel spreadsheets online for free. Extract tables and data from PDF files. No software installation required.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/pdf-to-excel"
+  },
+  "source": "pdf",
+  "target": "xlsx",
+  "category": "document",
+  "active": true,
+  "popular": true,
+  "featured": false,
+  "hero": {
+    "eyebrow": "Converter tool",
+    "title": "PDF to Excel Converter Free Online",
+    "description": "Convert PDF documents into editable Excel spreadsheets quickly while preserving table structures and data.",
+    "panel_label": "Ready to convert",
+    "panel_title": "Upload a PDF file and receive an editable Excel spreadsheet in seconds."
+  },
+  "features": [
+    {
+      "title": "Extract data from PDF",
+      "text": "Convert locked PDF data into editable Excel spreadsheets for analysis and manipulation."
+    },
+    {
+      "title": "Preserve table structures",
+      "text": "Keep your data organized with proper column and row structure in the output Excel file."
+    },
+    {
+      "title": "Fast secure online conversion",
+      "text": "Convert files in your browser with no software installation and a secure workflow."
+    },
+    {
+      "title": "Support for complex PDFs",
+      "text": "Handle multi-page PDF documents with various table layouts and formatting."
+    },
+    {
+      "title": "No software installation required",
+      "text": "Convert files directly in your browser without downloading or installing any software."
+    },
+    {
+      "title": "Free pdf to excel converter",
+      "text": "Convert PDF to Excel online completely free with no registration or hidden costs."
+    },
+    {
+      "title": "Secure document processing",
+      "text": "Your PDF files are encrypted during upload and automatically deleted after conversion."
+    },
+    {
+      "title": "Editable xlsx output",
+      "text": "Receive a standard .xlsx file ready for editing in Excel or Google Sheets."
+    }
+  ],
+  "supported_formats": {
+    "input": [
+      "PDF"
+    ],
+    "output": [
+      "XLSX"
+    ],
+    "description": "PDF input, Excel output"
+  },
+  "how_to_use": [
+    {
+      "title": "Upload your PDF file",
+      "description": "Select a PDF document from your device to begin the conversion."
+    },
+    {
+      "title": "Convert to Excel",
+      "description": "Choose XLSX as the output format and convert your document."
+    },
+    {
+      "title": "Download your spreadsheet",
+      "description": "Get your converted Excel file instantly for data analysis."
+    },
+    {
+      "title": "Upload your pdf",
+      "description": "Select a PDF file from your device to begin the conversion process."
+    },
+    {
+      "title": "Choose excel as format",
+      "description": "Pick XLSX as your desired format and review any available options."
+    },
+    {
+      "title": "Convert pdf to excel",
+      "description": "Click convert and our engine processes your document instantly."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is PDF?",
+      "text": "PDF is a portable document format ideal for sharing documents while preserving layout."
+    },
+    {
+      "title": "What is XLSX?",
+      "text": "XLSX is the modern Excel spreadsheet format used for data analysis and calculations."
+    },
+    {
+      "title": "What is PDF format?",
+      "text": "PDF is a widely used file format known for its document integrity and universal compatibility."
+    },
+    {
+      "title": "What is Excel format?",
+      "text": "Excel is a popular spreadsheet format valued for its powerful data management capabilities."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Convert PDF files to Excel in seconds",
+    "text": "Upload your document and receive an editable spreadsheet instantly.",
+    "primary_text": "Convert now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  },
+  "lifecycle_status": "active"
+}

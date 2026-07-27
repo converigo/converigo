@@ -1,0 +1,14 @@
+{
+  "slug": "mp3",
+  "name": "MP3",
+  "extension": ".mp3",
+  "mime_type": "audio/mpeg",
+  "category": "audio",
+  "description": "MP3 is a lossy compressed audio format that reduces file size while preserving acceptable sound quality, making it the most widely used format for music playback and portable devices.",
+  "related_formats": ["aac", "flac", "m4a", "ogg", "wav"],
+  "related_converters": ["mp4-to-mp3"],
+  "primary_keywords": ["mp3 audio format", "mp3 file format", "mp3 music format"],
+  "secondary_keywords": ["lossy audio compression", "mp3 converter", "mp3 player compatibility"],
+  "search_intent": ["audio conversion", "file compression", "music playback"]
+}
+

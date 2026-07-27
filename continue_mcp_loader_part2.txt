@@ -1,0 +1,221 @@
+        const { provider } = model;
+        if (provider === "transformers.js") {
+          if (ideInfo.ideType === "vscode") {
+            continueConfig.modelsByRole.embed.push(
+              new TransformersJsEmbeddingsProvider_default()
+            );
+          } else {
+            localErrors.push({
+              fatal: false,
+              message: `Transformers.js embeddings provider not supported in this IDE.`
+            });
+          }
+        } else {
+          continueConfig.modelsByRole.embed.push(...llms);
+        }
+      }
+      if (model.roles?.includes("rerank")) {
+        continueConfig.modelsByRole.rerank.push(...llms);
+      }
+      if (model.roles?.includes("subagent")) {
+        continueConfig.modelsByRole.subagent.push(...llms);
+      }
+    } catch (e14) {
+      localErrors.push({
+        fatal: false,
+        message: `Failed to load model:
+Name: ${model.name}
+Model: ${model.model}
+Provider: ${model.provider}
+${e14 instanceof Error ? e14.message : e14}`
+      });
+    }
+  }
+  if (ideInfo.ideType === "vscode" && !continueConfig.modelsByRole.embed.find(
+    (m12) => m12.providerName === "transformers.js"
+  )) {
+    continueConfig.modelsByRole.embed.push(
+      new TransformersJsEmbeddingsProvider_default()
+    );
+  }
+  const { providers, errors: contextErrors } = loadConfigContextProviders(
+    config3.context,
+    !!config3.docs?.length,
+    ideInfo.ideType
+  );
+  continueConfig.contextProviders = providers;
+  localErrors.push(...contextErrors);
+  const mcpManager = MCPManagerSingleton.getInstance();
+  const mcpOptions = (config3.mcpServers ?? []).map(
+    (server) => convertYamlMcpConfigToInternalMcpOptions(server, config3.requestOptions)
+  );
+  const { errors: jsonMcpErrors, mcpServers } = await loadJsonMcpConfigs(
+    ide,
+    true,
+    config3.requestOptions
+  );
+  localErrors.push(...jsonMcpErrors);
+  mcpOptions.push(...mcpServers);
+  mcpManager.setConnections(mcpOptions, false, { ide });
+  return { config: continueConfig, errors: localErrors };
+}
+async function loadContinueConfigFromYaml(options) {
+  const {
+    ide,
+    ideSettings,
+    ideInfo,
+    uniqueId,
+    llmLogger,
+    overrideConfigYaml,
+    packageIdentifier
+  } = options;
+  const configYamlResult = await loadConfigYaml({
+    overrideConfigYaml,
+    ideSettings,
+    ide,
+    packageIdentifier
+  });
+  if (!configYamlResult.config || configYamlResult.configLoadInterrupted) {
+    return {
+      errors: configYamlResult.errors,
+      config: void 0,
+      configLoadInterrupted: true,
+      configName: configYamlResult.configName
+    };
+  }
+  const { config: continueConfig, errors: localErrors } = await configYamlToContinueConfig({
+    unrolledAssistant: configYamlResult.config,
+    ide,
+    ideInfo,
+    uniqueId,
+    llmLogger
+  });
+  const sharedConfig = new GlobalContext().getSharedConfig();
+  const withShared = modifyAnyConfigWithSharedConfig(
+    continueConfig,
+    sharedConfig
+  );
+  if (withShared.allowAnonymousTelemetry === void 0) {
+    withShared.allowAnonymousTelemetry = true;
+  }
+  return {
+    config: withShared,
+    errors: [...configYamlResult.errors ?? [], ...localErrors],
+    configLoadInterrupted: false,
+    configName: configYamlResult.configName
+  };
+}
+var import_node_path12;
+var init_loadYaml = __esm({
+  "../../core/config/yaml/loadYaml.ts"() {
+    "use strict";
+    init_importMetaUrl();
+    init_dist17();
+    import_node_path12 = require("node:path");
+    init_MCPManagerSingleton();
+    init_TransformersJsEmbeddingsProvider();
+    init_getPromptFiles();
+    init_GlobalContext();
+    init_sharedConfig();
+    init_promptBlockSlashCommand();
+    init_promptFileSlashCommand();
+    init_loadJsonMcpConfigs();
+    init_tools();
+    init_uri();
+    init_loadContextProviders();
+    init_loadLocalAssistants();
+    init_loadLocalYamlBlocks();
+    init_LocalPlatformClient();
+    init_models4();
+    init_yamlToContinueConfig();
+  }
+});
+
+// ../../core/config/profile/doLoadConfig.ts
+async function loadRules(ide) {
+  const rules = [];
+  const errors2 = [];
+  const { rules: yamlRules, errors: continueRulesErrors } = await getWorkspaceContinueRuleDotFiles(ide);
+  rules.unshift(...yamlRules);
+  errors2.push(...continueRulesErrors);
+  const { rules: markdownRules, errors: markdownRulesErrors } = await loadMarkdownRules(ide);
+  rules.unshift(...markdownRules);
+  errors2.push(...markdownRulesErrors);
+  const codebaseRulesCache = CodebaseRulesCache.getInstance();
+  rules.unshift(...codebaseRulesCache.rules);
+  errors2.push(...codebaseRulesCache.errors);
+  return { rules, errors: errors2 };
+}
+async function doLoadConfig(options) {
+  const {
+    ide,
+    llmLogger,
+    overrideConfigJson,
+    overrideConfigYaml,
+    profileId,
+    overrideConfigYamlByPath,
+    packageIdentifier
+  } = options;
+  const ideInfo = await ide.getIdeInfo();
+  const uniqueId = await ide.getUniqueId();
+  const ideSettings = await ide.getIdeSettings();
+  const configJsonPath = getConfigJsonPath();
+  if (import_fs9.default.existsSync(configJsonPath)) {
+    migrateJsonSharedConfig(configJsonPath, ide);
+  }
+  const configYamlPath = localPathOrUriToPath(
+    overrideConfigYamlByPath || getConfigYamlPath(ideInfo.ideType)
+  );
+  let newConfig;
+  let errors2;
+  let configLoadInterrupted = false;
+  let configName;
+  const hasPreReadContent = packageIdentifier.uriType === "file" && packageIdentifier.content !== void 0;
+  if (overrideConfigYaml || hasPreReadContent || import_fs9.default.existsSync(configYamlPath)) {
+    const result2 = await loadContinueConfigFromYaml({
+      ide,
+      ideSettings,
+      ideInfo,
+      uniqueId,
+      llmLogger,
+      overrideConfigYaml,
+      packageIdentifier
+    });
+    newConfig = result2.config;
+    errors2 = result2.errors;
+    configLoadInterrupted = result2.configLoadInterrupted;
+    configName = result2.configName;
+  } else {
+    const result2 = await loadContinueConfigFromJson(
+      ide,
+      ideSettings,
+      ideInfo,
+      uniqueId,
+      llmLogger,
+      overrideConfigJson
+    );
+    newConfig = result2.config;
+    errors2 = result2.errors;
+    configLoadInterrupted = result2.configLoadInterrupted;
+  }
+  if (configLoadInterrupted || !newConfig) {
+    return {
+      errors: errors2,
+      config: newConfig,
+      configLoadInterrupted: true,
+      configName
+    };
+  }
+  errors2 = [...errors2 ?? []];
+  const { rules, errors: rulesErrors } = await loadRules(ide);
+  errors2.push(...rulesErrors);
+  newConfig.rules.unshift(...rules);
+  for (const rule of newConfig.rules) {
+    if (rule.invokable) {
+      try {
+        const slashCommand = convertRuleBlockToSlashCommand(rule);
+        (newConfig.slashCommands ??= []).push(slashCommand);
+      } catch (e14) {
+        errors2.push({
+          message: `Error converting invokable rule ${rule.name} to slash command: ${e14 instanceof Error ? e14.message : e14}`,
+          fatal: false

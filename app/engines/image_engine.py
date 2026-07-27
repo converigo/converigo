@@ -17,6 +17,7 @@ from PIL import Image
 logger = logging.getLogger(__name__)
 
 from app.engines.base_engine import BaseEngine
+from app.core.settings import settings
 
 
 class ImageEngine(BaseEngine):
@@ -49,7 +50,7 @@ class ImageEngine(BaseEngine):
                 f"Unsupported target format: {target}"
             )
 
-        output_dir = Path("outputs") / "image"
+        output_dir = settings.OUTPUT_DIR / "image"
 
         output_dir.mkdir(
             parents=True,

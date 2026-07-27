@@ -1,0 +1,13 @@
+{
+  "slug": "jpg",
+  "name": "JPG",
+  "extension": ".jpg",
+  "mime_type": "image/jpeg",
+  "category": "image",
+  "description": "JPG is a lossy image format optimized for photographs and rich color images with broad compatibility across devices and services.",
+  "related_formats": ["png", "webp", "gif"],
+  "related_converters": ["jpg-to-png", "jpg-to-webp", "png-to-jpg", "pdf-to-jpg"],
+  "primary_keywords": ["jpg file format", "jpeg image format", "compressed image"],
+  "secondary_keywords": ["jpg conversion", "jpeg compatibility", "image optimization"],
+  "search_intent": ["informational", "image conversion", "web image"]
+}

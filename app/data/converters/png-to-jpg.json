@@ -41,9 +41,15 @@
     }
   ],
   "seo": {
-    "title": "PNG to JPG Converter - Free Online Tool",
+    "title": "Convert PNG to JPG Online Free | Converigo",
     "description": "Convert PNG images to JPG format online for free. Reduce compatibility issues, preserve image quality, and get a fast secure online conversion.",
-    "keywords": "png to jpg, convert png to jpg, png to image, image compatibility"
+    "keywords": "png to jpg, convert png to jpg, png to image, image compatibility",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert PNG to JPG - Converigo free online converter",
+    "twitter_title": "Convert PNG to JPG Online Free | Converigo",
+    "twitter_description": "Convert PNG images to JPG format online for free. Reduce compatibility issues, preserve image quality, and get a fast secure online conversion.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/png-to-jpg"
   },
   "source": "png",
   "target": "jpg",
@@ -70,6 +76,26 @@
     {
       "title": "Fast secure online conversion",
       "text": "Convert images quickly with a simple online process that keeps your files secure."
+    },
+    {
+      "title": "Fast png to jpg conversion",
+      "text": "Convert PNG to JPG in seconds with our optimized processing engine."
+    },
+    {
+      "title": "No software installation required",
+      "text": "Convert files directly in your browser without downloading or installing any software."
+    },
+    {
+      "title": "High-quality jpg output",
+      "text": "Receive a polished JPG file ready for immediate use in your workflow."
+    },
+    {
+      "title": "Free png to jpg converter",
+      "text": "Convert PNG to JPG online completely free with no registration or hidden costs."
+    },
+    {
+      "title": "Secure png processing",
+      "text": "Your PNG files are encrypted during upload and automatically deleted after conversion."
     }
   ],
   "supported_formats": {
@@ -93,6 +119,18 @@
     {
       "title": "Download your image",
       "description": "Get your converted JPG file instantly for web use, email, or storage."
+    },
+    {
+      "title": "Upload your png",
+      "description": "Select a PNG file from your device to begin the conversion process."
+    },
+    {
+      "title": "Choose jpg as format",
+      "description": "Pick JPG as your desired format and review any available options."
+    },
+    {
+      "title": "Convert png to jpg",
+      "description": "Click convert and our engine processes your png instantly."
     }
   ],
   "about_formats": [
@@ -103,6 +141,14 @@
     {
       "title": "What is JPG?",
       "text": "JPG is a widely supported image format that is ideal for sharing, uploading, and reducing compatibility issues."
+    },
+    {
+      "title": "What is PNG format?",
+      "text": "PNG is a widely used file format known for its versatility and compatibility across many applications."
+    },
+    {
+      "title": "What is JPG format?",
+      "text": "JPG is a popular file format chosen for its broad compatibility and optimized performance."
     }
   ],
   "cta": {
@@ -113,5 +159,6 @@
     "secondary_text": "Read FAQs",
     "primary_href": "#converter",
     "secondary_href": "#faq"
-  }
+  },
+  "lifecycle_status": "certified"
 }

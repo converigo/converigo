@@ -1,0 +1,53 @@
+{
+  "slug": "png-faq",
+  "title": "PNG FAQ: Common Questions About the Format",
+  "description": "Get clear answers to common PNG questions about transparency, quality, compression, and when to use PNG for files and web graphics.",
+  "category": "Troubleshooting",
+  "topics": ["PNG", "FAQ", "transparency", "compression", "file format"],
+  "author": "Converigo",
+  "date_published": "2026-07-07",
+  "date_modified": "2026-07-21",
+  "read_time_minutes": 4,
+  "order": 7,
+  "keywords": ["PNG FAQ", "PNG questions", "PNG help", "PNG format questions"],
+  "seo_keywords": ["png faq", "png questions", "png help", "what is png format"],
+  "related_formats": ["png", "jpg", "webp", "svg"],
+  "related_converters": ["jpg-to-png", "png-to-jpg", "png-to-webp"],
+  "related_articles": ["png", "what-is-png", "png-transparency-guide", "png-compression-guide"],
+  "sections": [
+    {
+      "id": "faq-overview",
+      "title": "PNG Questions People Ask Most",
+      "content": "This FAQ page addresses the most common PNG questions, including when to use it, how it differs from JPG and WebP, and how transparency and file size affect the decision."
+    },
+    {
+      "id": "faq-items",
+      "title": "Answers at a Glance",
+      "content": "PNG is excellent for transparent graphics and lossless quality. It is less efficient than JPG or WebP for large photos, but more dependable when future edits or precise transparency matter."
+    }
+  ],
+  "faq": [
+    {
+      "question": "Is PNG good for logos?",
+      "answer": "Yes. PNG is often the best choice for logos because it preserves sharp edges and supports transparent backgrounds."
+    },
+    {
+      "question": "Is PNG suitable for photography?",
+      "answer": "PNG can be used for photography, but it often creates larger files than JPG or WebP."
+    },
+    {
+      "question": "Can PNG be converted to other formats?",
+      "answer": "Yes. PNG files can be converted to JPG, WebP, and other formats depending on your needs."
+    }
+  ],
+  "call_to_action": {
+    "text": "Find the best PNG workflow for your file and convert it with confidence.",
+    "url": "/jpg-to-png",
+    "button_text": "Start Converting"
+  },
+  "breadcrumb_override": [
+    { "name": "Home", "url": "/" },
+    { "name": "Learning Center", "url": "/learning" },
+    { "name": "PNG FAQ", "url": "/learning/png-faq" }
+  ]
+}

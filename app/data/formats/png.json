@@ -1,0 +1,13 @@
+{
+  "slug": "png",
+  "name": "PNG",
+  "extension": ".png",
+  "mime_type": "image/png",
+  "category": "image",
+  "description": "PNG is a lossless image format that preserves sharp edges and transparency for graphics, logos, and screenshots.",
+  "related_formats": ["jpg", "webp", "svg"],
+  "related_converters": ["png-to-jpg", "png-to-webp", "jpg-to-png", "webp-to-png"],
+  "primary_keywords": ["png file format", "lossless image", "png transparency"],
+  "secondary_keywords": ["png conversion", "png optimization", "image format"],
+  "search_intent": ["informational", "image quality", "web graphics"]
+}

@@ -1,0 +1,124 @@
+{
+  "slug": "heic",
+  "name": "HEIC",
+  "quick_answer": "HEIC — High Efficiency Image Container format used by Apple devices that delivers higher quality than JPG at roughly half the file size.",
+  "definition": "HEIC is an image file format. High Efficiency Image Container format used by Apple devices that delivers higher quality than JPG at roughly half the file size. It is commonly used in workflows that require reliable image handling and is supported by a wide range of applications and online tools.",
+  "use_cases": [
+    {
+      "title": "iPhone and Apple device photography",
+      "text": "HEIC is the default camera format on iPhones and iPads, used to store photos at half the file size of JPG with equivalent or better visual quality."
+    },
+    {
+      "title": "iCloud and Apple ecosystem sharing",
+      "text": "HEIC files sync efficiently through iCloud and share natively between Apple devices in Messages, AirDrop, and Photos."
+    },
+    {
+      "title": "Live Photos and burst sequences",
+      "text": "HEIC containers support Apple Live Photos and burst image sequences in a single file, preserving motion and context alongside the still image."
+    },
+    {
+      "title": "Space-efficient photo storage",
+      "text": "HEIC allows iPhone users to store roughly twice as many photos compared to JPG at the same perceived quality, reducing storage pressure."
+    },
+    {
+      "title": "High dynamic range and wide color",
+      "text": "HEIC preserves the full HDR and wide color gamut captured by modern iPhone cameras, retaining detail in highlights and shadows."
+    }
+  ],
+  "advantages": [
+    {
+      "title": "Half the size of JPG at the same quality",
+      "text": "HEIC uses the HEVC codec to compress photos to roughly half the file size of an equivalent JPG without visible quality loss."
+    },
+    {
+      "title": "HDR and wide color gamut support",
+      "text": "HEIC preserves the 10-bit HDR and P3 wide color gamut captured by modern iPhone cameras, which JPG cannot fully represent."
+    },
+    {
+      "title": "Multi-image and Live Photo containers",
+      "text": "HEIC can bundle multiple images, depth maps, and Apple Live Photo sequences in a single file that JPG cannot match."
+    },
+    {
+      "title": "Excellent detail preservation",
+      "text": "HEIC retains fine detail in textures, foliage, and complex scenes better than JPG at the same file size."
+    }
+  ],
+  "limitations": [
+    {
+      "title": "Limited compatibility outside Apple ecosystem",
+      "text": "HEIC is not natively supported on Windows without codec installation or on older Android devices, requiring conversion for broad sharing."
+    },
+    {
+      "title": "Requires conversion for web use",
+      "text": "Web browsers do not universally support HEIC, so images must be converted to JPG or WebP before publishing online."
+    },
+    {
+      "title": "Not widely supported by editing tools",
+      "text": "Many image editors and photo management applications outside the Apple ecosystem have limited or no native HEIC support."
+    },
+    {
+      "title": "Patent-encumbered format",
+      "text": "HEIC relies on HEVC which involves patent licensing, which has contributed to slower adoption compared to open formats like AVIF."
+    }
+  ],
+  "comparisons": [
+    {
+      "title": "HEIC vs JPG",
+      "text": "HEIC stores the same perceived quality as JPG at roughly half the file size and supports HDR, but JPG has far wider compatibility outside the Apple ecosystem."
+    },
+    {
+      "title": "HEIC vs PNG",
+      "text": "HEIC is more efficient than PNG for photographic images, but PNG is lossless and universally supported, making it preferable when exact quality preservation is required."
+    },
+    {
+      "title": "HEIC vs WEBP",
+      "text": "Both HEIC and WebP offer better compression than JPG, but WebP has broader browser and platform support while HEIC is better integrated in the Apple ecosystem."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "heic-to-jpg",
+      "title": "HEIC to JPG Converter",
+      "description": "Convert HEIC files to JPG quickly and easily.",
+      "href": "/heic-to-jpg"
+    },
+    {
+      "slug": "heic-to-png",
+      "title": "HEIC to PNG Converter",
+      "description": "Convert HEIC files to PNG quickly and easily.",
+      "href": "/heic-to-png"
+    },
+    {
+      "slug": "heic-to-pdf",
+      "title": "HEIC to PDF Converter",
+      "description": "Convert HEIC files to PDF quickly and easily.",
+      "href": "/heic-to-pdf"
+    }
+  ],
+  "faq": [
+    {
+      "question": "What is a HEIC file?",
+      "answer": "A HEIC (High Efficiency Image Container) file is the photo format used by iPhones and other Apple devices to store images at roughly half the size of JPG."
+    },
+    {
+      "question": "How do I open a HEIC file on Windows?",
+      "answer": "On Windows 10 and 11 you can install the Microsoft HEVC Video Extensions from the Microsoft Store, or convert the file to JPG using an online tool."
+    },
+    {
+      "question": "Is HEIC better quality than JPG?",
+      "answer": "HEIC provides equal or better quality than JPG at around half the file size, and it supports HDR and wide color gamut that JPG cannot fully represent."
+    },
+    {
+      "question": "Can I convert HEIC to JPG?",
+      "answer": "Yes, HEIC can be converted to JPG using online converters, Apple Photos, or image editing software for maximum compatibility."
+    },
+    {
+      "question": "Why does my iPhone save photos as HEIC?",
+      "answer": "Apple uses HEIC by default because it stores the same quality as JPG in about half the storage space, helping manage limited device storage."
+    },
+    {
+      "question": "Is HEIC supported on Android?",
+      "answer": "Android support for HEIC varies by device and OS version. For sharing with Android users, converting to JPG ensures compatibility."
+    }
+  ]
+}

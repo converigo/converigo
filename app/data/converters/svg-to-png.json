@@ -1,0 +1,184 @@
+{
+  "slug": "svg-to-png",
+  "title": "SVG to PNG Converter",
+  "description": "Convert SVG images into PNG format online for free.",
+  "upload_form": {
+    "action": "/convert",
+    "method": "post",
+    "accept": ".svg",
+    "button_text": "Convert SVG to PNG"
+  },
+  "faq": [
+    {
+      "question": "Can I convert SVG vector graphics to PNG?",
+      "answer": "Yes. This converter converts scalable SVG vector images into standard PNG raster images."
+    },
+    {
+      "question": "Why convert SVG to PNG?",
+      "answer": "PNG files are universally supported across websites, documents, and applications where SVG may not be compatible."
+    },
+    {
+      "question": "Will image quality be preserved?",
+      "answer": "Yes. The conversion produces high-quality PNG images at your chosen resolution."
+    },
+    {
+      "question": "Is the conversion secure and online?",
+      "answer": "Yes. The process is secure, fast, and works directly in your browser with no software installation."
+    },
+    {
+      "question": "How do I get my PNG file?",
+      "answer": "Once the conversion finishes, you can download your PNG image right away."
+    },
+    {
+      "question": "Is this converter free to use?",
+      "answer": "Yes. Converting SVG to PNG on Converigo is completely free."
+    },
+    {
+      "question": "Can I convert files on mobile?",
+      "answer": "Yes. The tool works in modern mobile and desktop browsers."
+    },
+    {
+      "question": "What if my upload fails?",
+      "answer": "Try refreshing the page, re-uploading your SVG image, and converting again."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "png-to-jpg",
+      "title": "PNG to JPG"
+    },
+    {
+      "slug": "jpg-to-png",
+      "title": "JPG to PNG"
+    },
+    {
+      "slug": "bmp-to-png",
+      "title": "BMP to PNG"
+    },
+    {
+      "slug": "webp-to-png",
+      "title": "WebP to PNG"
+    }
+  ],
+  "seo": {
+    "title": "Convert SVG to PNG Online Free | Converigo",
+    "description": "Convert SVG vector images to PNG format online for free. Make scalable graphics compatible with any platform. No software installation required.",
+    "keywords": "svg to png, convert svg to png, vector to raster, svg converter, image converter",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert SVG to PNG - Converigo free online converter",
+    "twitter_title": "Convert SVG to PNG Online Free | Converigo",
+    "twitter_description": "Convert SVG vector images to PNG format online for free. Make scalable graphics compatible with any platform. No software installation required.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/svg-to-png"
+  },
+  "source": "svg",
+  "target": "png",
+  "category": "image",
+  "active": true,
+  "popular": true,
+  "featured": false,
+  "hero": {
+    "eyebrow": "Converter tool",
+    "title": "SVG to PNG Converter Free Online",
+    "description": "Convert SVG vector graphics into widely compatible PNG raster images quickly and easily.",
+    "panel_label": "Ready to convert",
+    "panel_title": "Upload an SVG file and receive a standard PNG image in seconds."
+  },
+  "features": [
+    {
+      "title": "Convert vector to raster",
+      "text": "Turn SVG vector graphics into PNG raster images for universal compatibility."
+    },
+    {
+      "title": "Preserve image quality",
+      "text": "Get high-quality PNG output with sharp details and accurate colors."
+    },
+    {
+      "title": "Fast secure online conversion",
+      "text": "Convert files in your browser with no software installation and a secure workflow."
+    },
+    {
+      "title": "Support for complex SVGs",
+      "text": "Handle SVG files with gradients, patterns, and complex vector paths."
+    },
+    {
+      "title": "No software installation required",
+      "text": "Convert files directly in your browser without downloading or installing any software."
+    },
+    {
+      "title": "Free svg to png converter",
+      "text": "Convert SVG to PNG online completely free with no registration or hidden costs."
+    },
+    {
+      "title": "Secure image processing",
+      "text": "Your image files are encrypted during upload and automatically deleted after conversion."
+    },
+    {
+      "title": "Universal png compatibility",
+      "text": "Receive standard PNG files that work on all websites, documents, and applications."
+    }
+  ],
+  "supported_formats": {
+    "input": [
+      "SVG"
+    ],
+    "output": [
+      "PNG"
+    ],
+    "description": "SVG input, PNG output"
+  },
+  "how_to_use": [
+    {
+      "title": "Upload your SVG file",
+      "description": "Select an SVG vector image from your device to begin."
+    },
+    {
+      "title": "Convert to PNG",
+      "description": "Choose PNG as the output format and convert your image."
+    },
+    {
+      "title": "Download your PNG",
+      "description": "Get your converted PNG image instantly for use in any application."
+    },
+    {
+      "title": "Upload your svg",
+      "description": "Select an SVG file from your device to begin the conversion process."
+    },
+    {
+      "title": "Choose png as format",
+      "description": "Pick PNG as your desired format and review any available options."
+    },
+    {
+      "title": "Convert svg to png",
+      "description": "Click convert and our engine processes your image instantly."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is SVG?",
+      "text": "SVG is a vector image format that scales without losing quality, ideal for icons and illustrations."
+    },
+    {
+      "title": "What is PNG?",
+      "text": "PNG is a raster image format widely used for web graphics, screenshots, and digital images."
+    },
+    {
+      "title": "What is SVG format?",
+      "text": "SVG is an XML-based vector format known for its scalability and small file size."
+    },
+    {
+      "title": "What is PNG format?",
+      "text": "PNG is a popular raster format chosen for its lossless compression and broad compatibility."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Convert SVG files to PNG in seconds",
+    "text": "Upload your vector graphic and receive a standard PNG image instantly.",
+    "primary_text": "Convert now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  },
+  "lifecycle_status": "certified"
+}
