@@ -3,6 +3,7 @@ from pathlib import Path
 from fastapi.testclient import TestClient
 import pytest
 
+from app.core.settings import settings
 from app.main import app
 from app.plugins.registry import registry
 
@@ -13,6 +14,15 @@ def _assert_output_exists(response, client):
     assert data.get("status") == "success"
     assert "download_path" in data
     download = data["download_path"]
+    assert download.startswith("/download/")
+    relative_parts = Path(download.removeprefix("/download/")).parts
+    assert len(relative_parts) == 2, f"Unexpected download path shape: {download}"
+    conversion_id, filename = relative_parts
+
+    output_path = settings.OUTPUT_DIR / conversion_id / filename
+    assert output_path.exists(), f"Expected public artifact not found: {output_path}"
+    assert output_path.stat().st_size > 0, "Output file is empty"
+    assert len(list((settings.OUTPUT_DIR / conversion_id).glob("*"))) == 1
 
     # Verify that the download URL is served by the app and returns content
     dl_resp = client.get(download)

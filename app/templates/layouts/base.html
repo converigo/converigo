@@ -226,6 +226,22 @@
         const query = params.toString();
         window.location.search = query ? `?${query}` : window.location.pathname;
     };
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const languageSelect = document.getElementById('languageSelect');
+        if (!languageSelect) {
+            return;
+        }
+
+        const currentLocale = (languageSelect.getAttribute('data-current-locale') || window.localeCode || '').toLowerCase();
+        const normalizedCurrent = currentLocale.split('-')[0];
+        const options = Array.from(languageSelect.options || []);
+        const matchedOption = options.find((option) => (option.value || '').toLowerCase() === normalizedCurrent);
+
+        if (matchedOption) {
+            languageSelect.value = matchedOption.value;
+        }
+    });
 </script>
 
 <script src="/static/js/config.js"></script>

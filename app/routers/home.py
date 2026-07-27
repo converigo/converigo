@@ -200,6 +200,15 @@ async def home(request: Request):
     metadata = seo_service.build_home_meta(request)
     _, _, supported_locales = _get_locale_context(request)
 
+    hero_context = {
+        "eyebrow": t("hero.eyebrow", "Premium File Converter"),
+        "title": t("hero.title", "Convert All Files"),
+        "subtitle": t("hero.subtitle", "Convert files faster with premium simplicity."),
+        "subtitle_line": t("hero.subtitle_line", "In Seconds"),
+        "description": t("hero.description", "Convert images, videos, audio, and documents online."),
+        "description_secondary": t("hero.description_secondary", ""),
+    }
+
     return templates.TemplateResponse(
         request=request,
         name="pages/home.html",
@@ -210,7 +219,7 @@ async def home(request: Request):
             "supported_locales": supported_locales,
             "title": metadata["title"],
             "meta": metadata,
-            "hero": {},
+            "hero": hero_context,
             "featured_converters": popular[:4],
             "popular_converter_groups": popular_converter_groups,
             "popular_converters": popular,

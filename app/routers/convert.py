@@ -157,7 +157,8 @@ async def convert_file(
                 tracker.start("conversion")
                 output_path = await conversion_service.convert_file(
                     saved_path,
-                    target_format
+                    target_format,
+                    conversion_id=tracker.conversion_id,
                 )
                 tracker.finish("conversion")
 

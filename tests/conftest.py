@@ -3,6 +3,7 @@ import socket
 import subprocess
 import sys
 import time
+import urllib.request
 from pathlib import Path
 
 import pytest
@@ -12,6 +13,22 @@ def _is_port_open(host_name: str, port_number: int) -> bool:
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
         sock.settimeout(0.5)
         return sock.connect_ex((host_name, port_number)) == 0
+
+
+def _wait_for_http_ready(url: str, timeout_seconds: int = 60) -> None:
+    deadline = time.time() + timeout_seconds
+    last_error: Exception | None = None
+
+    while time.time() < deadline:
+        try:
+            with urllib.request.urlopen(url, timeout=2) as response:
+                if getattr(response, "status", 0) < 500:
+                    return
+        except Exception as exc:  # pragma: no cover - defensive for startup races
+            last_error = exc
+        time.sleep(0.25)
+
+    raise RuntimeError(f"Server at {url} did not become reachable within {timeout_seconds}s: {last_error}")
 
 
 @pytest.fixture(scope="session")
@@ -97,6 +114,17 @@ def app_server(request):
             except subprocess.TimeoutExpired:
                 process.kill()
                 process.wait(timeout=10)
+
+
+@pytest.fixture(scope="session")
+def app_base_url(app_server):
+    """Return the reachable base URL for browser-based tests."""
+    base_url = os.environ.get("CONVERIGO_BASE_URL")
+    if not base_url:
+        raise RuntimeError("CONVERIGO_BASE_URL was not set by the app server fixture")
+
+    _wait_for_http_ready(f"{base_url}/health")
+    return base_url
 
 
 # Not autouse — only tests that explicitly request app_server or use the

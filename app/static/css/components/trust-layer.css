@@ -12,6 +12,9 @@ Premium trust section treatment
     margin-top: clamp(24px, 2.8vw, 40px);
     padding: 0;
     isolation: isolate;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .trust-layer::before {
@@ -34,9 +37,11 @@ Premium trust section treatment
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: clamp(10px, 0.9vw, 14px);
     max-width: 1160px;
+    width: 100%;
     margin: 0 auto;
     padding: 0;
     list-style: none;
+    box-sizing: border-box;
 }
 
 .trust-card {

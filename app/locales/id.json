@@ -5,6 +5,7 @@
     "subtitle": "Konversi file lebih cepat dengan kesederhanaan premium.",
     "subtitle_line": "Dalam Hitungan Detik",
     "description": "Konversi gambar, video, audio, dan dokumen secara online.",
+    "description_secondary": "yang mendukung lebih dari 100 format.",
     "batch_hint": "Mendukung banyak file sekaligus",
     "callout": "Konversi dan Lanjutkan!",
     "callout_tagline": "Cepat, Sederhana, Siap.",
@@ -16,7 +17,10 @@
     "subtext": "Seret, jatuhkan, atau telusuri untuk memilih file Anda.",
     "badge": "Instan",
     "drop_title": "Jatuhkan file Anda di sini",
+    "drag_drop": "Jatuhkan file Anda di sini",
     "browse": "Pilih File",
+    "or": "atau",
+    "supports_100": "Mendukung lebih dari 100 format",
     "empty_status": "Belum ada file yang dipilih",
     "waiting_status": "Menunggu file Anda",
     "size_label": "0 KB",
@@ -43,7 +47,34 @@
     "conversion_partial_success": "⚠️ {success}/{total} file berhasil dikonversi",
     "file_type_audio": "File Audio",
     "file_type_video": "File Video",
-    "file_type_pdf": "File PDF"
+    "file_type_pdf": "File PDF",
+    "recommended_next": "Direkomendasikan Berikutnya",
+    "recommended_next_label": "Konverter berikutnya yang direkomendasikan",
+    "validation_status_uploaded": "Diupload",
+    "validation_step_received": "File diterima",
+    "validation_step_detected": "Format terdeteksi",
+    "validation_step_complete": "Validasi selesai",
+    "settings": "Pengaturan",
+    "remove_file": "Hapus file",
+    "convert_all_to": "Konversi semua {count} file ke:",
+    "convert_file_to": "Konversi file ke:",
+    "file_name": "Nama file",
+    "output_format": "Format keluaran",
+    "file_type": "Jenis file",
+    "convert_another": "Konversi File Lain",
+    "back_to_upload": "Kembali ke Unggah",
+    "file_ready_for_download": "File siap diunduh",
+    "ready_to_convert": "Siap untuk dikonversi"
+  },
+  "supported_formats": {
+    "heading": "Format yang didukung",
+    "description": "Konversi format file populer termasuk gambar, dokumen, audio, dan video.",
+    "categories": {
+      "images": "Gambar",
+      "documents": "Dokumen",
+      "audio": "Audio",
+      "video": "Video"
+    }
   },
   "stats": {
     "formats": "Format yang didukung",
@@ -154,6 +185,9 @@
     "privacy_policy": "Kebijakan Privasi",
     "terms": "Syarat",
     "bottom_tagline": "Konversi File dalam Sekejap.",
+    "how_it_works": "Cara Kerjanya",
+    "supported_formats": "Format yang didukung",
+    "support_cta": "Dukung Converigo di Ko-fi",
     "made_with_love": "Dibuat dengan ❤️ untuk para pembuat di seluruh dunia.",
     "copyright": "© {year} Converigo. Dibuat untuk konversi file yang elegan."
   },
@@ -201,6 +235,16 @@
         "description": "Mulai konversi secara instan tanpa membuat akun."
       }
     }
+  },
+  "trust": {
+    "secure_processing": "Pemrosesan Aman",
+    "secure_processing_desc": "File diproses di memori dan tidak pernah disimpan ke disk setelah konversi.",
+    "browser_based": "Berbasis Browser",
+    "browser_based_desc": "Tidak diperlukan instalasi perangkat lunak. Semua berjalan langsung di browser Anda.",
+    "fast_conversion": "Konversi Cepat",
+    "fast_conversion_desc": "Mesin konversi yang dioptimalkan memproses file dengan cepat dan efisien.",
+    "wide_format": "Dukungan Format Luas",
+    "wide_format_desc": "Konversi antara gambar, video, audio, dan dokumen dengan kompatibilitas yang luas."
   },
   "language": {
     "selector_label": "Bahasa",

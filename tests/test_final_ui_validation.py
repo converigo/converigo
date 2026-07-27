@@ -5,9 +5,15 @@ Tests converter button, download, accordion, and language switch
 
 import os
 from pathlib import Path
+
+import pytest
 from playwright.sync_api import sync_playwright
 
-BASE_URL = os.environ.get("CONVERIGO_BASE_URL", "http://127.0.0.1:8000")
+pytestmark = pytest.mark.usefixtures("app_base_url")
+
+
+def get_base_url() -> str:
+    return os.environ.get("CONVERIGO_BASE_URL", "http://127.0.0.1:8000")
 
 
 class TestConverterButtonValidation:
@@ -18,7 +24,7 @@ class TestConverterButtonValidation:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
-            page.goto(BASE_URL, wait_until="domcontentloaded", timeout=60000)
+            page.goto(get_base_url(), wait_until="domcontentloaded", timeout=60000)
 
             convert_button = page.locator("#convertButton")
             assert convert_button.is_disabled(), "Convert button should be disabled on page load"
@@ -30,7 +36,7 @@ class TestConverterButtonValidation:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
-            page.goto(BASE_URL, wait_until="domcontentloaded", timeout=60000)
+            page.goto(get_base_url(), wait_until="domcontentloaded", timeout=60000)
 
             file_path = Path("tests/assets/real-test.jpg").resolve()
             page.locator("#fileInput").set_input_files(str(file_path))
@@ -53,7 +59,7 @@ class TestConverterButtonValidation:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
-            page.goto(BASE_URL, wait_until="domcontentloaded", timeout=60000)
+            page.goto(get_base_url(), wait_until="domcontentloaded", timeout=60000)
 
             convert_button = page.locator("#convertButton")
             button_text = convert_button.text_content()
@@ -68,7 +74,7 @@ class TestConverterButtonValidation:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
-            page.goto(BASE_URL, wait_until="domcontentloaded", timeout=60000)
+            page.goto(get_base_url(), wait_until="domcontentloaded", timeout=60000)
 
             # Upload file
             file_path = Path("tests/assets/real-test.jpg").resolve()
@@ -95,7 +101,7 @@ class TestDownloadValidation:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
-            page.goto(BASE_URL, wait_until="domcontentloaded", timeout=60000)
+            page.goto(get_base_url(), wait_until="domcontentloaded", timeout=60000)
 
             download_btn = page.locator("#downloadBtn")
             assert download_btn.is_hidden(), "Download button should be hidden on page load"
@@ -107,7 +113,7 @@ class TestDownloadValidation:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
-            page.goto(BASE_URL, wait_until="domcontentloaded", timeout=60000)
+            page.goto(get_base_url(), wait_until="domcontentloaded", timeout=60000)
 
             # Upload file
             file_path = Path("tests/assets/real-test.jpg").resolve()
@@ -144,7 +150,7 @@ class TestDownloadValidation:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
-            page.goto(BASE_URL, wait_until="domcontentloaded", timeout=60000)
+            page.goto(get_base_url(), wait_until="domcontentloaded", timeout=60000)
 
             file_path = Path("tests/assets/real-test.jpg").resolve()
             page.locator("#fileInput").set_input_files(str(file_path))
@@ -185,7 +191,7 @@ class TestAccordionValidation:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
-            page.goto(BASE_URL, wait_until="domcontentloaded", timeout=60000)
+            page.goto(get_base_url(), wait_until="domcontentloaded", timeout=60000)
 
             accordion = page.locator("#converterAccordion")
             # Accordion might be on hub page, not home
@@ -204,7 +210,7 @@ class TestAccordionValidation:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
             # Try converter hub page where accordion should exist
-            page.goto(f"{BASE_URL}/hub", wait_until="domcontentloaded", timeout=60000)
+            page.goto(f"{get_base_url()}/hub", wait_until="domcontentloaded", timeout=60000)
 
             accordion_items = page.locator(".accordion-item")
             
@@ -228,7 +234,7 @@ class TestAccordionValidation:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
-            page.goto(BASE_URL, wait_until="domcontentloaded", timeout=60000)
+            page.goto(get_base_url(), wait_until="domcontentloaded", timeout=60000)
 
             faq_accordion = page.locator("#faqAccordion")
             
@@ -257,7 +263,7 @@ class TestLanguageSwitchValidation:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
-            page.goto(BASE_URL, wait_until="domcontentloaded", timeout=60000)
+            page.goto(get_base_url(), wait_until="domcontentloaded", timeout=60000)
 
             language_select = page.locator("#languageSelect")
             assert language_select.count() > 0, "Language selector should exist"
@@ -269,7 +275,7 @@ class TestLanguageSwitchValidation:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
-            page.goto(BASE_URL, wait_until="domcontentloaded", timeout=60000)
+            page.goto(get_base_url(), wait_until="domcontentloaded", timeout=60000)
 
             language_select = page.locator("#languageSelect")
             options = language_select.locator("option")
@@ -284,7 +290,7 @@ class TestLanguageSwitchValidation:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
-            page.goto(BASE_URL, wait_until="domcontentloaded", timeout=60000)
+            page.goto(get_base_url(), wait_until="domcontentloaded", timeout=60000)
 
             language_select = page.locator("#languageSelect")
             
@@ -320,7 +326,7 @@ class TestLanguageSwitchValidation:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
-            page.goto(BASE_URL, wait_until="domcontentloaded", timeout=60000)
+            page.goto(get_base_url(), wait_until="domcontentloaded", timeout=60000)
 
             language_icon = page.locator(".language-icon")
             
@@ -338,7 +344,7 @@ class TestProgressIndicatorValidation:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
-            page.goto(BASE_URL, wait_until="domcontentloaded", timeout=60000)
+            page.goto(get_base_url(), wait_until="domcontentloaded", timeout=60000)
 
             progress = page.locator("#convertProgress")
             assert progress.is_hidden(), "Progress bar should be hidden initially"
@@ -350,7 +356,7 @@ class TestProgressIndicatorValidation:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
-            page.goto(BASE_URL, wait_until="domcontentloaded", timeout=60000)
+            page.goto(get_base_url(), wait_until="domcontentloaded", timeout=60000)
 
             # Upload and convert
             file_path = Path("tests/assets/real-test.jpg").resolve()
@@ -383,7 +389,7 @@ class TestConversionStateMessages:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
-            page.goto(BASE_URL, wait_until="domcontentloaded", timeout=60000)
+            page.goto(get_base_url(), wait_until="domcontentloaded", timeout=60000)
 
             status_area = page.locator("#convertMessage")
             assert status_area.count() > 0, "Status message area should exist"
@@ -395,7 +401,7 @@ class TestConversionStateMessages:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
-            page.goto(BASE_URL, wait_until="domcontentloaded", timeout=60000)
+            page.goto(get_base_url(), wait_until="domcontentloaded", timeout=60000)
 
             # Try to convert with unsupported format (intentionally invalid)
             # This test just verifies the message area exists and functions
@@ -416,7 +422,7 @@ class TestUINoBreakChanges:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
-            page.goto(BASE_URL, wait_until="domcontentloaded", timeout=60000)
+            page.goto(get_base_url(), wait_until="domcontentloaded", timeout=60000)
 
             file_input = page.locator("#fileInput")
             assert file_input.count() > 0, "File input should exist"
@@ -432,7 +438,7 @@ class TestUINoBreakChanges:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
-            page.goto(BASE_URL, wait_until="domcontentloaded", timeout=60000)
+            page.goto(get_base_url(), wait_until="domcontentloaded", timeout=60000)
 
             preview = page.locator("#previewContainer")
             assert preview.count() > 0, "Preview container should exist"
@@ -444,7 +450,7 @@ class TestUINoBreakChanges:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
-            page.goto(BASE_URL, wait_until="domcontentloaded", timeout=60000)
+            page.goto(get_base_url(), wait_until="domcontentloaded", timeout=60000)
 
             format_options = page.locator("#formatOptions")
             assert format_options.count() > 0, "Format options container should exist"
@@ -456,7 +462,7 @@ class TestUINoBreakChanges:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
-            page.goto(BASE_URL, wait_until="domcontentloaded", timeout=60000)
+            page.goto(get_base_url(), wait_until="domcontentloaded", timeout=60000)
 
             conversion_area = page.locator("#conversionArea")
             assert conversion_area.count() > 0, "Conversion area should exist"

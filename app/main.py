@@ -117,6 +117,8 @@ class ObservabilityMiddleware:
                 method = scope.get("method", "GET")
                 status = response_status_label(status_code)
                 error_code = state.get("error_code")
+    
+# Touch file to trigger reload during development (no-op change)
 
                 metrics_registry.increment(
                     "converigo_requests_total",
@@ -152,7 +154,8 @@ class ObservabilityMiddleware:
                     },
                 )
 
-                if duration_ms >= settings.SLOW_REQUEST_THRESHOLD_MS:
+                threshold_ms = getattr(settings, "SLOW_REQUEST_THRESHOLD_MS", 1000)
+                if duration_ms >= threshold_ms:
                     logger.warning(
                         "Slow request detected",
                         extra={
@@ -289,6 +292,7 @@ language_manager = LanguageManager(Path("app/locales"))
 
 settings.UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 settings.OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+settings.TEMP_DIR.mkdir(parents=True, exist_ok=True)
 
 STATIC_DIR = Path(__file__).resolve().parent / "static"
 OUTPUT_DIR = settings.OUTPUT_DIR
@@ -312,9 +316,10 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-print("DEBUG APP CREATED")
-print("APP ID:", id(app))
-print("ROUTES AFTER CREATE:", len(app.routes))
+logger.info(
+    "FastAPI application initialized",
+    extra={"app_id": id(app), "route_count": len(app.routes)},
+)
 
 app.add_exception_handler(
     UnsupportedConversionError,

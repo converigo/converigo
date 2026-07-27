@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+
+  <defs>
+
+    <linearGradient id="cloudGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#47D7FF"></stop>
+      <stop offset="100%" stop-color="#2563EB"></stop>
+    </linearGradient>
+
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#3B82F6" flood-opacity="0.22"></feDropShadow>
+    </filter>
+
+  </defs>
+
+  <!-- Cloud -->
+
+  <path filter="url(#shadow)" d="
+      M38 88
+      H90
+
+      C104 88 114 78 114 65
+
+      C114 53 106 44 94 42
+
+      C91 24 76 14 58 14
+
+      C43 14 30 24 26 39
+
+      C12 40 2 51 2 65
+
+      C2 79 14 88 28 88
+
+      H38
+      " stroke="url(#cloudGradient)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
+
+  <!-- Upload Arrow -->
+
+  <g stroke="url(#cloudGradient)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+
+      <path d="M64 72V46"></path>
+
+      <path d="M54 56L64 46L74 56"></path>
+
+  </g>
+
+</svg>

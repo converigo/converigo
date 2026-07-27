@@ -98,6 +98,12 @@
     white-space:nowrap;
 }
 
+.kofi-cta-button span {
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
 .kofi-cta-button:hover,
 .kofi-cta-button:focus-visible {
     transform: translateY(-2px);
@@ -136,6 +142,19 @@
 @media (max-width: 760px) {
     .site-footer {
         padding:48px 0 28px;
+    }
+
+    .footer-brand,
+    .footer-brand h3,
+    .footer-brand p,
+    .footer-brand-cta,
+    .footer-links,
+    .footer-column,
+    .footer-column h4,
+    .footer-column a {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
     }
 
     .footer-links {

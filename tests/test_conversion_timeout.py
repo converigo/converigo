@@ -31,9 +31,10 @@ def test_normal_conversion_succeeds(monkeypatch, tmp_path):
 
     monkeypatch.setattr("app.services.conversion_service.registry.get_plugin", lambda source_format, target_format: FakePlugin())
 
-    output_path = asyncio.run(service.convert_file(source_path, "pdf"))
+    output_path = asyncio.run(service.convert_file(source_path, "pdf", conversion_id="conv-timeout"))
 
-    assert output_path == tmp_path / "converted.pdf"
+    assert output_path == Path("outputs") / "conv-timeout" / "converted.pdf"
+    assert output_path.exists()
 
 
 def test_timeout_conversion_is_stopped_safely(monkeypatch, tmp_path):

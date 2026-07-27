@@ -1,19 +1,19 @@
 {% set popular_converters = [
-    {"icon": "🖼️", "title": "JPG → PNG", "desc": "Convert JPG images into PNG format.", "href": "/tools/jpg-to-png"},
-    {"icon": "📸", "title": "PNG → JPG", "desc": "Convert PNG images into JPG format.", "href": "/tools/png-to-jpg"},
-    {"icon": "📑", "title": "JPG → PDF", "desc": "Turn photos into a polished PDF document in seconds.", "href": "/tools/jpg-to-pdf"},
-    {"icon": "📄", "title": "PDF → JPG", "desc": "Extract images from PDFs and save them as JPG files.", "href": "/tools/pdf-to-jpg"},
-    {"icon": "📝", "title": "DOCX → PDF", "desc": "Export DOCX documents into PDF format.", "href": "/tools/docx-to-pdf"},
-    {"icon": "📊", "title": "XLSX → PDF", "desc": "Export spreadsheets to printable PDFs.", "href": "/tools/xlsx-to-pdf"},
-    {"icon": "🎵", "title": "MP4 → MP3", "desc": "Extract audio from videos and save as MP3.", "href": "/tools/mp4-to-mp3"},
-    {"icon": "🌐", "title": "WEBP → JPG", "desc": "Convert WEBP images into JPG format for wider compatibility.", "href": "/tools/webp-to-jpg"}
+    {"icon": "🖼️", "title": request.state.t('popular.tools.jpg_to_png.title', 'JPG → PNG'), "desc": request.state.t('popular.tools.jpg_to_png.description', 'Convert JPG images into PNG format.'), "href": "/tools/jpg-to-png"},
+    {"icon": "📸", "title": request.state.t('popular.tools.png_to_jpg.title', 'PNG → JPG'), "desc": request.state.t('popular.tools.png_to_jpg.description', 'Convert PNG images into JPG format.'), "href": "/tools/png-to-jpg"},
+    {"icon": "📑", "title": request.state.t('popular.tools.jpg_to_pdf.title', 'JPG → PDF'), "desc": request.state.t('popular.tools.jpg_to_pdf.description', 'Turn photos into a polished PDF document in seconds.'), "href": "/tools/jpg-to-pdf"},
+    {"icon": "📄", "title": request.state.t('popular.tools.pdf_to_jpg.title', 'PDF → JPG'), "desc": request.state.t('popular.tools.pdf_to_jpg.description', 'Extract images from PDFs and save them as JPG files.'), "href": "/tools/pdf-to-jpg"},
+    {"icon": "📝", "title": request.state.t('popular.tools.docx_to_pdf.title', 'DOCX → PDF'), "desc": request.state.t('popular.tools.docx_to_pdf.description', 'Export DOCX documents into PDF format.'), "href": "/tools/docx-to-pdf"},
+    {"icon": "📊", "title": request.state.t('popular.tools.xlsx_to_pdf.title', 'XLSX → PDF'), "desc": request.state.t('popular.tools.xlsx_to_pdf.description', 'Export spreadsheets to printable PDFs.'), "href": "/tools/xlsx-to-pdf"},
+    {"icon": "🎵", "title": request.state.t('popular.tools.mp4_to_mp3.title', 'MP4 → MP3'), "desc": request.state.t('popular.tools.mp4_to_mp3.description', 'Extract audio from videos and save as MP3.'), "href": "/tools/mp4-to-mp3"},
+    {"icon": "🌐", "title": request.state.t('popular.tools.webp_to_jpg.title', 'WEBP → JPG'), "desc": request.state.t('popular.tools.webp_to_jpg.description', 'Convert WEBP images into JPG format for wider compatibility.'), "href": "/tools/webp-to-jpg"}
 ] %}
 
 <section class="popular-tools" aria-labelledby="popular-heading">
     <div class="container">
         <div class="popular-header">
-            <h2 id="popular-heading">Popular Converters</h2>
-            <p>Jump straight into the conversion tools people use most often.</p>
+            <h2 id="popular-heading">{{ request.state.t('popular.heading', 'Popular Converters') }}</h2>
+            <p>{{ request.state.t('popular.description', 'Jump straight into the conversion tools people use most often.') }}</p>
         </div>
 
         <div class="popular-grid" role="list">

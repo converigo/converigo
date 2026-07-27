@@ -2,6 +2,7 @@ from pathlib import Path
 
 from fastapi.testclient import TestClient
 
+from app.core.settings import settings
 from app.main import app
 
 
@@ -18,8 +19,12 @@ def _make_pdf_bytes() -> bytes:
     return buffer.read()
 
 
-def _remove_output_file(output_filename: str) -> None:
-    output_path = Path("outputs") / "document" / output_filename
+def _remove_output_file(response) -> None:
+    download_path = response.json()["download_path"]
+    relative_parts = Path(download_path.removeprefix("/download/")).parts
+    assert len(relative_parts) == 2
+    conversion_id, filename = relative_parts
+    output_path = settings.OUTPUT_DIR / conversion_id / filename
     if output_path.exists():
         output_path.unlink(missing_ok=True)
 
@@ -35,7 +40,7 @@ def test_pdf_to_xlsx_conversion_succeeds():
     assert response.status_code == 201
     assert response.json()["status"] == "success"
     assert response.json()["target_format"] == "xlsx"
-    _remove_output_file(response.json()["filename"])
+    _remove_output_file(response)
 
 
 def test_pdf_to_pptx_conversion_succeeds():
@@ -49,7 +54,7 @@ def test_pdf_to_pptx_conversion_succeeds():
     assert response.status_code == 201
     assert response.json()["status"] == "success"
     assert response.json()["target_format"] == "pptx"
-    _remove_output_file(response.json()["filename"])
+    _remove_output_file(response)
 
 
 def test_pdf_to_odt_conversion_succeeds():
@@ -63,7 +68,7 @@ def test_pdf_to_odt_conversion_succeeds():
     assert response.status_code == 201
     assert response.json()["status"] == "success"
     assert response.json()["target_format"] == "odt"
-    _remove_output_file(response.json()["filename"])
+    _remove_output_file(response)
 
 
 def test_jpg_to_png_conversion_succeeds():
@@ -80,7 +85,7 @@ def test_jpg_to_png_conversion_succeeds():
     assert response.status_code == 201
     assert response.json()["status"] == "success"
     assert response.json()["target_format"] == "png"
-    _remove_output_file(response.json()["filename"])
+    _remove_output_file(response)
 
 
 def test_png_to_jpg_conversion_succeeds():
@@ -97,7 +102,7 @@ def test_png_to_jpg_conversion_succeeds():
     assert response.status_code == 201
     assert response.json()["status"] == "success"
     assert response.json()["target_format"] == "jpg"
-    _remove_output_file(response.json()["filename"])
+    _remove_output_file(response)
 
 
 def test_mp4_to_mp3_conversion_succeeds():
@@ -114,4 +119,4 @@ def test_mp4_to_mp3_conversion_succeeds():
     assert response.status_code == 201
     assert response.json()["status"] == "success"
     assert response.json()["target_format"] == "mp3"
-    _remove_output_file(response.json()["filename"])
+    _remove_output_file(response)

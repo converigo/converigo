@@ -16,7 +16,10 @@
     "subtext": "Drag, drop or browse to select your file.",
     "badge": "Instant",
     "drop_title": "Drop your file here",
+    "drag_drop": "Drop your file here",
     "browse": "Choose File",
+    "or": "or",
+    "supports_100": "Supports 100+ formats",
     "empty_status": "No file selected yet",
     "waiting_status": "Waiting for your file",
     "size_label": "0 KB",
@@ -43,7 +46,34 @@
     "conversion_partial_success": "⚠️ {success}/{total} files converted",
     "file_type_audio": "Audio File",
     "file_type_video": "Video File",
-    "file_type_pdf": "PDF File"
+    "file_type_pdf": "PDF File",
+    "recommended_next": "Recommended Next",
+    "recommended_next_label": "Recommended next converters",
+    "validation_status_uploaded": "Uploaded",
+    "validation_step_received": "File received",
+    "validation_step_detected": "Format detected",
+    "validation_step_complete": "Validation complete",
+    "settings": "Settings",
+    "remove_file": "Remove file",
+    "convert_all_to": "Convert all {count} files to:",
+    "convert_file_to": "Convert file to:",
+    "file_name": "File name",
+    "output_format": "Output format",
+    "file_type": "File type",
+    "convert_another": "Convert Another File",
+    "back_to_upload": "Back to Upload",
+    "file_ready_for_download": "File ready for download",
+    "ready_to_convert": "Ready to Convert"
+  },
+  "supported_formats": {
+    "heading": "Supported Formats",
+    "description": "Convert popular file formats including images, documents, audio, and video.",
+    "categories": {
+      "images": "Images",
+      "documents": "Documents",
+      "audio": "Audio",
+      "video": "Video"
+    }
   },
   "stats": {
     "formats": "Supported formats",
@@ -155,6 +185,9 @@
     "bottom_tagline": "Convert Files in Seconds.",
     "tagline": "Convert and Go!",
     "support": "Support",
+    "how_it_works": "How It Works",
+    "supported_formats": "Supported Formats",
+    "support_cta": "Support Converigo on Ko-fi",
     "made_with_love": "Made with ❤️ for creators around the world.",
     "copyright": "© {year} Converigo. Built for elegant file conversion."
   },
@@ -202,6 +235,16 @@
         "description": "Start converting instantly without creating an account."
       }
     }
+  },
+  "trust": {
+    "secure_processing": "Secure Processing",
+    "secure_processing_desc": "Files are processed in memory and never stored on disk after conversion.",
+    "browser_based": "Browser Based",
+    "browser_based_desc": "No software installation needed. Everything runs directly in your browser.",
+    "fast_conversion": "Fast Conversion",
+    "fast_conversion_desc": "Optimized conversion engine that processes files quickly and efficiently.",
+    "wide_format": "Wide Format Support",
+    "wide_format_desc": "Convert between images, videos, audio, and documents with broad compatibility."
   },
   "language": {
     "selector_label": "Language",

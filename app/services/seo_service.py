@@ -87,7 +87,7 @@ class SeoService:
         else:
             description = tool_data.get("description") or seo_meta.get("description") or f"Convert {label} online free"
 
-        canonical = seo_meta.get("canonical") or self._resolve_url(
+        canonical = self._resolve_url(
             base_url,
             canonical_path or f"/tools/{tool_data['slug']}",
         )

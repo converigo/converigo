@@ -5,11 +5,13 @@ Version : 2.0.0
 """
 
 import asyncio
+import logging
+import shutil
+import uuid
 from pathlib import Path
 
 from app.core.settings import settings
 from app.plugins.registry import registry
-import logging
 
 logger = logging.getLogger(__name__)
 
@@ -75,10 +77,12 @@ class ConversionService:
         self,
         source_path: Path,
         target_format: str,
+        conversion_id: str | None = None,
     ) -> Path:
 
         source_format = source_path.suffix.replace(".", "").lower()
         target_format = target_format.lower().strip()
+        conversion_id = conversion_id or uuid.uuid4().hex
 
         try:
             plugin = registry.get_plugin(
@@ -103,38 +107,54 @@ class ConversionService:
             raise UnsupportedConversionError(source_format, target_format) from exc
 
         timeout_seconds = self._get_timeout_seconds(source_format, target_format)
+        temp_root = self._build_temp_root(conversion_id)
+        public_root = settings.OUTPUT_DIR / conversion_id
+        original_output_dir = settings.OUTPUT_DIR
 
         try:
+            temp_root.mkdir(parents=True, exist_ok=True)
+            settings.OUTPUT_DIR = temp_root
             output_path = await asyncio.wait_for(
                 plugin.convert(source_path, target_format),
                 timeout=timeout_seconds,
             )
         except asyncio.TimeoutError as exc:
+            self._cleanup_temp_artifacts(temp_root)
             raise ConversionError(
                 f"Conversion timed out after {timeout_seconds} seconds."
             ) from exc
         except RuntimeError as exc:
+            self._cleanup_temp_artifacts(temp_root)
             logger.exception("[CONVERTER_DEBUG] ConversionService runtime error during plugin.convert")
             raise ConversionError(str(exc)) from exc
         except UnsupportedConversionError:
+            self._cleanup_temp_artifacts(temp_root)
             raise
         except ValueError as exc:
+            self._cleanup_temp_artifacts(temp_root)
             message = str(exc)
             if message.startswith("Unsupported ") or "Unsupported" in message:
                 raise UnsupportedConversionError(source_format, target_format) from exc
             logger.exception("[CONVERTER_DEBUG] ConversionService value error during plugin.convert")
             raise ConversionError(message) from exc
         except Exception as exc:
+            self._cleanup_temp_artifacts(temp_root)
             logger.exception("[CONVERTER_DEBUG] ConversionService raised an unexpected exception")
             raise ConversionError(f"{type(exc).__name__}: {exc}") from exc
+        finally:
+            settings.OUTPUT_DIR = original_output_dir
 
         logger.info("Plugin returned output path: %s", str(output_path))
         logger.info("[CONVERTER_DEBUG] ConversionService output_path=%s", str(output_path))
 
         if not isinstance(output_path, Path):
+            self._cleanup_temp_artifacts(temp_root)
             raise ConversionError("Invalid output path.")
 
-        resolved_output_path = output_path.resolve(strict=False)
+        output_path = output_path.resolve(strict=False)
+        public_output_path = self._publish_output(output_path, public_root, temp_root)
+
+        resolved_output_path = public_output_path.resolve(strict=False)
         resolved_output_dir = settings.OUTPUT_DIR.resolve(strict=False)
         resolved_workdir = Path.cwd().resolve(strict=False)
         resolved_source_dir = source_path.resolve(strict=False).parent
@@ -148,13 +168,40 @@ class ConversionService:
                 f"Output path is outside the allowed output directory: {resolved_output_dir}"
             )
 
-        if not output_path.exists():
-
+        if not public_output_path.exists():
             raise ConversionError(
                 "Converted file was not saved."
             )
 
-        return output_path
+        return public_output_path
+
+    def _build_temp_root(self, conversion_id: str) -> Path:
+        temp_root = settings.TEMP_DIR / conversion_id
+        temp_root.mkdir(parents=True, exist_ok=True)
+        return temp_root
+
+    def _publish_output(self, output_path: Path, public_root: Path, temp_root: Path) -> Path:
+        if not output_path.exists():
+            self._cleanup_temp_artifacts(temp_root)
+            raise ConversionError("Converted file was not saved.")
+
+        public_root.mkdir(parents=True, exist_ok=True)
+        public_output_path = public_root / output_path.name
+        if public_output_path.exists():
+            public_output_path.unlink(missing_ok=True)
+        if output_path != public_output_path:
+            shutil.move(str(output_path), str(public_output_path))
+
+        self._cleanup_temp_artifacts(temp_root)
+        return public_output_path
+
+    def _cleanup_temp_artifacts(self, temp_root: Path) -> None:
+        if not temp_root.exists():
+            return
+        try:
+            shutil.rmtree(temp_root, ignore_errors=True)
+        except Exception:
+            logger.exception("Failed to remove temporary conversion artifacts: %s", temp_root)
 
     def _get_timeout_seconds(self, source_format: str, target_format: str) -> int:
         if source_format in {"mp4", "mov", "avi", "mkv", "webm"}:

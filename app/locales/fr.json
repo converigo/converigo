@@ -3,6 +3,12 @@
     "eyebrow": "Convertisseur de fichiers premium",
     "title": "Convertissez vos fichiers plus rapidement avec une simplicité premium.",
     "subtitle": "Converigo offre une conversion de fichiers sécurisée, responsive et soignée pour les étudiants, créateurs et professionnels.",
+    "subtitle_line": "en quelques secondes",
+    "description": "Convertissez des images, des vidéos, de l'audio et des documents en ligne.",
+    "description_secondary": "qui prend en charge plus de 100 formats.",
+    "batch_hint": "Prend en charge plusieurs fichiers à la fois",
+    "callout": "Convertissez et allez-y !",
+    "callout_tagline": "Rapide, simple, prêt.",
     "primary_cta": "Commencer la conversion",
     "secondary_cta": "Découvrir les fonctionnalités"
   },
@@ -11,11 +17,64 @@
     "subtext": "Glissez, déposez ou parcourez pour sélectionner votre fichier.",
     "badge": "Instantané",
     "drop_title": "Déposez votre fichier ici",
-    "browse": "parcourir",
+    "drag_drop": "Déposez votre fichier ici",
+    "browse": "Parcourir",
+    "or": "ou",
+    "supports_100": "Prend en charge plus de 100 formats",
     "empty_status": "Aucun fichier sélectionné",
     "waiting_status": "En attente de votre fichier",
     "size_label": "0 Ko",
-    "clear": "Effacer"
+    "clear": "Effacer",
+    "conversion_title": "Convertir en",
+    "conversion_instruction": "Convertir tous les fichiers en :",
+    "convert": "Convertir",
+    "download": "Télécharger",
+    "empty_state": "Téléchargez un fichier pour obtenir des recommandations de format et le convertir instantanément.",
+    "select_file": "Choisissez un fichier pour commencer",
+    "file_ready": "Fichier prêt",
+    "ready": "Prêt",
+    "files_ready": "Fichiers prêts",
+    "converting": "Conversion en cours...",
+    "conversion_completed": "✓ Conversion terminée",
+    "conversion_complete": "✓ Conversion terminée",
+    "download_ready": "Téléchargement prêt",
+    "ready_to_download": "Prêt à télécharger",
+    "try_again": "Réessayer",
+    "select_target_format": "❌ Sélectionnez d'abord un format de destination.",
+    "conversion_failed": "❌ La conversion a échoué. Veuillez réessayer plus tard.",
+    "conversion_failed_try_another": "❌ La conversion a échoué. Essayez un autre format.",
+    "conversion_all_failed": "❌ Toutes les conversions ont échoué",
+    "conversion_partial_success": "⚠️ {success}/{total} fichiers convertis",
+    "file_type_audio": "Fichier audio",
+    "file_type_video": "Fichier vidéo",
+    "file_type_pdf": "Fichier PDF",
+    "recommended_next": "Suggéré ensuite",
+    "recommended_next_label": "Convertisseurs recommandés",
+    "validation_status_uploaded": "Téléchargé",
+    "validation_step_received": "Fichier reçu",
+    "validation_step_detected": "Format détecté",
+    "validation_step_complete": "Validation terminée",
+    "settings": "Paramètres",
+    "remove_file": "Supprimer le fichier",
+    "convert_all_to": "Convertir les {count} fichiers en :",
+    "convert_file_to": "Convertir le fichier en :",
+    "file_name": "Nom de fichier",
+    "output_format": "Format de sortie",
+    "file_type": "Type de fichier",
+    "convert_another": "Convertir un autre fichier",
+    "back_to_upload": "Retour au téléchargement",
+    "file_ready_for_download": "Fichier prêt au téléchargement",
+    "ready_to_convert": "Prêt à convertir"
+  },
+  "supported_formats": {
+    "heading": "Formats pris en charge",
+    "description": "Convertissez des formats de fichiers populaires comme les images, documents, audio et vidéo.",
+    "categories": {
+      "images": "Images",
+      "documents": "Documents",
+      "audio": "Audio",
+      "video": "Vidéo"
+    }
   },
   "stats": {
     "formats": "Formats pris en charge",
@@ -25,8 +84,25 @@
   "popular": {
     "eyebrow": "Conversions Populaires",
     "heading": "Les flux de conversion les plus demandés",
-    "description": "Accès rapide aux formats les plus recherchés."
+    "description": "Accès rapide aux formats les plus recherchés.",
+    "tools": {
+      "jpg_to_png": { "title": "JPG → PNG", "description": "Convertissez des images JPG en format PNG." },
+      "png_to_jpg": { "title": "PNG → JPG", "description": "Convertissez des images PNG en JPG." },
+      "jpg_to_pdf": { "title": "JPG → PDF", "description": "Transformez des photos en un document PDF soigné en quelques secondes." },
+      "pdf_to_jpg": { "title": "PDF → JPG", "description": "Extrait des images des PDFs et enregistre-les au format JPG." },
+      "docx_to_pdf": { "title": "DOCX → PDF", "description": "Exportez des documents DOCX au format PDF." },
+      "xlsx_to_pdf": { "title": "XLSX → PDF", "description": "Exportez des feuilles de calcul au format PDF imprimable." },
+      "mp4_to_mp3": { "title": "MP4 → MP3", "description": "Extrait l'audio des vidéos et l'enregistre au format MP3." },
+      "webp_to_jpg": { "title": "WEBP → JPG", "description": "Convertissez des images WEBP au format JPG pour une meilleure compatibilité." }
+    }
   },
+    "how_it_works": {
+      "heading": "Comment ça marche",
+      "description": "Convertissez vos fichiers en trois étapes simples.",
+      "step1": { "title": "Téléchargez votre fichier", "description": "Sélectionnez un fichier pris en charge et envoyez-le à Converigo." },
+      "step2": { "title": "Choisissez le format", "description": "Choisissez le format de sortie dont vous avez besoin pour votre fichier." },
+      "step3": { "title": "Téléchargez le résultat", "description": "Téléchargez votre fichier converti instantanément." }
+    },
   "features": {
     "eyebrow": "Fonctionnalités",
     "heading": "Tout ce dont vous avez besoin pour convertir des fichiers sans effort",
@@ -40,6 +116,16 @@
   },
   "faq": {
     "heading": "Questions fréquemment posées",
+    "q1": "Quels formats de fichiers puis-je convertir ?",
+    "a1": "Converigo prend en charge les formats vidéo, audio et document populaires tels que MP4, MP3, WAV, PDF, DOCX et plus.",
+    "q2": "Mes données sont-elles privées ?",
+    "a2": "Tous les fichiers téléchargés sont traités en toute sécurité et l'interface est conçue pour respecter la confidentialité pendant les tests de conversion.",
+    "q3": "Est-ce que ça fonctionne sur mobile ?",
+    "a3": "Oui. La page de destination est entièrement responsive sur desktop, tablette et mobile.",
+    "q4": "Ai-je besoin d'installer un logiciel ?",
+    "a4": "Non. Converigo fonctionne directement dans votre navigateur sur ordinateur et mobile.",
+    "q5": "Puis-je convertir plusieurs fichiers à la fois ?",
+    "a5": "Oui. Converigo prend en charge le téléchargement de plusieurs fichiers pour des flux de conversion plus rapides.",
     "items": [
       {"question": "Quels formats de fichiers puis-je convertir ?", "answer": "Converigo prend en charge les formats vidéo, audio et document populaires tels que MP4, MP3, WAV, PDF, DOCX et plus."},
       {"question": "Mes données sont-elles privées ?", "answer": "Tous les fichiers téléchargés sont traités en toute sécurité et l'interface est conçue pour respecter la confidentialité pendant les tests de conversion."},
@@ -55,7 +141,24 @@
     "features": "Fonctionnalités",
     "faq": "FAQ",
     "upload": "Télécharger",
+    "how_it_works": "Comment ça marche",
+    "supported_formats": "Formats pris en charge",
+    "privacy_policy": "Politique de confidentialité",
+    "support_cta": "Soutenez Converigo sur Ko-fi",
+    "bottom_tagline": "Convertissez des fichiers en quelques secondes.",
     "copyright": "© {year} Converigo. Construit pour une conversion de fichiers élégante."
+  },
+  "community_support": {
+    "eyebrow": "Approuvé par les utilisateurs",
+    "heading": "Approuvé par des utilisateurs qui ont besoin de conversions rapides et simples",
+    "description": "Convertissez vos fichiers rapidement avec un convertisseur en ligne sécurisé et facile à utiliser.",
+    "support_cta": "Soutenez Converigo sur Ko-fi",
+    "cards": {
+      "fast": {"title": "Conversion rapide", "description": "Convertissez des fichiers rapidement avec un traitement optimisé."},
+      "secure": {"title": "Sécurisé et privé", "description": "Vos fichiers sont traités en toute sécurité pendant la conversion."},
+      "everywhere": {"title": "Fonctionne partout", "description": "Utilisez Converigo sur bureau, tablette et navigateurs mobiles."},
+      "no_registration": {"title": "Aucune inscription requise", "description": "Commencez à convertir instantanément sans créer de compte."}
+    }
   },
   "nav": {
     "home": "Accueil",
@@ -64,7 +167,37 @@
     "stats": "Statistiques",
     "faq": "FAQ",
     "upload": "Télécharger",
-    "related": "Articles connexes"
+    "related": "Articles connexes",
+    "tools": "Outils",
+    "support": "Assistance",
+    "api": "API",
+    "pricing": "Tarifs",
+    "toggle_menu": "Basculer la navigation"
+  },
+  "header": {
+    "brand": "Converigo",
+    "logo_alt": "Logo Converigo",
+    "logo_label": "Accueil Converigo",
+    "sign_in": "Se connecter",
+    "get_started": "Commencer"
+  },
+  "trust": {
+    "secure_processing": "Traitement sécurisé",
+    "secure_processing_desc": "Les fichiers sont traités en mémoire et ne sont jamais stockés sur disque après la conversion.",
+    "browser_based": "Basé sur le navigateur",
+    "browser_based_desc": "Aucune installation logicielle n'est nécessaire. Tout fonctionne directement dans votre navigateur.",
+    "fast_conversion": "Conversion rapide",
+    "fast_conversion_desc": "Moteur de conversion optimisé qui traite les fichiers rapidement et efficacement.",
+    "wide_format": "Large prise en charge des formats",
+    "wide_format_desc": "Convertissez entre images, vidéos, audio et documents avec une grande compatibilité."
+  },
+  "language": {
+    "selector_label": "Langue",
+    "en": "EN",
+    "es": "ES",
+    "fr": "FR",
+    "id": "ID",
+    "ja": "JA"
   },
   "tool_page": {
     "panel": {

@@ -8,6 +8,7 @@ class Settings:
         self.APP_VERSION = os.getenv("APP_VERSION", "3.0.0")
         self.UPLOAD_DIR = Path(os.getenv("UPLOAD_DIR", "uploads"))
         self.OUTPUT_DIR = Path(os.getenv("OUTPUT_DIR", "outputs"))
+        self.TEMP_DIR = Path(os.getenv("TEMP_DIR", "temp"))
         self.LOG_DIR = Path(os.getenv("LOG_DIR", "app/logs"))
         self.LOG_FILE = self.LOG_DIR / os.getenv("LOG_FILE", "app.log")
         self.IP_HASH_SALT = os.getenv("IP_HASH_SALT", self.APP_NAME).strip() or self.APP_NAME

@@ -1,14 +1,14 @@
 <section id="supported-formats" class="section">
     <div class="container">
         <div class="section-header">
-            <h2>Supported Formats</h2>
-            <p>Convert popular file formats including images, documents, audio, and video.</p>
+            <h2>{{ request.state.t('supported_formats.heading', 'Supported Formats') }}</h2>
+            <p>{{ request.state.t('supported_formats.description', 'Convert popular file formats including images, documents, audio, and video.') }}</p>
         </div>
 
         <div class="formats-grid">
             <article class="format-card">
                 <div class="format-card__icon" aria-hidden="true">🖼️</div>
-                <h3>Images</h3>
+                <h3>{{ request.state.t('supported_formats.categories.images', 'Images') }}</h3>
                 <ul>
                     <li>JPG</li>
                     <li>PNG</li>
@@ -20,7 +20,7 @@
             </article>
             <article class="format-card">
                 <div class="format-card__icon" aria-hidden="true">📄</div>
-                <h3>Documents</h3>
+                <h3>{{ request.state.t('supported_formats.categories.documents', 'Documents') }}</h3>
                 <ul>
                     <li>PDF</li>
                     <li>DOCX</li>
@@ -32,7 +32,7 @@
             </article>
             <article class="format-card">
                 <div class="format-card__icon" aria-hidden="true">🎵</div>
-                <h3>Audio</h3>
+                <h3>{{ request.state.t('supported_formats.categories.audio', 'Audio') }}</h3>
                 <ul>
                     <li>MP3</li>
                     <li>WAV</li>
@@ -43,7 +43,7 @@
             </article>
             <article class="format-card">
                 <div class="format-card__icon" aria-hidden="true">🎬</div>
-                <h3>Video</h3>
+                <h3>{{ request.state.t('supported_formats.categories.video', 'Video') }}</h3>
                 <ul>
                     <li>MP4</li>
                     <li>MOV</li>

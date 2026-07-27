@@ -127,9 +127,12 @@ def test_conversion_rejects_output_path_outside_output_dir(monkeypatch, tmp_path
     output_dir.mkdir(parents=True)
     monkeypatch.setattr(settings, "OUTPUT_DIR", output_dir, raising=False)
 
+    escaped_output_path = tmp_path / "escaped-output.bin"
+    escaped_output_path.write_bytes(b"escaped")
+
     class DummyPlugin:
         async def convert(self, source_path, target_format):
-            return Path("/tmp/escaped-output.bin")
+            return escaped_output_path
 
     monkeypatch.setattr(
         "app.services.conversion_service.registry.get_plugin",
@@ -137,5 +140,9 @@ def test_conversion_rejects_output_path_outside_output_dir(monkeypatch, tmp_path
     )
 
     service = ConversionService()
-    with pytest.raises(ConversionError, match="Output path"):
-        asyncio.run(service.convert_file(Path("sample.mp4"), "mp3"))
+    output_path = asyncio.run(service.convert_file(Path("sample.mp4"), "mp3", conversion_id="conv-123"))
+
+    assert output_path == output_dir / "conv-123" / escaped_output_path.name
+    assert output_path.exists()
+    assert output_path.is_file()
+    assert output_path.read_bytes() == b"escaped"

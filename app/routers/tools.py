@@ -306,6 +306,7 @@ async def render_universal_tool_page(
     if meta_overrides:
         seo_data.update(meta_overrides)
 
+    canonical_path = canonical_path or f"/tools/{slug}"
     if canonical_path is not None:
         seo_data["canonical"] = f"{PRODUCTION_BASE_URL}{canonical_path}"
         seo_data["og_url"] = seo_data["canonical"]
@@ -390,4 +391,4 @@ async def tools_index(request: Request):
 
 @router.get("/{slug}", response_class=HTMLResponse)
 async def tool_page(request: Request, slug: str):
-    return await render_universal_tool_page(request, slug, canonical_path=f"/{slug}")
+    return await render_universal_tool_page(request, slug, canonical_path=f"/tools/{slug}")

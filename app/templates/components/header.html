@@ -3,8 +3,8 @@
     <div class="container header-inner">
 
         <a href="/" class="logo" aria-label="Converigo home">
-            <img src="/static/images/converigo-logo.png" alt="Converigo logo">
-            <span>Converigo</span>
+            <img src="/static/images/converigo-logo.png" alt="Converigo" class="brand-logo">
+            <span class="brand-name">converigo</span>
         </a>
 
         <input type="checkbox" id="navToggle" class="nav-toggle" hidden>
@@ -36,7 +36,7 @@
             <div class="language-switcher">
                 <span class="language-icon" aria-hidden="true">🌐</span>
                 <label for="languageSelect" class="sr-only">{{ request.state.t('language.selector_label', 'Language') }}</label>
-                <select id="languageSelect" onchange="handleLanguageChange(event)">
+                <select id="languageSelect" onchange="handleLanguageChange(event)" data-current-locale="{{ request.state.locale.lang_code }}">
                     {% for locale_code in request.state.supported_locales %}
                         <option value="{{ locale_code }}" {% if request.state.locale.lang_code == locale_code %}selected{% endif %}>
                             {{ request.state.t('language.' ~ locale_code, locale_code.upper()) }}

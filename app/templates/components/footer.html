@@ -29,10 +29,10 @@
 
                 <div class="footer-column">
                     <h4>{{ request.state.t('footer.resources', 'Resources') }}</h4>
-                    <a href="/#how-it-works">How It Works</a>
-                    <a href="/#supported-formats">Supported Formats</a>
-                    <a href="/#faq">FAQ</a>
-                    <a href="/contact">Contact</a>
+                    <a href="/#how-it-works">{{ request.state.t('footer.how_it_works', 'How It Works') }}</a>
+                    <a href="/#supported-formats">{{ request.state.t('footer.supported_formats', 'Supported Formats') }}</a>
+                    <a href="/#faq">{{ request.state.t('footer.faq', 'FAQ') }}</a>
+                    <a href="/contact">{{ request.state.t('footer.contact', 'Contact') }}</a>
                 </div>
 
                 <div class="footer-column">
@@ -40,11 +40,11 @@
                     <a href="/about">{{ request.state.t('footer.about', 'About') }}</a>
                     <a href="/privacy-policy">{{ request.state.t('footer.privacy_policy', 'Privacy Policy') }}</a>
                     <a href="/terms">{{ request.state.t('footer.terms', 'Terms of Service') }}</a>
-                    <a href="https://ko-fi.com/converigo" target="_blank" rel="noopener" class="kofi-cta-button" aria-label="Support Converigo on Ko-fi">
+                    <a href="https://ko-fi.com/converigo" target="_blank" rel="noopener" class="kofi-cta-button" aria-label="{{ request.state.t('footer.support_cta', 'Support Converigo on Ko-fi') }}">
                         <svg class="kofi-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                             <path d="M7 2h10a4 4 0 0 1 4 4v1h1a2 2 0 0 1 2 2v2a4 4 0 0 1-4 4h-1v2a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V8H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3Zm10 3H7a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1Zm-1 4h1a1 1 0 0 0 0-2h-1v2Zm-8-1h2v2H8v-2Z" fill="currentColor"/>
                         </svg>
-                        <span>☕ Support Converigo</span>
+                        <span>☕ {{ request.state.t('footer.support_cta', 'Support Converigo') }}</span>
                     </a>
                 </div>
 
