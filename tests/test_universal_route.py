@@ -3,6 +3,14 @@ from fastapi.testclient import TestClient
 from app.main import app
 
 
+def test_tool_page_loads_workspace_state_script():
+    client = TestClient(app)
+    response = client.get("/jpg-to-pdf")
+
+    assert response.status_code == 200
+    assert '/static/js/ui/workspace_state.js' in response.text
+
+
 def test_universal_route_renders_tool_page_for_known_converter():
     client = TestClient(app)
     response = client.get("/jpg-to-pdf")
@@ -27,5 +35,7 @@ def test_universal_tool_page_renders_json_driven_sections():
 
     assert response.status_code == 200
     assert "Benefits" in response.text
+    assert "benefits-section" in response.text
+    assert "Smaller file sizes" in response.text
     assert "Use Cases" in response.text
     assert "About Formats" in response.text

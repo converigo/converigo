@@ -207,6 +207,7 @@ async def home(request: Request):
         "subtitle_line": t("hero.subtitle_line", "In Seconds"),
         "description": t("hero.description", "Convert images, videos, audio, and documents online."),
         "description_secondary": t("hero.description_secondary", ""),
+        "batch_hint": t("hero.batch_hint", "Supports many files at once"),
     }
 
     return templates.TemplateResponse(

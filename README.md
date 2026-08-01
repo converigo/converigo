@@ -89,6 +89,19 @@ docs/
 
 ---
 
+## Documentation
+
+Key project documentation lives under the `docs/` folder. See:
+
+- [Development Policy](docs/DEVELOPMENT_POLICY.md)
+- [Workflow](docs/WORKFLOW.md)
+- [Certification Process](docs/CERTIFICATION_PROCESS.md)
+- [QA Toolkit](docs/QA_TOOLKIT.md)
+- [Release Process](docs/RELEASE_PROCESS.md)
+
+These documents describe the canonical development rules, QA tools, certification expectations, and release flow for contributors.
+
+
 ## Development Team
 
 Founder

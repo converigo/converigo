@@ -158,6 +158,13 @@
         href="/static/css/components/trust-layer.css">
 
 
+    <!-- Download Page (second screen). Hidden by default via the `hidden`
+         attribute on #downloadWorkspaceScreen; does not affect Homepage. -->
+    <link
+        rel="stylesheet"
+        href="/static/css/components/workspace.css">
+
+
 
 
 
@@ -245,6 +252,10 @@
 </script>
 
 <script src="/static/js/config.js"></script>
+
+<!-- Download Experience V2 state foundation (feature flag + shared event names) -->
+<script src="/static/js/state/feature_flags.js"></script>
+<script src="/static/js/state/events.js"></script>
 
 <script>
     (function () {
@@ -393,7 +404,7 @@
 <!-- Download -->
 
 <script src="/static/js/download/download_manager.js"></script>
-
+<script src="/static/js/download/download_adapter.js"></script>
 
 
 
@@ -401,6 +412,9 @@
 <!-- Main Converter Controller -->
 
 <script src="/static/js/convert/converter.js"></script>
+
+<!-- Download Page Flow (Stage 1 / Stage 2 orchestration for #downloadWorkspaceScreen) -->
+<script src="/static/js/download/download_flow.js"></script>
 
 
 

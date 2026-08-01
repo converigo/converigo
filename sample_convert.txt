@@ -1,0 +1,14 @@
+Converigo processing validation sample.
+This file is used to validate the processing experience in the browser.
+It intentionally contains enough content to exercise the conversion flow and keep the UI visible for a moment.
+
+Line 1
+Line 2
+Line 3
+Line 4
+Line 5
+Line 6
+Line 7
+Line 8
+Line 9
+Line 10

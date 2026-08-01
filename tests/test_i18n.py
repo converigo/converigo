@@ -33,18 +33,18 @@ def test_homepage_lang_query_changes_locale_to_indonesian():
     assert 'window.localeCode = "id"' in html
 
 
-def test_homepage_renders_translated_hero_copy_for_spanish_locale():
+def test_homepage_unsupported_locale_falls_back_to_english_and_hides_selector_option():
     client = TestClient(app)
     response = client.get("/?lang=es")
 
     assert response.status_code == 200
     html = response.text
 
-    assert 'lang="es"' in html
-    assert 'Convierte archivos más rápido con simplicidad premium.' in html
-    assert 'hero-cta-primary' not in html
-    assert 'Sube tu archivo' in html
-    assert 'window.localeCode = "es"' in html
+    assert 'lang="en"' in html
+    assert 'Upload Your File' in html
+    assert 'value="es"' not in html
+    assert 'value="id"' in html
+    assert 'value="ja"' in html
 
 
 def test_homepage_hero_has_no_extra_ctas_and_visible_drop_zone():
@@ -77,22 +77,22 @@ def test_japanese_homepage_uses_translated_trust_and_support_copy():
     assert 'お問い合わせ' in html
 
 
-def test_navbar_and_hero_subtitle_are_localized_for_spanish_and_french():
+def test_navbar_and_hero_subtitle_are_localized_for_indonesian_and_japanese():
     client = TestClient(app)
 
-    spanish_response = client.get("/?lang=es")
-    spanish_html = spanish_response.text
-    assert 'Herramientas' in spanish_html
-    assert 'Soporte' in spanish_html
-    assert 'Empezar' in spanish_html
-    assert 'que soporta más de 100 formatos.' in spanish_html
+    indonesian_response = client.get("/?lang=id")
+    indonesian_html = indonesian_response.text
+    assert 'Alat' in indonesian_html
+    assert 'Dukungan' in indonesian_html
+    assert 'Mulai' in indonesian_html
+    assert 'yang mendukung lebih dari 100 format.' in indonesian_html
 
-    french_response = client.get("/?lang=fr")
-    french_html = french_response.text
-    assert 'Outils' in french_html
-    assert 'Support' in french_html
-    assert 'Commencer' in french_html
-    assert 'qui prend en charge plus de 100 formats.' in french_html
+    japanese_response = client.get("/?lang=ja")
+    japanese_html = japanese_response.text
+    assert 'ツール' in japanese_html
+    assert 'サポート' in japanese_html
+    assert '始める' in japanese_html
+    assert '100を超える形式' in japanese_html
 
 
 def test_indonesian_hero_subtitle_uses_full_translation_without_english_tail():

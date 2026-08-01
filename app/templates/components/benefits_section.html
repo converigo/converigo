@@ -1,0 +1,15 @@
+<section id="benefits" class="section section-white benefits-section">
+    <div class="container section-heading">
+        <span class="eyebrow">Benefits</span>
+        <h2>Why choose this converter</h2>
+    </div>
+    <div class="container benefits-grid">
+        {% for item in benefits %}
+        <article class="benefits-card">
+            <div class="benefit-icon" aria-hidden="true">✦</div>
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.text }}</p>
+        </article>
+        {% endfor %}
+    </div>
+</section>

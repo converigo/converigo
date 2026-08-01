@@ -4,46 +4,172 @@
  * Download Manager
  * Version : 1.3.0
  *
- * Handles:
- * - Prepare download button
- * - Clear old download
- * - Clean download UI
- * - Global instance
- * - Batch downloads (multiple files)
+ * Responsibilities:
+ * - Normalize and validate download payloads
+ * - Cache download metadata for the current session
+ * - Dispatch download-ready events for runtime consumers
+ * - Preserve legacy DOM-based download button and batch download support
+ *
+ * Categories:
+ * - BUSINESS: validation, normalization, event dispatch
+ * - DOM: existing page download button and batch link rendering
+ * - LEGACY: compatibility helpers for current homepage/workspace flows
  * -------------------------------------------------------
  */
 
-
 class DownloadManager {
-
     constructor(downloadButtonId = "downloadBtn") {
         this.button = document.getElementById(downloadButtonId);
+        this.lastDownloadItems = [];
+        this.processingDuration = 0;
+
         console.log("Download Manager Loaded");
 
-        if(this.button){
+        if (this.button) {
             this.clear();
         }
     }
 
-    _trackDownloadCompleted(){
-        if(!window.converigoAnalytics || typeof window.converigoAnalytics.trackEvent !== 'function'){
+    // BUSINESS: normalize the converter response into canonical download items
+    _normalizeDownloadResult(result) {
+        if (!result || typeof result !== 'object') {
+            return [];
+        }
+
+        const items = [];
+        if (Array.isArray(result.results)) {
+            result.results.forEach((item) => {
+                if (!item || item.status !== 'success') {
+                    return;
+                }
+                if (item.filename && item.download_path) {
+                    items.push({
+                        filename: String(item.filename),
+                        download_path: String(item.download_path),
+                        original: item,
+                    });
+                }
+            });
+        } else if (result.filename && result.download_path) {
+            items.push({
+                filename: String(result.filename),
+                download_path: String(result.download_path),
+                original: result,
+            });
+        }
+
+        return items;
+    }
+
+    // BUSINESS: ensure normalized items are valid for download
+    _validateDownloadItems(items) {
+        return Array.isArray(items) && items.length > 0 && items.every((item) => {
+            return item && item.filename && item.download_path;
+        });
+    }
+
+    // BUSINESS: dispatch an explicit runtime event for download readiness
+    _dispatchDownloadReady(items, originalResult) {
+        const eventName = (window.ConverigoEvents && window.ConverigoEvents.DOWNLOAD_READY) ? window.ConverigoEvents.DOWNLOAD_READY : 'download-ready';
+        window.dispatchEvent(new CustomEvent(eventName, {
+            detail: {
+                items,
+                originalResult,
+                processingDuration: this.processingDuration,
+            }
+        }));
+    }
+
+    // LEGACY: preserve the existing homepage/workspace download button behavior
+    _prepareLegacyDownloadUI(items) {
+        if (!this.button || !this._validateDownloadItems(items)) {
+            return;
+        }
+
+        if (items.length === 1) {
+            this._prepareSingleFile(items[0]);
+        } else {
+            this._prepareMultipleFiles(items);
+        }
+    }
+
+    // PUBLIC: reset state and legacy UI
+    clear() {
+        this.lastDownloadItems = [];
+        this.processingDuration = 0;
+
+        if (!this.button) {
+            return;
+        }
+
+        this.button.hidden = true;
+        this.button.removeAttribute('href');
+        this.button.removeAttribute('download');
+        this.button.textContent = window.translate ? window.translate('upload.download', 'Download') : 'Download';
+
+        const batchContainer = document.getElementById('batchDownloads');
+        if (batchContainer) {
+            batchContainer.innerHTML = '';
+            batchContainer.style.display = 'none';
+        }
+    }
+
+    // PUBLIC: prepare download payloads for runtime and legacy UI
+    prepare(result) {
+        if (!result) {
+            console.warn('Download result missing');
+            return;
+        }
+
+        const items = this._normalizeDownloadResult(result);
+        if (!this._validateDownloadItems(items)) {
+            console.warn('No valid downloadable items found');
+            return;
+        }
+
+        this.lastDownloadItems = items;
+        this._dispatchDownloadReady(items, result);
+        this._prepareLegacyDownloadUI(items);
+    }
+
+  _prepareLegacyDownloadUI(items) {
+        if ((window.__ENABLE_DOWNLOAD_V2__ === true || (window.ConverigoFlags && window.ConverigoFlags.ENABLE_DOWNLOAD_V2)) ) {
+            if (typeof console !== 'undefined' && typeof console.debug === 'function') {
+                console.debug('[DownloadManager] Download V2 enabled; skipping legacy UI rendering.');
+            }
+            return;
+        }
+
+        if (!this.button || !this._validateDownloadItems(items)) {
+            return;
+        }
+
+        if (items.length === 1) {
+            this._prepareSingleFile(items[0]);
+        } else {
+            this._prepareMultipleFiles(items);
+        }
+    }
+
+    // LEGACY: analytics-only helper
+    _trackDownloadCompleted() {
+        if (!window.converigoAnalytics || typeof window.converigoAnalytics.trackEvent !== 'function') {
             return;
         }
         const context = window.converigoAnalytics.getConverterContext();
         window.converigoAnalytics.trackEvent('download_button_click', {
             converter_name: context.converter_name,
             page_path: window.location.pathname || '/',
-            event_status: 'success'
+            event_status: 'success',
         });
     }
 
-    _attachDownloadHandler(element){
-        if(!element){
+    // LEGACY: attach click behavior to the current download button or links
+    _attachDownloadHandler(element) {
+        if (!element || element.dataset.ga4Bound === 'true') {
             return;
         }
-        if(element.dataset.ga4Bound === 'true'){
-            return;
-        }
+
         element.addEventListener('click', (event) => {
             this._trackDownloadCompleted();
             const downloadUrl = element.getAttribute('href') || '';
@@ -53,10 +179,12 @@ class DownloadManager {
                 this._triggerDownload(downloadUrl, filename);
             }
         }, { passive: false });
+
         element.dataset.ga4Bound = 'true';
     }
 
-    _triggerDownload(downloadUrl, filename = ''){
+    // LEGACY: perform the browser download and fallback navigation
+    _triggerDownload(downloadUrl, filename = '') {
         if (!downloadUrl) {
             return;
         }
@@ -86,117 +214,67 @@ class DownloadManager {
         }, 350);
     }
 
-    clear(){
-        if(!this.button){
+    // LEGACY: set up the single-file download button
+    _prepareSingleFile(item) {
+        if (!this.button) {
             return;
         }
 
-        this.button.hidden = true;
-        this.button.removeAttribute("href");
-        this.button.removeAttribute("download");
-        this.button.textContent = "Download";
-
-        const batchContainer = document.getElementById("batchDownloads");
-        if (batchContainer) {
-            batchContainer.innerHTML = "";
-            batchContainer.style.display = "none";
-        }
-    }
-
-    prepare(result){
-        if(!this.button){
-            console.warn("Download button missing");
-            return;
-        }
-
-        if(!result){
-            console.warn("Download result missing");
-            return;
-        }
-
-        // Handle single-file response (top-level filename/download_path)
-        if (result.filename && result.download_path && !result.results) {
-            this._prepareSingleFile(result);
-            return;
-        }
-
-        // Handle batch results (multiple files)
-        if (result.results && Array.isArray(result.results)) {
-            const successResults = result.results.filter(r => r.status === "success");
-            
-            if (successResults.length === 0) {
-                console.warn("No successful conversions in batch");
-                return;
-            }
-
-            // For batch: create a container with multiple download links
-            if (successResults.length === 1) {
-                const singleResult = successResults[0];
-                this._prepareSingleFile(singleResult);
-            } else {
-                this._prepareMultipleFiles(successResults);
-            }
-            return;
-        }
-
-        // Handle single file (backward compatibility)
-        this._prepareSingleFile(result);
-    }
-
-    _prepareSingleFile(result) {
-        const filename = result.filename || "converted-file";
-        const extension = filename.split(".").pop().toUpperCase();
+        const filename = item.filename || 'converted-file';
+        const extension = filename.split('.').pop().toUpperCase();
 
         this.button.hidden = false;
         this._attachDownloadHandler(this.button);
-        this.button.href = result.download_path;
+        this.button.href = item.download_path;
         this.button.download = filename;
 
         this.button.textContent =
-            window.translate('upload.download', 'Download') +
-            " " +
-            extension;
+            window.translate('upload.download', 'Download') + ' ' + extension;
 
-        console.log("Download Ready:", filename);
+        console.log('Download Ready:', filename);
     }
 
-    _prepareMultipleFiles(results) {
-        let container = document.getElementById("batchDownloads");
+    // LEGACY: create a batch download list for multiple files
+    _prepareMultipleFiles(items) {
+        if (!this.button) {
+            return;
+        }
+
+        let container = document.getElementById('batchDownloads');
         if (!container) {
-            container = document.createElement("div");
-            container.id = "batchDownloads";
-            container.style.display = "flex";
-            container.style.flexDirection = "column";
-            container.style.gap = "8px";
-            container.style.marginTop = "12px";
-            
+            container = document.createElement('div');
+            container.id = 'batchDownloads';
+            container.style.display = 'flex';
+            container.style.flexDirection = 'column';
+            container.style.gap = '8px';
+            container.style.marginTop = '12px';
             this.button.parentNode.insertBefore(container, this.button.nextSibling);
         }
 
-        container.innerHTML = "";
-        container.style.display = "flex";
+        container.innerHTML = '';
+        container.style.display = 'flex';
 
-        results.forEach((result, index) => {
-            const link = document.createElement("a");
-            link.href = result.download_path;
-            link.download = result.filename;
-            link.style.padding = "8px 12px";
-            link.style.backgroundColor = "#4CAF50";
-            link.style.color = "white";
-            link.style.borderRadius = "4px";
-            link.style.textDecoration = "none";
-            link.style.textAlign = "center";
-            link.style.fontSize = "14px";
-            link.style.cursor = "pointer";
+        items.forEach((item) => {
+            const link = document.createElement('a');
+            link.href = item.download_path;
+            link.download = item.filename;
+            link.style.padding = '8px 12px';
+            link.style.backgroundColor = '#4CAF50';
+            link.style.color = 'white';
+            link.style.borderRadius = '4px';
+            link.style.textDecoration = 'none';
+            link.style.textAlign = 'center';
+            link.style.fontSize = '14px';
+            link.style.cursor = 'pointer';
 
-            const extension = result.filename.split(".").pop().toUpperCase();
-            link.textContent = `📥 ${result.filename} (${extension})`;
+        const extension = item.filename.split('.').pop().toUpperCase();
+            link.textContent = `📥 ${item.filename} (${extension})`;
             this._attachDownloadHandler(link);
             container.appendChild(link);
         });
 
         this.button.hidden = true;
-        console.log("Batch Downloads Ready:", results.length, "files");
+        console.log('Batch Downloads Ready:', items.length, 'files');
     }
 }
 
@@ -206,7 +284,7 @@ Initialize Download Manager
 ================================================
 */
 
-document.addEventListener("DOMContentLoaded", ()=>{
-    window.downloadManager = new DownloadManager("downloadBtn");
-    console.log("DownloadManager Ready");
+document.addEventListener('DOMContentLoaded', () => {
+    window.downloadManager = new DownloadManager('downloadBtn');
+    console.log('DownloadManager Ready');
 });

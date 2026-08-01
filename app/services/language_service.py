@@ -5,6 +5,9 @@ from pathlib import Path
 from typing import Any
 
 
+SUPPORTED_LOCALES = ("id", "en", "ja")
+
+
 class LanguageService:
     def __init__(self, locales_dir: Path, default_locale: str = "en") -> None:
         self.locales_dir = locales_dir
@@ -13,14 +16,18 @@ class LanguageService:
 
     def get_supported_locales(self) -> list[str]:
         if not self.locales_dir.exists():
-            return [self.default_locale]
-        return sorted(
+            return list(SUPPORTED_LOCALES)
+
+        available = {
             path.stem
             for path in self.locales_dir.iterdir()
             if path.is_file() and path.suffix.lower() == ".json"
-        )
+        }
+        return [locale for locale in SUPPORTED_LOCALES if locale in available]
 
     def locale_exists(self, locale_code: str) -> bool:
+        if locale_code not in SUPPORTED_LOCALES:
+            return False
         locale_file = self.locales_dir / f"{locale_code}.json"
         return locale_file.exists()
 

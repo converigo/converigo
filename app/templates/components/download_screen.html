@@ -1,0 +1,69 @@
+<div class="download-screen" id="downloadScreenBlueprint" hidden>
+  <div class="download-screen__inner">
+    <header class="download-screen__header">
+      <p class="download-screen__eyebrow">Download</p>
+      <h1 class="download-screen__title">Your files are ready</h1>
+      <p class="download-screen__subtitle">Track the conversion flow and download your processed files as soon as the experience is ready.</p>
+    </header>
+
+    <section class="download-screen__progress" aria-labelledby="downloadProgressHeading">
+      <h2 class="download-screen__section-title" id="downloadProgressHeading">Progress</h2>
+      <div class="download-screen__steps">
+        <div class="download-screen__step download-screen__step--active" data-step="converting">
+          <span class="download-screen__step-index">1</span>
+          <span class="download-screen__step-label">Converting</span>
+        </div>
+        <div class="download-screen__step" data-step="preparing">
+          <span class="download-screen__step-index">2</span>
+          <span class="download-screen__step-label">Preparing</span>
+        </div>
+        <div class="download-screen__step" data-step="ready">
+          <span class="download-screen__step-index">3</span>
+          <span class="download-screen__step-label">Ready</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="download-screen__summary" aria-labelledby="downloadSummaryHeading">
+      <h2 class="download-screen__section-title" id="downloadSummaryHeading">File summary</h2>
+      <dl class="download-screen__summary-list">
+        <div class="download-screen__summary-item">
+          <dt class="download-screen__summary-label">Filename</dt>
+          <dd class="download-screen__summary-value" id="downloadSummaryFilename">example-file.pdf</dd>
+        </div>
+        <div class="download-screen__summary-item">
+          <dt class="download-screen__summary-label">Target format</dt>
+          <dd class="download-screen__summary-value" id="downloadSummaryFormat">PDF</dd>
+        </div>
+        <div class="download-screen__summary-item">
+          <dt class="download-screen__summary-label">File size</dt>
+          <dd class="download-screen__summary-value" id="downloadSummarySize">2.4 MB</dd>
+        </div>
+        <div class="download-screen__summary-item">
+          <dt class="download-screen__summary-label">Status</dt>
+          <dd class="download-screen__summary-value" id="downloadSummaryStatus">Ready to download</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="download-screen__actions">
+      <button class="btn btn-primary download-screen__button download-screen__button--primary" id="btnDownloadMain" type="button" disabled>Download</button>
+      <button class="btn btn-secondary download-screen__button download-screen__button--secondary" id="btnConvertAnother" type="button">Convert another file</button>
+    </section>
+
+    <footer class="download-screen__footer">
+      <div class="download-screen__footer-card">
+        <h3 class="download-screen__footer-title">Tips</h3>
+        <p class="download-screen__footer-copy">Keep this page open while your file is preparing, then use the download action when it becomes available.</p>
+      </div>
+      <div class="download-screen__footer-card">
+        <h3 class="download-screen__footer-title">History</h3>
+        <p class="download-screen__footer-copy">Recent downloads will appear here in a future release.</p>
+      </div>
+      <div class="download-screen__footer-card">
+        <h3 class="download-screen__footer-title">Cloud</h3>
+        <p class="download-screen__footer-copy">Cloud storage and sharing options are planned for a later update.</p>
+      </div>
+    </footer>
+  </div>
+</div>

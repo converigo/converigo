@@ -1,8 +1,10 @@
-<section id="hero" class="hero homepage-hero">
-    {% set hero = hero if hero is defined and hero is not none else {} %}
+{% set hero = hero if hero is defined and hero is not none else {} %}
+{% set hero_id = hero.id if hero is defined and hero is not none and hero.id is defined and hero.id else 'hero' %}
+<section id="{{ hero_id }}" class="hero homepage-hero">
     {% set hero_title = hero.title if hero is defined and hero is not none and hero.title is defined and hero.title else (t('hero.title', 'Convert All Files') if t is defined else 'Convert All Files') %}
     {% set hero_description = hero.description if hero is defined and hero is not none and hero.description is defined and hero.description else (t('hero.description', 'Convert images, videos, audio, and documents online.') if t is defined else 'Convert images, videos, audio, and documents online.') %}
     {% set hero_description_secondary = hero.description_secondary if hero is defined and hero is not none and hero.description_secondary is defined and hero.description_secondary else '' %}
+    {% set hero_show_main = hero.show_main if hero is defined and hero is not none and hero.show_main is defined else true %}
     <div class="container">
         <div class="hero-container">
             <div class="hero-content">
@@ -10,6 +12,7 @@
 
                 <p class="hero-description">{{ hero_description }}{% if hero_description_secondary %}<br>{{ hero_description_secondary }}{% endif %}</p>
             </div>
+            {% if hero_show_main %}
             <div class="hero-main">
                 <div class="hero-card-group left-row" aria-hidden="true">
                     <div class="floating-format-card card-pdf" role="presentation">
@@ -101,9 +104,12 @@
             </div>
         </div>
     </div>
+    {% endif %}
 
+    {% if hero_show_main %}
     <!-- UX-S3-001 Trust Layer Experience -->
     {% include "components/trust_layer.html" %}
+    {% endif %}
 </section>
 
 

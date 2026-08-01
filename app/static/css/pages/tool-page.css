@@ -1,0 +1,17 @@
+@import "../core/base.css";
+@import "../components/button.css";
+@import "../components/card.css";
+@import "../components/hero.css";
+@import "../components/upload-card.css";
+@import "../components/workspace.css";
+@import "../components/features.css";
+@import "../components/recommendation.css";
+@import "../components/trust-layer.css";
+
+body {
+    background: #f8fafc;
+}
+
+.tool-page .main {
+    padding-bottom: 2rem;
+}

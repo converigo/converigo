@@ -1,0 +1,101 @@
+<div id="downloadWorkspaceScreen" class="download-workspace-screen" hidden>
+  <div class="download-stage-wrapper">
+    <div class="download-converter-heading">
+      <h2 class="panel-title">Upload a PNG file and receive a JPG result in seconds.</h2>
+    </div>
+
+    <!-- ============================================================
+         STAGE 1: Output Format
+         Blueprint source: design/workspace-prototype/index.html
+           - #actionBar (.action-bar / .action-bar-inner / .action-bar-left / #globalFormat / #btnConvert)
+           - .file-row (.file-info / .file-name / .file-size) — simplified to a single file, no list/loop
+         Not carried over from blueprint: #btnAddMore, #fileInputMore, per-row gear/delete icons,
+         #uploadToast — all multi-file "Workspace" concepts, intentionally excluded from this flow.
+    ============================================================ -->
+    <section class="download-format-stage" id="downloadFormatStage">
+      <button class="btn-add-more" id="btnAddMore" type="button">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M9 3v12M3 9h12" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        Tambahkan Lebih Banyak File
+        <svg class="chevron" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M4 6l3 3 3-3" stroke="#9CA3AF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <input type="file" id="fileInputMore" multiple hidden>
+
+      <div class="file-list" id="fileList" tabindex="0">
+        <div class="file-row" id="fileRow">
+          <div class="file-info">
+            <div class="file-name" id="downloadFileNameLabel">—</div>
+            <div class="file-size" id="downloadFileSizeLabel"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="action-bar is-visible" id="actionBar">
+        <div class="action-bar-inner">
+          <div class="action-bar-left">
+            <span>Konversikan file ini ke:</span>
+            <div class="select-wrap">
+              <select id="globalFormat">
+                <option>JPG</option>
+                <option>PNG</option>
+                <option>WEBP</option>
+                <option>PDF</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn-convert" id="btnConvert" type="button">
+            Mengubah
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0-4-4m4 4-4 4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         STAGE 2: Download Stage (unchanged, already 1:1 with blueprint's #downloadStage)
+    ============================================================ -->
+    <section class="download-stage" id="downloadStage" hidden>
+      <div class="download-card" role="status" aria-live="polite">
+        <div class="download-card-head">
+          <span class="download-badge" id="downloadBadge">Menyiapkan unduhan</span>
+          <div class="download-title-block">
+            <h3 id="downloadTitle">Mengonversi berkas Anda</h3>
+            <p id="downloadSubtitle">Kami sedang menyiapkan file hasil untuk Anda unduh.</p>
+          </div>
+        </div>
+
+        <div class="download-progress" aria-label="Tahap unduhan">
+          <div class="step-item is-active" data-step="converting">
+            <span class="step-index">1</span>
+            <span class="step-label">Converting</span>
+          </div>
+          <div class="step-item" data-step="preparing">
+            <span class="step-index">2</span>
+            <span class="step-label">Preparing Download</span>
+          </div>
+          <div class="step-item" data-step="ready">
+            <span class="step-index">3</span>
+            <span class="step-label">Download Experience</span>
+          </div>
+        </div>
+
+        <div class="download-preview">
+          <div class="download-preview-icon" aria-hidden="true">📄</div>
+          <div class="download-preview-copy">
+            <div class="download-file-name" id="downloadFileName">Berkas siap</div>
+            <div class="download-file-meta" id="downloadFileMeta">1 file • format terpilih</div>
+          </div>
+        </div>
+
+        <div class="download-actions">
+          <button class="btn-download-main" id="btnDownloadMain" type="button" disabled>Download Sekarang</button>
+          <button class="btn-secondary" id="btnConvertAnother" type="button">Konversi Lagi</button>
+        </div>
+
+      </div>
+    </section>
+  </div>
+</div>

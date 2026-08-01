@@ -1,0 +1,302 @@
+﻿diff --git a/app/static/css/components/header.css b/app/static/css/components/header.css
+index 8e50e04..99407f7 100644
+--- a/app/static/css/components/header.css
++++ b/app/static/css/components/header.css
+@@ -1,69 +1,97 @@
+ .site-header {
+     background: white;
+     position: sticky;
+     top: 0;
+     z-index: 100;
+-    border-bottom: 1px solid var(--color-border);\n}
++    border-bottom: 1px solid rgba(15,23,42,0.06);
++    -webkit-font-smoothing:antialiased;
++    -moz-osx-font-smoothing:grayscale;
++}
+ 
+ .header-inner {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+-    gap: 24px;
+-    height: 80px;
++    gap: 28px;
++    height: 76px;
++    padding: 0 20px;
+ }
+ 
+ .logo {
+     display: flex;
+     align-items: center;
+-    gap: 10px;
+-    font-size: 34px;
+-    font-weight: 800;
++    gap: 12px;
++    font-size: 22px;
++    font-weight: 700;
+     color: var(--color-text);
+     text-decoration: none;
+     background: transparent;
+     border: none;
+-    box-shadow: none;
+     padding: 0;
+     overflow: visible;
+ }
+ 
+ .logo img {
+-    width: 48px;
+-    height: 48px;
+-    max-width: 48px;
+-    max-height: 48px;
++    width: auto;
++    height: auto;
++    max-width: 44px;
++    max-height: 44px;
+     object-fit: contain;
+     display: block;
+     background: transparent !important;
+     flex-shrink: 0;
+-    flex: 0 0 auto;
++}
++
++.brand-logo {
++    height: 28px;
++    width: auto;
++    max-height: 28px;
++    display: block;
++}
++
++.shared-brand-logo {
++    height: 28px;
++    width: auto;
++    max-height: 28px;
++    display: block;
++    object-fit: contain;
++}
++
++.brand-name {
++    font-size: 18px;
++    font-weight: 800;
++    text-transform: lowercase;
++    color: #07264a; /* navy/dark */
++    line-height: 1;
++    letter-spacing: -0.01em;
+ }
+ 
+ .nav-toggle-button {
+     display: none;
+     width: 44px;
+     height: 44px;
+-    border: 1px solid rgba(15, 23, 42, 0.12);
+-    border-radius: 14px;
++    border: 1px solid rgba(15, 23, 42, 0.08);
++    border-radius: 12px;
+     background: #ffffff;
+     cursor: pointer;
+     align-items: center;
+     justify-content: center;
+-    padding: 10px;
+-    transition: transform .2s ease, box-shadow .2s ease;
++    padding: 8px;
++    transition: transform .18s ease, box-shadow .18s ease;
+ }
+ 
+-.nav-toggle-button:hover {
++.nav-toggle-button:hover,
++.nav-toggle-button:focus-visible {
+     transform: translateY(-1px);
+-    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
++    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.06);
++    outline: none;
+ }
+ 
+ .nav-toggle-button span {
+     display: block;
+-    width: 20px;
++    width: 18px;
+     height: 2px;
+     background: var(--color-text);
+     border-radius: 999px;
+     margin: 3px 0;
+ }
+@@ -75,33 +103,52 @@
+ }
+ 
+ .main-nav {
+     display: flex;
+     justify-content: center;
+-    gap: 36px;
++    gap: 28px;
+     flex: 1;
+-    transition: max-height .25s ease, opacity .25s ease;
++    transition: max-height .22s cubic-bezier(.2,.9,.2,1), opacity .18s ease;
+     overflow: hidden;
++    align-items: center;
+ }
+ 
+ .main-nav a {
+     color: var(--color-text-light);
+-    transition: var(--transition);
++    transition: color .18s ease, background-color .18s ease, transform .12s ease;
+     white-space: nowrap;
++    font-size: 15px;
++    font-weight: 600;
++    letter-spacing: 0.01em;
++    padding: 6px 8px;
++    border-radius: 8px;
+ }
+ 
+ .main-nav a:hover {
+     color: var(--color-primary);
++    background: rgba(99,102,241,0.06);
++    transform: translateY(-1px);
++}
++
++.main-nav a:focus-visible {
++    outline: 3px solid rgba(99,102,241,0.18);
++    outline-offset: 3px;
++    border-radius: 8px;
+ }
+ 
+ .main-nav a.nav-support-link {
+     color: var(--color-text);
+-    font-weight: 600;
++    font-weight: 700;
++    padding: 8px 12px;
++    background: linear-gradient(90deg, rgba(99,102,241,0.08), rgba(79,70,229,0.04));
++    border-radius: 10px;
+ }
+ 
+ .main-nav a.nav-support-link:hover {
+     color: var(--color-primary);
++    background: linear-gradient(90deg, rgba(99,102,241,0.12), rgba(79,70,229,0.07));
++    transform: translateY(-1px);
+ }
+ 
+ .main-nav a.nav-hidden,
+ .footer-hidden,
+ .button-hidden {
+@@ -145,22 +192,22 @@
+ }
+ 
+ .header-right {
+     display: flex;
+     align-items: center;
+-    gap: 16px;
++    gap: 18px;
+     justify-content: flex-end;
+     min-width: 0;
+ }
+ 
+ .language-switcher {
+     display: inline-flex;
+     align-items: center;
+     gap: 8px;
+     position: relative;
+     padding: 6px 10px;
+-    border: 1px solid var(--border);
++    border: 1px solid rgba(15,23,42,0.06);
+     border-radius: 999px;
+     background: var(--surface-soft);
+     white-space: nowrap;
+ }
+ 
+@@ -173,11 +220,11 @@
+     appearance: none;
+     -webkit-appearance: none;
+     -moz-appearance: none;
+     border: none;
+     background: transparent;
+-    color: var(--text);
++    color: var(--text, #0f172a);
+     font: inherit;
+     padding: 0;
+     min-width: 48px;
+     cursor: pointer;
+ }
+@@ -192,11 +239,46 @@
+ }
+ 
+ .header-actions {
+     display: flex;
+     align-items: center;
+-    gap: 14px;
++    gap: 12px;
++}
++
++.header-actions .btn {
++    font-weight: 600;
++    font-size: 14px;
++    padding: 8px 14px;
++    border-radius: 10px;
++    transition: transform .12s ease, box-shadow .12s ease, background-color .12s ease;
++}
++
++.header-actions .btn:focus-visible,
++.main-nav a:focus-visible {
++    box-shadow: 0 6px 18px rgba(15,23,42,0.06);
++}
++
++.header-actions .btn.btn-primary {
++    background: var(--color-primary);
++    color: #fff;
++    border: 1px solid rgba(0,0,0,0.02);
++    box-shadow: 0 6px 18px rgba(99,102,241,0.08);
++}
++
++.header-actions .btn.btn-primary:hover {
++    transform: translateY(-2px);
++    box-shadow: 0 10px 30px rgba(99,102,241,0.12);
++}
++
++.header-actions .btn.btn-secondary {
++    background: transparent;
++    color: var(--color-text);
++    border: 1px solid rgba(15,23,42,0.08);
++}
++
++.header-actions .btn.btn-secondary:hover {
++    background: rgba(15,23,42,0.03);
+ }
+ 
+ @media (max-width: 900px) {
+     .header-inner {
+         display: flex;
+@@ -225,11 +307,11 @@
+         pointer-events: none;
+     }
+ 
+     .main-nav a {
+         padding: 12px 14px;
+-        border-radius: 14px;
++        border-radius: 12px;
+         background: rgba(248, 250, 252, 0.95);
+         color: var(--color-text);
+     }
+ 
+     .main-nav a.nav-support-link {
+@@ -258,16 +340,21 @@
+         height: 64px;
+         padding: 0 12px;
+     }
+ 
+     .logo {
+-        font-size: 22px;
++        font-size: 20px;
+     }
+ 
+     .logo img {
+-        width: 36px;
+-        height: 36px;
++        width: auto;
++        height: auto;
++    }
++
++    .brand-logo {
++        height: 24px;
++        width: auto;
+     }
+ 
+     .nav-toggle-button {
+         width: 40px;
+         height: 40px;

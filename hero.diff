@@ -1,0 +1,46 @@
+﻿diff --git a/app/templates/components/hero.html b/app/templates/components/hero.html
+index f02ba68..9a2a119 100644
+--- a/app/templates/components/hero.html
++++ b/app/templates/components/hero.html
+@@ -1,35 +1,20 @@
+ <section id="hero" class="hero homepage-hero">
+     {% set hero = hero if hero is defined and hero is not none else {} %}
++    {% set hero_title = hero.title if hero is defined and hero is not none and hero.title is defined and hero.title else (t('hero.title', 'Convert All Files') if t is defined else 'Convert All Files') %}
++    {% set hero_description = hero.description if hero is defined and hero is not none and hero.description is defined and hero.description else (t('hero.description', 'Convert images, videos, audio, and documents online.') if t is defined else 'Convert images, videos, audio, and documents online.') %}
++    {% set hero_description_secondary = hero.description_secondary if hero is defined and hero is not none and hero.description_secondary is defined and hero.description_secondary else '' %}
+     <div class="container">
+         <div class="hero-container">
+-            <div class="floating-format-cards" aria-hidden="true">
+-                <span class="floating-format-card card-pdf">PDF</span>
+-                <span class="floating-format-card card-docx">DOCX</span>
+-                <span class="floating-format-card card-xlsx">XLSX</span>
+-                <span class="floating-format-card card-mp3">MP3</span>
+-                <span class="floating-format-card card-mp4">MP4</span>
+-                <span class="floating-format-card card-jpg">JPG</span>
+-                <span class="floating-format-card card-zip">ZIP</span>
+-                <span class="floating-format-card card-pptx">PPTX</span>
+-            </div>
+             <div class="hero-content">
+-                <h1 class="hero-title">
+-                    {{ request.state.t('hero.title', 'Convert All Files') }}
+-                </h1>
+-
+-                <p class="hero-description">
+-                    {{ request.state.t('hero.description', 'Convert images, videos, audio, and documents online.') }}
+-                </p>
+-
+-                <p class="hero-batch-hint">{{ request.state.t('hero.batch_hint', 'Supports many files at once') }}</p>
++                <h1 class="hero-title">{{ hero_title }}</h1>
++                <p class="hero-description">{{ hero_description }}{% if hero_description_secondary %}<br>{{ hero_description_secondary }}{% endif %}</p>
+             </div>
+ 
+             <div class="homepage-upload-card">
+-                {% include "components/upload_card.html" %}
++                {% include "components/home_upload_card.html" %}
+             </div>
+         </div>
+     </div>
+ 
+-    <!-- UX-S3-001 Trust Layer Experience -->
+     {% include "components/trust_layer.html" %}
+ </section>

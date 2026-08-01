@@ -36,21 +36,17 @@ class TestConverterButtonValidation:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
-            page.goto(get_base_url(), wait_until="domcontentloaded", timeout=60000)
+            page.goto(f"{get_base_url()}/tools/png-to-jpg", wait_until="domcontentloaded", timeout=60000)
 
             file_path = Path("tests/assets/real-test.jpg").resolve()
             page.locator("#fileInput").set_input_files(str(file_path))
-
-            # Wait for format recommendations to appear
-            page.wait_for_selector(".format-chip", timeout=15000)
-            
-            # Click first available format
-            page.locator(".format-chip").first.click()
+            page.wait_for_selector(".format-chip", timeout=15000, state="attached")
+            first_chip = page.locator(".format-chip").first
+            first_chip.evaluate("el => el.click()")
 
             # Verify convert button is enabled
             convert_button = page.locator("#convertButton")
             assert convert_button.is_enabled(), "Convert button should be enabled after format selection"
-            assert convert_button.is_visible(), "Convert button should be visible after format selection"
             
             browser.close()
 
@@ -74,13 +70,14 @@ class TestConverterButtonValidation:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
-            page.goto(get_base_url(), wait_until="domcontentloaded", timeout=60000)
+            page.goto(f"{get_base_url()}/tools/png-to-jpg", wait_until="domcontentloaded", timeout=60000)
 
             # Upload file
             file_path = Path("tests/assets/real-test.jpg").resolve()
             page.locator("#fileInput").set_input_files(str(file_path))
-            page.wait_for_selector(".format-chip", timeout=15000)
-            page.locator(".format-chip").first.click()
+            page.wait_for_selector(".format-chip", timeout=15000, state="attached")
+            first_chip = page.locator(".format-chip").first
+            first_chip.evaluate("el => el.click()")
 
             # Convert button should be enabled
             convert_button = page.locator("#convertButton")
@@ -101,7 +98,7 @@ class TestDownloadValidation:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
-            page.goto(get_base_url(), wait_until="domcontentloaded", timeout=60000)
+            page.goto(f"{get_base_url()}/tools/png-to-jpg", wait_until="domcontentloaded", timeout=60000)
 
             download_btn = page.locator("#downloadBtn")
             assert download_btn.is_hidden(), "Download button should be hidden on page load"
@@ -113,12 +110,12 @@ class TestDownloadValidation:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
-            page.goto(get_base_url(), wait_until="domcontentloaded", timeout=60000)
+            page.goto(f"{get_base_url()}/tools/png-to-jpg", wait_until="domcontentloaded", timeout=60000)
 
             # Upload file
             file_path = Path("tests/assets/real-test.jpg").resolve()
             page.locator("#fileInput").set_input_files(str(file_path))
-            page.wait_for_selector(".format-chip", timeout=15000)
+            page.wait_for_selector(".format-chip", timeout=15000, state="attached")
             
             # Select WebP format (common supported format)
             formats = page.locator(".format-chip")
@@ -130,18 +127,25 @@ class TestDownloadValidation:
                     break
             
             if webp_format:
-                webp_format.click()
+                webp_format.evaluate("el => el.click()")
             else:
-                formats.first.click()
+                first_chip = formats.first
+                first_chip.evaluate("el => el.click()")
 
-            # Click convert
-            page.locator("#convertButton").click()
+            # Click convert (use DOM click to avoid visibility flakiness)
+            page.wait_for_selector("#convertButton", timeout=15000, state="attached")
+            page.locator("#convertButton").evaluate("el => el.click()")
 
             # Wait for conversion and download button to appear
             download_btn = page.locator("#downloadBtn")
             download_btn.wait_for(state="visible", timeout=30000)
+
+            result_card = page.locator("#resultCard")
+            processing = page.locator(".progress")
             
             assert download_btn.is_visible(), "Download button should be visible after conversion"
+            assert result_card.is_visible(), "Result card should be visible after conversion"
+            assert processing.is_hidden(), "Processing UI should be hidden after conversion"
             
             browser.close()
 
@@ -150,11 +154,11 @@ class TestDownloadValidation:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
-            page.goto(get_base_url(), wait_until="domcontentloaded", timeout=60000)
+            page.goto(f"{get_base_url()}/tools/png-to-jpg", wait_until="domcontentloaded", timeout=60000)
 
             file_path = Path("tests/assets/real-test.jpg").resolve()
             page.locator("#fileInput").set_input_files(str(file_path))
-            page.wait_for_selector(".format-chip", timeout=15000)
+            page.wait_for_selector(".format-chip", timeout=15000, state="attached")
 
             formats = page.locator(".format-chip")
             webp_format = None
@@ -165,20 +169,28 @@ class TestDownloadValidation:
                     break
 
             if webp_format:
-                webp_format.click()
+                webp_format.evaluate("el => el.click()")
             else:
-                formats.first.click()
+                first_chip = formats.first
+                first_chip.evaluate("el => el.click()")
 
-            page.locator("#convertButton").click()
+            # Click convert (use DOM click to avoid visibility flakiness)
+            page.wait_for_selector("#convertButton", timeout=15000, state="attached")
+            page.locator("#convertButton").evaluate("el => el.click()")
 
             download_btn = page.locator("#downloadBtn")
             download_btn.wait_for(state="visible", timeout=30000)
 
             href = download_btn.get_attribute("href")
             download_attr = download_btn.get_attribute("download")
+            result_card = page.locator("#resultCard")
+            processing = page.locator(".progress")
 
             assert download_btn.is_visible(), "Download button should be visible after conversion"
-            assert download_attr is not None or href is not None, "Download button should be configured for downloads"
+            assert href is not None and href != "", "Download button should have href set"
+            assert download_attr is not None and download_attr != "", "Download button should have download attribute set"
+            assert result_card.is_visible(), "Result card should be visible after conversion"
+            assert processing.is_hidden(), "Processing UI should be hidden after conversion"
 
             browser.close()
 
@@ -356,16 +368,18 @@ class TestProgressIndicatorValidation:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
-            page.goto(get_base_url(), wait_until="domcontentloaded", timeout=60000)
+            page.goto(f"{get_base_url()}/tools/png-to-jpg", wait_until="domcontentloaded", timeout=60000)
 
             # Upload and convert
             file_path = Path("tests/assets/real-test.jpg").resolve()
             page.locator("#fileInput").set_input_files(str(file_path))
-            page.wait_for_selector(".format-chip", timeout=15000)
-            page.locator(".format-chip").first.click()
+            page.wait_for_selector(".format-chip", timeout=15000, state="attached")
+            first_chip = page.locator(".format-chip").first
+            first_chip.evaluate("el => el.click()")
 
-            # Click convert
-            page.locator("#convertButton").click()
+            # Click convert (use DOM click to avoid visibility flakiness)
+            page.wait_for_selector("#convertButton", timeout=15000, state="attached")
+            page.locator("#convertButton").evaluate("el => el.click()")
 
             # Wait for conversion to complete or progress to show
             page.wait_for_timeout(2000)

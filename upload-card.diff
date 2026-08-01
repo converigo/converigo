@@ -1,0 +1,3695 @@
+﻿diff --git a/app/static/css/components/upload-card.css b/app/static/css/components/upload-card.css
+index d6771af..908264c 100644
+--- a/app/static/css/components/upload-card.css
++++ b/app/static/css/components/upload-card.css
+@@ -1,39 +1,64 @@
+-/*
++∩╗┐/*
+ ====================================================
+ Project : Converigo
+ Component : Upload Card
+ Version : 3.9.0
+ Premium glass upload experience
+ ====================================================
+ */
+ 
+ .upload-wrapper {
+     margin-top: 0;
+-    padding: 0;
++    padding: 0 0 6px;
+ }
+ 
+ .upload-card {
+     position: relative;
+     width: 100%;
+-    max-width: 560px;
++    max-width: 100%;
+     margin: 0 auto;
+-    padding: 20px;
+-    border-radius: 34px;
+-    border: 1px solid rgba(37, 99, 235, 0.18);
++    padding: 28px 28px 32px;
++    border-radius: 24px;
++    border: 1.5px solid rgba(37, 99, 235, 0.18);
+     background:
+-        linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(241, 247, 255, 0.84)),
+-        linear-gradient(145deg, rgba(37, 99, 235, 0.1), rgba(14, 165, 233, 0.06));
++        linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(241, 247, 255, 0.9)),
++        linear-gradient(145deg, rgba(37, 99, 235, 0.08), rgba(14, 165, 233, 0.05));
+     box-shadow:
+-        0 36px 82px rgba(15, 23, 42, 0.16),
+-        0 16px 36px rgba(37, 99, 235, 0.1),
+-        inset 0 1px 0 rgba(255, 255, 255, 0.94);
++        0 20px 48px rgba(15, 23, 42, 0.08),
++        0 8px 20px rgba(37, 99, 235, 0.08),
++        inset 0 1px 0 rgba(255, 255, 255, 0.92);
+     backdrop-filter: blur(18px);
+     -webkit-backdrop-filter: blur(18px);
+     overflow: hidden;
+ }
+ 
++.upload-card:hover,
++.upload-card:focus-within {
++    transform: translateY(-4px);
++    transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 220ms ease, border-color 220ms ease;
++    box-shadow:
++        0 26px 56px rgba(15, 23, 42, 0.12),
++        0 10px 30px rgba(37, 99, 235, 0.12),
++        inset 0 1px 0 rgba(255, 255, 255, 0.94);
++    border-color: rgba(37, 99, 235, 0.46);
++}
++
++.upload-card:focus-within {
++    box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.08), 0 26px 56px rgba(15, 23, 42, 0.12);
++}
++
++.upload-card.state-uploading {
++    box-shadow: 0 30px 60px rgba(14, 165, 233, 0.08), 0 12px 30px rgba(37, 99, 235, 0.08);
++    border-color: rgba(37, 99, 235, 0.54);
++}
++
++.upload-card.state-success {
++    box-shadow: 0 26px 48px rgba(16, 185, 129, 0.08), 0 10px 24px rgba(16, 185, 129, 0.06);
++    border-color: rgba(16, 185, 129, 0.36);
++}
++
+ .upload-card::before {
+     content: "";
+     position: absolute;
+     inset: 0;
+     border-radius: inherit;
+@@ -44,77 +69,144 @@ Premium glass upload experience
+ 
+ .upload-main {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+-    gap: 22px;
++    gap: 18px;
+     flex-wrap: wrap;
+-    max-width: 960px;
++    max-width: 100%;
+     margin: 0 auto;
++    position: relative;
++}
++
++.upload-main.upload-active {
++    display: grid;
++    grid-template-columns: minmax(0, 1.55fr) minmax(320px, 1fr);
++    gap: 24px;
++    align-items: start;
++    width: 100%;
++    max-width: 100%;
++    min-width: 0;
++}
++
++.upload-main.upload-active > .drop-zone,
++.upload-main.upload-active > .upload-stage {
++    width: 100%;
++    max-width: 100%;
+ }
+ 
+ .drop-zone {
++    position: relative;
++    isolation: isolate;
+     width: 100%;
+     max-width: 100%;
+-    min-height: 244px;
++    min-height: 220px;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+-    gap: 18px;
+-    padding: 22px 20px;
+-    border: 1.5px dashed rgba(37, 99, 235, 0.4);
+-    border-radius: 26px;
++    gap: 16px;
++    padding: 20px 18px;
++    border: 1.5px solid rgba(37, 99, 235, 0.28);
++    border-radius: var(--radius-xl);
+     background:
+-        radial-gradient(120% 100% at 0% 0%, rgba(37, 99, 235, 0.1), rgba(37, 99, 235, 0) 56%),
+-        linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 251, 255, 0.88));
++        radial-gradient(130% 95% at 5% 0%, rgba(37, 99, 235, 0.11), rgba(37, 99, 235, 0) 56%),
++        linear-gradient(165deg, rgba(255, 255, 255, 0.94), rgba(248, 251, 255, 0.78));
+     box-shadow:
+-        inset 0 1px 0 rgba(255, 255, 255, 0.74),
+-        0 22px 44px rgba(15, 23, 42, 0.1);
++        var(--shadow-md),
++        inset 0 1px 0 rgba(255, 255, 255, 0.78);
++    backdrop-filter: blur(8px);
++    -webkit-backdrop-filter: blur(8px);
+     cursor: pointer;
+-    transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease, background 220ms ease;
++    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
++}
++
++.drop-zone::before {
++    content: "";
++    position: absolute;
++    inset: 0;
++    border-radius: inherit;
++    pointer-events: none;
++    background: linear-gradient(130deg, rgba(255, 255, 255, 0.44), rgba(255, 255, 255, 0));
++    opacity: 0.82;
++    z-index: -1;
+ }
+ 
+ .drop-zone:hover,
+ .drop-zone:focus-visible {
+     transform: translateY(-2px);
+-    border-color: rgba(37, 99, 235, 0.7);
+-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(243, 248, 255, 0.92));
++    border-color: rgba(37, 99, 235, 0.62);
++    background:
++        radial-gradient(130% 95% at 5% 0%, rgba(37, 99, 235, 0.13), rgba(37, 99, 235, 0) 56%),
++        linear-gradient(165deg, rgba(255, 255, 255, 0.96), rgba(243, 248, 255, 0.9));
+     box-shadow:
+-        0 18px 36px rgba(37, 99, 235, 0.14),
+-        inset 0 1px 0 rgba(255, 255, 255, 0.86);
++        0 24px 46px rgba(15, 23, 42, 0.13),
++        0 8px 22px rgba(37, 99, 235, 0.12),
++        inset 0 1px 0 rgba(255, 255, 255, 0.84);
+     outline: none;
+ }
+ 
+ .drop-zone:hover .upload-support,
+ .drop-zone:focus-visible .upload-support {
+     color: #475569;
+ }
+ 
+ .drop-zone.drag-active {
+-    transform: translateY(-2px) scale(1.004);
++    transform: translateY(-2px) scale(1.005);
++    border-style: solid;
+     border-color: #1d4ed8;
+-    background: #eff6ff;
++    background:
++        radial-gradient(130% 95% at 5% 0%, rgba(37, 99, 235, 0.2), rgba(37, 99, 235, 0) 58%),
++        linear-gradient(180deg, rgba(239, 246, 255, 0.95), rgba(219, 234, 254, 0.75));
+     box-shadow:
+-        0 20px 42px rgba(37, 99, 235, 0.2),
+-        inset 0 1px 0 rgba(255, 255, 255, 0.88);
++        0 0 0 1px rgba(37, 99, 235, 0.22),
++        0 28px 56px rgba(37, 99, 235, 0.2),
++        inset 0 1px 0 rgba(255, 255, 255, 0.92);
++}
++
++.drop-zone:hover .upload-icon,
++.drop-zone:focus-visible .upload-icon,
++.drop-zone.drag-active .upload-icon {
++    transform: scale(1.05);
+ }
+ 
+ .upload-icon {
+-    font-size: 40px;
+-    margin-bottom: 10px;
++    display: flex;
++    justify-content: center;
++    align-items: center;
++    width: 88px;
++    height: 88px;
++    margin: 0 auto 22px;
++    font-size: 0;
++    color: transparent;
++    background-image: url("/static/upload-cloud.svg");
++    background-repeat: no-repeat;
++    background-position: center;
++    background-size: contain;
++    background-color: transparent;
++    filter: drop-shadow(0 10px 22px rgba(59, 130, 246, 0.18));
++    transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), filter 220ms ease;
++    transform-origin: center;
++}
++
++.upload-icon::before,
++.upload-icon::after {
++    content: none !important;
++    display: none !important;
+ }
+ 
+ .drop-zone-copy {
+     text-align: center;
+     max-width: 320px;
+ }
+ 
+ .drop-zone-copy h2 {
+     margin: 0 0 8px;
+-    font-size: 1.1rem;
++    font-size: 1.02rem;
+     color: #0f172a;
++    transition: opacity 260ms ease, transform 260ms ease;
++    will-change: opacity;
+ }
+ 
+ .drop-zone-copy p {
+     margin: 0;
+     color: #475569;
+@@ -135,2260 +227,1558 @@ Premium glass upload experience
+ .drop-zone button {
+     min-width: 146px;
+     margin-top: 6px;
+     padding: 11px 18px;
+     font-weight: 700;
+-    border-radius: 999px;
+-    box-shadow: 0 10px 24px rgba(37, 99, 235, 0.2);
++    border-radius: var(--radius-pill);
++    box-shadow: var(--shadow-sm);
++    transition: transform var(--motion-normal), box-shadow var(--motion-fast), background var(--motion-fast), filter var(--motion-fast);
++    background: linear-gradient(90deg, #2b6ef6 0%, #3b82f6 48%, #60a5fa 100%);
++    border: none;
++    color: #fff;
++}
++
++.drop-zone button:hover,
++.drop-zone button:focus-visible {
++    transform: translateY(-2px);
++    box-shadow: 0 16px 30px rgba(37, 99, 235, 0.24);
++    background: linear-gradient(90deg, #2563eb 0%, #3b82f6 48%, #0ea5e9 100%);
++    filter: saturate(1.04);
+ }
+ 
+ .preview-container {
+     display: none;
+ }
+ 
+-.preview-container:not([hidden]) {
++.preview-container:not([hidden]):not(:empty) {
+     display: block;
++    width: 100%;
+ }
+ 
+ .preview-card {
+-    width: min(100%, 290px);
+-    text-align: center;
+-    background: rgba(255, 255, 255, 0.95);
+-    border-radius: 26px;
+-    padding: 24px;
+-    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+-}
+-
+-.preview-media {
+     width: 100%;
+-    height: 240px;
+-    display: flex;
+-    align-items: center;
+-    justify-content: center;
+-    margin-bottom: 18px;
++    background: #ffffff;
+     border-radius: 22px;
+-    background: #f8fafc;
+-    overflow: hidden;
++    padding: 20px;
++    box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
++    border: 1px solid rgba(148, 163, 184, 0.12);
+ }
+ 
+-.preview-media.audio {
+-    background: #eef2ff;
++.preview-details {
++    gap: 8px;
+ }
+ 
+-.preview-media.video {
+-    background: #fff7ed;
++.preview-type,
++.preview-size,
++.preview-status {
++    font-size: 0.94rem;
+ }
+ 
+-.preview-media.pdf {
+-    background: #eef9ff;
++.file-list-panel {
++    display: flex;
++    flex-direction: column;
++    position: relative;
++    min-width: 0;
++    max-height: 480px;
++    overflow: hidden;
++    border: 1px solid rgba(148, 163, 184, 0.18);
++    border-radius: 20px;
++    background: #ffffff;
++    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+ }
+ 
+-.preview-image {
+-    width: 100%;
+-    height: 100%;
+-    display: block;
+-    object-fit: cover;
++.file-list {
++    overflow-y: auto;
++    min-width: 0;
++    min-height: 0;
++    padding: 14px 14px 0;
++    display: flex;
++    flex-direction: column;
++    gap: 10px;
+ }
+ 
+-.preview-icon {
++.file-list-heading {
++    display: flex;
++    align-items: center;
++    justify-content: space-between;
++    gap: 14px;
++    font-size: 1rem;
++    font-weight: 800;
++    color: #0f172a;
+     margin: 0;
+-    font-size: 60px;
++    padding-bottom: 14px;
++    border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+ }
+ 
+-.preview-details {
++.file-item {
+     display: flex;
+     flex-direction: column;
+-    gap: 5px;
+-    text-align: center;
++    gap: 12px;
++    padding: 12px 14px;
++    border-radius: 16px;
++    background: #ffffff;
++    border: 1px solid rgba(148, 163, 184, 0.2);
++    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.05);
+ }
+ 
+-.preview-name {
+-    font-size: 15px;
+-    font-weight: 700;
+-    color: #0f172a;
+-    word-break: break-word;
++.file-item:last-child {
++    border-bottom: none;
+ }
+ 
+-.preview-type,
+-.preview-size,
+-.preview-status {
+-    font-size: 0.95rem;
+-    color: #64748b;
++.file-item-main {
++    display: flex;
++    justify-content: space-between;
++    align-items: center;
++    gap: 12px;
+ }
+ 
+-.preview-status {
+-    margin-top: 6px;
+-    font-weight: 600;
++.file-item-icon {
++    width: 40px;
++    height: 40px;
++    display: inline-flex;
++    align-items: center;
++    justify-content: center;
++    border-radius: 16px;
++    background: #eff6ff;
++    border: 1px solid rgba(37, 99, 235, 0.16);
+     color: #2563eb;
++    font-size: 1.1rem;
++    flex-shrink: 0;
+ }
+ 
+-.selected-file {
+-    display: flex;
+-    flex-wrap: wrap;
+-    justify-content: center;
+-    gap: 10px;
+-    max-width: 690px;
+-    margin: 20px auto 0;
+-    padding: 16px 22px;
+-    border: 1px solid rgba(148, 163, 184, 0.24);
+-    border-radius: 18px;
+-    background: rgba(15, 23, 42, 0.03);
+-    color: #334155;
+-    font-size: 0.95rem;
++.file-item-meta {
++    min-width: 0;
++    flex: 1 1 auto;
+ }
+ 
+-.upload-hint {
+-    max-width: 620px;
+-    margin: 16px auto 0;
+-    padding: 0 10px;
+-    color: #475569;
+-    font-size: 0.96rem;
+-    line-height: 1.7;
+-    text-align: center;
++.file-item-name {
++    font-weight: 800;
++    color: #0f172a;
++    font-size: 0.98rem;
++    line-height: 1.3;
++    overflow: hidden;
++    white-space: nowrap;
++    text-overflow: ellipsis;
++    min-width: 0;
+ }
+ 
+-#conversionArea {
+-    text-align: center;
+-    margin-top:24px;
+-    transition:opacity .25s ease, visibility .25s ease;
++.file-item-size {
++    font-size: 0.88rem;
++    color: #64748b;
++    margin-top: 2px;
+ }
+ 
+-#conversionArea h3 {
+-    font-size:22px;
+-    margin-bottom:18px;
++.file-item-bottom {
++    display: flex;
++    align-items: center;
++    justify-content: space-between;
++    gap: 12px;
++    flex-wrap: wrap;
+ }
+ 
+-@supports selector(#conversionArea:has(#formatOptions:empty)) {
+-    #conversionArea:has(#formatOptions:empty) {
+-        display:none;
+-        opacity:0;
+-        visibility:hidden;
+-        height:0;
+-        overflow:hidden;
+-    }
++.file-output-field {
++    display: inline-flex;
++    align-items: center;
++    gap: 10px;
++    padding: 10px 12px;
++    border-radius: 14px;
++    background: #f8fbff;
++    border: 1px solid rgba(148, 163, 184, 0.24);
+ }
+ 
+-/*
+-================================
+-FORMAT BUTTON
+-================================
+-*/
+-
+-.supported-formats {
+-    display:flex;
+-    justify-content:center;
+-    gap:12px;
+-    flex-wrap:wrap;
+-    align-items:center;
++.file-output-label {
++    font-size: 0.72rem;
++    font-weight: 900;
++    color: #475569;
++    text-transform: uppercase;
++    letter-spacing: 0.08em;
+ }
+ 
+-.format-chip {
+-    border:1px solid #2563eb;
+-    background:#ffffff;
+-    color:#2563eb;
+-    padding:10px 16px;
+-    border-radius:14px;
+-    font-size:13px;
+-    font-weight:700;
+-    cursor:pointer;
+-    transition:.15s ease, transform .15s ease, box-shadow .15s ease;
+-    white-space:nowrap;
++.file-output-select {
++    border: 0;
++    background: transparent;
++    color: #0f172a;
++    font-weight: 700;
++    font-size: 0.94rem;
++    padding: 0 6px;
++    min-width: 90px;
+ }
+ 
+-.format-chip:hover {
+-    background:#2563eb;
+-    color:white;
+-    transform:translateY(-1px);
++.batch-format-select {
++    min-width: 180px;
++    padding: 10px 12px;
++    border: 1px solid rgba(148, 163, 184, 0.36);
++    border-radius: 14px;
++    background: #f8fafc;
++    color: #0f172a;
++    font-size: 0.95rem;
+ }
+ 
+-.format-chip.active {
+-    background:#2563eb;
+-    color:white;
+-    box-shadow:0 10px 25px rgba(37,99,235,.18);
++.file-item-actions {
++    display: flex;
++    align-items: center;
++    gap: 10px;
++    width: 100%;
++    justify-content: flex-end;
+ }
+ 
+-/*
+-================================
+-CONVERT BUTTON
+-================================
+-*/
+-
+-#convertButton {
+-    margin-top:22px;
++.file-gear-btn,
++.file-remove-btn {
++    width: 36px;
++    height: 36px;
++    display: inline-flex;
++    align-items: center;
++    justify-content: center;
++    border: 1px solid rgba(148, 163, 184, 0.32);
++    border-radius: 12px;
++    background: #ffffff;
++    color: #0f172a;
++    font-size: 1rem;
++    cursor: pointer;
++    transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+ }
+ 
+-#convertButton:disabled {
+-    opacity:.65;
+-    cursor:not-allowed;
++.file-gear-btn:hover,
++.file-remove-btn:hover {
++    transform: translateY(-1px);
++    border-color: rgba(37, 99, 235, 0.42);
++    background: #eff6ff;
+ }
+ 
+-.btn.loading {
+-    opacity:0.9;
+-    pointer-events:none;
++.file-list-footer {
++    position: sticky;
++    bottom: 0;
++    display: flex;
++    align-items: center;
++    justify-content: space-between;
++    gap: 12px;
++    padding: 12px 14px;
++    background: #f8fbff;
++    border-top: 1px solid rgba(148, 163, 184, 0.16);
++    z-index: 2;
+ }
+ 
+-.conversion-actions {
+-    display:flex;
+-    flex-direction:column;
+-    gap:16px;
+-    margin-top:18px;
+-    align-items:center;
++.workspace-header {
++    display: none;
++    width: 100%;
++    max-width: 840px;
++    margin: 0 auto 16px;
++    padding: 10px 0 14px;
++    border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+ }
+ 
+-.status-text {
+-    min-height:24px;
+-    color:#334155;
+-    font-size:0.95rem;
+-    line-height:1.5;
++.workspace-title-heading {
++    font-size: 1.7rem;
++    margin: 0 0 6px;
++    font-weight: 800;
++    color: #0f172a;
++    line-height: 1.1;
+ }
+ 
+-.status-text.success {
+-    color:#16a34a;
++.upload-card {
++    position: relative;
++    width: 100%;
++    max-width: 100%;
++    margin: 0 auto;
++    padding: 18px;
++    border-radius: 34px;
++    border: 1.5px solid rgba(37, 99, 235, 0.28);
++    background:
++        linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(241, 247, 255, 0.84)),
++        linear-gradient(145deg, rgba(37, 99, 235, 0.1), rgba(14, 165, 233, 0.06));
++    box-shadow:
++        0 36px 82px rgba(15, 23, 42, 0.16),
++        0 16px 36px rgba(37, 99, 235, 0.1),
++        inset 0 1px 0 rgba(255, 255, 255, 0.94);
++    backdrop-filter: blur(18px);
++    -webkit-backdrop-filter: blur(18px);
++    overflow: hidden;
+ }
+ 
+-.status-text.error {
+-    color:#dc2626;
++.workspace-description {
++    margin: 0;
++    font-size: 1rem;
++    color: #475569;
++    max-width: 720px;
+ }
+ 
+-.download-btn {
+-    margin-top:10px;
+-    width:max-content;
+-    align-self:center;
+-}
+-
+-/*
+-================================
+-PROGRESS
+-================================
+-*/
+-
+-.progress {
+-    width:260px;
+-    height:8px;
+-    background:#e5e7eb;
+-    border-radius:20px;
+-    margin:20px auto;
+-    overflow:hidden;
+-}
+-
+-.progress-bar {
+-    height:100%;
+-    width:0;
+-    background:#2563eb;
+-    transition:.3s;
+-}
+-
+-/*
+-================================
+-PREMIUM SAAS UPLOAD POLISH
+-UI-S1-002
+-================================
+-*/
+-
+-.upload-main {
+-    position: relative;
+-}
+-
+-.drop-zone {
+-    position: relative;
+-    isolation: isolate;
+-    border: 1.5px solid rgba(37,99,235,.28);
+-    background:
+-        radial-gradient(130% 95% at 5% 0%, rgba(37,99,235,.11), rgba(37,99,235,0) 56%),
+-        linear-gradient(165deg, rgba(255,255,255,.94), rgba(248,251,255,.78));
+-    box-shadow:
+-        0 18px 38px rgba(15,23,42,.1),
+-        inset 0 1px 0 rgba(255,255,255,.78);
+-    backdrop-filter: blur(8px);
+-    -webkit-backdrop-filter: blur(8px);
+-    transition:
+-        transform .2s ease,
+-        border-color .2s ease,
+-        background .2s ease,
+-        box-shadow .2s ease;
+-}
+-
+-.drop-zone::before {
+-    content: "";
+-    position: absolute;
+-    inset: 0;
+-    border-radius: inherit;
+-    pointer-events: none;
+-    background: linear-gradient(130deg, rgba(255,255,255,.44), rgba(255,255,255,0));
+-    opacity: .82;
+-    z-index: -1;
+-}
+-
+-.drop-zone:hover {
+-    transform: translateY(-2px);
+-    border-color: rgba(37,99,235,.62);
+-    background:
+-        radial-gradient(130% 95% at 5% 0%, rgba(37,99,235,.13), rgba(37,99,235,0) 56%),
+-        linear-gradient(165deg, rgba(255,255,255,.96), rgba(243,248,255,.9));
+-    box-shadow:
+-        0 24px 46px rgba(15,23,42,.13),
+-        0 8px 22px rgba(37,99,235,.12),
+-        inset 0 1px 0 rgba(255,255,255,.84);
+-}
+-
+-.drop-zone:focus-visible {
+-    outline: none;
+-    transform: translateY(-1px);
+-    border-color: rgba(37,99,235,.78);
+-    box-shadow:
+-        0 0 0 4px rgba(37,99,235,.2),
+-        0 22px 42px rgba(15,23,42,.12),
+-        inset 0 1px 0 rgba(255,255,255,.85);
+-}
+-
+-.drop-zone.drag-active {
+-    transform: translateY(-2px) scale(1.005);
+-    border-style: solid;
+-    border-color: #1d4ed8;
+-    background:
+-        radial-gradient(130% 95% at 5% 0%, rgba(37,99,235,.2), rgba(37,99,235,0) 58%),
+-        linear-gradient(180deg, rgba(239,246,255,.95), rgba(219,234,254,.75));
+-    box-shadow:
+-        0 0 0 1px rgba(37,99,235,.22),
+-        0 28px 56px rgba(37,99,235,.2),
+-        inset 0 1px 0 rgba(255,255,255,.92);
+-}
+-
+-
+-
+-.selected-file,
+-.file-ready-card,
+-.result-card {
+-    border: 1px solid rgba(148,163,184,.26);
+-    background:
+-        linear-gradient(165deg, rgba(255,255,255,.96), rgba(248,251,255,.92));
+-    box-shadow:
+-        0 16px 36px rgba(15,23,42,.08),
+-        inset 0 1px 0 rgba(255,255,255,.76);
+-}
+-
+-#selectedStatus:not([hidden]),
+-.file-ready-card,
+-.status-text.success,
+-.result-card {
+-    animation: uploadStateReveal .26s ease-out both;
+-}
+-
+-.status-text.success {
+-    color: #15803d;
+-    font-weight: 700;
+-}
+-
+-.status-text.success::before {
+-    content: "Γ£ô ";
+-    font-weight: 800;
+-}
+-
+-.result-status {
+-    color: #0f172a;
+-}
+-
+-.result-card {
+-    border-color: rgba(34,197,94,.22);
+-}
+-
+-.progress {
+-    background: linear-gradient(90deg, rgba(226,232,240,.84), rgba(203,213,225,.84));
+-}
+-
+-.progress-bar {
+-    background: linear-gradient(90deg, #2563eb, #0ea5e9);
+-    box-shadow: 0 0 0 1px rgba(37,99,235,.12), 0 6px 16px rgba(14,165,233,.25);
+-}
+-
+-@keyframes uploadStateReveal {
+-    from {
+-        opacity: 0;
+-        transform: translateY(5px);
+-    }
+-    to {
+-        opacity: 1;
+-        transform: translateY(0);
+-    }
+-}
+-
+-@media (prefers-reduced-motion: reduce) {
+-    .drop-zone,
+-    .drop-zone button,
+-    #convertButton,
+-    .download-btn,
+-    #selectedStatus:not([hidden]),
+-    .file-ready-card,
+-    .status-text.success,
+-    .result-card {
+-        animation: none !important;
+-        transition: none !important;
+-        transform: none !important;
+-    }
+-}
+-
+-@media (max-width: 480px) {
+-    .upload-wrapper {
+-        margin-top:0;
+-        padding-bottom:20px;
+-    }
+-
+-    .upload-main {
+-        flex-direction:column;
+-        align-items:stretch;
+-        gap:18px;
+-    }
+-
+-    .drop-zone {
+-        width:100%;
+-        max-width:100%;
+-        min-height:200px;
+-        height:auto;
+-        padding:20px 16px;
+-    }
+-
+-    .drop-zone h2 {
+-        font-size:20px;
+-    }
+-
+-    .drop-zone p {
+-        font-size:14px;
+-        margin-bottom:14px;
+-    }
+-
+-    .preview-container:not([hidden]) {
+-        display:flex;
+-        justify-content:center;
+-    }
+-
+-    .preview-card {
+-        width:min(100%, 240px);
+-    }
+-
+-    .preview-media {
+-        width:min(100%, 240px);
+-        height:220px;
+-        margin:0 auto;
+-    }
+-
+-    .supported-formats {
+-        gap:8px;
+-    }
+-
+-    .format-chip {
+-        min-height:44px;
+-        padding:10px 12px;
+-        font-size:12px;
+-    }
+-
+-    .conversion-actions {
+-        width:100%;
+-        gap:12px;
+-    }
+-
+-    .download-btn {
+-        width:100%;
+-        max-width:280px;
+-    }
+-
+-    .progress {
+-        width:min(100%, 260px);
+-    }
+-}
+-
+-/* UI-S1-005 ΓÇö Narrow viewport drop-zone fixes (no clipping at 390/375/360) */
+-@media (max-width: 390px) {
+-    .homepage-hero .homepage-upload-card .drop-zone {
+-        min-height: 170px;
+-        padding: 14px 10px;
+-        gap: 12px;
+-    }
+-
+-    .homepage-hero .homepage-upload-card .drop-zone h2 {
+-        font-size: 18px;
+-    }
+-
+-    .homepage-hero .homepage-upload-card .drop-zone p {
+-        font-size: 13px;
+-        margin-bottom: 10px;
+-    }
+-
+-    .homepage-hero .homepage-upload-card .drop-zone .upload-icon {
+-        font-size: 32px;
+-        margin-bottom: 6px;
+-    }
+-
+-    .homepage-hero .homepage-upload-card .drop-zone .upload-support {
+-        font-size: 0.82rem;
+-        max-width: 260px;
+-    }
+-
+-    .homepage-hero .homepage-upload-card .drop-zone button {
+-        min-width: 130px;
+-        padding: 9px 16px;
+-        font-size: 0.9rem;
+-    }
+-}
+-
+-@media (max-width: 360px) {
+-    .homepage-hero .homepage-upload-card .drop-zone {
+-        min-height: 150px;
+-        padding: 10px 8px;
+-        gap: 8px;
+-    }
+-
+-    .homepage-hero .homepage-upload-card .drop-zone h2 {
+-        font-size: 16px;
+-        margin-bottom: 6px;
+-    }
+-
+-    .homepage-hero .homepage-upload-card .drop-zone p {
+-        font-size: 12px;
+-        margin-bottom: 8px;
+-    }
+-
+-    .homepage-hero .homepage-upload-card .drop-zone .upload-icon {
+-        font-size: 28px;
+-        margin-bottom: 4px;
+-    }
+-
+-    .homepage-hero .homepage-upload-card .drop-zone .upload-support {
+-        font-size: 0.78rem;
+-        max-width: 220px;
+-    }
+-
+-    .homepage-hero .homepage-upload-card .drop-zone button {
+-        min-width: 110px;
+-        padding: 8px 12px;
+-        font-size: 0.85rem;
+-    }
+-}
+-
+-/*
+-================================
+-HIDDEN STATE
+-================================
+-*/
+-
+-#downloadBtn[hidden] {
+-    display:none !important;
+-}
+-
+-.progress[hidden] {
+-    display:none !important;
+-}
+-
+-/*
+-================================
+-MOBILE
+-================================
+-*/
+-
+-@media(max-width:900px){
+-
+-    .upload-main {
+-        flex-direction:column;
+-        align-items:center;
+-        gap:20px;
+-    }
+-
+-    .drop-zone {
+-        width:min(100%, 440px);
+-        max-width:100%;
+-    }
+-
+-    .preview-card {
+-        width:220px;
+-    }
+-
+-    .preview-media {
+-        width:220px;
+-        height:220px;
+-    }
+-
+-    .preview-image {
+-        width:100%;
+-        height:100%;
+-    }
+-
+-    .supported-formats {
+-        gap:10px;
+-    }
+-
+-    .download-btn {
+-        align-self:center;
+-    }
+-
+-}
+-
+-/*
+-================================
+-UX-S2-003 PREMIUM CONVERSION EXPERIENCE
+-================================
+-*/
+-
+-/* Keep conversion area height stable to avoid visual jumps between states. */
+-.conversion-actions {
+-    position: relative;
+-    width: min(100%, 720px);
+-    min-height: 168px;
+-    padding: 16px 14px 14px;
+-    border-radius: 18px;
+-    border: 1px solid rgba(148, 163, 184, 0.26);
+-    background:
+-        linear-gradient(165deg, rgba(255, 255, 255, 0.9), rgba(248, 251, 255, 0.78));
+-    box-shadow:
+-        0 16px 34px rgba(15, 23, 42, 0.08),
+-        inset 0 1px 0 rgba(255, 255, 255, 0.78);
+-}
+-
+-#conversionArea h3 {
+-    letter-spacing: -0.014em;
+-}
+-
+-.status-text {
+-    position: relative;
+-    width: 100%;
+-    max-width: 620px;
+-    margin: 0 auto;
+-    min-height: 46px;
+-    border-radius: 12px;
+-    padding: 10px 12px;
+-    background: rgba(255, 255, 255, 0.72);
+-    border: 1px solid rgba(148, 163, 184, 0.24);
+-}
+-
+-/* Conversion card (real app states only): appears when app marks converting. */
+-.upload-wrapper:has(.drop-zone.is-converting) #selectedStatus:not([hidden]) {
+-    position: relative;
+-    display: grid;
+-    grid-template-columns: 44px minmax(0, 1fr);
+-    align-items: center;
+-    gap: 10px;
+-    text-align: left;
+-    border: 1px solid rgba(37, 99, 235, 0.28);
+-    background:
+-        radial-gradient(120% 90% at 10% 0%, rgba(191, 219, 254, 0.34), rgba(191, 219, 254, 0) 58%),
+-        linear-gradient(166deg, rgba(255, 255, 255, 0.95), rgba(246, 250, 255, 0.88));
+-    box-shadow:
+-        0 20px 44px rgba(15, 23, 42, 0.12),
+-        0 8px 20px rgba(37, 99, 235, 0.12),
+-        inset 0 1px 0 rgba(255, 255, 255, 0.84);
+-    opacity: 1;
+-    transform: translate3d(0, -2px, 0);
+-}
+-
+-.upload-wrapper:has(.drop-zone.is-converting) #selectedStatus:not([hidden])::before {
+-    content: "≡ƒôä";
+-    width: 44px;
+-    height: 44px;
+-    border-radius: 14px;
+-    display: flex;
+-    align-items: center;
+-    justify-content: center;
+-    font-size: 22px;
+-    background: rgba(37, 99, 235, 0.12);
+-    border: 1px solid rgba(37, 99, 235, 0.22);
+-}
+-
+-.upload-wrapper:has(.drop-zone.is-converting) #selectedStatus:not([hidden])::after {
+-    content: "Converting file";
+-    grid-column: 2;
+-    color: #1d4ed8;
+-    font-size: 0.8rem;
+-    font-weight: 700;
+-    letter-spacing: 0.01em;
+-}
+-
+-/* Output format remains truthful by only styling existing active choice. */
+-.upload-wrapper:has(.drop-zone.is-converting) #formatOptions .format-chip.active {
+-    box-shadow:
+-        0 10px 24px rgba(37, 99, 235, 0.28),
+-        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+-    transform: translate3d(0, -1px, 0);
+-}
+-
+-/* Progress visual: premium glass panel only when real progress DOM is visible. */
+-.upload-wrapper:has(#convertProgress:not([hidden])) #convertProgress {
+-    position: relative;
+-    width: min(100%, 560px);
+-    height: 10px;
+-    border-radius: 999px;
+-    border: 1px solid rgba(148, 163, 184, 0.24);
+-    background:
+-        linear-gradient(90deg, rgba(226, 232, 240, 0.9), rgba(203, 213, 225, 0.86));
+-    box-shadow:
+-        0 0 0 1px rgba(255, 255, 255, 0.52),
+-        0 8px 20px rgba(15, 23, 42, 0.08);
+-    opacity: 1;
+-    transform: translate3d(0, 0, 0);
+-    animation: conversionCardLift 220ms ease-out both;
+-}
+-
+-.upload-wrapper:has(#convertProgress:not([hidden])) .progress-bar {
+-    background: linear-gradient(90deg, #2563eb, #0ea5e9);
+-    box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.12), 0 6px 16px rgba(14, 165, 233, 0.24);
+-}
+-
+-/* Non-fake loading indicator: shown only while convert button is in real loading state. */
+-.conversion-actions:has(#convertButton.loading) .status-text {
+-    color: #1e293b;
+-    font-weight: 600;
+-    border-color: rgba(37, 99, 235, 0.24);
+-}
+-
+-.conversion-actions:has(#convertButton.loading) .status-text::before {
+-    content: "";
+-    width: 14px;
+-    height: 14px;
+-    border-radius: 50%;
+-    border: 2px solid rgba(37, 99, 235, 0.28);
+-    border-top-color: #2563eb;
+-    display: inline-block;
+-    margin-right: 8px;
+-    transform: translate3d(0, 0, 0);
+-    animation: conversionSpinner 0.85s linear infinite;
+-}
+-
+-.conversion-actions:has(#convertButton.loading) .status-text::after {
+-    content: "Please wait...";
+-    display: inline;
+-    color: #64748b;
+-    font-size: 0.86rem;
+-    font-weight: 500;
+-    margin-left: 6px;
+-}
+-
+-/* Ready transition: gracefully prioritize download without changing DOM flow. */
+-.upload-wrapper:has(.drop-zone.is-complete) #convertProgress,
+-.upload-wrapper:has(#resultCard:not([hidden])) #convertProgress {
+-    opacity: 0;
+-    transform: translate3d(0, -4px, 0);
+-    transition: opacity 200ms ease, transform 200ms ease;
+-}
+-
+-.upload-wrapper:has(#resultCard:not([hidden])) #resultCard {
+-    border-color: rgba(34, 197, 94, 0.24);
+-    box-shadow:
+-        0 18px 40px rgba(15, 23, 42, 0.1),
+-        0 10px 24px rgba(34, 197, 94, 0.12),
+-        inset 0 1px 0 rgba(255, 255, 255, 0.86);
+-    animation: conversionCardLift 240ms ease-out both;
+-}
+-
+-.upload-wrapper:has(#resultCard:not([hidden])) #downloadBtn:not([hidden]) {
+-    box-shadow:
+-        0 0 0 4px rgba(37, 99, 235, 0.16),
+-        0 12px 28px rgba(37, 99, 235, 0.2);
+-    transform: translate3d(0, -1px, 0);
+-}
+-
+-/* Error state keeps clarity while preserving same layout container. */
+-.upload-wrapper:has(#errorCard:not([hidden])) .status-text {
+-    border-color: rgba(220, 38, 38, 0.24);
+-    color: #7f1d1d;
+-}
+-
+-@keyframes conversionSpinner {
+-    from {
+-        transform: rotate(0deg);
+-    }
+-    to {
+-        transform: rotate(360deg);
+-    }
+-}
+-
+-@keyframes conversionCardLift {
+-    from {
+-        opacity: 0;
+-        transform: translate3d(0, 6px, 0);
+-    }
+-    to {
+-        opacity: 1;
+-        transform: translate3d(0, 0, 0);
+-    }
+-}
+-
+-@media (max-width: 1024px) {
+-    .conversion-actions {
+-        min-height: 158px;
+-    }
+-}
+-
+-@media (max-width: 768px) {
+-    .conversion-actions {
+-        min-height: 146px;
+-        padding: 12px;
+-    }
+-
+-    .status-text {
+-        min-height: 42px;
+-        padding: 9px 10px;
+-    }
+-}
+-
+-@media (max-width: 430px) {
+-    .conversion-actions {
+-        min-height: 136px;
+-    }
+-
+-    .upload-wrapper:has(.drop-zone.is-converting) #selectedStatus:not([hidden]) {
+-        grid-template-columns: 38px minmax(0, 1fr);
+-        gap: 8px;
+-        padding: 12px 14px;
+-    }
+-
+-    .upload-wrapper:has(.drop-zone.is-converting) #selectedStatus:not([hidden])::before {
+-        width: 38px;
+-        height: 38px;
+-        font-size: 18px;
+-    }
+-}
+-
+-@media (max-width: 390px) {
+-    .status-text {
+-        font-size: 0.88rem;
+-    }
++.workspace-toolbar {
++    display: flex;
++    justify-content: flex-end;
++    gap: 12px;
++    flex-shrink: 0;
+ }
+ 
+-@media (max-width: 375px) {
+-    .conversion-actions {
+-        padding: 10px;
+-    }
++.workspace-add-files {
++    display: inline-flex;
++    align-items: center;
++    justify-content: center;
++    gap: 8px;
++    padding: 10px 15px;
++    border-radius: 999px;
++    border: 1px solid rgba(37, 99, 235, 0.16);
++    background: #ffffff;
++    color: #0f172a;
++    font-weight: 700;
++    cursor: pointer;
++    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+ }
+ 
+-@media (max-width: 360px) {
+-    .conversion-actions {
+-        min-height: 128px;
+-    }
+-
+-    .status-text {
+-        font-size: 0.84rem;
+-    }
++.workspace-add-files:hover,
++.workspace-add-files:focus-visible {
++    transform: translateY(-1px);
++    border-color: rgba(37, 99, 235, 0.36);
++    box-shadow: 0 12px 24px rgba(37, 99, 235, 0.08);
+ }
+ 
+-@media (prefers-reduced-motion: reduce) {
+-    .upload-wrapper:has(#convertProgress:not([hidden])) #convertProgress,
+-    .upload-wrapper:has(#resultCard:not([hidden])) #resultCard,
+-    .upload-wrapper:has(#resultCard:not([hidden])) #downloadBtn:not([hidden]),
+-    .conversion-actions:has(#convertButton.loading) .status-text::before {
+-        animation: none !important;
+-        transition: none !important;
+-        transform: none !important;
+-    }
++.file-item {
++    display: flex;
++    flex-direction: column;
++    gap: 16px;
++    padding: 18px;
++    border-radius: 20px;
++    background: #ffffff;
++    border: 1px solid rgba(148, 163, 184, 0.22);
++    box-shadow: 0 20px 42px rgba(15, 23, 42, 0.05);
+ }
+ 
+-/*
+-================================
+-UX-S2-001 PREMIUM UPLOAD EXPERIENCE
+-================================
+-*/
+-
+-.upload-wrapper {
+-    position: relative;
+-    isolation: isolate;
++.file-item-main {
++    display: flex;
++    gap: 14px;
++    align-items: center;
+ }
+ 
+-.upload-wrapper::before {
+-    content: "";
+-    position: absolute;
+-    inset: -24px -18px -18px;
+-    border-radius: 30px;
+-    z-index: -1;
+-    pointer-events: none;
+-    opacity: 0.55;
+-    background-image:
+-        linear-gradient(124deg, rgba(37, 99, 235, 0.08) 1px, transparent 1px),
+-        linear-gradient(28deg, rgba(14, 165, 233, 0.07) 1px, transparent 1px),
+-        radial-gradient(130% 110% at 8% 0%, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0));
+-    background-size: 48px 48px, 56px 56px, 100% 100%;
++.file-item-meta {
++    display: flex;
++    flex-direction: column;
++    gap: 4px;
++    min-width: 0;
++    flex: 1 1 auto;
+ }
+ 
+-.upload-main {
+-    position: relative;
++.file-item-name {
++    font-size: 1rem;
++    letter-spacing: -0.02em;
+ }
+ 
+-/* IDLE */
+-.upload-main.upload-initial .drop-zone,
+-.drop-zone {
+-    transform: translate3d(0, 0, 0);
+-    transition:
+-        transform 170ms ease,
+-        box-shadow 170ms ease,
+-        border-color 170ms ease,
+-        background 170ms ease,
+-        filter 170ms ease;
+-    border: 1.5px solid rgba(37, 99, 235, 0.26);
+-    background:
+-        radial-gradient(130% 100% at 12% 2%, rgba(191, 219, 254, 0.32), rgba(191, 219, 254, 0) 56%),
+-        linear-gradient(165deg, rgba(255, 255, 255, 0.95), rgba(247, 251, 255, 0.86));
+-    box-shadow:
+-        -16px -14px 30px rgba(255, 255, 255, 0.62),
+-        0 20px 48px rgba(15, 23, 42, 0.12),
+-        0 8px 22px rgba(37, 99, 235, 0.1),
+-        inset 0 1px 0 rgba(255, 255, 255, 0.86);
++.file-item-size {
++    font-size: 0.92rem;
+ }
+ 
+-.upload-main.upload-initial .drop-zone-copy h2,
+-.drop-zone-copy h2 {
+-    letter-spacing: -0.01em;
++.file-item-bottom {
++    display: flex;
++    align-items: center;
++    justify-content: space-between;
++    gap: 14px;
++    flex-wrap: wrap;
+ }
+ 
+-.upload-main.upload-initial .drop-zone-copy p,
+-.drop-zone-copy p {
+-    line-height: 1.7;
+-    letter-spacing: 0.002em;
++.file-output-field {
++    width: min(100%, 320px);
+ }
+ 
+-.drop-zone-copy::after {
+-    content: "Supports images, videos, audio, and documents";
+-    display: block;
+-    margin-top: 10px;
+-    font-size: 0.8rem;
+-    line-height: 1.5;
+-    color: #1d4ed8;
+-    font-weight: 600;
+-    letter-spacing: 0.01em;
++.file-gear-btn,
++.file-remove-btn {
++    width: 40px;
++    height: 40px;
++    border-radius: 14px;
+ }
+ 
+-.upload-support {
+-    position: relative;
+-    padding-top: 30px;
++.file-item-actions {
++    justify-content: flex-end;
+ }
+ 
+-.upload-support::before {
+-    content: "Secure upload";
+-    position: absolute;
+-    top: 0;
+-    left: 50%;
+-    transform: translateX(-50%);
+-    display: inline-flex;
++.batch-action-label {
++    display: flex;
+     align-items: center;
+-    justify-content: center;
+-    padding: 5px 12px;
+-    border-radius: 999px;
+-    border: 1px solid rgba(37, 99, 235, 0.22);
+-    background: rgba(255, 255, 255, 0.82);
+-    color: #1e40af;
+-    font-size: 0.75rem;
++    gap: 12px;
++    flex-wrap: wrap;
++    font-size: 0.95rem;
++    color: #0f172a;
+     font-weight: 700;
+-    letter-spacing: 0.015em;
+-}
+-
+-.upload-support::after {
+-    content: "Privacy note: files are processed for conversion and removed automatically by system cleanup.";
+-    display: block;
+-    margin-top: 8px;
+-    font-size: 0.78rem;
+-    line-height: 1.5;
+-    color: #64748b;
+-}
+-
+-/* HOVER */
+-.drop-zone:hover,
+-.drop-zone:focus-visible {
+-    transform: translate3d(0, -3px, 0);
+-    border-color: rgba(37, 99, 235, 0.7);
+-    filter: saturate(1.04);
+-    box-shadow:
+-        -16px -14px 30px rgba(255, 255, 255, 0.65),
+-        0 28px 58px rgba(15, 23, 42, 0.16),
+-        0 12px 28px rgba(37, 99, 235, 0.16),
+-        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+-}
+-
+-/* DRAG */
+-.drop-zone.drag-active {
+-    transform: translate3d(0, -2px, 0) scale(1.01);
+-    border-color: #2563eb;
+-    background:
+-        radial-gradient(130% 100% at 12% 2%, rgba(191, 219, 254, 0.4), rgba(191, 219, 254, 0) 56%),
+-        linear-gradient(165deg, rgba(255, 255, 255, 0.97), rgba(239, 246, 255, 0.92));
+-    box-shadow:
+-        -16px -14px 30px rgba(255, 255, 255, 0.68),
+-        0 30px 62px rgba(15, 23, 42, 0.16),
+-        0 14px 34px rgba(37, 99, 235, 0.22),
+-        inset 0 1px 0 rgba(255, 255, 255, 0.92);
+ }
+ 
+-/* UPLOADING */
+-.upload-wrapper:has(#convertProgress:not([hidden])) .status-text {
+-    color: #1e293b;
+-    font-weight: 600;
++.batch-action-copy {
++    color: #475569;
+ }
+ 
+-.upload-wrapper:has(#convertProgress:not([hidden])) .status-text::after {
+-    content: "Please wait...";
+-    display: block;
+-    margin-top: 4px;
++.batch-action-count {
++    font-size: 0.92rem;
+     color: #64748b;
+-    font-size: 0.86rem;
+-    font-weight: 500;
+-}
+-
+-.upload-wrapper:has(#convertProgress:not([hidden])) .progress {
+-    box-shadow:
+-        0 0 0 1px rgba(37, 99, 235, 0.1),
+-        inset 0 1px 0 rgba(255, 255, 255, 0.75);
+-}
+-
+-.upload-wrapper:has(#convertProgress:not([hidden])) .progress-bar {
+-    animation: uploadProgressGlow 1.4s ease-in-out infinite;
+-}
+-
+-/* VALIDATION */
+-.upload-wrapper:has(#convertProgress:not([hidden])) .status-text::before {
+-    content: "File received\AChecking format...\APreparing conversion...";
+-    display: block;
+-    white-space: pre-line;
+-    line-height: 1.45;
+-    max-height: 1.45em;
+-    overflow: hidden;
+-    margin-bottom: 4px;
+-    color: #2563eb;
+-    font-size: 0.83rem;
+-    font-weight: 700;
+-    animation: validationTicker 2.4s steps(3, end) infinite;
++    min-width: 48px;
++    text-align: right;
+ }
+ 
+-/* READY */
+-.upload-wrapper:has(.upload-main.upload-active):has(#conversionArea:not([hidden])) #selectedStatus:not([hidden]) {
+-    border-color: rgba(37, 99, 235, 0.28);
+-    box-shadow:
+-        0 16px 38px rgba(15, 23, 42, 0.08),
+-        0 8px 20px rgba(37, 99, 235, 0.1),
+-        inset 0 1px 0 rgba(255, 255, 255, 0.82);
++.preview-card {
++    width: min(100%, 290px);
++    text-align: center;
++    background: rgba(255, 255, 255, 0.95);
++    border-radius: 26px;
++    padding: 24px;
++    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+ }
+ 
+-.upload-wrapper:has(.upload-main.upload-active):has(#conversionArea:not([hidden])) #selectedStatus:not([hidden])::after {
+-    content: "Ready - Choose output format";
+-    display: inline-flex;
++.preview-media {
++    width: 100%;
++    height: 240px;
++    display: flex;
+     align-items: center;
+     justify-content: center;
+-    margin-left: 8px;
+-    padding: 4px 10px;
+-    border-radius: 999px;
+-    border: 1px solid rgba(22, 163, 74, 0.24);
+-    background: rgba(240, 253, 244, 0.8);
+-    color: #166534;
+-    font-size: 0.78rem;
+-    font-weight: 700;
+-    letter-spacing: 0.01em;
+-}
+-
+-.upload-wrapper:has(.upload-main.upload-active):has(#conversionArea:not([hidden])) #conversionArea h3 {
+-    letter-spacing: -0.015em;
+-}
+-
+-@keyframes validationTicker {
+-    0% {
+-        transform: translate3d(0, 0, 0);
+-    }
+-    34% {
+-        transform: translate3d(0, -1.45em, 0);
+-    }
+-    68%,
+-    100% {
+-        transform: translate3d(0, -2.9em, 0);
+-    }
++    margin-bottom: 18px;
++    border-radius: 22px;
++    background: #f8fafc;
++    overflow: hidden;
+ }
+ 
+-@keyframes uploadProgressGlow {
+-    0%,
+-    100% {
+-        filter: brightness(1);
+-        opacity: 0.92;
+-    }
+-    50% {
+-        filter: brightness(1.12);
+-        opacity: 1;
+-    }
++.preview-media.audio {
++    background: #eef2ff;
+ }
+ 
+-/* Responsive stabilization across required widths */
+-@media (max-width: 1024px) {
+-    .drop-zone {
+-        max-width: 100%;
+-        min-height: 230px;
+-    }
++.preview-media.video {
++    background: #fff7ed;
+ }
+ 
+-@media (max-width: 768px) {
+-    .upload-wrapper::before {
+-        inset: -12px -8px -8px;
+-        opacity: 0.44;
+-    }
+-
+-    .drop-zone-copy::after {
+-        font-size: 0.76rem;
+-    }
+-
+-    .upload-support::after {
+-        font-size: 0.74rem;
+-    }
++.preview-media.pdf {
++    background: #eef9ff;
+ }
+ 
+-@media (max-width: 430px) {
+-    .drop-zone {
+-        min-height: 178px;
+-        padding: 14px 12px;
+-        gap: 12px;
+-    }
+-
+-    .upload-support {
+-        padding-top: 26px;
+-    }
+-
+-    .upload-support::before {
+-        font-size: 0.7rem;
+-        padding: 4px 10px;
+-    }
++.preview-image {
++    width: 100%;
++    height: 100%;
++    display: block;
++    object-fit: cover;
+ }
+ 
+-@media (max-width: 390px) {
+-    .drop-zone {
+-        min-height: 164px;
+-        padding: 12px 10px;
+-    }
+-
+-    .drop-zone-copy h2 {
+-        font-size: 18px;
+-    }
+-
+-    .drop-zone-copy p,
+-    .upload-support,
+-    .upload-support::after {
+-        font-size: 0.78rem;
+-    }
+-
+-    .drop-zone-copy::after {
+-        font-size: 0.72rem;
+-    }
+-
+-    .upload-wrapper:has(.upload-main.upload-active):has(#conversionArea:not([hidden])) #selectedStatus:not([hidden])::after {
+-        margin-top: 6px;
+-        margin-left: 0;
+-    }
++.preview-icon {
++    margin: 0;
++    font-size: 60px;
+ }
+ 
+-@media (max-width: 375px) {
+-    .drop-zone {
+-        min-height: 154px;
+-        gap: 10px;
+-    }
+-
+-    .drop-zone button {
+-        min-width: 126px;
+-        padding: 9px 14px;
+-    }
++.preview-details {
++    display: flex;
++    flex-direction: column;
++    gap: 5px;
++    text-align: center;
+ }
+ 
+-@media (max-width: 360px) {
+-    .drop-zone {
+-        min-height: 148px;
+-        padding: 10px 8px;
+-    }
+-
+-    .drop-zone-copy h2 {
+-        font-size: 17px;
+-    }
+-
+-    .drop-zone-copy p,
+-    .drop-zone-copy::after,
+-    .upload-support,
+-    .upload-support::after {
+-        font-size: 0.72rem;
+-        line-height: 1.45;
+-    }
++.preview-name {
++    font-size: 15px;
++    font-weight: 700;
++    color: #0f172a;
++    word-break: break-word;
+ }
+ 
+-@media (prefers-reduced-motion: reduce) {
+-    .drop-zone,
+-    .drop-zone:hover,
+-    .drop-zone.drag-active,
+-    .upload-wrapper:has(#convertProgress:not([hidden])) .progress-bar,
+-    .upload-wrapper:has(#convertProgress:not([hidden])) .status-text::before {
+-        animation: none !important;
+-        transition: none !important;
+-        transform: none !important;
+-        filter: none !important;
+-    }
+-}
+-
+-/* ================================================
+-   UX-S2-002 ΓÇö Premium Validation Experience
+-   ================================================
+-   Requirements:
+-   - Glass card with reflection
+-   - Sequential checklist (3 steps: received ΓåÆ detected ΓåÆ complete)
+-   - Only transform & opacity for animations
+-   - Collapses smoothly when format options appear
+-   - Consistent with Hero design system
+-   ================================================ */
+-
+-/*
+-   Implementation approach:
+-   Uses #uploadHint element as the validation card container.
+-   #uploadHint is hidden by default (hidden attribute).
+-   When file is selected (upload-main.upload-active) and no formats yet,
+-   we reveal #uploadHint as a premium glass card.
+-   When formats appear (#conversionArea:not([hidden])), the card collapses.
+-   This avoids ::before/::after conflicts on #selectedStatus.
+-*/
+-
+-/* --- Premium File Info Card ΓÇö shown after file selected --- */
+-.upload-main.upload-active .validation-card:not([hidden]) {
+-    display: block !important;
+-    position: relative;
+-    margin: 18px auto 0;
+-    padding: 16px 20px;
+-    max-width: 100%;
+-    border-radius: 22px;
+-    border: 1px solid rgba(37, 99, 235, 0.26);
+-    background:
+-        linear-gradient(156deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.64)),
+-        linear-gradient(138deg, rgba(191, 219, 254, 0.16), rgba(125, 211, 252, 0.12));
+-    box-shadow:
+-        0 18px 40px rgba(15, 23, 42, 0.08),
+-        0 8px 20px rgba(37, 99, 235, 0.08),
+-        inset 0 1px 0 rgba(255, 255, 255, 0.86);
+-    backdrop-filter: blur(8px);
+-    -webkit-backdrop-filter: blur(8px);
+-    overflow: hidden;
++.preview-type,
++.preview-size,
++.preview-status {
++    font-size: 0.95rem;
++    color: #64748b;
+ }
+ 
+-@keyframes validationCardEnter {
+-    0% {
+-        opacity: 0;
+-        transform: translateY(8px);
+-    }
+-    100% {
+-        opacity: 1;
+-        transform: translateY(0);
+-    }
++.preview-status {
++    margin-top: 6px;
++    font-weight: 600;
++    color: #2563eb;
++}
++
++.selected-file,
++.file-ready-card,
++.result-card {
++    border: 1px solid rgba(148, 163, 184, 0.26);
++    background: linear-gradient(165deg, rgba(255, 255, 255, 0.96), rgba(248, 251, 255, 0.92));
++    box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.76);
+ }
+ 
+-/* Animate the card on appear */
+-.upload-main.upload-active .validation-card:not([hidden]) {
++.result-card {
+     opacity: 0;
+-    transform: translateY(8px);
+-    animation: validationCardEnter 300ms ease-out 0.08s forwards;
++    transform: translateY(10px);
++    transition: opacity 300ms ease, transform 300ms ease;
+ }
+ 
+-/* Reflection layer via ::before */
+-.upload-main.upload-active .validation-card:not([hidden])::before {
+-    content: "";
+-    position: absolute;
+-    inset: 0;
+-    border-radius: inherit;
+-    pointer-events: none;
+-    background: linear-gradient(125deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 60%);
+-    opacity: 0.82;
+-    z-index: 0;
++.result-card.download-visible {
++    opacity: 1;
++    transform: translateY(0);
+ }
+ 
+-/* Ensure content sits above reflection */
+-.upload-main.upload-active .validation-card:not([hidden]) > * {
+-    position: relative;
+-    z-index: 1;
++.processing-experience {
++    opacity: 1;
++    transition: opacity 300ms ease, visibility 300ms ease;
+ }
+ 
+-/* File info row: icon | name + size | status badge */
+-.validation-file-row {
+-    display: flex;
+-    align-items: center;
+-    gap: 12px;
+-    margin-bottom: 0;
++.homepage-hero #processingExperience {
++    display: none !important;
+ }
+ 
+-/* File icon */
+-.validation-file-icon {
+-    font-size: 24px;
+-    line-height: 1;
+-    flex-shrink: 0;
+-    width: 44px;
+-    height: 44px;
+-    display: flex;
+-    align-items: center;
+-    justify-content: center;
+-    border-radius: 14px;
+-    background: rgba(37, 99, 235, 0.08);
++.homepage-hero #processingExperience.processing-visible {
++    display: flex !important;
+ }
+ 
+-/* File details (name + size) */
+-.validation-file-info {
+-    flex: 1;
+-    min-width: 0;
++.processing-experience.fade-hidden {
++    opacity: 0;
++    visibility: hidden;
+ }
+ 
+-.validation-file-name {
+-    display: block;
+-    font-size: 0.92rem;
+-    font-weight: 700;
+-    color: #0f172a;
+-    white-space: nowrap;
+-    overflow: hidden;
+-    text-overflow: ellipsis;
+-    line-height: 1.4;
++.processing-experience.fade-visible {
++    opacity: 1;
++    visibility: visible;
+ }
+ 
+-.validation-file-size {
+-    display: block;
+-    font-size: 0.82rem;
++.selected-file {
++    display: flex;
++    flex-wrap: wrap;
++    justify-content: center;
++    gap: 10px;
++    max-width: 690px;
++    margin: 20px auto 0;
++    padding: 16px 22px;
++    border-radius: 18px;
++    color: #334155;
++    font-size: 0.95rem;
++}
++
++.upload-hint {
++    max-width: 620px;
++    margin: 16px auto 0;
++    padding: 0 10px;
+     color: #475569;
+-    font-weight: 600;
+-    margin-top: 2px;
++    font-size: 0.96rem;
++    line-height: 1.7;
++    text-align: center;
+ }
+ 
+-/* "Uploaded" badge */
+-.validation-status-badge {
+-    display: inline-flex;
+-    align-items: center;
++.processing-experience {
++    display: flex;
+     justify-content: center;
+-    flex-shrink: 0;
+-    padding: 3px 10px;
+-    border-radius: 999px;
+-    border: 1px solid rgba(22, 163, 74, 0.22);
+-    background: rgba(240, 253, 244, 0.82);
+-    color: #166534;
+-    font-size: 0.68rem;
+-    font-weight: 700;
+-    letter-spacing: 0.01em;
+-    white-space: nowrap;
+-    line-height: 1.4;
++    margin-top: 18px;
+ }
+ 
+-/* --- Step 2: Validation Checklist --- */
+-.validation-checklist {
+-    display: block;
+-    margin-top: 14px;
+-    padding-top: 14px;
+-    border-top: 1px solid rgba(37, 99, 235, 0.1);
++.processing-card {
++    width: min(100%, 640px);
++    padding: 18px 20px;
++    border-radius: 20px;
++    border: 1px solid rgba(37, 99, 235, 0.14);
++    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 251, 255, 0.94));
++    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+ }
+ 
+-.validation-step {
++.processing-card-head {
+     display: flex;
+     align-items: center;
+-    gap: 8px;
+-    font-size: 0.86rem;
+-    color: #166534;
+-    font-weight: 600;
+-    line-height: 1.55;
+-    opacity: 0;
+-    transform: translateY(3px);
+-}
+-
+-.validation-step + .validation-step {
+-    margin-top: 4px;
++    gap: 12px;
++    margin-bottom: 12px;
+ }
+ 
+-/* Step checkmark icon */
+-.validation-step::before {
+-    content: "Γ£ô";
++.processing-card-icon {
+     display: inline-flex;
+     align-items: center;
+     justify-content: center;
+-    width: 18px;
+-    height: 18px;
+-    border-radius: 999px;
+-    background: rgba(22, 163, 74, 0.12);
+-    color: #16a34a;
+-    font-size: 0.72rem;
+-    font-weight: 800;
+-    flex-shrink: 0;
++    width: 42px;
++    height: 42px;
++    border-radius: 14px;
++    background: rgba(37, 99, 235, 0.08);
++    font-size: 1.1rem;
+ }
+ 
+-/* Step 1: appears immediately */
+-.validation-step:nth-child(1) {
+-    animation: stepFadeIn 220ms ease-out 0.2s forwards;
++.processing-card-copy h3 {
++    margin: 0;
++    font-size: 1rem;
++    color: #0f172a;
+ }
+ 
+-/* Step 2: appears with delay */
+-.validation-step:nth-child(2) {
+-    animation: stepFadeIn 220ms ease-out 0.55s forwards;
++.processing-card-copy p {
++    margin: 4px 0 0;
++    font-size: 0.92rem;
++    color: #64748b;
+ }
+ 
+-/* Step 3: appears with longer delay */
+-.validation-step:nth-child(3) {
+-    animation: stepFadeIn 220ms ease-out 0.9s forwards;
++.processing-progress {
++    width: 100%;
++    height: 8px;
++    border-radius: 999px;
++    overflow: hidden;
++    background: linear-gradient(90deg, rgba(226, 232, 240, 0.84), rgba(203, 213, 225, 0.84));
+ }
+ 
+-@keyframes stepFadeIn {
+-    0% {
+-        opacity: 0;
+-        transform: translateY(3px);
+-    }
+-    100% {
+-        opacity: 1;
+-        transform: translateY(0);
+-    }
++.processing-progress .progress-bar {
++    height: 100%;
++    width: 0;
++    background: linear-gradient(90deg, #2563eb, #0ea5e9);
++    transition: width 320ms cubic-bezier(0.22, 1, 0.36, 1);
+ }
+ 
+-/* --- Step 3: Collapse when format options appear --- */
+-.upload-wrapper:has(#conversionArea:not([hidden])) .validation-card:not([hidden]) {
+-    animation: validationCardCollapse 280ms ease-in forwards;
+-    pointer-events: none;
++.processing-status-list {
++    display: flex;
++    flex-wrap: wrap;
++    gap: 8px;
++    margin-top: 12px;
+ }
+ 
+-@keyframes validationCardCollapse {
+-    0% {
+-        opacity: 1;
+-        transform: translateY(0) scale(1);
+-        max-height: 200px;
+-    }
+-    100% {
+-        opacity: 0;
+-        transform: translateY(-8px) scale(0.97);
+-        max-height: 0;
+-        margin: 0;
+-        padding: 0;
+-        border-width: 0;
+-    }
++.processing-status-item {
++    display: inline-flex;
++    align-items: center;
++    padding: 8px 10px;
++    border-radius: 999px;
++    border: 1px solid rgba(148, 163, 184, 0.2);
++    background: #f8fafc;
++    color: #475569;
++    font-size: 0.84rem;
++    font-weight: 600;
+ }
+ 
+-/* --- Step 4: Conversion area focus transition --- */
+-.upload-wrapper:has(#conversionArea:not([hidden])) #conversionArea {
+-    animation: conversionAreaFadeIn 360ms ease-out 0.12s both;
++.processing-status-item[hidden] {
++    display: none !important;
+ }
+ 
+-@keyframes conversionAreaFadeIn {
+-    0% {
+-        opacity: 0.65;
+-        transform: translateY(8px);
+-    }
+-    100% {
+-        opacity: 1;
+-        transform: translateY(0);
+-    }
++#conversionArea {
++    text-align: left;
++    margin-top: 24px;
++    width: 100%;
++    max-width: 840px;
++    transition: opacity 0.25s ease, visibility 0.25s ease;
+ }
+ 
+-/* Format chips enter with staggered delay */
+-.upload-wrapper:has(#conversionArea:not([hidden])) .format-chip {
+-    opacity: 0;
+-    transform: translateY(8px) scale(0.95);
+-    animation: chipStaggerIn 280ms ease-out forwards;
++#conversionArea h3 {
++    font-size: 1.38rem;
++    margin-bottom: 16px;
++    letter-spacing: -0.02em;
++    color: #0f172a;
+ }
+ 
+-.upload-wrapper:has(#conversionArea:not([hidden])) .format-chip:nth-child(1) { animation-delay: 0.08s; }
+-.upload-wrapper:has(#conversionArea:not([hidden])) .format-chip:nth-child(2) { animation-delay: 0.14s; }
+-.upload-wrapper:has(#conversionArea:not([hidden])) .format-chip:nth-child(3) { animation-delay: 0.2s; }
+-.upload-wrapper:has(#conversionArea:not([hidden])) .format-chip:nth-child(4) { animation-delay: 0.26s; }
+-.upload-wrapper:has(#conversionArea:not([hidden])) .format-chip:nth-child(5) { animation-delay: 0.32s; }
+-.upload-wrapper:has(#conversionArea:not([hidden])) .format-chip:nth-child(6) { animation-delay: 0.38s; }
++#conversionArea .format-instruction {
++    max-width: 720px;
++    margin-bottom: 18px;
++    font-size: 0.96rem;
++    color: #475569;
++}
+ 
+-@keyframes chipStaggerIn {
+-    0% {
++@supports selector(#conversionArea:has(#formatOptions:empty)) {
++    #conversionArea:has(#formatOptions:empty) {
++        display: none;
+         opacity: 0;
+-        transform: translateY(8px) scale(0.95);
+-    }
+-    100% {
+-        opacity: 1;
+-        transform: translateY(0) scale(1);
++        visibility: hidden;
++        height: 0;
++        overflow: hidden;
+     }
+ }
+ 
+-/* --- Responsive adjustments for validation card --- */
+-@media (max-width: 768px) {
+-    .upload-main.upload-active .validation-card:not([hidden]) {
+-        padding: 14px 16px;
+-        border-radius: 18px;
+-    }
+-
+-    .validation-file-icon {
+-        width: 38px;
+-        height: 38px;
+-        font-size: 20px;
+-    }
+-
+-    .validation-file-name {
+-        font-size: 0.86rem;
+-    }
+-
+-    .validation-file-size {
+-        font-size: 0.78rem;
+-    }
+-
+-    .validation-status-badge {
+-        font-size: 0.65rem;
+-        padding: 2px 8px;
+-    }
+-
+-    .validation-step {
+-        font-size: 0.82rem;
+-    }
++.supported-formats {
++    display: flex;
++    justify-content: flex-start;
++    gap: 12px;
++    flex-wrap: wrap;
++    align-items: center;
++    margin-top: 8px;
+ }
+ 
+-@media (max-width: 430px) {
+-    .upload-main.upload-active .validation-card:not([hidden]) {
+-        padding: 12px 14px;
+-        border-radius: 16px;
+-    }
+-
+-    .validation-file-row {
+-        gap: 10px;
+-    }
+-
+-    .validation-file-icon {
+-        width: 34px;
+-        height: 34px;
+-        font-size: 18px;
+-    }
+-
+-    .validation-file-name {
+-        font-size: 0.82rem;
+-    }
+-
+-    .validation-file-size {
+-        font-size: 0.75rem;
+-    }
+-
+-    .validation-status-badge {
+-        font-size: 0.6rem;
+-        padding: 2px 7px;
+-    }
+-
+-    .validation-checklist {
+-        margin-top: 12px;
+-        padding-top: 12px;
+-    }
+-
+-    .validation-step {
+-        font-size: 0.78rem;
+-    }
+-
+-    .validation-step + .validation-step {
+-        margin-top: 3px;
+-    }
+-
+-    .validation-step::before {
+-        width: 16px;
+-        height: 16px;
+-        font-size: 0.65rem;
+-    }
++.format-search {
++    width: 100%;
++    max-width: 420px;
++    margin: 0 0 16px;
++    border: 1px solid rgba(148, 163, 184, 0.22);
++    border-radius: 999px;
++    background: #fff;
++    color: #0f172a;
++    padding: 12px 16px;
++    font-size: 0.95rem;
++    box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.05);
+ }
+ 
+-@media (max-width: 390px) {
+-    .upload-main.upload-active .validation-card:not([hidden]) {
+-        padding: 10px 12px;
+-    }
+-
+-    .validation-file-icon {
+-        width: 30px;
+-        height: 30px;
+-        font-size: 16px;
+-    }
+-
+-    .validation-file-name {
+-        font-size: 0.78rem;
+-    }
+-
+-    .validation-file-size {
+-        font-size: 0.72rem;
+-    }
+-
+-    .validation-status-badge {
+-        font-size: 0.58rem;
+-        padding: 1px 6px;
+-    }
+-
+-    .validation-step {
+-        font-size: 0.75rem;
+-    }
+-
+-    .validation-step::before {
+-        width: 14px;
+-        height: 14px;
+-        font-size: 0.6rem;
+-    }
++.format-chip {
++    display: inline-flex;
++    align-items: center;
++    justify-content: flex-start;
++    gap: 10px;
++    padding: 14px 20px;
++    border-radius: 16px;
++    background: linear-gradient(180deg, #ffffff, #f8fafc);
++    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
++    border: 1px solid rgba(37, 99, 235, 0.1);
++    position: relative;
++    min-width: 130px;
++    color: #2563eb;
++    font-size: 0.94rem;
++    font-weight: 700;
++    cursor: pointer;
++    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease, background 180ms ease;
++    white-space: nowrap;
+ }
+ 
+-@media (max-width: 375px) {
+-    .upload-main.upload-active .validation-card:not([hidden]) {
+-        padding: 8px 10px;
+-    }
+-
+-    .validation-file-icon {
+-        width: 26px;
+-        height: 26px;
+-        font-size: 14px;
+-    }
+-
+-    .validation-file-name {
+-        font-size: 0.74rem;
+-    }
+-
+-    .validation-file-size {
+-        font-size: 0.7rem;
+-    }
+-
+-    .validation-status-badge {
+-        font-size: 0.55rem;
+-        padding: 1px 5px;
+-    }
+-
+-    .validation-step {
+-        font-size: 0.72rem;
+-    }
++.format-chip-icon {
++    display: inline-flex;
++    align-items: center;
++    justify-content: center;
++    width: 1.6rem;
++    height: 1.6rem;
++    border-radius: 999px;
++    background: rgba(37, 99, 235, 0.12);
++    color: inherit;
++    font-size: 0.95rem;
++    flex-shrink: 0;
+ }
+ 
+-@media (max-width: 360px) {
+-    .upload-main.upload-active .validation-card:not([hidden]) {
+-        padding: 8px 8px;
+-        border-radius: 14px;
+-    }
+-
+-    .validation-file-icon {
+-        width: 24px;
+-        height: 24px;
+-        font-size: 13px;
+-    }
+-
+-    .validation-file-name {
+-        font-size: 0.72rem;
+-    }
+-
+-    .validation-step {
+-        font-size: 0.7rem;
+-    }
++.format-chip:hover {
++    background: #2563eb;
++    color: #fff;
++    transform: translateY(-1px);
+ }
+ 
+-/* --- Accessibility: prefers-reduced-motion --- */
+-@media (prefers-reduced-motion: reduce) {
+-    .upload-main.upload-active .validation-card:not([hidden]),
+-    .upload-wrapper:has(#conversionArea:not([hidden])) .validation-card:not([hidden]),
+-    .upload-wrapper:has(#conversionArea:not([hidden])) #conversionArea,
+-    .upload-wrapper:has(#conversionArea:not([hidden])) .format-chip,
+-    .validation-step {
+-        animation: none !important;
+-        transition: none !important;
+-        transform: none !important;
+-        opacity: 1 !important;
+-    }
++.format-chip.active {
++    background: #2563eb;
++    color: white;
++    box-shadow: 0 14px 32px rgba(37, 99, 235, 0.18);
++}
+ 
+-    .upload-wrapper:has(#conversionArea:not([hidden])) .validation-card:not([hidden]) {
+-        max-height: none;
+-        margin: 18px auto 0;
+-        padding: 16px 20px;
+-        border-width: 1px;
+-    }
++.format-chip.active .format-chip-icon {
++    background: rgba(255, 255, 255, 0.18);
+ }
+ 
+-/* UI-S1-003 Premium Motion */
+-.drop-zone {
+-    will-change: transform, opacity;
+-    animation: uploadBreath 6.5s ease-in-out infinite;
++.format-chip {
++    display: inline-flex;
++    align-items: center;
++    justify-content: flex-start;
++    gap: 8px;
++    padding: 12px 18px;
++    border-radius: 14px;
++    background: linear-gradient(180deg, #ffffff, #f8fafc);
++    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
++    border: 1px solid rgba(37, 99, 235, 0.08);
++    position: relative;
++    min-width: 120px;
++    color: #2563eb;
++    font-size: 13px;
++    font-weight: 700;
++    cursor: pointer;
++    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease, background 180ms ease;
++    white-space: nowrap;
+ }
+ 
+-.upload-icon {
+-    will-change: transform, opacity;
+-    animation: floatingFile 5.8s ease-in-out infinite;
+-    transform-origin: 50% 58%;
++.format-chip-icon {
++    display: inline-flex;
++    align-items: center;
++    justify-content: center;
++    width: 1.5rem;
++    height: 1.5rem;
++    border-radius: 999px;
++    background: rgba(37, 99, 235, 0.08);
++    color: inherit;
++    font-size: 0.95rem;
++    flex-shrink: 0;
+ }
+ 
+-.drop-zone.drag-active .upload-icon {
+-    animation-duration: 3.4s;
++.format-chip-label {
++    font-weight: 700;
++    letter-spacing: 0.01em;
+ }
+ 
+-.drop-zone.drag-active {
+-    animation: dragPulse 2.6s ease-in-out infinite;
++.format-chip.active .format-chip-icon {
++    background: rgba(255, 255, 255, 0.18);
++    color: #fff;
+ }
+ 
+-.status-text.success,
+-.result-status {
+-    will-change: transform, opacity;
+-    animation: successBreath 2.8s ease-in-out 2;
++.format-chip::before,
++.format-chip::after {
++    content: none;
+ }
+ 
+-@keyframes floatingFile {
+-    0%,
+-    100% {
+-        opacity: 0.92;
+-        transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+-    }
+-    30% {
+-        opacity: 1;
+-        transform: translate3d(0, -4px, 0) rotate(-2deg) scale(1.02);
+-    }
+-    60% {
+-        opacity: 0.98;
+-        transform: translate3d(0, -6px, 0) rotate(1.5deg) scale(1.02);
+-    }
++.format-chip:hover {
++    background: #2563eb;
++    color: white;
++    transform: translateY(-1px);
+ }
+ 
+-@keyframes uploadBreath {
+-    0%,
+-    100% {
+-        transform: translate3d(0, 0, 0) scale(1);
+-    }
+-    50% {
+-        transform: translate3d(0, -1px, 0) scale(1.005);
+-    }
++.format-chip.active {
++    background: #2563eb;
++    color: white;
++    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.18);
+ }
+ 
+-@keyframes dragPulse {
+-    0%,
+-    100% {
+-        transform: translate3d(0, -2px, 0) scale(1.005);
+-    }
+-    50% {
+-        transform: translate3d(0, -3px, 0) scale(1.01);
+-    }
++.recommendation-card {
++    display: flex;
++    gap: 12px;
++    align-items: center;
++    padding: 14px;
++    border-radius: 14px;
++    background: linear-gradient(180deg, #ffffff, #f8fafc);
++    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
++    border: 1px solid rgba(148, 163, 184, 0.06);
+ }
+ 
+-@keyframes successBreath {
+-    0% {
+-        opacity: 0.7;
+-        transform: translate3d(0, 1px, 0) scale(0.995);
+-    }
+-    100% {
+-        opacity: 1;
+-        transform: translate3d(0, 0, 0) scale(1);
+-    }
++.recommendation-card .meta {
++    display: flex;
++    flex-direction: column;
++    gap: 4px;
+ }
+ 
+-@media (prefers-reduced-motion: reduce) {
+-    .drop-zone,
+-    .upload-icon,
+-    .drop-zone.drag-active,
+-    .status-text.success,
+-    .result-status {
+-        animation: none !important;
+-        transform: none !important;
+-        opacity: 1;
+-    }
++.recommendation-card .cta {
++    margin-left: auto;
++    padding: 8px 12px;
++    border-radius: 10px;
++    background: linear-gradient(90deg, #2563eb, #3b82f6);
++    color: #fff;
++    font-weight: 800;
++    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.12);
++    align-self: center;
+ }
+ 
+-.file-ready-card {
+-    width:min(100%, 720px);
+-    margin:20px auto 0;
+-    padding:18px 20px;
+-    border-radius:22px;
+-    background:#ffffff;
+-    border:1px solid rgba(37,99,235,.15);
+-    box-shadow:0 18px 36px rgba(15,23,42,.04);
+-    transition:transform .2s ease, box-shadow .2s ease;
++.rating-badge {
++    background: linear-gradient(180deg, #fef3c7, #fde68a);
++    color: #92400e;
++    padding: 6px 10px;
++    border-radius: 999px;
++    font-weight: 700;
++    box-shadow: 0 6px 14px rgba(249, 115, 22, 0.08);
+ }
+ 
+-.file-ready-card:hover {
+-    transform:translateY(-1px);
+-    box-shadow:0 22px 44px rgba(15,23,42,.06);
++.recommendation-card .rec-icon {
++    width: 44px;
++    height: 44px;
++    display: inline-flex;
++    align-items: center;
++    justify-content: center;
++    border-radius: 10px;
++    background: linear-gradient(90deg, #eef2ff, #e0f2fe);
++    color: #1e3a8a;
++    font-size: 18px;
+ }
+ 
+-.file-ready-row {
+-    display:flex;
+-    align-items:center;
+-    justify-content:space-between;
+-    gap:16px;
+-    flex-wrap:wrap;
++.recommendation-card .meta .title {
++    font-weight: 800;
++    color: #0f172a;
++    font-size: 14px;
+ }
+ 
+-.file-symbol {
+-    font-size:28px;
+-    width:44px;
+-    height:44px;
+-    display:flex;
+-    align-items:center;
+-    justify-content:center;
+-    border-radius:14px;
+-    background:rgba(37,99,235,.08);
++.recommendation-card .meta .subtitle {
++    font-size: 12px;
++    color: #667085;
+ }
+ 
+-.file-meta {
+-    flex:1 1 220px;
+-    min-width:180px;
++#convertButton {
++    margin-top: 0;
+ }
+ 
+-.file-name,
+-.preview-name {
+-    display:block;
+-    font-size:15px;
+-    font-weight:700;
+-    color:#0f172a;
++#convertButton:disabled {
++    opacity: 0.65;
++    cursor: not-allowed;
+ }
+ 
+-.file-type,
+-.preview-type,
+-.file-size,
+-.preview-size {
+-    display:block;
+-    font-size:0.95rem;
+-    color:#475569;
+-}
+-
+-.file-status {
+-    margin-top:10px;
+-    font-size:0.95rem;
+-    font-weight:700;
+-    color:#2563eb;
+-}
+-
+-.result-card,
+-.error-card {
+-    width:min(100%, 720px);
+-    margin:18px auto 0;
+-    padding:22px;
+-    border-radius:28px;
+-    background:
+-        radial-gradient(120% 100% at 0% 0%, rgba(37,99,235,.14), rgba(37,99,235,0) 42%),
+-        linear-gradient(165deg, rgba(255,255,255,.98), rgba(248,251,255,.9));
+-    border:1px solid rgba(37,99,235,.18);
+-    box-shadow:
+-        0 22px 48px rgba(15,23,42,.12),
+-        0 10px 24px rgba(37,99,235,.1),
+-        inset 0 1px 0 rgba(255,255,255,.82);
+-    display:flex;
+-    flex-direction:column;
+-    gap:16px;
+-    text-align:left;
+-    position:relative;
+-    overflow:hidden;
+-    backdrop-filter: blur(12px);
+-    -webkit-backdrop-filter: blur(12px);
++.btn.loading {
++    opacity: 0.9;
++    pointer-events: none;
+ }
+ 
+-.result-card::before,
+-.result-card::after {
+-    content:"";
+-    position:absolute;
+-    pointer-events:none;
+-    border-radius:inherit;
++.conversion-actions {
++    display: flex;
++    flex-direction: row;
++    gap: 16px;
++    margin: 22px auto 0;
++    align-items: center;
++    justify-content: space-between;
++    padding: 18px 22px;
++    border-radius: 22px;
++    border: 1px solid rgba(37, 99, 235, 0.16);
++    background: rgba(255, 255, 255, 0.95);
++    box-shadow: 0 22px 46px rgba(15, 23, 42, 0.12);
++    position: relative;
++    width: min(100%, 760px);
++    min-height: 170px;
+ }
+ 
+-.result-card::before {
+-    inset:0;
+-    background: linear-gradient(135deg, rgba(255,255,255,.72), rgba(255,255,255,0) 38%);
+-    opacity:.9;
+-}
+-
+-.result-card::after {
+-    inset:auto auto 14px 14px;
+-    width:72px;
+-    height:72px;
+-    background: radial-gradient(circle, rgba(59,130,246,.18), rgba(59,130,246,0) 70%);
+-    filter: blur(2px);
+-    opacity:.9;
+-}
+-
+-.result-status,
+-.error-title {
+-    font-size:18px;
+-    font-weight:700;
+-    color:var(--text);
+-    position:relative;
+-    z-index:1;
++.conversion-summary {
++    display: flex;
++    flex-direction: column;
++    min-width: 0;
++    gap: 4px;
+ }
+ 
+-.error-card {
+-    border-color:rgba(220,38,38,.18);
++.conversion-summary-label {
++    font-size: 0.75rem;
++    font-weight: 700;
++    color: #64748b;
++    letter-spacing: 0.08em;
++    text-transform: uppercase;
+ }
+ 
+-.error-message {
+-    margin:0;
+-    color:#475569;
+-    line-height:1.7;
++.conversion-summary-value {
++    font-size: 1rem;
++    font-weight: 800;
++    color: #0f172a;
+ }
+ 
+-.result-file-name {
+-    color:#0f172a;
+-    font-size:18px;
+-    font-weight:700;
+-    line-height:1.35;
+-    word-break:break-word;
+-    position:relative;
+-    z-index:1;
++#convertButton {
++    min-width: 150px;
++    padding: 12px 22px;
++    border-radius: 999px;
+ }
+ 
+-.result-summary,
+-.result-actions,
+-.error-card .btn {
+-    position:relative;
+-    z-index:1;
++.status-text {
++    min-height: 50px;
++    color: #334155;
++    font-size: 0.95rem;
++    line-height: 1.5;
++    position: relative;
++    width: 100%;
++    max-width: 560px;
++    margin: 0 auto;
++    border-radius: 14px;
++    padding: 12px 14px;
++    background: rgba(248, 250, 255, 0.9);
++    border: 1px solid rgba(148, 163, 184, 0.24);
+ }
+ 
+-.result-summary {
+-    display:flex;
+-    flex-direction:column;
+-    gap:14px;
++.download-btn {
++    margin-top: 10px;
++    width: max-content;
++    align-self: center;
+ }
+ 
+-.result-metadata {
+-    display:grid;
+-    grid-template-columns: repeat(3, minmax(0, 1fr));
+-    gap:12px;
+-    margin:0;
++.status-text {
++    min-height: 24px;
++    color: #334155;
++    font-size: 0.95rem;
++    line-height: 1.5;
++    position: relative;
++    width: 100%;
++    max-width: 620px;
++    margin: 0 auto;
++    min-height: 46px;
++    border-radius: 12px;
++    padding: 10px 12px;
++    background: rgba(255, 255, 255, 0.72);
++    border: 1px solid rgba(148, 163, 184, 0.24);
+ }
+ 
+-.result-metadata-item {
+-    margin:0;
+-    padding:12px 14px;
+-    border-radius:18px;
+-    border:1px solid rgba(148,163,184,.22);
+-    background:rgba(255,255,255,.68);
+-    box-shadow:inset 0 1px 0 rgba(255,255,255,.72);
++.status-text.success {
++    color: #16a34a;
++    font-weight: 700;
+ }
+ 
+-.result-metadata-item dt {
+-    margin:0 0 4px;
+-    color:#1d4ed8;
+-    font-size:.76rem;
+-    font-weight:700;
+-    letter-spacing:.02em;
+-    text-transform:uppercase;
++.status-text.success::before {
++    content: "Γ£ô ";
++    font-weight: 800;
+ }
+ 
+-.result-metadata-item dd {
+-    margin:0;
+-    color:#0f172a;
+-    font-size:.95rem;
+-    font-weight:600;
+-    line-height:1.45;
+-    word-break:break-word;
++.status-text.error {
++    color: #dc2626;
+ }
+ 
+-.result-actions {
+-    display:flex;
+-    flex-wrap:wrap;
+-    gap:12px;
+-    align-items:center;
++.download-btn {
++    margin-top: 10px;
++    width: max-content;
++    align-self: center;
+ }
+ 
+-.result-card .download-btn {
+-    width:max-content;
+-    min-width:220px;
+-    justify-content:center;
+-    padding-inline:18px;
+-    background:linear-gradient(180deg, #3b82f6, #2563eb 58%, #1d4ed8);
+-    border-color:rgba(14,53,143,.26);
+-    box-shadow:0 16px 34px rgba(37,99,235,.28), inset 0 1px 0 rgba(255,255,255,.36);
+-    position:relative;
+-    z-index:1;
++.progress {
++    width: 260px;
++    height: 8px;
++    background: linear-gradient(90deg, rgba(226, 232, 240, 0.84), rgba(203, 213, 225, 0.84));
++    border-radius: 20px;
++    margin: 20px auto;
++    overflow: hidden;
+ }
+ 
+-.result-card .download-btn::before {
+-    content:"Γ¼ç";
+-    margin-right:10px;
+-    font-size:1rem;
+-    line-height:1;
++.progress-bar {
++    height: 100%;
++    width: 0;
++    background: linear-gradient(90deg, #2563eb, #0ea5e9);
++    transition: width 320ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 200ms ease;
++    box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.12), 0 6px 16px rgba(14, 165, 233, 0.18);
+ }
+ 
+-.result-card .download-btn:hover:not(:disabled) {
+-    box-shadow:0 20px 40px rgba(37,99,235,.32), inset 0 1px 0 rgba(255,255,255,.4);
++.progress.success .progress-bar {
++    background: linear-gradient(90deg, #10b981, #34d399);
++    box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.12), 0 6px 16px rgba(16, 185, 129, 0.12);
+ }
+ 
+-.result-card .download-btn:focus-visible {
+-    box-shadow:
+-        0 0 0 4px rgba(37,99,235,.22),
+-        0 20px 40px rgba(37,99,235,.32),
+-        inset 0 1px 0 rgba(255,255,255,.4);
++#downloadBtn[hidden],
++.progress[hidden] {
++    display: none !important;
+ }
+ 
+-.result-secondary-btn {
+-    min-width: 180px;
+-    justify-content:center;
+-    border:1px solid rgba(37,99,235,.2);
+-    background:rgba(255,255,255,.72);
+-    color:#1d4ed8;
+-    box-shadow:0 10px 22px rgba(15,23,42,.08), inset 0 1px 0 rgba(255,255,255,.78);
++@keyframes uploadStateReveal {
++    from {
++        opacity: 0;
++        transform: translateY(5px);
++    }
++    to {
++        opacity: 1;
++        transform: translateY(0);
++    }
+ }
+ 
+-.result-secondary-btn:hover:not(:disabled) {
+-    background:rgba(239,246,255,.94);
+-    box-shadow:0 14px 28px rgba(37,99,235,.14), inset 0 1px 0 rgba(255,255,255,.84);
++@keyframes conversionSpinner {
++    from {
++        transform: rotate(0deg);
++    }
++    to {
++        transform: rotate(360deg);
++    }
+ }
+ 
+-.result-secondary-btn:focus-visible {
+-    box-shadow:
+-        0 0 0 4px rgba(37,99,235,.18),
+-        0 14px 28px rgba(37,99,235,.14),
+-        inset 0 1px 0 rgba(255,255,255,.84);
++@keyframes conversionCardLift {
++    from {
++        opacity: 0;
++        transform: translate3d(0, 6px, 0);
++    }
++    to {
++        opacity: 1;
++        transform: translate3d(0, 0, 0);
++    }
+ }
+ 
+-@media(max-width: 768px) {
++@media (prefers-reduced-motion: reduce) {
++    *, *::before, *::after {
++        animation-duration: 0.01ms !important;
++        animation-iteration-count: 1 !important;
++        transition-duration: 0.01ms !important;
++        scroll-behavior: auto !important;
++    }
++
++    .upload-card,
++    .drop-zone,
++    .upload-icon,
++    .drop-zone button,
++    .progress-bar,
++    .format-chip,
++    #convertButton,
++    .download-btn,
++    #selectedStatus:not([hidden]),
+     .file-ready-card,
+-    .result-card,
+-    .error-card {
+-        width:100%;
+-        padding:18px;
++    .status-text.success,
++    .result-card {
++        transition: none !important;
++        animation: none !important;
++        transform: none !important;
+     }
++}
+ 
+-    .file-ready-row {
+-        flex-direction:column;
+-        align-items:flex-start;
++@media (max-width: 780px) {
++    .upload-card {
++        padding: 16px;
++        border-radius: 24px;
+     }
+ 
+-    .result-metadata {
+-        grid-template-columns: 1fr;
++    .upload-main {
++        gap: 16px;
+     }
+ 
+-    .result-card .download-btn,
+-    .result-secondary-btn {
+-        width:100%;
+-        min-width:0;
++    .drop-zone {
++        min-height: 214px;
++        padding: 18px 16px;
++        border-radius: 22px;
++        gap: 12px;
+     }
+-}
+ 
+-.selected-file strong {
+-    font-size:15px;
+-}
++    .upload-icon {
++        width: 72px;
++        height: 72px;
++        margin-bottom: 10px;
++    }
+ 
+-/*
+-================================
+-CONVERSION AREA
+-================================
+-*/
++    .drop-zone-copy h2 {
++        font-size: 1.02rem;
++        line-height: 1.35;
++    }
+ 
+-#conversionArea {
+-    text-align:center;
+-    margin-top:22px;
+-    transition:opacity .25s ease, visibility .25s ease;
+-}
++    .drop-zone-copy p,
++    .upload-support {
++        font-size: 0.9rem;
++    }
+ 
+-#conversionArea h3 {
+-    font-size:22px;
+-    margin-bottom:18px;
+-}
++    .drop-zone button {
++        min-width: 0;
++        width: 100%;
++        max-width: 220px;
++        padding: 12px 16px;
++    }
+ 
+-@supports selector(#conversionArea:has(#formatOptions:empty)) {
+-    #conversionArea:has(#formatOptions:empty) {
+-        display:none;
+-        opacity:0;
+-        visibility:hidden;
+-        height:0;
+-        overflow:hidden;
++    .file-list-panel {
++        max-height: 320px;
++        border-radius: 20px;
+     }
+-}
+ 
+-/*
+-================================
+-FORMAT BUTTON
+-================================
+-*/
++    .file-list {
++        padding: 12px 12px 0;
++        gap: 10px;
++    }
+ 
+-.supported-formats {
+-    display:flex;
+-    justify-content:center;
+-    gap:12px;
+-    flex-wrap:wrap;
+-    align-items:center;
+-}
++    .file-list-heading {
++        padding-bottom: 8px;
++        font-size: 0.92rem;
++    }
+ 
+-.format-chip {
+-    border:1px solid #2563eb;
+-    background:#ffffff;
+-    color:#2563eb;
+-    padding:8px 14px;
+-    border-radius:12px;
+-    font-size:13px;
+-    font-weight:700;
+-    cursor:pointer;
+-    transition:.15s ease;
+-    white-space:nowrap;
+-}
++    .file-item {
++        padding: 10px 0 8px;
++    }
+ 
+-.format-chip:hover {
+-    background:#2563eb;
+-    color:white;
+-    transform:translateY(-2px);
+-}
++    .file-item-main {
++        flex-direction: column;
++        align-items: stretch;
++    }
+ 
+-.format-chip.active {
+-    background:#2563eb;
+-    color:white;
+-    box-shadow: 0 8px 20px rgba(37,99,235,.25);
+-}
++    .file-item-actions {
++        margin-left: 0;
++        width: 100%;
++        flex-wrap: wrap;
++    }
+ 
+-/*
+-================================
+-CONVERT BUTTON
+-================================
+-*/
++    .file-output-field {
++        flex: 1 1 100%;
++        justify-content: space-between;
++    }
+ 
+-#convertButton {
+-    margin-top:22px;
+-}
++    .file-gear-btn,
++    .file-remove-btn {
++        width: 40px;
++        height: 40px;
++        border-radius: 12px;
++        font-size: 1rem;
++    }
+ 
+-#convertButton:disabled {
+-    opacity:.6;
+-    cursor:not-allowed;
+-}
++    .file-list-footer {
++        flex-direction: column;
++        align-items: stretch;
++    }
+ 
+-.btn.loading {
+-    opacity:0.9;
+-    pointer-events:none;
+-}
++    .supported-formats {
++        justify-content: flex-start;
++        gap: 8px;
++    }
+ 
+-.conversion-actions {
+-    display:flex;
+-    flex-direction:column;
+-    gap:16px;
+-    margin-top:18px;
+-    align-items:center;
+-}
++    .format-search {
++        width: 100%;
++        padding: 12px 14px;
++        border-radius: 14px;
++        margin-bottom: 10px;
++        font-size: 0.95rem;
++    }
+ 
+-.status-text {
+-    min-height:24px;
+-    color:#334155;
+-    font-size:0.95rem;
+-    line-height:1.5;
+-}
++    .format-chip {
++        min-width: 0;
++        flex: 1 1 calc(50% - 4px);
++        justify-content: flex-start;
++        padding: 11px 12px;
++        border-radius: 14px;
++        transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease, background 180ms ease;
++    }
+ 
+-.status-text.success {
+-    color:#16a34a;
+-}
++    .format-chip-icon {
++        width: 1.75rem;
++        height: 1.75rem;
++        font-size: 0.95rem;
++    }
+ 
+-.status-text.error {
+-    color:#dc2626;
+-}
++    .conversion-actions {
++        position: sticky;
++        bottom: max(10px, env(safe-area-inset-bottom));
++        z-index: 20;
++        display: flex;
++        align-items: center;
++        justify-content: space-between;
++        gap: 10px;
++        margin-top: 14px;
++        padding: 10px 12px;
++        border-radius: 18px;
++        border: 1px solid rgba(37, 99, 235, 0.14);
++        background: rgba(255, 255, 255, 0.96);
++        box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
++        backdrop-filter: blur(10px);
++        -webkit-backdrop-filter: blur(10px);
++    }
++
++    .conversion-summary {
++        display: flex;
++        flex-direction: column;
++        gap: 2px;
++        min-width: 0;
++    }
++
++    .conversion-summary-label {
++        font-size: 0.73rem;
++        font-weight: 700;
++        color: #64748b;
++        text-transform: uppercase;
++        letter-spacing: 0.06em;
++    }
++
++    .conversion-summary-value {
++        font-size: 0.95rem;
++        font-weight: 800;
++        color: #0f172a;
++    }
++
++    #convertButton {
++        margin-top: 0;
++        padding: 11px 16px;
++        min-width: 122px;
++        border-radius: 999px;
++    }
++
++    .selected-file,
++    .upload-hint {
++        margin-top: 14px;
++        padding: 12px 14px;
++        font-size: 0.9rem;
++    }
+ 
+-.download-btn {
+-    margin-top:10px;
+-    width:max-content;
+-    align-self:center;
+-}
++    #conversionArea {
++        margin-top: 16px;
++    }
+ 
+-/*
+-================================
+-PROGRESS
+-================================
+-*/
++    #conversionArea h3 {
++        font-size: 1.1rem;
++        margin-bottom: 12px;
++    }
+ 
+-.progress {
+-    width:260px;
+-    height:8px;
+-    background:#e5e7eb;
+-    border-radius:20px;
+-    margin:20px auto;
+-    overflow:hidden;
+-}
++    .format-instruction {
++        font-size: 0.92rem;
++        margin-bottom: 10px;
++    }
+ 
+-.progress-bar {
+-    height:100%;
+-    width:0;
+-    background:#2563eb;
+-    transition:.3s;
++    .status-text {
++        font-size: 0.9rem;
++    }
+ }
+ 
+ @media (max-width: 480px) {
+     .upload-wrapper {
+-        margin-top:0;
+-        padding-bottom:20px;
++        margin-top: 0;
++        padding-bottom: 20px;
+     }
+ 
+     .upload-main {
+-        flex-direction:column;
+-        align-items:stretch;
+-        gap:16px;
++        flex-direction: column;
++        align-items: stretch;
++        gap: 18px;
+     }
+ 
+     .drop-zone {
+-        width:100%;
+-        max-width:100%;
+-        min-height:180px;
+-        height:auto;
+-        padding:16px 12px;
++        width: 100%;
++        max-width: 100%;
++        min-height: 200px;
++        height: auto;
++        padding: 20px 16px;
+     }
+ 
+     .drop-zone h2 {
+-        font-size:20px;
++        font-size: 20px;
+     }
+ 
+     .drop-zone p {
+-        font-size:14px;
+-        margin-bottom:14px;
++        font-size: 14px;
++        margin-bottom: 14px;
+     }
+ 
+     .preview-container:not([hidden]) {
+-        display:flex;
+-        justify-content:center;
++        display: flex;
++        justify-content: center;
+     }
+ 
+     .preview-card {
+-        width:min(100%, 240px);
++        width: min(100%, 240px);
+     }
+ 
+     .preview-media {
+-        width:min(100%, 240px);
+-        height:220px;
+-        margin:0 auto;
++        width: min(100%, 240px);
++        height: 220px;
++        margin: 0 auto;
+     }
+ 
+     .supported-formats {
+-        gap:8px;
++        gap: 8px;
+     }
+ 
+     .format-chip {
+-        min-height:44px;
+-        padding:10px 12px;
+-        font-size:12px;
++        min-height: 44px;
++        padding: 10px 12px;
++        font-size: 12px;
+     }
+ 
+     .conversion-actions {
+-        width:100%;
+-        gap:12px;
++        width: 100%;
++        gap: 12px;
+     }
+ 
+     .download-btn {
+-        width:100%;
+-        max-width:280px;
++        width: 100%;
++        max-width: 280px;
+     }
+ 
+     .progress {
+-        width:min(100%, 260px);
++        width: min(100%, 260px);
+     }
+ }
+ 
+-/*
+-================================
+-HIDDEN STATE
+-================================
+-*/
++@media (max-width: 390px) {
++    .homepage-hero .homepage-upload-card .drop-zone {
++        min-height: 170px;
++        padding: 14px 10px;
++        gap: 12px;
++    }
+ 
+-#downloadBtn[hidden] {
+-    display:none !important;
+-}
++    .homepage-hero .homepage-upload-card .drop-zone button {
++        width: auto;
++        max-width: 100%;
++        min-width: 0;
++        padding: 9px 16px;
++        font-size: 0.9rem;
++    }
+ 
+-.progress[hidden] {
+-    display:none !important;
++    .homepage-hero .homepage-upload-card .drop-zone h2 {
++        font-size: 18px;
++    }
++
++    .homepage-hero .homepage-upload-card .drop-zone p {
++        font-size: 13px;
++        margin-bottom: 10px;
++    }
++
++    .homepage-hero .homepage-upload-card .drop-zone .upload-icon {
++        font-size: 32px;
++        margin-bottom: 6px;
++    }
++
++    .homepage-hero .homepage-upload-card .drop-zone .upload-support {
++        font-size: 0.82rem;
++        max-width: 260px;
++    }
++
++    .homepage-hero .homepage-upload-card .drop-zone button {
++        min-width: 130px;
++        padding: 9px 16px;
++        font-size: 0.9rem;
++    }
+ }
+ 
+-/*
+-================================
+-MOBILE
+-================================
+-*/
++@media (max-width: 360px) {
++    .homepage-hero .homepage-upload-card .drop-zone {
++        min-height: 150px;
++        padding: 10px 8px;
++        gap: 8px;
++    }
++
++    .homepage-hero .homepage-upload-card .drop-zone button {
++        width: auto;
++        max-width: 100%;
++        min-width: 0;
++        padding: 8px 12px;
++        font-size: 0.85rem;
++    }
++
++    .homepage-hero .homepage-upload-card .drop-zone h2 {
++        font-size: 16px;
++        margin-bottom: 6px;
++    }
++
++    .homepage-hero .homepage-upload-card .drop-zone p {
++        font-size: 12px;
++        margin-bottom: 8px;
++    }
++
++    .homepage-hero .homepage-upload-card .drop-zone .upload-icon {
++        font-size: 28px;
++        margin-bottom: 4px;
++    }
+ 
+-@media(max-width:900px){
++    .homepage-hero .homepage-upload-card .drop-zone .upload-support {
++        font-size: 0.78rem;
++        max-width: 220px;
++    }
++
++    .homepage-hero .homepage-upload-card .drop-zone button {
++        min-width: 110px;
++        padding: 8px 12px;
++        font-size: 0.85rem;
++    }
++}
+ 
++@media (max-width: 900px) {
+     .upload-main {
+-        flex-direction:column;
+-        align-items:center;
+-        gap:25px;
++        flex-direction: column;
++        align-items: center;
++        gap: 20px;
+     }
+ 
+     .drop-zone {
+-        width:90%;
+-        max-width:420px;
++        width: min(100%, 440px);
++        max-width: 100%;
+     }
+ 
+     .preview-card {
+-        width:220px;
++        width: 220px;
+     }
+ 
+     .preview-media {
+-        width:220px;
+-        height:220px;
++        width: 220px;
++        height: 220px;
+     }
+ 
+     .preview-image {
+-        width:100%;
+-        height:100%;
++        width: 100%;
++        height: 100%;
+     }
+ 
+     .supported-formats {
+-        gap:10px;
++        gap: 10px;
+     }
+ 
+     .download-btn {
+-        align-self:center;
++        align-self: center;
++    }
++}
++
++.upload-wrapper:has(.drop-zone.is-converting) #selectedStatus:not([hidden]) {
++    position: relative;
++    display: grid;
++    grid-template-columns: 44px minmax(0, 1fr);
++    align-items: center;
++    gap: 10px;
++    text-align: left;
++    border: 1px solid rgba(37, 99, 235, 0.28);
++    background:
++        radial-gradient(120% 90% at 10% 0%, rgba(191, 219, 254, 0.34), rgba(191, 219, 254, 0) 58%),
++        linear-gradient(166deg, rgba(255, 255, 255, 0.95), rgba(246, 250, 255, 0.88));
++    box-shadow:
++        0 20px 44px rgba(15, 23, 42, 0.12),
++        0 8px 20px rgba(37, 99, 235, 0.12),
++        inset 0 1px 0 rgba(255, 255, 255, 0.84);
++    opacity: 1;
++    transform: translate3d(0, -2px, 0);
++}
++
++.upload-wrapper:has(.drop-zone.is-converting) #selectedStatus:not([hidden])::before {
++    content: "≡ƒôä";
++    width: 44px;
++    height: 44px;
++    border-radius: 14px;
++    display: flex;
++    align-items: center;
++    justify-content: center;
++    font-size: 22px;
++    background: rgba(37, 99, 235, 0.12);
++    border: 1px solid rgba(37, 99, 235, 0.22);
++}
++
++.upload-wrapper:has(.drop-zone.is-converting) #selectedStatus:not([hidden])::after {
++    content: "Converting file";
++    grid-column: 2;
++    color: #1d4ed8;
++    font-size: 0.8rem;
++    font-weight: 700;
++    letter-spacing: 0.01em;
++}
++
++.upload-wrapper:has(.drop-zone.is-converting) #formatOptions .format-chip.active {
++    box-shadow:
++        0 10px 24px rgba(37, 99, 235, 0.28),
++        inset 0 1px 0 rgba(255, 255, 255, 0.3);
++    transform: translate3d(0, -1px, 0);
++}
++
++.upload-wrapper:has(#convertProgress:not([hidden])) #convertProgress {
++    position: relative;
++    width: min(100%, 560px);
++    height: 10px;
++    border-radius: 999px;
++    border: 1px solid rgba(148, 163, 184, 0.24);
++    background: linear-gradient(90deg, rgba(226, 232, 240, 0.9), rgba(203, 213, 225, 0.86));
++    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.52), 0 8px 20px rgba(15, 23, 42, 0.08);
++    opacity: 1;
++    transform: translate3d(0, 0, 0);
++    animation: conversionCardLift 220ms ease-out both;
++}
++
++.upload-wrapper:has(#convertProgress:not([hidden])) .progress-bar {
++    background: linear-gradient(90deg, #2563eb, #0ea5e9);
++    box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.12), 0 6px 16px rgba(14, 165, 233, 0.24);
++}
++
++.conversion-actions:has(#convertButton.loading) .status-text {
++    color: #1e293b;
++    font-weight: 600;
++    border-color: rgba(37, 99, 235, 0.24);
++}
++
++.conversion-actions:has(#convertButton.loading) .status-text::before {
++    content: "";
++    width: 14px;
++    height: 14px;
++    border-radius: 50%;
++    border: 2px solid rgba(37, 99, 235, 0.28);
++    border-top-color: #2563eb;
++    display: inline-block;
++    margin-right: 8px;
++    transform: translate3d(0, 0, 0);
++    animation: conversionSpinner 0.85s linear infinite;
++}
++
++.conversion-actions:has(#convertButton.loading) .status-text::after {
++    content: "Please wait...";
++    display: inline;
++    color: #64748b;
++    font-size: 0.86rem;
++    font-weight: 500;
++    margin-left: 6px;
++}
++
++.upload-wrapper:has(.drop-zone.is-complete) #convertProgress,
++.upload-wrapper:has(#resultCard:not([hidden])) #convertProgress {
++    opacity: 0;
++    transform: translate3d(0, -4px, 0);
++    transition: opacity 200ms ease, transform 200ms ease;
++}
++
++.upload-wrapper:has(#resultCard:not([hidden])) #resultCard {
++    border-color: rgba(34, 197, 94, 0.24);
++    box-shadow:
++        0 18px 40px rgba(15, 23, 42, 0.1),
++        0 10px 24px rgba(34, 197, 94, 0.12),
++        inset 0 1px 0 rgba(255, 255, 255, 0.86);
++    animation: conversionCardLift 240ms ease-out both;
++}
++
++.upload-wrapper:has(#resultCard:not([hidden])) #downloadBtn:not([hidden]) {
++    box-shadow:
++        0 0 0 4px rgba(37, 99, 235, 0.16),
++        0 12px 28px rgba(37, 99, 235, 0.2);
++    transform: translate3d(0, -1px, 0);
++}
++
++.upload-wrapper:has(#errorCard:not([hidden])) .status-text {
++    border-color: rgba(220, 38, 38, 0.24);
++    color: #7f1d1d;
++}
++
++@media (max-width: 1024px) {
++    .conversion-actions {
++        min-height: 158px;
++    }
++}
++
++@media (max-width: 768px) {
++    .conversion-actions {
++        min-height: 146px;
++        padding: 12px;
++    }
++
++    .status-text {
++        min-height: 42px;
++        padding: 9px 10px;
++    }
++}
++
++@media (max-width: 430px) {
++    .conversion-actions {
++        min-height: 136px;
++    }
++
++    .upload-wrapper:has(.drop-zone.is-converting) #selectedStatus:not([hidden]) {
++        grid-template-columns: 38px minmax(0, 1fr);
++        gap: 8px;
++        padding: 12px 14px;
+     }
+ 
++    .upload-wrapper:has(.drop-zone.is-converting) #selectedStatus:not([hidden])::before {
++        width: 38px;
++        height: 38px;
++        font-size: 18px;
++    }
+ }

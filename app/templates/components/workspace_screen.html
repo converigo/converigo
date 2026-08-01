@@ -1,0 +1,133 @@
+<div id="workspaceScreen" class="workspace-screen" hidden>
+    <section class="workspace-page">
+        <div class="workspace" id="workspace" hidden>
+            <div class="workspace-head">
+                <div class="workspace-title">
+                    <h2>{{ landing.h1 if landing else hero.title or tool.title }}</h2>
+                    <p>{{ hero.description or meta.description }}</p>
+                </div>
+                <div class="workspace-actions">
+                    <button class="btn btn-secondary btn-add-more" id="btnAddMore" type="button">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M9 3v12M3 9h12" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round"/></svg>
+                        {{ request.state.t('upload.add_more_files', 'Add more files') }}
+                        <svg class="chevron" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M4 6l3 3 3-3" stroke="#9CA3AF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <input type="file" id="fileInputMore" multiple hidden>
+                </div>
+            </div>
+
+            <div class="file-list-panel" id="fileListPanel" hidden>
+                <div class="file-list" id="fileList" tabindex="0"></div>
+                <div class="file-list-footer" id="fileListFooter" hidden>
+                    <div class="batch-action-label">
+                        <span class="batch-action-copy">{{ request.state.t('upload.convert_all', 'Convert all to') }}</span>
+                        <label class="file-output-field">
+                            <span class="file-output-label">{{ request.state.t('upload.output', 'Output') }}</span>
+                            <select class="file-output-select" id="globalOutputSelect" aria-label="{{ request.state.t('upload.output_format', 'Output format') }}"></select>
+                        </label>
+                    </div>
+                    <span class="batch-action-count" id="conversionCount">(0)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="action-bar" id="actionBar" hidden>
+        <div class="action-bar-inner">
+            <div class="action-bar-left">
+                <span>{{ request.state.t('upload.convert_all', 'Convert all') }} (<span id="fileCount">0</span>) {{ request.state.t('upload.to', 'to') }}:</span>
+                <div class="select-wrap">
+                    <select id="globalFormat">
+                        <option>JPG</option>
+                        <option>PNG</option>
+                        <option>WEBP</option>
+                        <option>PDF</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-convert" id="btnConvert" type="button">
+                {{ request.state.t('upload.convert', 'Convert') }}
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0-4-4m4 4-4 4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <section class="conversion-result" id="conversionResult" hidden>
+        <div class="result-card" role="status" aria-live="polite">
+            <div class="result-pill">Ready to download</div>
+            <div class="result-header">
+                <h3 id="conversionResultTitle">{{ request.state.t('upload.conversion_complete_title', 'Konversi Selesai') }}</h3>
+                <p id="conversionResultSubtitle">{{ request.state.t('upload.conversion_complete_subtitle', 'Ringkasan hasil akan muncul di sini setelah tombol konversi ditekan.') }}</p>
+            </div>
+            <ul class="result-list" id="resultList"></ul>
+            <div class="result-card-actions">
+                <button class="btn btn-secondary" id="btnClearWorkspace" type="button">Clear workspace</button>
+            </div>
+        </div>
+    </section>
+
+    <div class="workspace-empty-state" id="workspaceEmptyState" hidden>
+        <div class="workspace-empty-card">
+            <div class="workspace-empty-icon" aria-hidden="true">☁️</div>
+            <h3>Workspace is ready</h3>
+            <p>Add a file to start a clean conversion flow.</p>
+            <button class="btn btn-primary" id="btnEmptyAddFiles" type="button">Add files</button>
+        </div>
+    </div>
+
+    <!-- Download stage moved to a dedicated Download Workspace template to act as a separate screen -->
+
+    <div class="upload-toast" id="uploadToast" hidden>
+        <div class="spinner"></div>
+        <span id="uploadToastText">{{ request.state.t('upload.adding_files', 'Menambahkan file…') }}</span>
+    </div>
+
+    <div class="selected-file" id="selectedStatus" hidden>
+        <span id="fileName">{{ request.state.t('upload.select_file', 'No file selected yet. Choose a file to begin.') }}</span>
+        <span id="fileSize"></span>
+    </div>
+
+    <div id="uploadHint" class="upload-hint" hidden>
+        {{ request.state.t('upload.supports_100', 'Supports 100+ formats') }}
+    </div>
+
+    <div id="processingExperience" class="processing-experience" hidden aria-hidden="true">
+        <div class="processing-card">
+            <div class="processing-card-head">
+                <div class="processing-card-icon" aria-hidden="true">⚙️</div>
+                <div class="processing-card-copy">
+                    <h3>{{ request.state.t('upload.processing_title', 'Processing your file') }}</h3>
+                    <p>{{ request.state.t('upload.processing_subtitle', 'Please wait while we prepare the conversion.') }}</p>
+                </div>
+            </div>
+
+            <div class="processing-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                <div class="progress-bar" aria-hidden="true"></div>
+            </div>
+
+            <div class="processing-status-list" aria-label="Processing steps">
+                <div class="processing-status-item" hidden>{{ request.state.t('upload.processing_step_prepare', 'Preparing file') }}</div>
+                <div class="processing-status-item" hidden>{{ request.state.t('upload.processing_step_analyze', 'Analyzing format') }}</div>
+                <div class="processing-status-item" hidden>{{ request.state.t('upload.processing_step_convert', 'Converting') }}</div>
+                <div class="processing-status-item" hidden>{{ request.state.t('upload.processing_step_optimize', 'Optimizing') }}</div>
+                <div class="processing-status-item" hidden>{{ request.state.t('upload.processing_step_finalize', 'Finalizing') }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="validation-card" hidden>
+        <div class="validation-file-row">
+            <div class="validation-file-icon">📄</div>
+            <div class="validation-file-info">
+                <span class="validation-file-name"></span>
+                <span class="validation-file-size"></span>
+            </div>
+            <div class="validation-status-badge">{{ request.state.t('upload.validation_status_uploaded', 'Uploaded') }}</div>
+        </div>
+        <div class="validation-checklist">
+            <div class="validation-step">{{ request.state.t('upload.validation_step_received', 'File received') }}</div>
+            <div class="validation-step">{{ request.state.t('upload.validation_step_detected', 'Format detected') }}</div>
+            <div class="validation-step">{{ request.state.t('upload.validation_step_complete', 'Validation complete') }}</div>
+        </div>
+    </div>
+</div>

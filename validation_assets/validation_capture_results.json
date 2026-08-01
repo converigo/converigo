@@ -1,0 +1,126 @@
+[
+  {
+    "page": "desktop_initial",
+    "width": 1366,
+    "height": 900
+  },
+  {
+    "page": "desktop_after_upload_single",
+    "files": 1,
+    "state": {
+      "footerVisible": true,
+      "fileListVisible": true,
+      "convertVisible": true,
+      "convertDisabled": false,
+      "removeCount": 1,
+      "selectCount": 1,
+      "fileListOverflowX": false,
+      "pageOverflowX": true,
+      "footerRect": {
+        "x": 535,
+        "y": 796.421875,
+        "width": 296,
+        "height": 157.359375,
+        "top": 796.421875,
+        "right": 831,
+        "bottom": 953.78125,
+        "left": 535
+      }
+    },
+    "controls": {
+      "globalExists": true,
+      "globalAria": "Global output format",
+      "firstSelectExists": true,
+      "removeBtnAria": "Remove file",
+      "touchTargets": {
+        "convert": 48,
+        "remove": 40,
+        "global": 19
+      }
+    }
+  },
+  {
+    "page": "desktop_25_files",
+    "count": 25,
+    "state": {
+      "fileCount": 25,
+      "footerVisible": true,
+      "footerBottom": 953.78125,
+      "listScroll": true,
+      "pageOverflowX": true
+    }
+  },
+  {
+    "page": "desktop_100_files",
+    "count": 100,
+    "state": {
+      "fileCount": 100,
+      "footerVisible": true,
+      "listScroll": true,
+      "pageOverflowX": true
+    }
+  },
+  {
+    "page": "tablet",
+    "viewport": {
+      "width": 768,
+      "height": 1024
+    },
+    "state": {
+      "footerVisible": true,
+      "pageOverflowX": true,
+      "footerBottom": 884.421875,
+      "viewHeight": 1024,
+      "listScroll": true
+    }
+  },
+  {
+    "page": "mobile_390",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "state": {
+      "footerVisible": true,
+      "pageOverflowX": true,
+      "footerBottom": 932.71875,
+      "viewHeight": 844,
+      "listScroll": true
+    }
+  },
+  {
+    "page": "mobile_412",
+    "viewport": {
+      "width": 412,
+      "height": 844
+    },
+    "state": {
+      "footerVisible": true,
+      "pageOverflowX": true,
+      "footerBottom": 937.78125,
+      "viewHeight": 844,
+      "listScroll": true
+    }
+  },
+  {
+    "page": "mobile_430",
+    "viewport": {
+      "width": 430,
+      "height": 844
+    },
+    "state": {
+      "footerVisible": true,
+      "pageOverflowX": true,
+      "footerBottom": 917.484375,
+      "viewHeight": 844,
+      "listScroll": true
+    }
+  },
+  {
+    "keyboard_focus": {
+      "activeId": "",
+      "activeTag": "DIV",
+      "outline": "none"
+    }
+  }
+]

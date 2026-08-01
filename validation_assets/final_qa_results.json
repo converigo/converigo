@@ -1,0 +1,223 @@
+{
+  "cross_browser": [
+    {
+      "browser": "chrome",
+      "available": true,
+      "screenshotInitial": "C:\\converigo\\validation_assets\\cross_chrome_desktop_initial.png",
+      "state": {
+        "convertVisible": true,
+        "convertDisabled": true,
+        "fileInputExists": true,
+        "globalExists": true,
+        "footerVisible": true,
+        "pageOverflowX": true
+      },
+      "screenshotUploaded": "C:\\converigo\\validation_assets\\cross_chrome_desktop_uploaded.png"
+    },
+    {
+      "browser": "edge",
+      "available": true,
+      "screenshotInitial": "C:\\converigo\\validation_assets\\cross_edge_desktop_initial.png",
+      "state": {
+        "convertVisible": true,
+        "convertDisabled": true,
+        "fileInputExists": true,
+        "globalExists": true,
+        "footerVisible": true,
+        "pageOverflowX": true
+      },
+      "screenshotUploaded": "C:\\converigo\\validation_assets\\cross_edge_desktop_uploaded.png"
+    },
+    {
+      "browser": "firefox",
+      "available": true,
+      "screenshotInitial": "C:\\converigo\\validation_assets\\cross_firefox_desktop_initial.png",
+      "state": {
+        "convertVisible": true,
+        "convertDisabled": true,
+        "fileInputExists": true,
+        "globalExists": true,
+        "footerVisible": true,
+        "pageOverflowX": true
+      },
+      "screenshotUploaded": "C:\\converigo\\validation_assets\\cross_firefox_desktop_uploaded.png"
+    }
+  ],
+  "empty_states": {
+    "desktop": {
+      "screenshot": "C:\\converigo\\validation_assets\\empty_desktop.png",
+      "state": {
+        "footerVisible": true,
+        "fileListExists": true,
+        "pageOverflowX": true,
+        "pageOverflowY": true,
+        "bodyOverflowX": true,
+        "footerBottom": 0,
+        "viewportWidth": 1366,
+        "viewportHeight": 900
+      }
+    },
+    "tablet": {
+      "screenshot": "C:\\converigo\\validation_assets\\empty_tablet.png",
+      "state": {
+        "footerVisible": true,
+        "fileListExists": true,
+        "pageOverflowX": true,
+        "pageOverflowY": true,
+        "bodyOverflowX": true,
+        "footerBottom": 0,
+        "viewportWidth": 768,
+        "viewportHeight": 1024
+      }
+    },
+    "mobile": {
+      "screenshot": "C:\\converigo\\validation_assets\\empty_mobile.png",
+      "state": {
+        "footerVisible": true,
+        "fileListExists": true,
+        "pageOverflowX": true,
+        "pageOverflowY": true,
+        "bodyOverflowX": true,
+        "footerBottom": 0,
+        "viewportWidth": 390,
+        "viewportHeight": 844
+      }
+    }
+  },
+  "keyboard_navigation": [
+    {
+      "id": "chooseFile",
+      "tag": "BUTTON",
+      "ariaLabel": null,
+      "role": null,
+      "outlineStyle": "none",
+      "outlineWidth": "3px",
+      "boxShadow": "rgba(37, 99, 235, 0.22) 0px 0px 0px 4px, rgba(37, 99, 235, 0.28) 0px 18px 42px 0px, rgba(255, 255, 255, 0.38) 0px 1px 0px 0px inset",
+      "height": 48,
+      "width": 221,
+      "accessibleName": "Choose File"
+    },
+    {
+      "id": null,
+      "tag": "DIV",
+      "ariaLabel": null,
+      "role": "listitem",
+      "outlineStyle": "none",
+      "outlineWidth": "3px",
+      "boxShadow": "rgba(37, 99, 235, 0.18) 0px 0px 0px 3px, rgba(15, 23, 42, 0.1) 0px 16px 36px 0px, rgba(37, 99, 235, 0.12) 0px 8px 20px 0px, rgba(255, 255, 255, 0.86) 0px 1px 0px 0px inset",
+      "height": 188,
+      "width": 281,
+      "accessibleName": "\ud83d\udd12\n            Secure Processing\n            Files are processed in memory and never stored on disk after conversion."
+    },
+    {
+      "id": null,
+      "tag": "DIV",
+      "ariaLabel": null,
+      "role": "listitem",
+      "outlineStyle": "none",
+      "outlineWidth": "3px",
+      "boxShadow": "rgba(37, 99, 235, 0.18) 0px 0px 0px 3px, rgba(15, 23, 42, 0.1) 0px 16px 36px 0px, rgba(37, 99, 235, 0.12) 0px 8px 20px 0px, rgba(255, 255, 255, 0.86) 0px 1px 0px 0px inset",
+      "height": 188,
+      "width": 281,
+      "accessibleName": "\u2601\ufe0f\n            Browser Based\n            No software installation needed. Everything runs directly in your browser."
+    },
+    {
+      "id": null,
+      "tag": "DIV",
+      "ariaLabel": null,
+      "role": "listitem",
+      "outlineStyle": "none",
+      "outlineWidth": "3px",
+      "boxShadow": "rgba(37, 99, 235, 0.18) 0px 0px 0px 3px, rgba(15, 23, 42, 0.1) 0px 16px 36px 0px, rgba(37, 99, 235, 0.12) 0px 8px 20px 0px, rgba(255, 255, 255, 0.86) 0px 1px 0px 0px inset",
+      "height": 188,
+      "width": 281,
+      "accessibleName": "\u26a1\n            Fast Conversion\n            Optimized conversion engine that processes files quickly and efficiently."
+    },
+    {
+      "id": null,
+      "tag": "DIV",
+      "ariaLabel": null,
+      "role": "listitem",
+      "outlineStyle": "none",
+      "outlineWidth": "3px",
+      "boxShadow": "rgba(37, 99, 235, 0.18) 0px 0px 0px 3px, rgba(15, 23, 42, 0.1) 0px 16px 36px 0px, rgba(37, 99, 235, 0.12) 0px 8px 20px 0px, rgba(255, 255, 255, 0.86) 0px 1px 0px 0px inset",
+      "height": 188,
+      "width": 281,
+      "accessibleName": "\ud83d\udcc4\n            Wide Format Support\n            Convert between images, videos, audio, and documents with broad compatibility."
+    },
+    {
+      "id": null,
+      "tag": "A",
+      "ariaLabel": null,
+      "role": "listitem",
+      "outlineStyle": "none",
+      "outlineWidth": "3px",
+      "boxShadow": "rgba(37, 99, 235, 0.18) 0px 0px 0px 3px, rgba(15, 23, 42, 0.12) 0px 22px 48px 0px, rgba(37, 99, 235, 0.14) 0px 10px 24px 0px, rgba(255, 255, 255, 0.88) 0px 1px 0px 0px inset",
+      "height": 205,
+      "width": 276,
+      "accessibleName": "\ud83d\uddbc\ufe0f\n                \n                    JPG \u2192 PNG\n                    Convert JPG images into PNG format.\n                \n                \u2192"
+    },
+    {
+      "id": null,
+      "tag": "A",
+      "ariaLabel": null,
+      "role": "listitem",
+      "outlineStyle": "none",
+      "outlineWidth": "3px",
+      "boxShadow": "rgba(37, 99, 235, 0.18) 0px 0px 0px 3px, rgba(15, 23, 42, 0.12) 0px 22px 48px 0px, rgba(37, 99, 235, 0.14) 0px 10px 24px 0px, rgba(255, 255, 255, 0.88) 0px 1px 0px 0px inset",
+      "height": 205,
+      "width": 276,
+      "accessibleName": "\ud83d\udcf8\n                \n                    PNG \u2192 JPG\n                    Convert PNG images into JPG format.\n                \n                \u2192"
+    },
+    {
+      "id": null,
+      "tag": "A",
+      "ariaLabel": null,
+      "role": "listitem",
+      "outlineStyle": "none",
+      "outlineWidth": "3px",
+      "boxShadow": "rgba(37, 99, 235, 0.18) 0px 0px 0px 3px, rgba(15, 23, 42, 0.12) 0px 22px 48px 0px, rgba(37, 99, 235, 0.14) 0px 10px 24px 0px, rgba(255, 255, 255, 0.88) 0px 1px 0px 0px inset",
+      "height": 205,
+      "width": 276,
+      "accessibleName": "\ud83d\udcd1\n                \n                    JPG \u2192 PDF\n                    Turn photos into a polished PDF document in seconds.\n                \n                \u2192"
+    }
+  ],
+  "accessibility": {
+    "globalAria": "Global output format",
+    "globalRole": null,
+    "convertAria": null,
+    "convertText": "Convert",
+    "chooseAria": null,
+    "fileListRole": null,
+    "fileListExists": true,
+    "removeButtonCount": 0
+  },
+  "animation": {
+    "fileRowTransition": null,
+    "fileRowAnimation": null,
+    "conversionAnimation": "0s",
+    "conversionTransition": "0.25s, 0.25s",
+    "convertButtonTouchHeight": 0,
+    "fileInputPresent": true
+  },
+  "reduced_motion": {
+    "reduced_motion": {
+      "prefersReducedMotion": true,
+      "rowAnimation": null,
+      "rowTransition": null,
+      "conversionAnimation": "0s",
+      "conversionTransition": "0.25s, 0.25s",
+      "convertButtonTransition": "0s"
+    }
+  },
+  "regression": {
+    "uploadFilePresent": true,
+    "formatChipCount": 5,
+    "stickyConvertButtonCount": 1,
+    "footerConvertButtonCount": 0,
+    "convertButtonEnabled": true,
+    "removeFileWorked": true,
+    "multiUploadCount": 1,
+    "convertError": "Locator.wait_for: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"#downloadBtn\") to be visible\n    62 \u00d7 locator resolved to hidden <a hidden=\"\" id=\"downloadBtn\" class=\"btn btn-secondary download-btn\">Download</a>\n"
+  }
+}

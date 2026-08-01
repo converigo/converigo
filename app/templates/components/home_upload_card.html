@@ -1,0 +1,26 @@
+<section id="uploadSection" class="upload-wrapper">
+    <div class="upload-card-shell">
+        <div class="upload-card-badge-group upload-card-badge-group-left" aria-hidden="true">
+            <span class="upload-card-badge upload-card-badge-doc">DOC</span>
+            <span class="upload-card-badge upload-card-badge-word">W</span>
+            <span class="upload-card-badge upload-card-badge-excel">X</span>
+        </div>
+
+        <div class="drop-zone" id="dropZone" tabindex="0" aria-label="{{ request.state.t('upload.label', 'Upload File') }}">
+            <!-- Shared brand logo (kept identical to header) -->
+            <img src="/static/images/converigo-logo.png" alt="Converigo logo" class="brand-logo shared-brand-logo" aria-hidden="true">
+            <div class="cloud-icon" aria-hidden="true"></div>
+            <h3>{{ request.state.t('upload.drop_title', 'Jatuhkan file Anda di sini') }}</h3>
+            <p class="or-text">{{ request.state.t('upload.or', 'atau') }}</p>
+            <span class="support-text">{{ request.state.t('upload.supports_100', 'Mendukung lebih dari 100 format') }}</span>
+            <button class="btn btn-primary btn-pilih-file" id="chooseFile" type="button">{{ request.state.t('upload.browse', 'Pilih File') }}</button>
+            <input type="file" id="fileInput" multiple hidden>
+        </div>
+
+        <div class="upload-card-badge-group upload-card-badge-group-right" aria-hidden="true">
+            <span class="upload-card-badge upload-card-badge-video">▶</span>
+            <span class="upload-card-badge upload-card-badge-image">🖼</span>
+            <span class="upload-card-badge upload-card-badge-ppt">P</span>
+        </div>
+    </div>
+</section>

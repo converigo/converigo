@@ -1,0 +1,480 @@
+/**
+ * -------------------------------------------------------
+ * Converigo
+ *
+ * Recommendation Manager
+ * Version : 4.0.0
+ *
+ * Frontend-only smart recommendation experience:
+ * - premium recommendation cards
+ * - in-panel search
+ * - favorites persistence via localStorage
+ * - recent formats history via localStorage
+ * - preserves existing format selection flow
+ * -------------------------------------------------------
+ */
+
+class RecommendationManager {
+    constructor() {
+        console.log("Recommendation Manager 4.0.0 Loaded");
+
+        this.formatContainer = document.getElementById("formatOptions");
+        this.conversionArea = document.getElementById("conversionArea");
+        this.convertButton = document.getElementById("convertButton");
+        this.formatSearch = document.getElementById("formatSearch");
+        this.selectedFormat = null;
+        this.lastRenderPayload = null;
+        this.favoriteStorageKey = "converigo_favorites";
+        this.recentStorageKey = "converigo_recent_formats";
+        this.favorites = this._loadStoredList(this.favoriteStorageKey);
+        this.recentFormats = this._loadStoredList(this.recentStorageKey);
+        this._bindSearch();
+    }
+
+    _bindSearch() {
+        if (!this.formatSearch) return;
+        this.formatSearch.hidden = false;
+        this.formatSearch.setAttribute("placeholder", "Search recommendations");
+        this.formatSearch.addEventListener("input", () => {
+            const query = this.formatSearch.value.trim().toLowerCase();
+            if (!this.formatContainer) return;
+
+            const cards = Array.from(this.formatContainer.querySelectorAll(".recommendation-card"));
+            cards.forEach((card) => {
+                const text = (card.dataset.label || card.textContent || "").toLowerCase();
+                const match = !query || text.includes(query);
+                card.hidden = !match;
+                card.style.display = match ? "" : "none";
+            });
+
+            const sections = Array.from(this.formatContainer.querySelectorAll(".recommendation-section-block"));
+            sections.forEach((section) => {
+                const visibleCards = Array.from(section.querySelectorAll(".recommendation-card")).filter((card) => !card.hidden);
+                section.hidden = visibleCards.length === 0;
+            });
+        });
+    }
+
+    async analyzeFile(file) {
+        if (!file || !file.name) return;
+        console.log("Analyzing:", file.name);
+        const extension = file.name.split(".").pop().toLowerCase();
+        try {
+            const response = await fetch(`/recommend/${extension}`);
+            if (!response.ok) {
+                throw new Error("No recommendation");
+            }
+            const data = await response.json().catch(() => null) || {};
+            this.renderFormats(data, extension);
+        } catch (error) {
+            console.error("Recommendation failed:", error);
+            this.renderFormats({}, extension);
+        }
+    }
+
+    _loadStoredList(key) {
+        try {
+            const raw = window.localStorage.getItem(key);
+            return raw ? JSON.parse(raw) : [];
+        } catch (error) {
+            return [];
+        }
+    }
+
+    _saveStoredList(key, value) {
+        try {
+            window.localStorage.setItem(key, JSON.stringify(value));
+        } catch (error) {
+            console.warn("Unable to persist recommendation history", error);
+        }
+    }
+
+    _formatIcon(target) {
+        const value = (target || "").toLowerCase();
+        if (value.includes("pdf")) return "📄";
+        if (value.includes("doc") || value.includes("docx")) return "📝";
+        if (value.includes("png") || value.includes("jpg") || value.includes("jpeg") || value.includes("webp") || value.includes("jxl")) return "🖼";
+        if (value.includes("mp4") || value.includes("mov") || value.includes("webm")) return "🎬";
+        if (value.includes("mp3") || value.includes("wav") || value.includes("flac")) return "🎵";
+        if (value.includes("zip") || value.includes("rar") || value.includes("7z")) return "🗜";
+        return "📦";
+    }
+
+    _getCategory(target) {
+        const value = (target || "").toLowerCase();
+        if (["png", "jpg", "jpeg", "webp", "jxl", "gif", "svg", "heic", "avif"].includes(value)) return "Image Formats";
+        if (["pdf", "doc", "docx", "ppt", "pptx", "xls", "xlsx", "txt"].includes(value)) return "Document Formats";
+        if (["zip", "rar", "7z", "tar", "gz"].includes(value)) return "Archive Formats";
+        if (["mp4", "mov", "webm", "avi", "mkv"].includes(value)) return "Video Formats";
+        if (["mp3", "wav", "ogg", "m4a", "flac"].includes(value)) return "Audio Formats";
+        return "Most Popular";
+    }
+
+    _getBadge(option) {
+        if (option.badge) return option.badge;
+        if (option.score >= 0.8) return "⭐ Recommended";
+        if (option.score >= 0.55) return "⚡ Fastest";
+        return "💎 Best Quality";
+    }
+
+    _getDescription(option, sourceFormat) {
+        if (option.description) return option.description;
+        if (option.title) return option.title;
+        const target = (option.target || "").toUpperCase();
+        if (sourceFormat === "pdf") {
+            if (target === "DOCX") return "Turn your document into a editable workspace.";
+            if (target === "PNG") return "Extract a clean image snapshot for sharing.";
+            if (target === "JPG") return "Create a compact image version for quick previews.";
+        }
+        if (["jpg", "jpeg", "png", "webp"].includes(sourceFormat)) {
+            if (target === "PNG") return "Preserve detail with strong compatibility.";
+            if (target === "WEBP") return "Balance compression and visual quality.";
+            if (target === "PDF") return "Package the image into a shareable document.";
+            if (target === "JXL") return "Get modern compression with rich color.";
+        }
+        return `Great for ${target.toLowerCase()} workflows.`;
+    }
+
+    _getEstimatedSize(target) {
+        const value = (target || "").toLowerCase();
+        if (["png", "jpg", "jpeg", "webp", "jxl"].includes(value)) return "~ 20–70% smaller";
+        if (["pdf", "docx", "pptx", "xlsx"].includes(value)) return "~ share-ready";
+        if (["zip", "rar", "7z"].includes(value)) return "~ compact archive";
+        return "~ varies by file";
+    }
+
+    _getFallbackRecommendations(sourceFormat) {
+        const source = (sourceFormat || "").toLowerCase();
+        if (["jpg", "jpeg", "png", "webp"].includes(source)) {
+            return [
+                { target: "png", title: "PNG", description: "Preserve detail with strong compatibility.", badge: "⭐ Recommended", score: 0.92 },
+                { target: "webp", title: "WEBP", description: "Balance compression and visual quality.", badge: "⚡ Fastest", score: 0.82 },
+                { target: "jxl", title: "JPEG XL", description: "Modern compression with rich color depth.", badge: "💎 Best Quality", score: 0.74 },
+                { target: "pdf", title: "PDF", description: "Package visuals into a shareable document.", badge: "📦 Smallest Size", score: 0.68 }
+            ];
+        }
+        if (["pdf"].includes(source)) {
+            return [
+                { target: "docx", title: "DOCX", description: "Turn your document into an editable workspace.", badge: "⭐ Recommended", score: 0.9 },
+                { target: "png", title: "PNG", description: "Extract a crisp image snapshot.", badge: "⚡ Fastest", score: 0.8 },
+                { target: "jpg", title: "JPG", description: "Create a compact preview for sharing.", badge: "📦 Smallest Size", score: 0.7 }
+            ];
+        }
+        if (["docx", "doc"].includes(source)) {
+            return [
+                { target: "pdf", title: "PDF", description: "Create a polished handoff-ready file.", badge: "⭐ Recommended", score: 0.9 },
+                { target: "txt", title: "TXT", description: "Simplify text to a lightweight format.", badge: "⚡ Fastest", score: 0.75 }
+            ];
+        }
+        if (["mp4", "mov", "webm"].includes(source)) {
+            return [
+                { target: "mp3", title: "MP3", description: "Extract audio with quicker playback.", badge: "⭐ Recommended", score: 0.9 },
+                { target: "webm", title: "WEBM", description: "Keep the original video quality.", badge: "💎 Best Quality", score: 0.8 }
+            ];
+        }
+        return [
+            { target: "pdf", title: "PDF", description: "Create a universally shareable file.", badge: "⭐ Recommended", score: 0.8 }
+        ];
+    }
+
+    _buildChoices(data, sourceFormat) {
+        const choices = [];
+        const seen = new Set();
+
+        const pushOption = (option) => {
+            if (!option || !option.target) return;
+            const target = String(option.target).toLowerCase();
+            if (seen.has(target)) return;
+            seen.add(target);
+            choices.push({
+                target,
+                title: (option.title || option.target || "").toUpperCase(),
+                description: this._getDescription(option, sourceFormat),
+                badge: this._getBadge(option),
+                score: Number(option.score || 0),
+                source: option.source || sourceFormat,
+                icon: option.icon || this._formatIcon(target)
+            });
+        };
+
+        if (data.best_choice) {
+            pushOption({ ...data.best_choice, score: Number(data.best_choice.score || 0.95) });
+        }
+
+        if (Array.isArray(data.alternatives)) {
+            data.alternatives.forEach((item) => pushOption(item));
+        }
+
+        this._getFallbackRecommendations(sourceFormat).forEach((item) => pushOption(item));
+        return choices;
+    }
+
+    _buildGroups(choices, sourceFormat) {
+        const recommended = choices.filter((item) => item.badge.includes("⭐") || item.score >= 0.8).slice(0, 4);
+        const popular = choices.filter((item) => item.score >= 0.55 && !recommended.some((entry) => entry.target === item.target)).slice(0, 4);
+        const image = choices.filter((item) => ["png", "jpg", "jpeg", "webp", "jxl", "gif", "svg", "heic", "avif"].includes(item.target)).slice(0, 4);
+        const documents = choices.filter((item) => ["pdf", "doc", "docx", "ppt", "pptx", "xls", "xlsx", "txt"].includes(item.target)).slice(0, 4);
+        const archives = choices.filter((item) => ["zip", "rar", "7z", "tar", "gz"].includes(item.target)).slice(0, 4);
+        const audio = choices.filter((item) => ["mp3", "wav", "ogg", "m4a", "flac"].includes(item.target)).slice(0, 4);
+        const video = choices.filter((item) => ["mp4", "mov", "webm", "avi", "mkv"].includes(item.target)).slice(0, 4);
+
+        const groups = [];
+        if (recommended.length) groups.push({ title: "Recommended", items: recommended });
+        if (popular.length) groups.push({ title: "Most Popular", items: popular });
+        if (image.length && sourceFormat && ["jpg", "jpeg", "png", "webp", "gif"].includes(sourceFormat)) groups.push({ title: "Image Formats", items: image });
+        if (documents.length && sourceFormat && ["pdf", "doc", "docx"].includes(sourceFormat)) groups.push({ title: "Document Formats", items: documents });
+        if (archives.length) groups.push({ title: "Archive Formats", items: archives });
+        if (audio.length && sourceFormat && ["mp4", "mov", "webm"].includes(sourceFormat)) groups.push({ title: "Audio Formats", items: audio });
+        if (video.length && sourceFormat && ["mp3", "wav", "ogg"].includes(sourceFormat)) groups.push({ title: "Video Formats", items: video });
+
+        const remaining = choices.filter((item) => !groups.flatMap((group) => group.items).some((entry) => entry.target === item.target));
+        if (remaining.length) groups.push({ title: "More Options", items: remaining.slice(0, 4) });
+        return groups.filter((group) => group.items.length > 0);
+    }
+
+    _toggleFavorite(target) {
+        const normalized = String(target || "").toLowerCase();
+        const favorites = this.favorites.includes(normalized)
+            ? this.favorites.filter((item) => item !== normalized)
+            : [...this.favorites, normalized];
+        this.favorites = favorites.slice(-8);
+        this._saveStoredList(this.favoriteStorageKey, this.favorites);
+        if (this.lastRenderPayload) {
+            this.renderFormats(this.lastRenderPayload.data, this.lastRenderPayload.sourceFormat);
+        }
+    }
+
+    _addRecent(target) {
+        const normalized = String(target || "").toLowerCase();
+        if (!normalized) return;
+        this.recentFormats = [normalized, ...this.recentFormats.filter((item) => item !== normalized)].slice(0, 6);
+        this._saveStoredList(this.recentStorageKey, this.recentFormats);
+    }
+
+    _selectOption(option, card, target) {
+        this.selectedFormat = target;
+        this._addRecent(target);
+
+        document.querySelectorAll(".recommendation-card").forEach((node) => {
+            node.classList.remove("active");
+            node.setAttribute("aria-pressed", "false");
+        });
+        card.classList.add("active");
+        card.setAttribute("aria-pressed", "true");
+
+        window.dispatchEvent(new CustomEvent("format-selected", { detail: { target } }));
+
+        if (window.conversionStateController && typeof window.conversionStateController.setConvertReady === "function") {
+            if (typeof window.conversionStateController.setFormatChoicesAvailable === "function") {
+                window.conversionStateController.setFormatChoicesAvailable(true);
+            }
+            if (typeof window.conversionStateController.setConversionState === "function") {
+                try {
+                    const cs = window.conversionStateController.ConversionState || {};
+                    const fileSelected = cs.FILE_SELECTED || "FILE_SELECTED";
+                    window.conversionStateController.setConversionState(fileSelected);
+                } catch (error) {
+                    window.conversionStateController.setConversionState("FILE_SELECTED");
+                }
+            }
+            window.conversionStateController.setConvertReady(true);
+        } else if (this.convertButton) {
+            this.convertButton.disabled = false;
+            this.convertButton.hidden = false;
+            this.convertButton.style.removeProperty("display");
+        }
+
+        if (window.uploadManager && typeof window.uploadManager._updateConversionSummary === "function") {
+            window.uploadManager._updateConversionSummary();
+        }
+    }
+
+    renderFormats(data, sourceFormat = "") {
+        if (!this.formatContainer) {
+            console.warn("formatOptions missing");
+            return;
+        }
+
+        this.lastRenderPayload = { data, sourceFormat };
+        this.formatContainer.innerHTML = "";
+        this.formatContainer.classList.add("recommendation-shell");
+
+        if (window.conversionStateController && typeof window.conversionStateController.setFormatChoicesAvailable === "function") {
+            window.conversionStateController.setFormatChoicesAvailable(false);
+        } else if (this.conversionArea) {
+            this.conversionArea.hidden = true;
+        }
+
+        const choices = this._buildChoices(data || {}, sourceFormat);
+        if (!choices.length) {
+            const empty = document.createElement("div");
+            empty.className = "recommendation-empty";
+            empty.textContent = "No recommendations are available yet. Please try another file.";
+            this.formatContainer.appendChild(empty);
+            return;
+        }
+
+        const favoritesList = this.favorites.filter((target) => choices.some((item) => item.target === target));
+        const recentList = this.recentFormats.filter((target) => choices.some((item) => item.target === target));
+
+        const panel = document.createElement("div");
+        panel.className = "recommendation-panel";
+
+        const summary = document.createElement("div");
+        summary.className = "recommendation-panel-summary";
+        summary.innerHTML = `<div class="recommendation-panel-copy"><strong>Smart picks</strong><span>Choose the format that fits your goal.</span></div>`;
+        panel.appendChild(summary);
+
+        if (favoritesList.length || recentList.length) {
+            const meta = document.createElement("div");
+            meta.className = "recommendation-toolbar";
+
+            if (favoritesList.length) {
+                const favoritesLabel = document.createElement("div");
+                favoritesLabel.className = "recommendation-toolbar-label";
+                favoritesLabel.textContent = "Favorites";
+                meta.appendChild(favoritesLabel);
+
+                const favoritesRow = document.createElement("div");
+                favoritesRow.className = "recommendation-pill-row";
+                favoritesList.forEach((target) => {
+                    const pill = document.createElement("button");
+                    pill.type = "button";
+                    pill.className = "recommendation-pill";
+                    pill.textContent = target.toUpperCase();
+                    pill.addEventListener("click", () => {
+                        const option = choices.find((item) => item.target === target);
+                        if (option) {
+                            this._selectOption(option, panel.querySelector(`[data-target="${target}"]`), option.target);
+                        }
+                    });
+                    favoritesRow.appendChild(pill);
+                });
+                meta.appendChild(favoritesRow);
+            }
+
+            if (recentList.length) {
+                const recentLabel = document.createElement("div");
+                recentLabel.className = "recommendation-toolbar-label";
+                recentLabel.textContent = "Recent";
+                meta.appendChild(recentLabel);
+
+                const recentRow = document.createElement("div");
+                recentRow.className = "recommendation-pill-row";
+                recentList.forEach((target) => {
+                    const pill = document.createElement("button");
+                    pill.type = "button";
+                    pill.className = "recommendation-pill subtle";
+                    pill.textContent = target.toUpperCase();
+                    pill.addEventListener("click", () => {
+                        const option = choices.find((item) => item.target === target);
+                        if (option) {
+                            this._selectOption(option, panel.querySelector(`[data-target="${target}"]`), option.target);
+                        }
+                    });
+                    recentRow.appendChild(pill);
+                });
+                meta.appendChild(recentRow);
+            }
+
+            panel.appendChild(meta);
+        }
+
+        const groups = this._buildGroups(choices, sourceFormat);
+        groups.forEach((group) => {
+            const section = document.createElement("section");
+            section.className = "recommendation-section-block";
+            const heading = document.createElement("h4");
+            heading.className = "recommendation-section-title";
+            heading.textContent = group.title;
+            section.appendChild(heading);
+
+            const grid = document.createElement("div");
+            grid.className = "recommendation-grid";
+            group.items.forEach((option) => {
+                const card = document.createElement("div");
+                card.className = "format-chip recommendation-card";
+                card.setAttribute("role", "button");
+                card.setAttribute("tabindex", "0");
+                card.setAttribute("aria-pressed", "false");
+                card.dataset.target = option.target;
+                card.dataset.label = option.title;
+
+                const isFavorite = this.favorites.includes(option.target);
+                const icon = document.createElement("span");
+                icon.className = "recommendation-card-icon";
+                icon.textContent = option.icon || this._formatIcon(option.target);
+
+                const header = document.createElement("div");
+                header.className = "recommendation-card-head";
+                const title = document.createElement("h5");
+                title.className = "recommendation-card-title";
+                title.textContent = option.title;
+                const favorite = document.createElement("button");
+                favorite.type = "button";
+                favorite.className = "recommendation-card-favorite";
+                favorite.setAttribute("aria-label", isFavorite ? `Remove ${option.title} from favorites` : `Add ${option.title} to favorites`);
+                favorite.textContent = isFavorite ? "★" : "☆";
+                favorite.addEventListener("click", (event) => {
+                    event.stopPropagation();
+                    this._toggleFavorite(option.target);
+                });
+                header.appendChild(title);
+                header.appendChild(favorite);
+
+                const description = document.createElement("p");
+                description.className = "recommendation-card-desc";
+                description.textContent = option.description;
+
+                const footer = document.createElement("div");
+                footer.className = "recommendation-card-footer";
+                const badge = document.createElement("span");
+                badge.className = "recommendation-card-badge";
+                badge.textContent = option.badge;
+                const size = document.createElement("span");
+                size.className = "recommendation-card-size";
+                size.textContent = this._getEstimatedSize(option.target);
+                footer.appendChild(badge);
+                footer.appendChild(size);
+
+                card.appendChild(icon);
+                card.appendChild(header);
+                card.appendChild(description);
+                card.appendChild(footer);
+
+                card.addEventListener("click", () => {
+                    this._selectOption(option, card, option.target);
+                });
+                card.addEventListener("keydown", (event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                        event.preventDefault();
+                        this._selectOption(option, card, option.target);
+                    }
+                });
+
+                grid.appendChild(card);
+            });
+            section.appendChild(grid);
+            panel.appendChild(section);
+        });
+
+        this.formatContainer.appendChild(panel);
+
+        const firstCard = this.formatContainer.querySelector(".recommendation-card");
+        if (firstCard && !this.selectedFormat) {
+            const target = firstCard.dataset.target;
+            if (target) {
+                this._selectOption({ target }, firstCard, target);
+            }
+        }
+
+        if (window.conversionStateController && typeof window.conversionStateController.setFormatChoicesAvailable === "function") {
+            window.conversionStateController.setFormatChoicesAvailable(choices.length > 0);
+        } else if (this.conversionArea) {
+            this.conversionArea.hidden = choices.length === 0;
+        }
+    }
+}
+document.addEventListener("DOMContentLoaded", () => {
+    window.RecommendationManager = new RecommendationManager();
+});
