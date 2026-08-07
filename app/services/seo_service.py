@@ -89,7 +89,7 @@ class SeoService:
 
         canonical = self._resolve_url(
             base_url,
-            canonical_path or f"/tools/{tool_data['slug']}",
+            canonical_path or f"/{tool_data['slug']}",
         )
 
         og_image = (
@@ -217,6 +217,8 @@ class SeoService:
         page_type: str | None = None,
         page_data: dict[str, Any] | None = None,
         canonical_path: str | None = None,
+        only_organization: bool = False,
+        only_web_site: bool = False,
     ) -> dict[str, Any]:
 
         base_url = self._build_base_url(request)
@@ -236,10 +238,96 @@ class SeoService:
             "publisher": organization,
             "potentialAction": {
                 "@type": "SearchAction",
-                "target": f"{base_url}/tools/{{search_term}}",
+                "target": f"{base_url}/{{search_term}}",
                 "query-input": "required name=search_term",
             },
         }
+
+        # Short-circuit: emit only the Organization node when requested.
+        if only_organization:
+            return {
+                "@context": "https://schema.org",
+                "@graph": [organization],
+            }
+
+        if only_web_site:
+            return {
+                "@context": "https://schema.org",
+                "@graph": [organization, website],
+            }
+
+        if getattr(request, "url", None) is not None and getattr(request.url, "path", None) == "/certification":
+            faq_items = [
+                {
+                    "@type": "Question",
+                    "name": "Is my file stored permanently?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "No. Files are processed securely and automatically removed after conversion.",
+                    },
+                },
+                {
+                    "@type": "Question",
+                    "name": "Do I need to create an account?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "No. You can convert files without creating an account.",
+                    },
+                },
+                {
+                    "@type": "Question",
+                    "name": "Which file formats are supported?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Converigo supports documents, images, videos, audio, archives, and many other formats.",
+                    },
+                },
+                {
+                    "@type": "Question",
+                    "name": "How long does conversion take?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Most conversions finish within seconds depending on file size and format.",
+                    },
+                },
+                {
+                    "@type": "Question",
+                    "name": "Is Converigo free?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Many conversions are available for free. Additional features may vary depending on the selected tool.",
+                    },
+                },
+                {
+                    "@type": "Question",
+                    "name": "What happens if my conversion fails?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "If a conversion cannot be completed, you can retry or choose another supported format.",
+                    },
+                },
+            ]
+
+            graph = [
+                organization,
+                website,
+                {
+                    "@type": "WebPage",
+                    "name": "Converigo Certification",
+                    "description": "Discover certified file converters and trusted conversion workflows on Converigo.",
+                    "url": self._normalize_url(base_url, "/certification"),
+                    "publisher": organization,
+                },
+                {
+                    "@type": "FAQPage",
+                    "mainEntity": faq_items,
+                },
+            ]
+
+            return {
+                "@context": "https://schema.org",
+                "@graph": graph,
+            }
 
         if tool_data is None and page_type is None:
             faq_items = [
@@ -388,11 +476,17 @@ class SeoService:
                     "url": self._normalize_url(base_url, page_data.get("url", "")),
                     "publisher": organization,
                 },
-                self._build_breadcrumb_list(
-                    base_url,
-                    [{"name": "Home", "url": "/"}, {"name": title, "url": page_data.get("url", "")}],
-                ),
             ]
+
+            breadcrumb_items = page_data.get("breadcrumb")
+            if breadcrumb_items is None:
+                breadcrumb_items = [
+                    {"name": "Home", "url": "/"},
+                    {"name": title, "url": page_data.get("url", "")},
+                ]
+
+            if breadcrumb_items:
+                graph.append(self._build_breadcrumb_list(base_url, breadcrumb_items))
 
             if faq_items:
                 graph.append(
@@ -407,7 +501,7 @@ class SeoService:
                 "@graph": graph,
             }
 
-        tool_url = self._resolve_url(base_url, canonical_path or f"/tools/{tool_data['slug']}")
+        tool_url = self._resolve_url(base_url, canonical_path or f"/{tool_data['slug']}")
 
         breadcrumb_items = [
             {

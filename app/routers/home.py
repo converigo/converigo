@@ -239,6 +239,47 @@ async def home(request: Request):
     )
 
 
+@router.get("/certification", response_class=HTMLResponse)
+async def certification(request: Request):
+    locale_data, t, supported_locales = _get_locale_context(request)
+    metadata = {
+        "title": t(
+            "certification.meta.title",
+            "Converigo Certification | Convert All Files",
+        ),
+        "description": t(
+            "certification.meta.description",
+            "Isolated certification page for Converigo frontend validation with localized content and download experience.",
+        ),
+        "canonical": f"{PRODUCTION_BASE_URL}/certification",
+        "og_url": f"{PRODUCTION_BASE_URL}/certification",
+        "keywords": t(
+            "certification.meta.keywords",
+            "Converigo, certification, file conversion, online converter",
+        ),
+        "author": "Converigo",
+        "robots": "index,follow",
+        "og_type": "website",
+        "twitter_card": "summary_large_image",
+        "twitter_site": "@converigo",
+        "twitter_creator": "@converigo",
+    }
+
+    return templates.TemplateResponse(
+        request=request,
+        name="main/converigo_main.html",
+        context={
+            "request": request,
+            "locale": locale_data,
+            "t": t,
+            "supported_locales": supported_locales,
+            "meta": metadata,
+            "structured_data": seo_service.build_structured_data(request),
+            "year": datetime.utcnow().year,
+        },
+    )
+
+
 @router.get("/about", response_class=HTMLResponse)
 async def about(request: Request):
     return await _render_trust_page(

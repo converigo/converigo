@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="{{ request.state.locale.lang_code if request.state and request.state.locale else 'en' }}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% include "partials/seo_meta.html" %}
+{% include "partials/structured_data.html" %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<style>
+  :root{
+    --bg:#F4F2FE;
+    --bg-deep:#EBE7FC;
+    --surface:#FFFFFF;
+    --ink:#1C1832;
+    --ink-soft:#6C6690;
+    --ink-faint:#A7A1C7;
+    --primary:#5B4FE9;
+    --primary-dark:#4335C7;
+    --primary-light:#ECE9FF;
+    --coral:#FF6B4A;
+    --coral-light:#FFE9E2;
+    --teal:#12B3A0;
+    --teal-light:#DEF7F3;
+    --amber:#F59E0B;
+    --amber-light:#FEF3DA;
+    --slate:#6C7599;
+    --slate-light:#E8EAF3;
+    --success:#1FAE63;
+    --danger:#E14B4B;
+    --line:#E6E1FB;
+    --shadow-lg:0 30px 70px -25px rgba(56,42,168,.35);
+    --shadow-sm:0 8px 20px -10px rgba(56,42,168,.25);
+    --radius:20px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(60% 50% at 85% -10%, #E3DDFF 0%, transparent 60%),
+      radial-gradient(50% 40% at 5% 10%, #FFE4DA 0%, transparent 55%),
+      var(--bg);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{font-family:'Space Grotesk',sans-serif;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{color:inherit;}
+  button{font-family:inherit;}
+  :focus-visible{outline:2.5px solid var(--primary-dark); outline-offset:2px; border-radius:6px;}
+
+  /* ---------- layout shells ---------- */
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+  @media (max-width:640px){ .wrap{padding:0 18px;} }
+
+  /* ---------- nav ---------- */
+  nav.topnav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(244,242,254,.75);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:16px 32px; max-width:1180px; margin:0 auto;}
+  .brand{display:inline-flex; align-items:center; gap:14px; font-family:'Space Grotesk'; font-weight:800; font-size:20px; letter-spacing:0.01em; color:var(--ink); text-decoration:none; cursor:pointer; transition:opacity .18s ease;}
+  .brand:hover, .brand:focus-visible{opacity:.85;}
+  .brand:focus-visible{outline:2px solid var(--primary-dark); outline-offset:4px; border-radius:8px;}
+  .brand::before{content:'';}
+  .brand-mark{
+    width:38px;height:38px;border-radius:10px 10px 10px 4px;
+    background:url('/static/images/converigo-logo.png') center/contain no-repeat;
+    display:flex;align-items:center;justify-content:center; flex-shrink:0;
+    color:transparent; font-size:0; font-family:'IBM Plex Mono'; font-weight:700;
+    animation:none;
+  }
+  @keyframes mark-hue{
+    0%,100%{background:linear-gradient(135deg,var(--primary),var(--coral));}
+    33%{background:linear-gradient(135deg,var(--teal),var(--primary));}
+    66%{background:linear-gradient(135deg,var(--amber),var(--coral));}
+  }
+  .nav-links{display:flex; gap:30px; font-size:14.5px; font-weight:500; color:var(--ink-soft);}
+  .nav-links a{text-decoration:none; color:var(--ink); transition:color .15s;}
+  .nav-links a:hover{color:var(--primary-dark);}
+  .nav-cta{
+    background:var(--ink); color:#fff; border:none; padding:12px 22px; min-height:44px; border-radius:999px;
+    font-weight:700; font-size:14px; cursor:pointer; transition:transform .15s, background .15s;
+  }
+  .nav-cta:hover{background:var(--primary-dark); transform:translateY(-1px);}
+  .nav-cta:focus-visible{outline:2px solid #fff; outline-offset:2px;}
+  @media (max-width:760px){
+    .nav-links{display:none;}
+    .nav-cta{
+      padding:12px 22px;
+      min-height:44px;
+      line-height:1.1;
+      white-space:normal;
+      text-align:center;
+      word-break:break-word;
+    }
+  }
+
+  /* ---------- hero ---------- */
+  .hero{padding:64px 0 20px; text-align:center; transition:padding .5s ease;}
+  .hero > .eyebrow,
+  .hero > h1.headline,
+  .hero > .sub {
+    transition: transform .4s ease;
+    transform: translateY(-54px);
+  }
+  @media (max-width:760px) {
+    .hero > .eyebrow,
+    .hero > h1.headline,
+    .hero > .sub {
+      transform: translateY(-36px);
+    }
+  }
+  body.has-jobs .hero{padding:34px 0 6px;}
+  body.has-jobs .hero,
+  body.has-jobs .supported-section,
+  body.has-jobs .trust-section,
+  body.has-jobs .how-section,
+  body.has-jobs .feature-section,
+  body.has-jobs .find-format-section,
+  body.has-jobs .faq-section,
+  body.has-jobs .site-foot{
+    display:none !important;
+  }
+  .eyebrow{display:inline-flex; align-items:center; gap:10px; margin:0 auto 8px; color:var(--ink-soft); font-size:13px; letter-spacing:.14em; text-transform:uppercase; font-weight:700; text-decoration:none;}
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%; background:var(--coral); animation:pulse-dot 1.6s ease-in-out infinite;}
+  @keyframes pulse-dot{0%,100%{opacity:1; transform:scale(1);} 50%{opacity:.4; transform:scale(.6);}}
+  h1.headline{
+    font-size:clamp(40px,4.8vw,50px); line-height:1.02; font-weight:800; letter-spacing:-.03em;
+    margin:0 auto 6px; max-width:760px; transition:font-size .4s ease;
+  }
+  body.has-jobs h1.headline{font-size:clamp(24px,3vw,34px);}
+  h1.headline .grad{
+    background:linear-gradient(100deg,var(--primary) 10%,var(--coral) 55%,var(--teal) 95%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    text-decoration:underline; text-decoration-color:rgba(91,79,233,.18);
+    text-decoration-thickness:0.18em; text-underline-offset:10px;
+  }
+  .sub{
+    max-width:620px; margin:0 auto 8px; color:var(--ink-soft); font-size:15px; line-height:1.7;
+    transition:max-height .4s ease, opacity .4s ease, margin .4s ease;
+  }
+  .hero-stage{position:relative; max-width:1020px; margin:0 auto 8px; min-height:232px; display:flex; justify-content:center; align-items:center;}
+  .hero-callout{
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:min(152px, 17vw); max-height:80px; padding:9px 10px;
+    display:flex; align-items:center; gap:9px;
+    background:rgba(255,255,255,.94); border:1px solid rgba(91,79,233,.10);
+    border-radius:16px; box-shadow:0 8px 22px -16px rgba(91,79,233,.22);
+    color:var(--ink-soft); font-size:12.5px; font-weight:600; line-height:1.3;
+    text-align:left; z-index:3;
+  }
+  .hero-callout .callout-icon{
+    display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px;
+    border-radius:999px; background:var(--primary); color:#fff; font-size:12px; flex-shrink:0;
+  }
+.hero-callout-left{left:12px; transform:translateY(-50%);} 
+  .hero-callout-right{right:12px; transform:translateY(-50%);} 
+  .hero-connector{
+    position:absolute; top:50%; width:88px; height:40px; border-bottom:1px solid rgba(91,79,233,.16);
+    border-radius:0 0 999px 999px; opacity:.9; pointer-events:none; z-index:2;
+  }
+  .hero-connector-left{left:calc(50% - 214px); transform:translateY(-50%); border-left:1px solid rgba(91,79,233,.16); border-right:0;}
+  .hero-connector-right{right:calc(50% - 214px); transform:translateY(-50%); border-right:1px solid rgba(91,79,233,.16); border-left:0;}
+
+  .trust-section{
+    padding:52px 0 36px;
+    margin-bottom:clamp(80px, 6vw, 120px);
+  }
+  .trust-section .section-eyebrow{
+    display:inline-flex; align-items:center; gap:10px; margin-bottom:16px;
+    color:var(--ink-soft); font-size:13px; font-weight:700; letter-spacing:.14em;
+    text-transform:uppercase;
+  }
+  .trust-section h2{
+    font-size:clamp(28px,3.8vw,34px); line-height:1.08; margin:0 0 16px; max-width:720px;
+  }
+  .trust-section p.trust-lead{
+    max-width:700px; margin:0 0 24px; color:var(--ink-soft); font-size:15.75px; line-height:1.8;
+  }
+  .trust-grid{
+    display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px;
+    align-items:stretch;
+    grid-auto-rows:1fr;
+  }
+  .trust-card{
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    gap:16px;
+    background:#fff; border:1px solid rgba(91,79,233,.08);
+    border-radius:24px; padding:28px;
+    box-shadow:0 18px 46px -32px rgba(91,79,233,.10);
+    transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    min-height:220px;
+  }
+  .trust-card:hover{transform:translateY(-1px); border-color:rgba(91,79,233,.14); box-shadow:0 30px 70px -38px rgba(91,79,233,.12);}
+  .how-section{
+    padding:44px 0 36px;
+    margin-top:0;
+    margin-bottom:clamp(80px, 6vw, 120px);
+  }
+  .how-section .section-eyebrow{
+    display:inline-flex; align-items:center; gap:10px; margin-bottom:16px;
+    color:var(--ink-soft); font-size:13px; font-weight:700; letter-spacing:.14em;
+    text-transform:uppercase;
+  }
+  .how-section h2{
+    font-size:clamp(28px,3.8vw,34px); line-height:1.1; margin:0 0 16px; max-width:720px;
+  }
+  .how-section p.how-lead{
+    max-width:700px; margin:0 0 28px; color:var(--ink-soft); font-size:15.75px; line-height:1.75;
+  }
+  .find-format-section{
+    padding:22px 0 36px;
+    margin-bottom:clamp(80px, 6vw, 120px);
+  }
+  .find-format-section .section-eyebrow{
+    display:inline-flex; align-items:center; gap:10px; margin-bottom:12px;
+    color:var(--ink-soft); font-size:13px; font-weight:700; letter-spacing:.14em;
+    text-transform:uppercase;
+  }
+  .find-format-section h2{
+    font-size:clamp(28px,3.6vw,32px); line-height:1.08; margin:0 0 10px; max-width:760px;
+  }
+  .find-format-section .find-format-lead{
+    max-width:700px; margin:0 0 24px; color:var(--ink-soft); font-size:15px; line-height:1.75;
+  }
+  .find-format-grid{
+    display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px;
+  }
+  .find-format-card{
+    background:rgba(255,255,255,.86); border:1px solid rgba(91,79,233,.12);
+    border-radius:20px; padding:22px 22px 18px; box-shadow:0 10px 26px -18px rgba(91,79,233,.18);
+    transition:border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+  }
+  .find-format-card:hover{border-color:rgba(91,79,233,.2); box-shadow:0 16px 34px -22px rgba(91,79,233,.26); transform:translateY(-2px);}
+  .find-format-card-title{margin:0 0 12px; font-size:18px; line-height:1.2; font-weight:700; color:var(--ink);}
+  .find-format-chip-grid{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+  .find-format-chip{display:inline-flex; align-items:center; justify-content:center; padding:7px 10px; border:1px solid rgba(91,79,233,.12); border-radius:999px; font-size:12.5px; font-weight:600; color:var(--ink-soft); background:rgba(255,255,255,.72);}
+  .find-format-link{display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:700; color:var(--primary); text-decoration:none; transition:color .18s ease;}
+  .find-format-card:hover .find-format-link{color:var(--primary-dark);}
+
+  @media (min-width: 1024px){
+    .hero{padding:64px 0 20px;}
+    .hero-stage{margin:0 auto 8px; min-height:232px;}
+    .marquee-wrap{margin:56px 0 10px;}
+    .find-format-section{
+      margin-top:clamp(80px, 6vw, 140px);
+      padding-top:24px;
+      padding-bottom:36px;
+    }
+  }
+
+  .faq-section{
+    padding:36px 0 48px;
+    margin-bottom:8px;
+  }
+  .faq-section .section-eyebrow{
+    display:inline-flex; align-items:center; gap:10px; margin-bottom:12px;
+    color:var(--ink-soft); font-size:13px; font-weight:700; letter-spacing:.14em;
+    text-transform:uppercase;
+  }
+  .faq-section h2{
+    font-size:clamp(28px,3.6vw,32px); line-height:1.08; margin:0 0 10px; max-width:760px;
+  }
+  .faq-section .faq-lead{
+    max-width:700px; margin:0 0 24px; color:var(--ink-soft); font-size:15px; line-height:1.75;
+  }
+  .faq-list{display:grid; gap:12px; max-width:860px;}
+  .faq-item{border:1px solid rgba(91,79,233,.12); border-radius:18px; background:rgba(255,255,255,.88); overflow:hidden; box-shadow:0 10px 24px -22px rgba(91,79,233,.18);}
+  .faq-question{width:100%; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:18px 20px; border:none; background:transparent; color:var(--ink); font-size:15px; font-weight:700; text-align:left; cursor:pointer;}
+  .faq-answer{max-height:0; overflow:hidden; transition:max-height .25s ease, padding .25s ease; padding:0 20px; color:var(--ink-soft); font-size:14.5px; line-height:1.75;}
+  .faq-item.active .faq-answer{max-height:220px; padding:0 20px 18px;}
+  .faq-chev{display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:999px; color:var(--primary); transition:transform .2s ease; flex-shrink:0;}
+  .faq-item.active .faq-chev{transform:rotate(180deg);}
+
+  .supported-section{
+    padding:44px 0 36px;
+    margin-bottom:clamp(80px, 6vw, 120px);
+  }
+  .supported-section h2{
+    font-size:clamp(30px,4vw,34px);
+    line-height:1.08;
+    margin:0 0 16px;
+    max-width:720px;
+  }
+  .supported-section .supported-lead{
+    margin:0 0 28px;
+    max-width:700px;
+    color:var(--ink-soft);
+    font-size:15.75px;
+    line-height:1.75;
+  }
+  .supported-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:20px;
+  }
+  .supported-card{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    background:#fff;
+    border:1px solid rgba(91,79,233,.10);
+    border-radius:24px;
+    padding:28px 26px;
+    box-shadow:var(--shadow-sm);
+  }
+  .supported-card h3{
+    margin:0;
+    font-size:20px;
+    line-height:1.25;
+    font-weight:700;
+  }
+  .supported-chip-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:12px;
+  }
+  .supported-chip{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:10px 12px;
+    border-radius:999px;
+    border:1px solid rgba(91,79,233,.12);
+    background:rgba(91,79,233,.08);
+    color:var(--ink);
+    font-size:14px;
+    font-weight:600;
+  }
+  .supported-link{
+    margin-top:auto;
+    color:var(--primary-dark);
+    font-size:14px;
+    font-weight:700;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
+  .supported-link:hover{
+    text-decoration:underline;
+  }
+  .how-grid{
+    position:relative; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:26px;
+    margin-top:28px;
+  }
+  .how-grid::before{
+    content:''; position:absolute; top:50%; left:32px; right:32px; height:1px;
+    background:rgba(91,79,233,.12); transform:translateY(-50%); z-index:0;
+  }
+  .how-card{
+    position:relative; background:rgba(255,255,255,.98); border:1px solid rgba(108,102,144,.10);
+    border-radius:24px; padding:28px 22px 22px 46px; box-shadow:0 22px 62px -46px rgba(91,79,233,.18);
+    z-index:1;
+  }
+  .how-card::before{
+    content:''; position:absolute; left:34px; top:36px; width:14px; height:14px;
+    border-radius:50%; background:var(--surface); border:3px solid var(--primary);
+  }
+  .how-step-number{
+    font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:800; color:var(--primary);
+  }
+  .how-step-title{
+    margin:8px 0 8px; font-size:18px; line-height:1.2; font-weight:700;
+  }
+  .how-step-desc{
+    margin:0; color:var(--ink-soft); font-size:14.75px; line-height:1.7;
+  }
+  .feature-section{
+    padding:44px 0 36px;
+    margin-bottom:clamp(80px, 6vw, 120px);
+  }
+  .feature-section .section-eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:16px;
+    color:var(--ink-soft);
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+  }
+  .feature-section h2{
+    max-width:720px;
+    font-size:clamp(30px,4.2vw,36px);
+    line-height:1.08;
+    margin:0 0 18px;
+  }
+  .feature-section p.feature-lead{
+    max-width:700px;
+    margin:0 0 30px;
+    color:var(--ink-soft);
+    font-size:15.75px;
+    line-height:1.75;
+  }
+  .feature-panel{
+    display:grid;
+    grid-template-columns:1.3fr .9fr;
+    gap:24px;
+    align-items:start;
+  }
+  .feature-primary-card{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    background:#fff;
+    border:1px solid rgba(91,79,233,.12);
+    border-radius:26px;
+    padding:34px 32px;
+    box-shadow:var(--shadow-sm);
+    min-height:380px;
+  }
+  .primary-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 16px;
+    border-radius:999px;
+    background:rgba(91,79,233,.08);
+    color:var(--primary-dark);
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.01em;
+  }
+  .feature-card-icon{
+    width:56px;
+    height:56px;
+    border-radius:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(91,79,233,.10);
+    color:var(--primary-dark);
+    font-size:26px;
+    box-shadow:0 20px 40px -30px rgba(91,79,233,.20);
+  }
+  .feature-primary-card h3{
+    margin:0;
+    font-size:28px;
+    line-height:1.15;
+    font-weight:700;
+  }
+  .feature-primary-card p{
+    margin:0;
+    color:var(--ink-soft);
+    font-size:15.75px;
+    line-height:1.8;
+  }
+  .support-grid{
+    display:grid;
+    gap:18px;
+    grid-template-columns:1fr;
+  }
+  @media (min-width:1080px){
+    .support-grid{
+      grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+  }
+  .support-card{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    padding:24px 22px;
+    border-radius:22px;
+    background:rgba(255,255,255,.98);
+    border:1px solid rgba(91,79,233,.10);
+    box-shadow:0 18px 46px -36px rgba(91,79,233,.10);
+    min-height:190px;
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .support-card:hover{
+    transform:translateY(-2px);
+    border-color:rgba(91,79,233,.16);
+    box-shadow:0 24px 56px -40px rgba(91,79,233,.14);
+  }
+  .support-icon{
+    width:44px;
+    height:44px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:14px;
+    background:rgba(91,79,233,.10);
+    color:var(--primary-dark);
+    font-size:20px;
+  }
+  .support-card h4{
+    margin:0;
+    font-size:17px;
+    line-height:1.3;
+    font-weight:700;
+  }
+  .support-card p{
+    margin:0;
+    color:var(--ink-soft);
+    font-size:14.75px;
+    line-height:1.8;
+  }
+  @media (max-width:980px){
+    .feature-panel{grid-template-columns:1fr;}
+    .supported-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:760px){
+    .feature-panel{grid-template-columns:1fr;}
+    .feature-primary-card{padding:28px 24px;}
+    .support-grid{gap:14px;}
+    .feature-section{padding:34px 0 34px;}
+    .feature-section h2{font-size:clamp(26px,6vw,30px);}
+    .feature-section p.feature-lead{margin-bottom:24px;}
+    .supported-section{padding:34px 0 34px;}
+    .supported-section h2{font-size:clamp(26px,6vw,30px);}
+    .supported-section p.supported-lead{margin-bottom:24px;}
+    .supported-card{padding:22px 20px;}
+  }
+  @media (max-width:860px){
+    .how-grid{grid-template-columns:1fr; padding-left:20px;}
+    .how-grid::before{left:30px; top:28px; bottom:12px; right:auto; width:1px; height:auto;}
+    .how-card{padding:24px 22px 22px 58px;}
+    .how-card::before{left:30px; top:30px;}
+  }
+  .trust-card:hover{transform:translateY(-1px); border-color:rgba(91,79,233,.14); box-shadow:0 26px 68px -48px rgba(91,79,233,.2);}
+  .trust-card:first-child{
+    border-color:rgba(108,102,144,.10);
+    box-shadow:0 22px 62px -46px rgba(91,79,233,.18);
+    padding:28px;
+  }
+  .trust-card:first-child .trust-card-title{
+    font-size:16.5px;
+  }
+  .trust-card-icon{
+    width:44px; height:44px; border-radius:14px; display:flex; align-items:center;
+    justify-content:center; color:var(--primary-dark);
+    background:rgba(91,79,233,.10);
+    font-size:20px; margin-bottom:16px;
+    box-shadow:0 0 0 1px rgba(91,79,233,.04);
+  }
+  .trust-card-title{
+    margin:0 0 10px; font-size:17px; line-height:1.3; font-weight:700; letter-spacing:-.02em;
+  }
+  .trust-card-desc{
+    margin:0; color:var(--ink-soft); font-size:14px; line-height:1.9;
+  }
+
+  @media (max-width:960px){
+    .hero-stage{min-height:auto; flex-direction:column; gap:12px; padding:0;}
+    .hero-callout{position:relative; top:auto; left:auto; right:auto; transform:none; width:min(100%,220px);}
+    .hero-connector{display:none;}
+    .dz-stage{margin:0 auto 4px;}
+  }
+
+  @media (max-width:860px){
+    .trust-grid{grid-template-columns:repeat(1,minmax(0,1fr));}
+    .trust-card:first-child{grid-column:auto;}
+  }
+
+  body.has-jobs .sub{
+    opacity:0; visibility:hidden; transform:translateY(-10px);
+    max-height:0; overflow:hidden; margin:0 auto 0; padding:0;
+    transition:opacity .4s ease, transform .4s ease;
+  }
+
+  /* ---------- dropzone + orbit ---------- */
+  .dz-stage{position:relative; max-width:700px; margin:0 auto; transition:transform .5s ease, opacity .5s ease; overflow:visible; z-index:4;}
+  body.has-jobs .dz-stage{
+    transform:scale(.98); opacity:0; visibility:hidden; pointer-events:none;
+    height:0; max-height:0; overflow:hidden; margin:0 auto 0; padding:0;
+  }
+
+  .orbit-field{
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:0;
+    height:0;
+    transform:translate(-50%, -60%) translateY(-20px);
+    pointer-events:none;
+    z-index:0;
+    overflow:visible;
+  }
+  .ring{
+    position:absolute;
+    top:0;
+    left:0;
+    width:0;
+    height:0;
+    animation:spin 42s linear infinite;
+  }
+  .ring.r2{animation-duration:58s; animation-direction:reverse;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .ic{position:absolute; top:50%; left:50%;}
+  .ic .counter{animation:spin 42s linear infinite reverse;}
+  .ring.r2 .ic .counter{animation-duration:58s; animation-direction:normal;}
+  .ic .badge{animation:bob 3.4s ease-in-out infinite;}
+  @keyframes bob{0%,100%{transform:translateY(0);} 50%{transform:translateY(-6px);}}
+
+  .dropzone{
+    position:relative; z-index:2;
+    background:var(--surface); border:1px solid rgba(91,79,233,.14);
+    border-radius:30px; padding:22px 24px 18px;
+    box-shadow:0 28px 90px -42px rgba(91,79,233,.28);
+    transition:border-color .2s, transform .2s, box-shadow .2s;
+    cursor:pointer;
+    transform:translateY(-20px);
+  }
+  .dropzone.drag{border-color:var(--primary); transform:translateY(-20px) scale(1.015); box-shadow:0 34px 80px -20px rgba(91,79,233,.4);}
+  .morph-badge{
+    width:72px;height:72px; margin:0 auto 14px;
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-family:'IBM Plex Mono'; font-weight:700; font-size:14px; letter-spacing:.03em;
+    background:var(--primary);
+    border-radius:32% 68% 65% 35% / 45% 35% 65% 55%;
+    box-shadow:0 16px 34px -12px rgba(91,79,233,.55);
+    animation:morph 7s ease-in-out infinite;
+    transition:background .3s ease, transform .3s ease;
+    min-width:78px; min-height:78px;
+    will-change:border-radius, background, transform;
+  }
+  @keyframes morph{
+    0%,100%{border-radius:32% 68% 65% 35% / 45% 35% 65% 55%;}
+    25%{border-radius:58% 42% 33% 67% / 60% 40% 60% 40%;}
+    50%{border-radius:50% 50% 50% 50% / 40% 60% 40% 60%;}
+    75%{border-radius:40% 60% 55% 45% / 30% 55% 45% 70%;}
+  }
+  .morph-badge span{
+    transition:opacity .18s ease, transform .18s ease;
+    display:inline-block;
+    width:42px;
+    text-align:center;
+    line-height:1;
+  }
+  .dz-title{font-weight:700; font-size:19px; margin:0 0 8px; letter-spacing:-.03em;}
+  .dz-sub{color:var(--ink-soft); font-size:13.5px; margin:0 0 16px;}
+  .dz-browse{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--ink); color:#fff; border:none; padding:10px 18px; min-height:40px; border-radius:999px;
+    font-weight:700; font-size:13px; cursor:pointer; transition:transform .15s, background .15s;
+  }
+  .dz-browse:hover{background:var(--primary-dark); transform:translateY(-1px);}
+  .dz-note{margin-top:12px; font-size:12px; color:var(--ink-soft); max-width:520px;}
+
+  /* ---------- marquee of supported formats ---------- */
+  .marquee-wrap{margin:56px 0 10px; transition:margin .4s ease, opacity .4s ease, max-height .4s ease, transform .4s ease; transform:translateY(-35px);}
+  body.has-jobs .marquee-wrap{opacity:0; max-height:0; overflow:hidden; margin:0; transform:none;}
+  .marquee-label{text-align:center; font-size:12.5px; letter-spacing:.09em; color:var(--ink-faint); font-family:'IBM Plex Mono'; margin-bottom:10px; text-transform:uppercase;}
+  .marquee{position:relative; overflow:hidden; max-width:100%; -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);}
+  .marquee-track{display:flex; gap:14px; width:max-content; animation:scroll-x 34s linear infinite;}
+  .marquee-track.rev{animation:scroll-x-rev 40s linear infinite; margin-top:14px;}
+  @keyframes scroll-x{from{transform:translateX(0);} to{transform:translateX(-50%);}}
+  @keyframes scroll-x-rev{from{transform:translateX(-50%);} to{transform:translateX(0);}}
+  .chip{
+    display:flex; align-items:center; gap:9px; background:var(--surface); border:1px solid var(--line);
+    padding:9px 16px 9px 10px; border-radius:100px; font-size:13.5px; font-weight:600; white-space:nowrap;
+    box-shadow:var(--shadow-sm);
+  }
+  .chip .dot2{width:9px;height:9px;border-radius:3px;}
+
+  /* ---------- results panel ---------- */
+  .panel-zone{max-width:900px; margin:26px auto 90px; display:none;}
+  body.has-jobs .panel-zone{display:block; animation:rise .55s cubic-bezier(.2,.8,.2,1);}
+  body:not(.has-jobs) .panel-zone{display:none;}
+  @keyframes rise{from{opacity:0; transform:translateY(26px) scale(.985);} to{opacity:1; transform:translateY(0) scale(1);}}
+
+  .panel-head{text-align:center; margin-bottom:22px;}
+  .panel-head h2{font-size:clamp(22px,3vw,30px); margin:0 0 6px;}
+  .panel-head p{color:var(--ink-soft); margin:0; font-size:14.5px;}
+
+  .panel{
+    background:var(--surface); border-radius:24px; box-shadow:var(--shadow-lg);
+    border:1px solid var(--line); overflow:hidden;
+  }
+  .panel-toolbar{display:flex; justify-content:flex-end; padding:20px 24px 6px;}
+  .ghost-btn{
+    display:flex; align-items:center; gap:6px; background:var(--primary-light); color:var(--primary-dark);
+    border:none; padding:9px 16px; border-radius:12px; font-weight:600; font-size:13.5px; cursor:pointer;
+    transition:background .15s;
+  }
+  .ghost-btn:hover{background:#DEDAFF;}
+
+  .row{
+    display:flex; align-items:center; gap:16px; padding:18px 24px;
+    border:1px solid rgba(108,102,144,.12); position:relative; overflow:hidden;
+    background:var(--surface); border-radius:20px; box-shadow:0 16px 40px -30px rgba(67,53,199,.35);
+    margin-bottom:14px;
+  }
+  .row:first-of-type{margin-top:0;}
+  .badge{
+    position:relative; flex:none; width:44px;height:44px;border-radius:11px 11px 11px 3px;
+    display:flex;align-items:center;justify-content:center; color:#fff;
+    font-family:'IBM Plex Mono'; font-weight:700; font-size:10.5px;
+    box-shadow:0 8px 16px -8px rgba(0,0,0,.35);
+  }
+  .badge::after{
+    content:'';position:absolute; top:0; right:0; width:0; height:0;
+    border-style:solid; border-width:0 11px 11px 0;
+    border-color:transparent rgba(255,255,255,.4) transparent transparent;
+  }
+  .row-info{flex:1; min-width:0;}
+  .row-name{font-weight:600; font-size:14.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .row-meta{display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--ink-faint); margin-top:3px;}
+  .arrow-tag{display:inline-flex; align-items:center; gap:5px; font-family:'IBM Plex Mono'; font-weight:600; font-size:11.5px; color:var(--ink-soft);}
+  .arrow-tag b{color:var(--primary-dark);}
+
+  .row-controls{display:flex; align-items:center; gap:8px; flex:none;}
+  select.fmt{
+    appearance:none; -webkit-appearance:none;
+    background:var(--surface) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="6"><path d="M0 0l5 6 5-6z" fill="%236C6690"/></svg>') no-repeat right 12px center;
+    border:1.5px solid var(--line); font-weight:700; font-family:'IBM Plex Mono'; font-size:12.5px; color:var(--ink);
+    padding:9px 30px 9px 12px; border-radius:11px; cursor:pointer; min-width:82px;
+  }
+  select.fmt:disabled{opacity:.5; cursor:not-allowed;}
+  .icon-btn{
+    width:36px;height:36px; border-radius:10px; border:1.5px solid var(--line); background:var(--surface);
+    color:var(--ink-soft); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:14px;
+    transition:background .15s, color .15s, border-color .15s;
+  }
+  .icon-btn:hover{background:var(--primary-light); color:var(--primary-dark); border-color:var(--primary-light);}
+  .icon-btn.danger:hover{background:#FDE7E7; color:var(--danger); border-color:#FDE7E7;}
+
+  .status-pill{
+    display:flex; align-items:center; gap:6px; font-size:13px; font-weight:700; color:var(--success);
+    background:#EAFAF1; border:1px solid #CFF3DD; padding:8px 14px; border-radius:11px; white-space:nowrap;
+  }
+  .converting-pill{
+    display:flex; align-items:center; gap:8px; font-size:12.5px; font-weight:600; color:var(--primary-dark);
+    background:var(--primary-light); padding:8px 14px; border-radius:11px; white-space:nowrap;
+  }
+  .spin{width:13px;height:13px; border-radius:50%; border:2px solid #C9C2FA; border-top-color:var(--primary-dark); animation:spin 0.8s linear infinite;}
+
+  .dl-split{display:flex; border-radius:14px; overflow:hidden; box-shadow:0 14px 32px -20px rgba(67,53,199,.28);}
+  .dl-main{background:var(--primary); color:#fff; border:none; padding:12px 22px; min-height:44px; font-weight:700; font-size:14px; cursor:pointer; display:flex; align-items:center; gap:8px; border-radius:999px; transition:background .15s, transform .15s;}
+  .dl-main:hover{background:var(--primary-dark); transform:translateY(-1px);}
+  .dl-caret{background:var(--primary-dark); color:#fff; border:none; width:36px; cursor:pointer; font-size:11px;}
+  .dl-caret:hover{background:#372BAA;}
+
+  .progress-track{position:absolute; left:0; bottom:0; height:3px; width:100%; background:var(--line);}
+  .progress-fill{height:100%; width:0%; background:linear-gradient(90deg,var(--primary),var(--coral)); transition:width linear;}
+
+  .subpanel{padding:0 24px 16px 84px; border-top:1px dashed var(--line); margin-top:0; display:none;}
+  .subpanel.open{display:block; animation:rise .3s ease;}
+  .subpanel-inner{padding-top:14px; display:flex; align-items:center; gap:14px; flex-wrap:wrap;}
+  .subpanel label{font-size:12.5px; font-weight:600; color:var(--ink-soft);}
+  input[type=range]{accent-color:var(--primary); width:160px;}
+  .code-box{
+    background:#1C1832; color:#D9D4FF; font-family:'IBM Plex Mono'; font-size:12px; padding:12px 14px;
+    border-radius:10px; width:100%; overflow-x:auto; white-space:pre; position:relative;
+  }
+  .code-copy{position:absolute; top:8px; right:8px; background:rgba(255,255,255,.1); border:none; color:#fff; font-size:11px; padding:5px 9px; border-radius:7px; cursor:pointer;}
+  .code-copy:hover{background:rgba(255,255,255,.2);}
+
+  .panel-footer{
+    display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+    padding:20px 24px; background:var(--primary-light);
+  }
+  .footer-left{display:flex; align-items:center; gap:10px; font-size:14px; font-weight:600; color:var(--ink);}
+  .footer-left select.fmt{background-color:#fff;}
+  .go-btn{
+    display:flex; align-items:center; gap:8px; background:var(--ink); color:#fff; border:none;
+    padding:12px 22px; min-height:44px; border-radius:999px; font-weight:700; font-size:14px; cursor:pointer; transition:background .15s, transform .15s;
+  }
+  .go-btn:hover:not(:disabled){background:var(--primary-dark); transform:translateY(-1px);}
+  .go-btn:disabled{opacity:.5; cursor:not-allowed;}
+
+  .footer-post{display:none; width:100%; flex-direction:column; gap:18px;}
+  .footer-post.show{display:flex;}
+  .post-actions{display:flex; gap:12px; flex-wrap:wrap; align-items:center;}
+  .outline-btn{
+    flex:1; min-width:180px; background:var(--surface); border:1.5px solid var(--primary); color:var(--primary-dark);
+    padding:14px 22px; border-radius:14px; font-weight:700; font-size:14.5px; cursor:pointer; transition:background .15s, transform .15s;
+  }
+  .outline-btn:hover{background:var(--primary-light);}
+  .solid-btn{
+    flex:2; min-width:220px; background:var(--primary); color:#fff; border:none;
+    padding:14px 22px; border-radius:14px; font-weight:700; font-size:14.5px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:10px;
+    transition:background .15s, transform .15s;
+  }
+  .solid-btn:hover{background:var(--primary-dark); transform:translateY(-1px);}
+  .post-note{font-size:12.5px; color:var(--ink-soft); text-align:center;}
+
+  /* ---------- toast ---------- */
+  #toastHost{position:fixed; bottom:26px; left:50%; transform:translateX(-50%); z-index:200; display:flex; flex-direction:column; gap:8px; align-items:center;}
+  .toast{
+    background:var(--ink); color:#fff; padding:12px 20px; border-radius:100px; font-size:13.5px; font-weight:600;
+    box-shadow:var(--shadow-lg); animation:toast-in .25s ease, toast-out .25s ease 2.3s forwards; display:flex; align-items:center; gap:8px;
+  }
+  @keyframes toast-in{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);}}
+  @keyframes toast-out{to{opacity:0; transform:translateY(-8px);}}
+
+  footer.site-foot{padding:40px 0 60px; text-align:center; color:var(--ink-faint); font-size:13px;}
+
+  @media (max-width:640px){
+    .nav-inner{
+      padding:12px 16px;
+      gap:12px;
+    }
+    .brand{
+      min-width:0;
+      flex-shrink:1;
+    }
+    .nav-cta{
+      flex-shrink:0;
+      white-space:nowrap;
+      min-height:40px;
+      padding:10px 16px;
+    }
+    .row{flex-wrap:wrap;}
+    .row-controls{width:100%; justify-content:flex-start; margin-left:60px; margin-top:-6px;}
+    .subpanel{padding-left:24px;}
+    .orbit-field{display:block; overflow:visible; contain:layout paint;}
+    .panel-zone{margin:26px auto 30px;}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.001s !important; animation-iteration-count:1 !important; transition-duration:.1s !important;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="nav-inner">
+    <a href="/" class="brand" aria-label="Go to the Converigo homepage"><span class="brand-mark" aria-hidden="true"></span>Converigo</a>
+    <div class="nav-links">
+      <a href="#formats">Format</a>
+      <a href="#cara">Cara Kerja</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <button class="nav-cta" id="navCta">Mulai Konversi</button>
+  </div>
+</nav>
+
+<header class="hero wrap">
+  <div class="eyebrow"><span class="dot"></span>Converigo — konversi file cepat, aman, tanpa install</div>
+  <h1 class="headline">Ubah File dalam <span class="grad">Hitungan Detik</span></h1>
+  <p class="sub">Konversi gambar, dokumen, video, audio, dan arsip langsung di browser—tanpa instalasi, tanpa registrasi, dan tanpa ribet.</p>
+  <div class="hero-stage">
+    <div class="hero-connector hero-connector-left" aria-hidden="true"></div>
+    <div class="dz-stage">
+    <div class="orbit-field" id="orbitField"></div>
+    <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Unggah file untuk dikonversi">
+      <div class="morph-badge" id="morphBadge"><span id="morphLabel">PDF</span></div>
+      <p class="dz-title">Seret &amp; lepas file di sini</p>
+      <p class="dz-sub">atau klik untuk memilih dari perangkatmu</p>
+      <button class="dz-browse" type="button" id="browseBtn">＋ Pilih File</button>
+      <p class="dz-note">Mendukung gambar, dokumen, audio, video &amp; arsip &middot; maks. 50 file sekaligus</p>
+    </div>
+  </div>
+    <div class="hero-connector hero-connector-right" aria-hidden="true"></div>
+  </div>
+  <input type="file" id="fileInput" multiple hidden>
+
+  <div class="marquee-wrap" id="formats">
+    <p class="marquee-label">Semua format yang bisa diubah</p>
+    <div class="marquee">
+      <div class="marquee-track" id="trackA"></div>
+      <div class="marquee-track rev" id="trackB"></div>
+    </div>
+  </div>
+</header>
+
+<section class="find-format-section wrap" aria-label="Find your format">
+  <div class="section-eyebrow">Find Your Format</div>
+  <h2>Browse supported file formats by category and quickly find the format you need.</h2>
+  <p class="find-format-lead">Choose the format family that matches your workflow and jump to the conversion you need.</p>
+  <div class="find-format-grid">
+    <article class="find-format-card">
+      <h3 class="find-format-card-title">Documents</h3>
+      <div class="find-format-chip-grid">
+        <span class="find-format-chip">PDF</span>
+        <span class="find-format-chip">DOCX</span>
+        <span class="find-format-chip">XLSX</span>
+        <span class="find-format-chip">PPTX</span>
+      </div>
+      <a class="find-format-link" href="#formats">View All →</a>
+    </article>
+    <article class="find-format-card">
+      <h3 class="find-format-card-title">Images</h3>
+      <div class="find-format-chip-grid">
+        <span class="find-format-chip">PNG</span>
+        <span class="find-format-chip">JPG</span>
+        <span class="find-format-chip">WEBP</span>
+        <span class="find-format-chip">SVG</span>
+      </div>
+      <a class="find-format-link" href="#formats">View All →</a>
+    </article>
+    <article class="find-format-card">
+      <h3 class="find-format-card-title">Video</h3>
+      <div class="find-format-chip-grid">
+        <span class="find-format-chip">MP4</span>
+        <span class="find-format-chip">AVI</span>
+        <span class="find-format-chip">MOV</span>
+        <span class="find-format-chip">MKV</span>
+      </div>
+      <a class="find-format-link" href="#formats">View All →</a>
+    </article>
+    <article class="find-format-card">
+      <h3 class="find-format-card-title">Audio</h3>
+      <div class="find-format-chip-grid">
+        <span class="find-format-chip">MP3</span>
+        <span class="find-format-chip">WAV</span>
+        <span class="find-format-chip">AAC</span>
+        <span class="find-format-chip">FLAC</span>
+      </div>
+      <a class="find-format-link" href="#formats">View All →</a>
+    </article>
+  </div>
+</section>
+
+<section class="supported-section wrap" aria-label="Supported formats">
+  <div class="section-eyebrow">Format yang Didukung</div>
+  <h2>Format populer yang bisa Anda konversi langsung.</h2>
+  <p class="supported-lead">Lihat rangkaian format yang sering digunakan untuk dokumen, gambar, video, dan audio—semua tanpa instalasi.</p>
+  <div class="supported-grid">
+    <article class="supported-card">
+      <h3>Dokumen</h3>
+      <div class="supported-chip-grid">
+        <span class="supported-chip">PDF</span>
+        <span class="supported-chip">DOCX</span>
+        <span class="supported-chip">XLSX</span>
+        <span class="supported-chip">PPTX</span>
+      </div>
+      <a class="supported-link" href="#formats">Lihat semua →</a>
+    </article>
+    <article class="supported-card">
+      <h3>Gambar</h3>
+      <div class="supported-chip-grid">
+        <span class="supported-chip">PNG</span>
+        <span class="supported-chip">JPG</span>
+        <span class="supported-chip">WEBP</span>
+        <span class="supported-chip">SVG</span>
+      </div>
+      <a class="supported-link" href="#formats">Lihat semua →</a>
+    </article>
+    <article class="supported-card">
+      <h3>Video</h3>
+      <div class="supported-chip-grid">
+        <span class="supported-chip">MP4</span>
+        <span class="supported-chip">AVI</span>
+        <span class="supported-chip">MOV</span>
+        <span class="supported-chip">MKV</span>
+      </div>
+      <a class="supported-link" href="#formats">Lihat semua →</a>
+    </article>
+    <article class="supported-card">
+      <h3>Audio</h3>
+      <div class="supported-chip-grid">
+        <span class="supported-chip">MP3</span>
+        <span class="supported-chip">WAV</span>
+        <span class="supported-chip">AAC</span>
+        <span class="supported-chip">FLAC</span>
+      </div>
+      <a class="supported-link" href="#formats">Lihat semua →</a>
+    </article>
+  </div>
+</section>
+
+<section class="trust-section wrap" aria-label="Trust and security">
+  <div class="section-eyebrow">Kepercayaan</div>
+  <h2>Konversi file Anda dengan keamanan dan transparansi yang jelas.</h2>
+  <p class="trust-lead">File Anda tetap pribadi, prosesnya jelas, dan tidak memerlukan akun untuk digunakan.</p>
+  <div class="trust-grid">
+    <article class="trust-card">
+      <div class="trust-card-icon" aria-hidden="true">🔒</div>
+      <h3 class="trust-card-title">Pengolahan lokal</h3>
+      <p class="trust-card-desc">Konversi dijalankan di browser. File tidak dikirim ke server pihak ketiga.</p>
+    </article>
+    <article class="trust-card">
+      <div class="trust-card-icon" aria-hidden="true">🗑️</div>
+      <h3 class="trust-card-title">Hapus otomatis</h3>
+      <p class="trust-card-desc">File dihapus otomatis dalam 8 jam setelah selesai, tanpa jejak jangka panjang.</p>
+    </article>
+    <article class="trust-card">
+      <div class="trust-card-icon" aria-hidden="true">👤</div>
+      <h3 class="trust-card-title">Tanpa akun</h3>
+      <p class="trust-card-desc">Gunakan layanan langsung tanpa mendaftar atau menyerahkan data pribadi tambahan.</p>
+    </article>
+    <article class="trust-card">
+      <div class="trust-card-icon" aria-hidden="true">📋</div>
+      <h3 class="trust-card-title">Alur yang jelas</h3>
+      <p class="trust-card-desc">Unggah, pilih format, konversi, unduh — setiap langkah mudah terlihat.</p>
+    </article>
+  </div>
+</section>
+
+<section id="cara" class="how-section wrap" aria-label="How it works">
+  <div class="section-eyebrow">Cara Kerja</div>
+  <h2>Empat langkah jelas untuk menyelesaikan file Anda dengan cepat.</h2>
+  <p class="how-lead">Unggah, pilih format, konversi aman, lalu unduh hasil tanpa kerumitan.</p>
+  <div class="how-grid">
+    <article class="how-card">
+      <span class="how-step-number">1</span>
+      <h3 class="how-step-title">Unggah file Anda</h3>
+      <p class="how-step-desc">Seret file atau pilih langsung dari perangkatmu.</p>
+    </article>
+    <article class="how-card">
+      <span class="how-step-number">2</span>
+      <h3 class="how-step-title">Pilih format keluaran</h3>
+      <p class="how-step-desc">Tentukan jenis file yang Anda butuhkan berikutnya.</p>
+    </article>
+    <article class="how-card">
+      <span class="how-step-number">3</span>
+      <h3 class="how-step-title">Konversi aman</h3>
+      <p class="how-step-desc">Proses berjalan cepat, tanpa mengorbankan privasi Anda.</p>
+    </article>
+    <article class="how-card">
+      <span class="how-step-number">4</span>
+      <h3 class="how-step-title">Unduh instan</h3>
+      <p class="how-step-desc">Ambil hasilnya segera setelah konversi selesai.</p>
+    </article>
+  </div>
+</section>
+
+<section class="feature-section wrap" aria-label="Feature overview">
+  <div class="section-eyebrow">Fitur Utama</div>
+  <h2>Konversi file yang bekerja seperti Anda butuhkan: cepat, jelas, dan tanpa instalasi.</h2>
+  <p class="feature-lead">Converigo menyatukan semua langkah penting dalam satu alur sederhana sehingga Anda bisa menyelesaikan file dengan percaya diri.</p>
+  <div class="feature-panel">
+    <div class="feature-primary-card">
+      <div class="primary-badge">Alasan utama</div>
+      <div class="feature-card-icon" aria-hidden="true">⚡</div>
+      <h3>Konversi langsung di browser</h3>
+      <p>Unggah file, pilih format, dan unduh hasilnya tanpa instalasi. Langsung dan tanpa langkah tambahan.</p>
+    </div>
+    <div class="support-grid">
+      <article class="support-card">
+        <div class="support-icon" aria-hidden="true">📁</div>
+        <h4>Dukungan format luas</h4>
+        <p>Bekerja dengan dokumen, gambar, audio, dan video yang umum dipakai setiap hari.</p>
+      </article>
+      <article class="support-card">
+        <div class="support-icon" aria-hidden="true">📋</div>
+        <h4>Alur yang mudah dipahami</h4>
+        <p>Setiap langkah jelas ditampilkan, jadi Anda selalu tahu apa yang terjadi sebelum mengunduh.</p>
+      </article>
+      <article class="support-card">
+        <div class="support-icon" aria-hidden="true">🧩</div>
+        <h4>Langsung digunakan</h4>
+        <p>Tidak perlu akun atau konfirmasi tambahan. Mulai konversi dalam hitungan detik.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="faq-section wrap" aria-label="Frequently asked questions">
+  <div class="section-eyebrow">FAQ</div>
+  <h2>Frequently Asked Questions</h2>
+  <p class="faq-lead">Everything you need to know before converting your files.</p>
+  <div class="faq-list">
+    <article class="faq-item active">
+      <h3 style="margin:0; font-size:inherit; font-weight:inherit;">
+        <button class="faq-question" type="button" aria-expanded="true">
+          <span>Is my file stored permanently?</span>
+          <span class="faq-chev">⌄</span>
+        </button>
+      </h3>
+      <p class="faq-answer" style="margin:0;">No. Files are processed securely and automatically removed after conversion.</p>
+    </article>
+    <article class="faq-item">
+      <h3 style="margin:0; font-size:inherit; font-weight:inherit;">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>Do I need to create an account?</span>
+          <span class="faq-chev">⌄</span>
+        </button>
+      </h3>
+      <p class="faq-answer" style="margin:0;">No. You can convert files without creating an account.</p>
+    </article>
+    <article class="faq-item">
+      <h3 style="margin:0; font-size:inherit; font-weight:inherit;">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>Which file formats are supported?</span>
+          <span class="faq-chev">⌄</span>
+        </button>
+      </h3>
+      <p class="faq-answer" style="margin:0;">Converigo supports documents, images, videos, audio, archives, and many other formats.</p>
+    </article>
+    <article class="faq-item">
+      <h3 style="margin:0; font-size:inherit; font-weight:inherit;">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>How long does conversion take?</span>
+          <span class="faq-chev">⌄</span>
+        </button>
+      </h3>
+      <p class="faq-answer" style="margin:0;">Most conversions finish within seconds depending on file size and format.</p>
+    </article>
+    <article class="faq-item">
+      <h3 style="margin:0; font-size:inherit; font-weight:inherit;">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>Is Converigo free?</span>
+          <span class="faq-chev">⌄</span>
+        </button>
+      </h3>
+      <p class="faq-answer" style="margin:0;">Many conversions are available for free. Additional features may vary depending on the selected tool.</p>
+    </article>
+    <article class="faq-item">
+      <h3 style="margin:0; font-size:inherit; font-weight:inherit;">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>What happens if my conversion fails?</span>
+          <span class="faq-chev">⌄</span>
+        </button>
+      </h3>
+      <p class="faq-answer" style="margin:0;">If a conversion cannot be completed, you can retry or choose another supported format.</p>
+    </article>
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const items = Array.from(document.querySelectorAll('.faq-item'));
+  items.forEach((item) => {
+    const button = item.querySelector('.faq-question');
+    if (!button) return;
+    button.addEventListener('click', () => {
+      const isOpen = item.classList.contains('active');
+      items.forEach((entry) => {
+        entry.classList.remove('active');
+        const entryButton = entry.querySelector('.faq-question');
+        if (entryButton) entryButton.setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('active');
+        button.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+});
+</script>
+
+<main class="wrap">
+  <div class="panel-zone" id="panelZone">
+    <div class="panel-head">
+      <h2>Hasil Konversi</h2>
+      <p>File kamu siap — unduh sebelum terhapus otomatis</p>
+    </div>
+    <div class="panel">
+      <div class="panel-toolbar">
+        <button class="ghost-btn" id="addMoreBtn" type="button">＋ Tambahkan Lebih Banyak File <span style="font-size:10px;">▾</span></button>
+      </div>
+      <div id="rows"></div>
+
+      <div class="panel-footer" id="footerPre">
+        <div class="footer-left">
+          <span id="footerLabel">Konversikan Semua (<span id="pendingCount">0</span>) ke:</span>
+          <select class="fmt" id="globalFmt"></select>
+        </div>
+        <button class="go-btn" id="goBtn" type="button">Mengubah <span>→</span></button>
+      </div>
+
+      <div class="panel-footer footer-post" id="footerPost">
+        <div class="post-actions">
+          <button class="outline-btn" id="newBtn" type="button">Konversi File Baru</button>
+          <button class="solid-btn" id="dlAllBtn" type="button">⬇ Unduh Semua</button>
+        </div>
+        <p class="post-note">Semua file akan dihapus otomatis dalam 8 jam untuk menjaga privasi Anda. Pastikan unduh hasil sebelum terhapus.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div id="toastHost"></div>
+
+<script>
+/* ---------------- data model ---------------- */
+const CATEGORY = {
+  image:    {color:'#5B4FE9', light:'#ECE9FF', targets:['JPG','PNG','WEBP','GIF','SVG','BMP'], exts:['jpg','jpeg','png','webp','gif','svg','bmp','tiff','heic']},
+  document: {color:'#FF6B4A', light:'#FFE9E2', targets:['PDF','DOCX','TXT','PPTX','XLSX','CSV','HTML'], exts:['pdf','docx','doc','txt','pptx','ppt','xlsx','xls','csv','html','md','rtf']},
+  audio:    {color:'#12B3A0', light:'#DEF7F3', targets:['MP3','WAV','OGG','FLAC','M4A'], exts:['mp3','wav','ogg','flac','m4a','aac']},
+  video:    {color:'#F59E0B', light:'#FEF3DA', targets:['MP4','MOV','WEBM','MKV','GIF'], exts:['mp4','mov','avi','webm','mkv','flv']},
+  archive:  {color:'#6C7599', light:'#E8EAF3', targets:['ZIP','RAR','7Z','TAR'], exts:['zip','rar','7z','tar','gz']},
+  other:    {color:'#9333EA', light:'#F3E8FF', targets:['PDF','JPG','PNG','TXT','ZIP'], exts:[]}
+};
+
+function categoryOf(ext){
+  ext = (ext||'').toLowerCase();
+  for(const key in CATEGORY){
+    if(CATEGORY[key].exts.includes(ext)) return key;
+  }
+  return 'other';
+}
+
+let jobs = [];
+let uid = 0;
+
+/* ---------------- helpers ---------------- */
+function splitName(filename){
+  const idx = filename.lastIndexOf('.');
+  if(idx <= 0) return {base:filename, ext:''};
+  return {base:filename.slice(0,idx), ext:filename.slice(idx+1)};
+}
+function fmtSize(bytes){
+  if(bytes < 1024) return bytes + ' B';
+  const kb = bytes/1024;
+  if(kb < 1024) return kb.toFixed(2) + ' KB';
+  return (kb/1024).toFixed(2) + ' MB';
+}
+function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function toast(msg, icon){
+  const host = document.getElementById('toastHost');
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.innerHTML = (icon||'✓') + ' ' + msg;
+  host.appendChild(el);
+  setTimeout(()=> el.remove(), 2700);
+}
+
+/* ---------------- add files ---------------- */
+function addFiles(fileList){
+  const files = Array.from(fileList).slice(0, 50);
+  if(!files.length) return;
+  files.forEach(file=>{
+    const {ext} = splitName(file.name);
+    const cat = categoryOf(ext);
+    const targets = CATEGORY[cat].targets;
+    let target = targets.find(t => t.toLowerCase() !== ext.toLowerCase()) || targets[0];
+    jobs.push({
+      id: 'j'+(uid++),
+      file, name:file.name, size:file.size, ext: ext.toUpperCase() || '—',
+      category:cat, target, status:'pending', progress:0, settingsOpen:false, codeOpen:false, quality:80
+    });
+  });
+  document.body.classList.add('has-jobs');
+  render();
+  toast(files.length + ' file ditambahkan');
+}
+
+/* ---------------- render ---------------- */
+function badgeStyle(cat){ return 'background:'+CATEGORY[cat].color+';'; }
+
+function rowTemplate(job){
+  const cat = CATEGORY[job.category];
+  let rightHTML = '';
+
+  if(job.status === 'pending'){
+    rightHTML = `
+      <select class="fmt" data-action="target" data-id="${job.id}">
+        ${cat.targets.map(t=>`<option value="${t}" ${t===job.target?'selected':''}>${t}</option>`).join('')}
+      </select>
+      <button class="icon-btn" data-action="settings" data-id="${job.id}" title="Pengaturan" aria-label="Pengaturan">⚙</button>
+      <button class="icon-btn" data-action="code" data-id="${job.id}" title="Lihat API" aria-label="Lihat API">&lt;/&gt;</button>
+      <button class="icon-btn danger" data-action="remove" data-id="${job.id}" title="Hapus" aria-label="Hapus">✕</button>`;
+  } else if(job.status === 'processing' || job.status === 'converting'){
+    rightHTML = `<div class="converting-pill"><span class="spin"></span>Mengonversi…</div>
+      <button class="icon-btn danger" data-action="remove" data-id="${job.id}" title="Hapus" aria-label="Hapus">✕</button>`;
+  } else {
+    rightHTML = `
+      <div class="status-pill">✓ Selesai</div>
+      <div class="dl-split">
+        <button class="dl-main" data-action="download" data-id="${job.id}">⬇ Unduh</button>
+        <button class="dl-caret" data-action="settings" data-id="${job.id}" aria-label="Opsi unduh">▾</button>
+      </div>
+      <button class="icon-btn danger" data-action="remove" data-id="${job.id}" title="Hapus" aria-label="Hapus">✕</button>`;
+  }
+
+  const progressHTML = job.status === 'converting' || job.status === 'processing'
+    ? `<div class="progress-track"><div class="progress-fill" id="fill-${job.id}"></div></div>` : '';
+
+  const sub = `
+    <div class="subpanel ${job.settingsOpen ? 'open':''}" data-sub="settings-${job.id}">
+      <div class="subpanel-inner">
+        <label>Kualitas Output: <b>${job.quality}%</b></label>
+        <input type="range" min="10" max="100" value="${job.quality}" data-action="quality" data-id="${job.id}">
+      </div>
+    </div>
+    <div class="subpanel ${job.codeOpen ? 'open':''}" data-sub="code-${job.id}">
+      <div class="subpanel-inner" style="display:block;">
+        <div class="code-box">curl -X POST https://api.ubah.in/v1/convert \\
+  -F "file=@${job.name}" \\
+  -F "target=${job.target.toLowerCase()}"<button class="code-copy" data-action="copy" data-id="${job.id}">Salin</button></div>
+      </div>
+    </div>`;
+
+  return `
+    <div class="row" data-row="${job.id}">
+      <div class="badge" style="${badgeStyle(job.category)}">${job.ext.slice(0,4)}</div>
+      <div class="row-info">
+        <div class="row-name">${esc(job.name)}</div>
+        <div class="row-meta">
+          <span>${fmtSize(job.size)}</span>
+          <span class="arrow-tag">${job.ext} → <b>${job.status==='done' ? job.target : job.target}</b></span>
+        </div>
+      </div>
+      <div class="row-controls">${rightHTML}</div>
+      ${progressHTML}
+    </div>
+    ${sub}
+  `;
+}
+
+function render(){
+  const rowsEl = document.getElementById('rows');
+  rowsEl.innerHTML = jobs.map(rowTemplate).join('');
+
+  const allDone = jobs.length>0 && jobs.every(j=>j.status==='done');
+  const pending = jobs.filter(j=>j.status!=='done');
+
+  document.getElementById('footerPre').style.display = allDone ? 'none' : 'flex';
+  document.getElementById('footerPost').classList.toggle('show', allDone);
+
+  const pendingCountEl = document.getElementById('pendingCount');
+  if(pendingCountEl) pendingCountEl.textContent = pending.length;
+  const goBtn = document.getElementById('goBtn');
+  goBtn.disabled = pending.length === 0 || jobs.some(j=>j.status==='converting' || j.status==='processing');
+
+  // start any newly-converting progress bars
+  jobs.filter(j=>j.status==='converting').forEach(j=>{
+    const fill = document.getElementById('fill-'+j.id);
+    if(fill){
+      requestAnimationFrame(()=>{
+        fill.style.transitionDuration = j._duration + 'ms';
+        fill.style.width = '100%';
+      });
+    }
+  });
+
+  buildGlobalFmt();
+}
+
+function buildGlobalFmt(){
+  const sel = document.getElementById('globalFmt');
+  const label = document.getElementById('footerLabel');
+  const pending = jobs.filter(j=>j.status!=='done');
+  const pendingTargets = [...new Set(pending.map(j => j.target))];
+  const sameTarget = pending.length > 0 && pendingTargets.length === 1;
+
+  if(sameTarget){
+    const cats = [...new Set(pending.map(j=>j.category))];
+    let opts = [];
+    if(cats.length === 1){
+      opts = CATEGORY[cats[0]].targets;
+    } else {
+      opts = ['JPG','PNG','PDF','MP3','MP4','ZIP'];
+    }
+    const current = sel.value;
+    sel.innerHTML = opts.map(t=>`<option value="${t}">${t}</option>`).join('');
+    if(opts.includes(current)) sel.value = current;
+    label.innerHTML = `Konversikan Semua (<span id="pendingCount">${pending.length}</span>) ke:`;
+    sel.style.display = '';
+  } else {
+    sel.innerHTML = '';
+    sel.style.display = 'none';
+    label.innerHTML = `Konversi (<span id="pendingCount">${pending.length}</span> File)`;
+  }
+}
+
+/* ---------------- conversion logic ---------------- */
+function convertAll(){
+  const pending = jobs.filter(j=>j.status==='pending');
+  if(!pending.length) return;
+  pending.forEach((j, i)=>{
+    j._duration = 900 + Math.random()*1400;
+    setTimeout(()=>{
+      j.status = 'processing';
+      render();
+      setTimeout(()=>{
+        j.status = 'converting';
+        render();
+        setTimeout(()=>{
+          j.status = 'done';
+          render();
+        }, j._duration + 60);
+      }, 180);
+    }, i * 160);
+  });
+}
+
+/* ---------------- download ---------------- */
+function convertedBlobName(job){
+  const {base} = splitName(job.name);
+  return base + '.' + job.target.toLowerCase();
+}
+function downloadJob(job){
+  const url = URL.createObjectURL(job.file);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = convertedBlobName(job);
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url), 4000);
+  toast('Mengunduh ' + convertedBlobName(job));
+}
+async function downloadAll(){
+  const done = jobs.filter(j=>j.status==='done');
+  if(!done.length) return;
+  if(done.length === 1){ downloadJob(done[0]); return; }
+  toast('Menyiapkan ZIP…', '⏳');
+  const zip = new JSZip();
+  for(const j of done){
+    const buf = await j.file.arrayBuffer();
+    zip.file(convertedBlobName(j), buf);
+  }
+  const blob = await zip.generateAsync({type:'blob'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'converigo-hasil-konversi.zip';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url), 4000);
+  toast('Unduhan ZIP dimulai');
+}
+
+/* ---------------- reset ---------------- */
+function resetAll(){
+  jobs = [];
+  document.body.classList.remove('has-jobs');
+  render();
+}
+
+/* ---------------- event delegation ---------------- */
+document.getElementById('rows').addEventListener('click', e=>{
+  const btn = e.target.closest('[data-action]');
+  if(!btn) return;
+  const id = btn.dataset.id;
+  const job = jobs.find(j=>j.id===id);
+  if(!job) return;
+  const action = btn.dataset.action;
+
+  if(action==='remove'){
+    jobs = jobs.filter(j=>j.id!==id);
+    if(!jobs.length) document.body.classList.remove('has-jobs');
+    render();
+  } else if(action==='settings'){
+    job.settingsOpen = !job.settingsOpen;
+    job.codeOpen = false;
+    render();
+  } else if(action==='code'){
+    job.codeOpen = !job.codeOpen;
+    job.settingsOpen = false;
+    render();
+  } else if(action==='download'){
+    downloadJob(job);
+  } else if(action==='copy'){
+    const code = `curl -X POST https://api.ubah.in/v1/convert -F "file=@${job.name}" -F "target=${job.target.toLowerCase()}"`;
+    navigator.clipboard?.writeText(code);
+    toast('Perintah disalin ke clipboard');
+  }
+});
+document.getElementById('rows').addEventListener('change', e=>{
+  const el = e.target.closest('[data-action]');
+  if(!el) return;
+  const id = el.dataset.id;
+  const job = jobs.find(j=>j.id===id);
+  if(!job) return;
+  if(el.dataset.action==='target'){ job.target = el.value; render(); }
+});
+document.getElementById('rows').addEventListener('input', e=>{
+  const el = e.target.closest('[data-action="quality"]');
+  if(!el) return;
+  const job = jobs.find(j=>j.id===el.dataset.id);
+  if(!job) return;
+  job.quality = el.value;
+  const label = el.closest('.subpanel-inner').querySelector('label b');
+  if(label) label.textContent = el.value + '%';
+});
+
+document.getElementById('goBtn').addEventListener('click', convertAll);
+document.getElementById('newBtn').addEventListener('click', resetAll);
+document.getElementById('dlAllBtn').addEventListener('click', downloadAll);
+
+/* file input wiring */
+const fileInput = document.getElementById('fileInput');
+document.getElementById('browseBtn').addEventListener('click', e=>{ e.stopPropagation(); fileInput.click(); });
+document.getElementById('addMoreBtn').addEventListener('click', ()=> fileInput.click());
+document.getElementById('navCta').addEventListener('click', ()=>{
+  // Removed forced scrolling to prevent unexpected viewport movement.
+});
+fileInput.addEventListener('change', e=>{ addFiles(e.target.files); fileInput.value=''; });
+
+const dz = document.getElementById('dropzone');
+dz.addEventListener('click', ()=> fileInput.click());
+dz.addEventListener('keydown', e=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); fileInput.click(); }});
+['dragenter','dragover'].forEach(evt=>{
+  dz.addEventListener(evt, e=>{ e.preventDefault(); dz.classList.add('drag'); });
+});
+['dragleave','drop'].forEach(evt=>{
+  dz.addEventListener(evt, e=>{ e.preventDefault(); dz.classList.remove('drag'); });
+});
+dz.addEventListener('drop', e=>{
+  if(e.dataTransfer?.files?.length) addFiles(e.dataTransfer.files);
+});
+
+/* ---------------- morph badge cycle ---------------- */
+const morphCycle = [
+  {label:'PDF', color:'#FF6B4A'}, {label:'JPG', color:'#5B4FE9'}, {label:'MP3', color:'#12B3A0'},
+  {label:'MP4', color:'#F59E0B'}, {label:'PNG', color:'#5B4FE9'}, {label:'ZIP', color:'#6C7599'},
+  {label:'DOCX', color:'#FF6B4A'}, {label:'WAV', color:'#12B3A0'}
+];
+let mi = 0;
+const morphBadge = document.getElementById('morphBadge');
+const morphLabel = document.getElementById('morphLabel');
+// Pause morph updates when the user is at the bottom of the page to avoid
+// layout shifts that can nudge the viewport. See bugfix rules: only add
+// a minimal scroll listener and skip updates while at bottom.
+let __isMorphPausedAtBottom = false;
+window.addEventListener('scroll', () => {
+  __isMorphPausedAtBottom = (window.innerHeight + window.scrollY) >= (document.body.scrollHeight - 5);
+}, { passive: true });
+
+setInterval(()=>{
+  // compute bottom at tick to avoid race with scroll events
+  const __atBottomNow = document.documentElement.scrollHeight > window.innerHeight &&
+    (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 5);
+  if(__isMorphPausedAtBottom || __atBottomNow) return;
+  mi = (mi+1) % morphCycle.length;
+  morphLabel.style.opacity = 0;
+  setTimeout(()=>{
+    morphLabel.textContent = morphCycle[mi].label;
+    morphBadge.style.background = morphCycle[mi].color;
+    morphLabel.style.opacity = 1;
+  }, 180);
+}, 1900);
+
+/* ---------------- orbit icons ---------------- */
+const orbitExts = [
+  {t:'PDF', c:'#FF6B4A'}, {t:'JPG', c:'#5B4FE9'}, {t:'MP3', c:'#12B3A0'}, {t:'MP4', c:'#F59E0B'},
+  {t:'ZIP', c:'#6C7599'}, {t:'PNG', c:'#5B4FE9'}, {t:'DOCX', c:'#FF6B4A'}, {t:'WAV', c:'#12B3A0'},
+  {t:'SVG', c:'#5B4FE9'}, {t:'CSV', c:'#FF6B4A'}, {t:'GIF', c:'#5B4FE9'}
+];
+function buildOrbit(){
+  const field = document.getElementById('orbitField');
+  const ring1 = document.createElement('div'); ring1.className = 'ring r1';
+  const ring2 = document.createElement('div'); ring2.className = 'ring r2';
+  const set1 = orbitExts.slice(0,6), set2 = orbitExts.slice(6,11);
+
+  function place(container, items, radius){
+    items.forEach((it, i)=>{
+      const angle = (360/items.length) * i;
+      const wrap = document.createElement('div');
+      wrap.className = 'ic';
+      wrap.style.transform = `rotate(${angle}deg) translate(${radius}px)`;
+      wrap.innerHTML = `<div class="counter"><div class="badge" style="width:38px;height:38px;border-radius:10px 10px 10px 3px;background:${it.c};font-size:9px;">${it.t}</div></div>`;
+      container.appendChild(wrap);
+    });
+  }
+  place(ring1, set1, 150);
+  place(ring2, set2, 215);
+  field.appendChild(ring1);
+  field.appendChild(ring2);
+}
+buildOrbit();
+
+/* ---------------- format marquee build ---------------- */
+function buildMarquee(){
+  const all = [];
+  Object.entries(CATEGORY).forEach(([key, val])=>{
+    if(key==='other') return;
+    val.targets.forEach(t=> all.push({t, c:val.color}));
+  });
+  const half = Math.ceil(all.length/2);
+  const rowA = all.slice(0, half), rowB = all.slice(half);
+  function build(list){
+    const doubled = list.concat(list);
+    return doubled.map(it=>`<div class="chip"><span class="dot2" style="background:${it.c}"></span>${it.t}</div>`).join('');
+  }
+  document.getElementById('trackA').innerHTML = build(rowA);
+  document.getElementById('trackB').innerHTML = build(rowB);
+}
+buildMarquee();
+
+render();
+</script>
+</body>
+</html>
