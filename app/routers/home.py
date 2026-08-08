@@ -1,4 +1,4 @@
-"""
+﻿"""
 Project : Converigo
 Author  : Pico Lala & ChatGPT
 Version : 2.0.0
@@ -8,7 +8,7 @@ from datetime import datetime
 from pathlib import Path
 
 from fastapi import APIRouter, HTTPException, Request
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 
 from app.core.templates import templates
 from app.services.converter_data_service import ConverterDataService
@@ -149,81 +149,18 @@ async def _render_not_found_page(request: Request, path: str | None = None) -> H
 
 @router.get("/", response_class=HTMLResponse)
 async def home(request: Request):
-
-    locale_data = language_service.load_locale(
-        accept_language=request.headers.get("accept-language"),
-        lang_query=request.query_params.get("lang"),
-    )
-
-    def t(key: str, default: str = "") -> str:
-        return language_service.translate(
-            locale_data,
-            key,
-            default,
-        )
-
-    popular = [
-        tool for tool in converter_data_service.list_popular_converters(limit=6)
-        if not (
-            str(tool.get("source", "")).strip().lower() == "pdf"
-            and str(tool.get("target", "")).strip().lower() == "pdf"
-        )
-    ]
-
-    category_icons = {
-        "image": "🖼️",
-        "document": "📄",
-        "audio": "🎧",
-        "video": "🎬",
-        "archive": "🗜️",
-        "general": "⚙️",
-    }
-
-    popular_converter_groups: list[dict[str, Any]] = []
-    group_map: dict[str, dict[str, Any]] = {}
-    for tool in popular:
-        category_key = str(tool.get("category", "general") or "general").strip().lower()
-        category_title = category_key.title()
-        if category_title not in group_map:
-            group_map[category_title] = {
-                "title": category_title,
-                "icon": category_icons.get(category_key, "⚙️"),
-                "tools": [],
-            }
-            popular_converter_groups.append(group_map[category_title])
-        group_map[category_title]["tools"].append(tool)
-
-    latest = converter_data_service.list_latest_converters(
-        limit=4
-    )
-
+    locale_data, t, supported_locales = _get_locale_context(request)
     metadata = seo_service.build_home_meta(request)
-    _, _, supported_locales = _get_locale_context(request)
-
-    hero_context = {
-        "eyebrow": t("hero.eyebrow", "Premium File Converter"),
-        "title": t("hero.title", "Convert All Files"),
-        "subtitle": t("hero.subtitle", "Convert files faster with premium simplicity."),
-        "subtitle_line": t("hero.subtitle_line", "In Seconds"),
-        "description": t("hero.description", "Convert images, videos, audio, and documents online."),
-        "description_secondary": t("hero.description_secondary", ""),
-    }
 
     return templates.TemplateResponse(
         request=request,
-        name="pages/home.html",
+        name="main/converigo_main.html",
         context={
             "request": request,
             "locale": locale_data,
             "t": t,
             "supported_locales": supported_locales,
-            "title": metadata["title"],
             "meta": metadata,
-            "hero": hero_context,
-            "featured_converters": popular[:4],
-            "popular_converter_groups": popular_converter_groups,
-            "popular_converters": popular,
-            "latest_converters": latest,
             "structured_data": seo_service.build_structured_data(
                 request,
                 page_data={
@@ -236,6 +173,11 @@ async def home(request: Request):
             "year": datetime.utcnow().year,
         },
     )
+
+
+@router.get("/certification")
+async def certification():
+    return RedirectResponse(url="/", status_code=301)
 
 
 @router.get("/about", response_class=HTMLResponse)
