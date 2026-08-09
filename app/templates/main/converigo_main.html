@@ -117,15 +117,35 @@
       transform: translateY(-36px);
     }
   }
-  body.has-jobs .hero{padding:34px 0 6px;}
-  body.has-jobs .hero,
+  body.has-jobs .hero{padding:2px 0 0;}
+  body.has-jobs .hero > .eyebrow,
+  body.has-jobs .hero > h1.headline,
+  body.has-jobs .hero > .sub {
+    transform:none;
+  }
+  body.has-jobs .hero-stage{min-height:0; margin:0 auto 0;}
+  body.has-jobs .sub{margin-bottom:0;}
+  body.has-jobs .hero .eyebrow{margin-bottom:2px;}
+  body.has-jobs .hero h1.headline{margin-bottom:1px;}
+  body.has-jobs .hero .hero-connector,
+  body.has-jobs .hero .orbit-field,
+  body.has-jobs .hero .morph-badge,
+  body.has-jobs .hero .dropzone::before,
+  body.has-jobs .hero .dropzone::after{
+    display:none !important;
+  }
+  body.has-jobs .hero .dropzone{
+    box-shadow:0 18px 48px -36px rgba(56,42,168,.2);
+    transform:none;
+    border-color:rgba(91,79,233,.1);
+  }
   body.has-jobs .supported-section,
-  body.has-jobs .trust-section,
-  body.has-jobs .how-section,
+  body.has-jobs .trust-how-section,
   body.has-jobs .feature-section,
   body.has-jobs .find-format-section,
   body.has-jobs .faq-section,
-  body.has-jobs .site-foot{
+  body.has-jobs .site-foot,
+  body.has-jobs .marquee-wrap{
     display:none !important;
   }
   .eyebrow{display:inline-flex; align-items:center; gap:10px; margin:0 auto 8px; color:var(--ink-soft); font-size:13px; letter-spacing:.14em; text-transform:uppercase; font-weight:700; text-decoration:none;}
@@ -163,11 +183,11 @@
 .hero-callout-left{left:12px; transform:translateY(-50%);}
   .hero-callout-right{right:12px; transform:translateY(-50%);}
   .hero-connector{
-    position:absolute; top:50%; width:88px; height:40px; border-bottom:1px solid rgba(91,79,233,.16);
-    border-radius:0 0 999px 999px; opacity:.9; pointer-events:none; z-index:2;
+    position:absolute; top:50%; width:64px; height:28px; border-bottom:1px solid rgba(91,79,233,.12);
+    border-radius:0 0 999px 999px; opacity:.75; pointer-events:none; z-index:2;
   }
-  .hero-connector-left{left:calc(50% - 214px); transform:translateY(-50%); border-left:1px solid rgba(91,79,233,.16); border-right:0;}
-  .hero-connector-right{right:calc(50% - 214px); transform:translateY(-50%); border-right:1px solid rgba(91,79,233,.16); border-left:0;}
+  .hero-connector-left{left:calc(50% - 150px); transform:translateY(-50%); border-left:1px solid rgba(91,79,233,.12); border-right:0;}
+  .hero-connector-right{right:calc(50% - 150px); transform:translateY(-50%); border-right:1px solid rgba(91,79,233,.12); border-left:0;}
 
   .trust-section{
     padding:52px 0 36px;
@@ -193,14 +213,14 @@
     display:flex;
     flex-direction:column;
     justify-content:flex-start;
-    gap:16px;
-    background:#fff; border:1px solid rgba(91,79,233,.08);
-    border-radius:24px; padding:28px;
-    box-shadow:0 18px 46px -32px rgba(91,79,233,.10);
+    gap:18px;
+    background:rgba(255,255,255,.9); border:1px solid rgba(91,79,233,.08);
+    border-radius:18px; padding:24px;
+    box-shadow:0 12px 28px -26px rgba(56,42,168,.18);
     transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
     min-height:220px;
   }
-  .trust-card:hover{transform:translateY(-1px); border-color:rgba(91,79,233,.14); box-shadow:0 30px 70px -38px rgba(91,79,233,.12);}
+  .trust-card:hover{transform:translateY(-1px); border-color:rgba(91,79,233,.16); box-shadow:0 28px 62px -38px rgba(91,79,233,.14);}
   .how-section{
     padding:44px 0 36px;
     margin-top:0;
@@ -218,34 +238,71 @@
     max-width:700px; margin:0 0 28px; color:var(--ink-soft); font-size:15.75px; line-height:1.75;
   }
   .find-format-section{
-    padding:22px 0 36px;
-    margin-bottom:clamp(80px, 6vw, 120px);
+    padding:26px 0 10px;
+    margin-bottom:20px;
+    scroll-margin-top:96px;
   }
   .find-format-section .section-eyebrow{
-    display:inline-flex; align-items:center; gap:10px; margin-bottom:12px;
+    display:inline-flex; align-items:center; gap:10px; margin-bottom:8px;
     color:var(--ink-soft); font-size:13px; font-weight:700; letter-spacing:.14em;
     text-transform:uppercase;
   }
   .find-format-section h2{
-    font-size:clamp(28px,3.6vw,32px); line-height:1.08; margin:0 0 10px; max-width:760px;
+    font-size:clamp(28px,3.6vw,32px); line-height:1.04; margin:0 0 4px; max-width:760px;
   }
   .find-format-section .find-format-lead{
-    max-width:700px; margin:0 0 24px; color:var(--ink-soft); font-size:15px; line-height:1.75;
+    max-width:700px; margin:0 0 12px; color:var(--ink-soft); font-size:14px; line-height:1.5;
   }
-  .find-format-grid{
-    display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px;
+  .find-format-directory{
+    display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0;
+    margin-top:0; background:transparent; border-top:1px solid rgba(91,79,233,.06);
   }
-  .find-format-card{
-    background:rgba(255,255,255,.86); border:1px solid rgba(91,79,233,.12);
-    border-radius:20px; padding:22px 22px 18px; box-shadow:0 10px 26px -18px rgba(91,79,233,.18);
-    transition:border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+  .find-format-card,
+  .find-format-row,
+  .supported-row,
+  .trust-statement,
+  .how-step-row,
+  .feature-primary-card,
+  .support-card,
+  .faq-item {
+    background:transparent; border:none; border-radius:0; box-shadow:none; padding:0; margin:0;
+    transition:none;
   }
-  .find-format-card:hover{border-color:rgba(91,79,233,.2); box-shadow:0 16px 34px -22px rgba(91,79,233,.26); transform:translateY(-2px);}
-  .find-format-card-title{margin:0 0 12px; font-size:18px; line-height:1.2; font-weight:700; color:var(--ink);}
-  .find-format-chip-grid{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
-  .find-format-chip{display:inline-flex; align-items:center; justify-content:center; padding:7px 10px; border:1px solid rgba(91,79,233,.12); border-radius:999px; font-size:12.5px; font-weight:600; color:var(--ink-soft); background:rgba(255,255,255,.72);}
-  .find-format-link{display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:700; color:var(--primary); text-decoration:none; transition:color .18s ease;}
-  .find-format-card:hover .find-format-link{color:var(--primary-dark);}
+  .find-format-row{
+    display:flex; flex-direction:column; gap:4px; min-height:0;
+    padding:12px 0 10px; border-bottom:1px solid rgba(91,79,233,.06);
+    background:transparent;
+  }
+  .find-format-card:hover,
+  .find-format-row:hover,
+  .supported-row:hover,
+  .trust-statement:hover,
+  .how-step-row:hover,
+  .feature-primary-card:hover,
+  .support-card:hover,
+  .faq-item:hover{border-color:transparent; box-shadow:none; transform:none;}
+  .format-row-label{
+    display:flex; align-items:flex-start; gap:10px;
+  }
+  .format-index{
+    display:inline-flex; align-items:center; justify-content:center;
+    min-width:20px; height:18px; padding:0 4px;
+    border:none; border-radius:4px; background:transparent; color:var(--ink-soft);
+    font-size:8px; letter-spacing:.12em; font-family:'IBM Plex Mono'; font-weight:600;
+  }
+  .find-format-card-title{margin:0; font-size:15px; line-height:1.2; font-weight:600; color:var(--ink); letter-spacing:-.02em;}
+  .format-category-copy{margin:0; color:var(--ink-soft); font-size:12px; line-height:1.45; max-width:28ch;}
+  .find-format-chip-grid{display:flex; flex-wrap:wrap; gap:4px; margin-top:2px; padding-left:30px;}
+  .find-format-chip{display:inline-flex; align-items:center; justify-content:center; min-height:18px; padding:0 6px; border:1px solid rgba(91,79,233,.08); border-radius:4px; font-size:10px; line-height:1; font-weight:500; color:var(--ink-soft); background:transparent; width:auto;}
+  .format-row-action, .find-format-link, .supported-link{display:none;}
+  @media (max-width:760px){
+    .find-format-section{padding-top:22px; margin-bottom:18px;}
+    .find-format-directory{grid-template-columns:1fr; gap:0;}
+    .find-format-row{padding:11px 0 9px;}
+    .find-format-chip-grid{padding-left:0; gap:4px;}
+    .format-category-copy{max-width:100%;}
+    .find-format-chip{font-size:9.4px; min-height:17px; padding:0 5px;}
+  }
 
   @media (min-width: 1024px){
     .hero{padding:64px 0 20px;}
@@ -273,13 +330,16 @@
   .faq-section .faq-lead{
     max-width:700px; margin:0 0 24px; color:var(--ink-soft); font-size:15px; line-height:1.75;
   }
-  .faq-list{display:grid; gap:12px; max-width:860px;}
-  .faq-item{border:1px solid rgba(91,79,233,.12); border-radius:18px; background:rgba(255,255,255,.88); overflow:hidden; box-shadow:0 10px 24px -22px rgba(91,79,233,.18);}
-  .faq-question{width:100%; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:18px 20px; border:none; background:transparent; color:var(--ink); font-size:15px; font-weight:700; text-align:left; cursor:pointer;}
-  .faq-answer{max-height:0; overflow:hidden; transition:max-height .25s ease, padding .25s ease; padding:0 20px; color:var(--ink-soft); font-size:14.5px; line-height:1.75;}
-  .faq-item.active .faq-answer{max-height:220px; padding:0 20px 18px;}
-  .faq-chev{display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:999px; color:var(--primary); transition:transform .2s ease; flex-shrink:0;}
-  .faq-item.active .faq-chev{transform:rotate(180deg);}
+  .faq-list{display:grid; gap:0; max-width:860px; border-top:1px solid rgba(91,79,233,.08);}
+  .faq-item{border:0; border-radius:0; background:transparent; overflow:hidden; box-shadow:none; padding:0;}
+  .faq-item:not(:last-child){border-bottom:1px solid rgba(91,79,233,.07);}
+  .faq-question{width:100%; display:grid; grid-template-columns:42px minmax(0,1fr) 24px; align-items:flex-start; gap:16px; padding:18px 0; border:none; background:transparent; color:var(--ink); font-size:15px; font-weight:600; text-align:left; cursor:pointer;}
+  .faq-index{display:inline-flex; align-items:flex-start; justify-content:flex-start; padding-top:2px; color:var(--ink-soft); font-size:10px; line-height:1.5; letter-spacing:.14em; text-transform:uppercase; font-family:'IBM Plex Mono',monospace; font-weight:600;}
+  .faq-question-text{display:block; min-width:0; color:var(--ink); font-size:15px; line-height:1.5; font-weight:600; letter-spacing:-.01em;}
+  .faq-answer{max-height:0; overflow:hidden; transition:max-height .25s ease, padding .25s ease; padding:0 0; color:var(--ink-soft); font-size:14px; line-height:1.7; margin:0; padding-left:58px; padding-right:28px;}
+  .faq-item.active .faq-answer{max-height:260px; padding-top:0; padding-bottom:18px;}
+  .faq-chev{display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:999px; color:var(--ink-soft); transition:transform .2s ease; flex-shrink:0; font-size:12px; margin-top:2px;}
+  .faq-item.active .faq-chev{transform:rotate(180deg); color:var(--primary);}
 
   .supported-section{
     padding:44px 0 36px;
@@ -367,13 +427,14 @@
     border-radius:50%; background:var(--surface); border:3px solid var(--primary);
   }
   .how-step-number{
-    font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:800; color:var(--primary);
+    font-size:10px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft);
+    font-family:'IBM Plex Mono',monospace;
   }
   .how-step-title{
-    margin:8px 0 8px; font-size:18px; line-height:1.2; font-weight:700;
+    margin:0; font-size:15px; line-height:1.25; font-weight:600; letter-spacing:-.02em;
   }
   .how-step-desc{
-    margin:0; color:var(--ink-soft); font-size:14.75px; line-height:1.7;
+    margin:0; color:var(--ink-soft); font-size:13.5px; line-height:1.65;
   }
   .feature-section{
     padding:44px 0 36px;
@@ -398,130 +459,99 @@
   }
   .feature-section p.feature-lead{
     max-width:700px;
-    margin:0 0 30px;
+    margin:0 0 24px;
     color:var(--ink-soft);
     font-size:15.75px;
     line-height:1.75;
   }
   .feature-panel{
     display:grid;
-    grid-template-columns:1.3fr .9fr;
-    gap:24px;
-    align-items:start;
+    gap:0;
+    grid-template-columns:1fr;
+    border-top:1px solid rgba(91,79,233,.08);
   }
-  .feature-primary-card{
-    position:relative;
-    display:flex;
-    flex-direction:column;
-    gap:20px;
-    background:#fff;
-    border:1px solid rgba(91,79,233,.12);
-    border-radius:26px;
-    padding:34px 32px;
-    box-shadow:var(--shadow-sm);
-    min-height:380px;
+  .feature-primary-card,
+  .support-card{
+    background:transparent;
+    border:none;
+    border-radius:0;
+    box-shadow:none;
+    padding:0;
+    min-height:0;
+  }
+  .feature-primary-card,
+  .support-card{
+    display:grid;
+    grid-template-columns:36px minmax(0,1fr);
+    gap:12px 14px;
+    align-items:start;
+    padding:16px 0 14px;
+    border-bottom:1px solid rgba(91,79,233,.08);
+  }
+  .feature-primary-top{
+    display:flex; align-items:center; gap:12px;
+    margin:0;
   }
   .primary-badge{
     display:inline-flex;
     align-items:center;
-    gap:8px;
-    padding:10px 16px;
-    border-radius:999px;
-    background:rgba(91,79,233,.08);
-    color:var(--primary-dark);
-    font-size:13px;
-    font-weight:700;
-    letter-spacing:.01em;
-  }
-  .feature-card-icon{
-    width:56px;
-    height:56px;
-    border-radius:20px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:rgba(91,79,233,.10);
-    color:var(--primary-dark);
-    font-size:26px;
-    box-shadow:0 20px 40px -30px rgba(91,79,233,.20);
-  }
-  .feature-primary-card h3{
-    margin:0;
-    font-size:28px;
-    line-height:1.15;
-    font-weight:700;
-  }
-  .feature-primary-card p{
-    margin:0;
+    justify-content:flex-start;
+    padding:0;
+    border-radius:0;
+    background:transparent;
     color:var(--ink-soft);
-    font-size:15.75px;
-    line-height:1.8;
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:.14em;
+    text-transform:uppercase;
   }
-  .support-grid{
-    display:grid;
-    gap:18px;
-    grid-template-columns:1fr;
-  }
-  @media (min-width:1080px){
-    .support-grid{
-      grid-template-columns:repeat(2,minmax(0,1fr));
-    }
-  }
-  .support-card{
-    display:flex;
-    flex-direction:column;
-    gap:16px;
-    padding:24px 22px;
-    border-radius:22px;
-    background:rgba(255,255,255,.98);
-    border:1px solid rgba(91,79,233,.10);
-    box-shadow:0 18px 46px -36px rgba(91,79,233,.10);
-    min-height:190px;
-    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-  }
-  .support-card:hover{
-    transform:translateY(-2px);
-    border-color:rgba(91,79,233,.16);
-    box-shadow:0 24px 56px -40px rgba(91,79,233,.14);
-  }
+  .feature-card-icon,
   .support-icon{
-    width:44px;
-    height:44px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:14px;
-    background:rgba(91,79,233,.10);
-    color:var(--primary-dark);
-    font-size:20px;
+    display:none;
   }
+  .feature-primary-card h3,
   .support-card h4{
     margin:0;
-    font-size:17px;
+    font-size:15px;
     line-height:1.3;
-    font-weight:700;
+    font-weight:600;
+    letter-spacing:-.02em;
+    color:var(--ink);
   }
-  .support-card p{
+  .feature-primary-card p,
+  .feature-primary-copy,
+  .support-card p,
+  .feature-proof-list li{
     margin:0;
     color:var(--ink-soft);
-    font-size:14.75px;
-    line-height:1.8;
+    font-size:14px;
+    line-height:1.7;
   }
+  .feature-primary-copy,
+  .support-card p{
+    grid-column:2;
+  }
+  .feature-proof-list{
+    margin:0;
+    padding:0;
+    list-style:none;
+    display:grid;
+    gap:6px;
+    grid-column:2;
+  }
+  .feature-primary-link{display:none;}
   @media (max-width:980px){
     .feature-panel{grid-template-columns:1fr;}
-    .supported-grid{grid-template-columns:1fr;}
   }
   @media (max-width:760px){
-    .feature-panel{grid-template-columns:1fr;}
-    .feature-primary-card{padding:28px 24px;}
-    .support-grid{gap:14px;}
     .feature-section{padding:34px 0 34px;}
     .feature-section h2{font-size:clamp(26px,6vw,30px);}
-    .feature-section p.feature-lead{margin-bottom:24px;}
-    .supported-section{padding:34px 0 34px;}
-    .supported-section h2{font-size:clamp(26px,6vw,30px);}
-    .supported-section p.supported-lead{margin-bottom:24px;}
-    .supported-card{padding:22px 20px;}
+    .feature-section p.feature-lead{margin-bottom:18px;}
+    .feature-primary-card,
+    .support-card{grid-template-columns:26px minmax(0,1fr); gap:10px 12px; padding:14px 0 12px;}
+    .feature-primary-copy,
+    .support-card p,
+    .feature-proof-list{grid-column:2;}
   }
   @media (max-width:860px){
     .how-grid{grid-template-columns:1fr; padding-left:20px;}
@@ -529,21 +559,22 @@
     .how-card{padding:24px 22px 22px 58px;}
     .how-card::before{left:30px; top:30px;}
   }
-  .trust-card:hover{transform:translateY(-1px); border-color:rgba(91,79,233,.14); box-shadow:0 26px 68px -48px rgba(91,79,233,.2);}
+  .trust-card:hover{transform:translateY(-1px); border-color:rgba(91,79,233,.14); box-shadow:0 18px 36px -28px rgba(56,42,168,.22);}
   .trust-card:first-child{
     border-color:rgba(108,102,144,.10);
-    box-shadow:0 22px 62px -46px rgba(91,79,233,.18);
-    padding:28px;
+    box-shadow:0 18px 36px -28px rgba(56,42,168,.22);
+    padding:24px;
   }
   .trust-card:first-child .trust-card-title{
     font-size:16.5px;
   }
   .trust-card-icon{
-    width:44px; height:44px; border-radius:14px; display:flex; align-items:center;
+    width:44px; height:44px; border-radius:16px; display:flex; align-items:center;
     justify-content:center; color:var(--primary-dark);
-    background:rgba(91,79,233,.10);
+    background:rgba(91,79,233,.09);
+    border:1px solid rgba(91,79,233,.12);
     font-size:20px; margin-bottom:16px;
-    box-shadow:0 0 0 1px rgba(91,79,233,.04);
+    box-shadow:0 8px 16px -12px rgba(91,79,233,.12);
   }
   .trust-card-title{
     margin:0 0 10px; font-size:17px; line-height:1.3; font-weight:700; letter-spacing:-.02em;
@@ -607,30 +638,23 @@
   .dropzone{
     position:relative; z-index:2;
     background:var(--surface); border:1px solid rgba(91,79,233,.14);
-    border-radius:30px; padding:22px 24px 18px;
-    box-shadow:0 28px 90px -42px rgba(91,79,233,.28);
+    border-radius:24px; padding:20px 22px 16px;
+    box-shadow:0 22px 52px -32px rgba(56,42,168,.22);
     transition:border-color .2s, transform .2s, box-shadow .2s;
     cursor:pointer;
-    transform:translateY(-20px);
+    transform:translateY(-6px);
   }
-  .dropzone.drag{border-color:var(--primary); transform:translateY(-20px) scale(1.015); box-shadow:0 34px 80px -20px rgba(91,79,233,.4);}
+  .dropzone.drag{border-color:var(--primary); transform:translateY(-6px) scale(1.01); box-shadow:0 26px 60px -26px rgba(56,42,168,.28);}
   .morph-badge{
-    width:72px;height:72px; margin:0 auto 14px;
+    width:64px;height:64px; margin:0 auto 12px;
     display:flex; align-items:center; justify-content:center;
-    color:#fff; font-family:'IBM Plex Mono'; font-weight:700; font-size:14px; letter-spacing:.03em;
-    background:var(--primary);
-    border-radius:32% 68% 65% 35% / 45% 35% 65% 55%;
-    box-shadow:0 16px 34px -12px rgba(91,79,233,.55);
-    animation:morph 7s ease-in-out infinite;
+    color:#fff; font-family:'IBM Plex Mono'; font-weight:700; font-size:13px; letter-spacing:.03em;
+    background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+    border-radius:18px;
+    box-shadow:0 14px 26px -16px rgba(56,42,168,.38);
+    animation:none;
     transition:background .3s ease, transform .3s ease;
-    min-width:78px; min-height:78px;
-    will-change:border-radius, background, transform;
-  }
-  @keyframes morph{
-    0%,100%{border-radius:32% 68% 65% 35% / 45% 35% 65% 55%;}
-    25%{border-radius:58% 42% 33% 67% / 60% 40% 60% 40%;}
-    50%{border-radius:50% 50% 50% 50% / 40% 60% 40% 60%;}
-    75%{border-radius:40% 60% 55% 45% / 30% 55% 45% 70%;}
+    min-width:64px; min-height:64px;
   }
   .morph-badge span{
     transition:opacity .18s ease, transform .18s ease;
@@ -643,10 +667,11 @@
   .dz-sub{color:var(--ink-soft); font-size:13.5px; margin:0 0 16px;}
   .dz-browse{
     display:inline-flex; align-items:center; gap:8px;
-    background:var(--ink); color:#fff; border:none; padding:10px 18px; min-height:40px; border-radius:999px;
-    font-weight:700; font-size:13px; cursor:pointer; transition:transform .15s, background .15s;
+    background:var(--ink); color:#fff; border:1px solid rgba(255,255,255,.2); padding:10px 18px; min-height:40px; border-radius:999px;
+    font-weight:700; font-size:13px; cursor:pointer; transition:transform .15s, background .15s, box-shadow .15s;
+    box-shadow:0 10px 22px -14px rgba(0,0,0,.14);
   }
-  .dz-browse:hover{background:var(--primary-dark); transform:translateY(-1px);}
+  .dz-browse:hover{background:var(--primary-dark); transform:translateY(-1px); box-shadow:0 14px 26px -16px rgba(0,0,0,.18);}
   .dz-note{margin-top:12px; font-size:12px; color:var(--ink-soft); max-width:520px;}
 
   /* ---------- marquee of supported formats ---------- */
@@ -666,8 +691,12 @@
   .chip .dot2{width:9px;height:9px;border-radius:3px;}
 
   /* ---------- results panel ---------- */
-  .panel-zone{max-width:900px; margin:26px auto 90px; display:none;}
-  body.has-jobs .panel-zone{display:block; animation:rise .55s cubic-bezier(.2,.8,.2,1);}
+  .panel-zone{max-width:900px; width:min(100%,900px); margin:0 auto 0; display:none; position:relative; z-index:2;}
+  body.has-jobs .panel-zone{display:block; margin:48px auto 12px; animation:rise .55s cubic-bezier(.2,.8,.2,1);}
+  body.has-jobs .panel-head{margin-bottom:12px;}
+  body.has-jobs .panel-head h2{font-size:clamp(20px,2.6vw,24px); margin:0 0 4px;}
+  body.has-jobs .panel-head p{font-size:13px;}
+  body.has-jobs .panel{border-radius:20px;}
   body:not(.has-jobs) .panel-zone{display:none;}
   @keyframes rise{from{opacity:0; transform:translateY(26px) scale(.985);} to{opacity:1; transform:translateY(0) scale(1);}}
 
@@ -740,10 +769,7 @@
   .dl-split{display:flex; border-radius:14px; overflow:hidden; box-shadow:0 14px 32px -20px rgba(67,53,199,.28);}
   .dl-main{background:var(--primary); color:#fff; border:none; padding:12px 22px; min-height:44px; font-weight:700; font-size:14px; cursor:pointer; display:flex; align-items:center; gap:8px; border-radius:999px; transition:background .15s, transform .15s;}
   .dl-main:hover{background:var(--primary-dark); transform:translateY(-1px);}
-  .dl-caret{background:var(--primary-dark); color:#fff; border:none; width:36px; cursor:pointer; font-size:11px;}
-  .dl-caret:hover{background:#372BAA;}
-
-  .progress-track{position:absolute; left:0; bottom:0; height:3px; width:100%; background:var(--line);}
+  .dl-caret{display:none !important; background:var(--primary-dark); color:#fff; border:none; width:36px; cursor:pointer; font-size:11px;}
   .progress-fill{height:100%; width:0%; background:linear-gradient(90deg,var(--primary),var(--coral)); transition:width linear;}
 
   .subpanel{padding:0 24px 16px 84px; border-top:1px dashed var(--line); margin-top:0; display:none;}
@@ -766,9 +792,11 @@
   .footer-left select.fmt{background-color:#fff;}
   .go-btn{
     display:flex; align-items:center; gap:8px; background:var(--ink); color:#fff; border:none;
-    padding:12px 22px; min-height:44px; border-radius:999px; font-weight:700; font-size:14px; cursor:pointer; transition:background .15s, transform .15s;
+    padding:12px 22px; min-height:44px; border-radius:999px; font-weight:700; font-size:14px; cursor:pointer; transition:background .15s, transform .15s, box-shadow .15s;
+    box-shadow:0 14px 30px -18px rgba(67,53,199,.16);
   }
-  .go-btn:hover:not(:disabled){background:var(--primary-dark); transform:translateY(-1px);}
+  .go-btn:hover:not(:disabled){background:var(--primary-dark); transform:translateY(-1px); box-shadow:0 18px 34px -20px rgba(67,53,199,.18);}
+  .go-btn:focus-visible{outline:2px solid rgba(255,255,255,.95); outline-offset:4px;}
   .go-btn:disabled{opacity:.5; cursor:not-allowed;}
 
   .footer-post{display:none; width:100%; flex-direction:column; gap:18px;}
@@ -782,9 +810,11 @@
   .solid-btn{
     flex:2; min-width:220px; background:var(--primary); color:#fff; border:none;
     padding:14px 22px; border-radius:14px; font-weight:700; font-size:14.5px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:10px;
-    transition:background .15s, transform .15s;
+    transition:background .15s, transform .15s, box-shadow .15s;
+    box-shadow:0 14px 30px -18px rgba(67,53,199,.18);
   }
-  .solid-btn:hover{background:var(--primary-dark); transform:translateY(-1px);}
+  .solid-btn:hover{background:var(--primary-dark); transform:translateY(-1px); box-shadow:0 18px 36px -20px rgba(67,53,199,.20);}
+  .solid-btn:focus-visible{outline:2px solid rgba(255,255,255,.95); outline-offset:4px;}
   .post-note{font-size:12.5px; color:var(--ink-soft); text-align:center;}
 
   /* ---------- toast ---------- */
@@ -823,7 +853,23 @@
   @media (prefers-reduced-motion:reduce){
     *{animation-duration:.001s !important; animation-iteration-count:1 !important; transition-duration:.1s !important;}
   }
+
+  .site-footer .container {
+    width: min(100%, 1180px);
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 32px;
+    box-sizing: border-box;
+  }
+  .site-footer a {
+    color: rgba(244,247,251,0.78);
+  }
+  .site-footer a:hover,
+  .site-footer a:focus-visible {
+    color: #ffffff;
+  }
 </style>
+<link rel="stylesheet" href="/static/css/components/footer.css">
 </head>
 <body>
 
@@ -840,9 +886,9 @@
 </nav>
 
 <header class="hero wrap">
-  <div class="eyebrow"><span class="dot"></span>Converigo ΓÇö konversi file cepat, aman, tanpa install</div>
+  <div class="eyebrow"><span class="dot"></span>Converigo — konversi file cepat, aman, tanpa install</div>
   <h1 class="headline">Ubah File dalam <span class="grad">Hitungan Detik</span></h1>
-  <p class="sub">Konversi gambar, dokumen, video, audio, dan arsip langsung di browserΓÇötanpa instalasi, tanpa registrasi, dan tanpa ribet.</p>
+  <p class="sub">Konversi gambar, dokumen, video, audio, dan arsip langsung di browser—tanpa instalasi, tanpa registrasi, dan tanpa ribet.</p>
   <div class="hero-stage">
     <div class="hero-connector hero-connector-left" aria-hidden="true"></div>
     <div class="dz-stage">
@@ -851,13 +897,42 @@
       <div class="morph-badge" id="morphBadge"><span id="morphLabel">PDF</span></div>
       <p class="dz-title">Seret &amp; lepas file di sini</p>
       <p class="dz-sub">atau klik untuk memilih dari perangkatmu</p>
-      <button class="dz-browse" type="button" id="browseBtn">∩╝ï Pilih File</button>
+      <button class="dz-browse" type="button" id="browseBtn">📂 Pilih File</button>
       <p class="dz-note">Mendukung gambar, dokumen, audio, video &amp; arsip &middot; maks. 50 file sekaligus</p>
     </div>
   </div>
     <div class="hero-connector hero-connector-right" aria-hidden="true"></div>
   </div>
   <input type="file" id="fileInput" multiple hidden>
+
+  <div class="panel-zone" id="panelZone">
+    <div class="panel-head">
+      <h2>Hasil Konversi</h2>
+      <p>File kamu siap — unduh sebelum terhapus otomatis</p>
+    </div>
+    <div class="panel">
+      <div class="panel-toolbar">
+        <button class="ghost-btn" id="addMoreBtn" type="button">📁 Tambahkan Lebih Banyak File <span style="font-size:10px;">▾</span></button>
+      </div>
+      <div id="rows"></div>
+
+      <div class="panel-footer" id="footerPre">
+        <div class="footer-left">
+          <span id="footerLabel">Konversikan Semua (<span id="pendingCount">0</span>) ke:</span>
+          <select class="fmt" id="globalFmt"></select>
+        </div>
+        <button class="go-btn" id="goBtn" type="button">Mengubah <span>→</span></button>
+      </div>
+
+      <div class="panel-footer footer-post" id="footerPost">
+        <div class="post-actions">
+          <button class="outline-btn" id="newBtn" type="button">Konversi File Baru</button>
+          <button class="solid-btn" id="dlAllBtn" type="button">⬇️ Unduh Semua</button>
+        </div>
+        <p class="post-note">Semua file akan dihapus otomatis dalam 8 jam untuk menjaga privasi Anda. Pastikan unduh hasil sebelum terhapus.</p>
+      </div>
+    </div>
+  </div>
 
   <div class="marquee-wrap" id="formats">
     <p class="marquee-label">Semua format yang bisa diubah</p>
@@ -868,247 +943,296 @@
   </div>
 </header>
 
-<section class="find-format-section wrap" aria-label="Find your format">
-  <div class="section-eyebrow">Find Your Format</div>
-  <h2>Browse supported file formats by category and quickly find the format you need.</h2>
-  <p class="find-format-lead">Choose the format family that matches your workflow and jump to the conversion you need.</p>
-  <div class="find-format-grid">
-    <article class="find-format-card">
-      <h3 class="find-format-card-title">Documents</h3>
+<section class="find-format-section wrap" aria-label="Temukan format Anda">
+  <div class="section-eyebrow">Temukan Format</div>
+  <div class="section-head">
+    <div>
+      <h2>Temukan format yang cocok untuk kebutuhan konversi Anda.</h2>
+      <p class="find-format-lead">Pilih kategori file dan lanjutkan ke jenis konversi yang sesuai.</p>
+    </div>
+    <a class="button button-quiet" href="#formats">Lihat semua format</a>
+  </div>
+  <div class="find-format-directory">
+    <article class="find-format-row is-featured">
+      <div class="format-row-label">
+        <span class="format-index">01</span>
+        <div>
+          <h3 class="find-format-card-title">Documents</h3>
+          <p class="format-category-copy">PDF, dokumen kerja, presentasi, dan spreadsheet.</p>
+        </div>
+      </div>
       <div class="find-format-chip-grid">
         <span class="find-format-chip">PDF</span>
         <span class="find-format-chip">DOCX</span>
         <span class="find-format-chip">XLSX</span>
         <span class="find-format-chip">PPTX</span>
       </div>
-      <a class="find-format-link" href="#formats">View All ΓåÆ</a>
     </article>
-    <article class="find-format-card">
-      <h3 class="find-format-card-title">Images</h3>
+    <article class="find-format-row">
+      <div class="format-row-label">
+        <span class="format-index">02</span>
+        <div>
+          <h3 class="find-format-card-title">Images</h3>
+          <p class="format-category-copy">Visual web, asset editor, dan file siap publikasi.</p>
+        </div>
+      </div>
       <div class="find-format-chip-grid">
         <span class="find-format-chip">PNG</span>
         <span class="find-format-chip">JPG</span>
         <span class="find-format-chip">WEBP</span>
         <span class="find-format-chip">SVG</span>
       </div>
-      <a class="find-format-link" href="#formats">View All ΓåÆ</a>
     </article>
-    <article class="find-format-card">
-      <h3 class="find-format-card-title">Video</h3>
+    <article class="find-format-row">
+      <div class="format-row-label">
+        <span class="format-index">03</span>
+        <div>
+          <h3 class="find-format-card-title">Video</h3>
+          <p class="format-category-copy">Format untuk distribusi, review, dan sharing media.</p>
+        </div>
+      </div>
       <div class="find-format-chip-grid">
         <span class="find-format-chip">MP4</span>
         <span class="find-format-chip">AVI</span>
         <span class="find-format-chip">MOV</span>
         <span class="find-format-chip">MKV</span>
       </div>
-      <a class="find-format-link" href="#formats">View All ΓåÆ</a>
     </article>
-    <article class="find-format-card">
-      <h3 class="find-format-card-title">Audio</h3>
+    <article class="find-format-row">
+      <div class="format-row-label">
+        <span class="format-index">04</span>
+        <div>
+          <h3 class="find-format-card-title">Audio</h3>
+          <p class="format-category-copy">File audio siap diputar, dipublish, atau diarsipkan.</p>
+        </div>
+      </div>
       <div class="find-format-chip-grid">
         <span class="find-format-chip">MP3</span>
         <span class="find-format-chip">WAV</span>
         <span class="find-format-chip">AAC</span>
         <span class="find-format-chip">FLAC</span>
       </div>
-      <a class="find-format-link" href="#formats">View All ΓåÆ</a>
     </article>
   </div>
 </section>
 
-<section class="supported-section wrap" aria-label="Supported formats">
-  <div class="section-eyebrow">Format yang Didukung</div>
-  <h2>Format populer yang bisa Anda konversi langsung.</h2>
-  <p class="supported-lead">Lihat rangkaian format yang sering digunakan untuk dokumen, gambar, video, dan audioΓÇösemua tanpa instalasi.</p>
-  <div class="supported-grid">
-    <article class="supported-card">
-      <h3>Dokumen</h3>
+<section class="supported-section wrap" aria-label="Popular format matrix">
+  <div class="section-head compact-head">
+    <div>
+      <div class="section-eyebrow">Format Populer</div>
+      <h2>Format populer yang bisa Anda konversi langsung.</h2>
+    </div>
+    <a class="button button-ghost" href="#formats">Semua format</a>
+  </div>
+  <div class="supported-directory">
+    <article class="supported-row is-featured">
+      <div class="supported-row-label">
+        <span class="supported-index">Documents</span>
+        <div>
+          <h3>Dokumen</h3>
+          <p class="supported-copy">Teks, spreadsheet, dan presentasi yang sering dipakai untuk kerja harian.</p>
+        </div>
+      </div>
       <div class="supported-chip-grid">
         <span class="supported-chip">PDF</span>
         <span class="supported-chip">DOCX</span>
         <span class="supported-chip">XLSX</span>
         <span class="supported-chip">PPTX</span>
       </div>
-      <a class="supported-link" href="#formats">Lihat semua ΓåÆ</a>
     </article>
-    <article class="supported-card">
-      <h3>Gambar</h3>
+    <article class="supported-row">
+      <div class="supported-row-label">
+        <span class="supported-index">Images</span>
+        <div>
+          <h3>Gambar</h3>
+          <p class="supported-copy">Visual siap web, sharing, asset, dan kolaborasi tim.</p>
+        </div>
+      </div>
       <div class="supported-chip-grid">
-        <span class="supported-chip">PNG</span>
         <span class="supported-chip">JPG</span>
+        <span class="supported-chip">PNG</span>
         <span class="supported-chip">WEBP</span>
         <span class="supported-chip">SVG</span>
       </div>
-      <a class="supported-link" href="#formats">Lihat semua ΓåÆ</a>
     </article>
-    <article class="supported-card">
-      <h3>Video</h3>
+    <article class="supported-row">
+      <div class="supported-row-label">
+        <span class="supported-index">Video</span>
+        <div>
+          <h3>Video</h3>
+          <p class="supported-copy">Media visual untuk preview, desktop, dan publikasi.</p>
+        </div>
+      </div>
       <div class="supported-chip-grid">
         <span class="supported-chip">MP4</span>
-        <span class="supported-chip">AVI</span>
         <span class="supported-chip">MOV</span>
+        <span class="supported-chip">WEBM</span>
         <span class="supported-chip">MKV</span>
       </div>
-      <a class="supported-link" href="#formats">Lihat semua ΓåÆ</a>
     </article>
-    <article class="supported-card">
-      <h3>Audio</h3>
+    <article class="supported-row">
+      <div class="supported-row-label">
+        <span class="supported-index">Audio</span>
+        <div>
+          <h3>Audio</h3>
+          <p class="supported-copy">Audio siap diputar, dibagikan, atau dipindahkan ke workflow lain.</p>
+        </div>
+      </div>
       <div class="supported-chip-grid">
         <span class="supported-chip">MP3</span>
         <span class="supported-chip">WAV</span>
         <span class="supported-chip">AAC</span>
         <span class="supported-chip">FLAC</span>
       </div>
-      <a class="supported-link" href="#formats">Lihat semua ΓåÆ</a>
     </article>
   </div>
 </section>
 
-<section class="trust-section wrap" aria-label="Trust and security">
-  <div class="section-eyebrow">Kepercayaan</div>
-  <h2>Konversi file Anda dengan keamanan dan transparansi yang jelas.</h2>
-  <p class="trust-lead">File Anda tetap pribadi, prosesnya jelas, dan tidak memerlukan akun untuk digunakan.</p>
-  <div class="trust-grid">
-    <article class="trust-card">
-      <div class="trust-card-icon" aria-hidden="true">≡ƒöÆ</div>
-      <h3 class="trust-card-title">Pengolahan lokal</h3>
-      <p class="trust-card-desc">Konversi dijalankan di browser. File tidak dikirim ke server pihak ketiga.</p>
-    </article>
-    <article class="trust-card">
-      <div class="trust-card-icon" aria-hidden="true">≡ƒùæ∩╕Å</div>
-      <h3 class="trust-card-title">Hapus otomatis</h3>
-      <p class="trust-card-desc">File dihapus otomatis dalam 8 jam setelah selesai, tanpa jejak jangka panjang.</p>
-    </article>
-    <article class="trust-card">
-      <div class="trust-card-icon" aria-hidden="true">≡ƒæñ</div>
-      <h3 class="trust-card-title">Tanpa akun</h3>
-      <p class="trust-card-desc">Gunakan layanan langsung tanpa mendaftar atau menyerahkan data pribadi tambahan.</p>
-    </article>
-    <article class="trust-card">
-      <div class="trust-card-icon" aria-hidden="true">≡ƒôï</div>
-      <h3 class="trust-card-title">Alur yang jelas</h3>
-      <p class="trust-card-desc">Unggah, pilih format, konversi, unduh ΓÇö setiap langkah mudah terlihat.</p>
-    </article>
-  </div>
-</section>
-
-<section id="cara" class="how-section wrap" aria-label="How it works">
-  <div class="section-eyebrow">Cara Kerja</div>
-  <h2>Empat langkah jelas untuk menyelesaikan file Anda dengan cepat.</h2>
-  <p class="how-lead">Unggah, pilih format, konversi aman, lalu unduh hasil tanpa kerumitan.</p>
-  <div class="how-grid">
-    <article class="how-card">
-      <span class="how-step-number">1</span>
-      <h3 class="how-step-title">Unggah file Anda</h3>
-      <p class="how-step-desc">Seret file atau pilih langsung dari perangkatmu.</p>
-    </article>
-    <article class="how-card">
-      <span class="how-step-number">2</span>
-      <h3 class="how-step-title">Pilih format keluaran</h3>
-      <p class="how-step-desc">Tentukan jenis file yang Anda butuhkan berikutnya.</p>
-    </article>
-    <article class="how-card">
-      <span class="how-step-number">3</span>
-      <h3 class="how-step-title">Konversi aman</h3>
-      <p class="how-step-desc">Proses berjalan cepat, tanpa mengorbankan privasi Anda.</p>
-    </article>
-    <article class="how-card">
-      <span class="how-step-number">4</span>
-      <h3 class="how-step-title">Unduh instan</h3>
-      <p class="how-step-desc">Ambil hasilnya segera setelah konversi selesai.</p>
-    </article>
+<section class="trust-how-section wrap" aria-label="Keamanan, kepercayaan, dan alur kerja">
+  <div class="trust-how-layout">
+    <aside class="trust-panel">
+      <div class="section-eyebrow">Kepercayaan</div>
+      <h2>Konversi file Anda dengan keamanan dan transparansi yang jelas.</h2>
+      <p class="trust-lead">File Anda tetap pribadi, prosesnya jelas, dan tidak memerlukan akun untuk digunakan.</p>
+      <div class="trust-editorial">
+        <article class="trust-statement">
+          <span class="trust-index">01</span>
+          <div>
+            <div class="trust-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="6" width="16" height="10" rx="2"/><path d="M8 17h8"/><path d="M10 20h4"/></svg></div>
+            <h3 class="trust-card-title">Pengolahan langsung di browser</h3>
+            <p class="trust-card-desc">Konversi dijalankan di browser. File tidak dikirim ke server pihak ketiga.</p>
+          </div>
+        </article>
+        <article class="trust-statement">
+          <span class="trust-index">02</span>
+          <div>
+            <div class="trust-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 7V5h6v2"/><path d="M7 7h10"/><rect x="8" y="9" width="8" height="8" rx="2"/><path d="M10 11v4"/><path d="M14 11v4"/></svg></div>
+            <h3 class="trust-card-title">File dihapus otomatis</h3>
+            <p class="trust-card-desc">File dihapus otomatis dalam 8 jam setelah selesai, tanpa jejak jangka panjang.</p>
+          </div>
+        </article>
+        <article class="trust-statement">
+          <span class="trust-index">03</span>
+          <div>
+            <div class="trust-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="3"/><path d="M6 20c0-2.5 2-4.5 6-4.5s6 2 6 4.5"/><path d="M6 6l12 12"/></svg></div>
+            <h3 class="trust-card-title">Tanpa akun</h3>
+            <p class="trust-card-desc">Gunakan layanan langsung tanpa mendaftar atau menyerahkan data pribadi tambahan.</p>
+          </div>
+        </article>
+      </div>
+    </aside>
+    <div class="how-panel">
+      <div class="section-eyebrow">Cara Kerja</div>
+      <h2>Empat langkah jelas untuk menyelesaikan file Anda dengan cepat.</h2>
+      <p class="how-lead">Unggah, pilih format, konversi aman, lalu unduh hasil tanpa kerumitan.</p>
+      <div class="how-timeline">
+        <article class="how-step-row">
+          <span class="how-step-number">01</span>
+          <div class="how-step-copy">
+            <h3 class="how-step-title">Upload file</h3>
+            <p class="how-step-desc">Seret file atau pilih langsung dari perangkatmu.</p>
+          </div>
+        </article>
+        <article class="how-step-row">
+          <span class="how-step-number">02</span>
+          <div class="how-step-copy">
+            <h3 class="how-step-title">Pilih format</h3>
+            <p class="how-step-desc">Tentukan jenis hasil yang Anda butuhkan berikutnya.</p>
+          </div>
+        </article>
+        <article class="how-step-row">
+          <span class="how-step-number">03</span>
+          <div class="how-step-copy">
+            <h3 class="how-step-title">Download hasil</h3>
+            <p class="how-step-desc">Ambil file yang sudah siap dipakai tanpa langkah tambahan.</p>
+          </div>
+        </article>
+      </div>
+    </div>
   </div>
 </section>
 
 <section class="feature-section wrap" aria-label="Feature overview">
-  <div class="section-eyebrow">Fitur Utama</div>
-  <h2>Konversi file yang bekerja seperti Anda butuhkan: cepat, jelas, dan tanpa instalasi.</h2>
-  <p class="feature-lead">Converigo menyatukan semua langkah penting dalam satu alur sederhana sehingga Anda bisa menyelesaikan file dengan percaya diri.</p>
+  <div class="section-eyebrow">Why Converigo</div>
+  <h2>Fitur yang membuat proses konversi tetap cepat, sederhana, dan jelas.</h2>
+  <p class="feature-lead">Semua hal yang penting dipresentasikan dalam satu alur yang mudah dibaca, tanpa elemen yang mengalihkan fokus.</p>
   <div class="feature-panel">
-    <div class="feature-primary-card">
-      <div class="primary-badge">Alasan utama</div>
-      <div class="feature-card-icon" aria-hidden="true">ΓÜí</div>
-      <h3>Konversi langsung di browser</h3>
-      <p>Unggah file, pilih format, dan unduh hasilnya tanpa instalasi. Langsung dan tanpa langkah tambahan.</p>
-    </div>
-    <div class="support-grid">
-      <article class="support-card">
-        <div class="support-icon" aria-hidden="true">≡ƒôü</div>
-        <h4>Dukungan format luas</h4>
-        <p>Bekerja dengan dokumen, gambar, audio, dan video yang umum dipakai setiap hari.</p>
-      </article>
-      <article class="support-card">
-        <div class="support-icon" aria-hidden="true">≡ƒôï</div>
-        <h4>Alur yang mudah dipahami</h4>
-        <p>Setiap langkah jelas ditampilkan, jadi Anda selalu tahu apa yang terjadi sebelum mengunduh.</p>
-      </article>
-      <article class="support-card">
-        <div class="support-icon" aria-hidden="true">≡ƒº⌐</div>
-        <h4>Langsung digunakan</h4>
-        <p>Tidak perlu akun atau konfirmasi tambahan. Mulai konversi dalam hitungan detik.</p>
-      </article>
-    </div>
+    <article class="feature-primary-card">
+      <div class="feature-primary-top">
+        <span class="primary-badge">01</span>
+      </div>
+      <h3>Fast conversion</h3>
+      <p class="feature-primary-copy">Convert files quickly from your browser, without extra setup or extra steps.</p>
+    </article>
+    <article class="support-card">
+      <div class="feature-primary-top">
+        <span class="primary-badge">02</span>
+      </div>
+      <h4>Multiple formats</h4>
+      <p>Support documents, images, audio, and video in a single practical workflow.</p>
+    </article>
+    <article class="support-card">
+      <div class="feature-primary-top">
+        <span class="primary-badge">03</span>
+      </div>
+      <h4>Simple workflow</h4>
+      <p>Upload, convert, and download without unnecessary extra screens or configuration.</p>
+    </article>
   </div>
 </section>
 
 <section id="faq" class="faq-section wrap" aria-label="Frequently asked questions">
   <div class="section-eyebrow">FAQ</div>
-  <h2>Frequently Asked Questions</h2>
-  <p class="faq-lead">Everything you need to know before converting your files.</p>
+  <h2>Pertanyaan yang Sering Diajukan</h2>
+  <p class="faq-lead">Jawaban singkat untuk membantu Anda menggunakan Converigo dengan cepat.</p>
   <div class="faq-list">
     <article class="faq-item active">
-      <h3 style="margin:0; font-size:inherit; font-weight:inherit;">
-        <button class="faq-question" type="button" aria-expanded="true">
-          <span>Is my file stored permanently?</span>
-          <span class="faq-chev">Γîä</span>
-        </button>
-      </h3>
-      <p class="faq-answer" style="margin:0;">No. Files are processed securely and automatically removed after conversion.</p>
+      <button class="faq-question" type="button" aria-expanded="true">
+        <span class="faq-index">01</span>
+        <span class="faq-question-text">Apakah file saya disimpan permanen?</span>
+        <span class="faq-chev">▼</span>
+      </button>
+      <p class="faq-answer">Tidak. File diproses sementara dan dihapus otomatis setelah konversi selesai.</p>
     </article>
     <article class="faq-item">
-      <h3 style="margin:0; font-size:inherit; font-weight:inherit;">
-        <button class="faq-question" type="button" aria-expanded="false">
-          <span>Do I need to create an account?</span>
-          <span class="faq-chev">Γîä</span>
-        </button>
-      </h3>
-      <p class="faq-answer" style="margin:0;">No. You can convert files without creating an account.</p>
+      <button class="faq-question" type="button" aria-expanded="false">
+        <span class="faq-index">02</span>
+        <span class="faq-question-text">Perlu membuat akun?</span>
+        <span class="faq-chev">▼</span>
+      </button>
+      <p class="faq-answer">Tidak. Anda bisa langsung mengonversi file tanpa membuat akun.</p>
     </article>
     <article class="faq-item">
-      <h3 style="margin:0; font-size:inherit; font-weight:inherit;">
-        <button class="faq-question" type="button" aria-expanded="false">
-          <span>Which file formats are supported?</span>
-          <span class="faq-chev">Γîä</span>
-        </button>
-      </h3>
-      <p class="faq-answer" style="margin:0;">Converigo supports documents, images, videos, audio, archives, and many other formats.</p>
+      <button class="faq-question" type="button" aria-expanded="false">
+        <span class="faq-index">03</span>
+        <span class="faq-question-text">Format file apa saja yang didukung?</span>
+        <span class="faq-chev">▼</span>
+      </button>
+      <p class="faq-answer">Converigo mendukung dokumen, gambar, video, audio, arsip, dan banyak format umum lainnya.</p>
     </article>
     <article class="faq-item">
-      <h3 style="margin:0; font-size:inherit; font-weight:inherit;">
-        <button class="faq-question" type="button" aria-expanded="false">
-          <span>How long does conversion take?</span>
-          <span class="faq-chev">Γîä</span>
-        </button>
-      </h3>
-      <p class="faq-answer" style="margin:0;">Most conversions finish within seconds depending on file size and format.</p>
+      <button class="faq-question" type="button" aria-expanded="false">
+        <span class="faq-index">04</span>
+        <span class="faq-question-text">Berapa lama konversi berlangsung?</span>
+        <span class="faq-chev">▼</span>
+      </button>
+      <p class="faq-answer">Biasanya beberapa detik, tergantung ukuran dan jenis berkas.</p>
     </article>
     <article class="faq-item">
-      <h3 style="margin:0; font-size:inherit; font-weight:inherit;">
-        <button class="faq-question" type="button" aria-expanded="false">
-          <span>Is Converigo free?</span>
-          <span class="faq-chev">Γîä</span>
-        </button>
-      </h3>
-      <p class="faq-answer" style="margin:0;">Many conversions are available for free. Additional features may vary depending on the selected tool.</p>
+      <button class="faq-question" type="button" aria-expanded="false">
+        <span class="faq-index">05</span>
+        <span class="faq-question-text">Apakah Converigo gratis?</span>
+        <span class="faq-chev">▼</span>
+      </button>
+      <p class="faq-answer">Banyak konversi tersedia gratis. Fitur tambahan bisa berbeda sesuai alat yang dipilih.</p>
     </article>
     <article class="faq-item">
-      <h3 style="margin:0; font-size:inherit; font-weight:inherit;">
-        <button class="faq-question" type="button" aria-expanded="false">
-          <span>What happens if my conversion fails?</span>
-          <span class="faq-chev">Γîä</span>
-        </button>
-      </h3>
-      <p class="faq-answer" style="margin:0;">If a conversion cannot be completed, you can retry or choose another supported format.</p>
+      <button class="faq-question" type="button" aria-expanded="false">
+        <span class="faq-index">06</span>
+        <span class="faq-question-text">Apa yang terjadi jika konversi gagal?</span>
+        <span class="faq-chev">▼</span>
+      </button>
+      <p class="faq-answer">Jika konversi gagal, coba lagi atau pilih format lain yang didukung.</p>
     </article>
   </div>
 </section>
@@ -1135,36 +1259,45 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-<main class="wrap">
-  <div class="panel-zone" id="panelZone">
-    <div class="panel-head">
-      <h2>Hasil Konversi</h2>
-      <p>File kamu siap ΓÇö unduh sebelum terhapus otomatis</p>
+<footer class="site-footer" aria-labelledby="footerHeading">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-brand-mark" aria-hidden="true">C</div>
+        <h3>{{ request.state.t('footer.brand', 'Converigo') }}</h3>
+        <p>{{ request.state.t('footer.description', 'Fast, free and secure online file converter.') }}</p>
+        <p class="footer-brand-cta">{{ request.state.t('footer.tagline', 'Convert Files in Seconds.') }}</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-column">
+          <h4>{{ request.state.t('footer.product', 'Product') }}</h4>
+          <a href="/#formats">{{ request.state.t('footer.supported_formats', 'Supported Formats') }}</a>
+          <a href="#faq">{{ request.state.t('footer.faq', 'FAQ') }}</a>
+        </div>
+        <div class="footer-column">
+          <h4>{{ request.state.t('footer.company', 'Company') }}</h4>
+          <a href="/about">{{ request.state.t('footer.about', 'About') }}</a>
+          <a href="/contact">{{ request.state.t('footer.contact', 'Contact') }}</a>
+          <a href="/blog">{{ request.state.t('footer.blog', 'Blog') }}</a>
+          <a href="/privacy-policy">{{ request.state.t('footer.privacy_policy', 'Privacy Policy') }}</a>
+        </div>
+        <div class="footer-column">
+          <h4>{{ request.state.t('footer.support', 'Support') }}</h4>
+          <a href="https://ko-fi.com/converigo" target="_blank" rel="noopener" class="kofi-cta-button" aria-label="{{ request.state.t('footer.support_cta', 'Support Converigo on Ko-fi') }}">
+            <svg class="kofi-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M7 2h10a4 4 0 0 1 4 4v1h1a2 2 0 0 1 2 2v2a4 4 0 0 1-4 4h-1v2a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V8H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3Zm10 3H7a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1Zm-1 4h1a1 1 0 0 0 0-2h-1v2Zm-8-1h2v2H8v-2Z" fill="currentColor"/>
+            </svg>
+            <span>{{ request.state.t('footer.support_cta', 'Support Converigo') }}</span>
+          </a>
+        </div>
+      </div>
     </div>
-    <div class="panel">
-      <div class="panel-toolbar">
-        <button class="ghost-btn" id="addMoreBtn" type="button">∩╝ï Tambahkan Lebih Banyak File <span style="font-size:10px;">Γû╛</span></button>
-      </div>
-      <div id="rows"></div>
-
-      <div class="panel-footer" id="footerPre">
-        <div class="footer-left">
-          <span id="footerLabel">Konversikan Semua (<span id="pendingCount">0</span>) ke:</span>
-          <select class="fmt" id="globalFmt"></select>
-        </div>
-        <button class="go-btn" id="goBtn" type="button">Mengubah <span>ΓåÆ</span></button>
-      </div>
-
-      <div class="panel-footer footer-post" id="footerPost">
-        <div class="post-actions">
-          <button class="outline-btn" id="newBtn" type="button">Konversi File Baru</button>
-          <button class="solid-btn" id="dlAllBtn" type="button">Γ¼ç Unduh Semua</button>
-        </div>
-        <p class="post-note">Semua file akan dihapus otomatis dalam 8 jam untuk menjaga privasi Anda. Pastikan unduh hasil sebelum terhapus.</p>
-      </div>
+    <div class="footer-bottom">
+      <p>{{ request.state.t('footer.copyright', '© 2026 Converigo. All rights reserved.') }}</p>
+      <p>{{ request.state.t('footer.bottom_tagline', 'Convert Files in Seconds.') }}</p>
     </div>
   </div>
-</main>
+</footer>
 
 <div id="toastHost"></div>
 
@@ -1207,7 +1340,7 @@ function toast(msg, icon){
   const host = document.getElementById('toastHost');
   const el = document.createElement('div');
   el.className = 'toast';
-  el.innerHTML = (icon||'Γ£ô') + ' ' + msg;
+  el.innerHTML = (icon||'✔️') + ' ' + msg;
   host.appendChild(el);
   setTimeout(()=> el.remove(), 2700);
 }
@@ -1223,7 +1356,7 @@ function addFiles(fileList){
     let target = targets.find(t => t.toLowerCase() !== ext.toLowerCase()) || targets[0];
     jobs.push({
       id: 'j'+(uid++),
-      file, name:file.name, size:file.size, ext: ext.toUpperCase() || 'ΓÇö',
+      file, name:file.name, size:file.size, ext: ext.toUpperCase() || 'FILE',
       category:cat, target, status:'pending', progress:0, settingsOpen:false, codeOpen:false, quality:80
     });
   });
@@ -1244,20 +1377,20 @@ function rowTemplate(job){
       <select class="fmt" data-action="target" data-id="${job.id}">
         ${cat.targets.map(t=>`<option value="${t}" ${t===job.target?'selected':''}>${t}</option>`).join('')}
       </select>
-      <button class="icon-btn" data-action="settings" data-id="${job.id}" title="Pengaturan" aria-label="Pengaturan">ΓÜÖ</button>
+      <button class="icon-btn" data-action="settings" data-id="${job.id}" title="Pengaturan" aria-label="Pengaturan">⚙️</button>
       <button class="icon-btn" data-action="code" data-id="${job.id}" title="Lihat API" aria-label="Lihat API">&lt;/&gt;</button>
-      <button class="icon-btn danger" data-action="remove" data-id="${job.id}" title="Hapus" aria-label="Hapus">Γ£ò</button>`;
+      <button class="icon-btn danger" data-action="remove" data-id="${job.id}" title="Hapus" aria-label="Hapus">✖</button>`;
   } else if(job.status === 'processing' || job.status === 'converting'){
-    rightHTML = `<div class="converting-pill"><span class="spin"></span>MengonversiΓÇª</div>
-      <button class="icon-btn danger" data-action="remove" data-id="${job.id}" title="Hapus" aria-label="Hapus">Γ£ò</button>`;
+    rightHTML = `<div class="converting-pill"><span class="spin"></span>Mengonversi…</div>
+      <button class="icon-btn danger" data-action="remove" data-id="${job.id}" title="Hapus" aria-label="Hapus">✖</button>`;
   } else {
     rightHTML = `
-      <div class="status-pill">Γ£ô Selesai</div>
+      <div class="status-pill">✔️ Selesai</div>
       <div class="dl-split">
-        <button class="dl-main" data-action="download" data-id="${job.id}">Γ¼ç Unduh</button>
-        <button class="dl-caret" data-action="settings" data-id="${job.id}" aria-label="Opsi unduh">Γû╛</button>
+        <button class="dl-main" data-action="download" data-id="${job.id}">⬇️ Unduh</button>
+        <button class="dl-caret" data-action="settings" data-id="${job.id}" aria-label="Opsi unduh">▾</button>
       </div>
-      <button class="icon-btn danger" data-action="remove" data-id="${job.id}" title="Hapus" aria-label="Hapus">Γ£ò</button>`;
+      <button class="icon-btn danger" data-action="remove" data-id="${job.id}" title="Hapus" aria-label="Hapus">✖</button>`;
   }
 
   const progressHTML = job.status === 'converting' || job.status === 'processing'
@@ -1285,7 +1418,7 @@ function rowTemplate(job){
         <div class="row-name">${esc(job.name)}</div>
         <div class="row-meta">
           <span>${fmtSize(job.size)}</span>
-          <span class="arrow-tag">${job.ext} ΓåÆ <b>${job.status==='done' ? job.target : job.target}</b></span>
+          <span class="arrow-tag">${job.ext} → <b>${job.status==='done' ? job.target : job.target}</b></span>
         </div>
       </div>
       <div class="row-controls">${rightHTML}</div>
@@ -1392,7 +1525,7 @@ async function downloadAll(){
   const done = jobs.filter(j=>j.status==='done');
   if(!done.length) return;
   if(done.length === 1){ downloadJob(done[0]); return; }
-  toast('Menyiapkan ZIPΓÇª', 'ΓÅ│');
+  toast('Menyiapkan ZIP…', '⏳');
   const zip = new JSZip();
   for(const j of done){
     const buf = await j.file.arrayBuffer();
