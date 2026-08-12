@@ -1060,18 +1060,18 @@
 <section class="supported-section wrap" aria-label="Popular format matrix">
   <div class="section-head compact-head">
     <div>
-      <div class="section-eyebrow">Format Populer</div>
-      <h2>Format populer yang bisa Anda konversi langsung.</h2>
+      <div class="section-eyebrow">{{ request.state.t('homepage.supported.eyebrow', 'Popular Formats') }}</div>
+      <h2>{{ request.state.t('homepage.supported.heading', 'Popular formats you can convert instantly.') }}</h2>
     </div>
-    <a class="button button-ghost" href="#formats">Semua format</a>
+    <a class="button button-ghost" href="#formats">{{ request.state.t('homepage.supported.cta', 'All formats') }}</a>
   </div>
   <div class="supported-directory">
     <article class="supported-row is-featured">
       <div class="supported-row-label">
-        <span class="supported-index">Documents</span>
+        <span class="supported-index">{{ request.state.t('homepage.supported.categories.documents.title', 'Documents') }}</span>
         <div>
-          <h3>Dokumen</h3>
-          <p class="supported-copy">Teks, spreadsheet, dan presentasi yang sering dipakai untuk kerja harian.</p>
+          <h3>{{ request.state.t('homepage.supported.categories.documents.title', 'Documents') }}</h3>
+          <p class="supported-copy">{{ request.state.t('homepage.supported.categories.documents.copy', 'Text, spreadsheets, and presentations for everyday work.') }}</p>
         </div>
       </div>
       <div class="supported-chip-grid">
@@ -1083,10 +1083,10 @@
     </article>
     <article class="supported-row">
       <div class="supported-row-label">
-        <span class="supported-index">Images</span>
+        <span class="supported-index">{{ request.state.t('homepage.supported.categories.images.title', 'Images') }}</span>
         <div>
-          <h3>Gambar</h3>
-          <p class="supported-copy">Visual siap web, sharing, asset, dan kolaborasi tim.</p>
+          <h3>{{ request.state.t('homepage.supported.categories.images.title', 'Images') }}</h3>
+          <p class="supported-copy">{{ request.state.t('homepage.supported.categories.images.copy', 'Visual files for web, sharing, asset, and team collaboration.') }}</p>
         </div>
       </div>
       <div class="supported-chip-grid">
@@ -1098,10 +1098,10 @@
     </article>
     <article class="supported-row">
       <div class="supported-row-label">
-        <span class="supported-index">Video</span>
+        <span class="supported-index">{{ request.state.t('homepage.supported.categories.video.title', 'Video') }}</span>
         <div>
-          <h3>Video</h3>
-          <p class="supported-copy">Media visual untuk preview, desktop, dan publikasi.</p>
+          <h3>{{ request.state.t('homepage.supported.categories.video.title', 'Video') }}</h3>
+          <p class="supported-copy">{{ request.state.t('homepage.supported.categories.video.copy', 'Visual media for preview, desktop, and publishing.') }}</p>
         </div>
       </div>
       <div class="supported-chip-grid">
@@ -1113,10 +1113,10 @@
     </article>
     <article class="supported-row">
       <div class="supported-row-label">
-        <span class="supported-index">Audio</span>
+        <span class="supported-index">{{ request.state.t('homepage.supported.categories.audio.title', 'Audio') }}</span>
         <div>
-          <h3>Audio</h3>
-          <p class="supported-copy">Audio siap diputar, dibagikan, atau dipindahkan ke workflow lain.</p>
+          <h3>{{ request.state.t('homepage.supported.categories.audio.title', 'Audio') }}</h3>
+          <p class="supported-copy">{{ request.state.t('homepage.supported.categories.audio.copy', 'Audio files ready to play, share, or move into other workflows.') }}</p>
         </div>
       </div>
       <div class="supported-chip-grid">
