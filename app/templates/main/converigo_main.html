@@ -1132,32 +1132,32 @@
 <section class="trust-how-section wrap" aria-label="Keamanan, kepercayaan, dan alur kerja">
   <div class="trust-how-layout">
     <aside class="trust-panel">
-      <div class="section-eyebrow">Kepercayaan</div>
-      <h2>Konversi file Anda dengan keamanan dan transparansi yang jelas.</h2>
-      <p class="trust-lead">File Anda tetap pribadi, prosesnya jelas, dan tidak memerlukan akun untuk digunakan.</p>
+      <div class="section-eyebrow">{{ request.state.t('homepage.trust.eyebrow', 'Trust') }}</div>
+      <h2>{{ request.state.t('homepage.trust.heading', 'Convert files with clear security and transparency.') }}</h2>
+      <p class="trust-lead">{{ request.state.t('homepage.trust.lead', 'Your files stay private, the process is transparent, and no account is needed.') }}</p>
       <div class="trust-editorial">
         <article class="trust-statement">
           <span class="trust-index">01</span>
           <div>
             <div class="trust-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="6" width="16" height="10" rx="2"/><path d="M8 17h8"/><path d="M10 20h4"/></svg></div>
-            <h3 class="trust-card-title">Pengolahan langsung di browser</h3>
-            <p class="trust-card-desc">Konversi dijalankan di browser. File tidak dikirim ke server pihak ketiga.</p>
+            <h3 class="trust-card-title">{{ request.state.t('homepage.trust.statement1_title', 'Browser-based processing') }}</h3>
+            <p class="trust-card-desc">{{ request.state.t('homepage.trust.statement1_desc', 'Conversion happens in the browser. Files are not sent to third-party servers.') }}</p>
           </div>
         </article>
         <article class="trust-statement">
           <span class="trust-index">02</span>
           <div>
             <div class="trust-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 7V5h6v2"/><path d="M7 7h10"/><rect x="8" y="9" width="8" height="8" rx="2"/><path d="M10 11v4"/><path d="M14 11v4"/></svg></div>
-            <h3 class="trust-card-title">File dihapus otomatis</h3>
-            <p class="trust-card-desc">File dihapus otomatis dalam 8 jam setelah selesai, tanpa jejak jangka panjang.</p>
+            <h3 class="trust-card-title">{{ request.state.t('homepage.trust.statement2_title', 'Files deleted automatically') }}</h3>
+            <p class="trust-card-desc">{{ request.state.t('homepage.trust.statement2_desc', 'Files are deleted automatically 8 hours after completion, with no long-term trace.') }}</p>
           </div>
         </article>
         <article class="trust-statement">
           <span class="trust-index">03</span>
           <div>
             <div class="trust-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="3"/><path d="M6 20c0-2.5 2-4.5 6-4.5s6 2 6 4.5"/><path d="M6 6l12 12"/></svg></div>
-            <h3 class="trust-card-title">Tanpa akun</h3>
-            <p class="trust-card-desc">Gunakan layanan langsung tanpa mendaftar atau menyerahkan data pribadi tambahan.</p>
+            <h3 class="trust-card-title">{{ request.state.t('homepage.trust.statement3_title', 'No account required') }}</h3>
+            <p class="trust-card-desc">{{ request.state.t('homepage.trust.statement3_desc', 'Use the service directly without signing up or handing over extra personal data.') }}</p>
           </div>
         </article>
       </div>
