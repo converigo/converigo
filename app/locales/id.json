@@ -82,7 +82,27 @@
       "heading": "Fitur yang membuat proses konversi tetap cepat, sederhana, dan jelas.",
       "lead": "Semua hal yang penting dipresentasikan dalam satu alur yang mudah dibaca, tanpa elemen yang mengalihkan fokus."
     },
-    "faq_homepage": {
+    "why_converigo": {
+      "eyebrow": "Mengapa Converigo",
+      "heading": "Fitur yang membuat proses konversi tetap cepat, sederhana, dan jelas.",
+      "lead": "Semua hal yang penting dipresentasikan dalam satu alur yang mudah dibaca, tanpa elemen yang mengalihkan fokus.",
+      "card1": {
+        "title": "Konversi cepat",
+        "copy": "Konversi file dengan cepat dari browser Anda, tanpa pengaturan ekstra atau langkah tambahan."
+      },
+      "card2": {
+        "title": "Format banyak",
+        "copy": "Dukungan dokumen, gambar, audio, dan video dalam alur kerja praktis yang sama."
+      },
+      "card3": {
+        "title": "Alur sederhana",
+        "copy": "Unggah, konversi, dan unduh tanpa layar tambahan atau konfigurasi yang tidak perlu."
+      }
+    },
+    "faq": {
+      "eyebrow": "FAQ",
+      "heading": "Pertanyaan yang Sering Diajukan",
+      "lead": "Jawaban singkat untuk membantu Anda menggunakan Converigo dengan cepat.",
       "q1": "Apakah file saya disimpan permanen?",
       "a1": "Tidak. File diproses sementara dan dihapus otomatis setelah konversi selesai.",
       "q2": "Perlu membuat akun?",

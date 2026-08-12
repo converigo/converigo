@@ -81,7 +81,27 @@
       "heading": "Features that keep conversion fast, simple, and clear.",
       "lead": "Everything important is presented in one easy-to-read flow, without distracting elements."
     },
-    "faq_homepage": {
+    "why_converigo": {
+      "eyebrow": "Why Converigo",
+      "heading": "Features that keep conversion fast, simple, and clear.",
+      "lead": "Everything important is presented in one easy-to-read flow, without distracting elements.",
+      "card1": {
+        "title": "Fast conversion",
+        "copy": "Convert files quickly from your browser, without extra setup or extra steps."
+      },
+      "card2": {
+        "title": "Multiple formats",
+        "copy": "Support documents, images, audio, and video in a single practical workflow."
+      },
+      "card3": {
+        "title": "Simple workflow",
+        "copy": "Upload, convert, and download without unnecessary extra screens or configuration."
+      }
+    },
+    "faq": {
+      "eyebrow": "FAQ",
+      "heading": "Frequently asked questions",
+      "lead": "Short answers to help you use Converigo quickly.",
       "q1": "Are my files stored permanently?",
       "a1": "No. Files are processed temporarily and deleted automatically after conversion is complete.",
       "q2": "Do I need to create an account?",
