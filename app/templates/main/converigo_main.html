@@ -984,22 +984,22 @@
   </div>
 </header>
 
-<section class="find-format-section wrap" aria-label="Temukan format Anda">
-  <div class="section-eyebrow">Temukan Format</div>
+<section class="find-format-section wrap" aria-label="{{ request.state.t('homepage.find_format.eyebrow', 'Find Format') }}">
+  <div class="section-eyebrow">{{ request.state.t('homepage.find_format.eyebrow', 'Find Format') }}</div>
   <div class="section-head">
     <div>
-      <h2>Temukan format yang cocok untuk kebutuhan konversi Anda.</h2>
-      <p class="find-format-lead">Pilih kategori file dan lanjutkan ke jenis konversi yang sesuai.</p>
+      <h2>{{ request.state.t('homepage.find_format.heading', 'Find the right format for your conversion needs.') }}</h2>
+      <p class="find-format-lead">{{ request.state.t('homepage.find_format.lead', 'Choose a file category and continue to the right conversion type.') }}</p>
     </div>
-    <a class="button button-quiet" href="#formats">Lihat semua format</a>
+    <a class="button button-quiet" href="#formats">{{ request.state.t('homepage.find_format.cta', 'View all formats') }}</a>
   </div>
   <div class="find-format-directory">
     <article class="find-format-row is-featured">
       <div class="format-row-label">
         <span class="format-index">01</span>
         <div>
-          <h3 class="find-format-card-title">Documents</h3>
-          <p class="format-category-copy">PDF, dokumen kerja, presentasi, dan spreadsheet.</p>
+          <h3 class="find-format-card-title">{{ request.state.t('homepage.find_format.categories.documents.title', 'Documents') }}</h3>
+          <p class="format-category-copy">{{ request.state.t('homepage.find_format.categories.documents.copy', 'PDF, work documents, presentations, and spreadsheets.') }}</p>
         </div>
       </div>
       <div class="find-format-chip-grid">
@@ -1013,8 +1013,8 @@
       <div class="format-row-label">
         <span class="format-index">02</span>
         <div>
-          <h3 class="find-format-card-title">Images</h3>
-          <p class="format-category-copy">Visual web, asset editor, dan file siap publikasi.</p>
+          <h3 class="find-format-card-title">{{ request.state.t('homepage.find_format.categories.images.title', 'Images') }}</h3>
+          <p class="format-category-copy">{{ request.state.t('homepage.find_format.categories.images.copy', 'Visual web, asset editor, and files ready for publication.') }}</p>
         </div>
       </div>
       <div class="find-format-chip-grid">
@@ -1028,8 +1028,8 @@
       <div class="format-row-label">
         <span class="format-index">03</span>
         <div>
-          <h3 class="find-format-card-title">Video</h3>
-          <p class="format-category-copy">Format untuk distribusi, review, dan sharing media.</p>
+          <h3 class="find-format-card-title">{{ request.state.t('homepage.find_format.categories.video.title', 'Video') }}</h3>
+          <p class="format-category-copy">{{ request.state.t('homepage.find_format.categories.video.copy', 'Formats for distribution, review, and media sharing.') }}</p>
         </div>
       </div>
       <div class="find-format-chip-grid">
@@ -1043,8 +1043,8 @@
       <div class="format-row-label">
         <span class="format-index">04</span>
         <div>
-          <h3 class="find-format-card-title">Audio</h3>
-          <p class="format-category-copy">File audio siap diputar, dipublish, atau diarsipkan.</p>
+          <h3 class="find-format-card-title">{{ request.state.t('homepage.find_format.categories.audio.title', 'Audio') }}</h3>
+          <p class="format-category-copy">{{ request.state.t('homepage.find_format.categories.audio.copy', 'Audio files ready to play, publish, or archive.') }}</p>
         </div>
       </div>
       <div class="find-format-chip-grid">
