@@ -888,7 +888,22 @@
       <a href="#cara">Cara Kerja</a>
       <a href="#faq">FAQ</a>
     </div>
-    <button class="nav-cta" id="navCta">Mulai Konversi</button>
+    <div class="header-actions">
+      <div class="language-switcher">
+        <span class="language-icon" aria-hidden="true">🌐</span>
+        <label for="languageSelect" class="sr-only">{{ request.state.t('language.selector_label', 'Language') }}</label>
+        <select id="languageSelect" onchange="handleLanguageChange(event)" data-current-locale="{{ request.state.locale.lang_code }}">
+          {% set visible_locales = ['en', 'id', 'ja'] %}
+          {% for locale_code in request.state.supported_locales %}
+            {% if locale_code in visible_locales %}
+              <option value="{{ locale_code }}" {% if request.state.locale.lang_code == locale_code %}selected{% endif %}>
+                {% if locale_code == 'en' %}English (EN){% elif locale_code == 'id' %}Indonesia (ID){% else %}日本語 / Japan (JA){% endif %}
+              </option>
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    </div>
   </div>
 </nav>
 
@@ -1609,9 +1624,18 @@ document.getElementById('dlAllBtn').addEventListener('click', downloadAll);
 const fileInput = document.getElementById('fileInput');
 document.getElementById('browseBtn').addEventListener('click', e=>{ e.stopPropagation(); fileInput.click(); });
 document.getElementById('addMoreBtn').addEventListener('click', ()=> fileInput.click());
-document.getElementById('navCta').addEventListener('click', ()=>{
-  // Removed forced scrolling to prevent unexpected viewport movement.
-});
+window.handleLanguageChange = function (event) {
+  const selectedLang = event.target.value;
+  const params = new URLSearchParams(window.location.search);
+  if (selectedLang) {
+    params.set('lang', selectedLang);
+  } else {
+    params.delete('lang');
+  }
+  const query = params.toString();
+  window.location.search = query ? `?${query}` : window.location.pathname;
+};
+
 fileInput.addEventListener('change', e=>{ addFiles(e.target.files); fileInput.value=''; });
 
 const dz = document.getElementById('dropzone');
