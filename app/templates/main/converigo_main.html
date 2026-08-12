@@ -915,12 +915,12 @@
     <div class="hero-connector hero-connector-left" aria-hidden="true"></div>
     <div class="dz-stage">
     <div class="orbit-field" id="orbitField"></div>
-    <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Unggah file untuk dikonversi">
+    <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="{{ request.state.t('upload.drop_title', 'Unggah file untuk dikonversi') }}">
       <div class="morph-badge" id="morphBadge"><span id="morphLabel">PDF</span></div>
-      <p class="dz-title">Seret &amp; lepas file di sini</p>
-      <p class="dz-sub">atau klik untuk memilih dari perangkatmu</p>
-      <button class="dz-browse" type="button" id="browseBtn">📂 Pilih File</button>
-      <p class="dz-note">Mendukung gambar, dokumen, audio, video &amp; arsip &middot; maks. 50 file sekaligus</p>
+      <p class="dz-title">{{ request.state.t('upload.drop_title', 'Seret &amp; lepas file di sini') }}</p>
+      <p class="dz-sub">{{ request.state.t('upload.choose_from_device', 'atau klik untuk memilih dari perangkatmu') }}</p>
+      <button class="dz-browse" type="button" id="browseBtn">{{ request.state.t('upload.browse', '📂 Pilih File') }}</button>
+      <p class="dz-note">{{ request.state.t('upload.supports_types', 'Mendukung gambar, dokumen, audio, video &amp; arsip · maks. 50 file sekaligus') }}</p>
     </div>
   </div>
     <div class="hero-connector hero-connector-right" aria-hidden="true"></div>
