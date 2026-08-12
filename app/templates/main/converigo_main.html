@@ -646,15 +646,16 @@
   }
   .dropzone.drag{border-color:var(--primary); transform:translateY(-6px) scale(1.01); box-shadow:0 26px 60px -26px rgba(56,42,168,.28);}
   .morph-badge{
-    width:64px;height:64px; margin:0 auto 12px;
+    width:72px; height:72px; margin:0px auto 14px;
     display:flex; align-items:center; justify-content:center;
-    color:#fff; font-family:'IBM Plex Mono'; font-weight:700; font-size:13px; letter-spacing:.03em;
-    background:linear-gradient(135deg,var(--primary),var(--primary-dark));
-    border-radius:18px;
-    box-shadow:0 14px 26px -16px rgba(56,42,168,.38);
-    animation:none;
-    transition:background .3s ease, transform .3s ease;
-    min-width:64px; min-height:64px;
+    color: rgb(255, 255, 255); font-family: "IBM Plex Mono"; font-weight:700; font-size:14px; letter-spacing:0.03em;
+    background: var(--primary);
+    border-radius:32% 68% 65% 35% / 45% 35% 65% 55%;
+    box-shadow: rgba(91, 79, 233, 0.55) 0px 16px 34px -12px;
+    animation: 7s ease-in-out 0s infinite normal none running morph;
+    transition: background 0.3s, transform 0.3s;
+    min-width: 78px; min-height: 78px;
+    will-change: border-radius, background, transform;
   }
   .morph-badge span{
     transition:opacity .18s ease, transform .18s ease;
@@ -662,6 +663,12 @@
     width:42px;
     text-align:center;
     line-height:1;
+  }
+  @keyframes morph{
+    0%,100%{border-radius:32% 68% 65% 35% / 45% 35% 65% 55%;}
+    25%{border-radius:58% 42% 33% 67% / 60% 40%;}
+    50%{border-radius:50% / 40% 60%;}
+    75%{border-radius:40% 60% 55% 45% / 30% 55% 45% 70%;}
   }
   .dz-title{font-weight:700; font-size:19px; margin:0 0 8px; letter-spacing:-.03em;}
   .dz-sub{color:var(--ink-soft); font-size:13.5px; margin:0 0 16px;}
