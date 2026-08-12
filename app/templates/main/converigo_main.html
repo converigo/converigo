@@ -1163,29 +1163,29 @@
       </div>
     </aside>
     <div class="how-panel">
-      <div class="section-eyebrow">Cara Kerja</div>
-      <h2>Empat langkah jelas untuk menyelesaikan file Anda dengan cepat.</h2>
-      <p class="how-lead">Unggah, pilih format, konversi aman, lalu unduh hasil tanpa kerumitan.</p>
+      <div class="section-eyebrow">{{ request.state.t('homepage.how_it_works.eyebrow', 'How It Works') }}</div>
+      <h2>{{ request.state.t('homepage.how_it_works.heading', 'Convert your files in three simple steps.') }}</h2>
+      <p class="how-lead">{{ request.state.t('homepage.how_it_works.lead', 'Upload, choose a format, convert, then download your result without extra screens.') }}</p>
       <div class="how-timeline">
         <article class="how-step-row">
           <span class="how-step-number">01</span>
           <div class="how-step-copy">
-            <h3 class="how-step-title">Upload file</h3>
-            <p class="how-step-desc">Seret file atau pilih langsung dari perangkatmu.</p>
+            <h3 class="how-step-title">{{ request.state.t('homepage.how_it_works.step1.title', 'Upload Your File') }}</h3>
+            <p class="how-step-desc">{{ request.state.t('homepage.how_it_works.step1.description', 'Select the file you want to convert from your device.') }}</p>
           </div>
         </article>
         <article class="how-step-row">
           <span class="how-step-number">02</span>
           <div class="how-step-copy">
-            <h3 class="how-step-title">Pilih format</h3>
-            <p class="how-step-desc">Tentukan jenis hasil yang Anda butuhkan berikutnya.</p>
+            <h3 class="how-step-title">{{ request.state.t('homepage.how_it_works.step2.title', 'Choose Format') }}</h3>
+            <p class="how-step-desc">{{ request.state.t('homepage.how_it_works.step2.description', 'Select the output format you need for your file.') }}</p>
           </div>
         </article>
         <article class="how-step-row">
           <span class="how-step-number">03</span>
           <div class="how-step-copy">
-            <h3 class="how-step-title">Download hasil</h3>
-            <p class="how-step-desc">Ambil file yang sudah siap dipakai tanpa langkah tambahan.</p>
+            <h3 class="how-step-title">{{ request.state.t('homepage.how_it_works.step3.title', 'Download Result') }}</h3>
+            <p class="how-step-desc">{{ request.state.t('homepage.how_it_works.step3.description', 'Download your converted file instantly.') }}</p>
           </div>
         </article>
       </div>
