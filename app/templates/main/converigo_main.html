@@ -1194,86 +1194,86 @@
 </section>
 
 <section class="feature-section wrap" aria-label="Feature overview">
-  <div class="section-eyebrow">Why Converigo</div>
-  <h2>Fitur yang membuat proses konversi tetap cepat, sederhana, dan jelas.</h2>
-  <p class="feature-lead">Semua hal yang penting dipresentasikan dalam satu alur yang mudah dibaca, tanpa elemen yang mengalihkan fokus.</p>
+  <div class="section-eyebrow">{{ request.state.t('homepage.why_converigo.eyebrow', 'Why Converigo') }}</div>
+  <h2>{{ request.state.t('homepage.why_converigo.heading', 'Features that keep conversion fast, simple, and clear.') }}</h2>
+  <p class="feature-lead">{{ request.state.t('homepage.why_converigo.lead', 'Everything important is presented in one easy-to-read flow, without distracting elements.') }}</p>
   <div class="feature-panel">
     <article class="feature-primary-card">
       <div class="feature-primary-top">
         <span class="primary-badge">01</span>
       </div>
-      <h3>Fast conversion</h3>
-      <p class="feature-primary-copy">Convert files quickly from your browser, without extra setup or extra steps.</p>
+      <h3>{{ request.state.t('homepage.why_converigo.card1.title', 'Fast conversion') }}</h3>
+      <p class="feature-primary-copy">{{ request.state.t('homepage.why_converigo.card1.copy', 'Convert files quickly from your browser, without extra setup or extra steps.') }}</p>
     </article>
     <article class="support-card">
       <div class="feature-primary-top">
         <span class="primary-badge">02</span>
       </div>
-      <h4>Multiple formats</h4>
-      <p>Support documents, images, audio, and video in a single practical workflow.</p>
+      <h4>{{ request.state.t('homepage.why_converigo.card2.title', 'Multiple formats') }}</h4>
+      <p>{{ request.state.t('homepage.why_converigo.card2.copy', 'Support documents, images, audio, and video in a single practical workflow.') }}</p>
     </article>
     <article class="support-card">
       <div class="feature-primary-top">
         <span class="primary-badge">03</span>
       </div>
-      <h4>Simple workflow</h4>
-      <p>Upload, convert, and download without unnecessary extra screens or configuration.</p>
+      <h4>{{ request.state.t('homepage.why_converigo.card3.title', 'Simple workflow') }}</h4>
+      <p>{{ request.state.t('homepage.why_converigo.card3.copy', 'Upload, convert, and download without unnecessary extra screens or configuration.') }}</p>
     </article>
   </div>
 </section>
 
 <section id="faq" class="faq-section wrap" aria-label="Frequently asked questions">
-  <div class="section-eyebrow">FAQ</div>
-  <h2>Pertanyaan yang Sering Diajukan</h2>
-  <p class="faq-lead">Jawaban singkat untuk membantu Anda menggunakan Converigo dengan cepat.</p>
+  <div class="section-eyebrow">{{ request.state.t('homepage.faq.eyebrow', 'FAQ') }}</div>
+  <h2>{{ request.state.t('homepage.faq.heading', 'Frequently asked questions') }}</h2>
+  <p class="faq-lead">{{ request.state.t('homepage.faq.lead', 'Short answers to help you use Converigo quickly.') }}</p>
   <div class="faq-list">
     <article class="faq-item active">
       <button class="faq-question" type="button" aria-expanded="true">
         <span class="faq-index">01</span>
-        <span class="faq-question-text">Apakah file saya disimpan permanen?</span>
+        <span class="faq-question-text">{{ request.state.t('homepage.faq.q1', 'Are my files stored permanently?') }}</span>
         <span class="faq-chev">▼</span>
       </button>
-      <p class="faq-answer">Tidak. File diproses sementara dan dihapus otomatis setelah konversi selesai.</p>
+      <p class="faq-answer">{{ request.state.t('homepage.faq.a1', 'No. Files are processed temporarily and deleted automatically after conversion is complete.') }}</p>
     </article>
     <article class="faq-item">
       <button class="faq-question" type="button" aria-expanded="false">
         <span class="faq-index">02</span>
-        <span class="faq-question-text">Perlu membuat akun?</span>
+        <span class="faq-question-text">{{ request.state.t('homepage.faq.q2', 'Do I need to create an account?') }}</span>
         <span class="faq-chev">▼</span>
       </button>
-      <p class="faq-answer">Tidak. Anda bisa langsung mengonversi file tanpa membuat akun.</p>
+      <p class="faq-answer">{{ request.state.t('homepage.faq.a2', 'No. You can convert files directly without creating an account.') }}</p>
     </article>
     <article class="faq-item">
       <button class="faq-question" type="button" aria-expanded="false">
         <span class="faq-index">03</span>
-        <span class="faq-question-text">Format file apa saja yang didukung?</span>
+        <span class="faq-question-text">{{ request.state.t('homepage.faq.q3', 'What file formats are supported?') }}</span>
         <span class="faq-chev">▼</span>
       </button>
-      <p class="faq-answer">Converigo mendukung dokumen, gambar, video, audio, arsip, dan banyak format umum lainnya.</p>
+      <p class="faq-answer">{{ request.state.t('homepage.faq.a3', 'Converigo supports documents, images, video, audio, archives, and many common formats.') }}</p>
     </article>
     <article class="faq-item">
       <button class="faq-question" type="button" aria-expanded="false">
         <span class="faq-index">04</span>
-        <span class="faq-question-text">Berapa lama konversi berlangsung?</span>
+        <span class="faq-question-text">{{ request.state.t('homepage.faq.q4', 'How long does conversion take?') }}</span>
         <span class="faq-chev">▼</span>
       </button>
-      <p class="faq-answer">Biasanya beberapa detik, tergantung ukuran dan jenis berkas.</p>
+      <p class="faq-answer">{{ request.state.t('homepage.faq.a4', 'Usually a few seconds, depending on file size and type.') }}</p>
     </article>
     <article class="faq-item">
       <button class="faq-question" type="button" aria-expanded="false">
         <span class="faq-index">05</span>
-        <span class="faq-question-text">Apakah Converigo gratis?</span>
+        <span class="faq-question-text">{{ request.state.t('homepage.faq.q5', 'Is Converigo free?') }}</span>
         <span class="faq-chev">▼</span>
       </button>
-      <p class="faq-answer">Banyak konversi tersedia gratis. Fitur tambahan bisa berbeda sesuai alat yang dipilih.</p>
+      <p class="faq-answer">{{ request.state.t('homepage.faq.a5', 'Many conversions are available for free. Additional features may vary by tool.') }}</p>
     </article>
     <article class="faq-item">
       <button class="faq-question" type="button" aria-expanded="false">
         <span class="faq-index">06</span>
-        <span class="faq-question-text">Apa yang terjadi jika konversi gagal?</span>
+        <span class="faq-question-text">{{ request.state.t('homepage.faq.q6', 'What happens if conversion fails?') }}</span>
         <span class="faq-chev">▼</span>
       </button>
-      <p class="faq-answer">Jika konversi gagal, coba lagi atau pilih format lain yang didukung.</p>
+      <p class="faq-answer">{{ request.state.t('homepage.faq.a6', 'If conversion fails, try again or choose another supported format.') }}</p>
     </article>
   </div>
 </section>
