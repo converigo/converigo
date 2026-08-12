@@ -9,6 +9,7 @@ class LanguageService:
     def __init__(self, locales_dir: Path, default_locale: str = "en") -> None:
         self.locales_dir = locales_dir
         self.default_locale = default_locale
+        # cache maps locale_code -> {'data': locale_data, 'mtime': file_mtime}
         self._cache: dict[str, dict[str, Any]] = {}
 
     def get_supported_locales(self) -> list[str]:
@@ -50,21 +51,37 @@ class LanguageService:
         lang_query: str | None = None,
     ) -> dict[str, Any]:
         locale_code = self.determine_locale(accept_language=accept_language, lang_query=lang_query)
-        if locale_code in self._cache:
-            return self._cache[locale_code]
-
+        # If cached, validate mtime to avoid serving stale content when files change
         locale_file = self.locales_dir / f"{locale_code}.json"
+        try:
+            current_mtime = locale_file.stat().st_mtime
+        except FileNotFoundError:
+            current_mtime = None
+
+        cached = self._cache.get(locale_code)
+        if cached is not None:
+            cached_mtime = cached.get("mtime")
+            if cached_mtime is not None and current_mtime is not None and float(cached_mtime) == float(current_mtime):
+                return cached.get("data")
+
         try:
             with locale_file.open("r", encoding="utf-8") as handle:
                 locale_data = json.load(handle)
+            file_mtime = locale_file.stat().st_mtime
         except FileNotFoundError:
             locale_file = self.locales_dir / f"{self.default_locale}.json"
             with locale_file.open("r", encoding="utf-8") as handle:
                 locale_data = json.load(handle)
             locale_code = self.default_locale
+            file_mtime = locale_file.stat().st_mtime
 
         locale_data["lang_code"] = locale_code
-        self._cache[locale_code] = locale_data
+        # Store both data and mtime
+        try:
+            self._cache[locale_code] = {"data": locale_data, "mtime": float(file_mtime)}
+        except Exception:
+            # Fallback: store data without mtime if something unexpected occurs
+            self._cache[locale_code] = {"data": locale_data}
         return locale_data
 
     def translate(self, locale_data: dict[str, Any], key: str, default: str = "") -> str:
