@@ -929,29 +929,29 @@
 
   <div class="panel-zone" id="panelZone">
     <div class="panel-head">
-      <h2>Hasil Konversi</h2>
-      <p>File kamu siap — unduh sebelum terhapus otomatis</p>
+      <h2>{{ request.state.t('upload.results_heading', 'Hasil Konversi') }}</h2>
+      <p>{{ request.state.t('upload.results_subtitle', 'File kamu siap — unduh sebelum terhapus otomatis') }}</p>
     </div>
     <div class="panel">
       <div class="panel-toolbar">
-        <button class="ghost-btn" id="addMoreBtn" type="button">📁 Tambahkan Lebih Banyak File <span style="font-size:10px;">▾</span></button>
+        <button class="ghost-btn" id="addMoreBtn" type="button">{{ request.state.t('upload.add_more_files', '📁 Tambahkan Lebih Banyak File') }} <span style="font-size:10px;">▾</span></button>
       </div>
       <div id="rows"></div>
 
       <div class="panel-footer" id="footerPre">
         <div class="footer-left">
-          <span id="footerLabel">Konversikan Semua (<span id="pendingCount">0</span>) ke:</span>
+          <span id="footerLabel">{{ request.state.t('upload.conversion_instruction', 'Convert all files to:') }} (<span id="pendingCount">0</span>)</span>
           <select class="fmt" id="globalFmt"></select>
         </div>
-        <button class="go-btn" id="goBtn" type="button">Mengubah <span>→</span></button>
+        <button class="go-btn" id="goBtn" type="button">{{ request.state.t('upload.convert_button', 'Mengubah') }} <span>→</span></button>
       </div>
 
       <div class="panel-footer footer-post" id="footerPost">
         <div class="post-actions">
-          <button class="outline-btn" id="newBtn" type="button">Konversi File Baru</button>
-          <button class="solid-btn" id="dlAllBtn" type="button">⬇️ Unduh Semua</button>
+          <button class="outline-btn" id="newBtn" type="button">{{ request.state.t('upload.add_more_files', 'Konversi File Baru') }}</button>
+          <button class="solid-btn" id="dlAllBtn" type="button">{{ request.state.t('upload.download_all', '⬇️ Unduh Semua') }}</button>
         </div>
-        <p class="post-note">Semua file akan dihapus otomatis dalam 8 jam untuk menjaga privasi Anda. Pastikan unduh hasil sebelum terhapus.</p>
+        <p class="post-note">{{ request.state.t('upload.post_note', 'Semua file akan dihapus otomatis dalam 8 jam untuk menjaga privasi Anda. Pastikan unduh hasil sebelum terhapus.') }}</p>
       </div>
     </div>
   </div>
@@ -1497,12 +1497,12 @@ function buildGlobalFmt(){
     const current = sel.value;
     sel.innerHTML = opts.map(t=>`<option value="${t}">${t}</option>`).join('');
     if(opts.includes(current)) sel.value = current;
-    label.innerHTML = `Konversikan Semua (<span id="pendingCount">${pending.length}</span>) ke:`;
+    label.innerHTML = `${window.translate('upload.conversion_instruction', 'Convert all files to:')} (<span id="pendingCount">${pending.length}</span>)`;
     sel.style.display = '';
   } else {
     sel.innerHTML = '';
     sel.style.display = 'none';
-    label.innerHTML = `Konversi (<span id="pendingCount">${pending.length}</span> File)`;
+    label.innerHTML = `${window.translate('upload.conversion_instruction', 'Convert all files to:')} (<span id="pendingCount">${pending.length}</span>)`;
   }
 }
 
