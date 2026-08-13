@@ -689,6 +689,9 @@
     50%{border-radius:50% / 40% 60%;}
     75%{border-radius:40% 60% 55% 45% / 30% 55% 45% 70%;}
   }
+  @media (prefers-reduced-motion: reduce) {
+    .morph-badge { animation: none !important; transition: none !important; }
+  }
   .dz-title{font-weight:700; font-size:19px; margin:0 0 8px; letter-spacing:-.03em;}
   .dz-sub{color:var(--ink-soft); font-size:13.5px; margin:0 0 16px;}
   .dz-browse{
