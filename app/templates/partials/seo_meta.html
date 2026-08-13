@@ -1,8 +1,8 @@
 {% set page_meta = meta if meta is defined else seo if seo is defined else {} %}
 
-{% set page_title = page_meta.title | default('Converigo | Fast, Free & Secure Online File Converter') %}
+{% set page_title = request.state.t('homepage.title', page_meta.title | default('Converigo | Fast, Free & Secure Online File Converter')) %}
 
-{% set page_description = page_meta.description | default('Converigo offers fast, secure, and automatic file conversion from video, audio, image, and document formats.') %}
+{% set page_description = request.state.t('homepage.description', page_meta.description | default('Converigo offers fast, secure, and automatic file conversion from video, audio, image, and document formats.')) %}
 
 {% set current_path = request.url.path if request is defined and request.url is defined else '/' %}
 {% set page_canonical = page_meta.canonical | default('https://converigo.com' ~ current_path) %}
@@ -35,6 +35,21 @@
 {% set page_twitter_site = page_meta.twitter_site | default('@converigo') %}
 
 {% set page_twitter_creator = page_meta.twitter_creator | default('@converigo') %}
+
+{# Ensure OG/Twitter values prefer explicit meta keys, else fall back to localized translations #}
+{% set page_og_title = page_meta.og_title | default(request.state.t('homepage.title', page_title)) %}
+{% set page_og_description = page_meta.og_description | default(request.state.t('homepage.description', page_description)) %}
+{% set page_twitter_title = page_meta.twitter_title | default(request.state.t('homepage.title', page_title)) %}
+{% set page_twitter_description = page_meta.twitter_description | default(request.state.t('homepage.description', page_description)) %}
+
+{# Minimal JSON-LD localized snippet for homepage #}
+{% set jsonld = {
+	"@context": "https://schema.org",
+	"@type": "WebSite",
+	"name": (request.state.t('homepage.title') if request is defined and request.state is defined else page_title),
+	"url": page_canonical,
+	"description": (request.state.t('homepage.description') if request is defined and request.state is defined else page_description)
+} %}
 
 
 <title>{{ page_title }}</title>
@@ -76,9 +91,9 @@
 
 <!-- Open Graph -->
 
-<meta property="og:title" content="{{ page_title }}">
+<meta property="og:title" content="{{ page_og_title }}">
 
-<meta property="og:description" content="{{ page_description }}">
+<meta property="og:description" content="{{ page_og_description }}">
 
 <meta property="og:type" content="{{ page_og_type }}">
 
@@ -99,12 +114,17 @@
 
 <meta name="twitter:card" content="{{ page_twitter_card }}">
 
-<meta name="twitter:title" content="{{ page_title }}">
+<meta name="twitter:title" content="{{ page_twitter_title }}">
 
-<meta name="twitter:description" content="{{ page_description }}">
+<meta name="twitter:description" content="{{ page_twitter_description }}">
 
 <meta name="twitter:image" content="{{ page_og_image }}">
 
 <meta name="twitter:site" content="{{ page_twitter_site }}">
 
 <meta name="twitter:creator" content="{{ page_twitter_creator }}">
+
+{# JSON-LD output (localized) #}
+<script type="application/ld+json">
+{{ jsonld | tojson(indent=2) }}
+</script>
