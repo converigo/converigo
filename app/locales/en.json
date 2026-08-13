@@ -31,6 +31,101 @@
     "empty_state": "Upload a file to get format recommendations and convert it instantly.",
     "select_file": "Choose a file to start",
     "file_ready": "File ready",
+    "choose_from_device": "or click to choose from your device",
+    "supports_types": "Supports images, documents, audio, video & archives · max 50 files at once",
+    "results_heading": "Conversion Results",
+    "results_subtitle": "Your files are ready — download before they are deleted automatically",
+    "add_more_files": "Add More Files",
+    "convert_button": "Convert",
+    "download_all": "Download All",
+    "post_note": "All files will be deleted automatically in 8 hours for your privacy. Be sure to download results before they are removed."
+  },
+  "homepage": {
+    "marquee_label": "All formats you can change",
+    "find_format": {
+      "eyebrow": "Find Format",
+      "heading": "Find the right format for your conversion needs.",
+      "lead": "Choose a file category and continue to the right conversion type.",
+      "cta": "View all formats",
+      "categories": {
+        "documents": {"title": "Documents", "copy": "PDF, work documents, presentations, and spreadsheets."},
+        "images": {"title": "Images", "copy": "Visual web, asset editor, and files ready for publication."},
+        "video": {"title": "Video", "copy": "Formats for distribution, review, and media sharing."},
+        "audio": {"title": "Audio", "copy": "Audio files ready to play, publish, or archive."}
+      }
+    },
+    "supported": {
+      "eyebrow": "Popular Formats",
+      "heading": "Popular formats you can convert instantly.",
+      "cta": "All formats",
+      "categories": {
+        "documents": {"title": "Documents", "copy": "Text, spreadsheets, and presentations for everyday work."},
+        "images": {"title": "Images", "copy": "Visual files for web, sharing, asset, and team collaboration."},
+        "video": {"title": "Video", "copy": "Visual media for preview, desktop, and publishing."},
+        "audio": {"title": "Audio", "copy": "Audio files ready to play, share, or move into other workflows."}
+      }
+    },
+    "trust": {
+      "eyebrow": "Trust",
+      "heading": "Convert files with clear security and transparency.",
+      "lead": "Your files stay private, the process is transparent, and no account is needed.",
+      "statement1_title": "Browser-based processing",
+      "statement1_desc": "Conversion happens in the browser. Files are not sent to third-party servers.",
+      "statement2_title": "Files deleted automatically",
+      "statement2_desc": "Files are deleted automatically 8 hours after completion, with no long-term trace.",
+      "statement3_title": "No account required",
+      "statement3_desc": "Use the service directly without signing up or handing over extra personal data."
+    },
+    "feature": {
+      "eyebrow": "Why Converigo",
+      "heading": "Features that keep conversion fast, simple, and clear.",
+      "lead": "Everything important is presented in one easy-to-read flow, without distracting elements."
+    },
+    "why_converigo": {
+      "eyebrow": "Why Converigo",
+      "heading": "Features that keep conversion fast, simple, and clear.",
+      "lead": "Everything important is presented in one easy-to-read flow, without distracting elements.",
+      "card1": {
+        "title": "Fast conversion",
+        "copy": "Convert files quickly from your browser, without extra setup or extra steps."
+      },
+      "card2": {
+        "title": "Multiple formats",
+        "copy": "Support documents, images, audio, and video in a single practical workflow."
+      },
+      "card3": {
+        "title": "Simple workflow",
+        "copy": "Upload, convert, and download without unnecessary extra screens or configuration."
+      }
+    },
+    "faq": {
+      "eyebrow": "FAQ",
+      "heading": "Frequently asked questions",
+      "lead": "Short answers to help you use Converigo quickly.",
+      "q1": "Are my files stored permanently?",
+      "a1": "No. Files are processed temporarily and deleted automatically after conversion is complete.",
+      "q2": "Do I need to create an account?",
+      "a2": "No. You can convert files directly without creating an account.",
+      "q3": "What file formats are supported?",
+      "a3": "Converigo supports documents, images, video, audio, archives, and many common formats.",
+      "q4": "How long does conversion take?",
+      "a4": "Usually a few seconds, depending on file size and type.",
+      "q5": "Is Converigo free?",
+      "a5": "Many conversions are available for free. Additional features may vary by tool.",
+      "q6": "What happens if conversion fails?",
+      "a6": "If conversion fails, try again or choose another supported format."
+    }
+    ,
+    "how_it_works": {
+      "eyebrow": "How It Works",
+      "heading": "Convert your files in three simple steps.",
+      "lead": "Upload, choose a format, convert, then download your result without extra screens.",
+      "step1": { "title": "Upload Your File", "description": "Select the file you want to convert from your device." },
+      "step2": { "title": "Choose Format", "description": "Select the output format you need for your file." },
+      "step3": { "title": "Download Result", "description": "Download your converted file instantly." }
+    }
+  },
+  "supported_formats": {
     "ready": "Ready",
     "files_ready": "Files ready",
     "converting": "Converting...",

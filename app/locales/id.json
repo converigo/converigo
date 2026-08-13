@@ -32,6 +32,101 @@
     "empty_state": "Unggah file untuk mendapatkan rekomendasi format dan segera mengonversinya.",
     "select_file": "Pilih file untuk memulai",
     "file_ready": "File siap",
+    "choose_from_device": "atau klik untuk memilih dari perangkatmu",
+    "supports_types": "Mendukung gambar, dokumen, audio, video & arsip · maks. 50 file sekaligus",
+    "results_heading": "Hasil Konversi",
+    "results_subtitle": "File kamu siap — unduh sebelum terhapus otomatis",
+    "add_more_files": "Tambahkan Lebih Banyak File",
+    "convert_button": "Mengubah",
+    "download_all": "Unduh Semua",
+    "post_note": "Semua file akan dihapus otomatis dalam 8 jam untuk menjaga privasi Anda. Pastikan unduh hasil sebelum terhapus."
+  },
+  "homepage": {
+    "marquee_label": "Semua format yang bisa diubah",
+    "find_format": {
+      "eyebrow": "Temukan Format",
+      "heading": "Temukan format yang cocok untuk kebutuhan konversi Anda.",
+      "lead": "Pilih kategori file dan lanjutkan ke jenis konversi yang sesuai.",
+      "cta": "Lihat semua format",
+      "categories": {
+        "documents": {"title": "Dokumen", "copy": "PDF, dokumen kerja, presentasi, dan spreadsheet."},
+        "images": {"title": "Gambar", "copy": "Visual web, asset editor, dan file siap publikasi."},
+        "video": {"title": "Video", "copy": "Format untuk distribusi, review, dan sharing media."},
+        "audio": {"title": "Audio", "copy": "File audio siap diputar, dipublish, atau diarsipkan."}
+      }
+    },
+    "supported": {
+      "eyebrow": "Format Populer",
+      "heading": "Format populer yang bisa Anda konversi langsung.",
+      "cta": "Semua format",
+      "categories": {
+        "documents": {"title": "Dokumen", "copy": "Teks, spreadsheet, dan presentasi untuk kerja harian."},
+        "images": {"title": "Gambar", "copy": "File visual untuk web, berbagi, aset, dan kolaborasi tim."},
+        "video": {"title": "Video", "copy": "Media visual untuk preview, desktop, dan publikasi."},
+        "audio": {"title": "Audio", "copy": "File audio siap diputar, dibagikan, atau dipindahkan ke workflow lain."}
+      }
+    },
+    "trust": {
+      "eyebrow": "Kepercayaan",
+      "heading": "Konversi file Anda dengan keamanan dan transparansi yang jelas.",
+      "lead": "File Anda tetap pribadi, prosesnya jelas, dan tidak memerlukan akun untuk digunakan.",
+      "statement1_title": "Pengolahan langsung di browser",
+      "statement1_desc": "Konversi dijalankan di browser. File tidak dikirim ke server pihak ketiga.",
+      "statement2_title": "File dihapus otomatis",
+      "statement2_desc": "File dihapus otomatis dalam 8 jam setelah selesai, tanpa jejak jangka panjang.",
+      "statement3_title": "Tanpa akun",
+      "statement3_desc": "Gunakan layanan langsung tanpa mendaftar atau menyerahkan data pribadi tambahan."
+    },
+    "feature": {
+      "eyebrow": "Mengapa Converigo",
+      "heading": "Fitur yang membuat proses konversi tetap cepat, sederhana, dan jelas.",
+      "lead": "Semua hal yang penting dipresentasikan dalam satu alur yang mudah dibaca, tanpa elemen yang mengalihkan fokus."
+    },
+    "why_converigo": {
+      "eyebrow": "Mengapa Converigo",
+      "heading": "Fitur yang membuat proses konversi tetap cepat, sederhana, dan jelas.",
+      "lead": "Semua hal yang penting dipresentasikan dalam satu alur yang mudah dibaca, tanpa elemen yang mengalihkan fokus.",
+      "card1": {
+        "title": "Konversi cepat",
+        "copy": "Konversi file dengan cepat dari browser Anda, tanpa pengaturan ekstra atau langkah tambahan."
+      },
+      "card2": {
+        "title": "Format banyak",
+        "copy": "Dukungan dokumen, gambar, audio, dan video dalam alur kerja praktis yang sama."
+      },
+      "card3": {
+        "title": "Alur sederhana",
+        "copy": "Unggah, konversi, dan unduh tanpa layar tambahan atau konfigurasi yang tidak perlu."
+      }
+    },
+    "faq": {
+      "eyebrow": "FAQ",
+      "heading": "Pertanyaan yang Sering Diajukan",
+      "lead": "Jawaban singkat untuk membantu Anda menggunakan Converigo dengan cepat.",
+      "q1": "Apakah file saya disimpan permanen?",
+      "a1": "Tidak. File diproses sementara dan dihapus otomatis setelah konversi selesai.",
+      "q2": "Perlu membuat akun?",
+      "a2": "Tidak. Anda bisa langsung mengonversi file tanpa membuat akun.",
+      "q3": "Format file apa saja yang didukung?",
+      "a3": "Converigo mendukung dokumen, gambar, video, audio, arsip, dan banyak format umum lainnya.",
+      "q4": "Berapa lama konversi berlangsung?",
+      "a4": "Biasanya beberapa detik, tergantung ukuran dan jenis berkas.",
+      "q5": "Apakah Converigo gratis?",
+      "a5": "Banyak konversi tersedia gratis. Fitur tambahan bisa berbeda sesuai alat yang dipilih.",
+      "q6": "Apa yang terjadi jika konversi gagal?",
+      "a6": "Jika konversi gagal, coba lagi atau pilih format lain yang didukung."
+    }
+    ,
+    "how_it_works": {
+      "eyebrow": "Cara Kerja",
+      "heading": "Empat langkah jelas untuk menyelesaikan file Anda dengan cepat.",
+      "lead": "Unggah, pilih format, konversi aman, lalu unduh hasil tanpa kerumitan.",
+      "step1": { "title": "Unggah File Anda", "description": "Pilih file yang ingin Anda konversi dari perangkat Anda." },
+      "step2": { "title": "Pilih Format", "description": "Pilih format output yang Anda butuhkan untuk file Anda." },
+      "step3": { "title": "Download Hasil", "description": "Unduh file konversi Anda secara instan." }
+    }
+  },
+  "supported_formats": {
     "ready": "Siap",
     "files_ready": "File siap",
     "converting": "Mengonversi...",
