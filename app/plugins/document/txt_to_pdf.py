@@ -1,0 +1,58 @@
+"""
+TXT -> PDF Plugin
+
+Minimal plugin to convert plain text files to PDF using the
+existing DocumentEngine rendering helper. Follows the existing
+plugin pattern so it will be discovered by the PluginRegistry.
+"""
+
+from pathlib import Path
+
+from app.plugins.base import ConverterPlugin
+from app.engines.document_engine import DocumentEngine
+
+
+class TXTToPDFPlugin(ConverterPlugin):
+    slug = "txt-to-pdf"
+    name = "TXT to PDF"
+    description = "Convert plain text (.txt) files into PDF documents."
+    category = "document"
+    engine = "document"
+    icon = "📄"
+
+    source_formats = ["txt"]
+    target_formats = ["pdf"]
+
+    priority = 70
+    quality = 70
+    compatibility = 90
+
+    async def convert(
+        self,
+        source_path: Path,
+        target_format: str,
+    ) -> Path:
+        if not self.supports(source_path.suffix, target_format):
+            raise RuntimeError("TXTToPDFPlugin only supports TXT -> PDF.")
+
+        # Use the DocumentEngine rendering helper to generate a real PDF.
+        output_dir = Path("outputs") / "document"
+        output_dir.mkdir(parents=True, exist_ok=True)
+
+        output_path = output_dir / f"{source_path.stem}.pdf"
+
+        # Read source lines safely (utf-8, replace errors)
+        with source_path.open("r", encoding="utf-8", errors="replace") as f:
+            lines = [line.rstrip('\n') for line in f.readlines()]
+
+        engine = DocumentEngine()
+
+        # DocumentEngine._render_text_lines_to_pdf is synchronous and
+        # returns a Path to the written PDF. Call it and return the result.
+        pdf_path = engine._render_text_lines_to_pdf(lines, output_path)
+
+        # Ensure we never return the original source_path
+        if pdf_path.resolve() == source_path.resolve():
+            raise RuntimeError("Plugin produced source path as output, aborting.")
+
+        return pdf_path
