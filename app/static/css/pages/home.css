@@ -47,10 +47,7 @@ body {
     justify-content: flex-start !important;
     padding: 10px 0 18px !important;
     min-height: auto;
-    background:
-        radial-gradient(160% 140% at 8% -12%, rgba(56, 189, 248, 0.14) 0%, rgba(56, 189, 248, 0) 46%),
-        radial-gradient(120% 110% at 92% 4%, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0) 62%),
-        linear-gradient(180deg, #fdfefe 0%, #f4f8ff 58%, #edf3ff 100%);
+    background: #FFFFFF;
 }
 
 .homepage-hero::before,
@@ -71,7 +68,7 @@ body {
         radial-gradient(circle at 24% 24%, rgba(37, 99, 235, 0.18) 0%, rgba(37, 99, 235, 0.08) 34%, rgba(37, 99, 235, 0) 68%),
         radial-gradient(circle at 58% 58%, rgba(14, 165, 233, 0.1) 0%, rgba(14, 165, 233, 0) 72%);
     filter: blur(4px);
-    opacity: 0.8;
+    opacity: 0;
     animation: heroFloatA 14s ease-in-out infinite alternate;
 }
 
@@ -84,7 +81,7 @@ body {
         radial-gradient(circle at 64% 44%, rgba(14, 165, 233, 0.12) 0%, rgba(14, 165, 233, 0) 74%),
         radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.08) 0%, rgba(37, 99, 235, 0) 78%);
     box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
-    opacity: 0.78;
+    opacity: 0;
     animation: heroFloatB 16s ease-in-out infinite alternate;
 }
 
@@ -1226,10 +1223,7 @@ body {
 
 /* UI-S1-007 Premium Hero Refinement */
 .homepage-hero {
-    background:
-        radial-gradient(180% 140% at 8% -12%, rgba(56, 189, 248, 0.22) 0%, rgba(56, 189, 248, 0) 48%),
-        radial-gradient(130% 120% at 92% 10%, rgba(59, 130, 246, 0.15) 0%, rgba(59, 130, 246, 0) 68%),
-        linear-gradient(180deg, #fdfefe 0%, #eff5ff 53%, #edf3ff 100%);
+    background: #FFFFFF;
 }
 
 .homepage-hero::before {
@@ -1241,7 +1235,7 @@ body {
         radial-gradient(circle at 18% 18%, rgba(56, 189, 248, 0.28), rgba(56, 189, 248, 0) 48%),
         radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.16), rgba(37, 99, 235, 0) 68%);
     filter: blur(3px);
-    opacity: 0.95;
+    opacity: 0;
     animation: heroFloatA 14s ease-in-out infinite alternate;
 }
 
@@ -1254,6 +1248,7 @@ body {
         radial-gradient(circle at 64% 44%, rgba(14, 165, 233, 0.24), rgba(14, 165, 233, 0) 74%),
         radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.14), rgba(37, 99, 235, 0) 78%);
     filter: blur(0.4px);
+    opacity: 0;
     animation: heroFloatB 16s ease-in-out infinite alternate;
 }
 
