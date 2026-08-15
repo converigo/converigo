@@ -1,9 +1,9 @@
 .site-footer{
     margin-top: 64px;
     padding: 64px 0 40px;
-    background: linear-gradient(135deg, #071b3a 0%, #0f244d 100%);
-    border-top: 1px solid rgba(255,255,255,0.12);
-    color: #f4f7fb;
+    background: #FFFFFF;
+    border-top: 1px solid rgba(28,24,50,0.1);
+    color: #1C1832;
 }
 
 .footer-top{
@@ -24,8 +24,8 @@
     place-items:center;
     margin-bottom:16px;
     border-radius:12px;
-    background: rgba(255,255,255,0.14);
-    color: #ffffff;
+    background: rgba(28,24,50,0.06);
+    color: #1C1832;
     font-weight:700;
     font-size:1.05rem;
     letter-spacing:0.04em;
@@ -34,18 +34,18 @@
 .footer-brand h3{
     font-size: clamp(1.75rem, 2.3vw, 2rem);
     margin: 0 0 12px;
-    color: #ffffff;
+    color: #1C1832;
 }
 
 .footer-brand p{
     margin:0;
-    color: rgba(244,247,251,0.78);
+    color: #6C6690;
     line-height:1.7;
 }
 
 .footer-brand-cta {
     margin-top:12px !important;
-    color: #8dc8ff !important;
+    color: #2563EB !important;
     font-weight:600;
 }
 
@@ -63,19 +63,19 @@
 
 .footer-column h4{
     margin:0 0 6px;
-    color: #ffffff;
+    color: #1C1832;
     font-size:1rem;
 }
 
 .footer-column a{
-    color: rgba(244,247,251,0.78);
+    color: #6C6690;
     text-decoration:none;
     transition: color .2s ease, transform .2s ease;
 }
 
 .footer-column a:hover,
 .footer-column a:focus-visible{
-    color: #ffffff;
+    color: #1C1832;
     transform: translateX(2px);
 }
 
@@ -89,7 +89,7 @@
     min-height:46px;
     padding:0.8rem 1.1rem;
     border-radius:999px;
-    border:1px solid rgba(255,255,255,0.2);
+    border:1px solid rgba(28,24,50,0.12);
     background: linear-gradient(135deg, #ff7a1a 0%, #ff5c6c 100%);
     color:#fff;
     font-weight:700;
@@ -120,12 +120,12 @@
 .footer-bottom{
     margin-top:34px;
     padding-top:22px;
-    border-top:1px solid rgba(255,255,255,0.14);
+    border-top:1px solid rgba(28,24,50,0.1);
     display:flex;
     justify-content:space-between;
     flex-wrap:wrap;
     gap:16px;
-    color: rgba(244,247,251,0.78);
+    color: #6C6690;
     font-size:0.95rem;
 }
 
