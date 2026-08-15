@@ -28,12 +28,43 @@ class SeoService:
     def build_home_meta(self, request: Any) -> dict[str, str]:
         base_url = self._build_base_url(request)
 
+        # Determine locale language code from request.state.locale (LanguageService sets 'lang_code')
+        lang_code = "en"
+        try:
+            locale_obj = getattr(request.state, "locale", None)
+            if isinstance(locale_obj, dict):
+                lang_code = locale_obj.get("lang_code") or lang_code
+            else:
+                # support attribute access if present
+                lang_code = getattr(locale_obj, "lang_code", lang_code) or lang_code
+        except Exception:
+            lang_code = "en"
+
+        # Localized title/description: prefer existing locale keys where available
+        t = getattr(request.state, "t", None)
+        if callable(t):
+            brand = t("footer.brand", "Converigo")
+            heading = t("hero.title", "Convert All Files")
+            description = t(
+                "hero.description",
+                "Converigo offers fast, secure, and automatic file conversion from video, audio, image, and document formats.",
+            )
+        else:
+            brand = "Converigo"
+            heading = "Convert All Files"
+            description = "Converigo offers fast, secure, and automatic file conversion from video, audio, image, and document formats."
+
+        title = f"{brand} | {heading}"
+
+        canonical = f"{base_url}/?lang={lang_code}"
+        og_url = canonical
+
         return {
-            "title": "Converigo | Fast, Free & Secure Online File Converter",
-            "description": "Converigo offers fast, secure, and automatic file conversion from video, audio, image, and document formats.",
-            "canonical": f"{base_url}/",
-            "og_url": f"{base_url}/",
-            "og_site_name": "Converigo",
+            "title": title,
+            "description": description,
+            "canonical": canonical,
+            "og_url": og_url,
+            "og_site_name": brand,
             "og_image": f"{base_url}/static/images/converigo-og-image.png",
             "og_image_alt": "Converigo file conversion platform",
             "og_image_width": 1200,
@@ -43,7 +74,7 @@ class SeoService:
             "twitter_site": "@converigo",
             "twitter_creator": "@converigo",
             "keywords": "online file converter, file conversion, document conversion, image conversion, audio conversion, video conversion",
-            "author": "Converigo",
+            "author": brand,
             "robots": "index,follow",
         }
 
@@ -228,11 +259,31 @@ class SeoService:
             "logo": f"{base_url}/static/images/converigo-logo.png",
         }
 
+        # Determine locale language code (if available) to use localized site URL
+        lang_code = "en"
+        try:
+            locale_obj = getattr(request.state, "locale", None)
+            if isinstance(locale_obj, dict):
+                lang_code = locale_obj.get("lang_code") or lang_code
+            else:
+                lang_code = getattr(locale_obj, "lang_code", lang_code) or lang_code
+        except Exception:
+            lang_code = "en"
+
+        t = getattr(request.state, "t", None)
+        if callable(t):
+            site_name = t("footer.brand", "Converigo")
+            site_description = t("hero.description", "")
+        else:
+            site_name = "Converigo"
+            site_description = ""
+
         website = {
             "@context": "https://schema.org",
             "@type": "WebSite",
-            "url": base_url,
-            "name": "Converigo",
+            "url": f"{base_url}/?lang={lang_code}",
+            "name": site_name,
+            "description": site_description,
             "publisher": organization,
             "potentialAction": {
                 "@type": "SearchAction",
