@@ -42,13 +42,13 @@
 {% set page_twitter_title = page_meta.twitter_title | default(request.state.t('homepage.title', page_title)) %}
 {% set page_twitter_description = page_meta.twitter_description | default(request.state.t('homepage.description', page_description)) %}
 
-{# Minimal JSON-LD localized snippet for homepage #}
+{# Minimal JSON-LD localized snippet for homepage (use already-computed values) #}
 {% set jsonld = {
 	"@context": "https://schema.org",
 	"@type": "WebSite",
-	"name": (request.state.t('homepage.title') if request is defined and request.state is defined else page_title),
+	"name": page_title,
 	"url": page_canonical,
-	"description": (request.state.t('homepage.description') if request is defined and request.state is defined else page_description)
+	"description": page_description
 } %}
 
 
@@ -81,10 +81,10 @@
 <link rel="canonical" href="{{ page_canonical }}">
 
 {% set page_hreflang_locales = request.state.supported_locales | default(['en', 'id']) %}
-{% set page_hreflang_base = page_canonical | replace('https://converigo.com', 'https://converigo.com') %}
-{% set page_hreflang_delimiter = '?' if '?' not in page_hreflang_base else '&' %}
+{# Build hreflang links from site root to avoid duplicate lang query params #}
+{% set page_hreflang_base = 'https://converigo.com/' %}
 {% for locale_code in page_hreflang_locales %}
-<link rel="alternate" hreflang="{{ locale_code }}" href="{{ page_hreflang_base }}{{ page_hreflang_delimiter }}lang={{ locale_code }}">
+<link rel="alternate" hreflang="{{ locale_code }}" href="{{ page_hreflang_base }}?lang={{ locale_code }}">
 {% endfor %}
 <link rel="alternate" hreflang="x-default" href="{{ page_hreflang_base }}">
 
