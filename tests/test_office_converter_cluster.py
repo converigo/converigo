@@ -37,9 +37,19 @@ def test_converter_data_and_landing_build():
     data_svc = ConverterDataService(Path("app/data/converters"))
     seo = SeoService(Path("app/data/converters"))
     builder = LandingPageBuilder(seo, data_svc)
+    class Req:
+        def __init__(self):
+            from types import SimpleNamespace
+
+            self.state = SimpleNamespace(
+                t=lambda key, default=None: default if default is not None else key,
+                locale=SimpleNamespace(lang_code="en"),
+                supported_locales=["en", "es", "fr", "id", "ja"],
+            )
+
     for slug in SLUGS:
         data = data_svc.load_converter_by_slug(slug)
-        ctx = builder.build_context(type("Request", (), {})(), data)
+        ctx = builder.build_context(Req(), data)
         builder.validate_contract(ctx)
         assert ctx.get("h1") and ctx.get("steps")
 
