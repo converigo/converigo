@@ -1,0 +1,144 @@
+{
+  "slug": "mp3-to-wav",
+  "title": "MP3 to WAV Converter",
+  "description": "Convert MP3 audio files to WAV for high-quality, uncompressed audio suitable for editing and legacy workflows.",
+  "upload_form": {
+    "action": "/convert",
+    "method": "post",
+    "accept": ".mp3",
+    "button_text": "Convert MP3 to WAV"
+  },
+  "faq": [
+    {
+      "question": "What file types can I upload?",
+      "answer": "Upload MP3 audio files only."
+    },
+    {
+      "question": "What output do I get?",
+      "answer": "A WAV audio file (uncompressed PCM) that is ideal for editing and archival."
+    },
+    {
+      "question": "Is the conversion free?",
+      "answer": "Yes. MP3 to WAV conversion is free and performed in the browser/server pipeline."
+    },
+    {
+      "question": "Will audio quality be preserved?",
+      "answer": "Yes. The converter decodes MP3 and writes a high-quality WAV output preserving audio fidelity."
+    },
+    {
+      "question": "Can I use this on mobile?",
+      "answer": "Yes. The converter works in modern mobile and desktop browsers."
+    },
+    {
+      "question": "How do I download the converted audio?",
+      "answer": "Download the WAV file immediately after conversion completes."
+    },
+    {
+      "question": "What if conversion fails?",
+      "answer": "Try re-uploading the MP3 file or use a different source file; if problems persist, contact support."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "mp3-to-m4a",
+      "title": "MP3 to M4A"
+    },
+    {
+      "slug": "mp4-to-wav",
+      "title": "MP4 to WAV"
+    },
+    {
+      "slug": "wav-to-mp3",
+      "title": "WAV to MP3"
+    }
+  ],
+  "seo": {
+    "title": "Convert MP3 to WAV Online Free | Converigo",
+    "description": "Convert MP3 to WAV online for free using Converigo. Fast, secure and browser-based conversion from mp3 to wav with high-quality PCM output.",
+    "keywords": "mp3 to wav, convert mp3 to wav, online audio converter, wav pcm",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert MP3 to WAV - Converigo free online converter",
+    "twitter_title": "Convert MP3 to WAV Online Free | Converigo",
+    "twitter_description": "Convert MP3 to WAV online for free using Converigo. Fast, secure and browser-based conversion from mp3 to wav with high-quality PCM output.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/mp3-to-wav"
+  },
+  "source": "mp3",
+  "target": "wav",
+  "category": "audio",
+  "active": true,
+  "popular": false,
+  "featured": false,
+  "hero": {
+    "eyebrow": "Audio converter",
+    "title": "Convert MP3 to WAV Online Free",
+    "description": "Quickly convert MP3 files to WAV for editing, mastering, or compatibility with legacy audio tools.",
+    "panel_label": "Ready to convert",
+    "panel_title": "Upload an MP3 and receive a WAV file in seconds."
+  },
+  "features": [
+    {
+      "title": "Lossless output",
+      "text": "WAV provides uncompressed PCM output ideal for audio editing and processing."
+    },
+    {
+      "title": "Fast workflow",
+      "text": "Upload, convert, and download in a few quick steps."
+    },
+    {
+      "title": "Secure processing",
+      "text": "Files are handled securely and removed after processing."
+    },
+    {
+      "title": "High-quality WAV",
+      "text": "Receive a WAV file that preserves the decoded audio at original sample rate."
+    },
+    {
+      "title": "No installation required",
+      "text": "Convert directly in your browser without installing software."
+    }
+  ],
+  "supported_formats": {
+    "input": [
+      "MP3"
+    ],
+    "output": [
+      "WAV"
+    ],
+    "description": "MP3 input, WAV output (PCM)"
+  },
+  "how_to_use": [
+    {
+      "title": "Upload your MP3",
+      "description": "Select an MP3 file from your device to start the conversion."
+    },
+    {
+      "title": "Choose WAV as output",
+      "description": "Pick WAV as the result format and review any conversion options if present."
+    },
+    {
+      "title": "Download the WAV file",
+      "description": "Get your WAV file immediately after conversion completes."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is MP3?",
+      "text": "MP3 is a lossy compressed audio format widely used for music and spoken audio."
+    },
+    {
+      "title": "What is WAV?",
+      "text": "WAV is an uncompressed audio container commonly used for editing and archival."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Convert MP3 files to WAV in seconds",
+    "text": "Upload your MP3 and receive a high-quality WAV file ready for editing.",
+    "primary_text": "Convert now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  },
+  "lifecycle_status": "experimental"
+}
