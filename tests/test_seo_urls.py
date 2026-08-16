@@ -11,10 +11,18 @@ class DummyURL:
         self.port = port
 
 
+from types import SimpleNamespace
+
+
 class DummyRequest:
     def __init__(self):
         self.headers = {}
         self.url = DummyURL()
+        self.state = SimpleNamespace(
+            t=lambda key, default=None: default if default is not None else key,
+            locale=SimpleNamespace(lang_code="en"),
+            supported_locales=["en", "es", "fr", "id", "ja"],
+        )
 
 
 def test_seo_service_uses_production_absolute_urls():
@@ -23,5 +31,5 @@ def test_seo_service_uses_production_absolute_urls():
 
     meta = service.build_home_meta(request)
 
-    assert meta["canonical"] == "https://converigo.com/"
-    assert meta["og_url"] == "https://converigo.com/"
+    assert meta["canonical"] == "https://converigo.com/?lang=en"
+    assert meta["og_url"] == "https://converigo.com/?lang=en"

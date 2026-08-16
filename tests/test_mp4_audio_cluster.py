@@ -11,8 +11,16 @@ CONVERTERS_DIR = REPO_ROOT / "app" / "data" / "converters"
 NEW_SLUGS = ["mp4-to-wav", "mp4-to-aac", "mp4-to-flac", "mp4-to-ogg", "mp4-to-m4a"]
 
 
+from types import SimpleNamespace
+
+
 class DummyRequest:
-    pass
+    def __init__(self):
+        self.state = SimpleNamespace(
+            t=lambda key, default=None: default if default is not None else key,
+            locale=SimpleNamespace(lang_code="en"),
+            supported_locales=["en", "es", "fr", "id", "ja"],
+        )
 
 
 def _build_builder() -> LandingPageBuilder:
