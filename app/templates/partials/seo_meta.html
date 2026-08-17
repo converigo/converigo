@@ -81,8 +81,11 @@
 <link rel="canonical" href="{{ page_canonical }}">
 
 {% set page_hreflang_locales = request.state.supported_locales | default(['en', 'id']) %}
-{# Build hreflang links from site root to avoid duplicate lang query params #}
+{# Keep hreflang aligned with the active page path while keeping the homepage rooted at /. #}
+{% set page_hreflang_base = 'https://converigo.com' ~ current_path %}
+{% if current_path == '/' %}
 {% set page_hreflang_base = 'https://converigo.com/' %}
+{% endif %}
 {% for locale_code in page_hreflang_locales %}
 <link rel="alternate" hreflang="{{ locale_code }}" href="{{ page_hreflang_base }}?lang={{ locale_code }}">
 {% endfor %}
