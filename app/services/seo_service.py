@@ -250,6 +250,7 @@ class SeoService:
         canonical_path: str | None = None,
     ) -> dict[str, Any]:
 
+        request_state = getattr(request, "state", None) if request is not None else None
         base_url = self._build_base_url(request)
 
         organization = {
@@ -262,7 +263,7 @@ class SeoService:
         # Determine locale language code (if available) to use localized site URL
         lang_code = "en"
         try:
-            locale_obj = getattr(request.state, "locale", None)
+            locale_obj = getattr(request_state, "locale", None)
             if isinstance(locale_obj, dict):
                 lang_code = locale_obj.get("lang_code") or lang_code
             else:
@@ -270,7 +271,7 @@ class SeoService:
         except Exception:
             lang_code = "en"
 
-        t = getattr(request.state, "t", None)
+        t = getattr(request_state, "t", None) if request_state is not None else None
         if callable(t):
             site_name = t("footer.brand", "Converigo")
             site_description = t("hero.description", "")
@@ -510,6 +511,36 @@ class SeoService:
                 {
                     "@type": "FAQPage",
                     "mainEntity": faq_items,
+                }
+            )
+
+        source = str(tool_data.get("source") or "").strip().upper()
+        target = str(tool_data.get("target") or "").strip().upper()
+        if source and target:
+            graph.append(
+                {
+                    "@type": "HowTo",
+                    "name": f"How to convert {source} to {target}",
+                    "step": [
+                        {
+                            "@type": "HowToStep",
+                            "position": 1,
+                            "name": f"Upload your {source} file",
+                            "text": f"Upload your {source} file",
+                        },
+                        {
+                            "@type": "HowToStep",
+                            "position": 2,
+                            "name": "Click the convert button",
+                            "text": "Click the convert button",
+                        },
+                        {
+                            "@type": "HowToStep",
+                            "position": 3,
+                            "name": f"Download your converted {target} file",
+                            "text": f"Download your converted {target} file",
+                        },
+                    ],
                 }
             )
 
