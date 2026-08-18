@@ -12,7 +12,7 @@
   "seo_keywords": ["MP3 vs WAV", "choose WAV or MP3", "audio conversion guide"],
   "og_image": "/static/images/og-mp3-vs-wav-explained.png",
   "og_image_alt": "Audio format comparison between MP3 and WAV",
-  "canonical": "/learning/mp3-vs-wav-explained",
+  "canonical": "https://converigo.com/learning/mp3-vs-wav-explained",
   "featured": false,
   "order": 7,
   "related_formats": ["mp3", "wav"],

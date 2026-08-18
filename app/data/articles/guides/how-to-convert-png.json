@@ -14,6 +14,7 @@
   "related_formats": ["png", "jpg", "webp", "svg"],
   "related_converters": ["jpg-to-png", "png-to-jpg", "png-to-webp", "webp-to-png"],
   "related_articles": ["png", "what-is-png", "png-vs-jpg", "png-compression-guide"],
+  "canonical": "https://converigo.com/learning/how-to-convert-png",
   "sections": [
     {
       "id": "overview",

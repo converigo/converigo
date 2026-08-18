@@ -12,7 +12,7 @@
   "seo_keywords": ["batch conversion workflow", "convert multiple files", "bulk file conversion"],
   "og_image": "/static/images/og-batch-conversion-workflow.png",
   "og_image_alt": "Workflow diagram for batch conversion",
-  "canonical": "/learning/batch-conversion-workflow",
+  "canonical": "https://converigo.com/learning/batch-conversion-workflow",
   "featured": true,
   "order": 3,
   "related_formats": ["jpg", "png", "pdf"],

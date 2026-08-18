@@ -25,6 +25,7 @@
   ],
   "og_image": "/images/og/webp-vs-png.jpg",
   "og_image_alt": "Comparison chart showing WebP and PNG formats with file sizes, quality bars, and browser logos",
+  "canonical": "https://converigo.com/learning/webp-vs-png",
   "related_formats": ["webp", "png", "jpg", "avif", "gif"],
   "related_converters": ["webp-to-png", "png-to-webp", "jpg-to-webp", "webp-to-jpg", "bmp-to-webp"],
   "related_articles": ["png-vs-jpg", "lossy-vs-lossless-compression", "what-is-file-conversion"],

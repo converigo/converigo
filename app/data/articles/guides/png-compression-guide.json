@@ -14,6 +14,7 @@
   "related_formats": ["png", "webp", "jpg"],
   "related_converters": ["png-to-webp", "jpg-to-png", "png-to-jpg"],
   "related_articles": ["png", "png-transparency-guide", "png-vs-webp"],
+  "canonical": "https://converigo.com/learning/png-compression-guide",
   "sections": [
     {
       "id": "why-optimize",

@@ -12,7 +12,7 @@
   "seo_keywords": ["file format guide", "understand file formats", "convert files online"],
   "og_image": "/static/images/og-understanding-file-formats.png",
   "og_image_alt": "Illustration of common file formats",
-  "canonical": "/learning/understanding-file-formats",
+  "canonical": "https://converigo.com/learning/understanding-file-formats",
   "featured": true,
   "order": 2,
   "related_formats": ["pdf", "jpg", "png"],

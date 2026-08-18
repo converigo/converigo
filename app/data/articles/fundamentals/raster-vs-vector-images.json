@@ -25,6 +25,7 @@
   ],
   "og_image": "/images/og/raster-vs-vector-images.jpg",
   "og_image_alt": "Side-by-side comparison of a raster image showing pixelation when zoomed versus a vector image showing smooth scaling",
+  "canonical": "https://converigo.com/learning/raster-vs-vector-images",
   "related_formats": ["jpg", "png", "svg", "webp", "bmp", "gif"],
   "related_converters": ["svg-to-png", "jpg-to-png", "png-to-jpg", "bmp-to-jpg", "webp-to-png"],
   "related_articles": ["what-is-file-conversion", "lossy-vs-lossless-compression", "what-is-svg"],

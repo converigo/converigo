@@ -25,6 +25,7 @@
   ],
   "og_image": "/images/og/lossy-vs-lossless-compression.jpg",
   "og_image_alt": "Diagram comparing lossy compression that removes data versus lossless compression that preserves all data",
+  "canonical": "https://converigo.com/learning/lossy-vs-lossless-compression",
   "related_formats": ["jpg", "png", "mp3", "webp", "flac", "zip"],
   "related_converters": ["jpg-to-png", "png-to-webp", "mp4-to-mp3", "mp4-to-flac", "webp-to-png"],
   "related_articles": ["what-is-file-conversion", "png-vs-jpg", "what-is-svg"],
