@@ -18,16 +18,12 @@ def _find_hreflang_links(html: str) -> dict[str, str]:
         "/webp-to-jpg",
         "/avif-to-jpg",
         "/heic-to-jpg",
-        "/jpg-to-pdf",
         "/xlsx-to-pdf",
         "/svg-to-png",
         "/jpg-to-ico",
         "/jpg-to-tiff",
-        "/webp-to-png",
         "/bmp-to-jpg",
         "/bmp-to-png",
-        "/pdf-to-jpg",
-        "/mp4-to-mp3",
         "/pdf-to-pptx",
         "/png-to-ico",
         "/mp3-to-wav",
@@ -48,6 +44,25 @@ def test_landing_page_canonical_and_hreflang_for_converters(path):
     assert links["en"] == f"https://converigo.com{path}?lang=en"
     assert links["id"] == f"https://converigo.com{path}?lang=id"
     assert links["x-default"] == f"https://converigo.com{path}"
+
+
+@pytest.mark.parametrize(
+    ("path", "expected_target"),
+    [
+        ("/jpg-to-pdf", "/tools/jpg-to-pdf"),
+        ("/webp-to-png", "/tools/webp-to-png"),
+        ("/pdf-to-jpg", "/tools/pdf-to-jpg"),
+        ("/mp4-to-mp3", "/tools/mp4-to-mp3"),
+        ("/png-to-jpg", "/tools/png-to-jpg"),
+        ("/png-to-webp", "/tools/png-to-webp"),
+    ],
+)
+def test_legacy_converter_urls_redirect_to_tools_path(path, expected_target):
+    client = TestClient(app)
+    response = client.get(path, follow_redirects=False)
+
+    assert response.status_code == 301
+    assert response.headers["location"] == expected_target
 
 
 def test_homepage_hreflang_uses_root_url():

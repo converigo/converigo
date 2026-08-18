@@ -213,10 +213,22 @@ class ConverterDataService:
         tool_data: dict[str, Any],
         limit: int = 4,
     ) -> List[dict[str, Any]]:
+        if not tool_data:
+            return []
+
+        manual_related_tools = tool_data.get("related_tools")
+        if isinstance(manual_related_tools, list) and manual_related_tools:
+            valid_items = [
+                item for item in manual_related_tools
+                if isinstance(item, dict) and str(item.get("slug") or "").strip()
+            ]
+            if valid_items:
+                return valid_items[:limit]
+
         from app.services.related_converter_service import RelatedConverterService
 
         service = RelatedConverterService(self)
-        return service.get_related_converters(tool_data, limit=limit)
+        return service.get_related_converters(tool_data, limit=min(limit, 5))
 
     def _infer_cluster(self, converter: dict[str, Any]) -> str:
         source = str(converter.get("source") or "").lower()
@@ -279,17 +291,8 @@ class ConverterDataService:
                 }
             )
 
-        landing_page_overrides = {
-            "mp4-to-mp3": "/mp4-to-mp3",
-            "jpg-to-pdf": "/jpg-to-pdf",
-            "png-to-jpg": "/png-to-jpg",
-            "pdf-to-jpg": "/pdf-to-jpg",
-            "png-to-webp": "/png-to-webp",
-            "webp-to-png": "/webp-to-png",
-        }
-
         for tool in self.list_supported_converters():
-            path = landing_page_overrides.get(tool["slug"], f"/tools/{tool['slug']}")
+            path = f"/tools/{tool['slug']}"
             entries.append(
                 {
                     "loc": base_url.rstrip("/") + path,
