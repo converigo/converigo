@@ -123,32 +123,32 @@ class SeoService:
             canonical_path or f"/tools/{tool_data['slug']}",
         )
 
-        og_image = (
-            seo_meta.get("image")
-            or f"{base_url}/static/images/og-default.png"
-        )
+        og_image = seo_meta.get("image") or f"{base_url}/static/images/og-default.png"
+        og_image_alt = seo_meta.get("og_image_alt") or title
+        twitter_title = seo_meta.get("twitter_title") or title
+        twitter_description = seo_meta.get("twitter_description") or description
+        twitter_image = seo_meta.get("twitter_image") or og_image
 
         return {
-            "title": title,
-            "description": description,
+            "title": title or seo_meta.get("title"),
+            "description": description or seo_meta.get("description"),
             "canonical": canonical,
             "og_url": canonical,
             "og_site_name": "Converigo",
             "og_image": og_image,
-            "og_image_alt": title,
+            "og_image_alt": og_image_alt,
             "og_image_width": 1200,
             "og_image_height": 630,
             "keywords": seo_meta.get("keywords", ""),
-            "og_type": seo_meta.get(
-                "type",
-                "website",
-            ),
-            "twitter_card": seo_meta.get(
-                "twitter_card",
-                "summary_large_image",
-            ),
+            "og_type": seo_meta.get("type", "website"),
+            "twitter_card": seo_meta.get("twitter_card", "summary_large_image"),
+            "twitter_title": twitter_title,
+            "twitter_description": twitter_description,
+            "twitter_image": twitter_image,
             "twitter_site": "@converigo",
             "twitter_creator": "@converigo",
+            "author": "Converigo",
+            "robots": "index,follow",
         }
 
     def _build_blog_entries(self, base_url: str) -> list[dict[str, str]]:
@@ -192,12 +192,21 @@ class SeoService:
         entries.extend(self._build_blog_entries(base_url))
         entries.extend(self._build_learning_entries(base_url))
 
+        deduped_entries: list[dict[str, str]] = []
+        seen_locs: set[str] = set()
+        for entry in entries:
+            loc = str(entry.get("loc", "")).strip()
+            if not loc or loc in seen_locs:
+                continue
+            seen_locs.add(loc)
+            deduped_entries.append(entry)
+
         lines = [
             '<?xml version="1.0" encoding="UTF-8"?>',
             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
         ]
 
-        for entry in entries:
+        for entry in deduped_entries:
 
             loc = escape(str(entry["loc"]))
 
