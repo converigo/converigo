@@ -4,6 +4,7 @@ import json
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Iterator, List
+from urllib.parse import urlparse
 
 from app.plugins.registry import registry as plugin_registry
 from app.services.converter_registry_service import ConverterRegistryService
@@ -218,10 +219,33 @@ class ConverterDataService:
 
         manual_related_tools = tool_data.get("related_tools")
         if isinstance(manual_related_tools, list) and manual_related_tools:
-            valid_items = [
-                item for item in manual_related_tools
-                if isinstance(item, dict) and str(item.get("slug") or "").strip()
-            ]
+            supported_slugs = {
+                str(item.get("slug") or "").strip().lower()
+                for item in self.list_supported_converters()
+                if str(item.get("slug") or "").strip()
+            }
+            current_slug = str(tool_data.get("slug") or "").strip().lower()
+            valid_items: List[dict[str, Any]] = []
+            seen_slugs: set[str] = set()
+
+            for item in manual_related_tools:
+                if not isinstance(item, dict):
+                    continue
+
+                slug = str(item.get("slug") or "").strip().lower()
+                if not slug or slug == current_slug or slug in seen_slugs:
+                    continue
+                if slug not in supported_slugs:
+                    continue
+
+                seen_slugs.add(slug)
+                valid_items.append({
+                    "slug": slug,
+                    "title": item.get("title") or item.get("name") or slug.replace("-", " ").title(),
+                })
+                if len(valid_items) >= limit:
+                    break
+
             if valid_items:
                 return valid_items[:limit]
 
@@ -271,39 +295,73 @@ class ConverterDataService:
     def _is_document(self, value: str) -> bool:
         return value in {"pdf", "doc", "docx", "ppt", "pptx", "xls", "xlsx", "txt", "odt", "rtf"}
 
+    def _resolve_public_canonical_path(self, tool: dict[str, Any]) -> str:
+        slug = str(tool.get("slug") or "").strip()
+        seo_data = tool.get("seo") if isinstance(tool.get("seo"), dict) else {}
+
+        candidates = [
+            str(seo_data.get("canonical") or "").strip(),
+            str(tool.get("landing_path") or "").strip(),
+            str(tool.get("canonical_url") or "").strip(),
+            str(tool.get("path") or "").strip(),
+            f"/tools/{slug}" if slug else "",
+        ]
+
+        for candidate in candidates:
+            if not candidate:
+                continue
+            if candidate.startswith(("http://", "https://")):
+                candidate = urlparse(candidate).path or ""
+            candidate = str(candidate).strip()
+            if candidate.startswith("/"):
+                return candidate
+
+        return f"/tools/{slug}" if slug else "/"
+
     def sitemap_entries(
         self,
         base_url: str,
     ) -> List[dict[str, str]]:
-        entries = [
-            {
-                "loc": base_url.rstrip("/") + "/",
-                "lastmod": datetime.utcnow().date().isoformat(),
-            }
-        ]
+        entries: list[dict[str, str]] = []
+        seen_locs: set[str] = set()
+
+        def add_entry(loc: str, lastmod: str) -> None:
+            if not loc:
+                return
+            if loc in seen_locs:
+                return
+            seen_locs.add(loc)
+            entries.append({"loc": loc, "lastmod": lastmod})
+
+        add_entry(
+            base_url.rstrip("/") + "/",
+            datetime.utcnow().date().isoformat(),
+        )
 
         trust_pages = ["/about", "/privacy-policy", "/terms", "/contact", "/cookies"]
         for path in trust_pages:
-            entries.append(
-                {
-                    "loc": base_url.rstrip("/") + path,
-                    "lastmod": datetime.utcnow().date().isoformat(),
-                }
+            add_entry(
+                base_url.rstrip("/") + path,
+                datetime.utcnow().date().isoformat(),
             )
 
         for tool in self.list_supported_converters():
-            path = f"/tools/{tool['slug']}"
-            entries.append(
-                {
-                    "loc": base_url.rstrip("/") + path,
-                    "lastmod": tool.get(
+            if tool.get("active") is False:
+                continue
+            path = self._resolve_public_canonical_path(tool)
+            if not path or not path.startswith("/"):
+                continue
+            add_entry(
+                base_url.rstrip("/") + path,
+                str(
+                    tool.get(
                         "updated_at",
                         tool.get(
                             "created_at",
                             datetime.utcnow().date().isoformat(),
                         ),
-                    ),
-                }
+                    )
+                ),
             )
 
         return entries
