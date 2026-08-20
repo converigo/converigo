@@ -56,7 +56,8 @@ class SeoService:
 
         title = f"{brand} | {heading}"
 
-        canonical = f"{base_url}/?lang={lang_code}"
+        # Homepage canonical: use root to align with x-default and non-home pages
+        canonical = f"{base_url}/"
         og_url = canonical
 
         return {
