@@ -1,0 +1,9 @@
+{% if not disable_analytics and runtime_ga_measurement_id %}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ runtime_ga_measurement_id }}"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '{{ runtime_ga_measurement_id }}');
+</script>
+{% endif %}
