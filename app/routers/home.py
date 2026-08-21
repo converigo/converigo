@@ -8,7 +8,7 @@ from datetime import datetime
 from pathlib import Path
 
 from fastapi import APIRouter, HTTPException, Request
-from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.responses import HTMLResponse, Response
 
 from app.core.templates import templates
 from app.services.converter_data_service import ConverterDataService
@@ -400,32 +400,32 @@ async def blog_article(request: Request, slug: str):
 
 @router.get("/mp4-to-mp3", response_class=HTMLResponse)
 async def mp4_to_mp3_landing(request: Request):
-    return await render_universal_tool_page(request, "mp4-to-mp3", canonical_path="/mp4-to-mp3")
+    return Response(status_code=410)
 
 
 @router.get("/jpg-to-png", response_class=HTMLResponse)
 async def jpg_to_png_landing(request: Request):
-    return await render_universal_tool_page(request, "jpg-to-png", canonical_path="/jpg-to-png")
+    return Response(status_code=410)
 
 
 @router.get("/png-to-jpg", response_class=HTMLResponse)
 async def png_to_jpg_landing(request: Request):
-    return await render_universal_tool_page(request, "png-to-jpg", canonical_path="/png-to-jpg")
+    return Response(status_code=410)
 
 
 @router.get("/png-to-webp", response_class=HTMLResponse)
 async def png_to_webp_landing(request: Request):
-    return await render_universal_tool_page(request, "png-to-webp", canonical_path="/png-to-webp")
+    return Response(status_code=410)
 
 
 @router.get("/webp-to-jpg", response_class=HTMLResponse)
 async def webp_to_jpg_landing(request: Request):
-    return await render_universal_tool_page(request, "webp-to-jpg", canonical_path="/webp-to-jpg")
+    return Response(status_code=410)
 
 
 @router.get("/webp-to-png", response_class=HTMLResponse)
 async def webp_to_png_landing(request: Request):
-    return await render_universal_tool_page(request, "webp-to-png", canonical_path="/webp-to-png")
+    return Response(status_code=410)
 
 
 @router.get("/image-conversion", response_class=HTMLResponse)
@@ -541,27 +541,14 @@ async def _render_hub_page(request: Request, slug: str) -> HTMLResponse:
 
 @router.get("/pdf-to-jpg", response_class=HTMLResponse)
 async def pdf_to_jpg_landing(request: Request):
-    return await render_universal_tool_page(request, "pdf-to-jpg", canonical_path="/pdf-to-jpg")
+    return Response(status_code=410)
 
 
 @router.get("/word-to-pdf", response_class=HTMLResponse)
 async def word_to_pdf_landing(request: Request):
-    return await render_universal_tool_page(request, "word-to-pdf", canonical_path="/word-to-pdf")
+    return Response(status_code=410)
 
 
 @router.get("/jpg-to-pdf", response_class=HTMLResponse)
 async def jpg_to_pdf_landing(request: Request):
-    return await render_universal_tool_page(request, "jpg-to-pdf", canonical_path="/jpg-to-pdf")
-
-
-@router.get("/{slug}", response_class=HTMLResponse)
-async def universal_converter_route(request: Request, slug: str):
-    if slug in RESERVED_PATHS:
-        return await _render_not_found_page(request, path=f"/{slug}")
-
-    try:
-        converter_data_service.load_converter_by_slug(slug)
-    except FileNotFoundError:
-        return await _render_not_found_page(request, path=f"/{slug}")
-
-    return await render_universal_tool_page(request, slug, canonical_path=f"/{slug}")
+    return Response(status_code=410)

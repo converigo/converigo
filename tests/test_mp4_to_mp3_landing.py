@@ -8,10 +8,18 @@ from fastapi.testclient import TestClient
 from app.main import app
 
 
-def test_mp4_to_mp3_landing_page_renders_with_seo_and_faq():
+def test_mp4_to_mp3_legacy_page_is_retired():
     client = TestClient(app)
 
     response = client.get("/mp4-to-mp3")
+
+    assert response.status_code == 410
+
+
+def test_mp4_to_mp3_canonical_page_renders_with_seo_and_faq():
+    client = TestClient(app)
+
+    response = client.get("/tools/mp4-to-mp3")
 
     assert response.status_code == 200
     assert "MP4 to MP3 | Converigo" in response.text
@@ -27,7 +35,6 @@ def test_mp4_to_mp3_landing_page_renders_with_seo_and_faq():
     assert "MP4 input, MP3 output" in response.text
     assert "Download your converted MP3" in response.text
     assert "How to convert MP4 to MP3" in response.text
-    # Check that related tools are shown (may vary based on related converter service)
     assert "/tools/" in response.text
 
 

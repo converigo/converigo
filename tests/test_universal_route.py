@@ -3,9 +3,16 @@ from fastapi.testclient import TestClient
 from app.main import app
 
 
+def test_legacy_root_route_is_retired_with_410():
+    client = TestClient(app)
+    response = client.get("/jpg-to-pdf", follow_redirects=False)
+
+    assert response.status_code == 410
+
+
 def test_universal_route_renders_tool_page_for_known_converter():
     client = TestClient(app)
-    response = client.get("/jpg-to-pdf")
+    response = client.get("/tools/jpg-to-pdf")
 
     assert response.status_code == 200
     assert "Converter tool" in response.text
@@ -21,9 +28,9 @@ def test_existing_tools_route_still_renders_for_same_converter():
     assert "JPG to PDF Converter" in response.text
 
 
-def test_universal_tool_page_renders_json_driven_sections():
+def test_canonical_png_to_webp_route_renders_json_driven_sections():
     client = TestClient(app)
-    response = client.get("/png-to-webp")
+    response = client.get("/tools/png-to-webp")
 
     assert response.status_code == 200
     assert "Benefits" in response.text

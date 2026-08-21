@@ -279,17 +279,8 @@ class ConverterDataService:
                 }
             )
 
-        landing_page_overrides = {
-            "mp4-to-mp3": "/mp4-to-mp3",
-            "jpg-to-pdf": "/jpg-to-pdf",
-            "png-to-jpg": "/png-to-jpg",
-            "pdf-to-jpg": "/pdf-to-jpg",
-            "png-to-webp": "/png-to-webp",
-            "webp-to-png": "/webp-to-png",
-        }
-
         for tool in self.list_supported_converters():
-            path = landing_page_overrides.get(tool["slug"], f"/tools/{tool['slug']}")
+            path = f"/tools/{tool['slug']}"
             entries.append(
                 {
                     "loc": base_url.rstrip("/") + path,
