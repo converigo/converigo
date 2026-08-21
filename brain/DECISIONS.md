@@ -56,3 +56,38 @@
 - **Decision:** Create a separate `SearchConsoleReadinessService` dedicated to validating Search Console requirements (sitemap, robots, indexability, structured data, canonical, core SEO) without modifying the existing SEO Audit Engine.
 - **Rationale:** Search Console readiness is a distinct concern from SEO scoring. A separate service keeps concerns separated, uses a weighted scoring model (100 points across 6 categories), and provides actionable recommendations specific to Search Console verification.
 - **Outcome:** 24 tests PASS. 61 pages audited with 736 checks. Readiness Score: 41.2/100 (CRITICAL) — baseline established. API endpoint and dashboard integration complete. No architecture changes.
+
+Decision Record: FASE 16 — CLOSED (2026-08-18)
+
+Context
+- Baseline run: two E2E tests failed during Phase 16 verification:
+  - `tests/e2e/test_convert_flow.py::test_jpg_conversion_flow`
+  - `tests/e2e/test_convert_flow.py::test_png_conversion_flow`
+- Failure symptom: Playwright `TimeoutError` waiting for `.format-chip` to appear in the served UI.
+
+Summary baseline
+- Two E2E tests failed as listed above; root cause surfaced as a frontend runtime mismatch where `.format-chip` is never rendered during the tested flow.
+
+Root cause
+- Two parallel upload implementations exist in the codebase:
+  - Legacy inline flow: `addFiles()` (inline in `converigo_main.html`) — active in the served page during tests.
+  - Modular flow: `UploadManager` / `RecommendationManager` (static JS modules) — present on disk and served, but not effective for the upload path exercised by the tests.
+- Result: the modular `RecommendationManager` flow (which would render `.format-chip`) is not invoked in the runtime path used by the failing tests; the legacy inline path does not call the recommendation render, producing no `.format-chip` and causing the Playwright timeout.
+
+Classification
+- A — Application bug. Record as dev backlog item; not a Phase-16 blocking regression for release gating.
+
+Investigation pointer
+- Relevant commit for follow-up: `28d40ec` (message: "consolidate production mainpage and remove legacy homepage") — inspect how legacy vs modular flows were merged and which template remains active in production.
+
+Clarification about "hang"
+- Not a true hang: isolated re-runs of the E2E tests exit normally after the configured Playwright timeout (~3 minutes), consistent with observed TimeoutError behavior.
+
+Production / Safety
+- No application source code was changed or committed during the investigation. All temporary experiment files and scripts created for runtime checks were removed or reverted before this entry.
+
+Decision
+- FASE 16: CLOSED. Proceed to FASE 17. Track this frontend bug as a separate backlog ticket for the dev team to reconcile legacy vs modular upload/recommendation flows.
+
+Recorded: 2026-08-18
+Recorder: GitHub Copilot (agent-assisted)

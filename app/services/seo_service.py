@@ -56,7 +56,8 @@ class SeoService:
 
         title = f"{brand} | {heading}"
 
-        canonical = f"{base_url}/?lang={lang_code}"
+        # Homepage canonical: use root to align with x-default and non-home pages
+        canonical = f"{base_url}/"
         og_url = canonical
 
         return {
@@ -123,32 +124,32 @@ class SeoService:
             canonical_path or f"/tools/{tool_data['slug']}",
         )
 
-        og_image = (
-            seo_meta.get("image")
-            or f"{base_url}/static/images/og-default.png"
-        )
+        og_image = seo_meta.get("image") or f"{base_url}/static/images/og-default.png"
+        og_image_alt = seo_meta.get("og_image_alt") or title
+        twitter_title = seo_meta.get("twitter_title") or title
+        twitter_description = seo_meta.get("twitter_description") or description
+        twitter_image = seo_meta.get("twitter_image") or og_image
 
         return {
-            "title": title,
-            "description": description,
+            "title": title or seo_meta.get("title"),
+            "description": description or seo_meta.get("description"),
             "canonical": canonical,
             "og_url": canonical,
             "og_site_name": "Converigo",
             "og_image": og_image,
-            "og_image_alt": title,
+            "og_image_alt": og_image_alt,
             "og_image_width": 1200,
             "og_image_height": 630,
             "keywords": seo_meta.get("keywords", ""),
-            "og_type": seo_meta.get(
-                "type",
-                "website",
-            ),
-            "twitter_card": seo_meta.get(
-                "twitter_card",
-                "summary_large_image",
-            ),
+            "og_type": seo_meta.get("type", "website"),
+            "twitter_card": seo_meta.get("twitter_card", "summary_large_image"),
+            "twitter_title": twitter_title,
+            "twitter_description": twitter_description,
+            "twitter_image": twitter_image,
             "twitter_site": "@converigo",
             "twitter_creator": "@converigo",
+            "author": "Converigo",
+            "robots": "index,follow",
         }
 
     def _build_blog_entries(self, base_url: str) -> list[dict[str, str]]:
@@ -192,12 +193,21 @@ class SeoService:
         entries.extend(self._build_blog_entries(base_url))
         entries.extend(self._build_learning_entries(base_url))
 
+        deduped_entries: list[dict[str, str]] = []
+        seen_locs: set[str] = set()
+        for entry in entries:
+            loc = str(entry.get("loc", "")).strip()
+            if not loc or loc in seen_locs:
+                continue
+            seen_locs.add(loc)
+            deduped_entries.append(entry)
+
         lines = [
             '<?xml version="1.0" encoding="UTF-8"?>',
             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
         ]
 
-        for entry in entries:
+        for entry in deduped_entries:
 
             loc = escape(str(entry["loc"]))
 
@@ -250,6 +260,7 @@ class SeoService:
         canonical_path: str | None = None,
     ) -> dict[str, Any]:
 
+        request_state = getattr(request, "state", None) if request is not None else None
         base_url = self._build_base_url(request)
 
         organization = {
@@ -262,7 +273,7 @@ class SeoService:
         # Determine locale language code (if available) to use localized site URL
         lang_code = "en"
         try:
-            locale_obj = getattr(request.state, "locale", None)
+            locale_obj = getattr(request_state, "locale", None)
             if isinstance(locale_obj, dict):
                 lang_code = locale_obj.get("lang_code") or lang_code
             else:
@@ -270,7 +281,7 @@ class SeoService:
         except Exception:
             lang_code = "en"
 
-        t = getattr(request.state, "t", None)
+        t = getattr(request_state, "t", None) if request_state is not None else None
         if callable(t):
             site_name = t("footer.brand", "Converigo")
             site_description = t("hero.description", "")
@@ -510,6 +521,36 @@ class SeoService:
                 {
                     "@type": "FAQPage",
                     "mainEntity": faq_items,
+                }
+            )
+
+        source = str(tool_data.get("source") or "").strip().upper()
+        target = str(tool_data.get("target") or "").strip().upper()
+        if source and target:
+            graph.append(
+                {
+                    "@type": "HowTo",
+                    "name": f"How to convert {source} to {target}",
+                    "step": [
+                        {
+                            "@type": "HowToStep",
+                            "position": 1,
+                            "name": f"Upload your {source} file",
+                            "text": f"Upload your {source} file",
+                        },
+                        {
+                            "@type": "HowToStep",
+                            "position": 2,
+                            "name": "Click the convert button",
+                            "text": "Click the convert button",
+                        },
+                        {
+                            "@type": "HowToStep",
+                            "position": 3,
+                            "name": f"Download your converted {target} file",
+                            "text": f"Download your converted {target} file",
+                        },
+                    ],
                 }
             )
 

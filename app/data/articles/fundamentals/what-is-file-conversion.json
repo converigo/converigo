@@ -25,6 +25,7 @@
   ],
   "og_image": "/images/og/what-is-file-conversion.jpg",
   "og_image_alt": "Illustration showing file conversion between document, image, audio, and video formats",
+  "canonical": "https://converigo.com/learning/what-is-file-conversion",
   "related_formats": ["pdf", "jpg", "png", "mp3", "svg"],
   "related_converters": ["pdf-to-jpg", "jpg-to-png", "mp4-to-mp3", "png-to-webp"],
   "related_articles": ["lossy-vs-lossless-compression", "raster-vs-vector-images"],

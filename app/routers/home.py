@@ -400,7 +400,7 @@ async def blog_article(request: Request, slug: str):
 
 @router.get("/mp4-to-mp3", response_class=HTMLResponse)
 async def mp4_to_mp3_landing(request: Request):
-    return await render_universal_tool_page(request, "mp4-to-mp3", canonical_path="/mp4-to-mp3")
+    return RedirectResponse(url="/tools/mp4-to-mp3", status_code=301)
 
 
 @router.get("/jpg-to-png", response_class=HTMLResponse)
@@ -410,12 +410,12 @@ async def jpg_to_png_landing(request: Request):
 
 @router.get("/png-to-jpg", response_class=HTMLResponse)
 async def png_to_jpg_landing(request: Request):
-    return await render_universal_tool_page(request, "png-to-jpg", canonical_path="/png-to-jpg")
+    return RedirectResponse(url="/tools/png-to-jpg", status_code=301)
 
 
 @router.get("/png-to-webp", response_class=HTMLResponse)
 async def png_to_webp_landing(request: Request):
-    return await render_universal_tool_page(request, "png-to-webp", canonical_path="/png-to-webp")
+    return RedirectResponse(url="/tools/png-to-webp", status_code=301)
 
 
 @router.get("/webp-to-jpg", response_class=HTMLResponse)
@@ -425,7 +425,7 @@ async def webp_to_jpg_landing(request: Request):
 
 @router.get("/webp-to-png", response_class=HTMLResponse)
 async def webp_to_png_landing(request: Request):
-    return await render_universal_tool_page(request, "webp-to-png", canonical_path="/webp-to-png")
+    return RedirectResponse(url="/tools/webp-to-png", status_code=301)
 
 
 @router.get("/image-conversion", response_class=HTMLResponse)
@@ -541,7 +541,7 @@ async def _render_hub_page(request: Request, slug: str) -> HTMLResponse:
 
 @router.get("/pdf-to-jpg", response_class=HTMLResponse)
 async def pdf_to_jpg_landing(request: Request):
-    return await render_universal_tool_page(request, "pdf-to-jpg", canonical_path="/pdf-to-jpg")
+    return RedirectResponse(url="/tools/pdf-to-jpg", status_code=301)
 
 
 @router.get("/word-to-pdf", response_class=HTMLResponse)
@@ -551,7 +551,7 @@ async def word_to_pdf_landing(request: Request):
 
 @router.get("/jpg-to-pdf", response_class=HTMLResponse)
 async def jpg_to_pdf_landing(request: Request):
-    return await render_universal_tool_page(request, "jpg-to-pdf", canonical_path="/jpg-to-pdf")
+    return RedirectResponse(url="/tools/jpg-to-pdf", status_code=301)
 
 
 @router.get("/{slug}", response_class=HTMLResponse)

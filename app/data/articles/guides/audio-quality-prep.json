@@ -12,7 +12,7 @@
   "seo_keywords": ["prepare audio for conversion", "improve audio quality", "audio conversion guide"],
   "og_image": "/static/images/og-audio-quality-prep.png",
   "og_image_alt": "Audio quality preparation checklist",
-  "canonical": "/learning/audio-quality-prep",
+  "canonical": "https://converigo.com/learning/audio-quality-prep",
   "featured": false,
   "order": 5,
   "related_formats": ["mp3", "wav", "m4a"],

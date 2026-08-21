@@ -14,6 +14,7 @@
   "related_formats": ["png", "svg", "jpg", "webp"],
   "related_converters": ["jpg-to-png", "png-to-jpg", "png-to-webp"],
   "related_articles": ["what-is-png", "png", "png-vs-jpg"],
+  "canonical": "https://converigo.com/learning/png-transparency-guide",
   "sections": [
     {
       "id": "alpha",

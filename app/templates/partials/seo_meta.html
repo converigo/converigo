@@ -6,9 +6,6 @@
 
 {% set current_path = request.url.path if request is defined and request.url is defined else '/' %}
 {% set page_canonical = page_meta.canonical | default('https://converigo.com' ~ current_path) %}
-{% if current_path.startswith('/tools/') %}
-{% set page_canonical = 'https://converigo.com' ~ current_path %}
-{% endif %}
 
 {% set page_keywords = page_meta.keywords | default('convert files, file conversion, online converter, convert video, convert image') %}
 

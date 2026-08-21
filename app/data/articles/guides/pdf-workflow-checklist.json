@@ -12,7 +12,7 @@
   "seo_keywords": ["PDF workflow checklist", "convert PDF to image", "document conversion guide"],
   "og_image": "/static/images/og-pdf-workflow-checklist.png",
   "og_image_alt": "Checklist for PDF conversion workflow",
-  "canonical": "/learning/pdf-workflow-checklist",
+  "canonical": "https://converigo.com/learning/pdf-workflow-checklist",
   "featured": false,
   "order": 4,
   "related_formats": ["pdf", "docx", "jpg"],

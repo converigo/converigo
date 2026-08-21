@@ -25,6 +25,7 @@
   ],
   "og_image": "/images/og/what-is-svg.jpg",
   "og_image_alt": "SVG logo icon showing scalable vector graphics with zoom-in detail highlighting smooth edges",
+  "canonical": "https://converigo.com/learning/what-is-svg",
   "related_formats": ["svg", "png", "jpg", "webp", "pdf"],
   "related_converters": ["svg-to-png", "jpg-to-png", "png-to-jpg", "webp-to-png"],
   "related_articles": ["raster-vs-vector-images", "lossy-vs-lossless-compression", "webp-vs-png"],

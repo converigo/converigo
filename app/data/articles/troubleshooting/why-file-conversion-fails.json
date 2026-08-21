@@ -25,6 +25,7 @@
   ],
   "og_image": "/images/og/why-file-conversion-fails.jpg",
   "og_image_alt": "Illustration showing common file conversion errors with solution icons on a troubleshooting flowchart",
+  "canonical": "https://converigo.com/learning/why-file-conversion-fails",
   "related_formats": ["pdf", "jpg", "png", "mp4", "mp3"],
   "related_converters": ["pdf-to-docx", "png-to-jpg", "mp4-to-mp3", "pdf-to-jpg", "jpg-to-png"],
   "related_articles": ["what-is-file-conversion", "lossy-vs-lossless-compression"],

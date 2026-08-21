@@ -12,7 +12,7 @@
   "seo_keywords": ["understand image quality", "image resolution guide", "convert images with quality"],
   "og_image": "/static/images/og-understanding-image-quality.png",
   "og_image_alt": "Visual explanation of image quality factors",
-  "canonical": "/learning/understanding-image-quality",
+  "canonical": "https://converigo.com/learning/understanding-image-quality",
   "featured": false,
   "order": 10,
   "related_formats": ["jpg", "png", "webp"],

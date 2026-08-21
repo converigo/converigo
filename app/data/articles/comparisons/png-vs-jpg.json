@@ -25,6 +25,7 @@
   ],
   "og_image": "/images/og/png-vs-jpg.jpg",
   "og_image_alt": "Split comparison showing the same image as PNG on one side and JPG on the other, highlighting quality and file size differences",
+  "canonical": "https://converigo.com/learning/png-vs-jpg",
   "related_formats": ["png", "jpg", "webp", "gif", "bmp"],
   "related_converters": ["png-to-jpg", "jpg-to-png", "webp-to-png", "webp-to-jpg", "bmp-to-jpg"],
   "related_articles": ["webp-vs-png", "lossy-vs-lossless-compression", "what-is-file-conversion"],
