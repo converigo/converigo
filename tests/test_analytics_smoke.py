@@ -11,6 +11,11 @@ def test_homepage_renders_ga4_and_analytics_bootstrap(monkeypatch) -> None:
     response = client.get("/")
 
     assert response.status_code == 200
-    assert "googletagmanager.com/gtag/js?id=G-SMOKE123" in response.text
-    assert "async src=\"https://www.googletagmanager.com/gtag/js?id=G-SMOKE123\"" in response.text
-    assert "window.converigoAnalytics" in response.text
+    # Exactly one external gtag script tag
+    assert response.text.count('googletagmanager.com/gtag/js?id=G-SMOKE123') == 1
+    assert response.text.count('async src="https://www.googletagmanager.com/gtag/js?id=G-SMOKE123"') == 1
+    # Exactly one gtag config call
+    assert response.text.count("gtag('config'") == 1
+    # dataLayer must be initialized and converigoAnalytics present
+    assert 'window.dataLayer = window.dataLayer || []' in response.text
+    assert 'window.converigoAnalytics' in response.text
