@@ -5,10 +5,18 @@ from fastapi.testclient import TestClient
 from app.main import app
 
 
-def test_png_to_webp_landing_page_renders_with_seo_and_faq():
+def test_png_to_webp_legacy_page_is_retired():
     client = TestClient(app)
 
     response = client.get("/png-to-webp")
+
+    assert response.status_code == 410
+
+
+def test_png_to_webp_canonical_page_renders_with_seo_and_faq():
+    client = TestClient(app)
+
+    response = client.get("/tools/png-to-webp")
 
     assert response.status_code == 200
     assert "PNG to WEBP Converter Online Free - Converigo" in response.text

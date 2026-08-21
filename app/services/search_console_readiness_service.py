@@ -793,35 +793,17 @@ class SearchConsoleReadinessService:
 
     def _build_expected_urls(self, converters: list[dict[str, Any]], base_url: str) -> dict[str, str]:
         """Build mapping of slug -> expected canonical URL."""
-        landing_page_overrides = {
-            "mp4-to-mp3": "/mp4-to-mp3",
-            "jpg-to-pdf": "/jpg-to-pdf",
-            "png-to-jpg": "/png-to-jpg",
-            "pdf-to-jpg": "/pdf-to-jpg",
-            "png-to-webp": "/png-to-webp",
-            "webp-to-png": "/webp-to-png",
-        }
         expected: dict[str, str] = {}
         for converter in converters:
             slug = str(converter.get("slug", ""))
             if not slug:
                 continue
-            path = landing_page_overrides.get(slug, f"/tools/{slug}")
-            expected[slug] = f"{base_url.rstrip('/')}{path}"
+            expected[slug] = f"{base_url.rstrip('/')}/tools/{slug}"
         return expected
 
     def _expected_canonical(self, slug: str, base_url: str) -> str:
         """Get expected canonical for a slug."""
-        overrides = {
-            "mp4-to-mp3": "/mp4-to-mp3",
-            "jpg-to-pdf": "/jpg-to-pdf",
-            "png-to-jpg": "/png-to-jpg",
-            "pdf-to-jpg": "/pdf-to-jpg",
-            "png-to-webp": "/png-to-webp",
-            "webp-to-png": "/webp-to-png",
-        }
-        path = overrides.get(slug, f"/tools/{slug}")
-        return f"{base_url.rstrip('/')}{path}"
+        return f"{base_url.rstrip('/')}/tools/{slug}"
 
     def _read_sitemap_urls(self, path: Path) -> list[str]:
         """Read URLs from a sitemap XML file."""

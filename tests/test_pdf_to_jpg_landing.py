@@ -3,9 +3,16 @@ from fastapi.testclient import TestClient
 from app.main import app
 
 
-def test_pdf_to_jpg_landing_page_renders_with_seo_and_faq():
+def test_pdf_to_jpg_legacy_page_is_retired():
     client = TestClient(app)
     response = client.get("/pdf-to-jpg")
+
+    assert response.status_code == 410
+
+
+def test_pdf_to_jpg_canonical_page_renders_with_seo_and_faq():
+    client = TestClient(app)
+    response = client.get("/tools/pdf-to-jpg")
 
     assert response.status_code == 200
     assert "PDF to JPG Converter Online Free" in response.text

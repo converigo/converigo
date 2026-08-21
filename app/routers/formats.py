@@ -69,7 +69,7 @@ def _build_related_converters(format_name: str, limit: int = 6) -> list[dict[str
                     "slug": slug,
                     "title": str(contract.get("name", slug)).strip(),
                     "description": str(contract.get("description", "")).strip(),
-                    "href": str(contract.get("landing_path", f"/{slug}")).strip() or f"/{slug}",
+                    "href": str(contract.get("landing_path", f"/tools/{slug}")).strip() or f"/tools/{slug}",
                 }
             )
     return converters[:limit]

@@ -163,7 +163,7 @@ class ComparisonService:
                 break
         if candidates:
             return candidates
-        return [{"slug": "pdf-to-jpg", "title": "PDF to JPG", "description": "Convert documents into images for sharing and previews.", "href": "/pdf-to-jpg"}]
+        return [{"slug": "pdf-to-jpg", "title": "PDF to JPG", "description": "Convert documents into images for sharing and previews.", "href": "/tools/pdf-to-jpg"}]
 
     def _related_format_items(self, source_authority: dict[str, Any], target_authority: dict[str, Any]) -> list[dict[str, Any]]:
         return [
