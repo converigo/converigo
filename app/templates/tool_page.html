@@ -1,211 +1,347 @@
-{% extends "layouts/base.html" %}
+<!DOCTYPE html>
+<html lang="{{ request.state.locale.lang_code if request.state and request.state.locale else 'en' }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% include "partials/public_seo_meta.html" %}
+  {% if structured_data %}{% include "partials/structured_data.html" %}{% endif %}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    window.appLocale = {{ request.state.locale | tojson | safe }};
+    window.localeCode = "{{ request.state.locale.lang_code if request.state and request.state.locale else 'en' }}";
+    window.translate = function (key, defaultText) {
+      if (!window.appLocale || typeof key !== 'string') {
+        return defaultText || key;
+      }
+      const parts = key.split('.');
+      let value = window.appLocale;
+      for (const part of parts) {
+        if (value && typeof value === 'object' && part in value) {
+          value = value[part];
+        } else {
+          return defaultText || key;
+        }
+      }
+      return typeof value === 'string' ? value : (defaultText || key);
+    };
+  </script>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --ink: #1c1832;
+      --ink-soft: #625c7d;
+      --line: #e7e2ff;
+      --primary: #5b4fe9;
+      --primary-dark: #4335c7;
+      --surface: #f7f6ff;
+      --surface-strong: #ffffff;
+      --card-shadow: 0 24px 60px -32px rgba(63, 48, 170, 0.25);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #fff;
+      color: var(--ink);
+      line-height: 1.6;
+    }
+    h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; margin: 0 0 0.7rem; }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+    .topnav { position: sticky; top: 0; z-index: 50; background: rgba(247, 246, 255, 0.82); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    .nav-inner { max-width: 1180px; margin: 0 auto; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; font-weight: 800; font-family: 'Space Grotesk', sans-serif; }
+    .brand-mark { width: 38px; height: 38px; border-radius: 12px; background: linear-gradient(135deg, var(--primary), #ff6b4a); display: inline-block; }
+    .nav-links { display: flex; align-items: center; gap: 20px; color: var(--ink-soft); font-size: 14px; }
+    .modern-hero { padding: 64px 0 28px; }
+    .modern-hero-inner { display: grid; gap: 28px; grid-template-columns: 1.2fr 0.8fr; align-items: center; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; padding: 7px 12px; border-radius: 999px; background: #f1efff; color: var(--primary-dark); letter-spacing: 0.08em; text-transform: uppercase; font-size: 11px; font-weight: 800; }
+    .eyebrow::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #ff6b4a; }
+    .hero-title { font-size: clamp(2.3rem, 4vw, 4rem); line-height: 1.03; letter-spacing: -0.04em; margin: 16px 0 12px; }
+    .hero-sub { max-width: 650px; color: var(--ink-soft); font-size: 1.05rem; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+    .primary-btn, .secondary-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 11px 18px; border-radius: 12px; font-weight: 700; border: 1px solid transparent; }
+    .primary-btn { background: var(--primary); color: white; }
+    .secondary-btn { background: white; border-color: var(--line); color: var(--ink); }
+    .modern-panel { background: linear-gradient(180deg, #fff, #f8f7ff); border: 1px solid rgba(91,79,233,0.10); border-radius: var(--radius); box-shadow: var(--card-shadow); padding: 22px; }
+    .modern-upload { display: grid; gap: 14px; }
+    .modern-upload .drop-zone { border: 1.5px dashed rgba(91,79,233,0.35); background: rgba(255,255,255,0.7); border-radius: 18px; padding: 28px 18px; text-align: center; }
+    .modern-upload h3 { font-size: 1.2rem; }
+    .modern-upload input[type="file"] { display: none; }
+    .modern-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; margin-top: 18px; }
+    .modern-card { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 18px; box-shadow: 0 15px 40px -30px rgba(63,48,170,0.24); }
+    .modern-section { padding: 28px 0; }
+    .section-head { display: flex; justify-content: space-between; gap: 20px; align-items: end; margin-bottom: 18px; }
+    .section-head h2 { font-size: clamp(1.8rem, 2.5vw, 2.6rem); }
+    .section-head p { color: var(--ink-soft); margin: 0; }
+    .modern-faq { display: grid; gap: 12px; }
+    .faq-item { background: #fff; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+    .faq-question { width: 100%; background: transparent; border: none; padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; font: inherit; font-weight: 700; text-align: left; }
+    .faq-answer { padding: 0 20px 18px; color: var(--ink-soft); }
+    .modern-footer { margin-top: 42px; border-top: 1px solid var(--line); padding: 26px 0 50px; background: #faf9ff; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 30px; flex-wrap: wrap; }
+    @media (max-width: 900px) {
+      .modern-hero-inner { grid-template-columns: 1fr; }
+      .modern-grid { grid-template-columns: 1fr; }
+      .section-head { display: block; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body class="tool-page modern-shell">
+  <nav class="topnav">
+    <div class="nav-inner">
+      <a href="/" class="brand" aria-label="Converigo home"><span class="brand-mark" aria-hidden="true"></span>Converigo</a>
+      <div class="nav-links">
+        <a href="/tools">Tools</a>
+        <a href="/learning">Learning</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="header-actions">
+        <div class="language-switcher">
+          <label for="languageSelect" class="sr-only">Language</label>
+          <select id="languageSelect" onchange="handleLanguageChange(event)" data-current-locale="{{ request.state.locale.lang_code if request.state and request.state.locale else 'en' }}">
+            {% set visible_locales = ['en', 'id', 'ja'] %}
+            {% for locale_code in request.state.supported_locales %}
+              {% if locale_code in visible_locales %}
+                <option value="{{ locale_code }}" {% if request.state.locale.lang_code == locale_code %}selected{% endif %}>{% if locale_code == 'en' %}English{% elif locale_code == 'id' %}Indonesia{% else %}日本語{% endif %}</option>
+              {% endif %}
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+    </div>
+  </nav>
 
-{% block title %}{{ landing.h1 if landing else hero.title or tool.title }}{% endblock %}
-
-{% block page_css %}{% endblock %}
-
-{% block body_class %}tool-page{% endblock %}
-
-{% block content %}
-    {% include "components/header.html" %}
-
-    <main class="main" role="main">
-        {% set breadcrumb = breadcrumb if breadcrumb is defined else landing.breadcrumb if landing is defined and landing.breadcrumb else [] %}
-    {% if breadcrumb %}
-        <section class="section section-white">
-            <div class="container">
-                <nav aria-label="Breadcrumb">
-                    <ol class="breadcrumb">
-                        {% for item in breadcrumb %}
-                        <li><a href="{{ item.url }}">{{ item.name }}</a></li>
-                        {% endfor %}
-                    </ol>
-                </nav>
+  <main role="main">
+    <section class="modern-hero">
+      <div class="wrap modern-hero-inner">
+        <div>
+          {% set breadcrumb = breadcrumb if breadcrumb is defined else landing.breadcrumb if landing is defined and landing.breadcrumb else [] %}
+          {% if hero and hero.eyebrow %}
+            <div class="eyebrow">{{ hero.eyebrow }}</div>
+          {% elif breadcrumb %}
+            <div class="eyebrow">{{ breadcrumb[-1].name }}</div>
+          {% endif %}
+          <h1 class="hero-title">{{ landing.h1 if landing else hero.title or tool.title }}</h1>
+          <p class="hero-sub">{{ hero.description or meta.description }}</p>
+          <div class="cta-row">
+            <a href="#converter" class="primary-btn">{{ cta.primary_text or 'Convert now' }}</a>
+            <a href="#how-to-use" class="secondary-btn">{{ cta.secondary_text or 'How it works' }}</a>
+            <a href="#supported-formats" class="text-link">Supported formats</a>
+            <a href="#faq" class="text-link">FAQ</a>
+            <a href="#related-tools" class="text-link">Related tools</a>
+          </div>
+        </div>
+        <div class="modern-panel">
+            <div class="modern-upload" id="converter">
+            <h3>{{ t('upload.label', 'Upload file') }}</h3>
+            <div class="drop-zone" id="dropZone" tabindex="0" aria-label="Upload file">
+              <p><strong>{{ t('upload.drop_title', 'Drop your file here') }}</strong></p>
+              <p>{{ t('upload.or', 'or choose from your device') }}</p>
+              <button type="button" id="chooseFile" class="primary-btn">{{ upload_form.button_text if upload_form and upload_form.button_text else t('upload.browse', 'Choose File') }}</button>
+              <input type="file" id="fileInput" multiple hidden>
             </div>
-        </section>
+            <div>
+              <div id="conversionArea" hidden>
+                <h4>Convert to</h4>
+                <div id="conversionInstructionText" class="format-instruction">Convert all files to:</div>
+                <input type="search" id="formatSearch" class="format-search" placeholder="Search formats" autocomplete="off" hidden aria-label="Search formats">
+                <div id="formatOptions" class="supported-formats"></div>
+                <div class="conversion-actions" id="conversionStickyBar">
+                  <div class="conversion-summary"><span class="conversion-summary-label">Convert All</span><span class="conversion-summary-value" id="conversionSummaryOutput">—</span></div>
+                  <button id="convertButton" class="primary-btn" type="button" disabled>Convert</button>
+                  <div id="convertProgress" class="progress" hidden aria-hidden="true"><div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div></div>
+                  <div id="convertMessage" class="status-text" aria-live="polite"></div>
+                  <a id="downloadBtn" class="secondary-btn" hidden download>Download</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {% if benefits %}
+    <section class="modern-section">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Benefits</div>
+            <h2>Why users choose this converter</h2>
+          </div>
+        </div>
+        <div class="modern-grid">
+          {% for item in benefits %}
+          <article class="modern-card">
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.text }}</p>
+          </article>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
     {% endif %}
 
-        <section class="tool-hero section">
-            <div class="container tool-hero-inner">
-                <div class="hero-copy">
-                    <span class="eyebrow">{{ hero.eyebrow or 'Converter tool' }}</span>
-                    <h1 class="hero-title">{{ landing.h1 if landing else hero.title or tool.title }}</h1>
-                    <p class="hero-sub">{{ hero.description or meta.description }}</p>
-                    <div class="hero-cta">
-                        <a href="{{ cta.primary_href or '#converter' }}" class="btn btn-primary">{{ cta.primary_text or t('tool_page.cta_convert', 'Convert now') }}</a>
-                        <a href="{{ cta.secondary_href or '#faq' }}" class="btn btn-outline">{{ cta.secondary_text or t('tool_page.cta_faq', 'Read FAQs') }}</a>
-                        <a href="#how-to-use" class="btn btn-outline">How it works</a>
-                        <a href="#supported-formats" class="btn btn-outline">Supported formats</a>
-                        <a href="#related-tools" class="btn btn-outline">Related tools</a>
-                    </div>
-                </div>
-                <div class="hero-panel">
-                    <div class="panel-head">
-                        <p class="panel-label">{{ hero.panel_label or t('tool_page.panel.label', 'Ready to convert') }}</p>
-                        <h2 class="panel-title">{{ hero.panel_title or t('tool_page.panel.title', 'Upload one file and get your converted result.') }}</h2>
-                    </div>
-                    {% include "components/upload_card.html" %}
-                </div>
-            </div>
-        </section>
+    {% if how_to_use %}
+    <section class="modern-section" id="how-to-use">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">How it works</div>
+            <h2>How to convert {{ tool.source|upper or 'FILE' }} to {{ tool.target|upper or 'OUTPUT' }}</h2>
+          </div>
+        </div>
+        <div class="modern-grid">
+          {% for step in how_to_use %}
+          <article class="modern-card">
+            <h3>{{ step.title }}</h3>
+            <p>{{ step.description }}</p>
+          </article>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+    {% endif %}
 
-        {% if benefits %}
-        <section id="benefits" class="section section-white">
-            <div class="container section-heading">
-                <span class="eyebrow">Benefits</span>
-                <h2>Why choose this converter</h2>
-            </div>
-            <div class="grid features-grid">
-                {% for item in benefits %}
-                <article class="feature-card hover-card">
-                    <i data-lucide="sparkles"></i>
-                    <h3>{{ item.title }}</h3>
-                    <p>{{ item.text }}</p>
-                </article>
-                {% endfor %}
-            </div>
-        </section>
-        {% endif %}
+    {% if supported_formats %}
+    <section class="modern-section" id="supported-formats">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Supported formats</div>
+            <h2>Current conversion flow</h2>
+          </div>
+        </div>
+        <div class="modern-card">
+          <p><strong>Input format:</strong> {{ supported_formats.input|join(', ') if supported_formats.input is iterable and supported_formats.input is not string else supported_formats.input }}</p>
+          <p><strong>Output format:</strong> {{ supported_formats.output|join(', ') if supported_formats.output is iterable and supported_formats.output is not string else supported_formats.output }}</p>
+          <p>{{ supported_formats.description or (tool.source|upper ~ ' input, ' ~ tool.target|upper ~ ' output') }}</p>
+        </div>
+      </div>
+    </section>
+    {% endif %}
 
-        {% if features %}
-        <section id="features" class="section">
-            <div class="container section-heading">
-                <span class="eyebrow">Features</span>
-                <h2>Built for quick and reliable conversions</h2>
-            </div>
-            <div class="grid features-grid">
-                {% for item in features %}
-                <article class="feature-card hover-card">
-                    <i data-lucide="check-circle"></i>
-                    <h3>{{ item.title }}</h3>
-                    <p>{{ item.text }}</p>
-                </article>
-                {% endfor %}
-            </div>
-        </section>
-        {% endif %}
+    {% if use_cases %}
+    <section class="modern-section" id="use-cases">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Use Cases</div>
+            <h2>Typical workflows for this tool</h2>
+          </div>
+        </div>
+        <div class="modern-grid">
+          {% for item in use_cases %}
+          <article class="modern-card">
+            <p>{{ item }}</p>
+          </article>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+    {% endif %}
 
-        {% if supported_formats %}
-        <section id="supported-formats" class="section section-white">
-            <div class="container section-heading">
-                <span class="eyebrow">Supported formats</span>
-                <h2>Input and output formats</h2>
-            </div>
-            <div class="container">
-                <p><strong>Input format:</strong> {{ supported_formats.input|join(', ') if supported_formats.input is iterable and supported_formats.input is not string else supported_formats.input }}</p>
-                <p><strong>Output format:</strong> {{ supported_formats.output|join(', ') if supported_formats.output is iterable and supported_formats.output is not string else supported_formats.output }}</p>
-                <p>{{ supported_formats.description or (tool.source|upper ~ ' input, ' ~ tool.target|upper ~ ' output') }}</p>
-            </div>
-        </section>
-        {% endif %}
+    {% if about_formats %}
+    <section class="modern-section" id="about-formats">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">About Formats</div>
+            <h2>Learn more about the input and output formats</h2>
+          </div>
+        </div>
+        <div class="modern-grid">
+          {% for item in about_formats %}
+          <article class="modern-card">
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.text }}</p>
+          </article>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+    {% endif %}
 
-        {% if how_to_use %}
-        <section id="how-to-use" class="section">
-            <div class="container section-heading">
-                <span class="eyebrow">{{ t('tool_page.how_it_works.eyebrow', 'How it works') }}</span>
-                <h2>{{ t('tool_page.how_it_works.heading', 'Simple conversion in three steps') }}</h2>
+    {% if faq %}
+    <section class="modern-section" id="faq">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">FAQ</div>
+            <h2>Frequently asked questions</h2>
+          </div>
+        </div>
+        <div class="modern-faq">
+          {% for item in faq %}
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>{{ item.question }}</span>
+              <span>+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>{{ item.answer }}</p>
             </div>
-            <div class="grid features-grid">
-                {% for step in how_to_use %}
-                <article class="feature-card hover-card">
-                    <i data-lucide="upload"></i>
-                    <h3>{{ step.title }}</h3>
-                    <p>{{ step.description }}</p>
-                </article>
-                {% endfor %}
-            </div>
-        </section>
-        {% endif %}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+    {% endif %}
 
-        {% if use_cases %}
-        <section id="use-cases" class="section section-white">
-            <div class="container section-heading">
-                <span class="eyebrow">Use Cases</span>
-                <h2>When this converter is useful</h2>
-            </div>
-            <div class="container">
-                <ul>
-                    {% for case in use_cases %}
-                    <li>{{ case }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </section>
-        {% endif %}
+    {% if related_tools %}
+    <section class="modern-section" id="related-tools">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Related tools</div>
+            <h2>Other converters you may need</h2>
+          </div>
+        </div>
+        <div class="modern-grid">
+          {% for related in related_tools %}
+          <article class="modern-card">
+            <h3><a href="/tools/{{ related.slug }}">{{ related.title }}</a></h3>
+            <p>{{ related.description or 'Discover another useful conversion flow.' }}</p>
+          </article>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+    {% endif %}
+  </main>
 
-        {% if about_formats %}
-        <section id="about-formats" class="section">
-            <div class="container section-heading">
-                <span class="eyebrow">About Formats</span>
-                <h2>Understanding the source and output formats</h2>
-            </div>
-            <div class="grid features-grid">
-                {% for item in about_formats %}
-                <article class="feature-card hover-card">
-                    <i data-lucide="info"></i>
-                    <h3>{{ item.title }}</h3>
-                    <p>{{ item.text }}</p>
-                </article>
-                {% endfor %}
-            </div>
-        </section>
-        {% endif %}
+  <footer class="modern-footer">
+    <div class="wrap footer-inner">
+      <div>
+        <h3>Converigo</h3>
+        <p>Fast, free, secure online file conversion.</p>
+      </div>
+      <div>
+        <a href="/tools">Tools</a>
+      </div>
+      <div>
+        <a href="/learning">Learning</a>
+      </div>
+      <div>
+        <a href="/about">About</a>
+      </div>
+    </div>
+  </footer>
 
-        <section id="faq" class="section">
-            <div class="container section-heading">
-                <span class="eyebrow">{{ t('tool_page.faq.eyebrow', 'FAQ') }}</span>
-                <h2>{{ t('tool_page.faq.heading', 'Frequently asked questions') }}</h2>
-            </div>
-            <div class="faq-grid">
-                {% for item in faq %}
-                <div class="faq-item">
-                    <button class="faq-question" type="button" id="faq-question-{{ loop.index }}" aria-expanded="false" aria-controls="faq-answer-{{ loop.index }}">
-                        <span>{{ item.question }}</span>
-                        <span class="faq-toggle">+</span>
-                    </button>
-                    <div class="faq-answer" id="faq-answer-{{ loop.index }}" role="region" aria-labelledby="faq-question-{{ loop.index }}" hidden>
-                        <p>{{ item.answer }}</p>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </section>
-
-        <section id="related-tools" class="section section-white">
-            <div class="container section-heading">
-                <span class="eyebrow">{{ t('tool_page.related.eyebrow', 'Related Tools') }}</span>
-                <h2>{{ t('tool_page.related.heading', 'Other converters you may need') }}</h2>
-            </div>
-            <div class="grid popular-grid">
-                {% for related in related_tools %}
-                <article class="card card-lg hover-card">
-                    <div class="card-icon"><i data-lucide="layers"></i></div>
-                    <h3><a href="/tools/{{ related.slug }}">{{ related.title }}</a></h3>
-                    <p>{{ related.description or t('tool_page.related.fallback', 'Discover another useful conversion flow.') }}</p>
-                </article>
-                {% endfor %}
-            </div>
-        </section>
-
-        {% if landing %}
-        {% include "components/landing_sections.html" %}
-        {% endif %}
-
-        {% if cta and not landing %}
-        <section class="section">
-            <div class="container">
-                <div class="card card-lg">
-                    <h2>{{ cta.title }}</h2>
-                    <p>{{ cta.text }}</p>
-                    <div class="hero-cta">
-                        <a href="{{ cta.primary_href or '#converter' }}" class="btn btn-primary">{{ cta.primary_text or t('tool_page.cta_convert', 'Convert now') }}</a>
-                        <a href="{{ cta.secondary_href or '#faq' }}" class="btn btn-outline">{{ cta.secondary_text or t('tool_page.cta_faq', 'Read FAQs') }}</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        {% endif %}
-    </main>
-{% endblock %}
-
+  <script>
+    document.querySelectorAll('.faq-question').forEach((button) => {
+      button.addEventListener('click', () => {
+        const answer = button.parentElement.querySelector('.faq-answer');
+        const isOpen = button.getAttribute('aria-expanded') === 'true';
+        button.setAttribute('aria-expanded', String(!isOpen));
+        if (answer) answer.hidden = isOpen;
+        button.lastElementChild.textContent = isOpen ? '+' : '−';
+      });
+    });
+  </script>
+</body>
 </html>

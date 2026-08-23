@@ -41,8 +41,8 @@ def test_landing_page_canonical_and_hreflang_for_converters(path):
     assert f'<link rel="canonical" href="https://converigo.com{path}"' in response.text
 
     links = _find_hreflang_links(response.text)
-    assert links["en"] == f"https://converigo.com{path}?lang=en"
-    assert links["id"] == f"https://converigo.com{path}?lang=id"
+    assert links["en"] == f"https://converigo.com{path}"
+    assert links["id"] == f"https://converigo.com{path}"
     assert links["x-default"] == f"https://converigo.com{path}"
 
 
@@ -52,6 +52,6 @@ def test_homepage_hreflang_uses_root_url():
     assert response.status_code == 200
 
     links = _find_hreflang_links(response.text)
-    assert links["en"] == "https://converigo.com/?lang=en"
-    assert links["id"] == "https://converigo.com/?lang=id"
+    assert links["en"] == "https://converigo.com/"
+    assert links["id"] == "https://converigo.com/"
     assert links["x-default"] == "https://converigo.com/"

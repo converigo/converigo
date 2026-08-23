@@ -185,7 +185,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const updateConversionAreaVisibility = () => {
         const shouldShow = hasFormatChoices && (
             currentConversionState === ConversionState.FILE_SELECTED ||
-            currentConversionState === ConversionState.CONVERTING
+            currentConversionState === ConversionState.CONVERTING ||
+            currentConversionState === ConversionState.SUCCESS ||
+            currentConversionState === ConversionState.ERROR
         );
         setVisibility(conversionArea, shouldShow);
     };

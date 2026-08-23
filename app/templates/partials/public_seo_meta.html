@@ -1,0 +1,72 @@
+{% set page_meta = meta if meta is defined else seo if seo is defined else {} %}
+{% set current_path = request.url.path if request is defined and request.url is defined else '/' %}
+{% set page_title = page_meta.title | default('Converigo | Convert Files Online') %}
+{% set page_description = page_meta.description | default('Converigo helps you convert files quickly, securely, and with a simple workflow.') %}
+{% set page_canonical = page_meta.canonical | default('https://converigo.com' ~ current_path) %}
+{% set page_keywords = page_meta.keywords | default('convert files, file conversion, online converter, convert video, convert image') %}
+{% set page_robots = page_meta.robots | default('index,follow') %}
+{% set page_og_image = page_meta.og_image | default('https://converigo.com/static/images/converigo-og-image.png') %}
+{% set page_og_url = page_meta.og_url | default(page_canonical) %}
+{% set page_og_site_name = page_meta.og_site_name | default('Converigo') %}
+{% set page_og_title = page_meta.og_title | default(page_title) %}
+{% set page_og_description = page_meta.og_description | default(page_description) %}
+{% set page_twitter_title = page_meta.twitter_title | default(page_title) %}
+{% set page_twitter_description = page_meta.twitter_description | default(page_description) %}
+
+<title>{{ page_title }}</title>
+<meta name="description" content="{{ page_description }}">
+<meta name="keywords" content="{{ page_keywords }}">
+<meta name="robots" content="{{ page_robots }}">
+<link rel="canonical" href="{{ page_canonical }}">
+
+{# Verification tokens: prefer per-request values (set by middleware) else fall back to context/globals #}
+{% set verification_token_value = verification_token | default('') %}
+{% if request is defined and request.state is defined and request.state.verification_token is defined %}
+{% set verification_token_value = request.state.verification_token %}
+{% endif %}
+{% if verification_token_value %}
+<meta name="google-site-verification" content="{{ verification_token_value }}">
+{% endif %}
+
+{% set bing_verification_token_value = bing_verification_token | default('') %}
+{% if request is defined and request.state is defined and request.state.bing_verification_token is defined %}
+{% set bing_verification_token_value = request.state.bing_verification_token %}
+{% endif %}
+{% if bing_verification_token_value %}
+<meta name="msvalidate.01" content="{{ bing_verification_token_value }}">
+{% endif %}
+
+{% set seo_hreflang_links = page_meta.hreflang | default([]) %}
+{% if seo_hreflang_links %}
+  {% for hreflang in seo_hreflang_links %}
+  <link rel="alternate" hreflang="{{ hreflang.locale }}" href="{{ hreflang.href }}">
+  {% endfor %}
+{% else %}
+  {% set hreflang_locales = request.state.supported_locales | default(['en', 'id', 'es', 'fr', 'ja']) %}
+  {% set root_hreflang_base = page_canonical | default('https://converigo.com' ~ current_path) %}
+  {% for locale_code in hreflang_locales %}
+    <link rel="alternate" hreflang="{{ locale_code }}" href="{{ root_hreflang_base }}">
+  {% endfor %}
+  <link rel="alternate" hreflang="x-default" href="{{ root_hreflang_base }}">
+{% endif %}
+
+<meta property="og:title" content="{{ page_og_title }}">
+<meta property="og:description" content="{{ page_og_description }}">
+<meta property="og:type" content="{{ page_meta.og_type | default('website') }}">
+<meta property="og:url" content="{{ page_og_url }}">
+<meta property="og:site_name" content="{{ page_og_site_name }}">
+<meta property="og:image" content="{{ page_og_image }}">
+<meta property="og:image:alt" content="{{ page_meta.og_image_alt | default(page_title) }}">
+<meta property="og:image:width" content="{{ page_meta.og_image_width | default(1200) }}">
+<meta property="og:image:height" content="{{ page_meta.og_image_height | default(630) }}">
+
+<meta name="twitter:card" content="{{ page_meta.twitter_card | default('summary_large_image') }}">
+<meta name="twitter:title" content="{{ page_twitter_title }}">
+<meta name="twitter:description" content="{{ page_twitter_description }}">
+<meta name="twitter:image" content="{{ page_og_image }}">
+<meta name="twitter:site" content="{{ page_meta.twitter_site | default('@converigo') }}">
+<meta name="twitter:creator" content="{{ page_meta.twitter_creator | default('@converigo') }}">
+
+<script type="application/ld+json">
+{{ page_meta.structured_data if page_meta.structured_data is defined else {"@context": "https://schema.org", "@type": "WebSite", "name": page_title, "url": page_canonical, "description": page_description} | tojson(indent=2) }}
+</script>

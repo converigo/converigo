@@ -10,7 +10,7 @@ from app.services.knowledge_service import KnowledgeService
 from app.services.landing_service import LandingPageBuilder
 from app.services.programmatic_seo_service import ProgrammaticSEOService
 from app.services.related_converter_service import RelatedConverterService
-from app.services.seo_service import PRODUCTION_BASE_URL, SeoService
+from app.services.public_seo_service import PRODUCTION_BASE_URL
 
 
 class ComparisonService:
@@ -19,8 +19,7 @@ class ComparisonService:
     def __init__(self, contracts_dir: Path | str | None = None) -> None:
         self.contracts_dir = Path(contracts_dir or "app/data/converters")
         self.converter_data_service = ConverterDataService(self.contracts_dir)
-        self.seo_service = SeoService(self.contracts_dir)
-        self.landing_builder = LandingPageBuilder(self.seo_service, self.converter_data_service)
+        self.landing_builder = LandingPageBuilder(self.converter_data_service)
         self.authority_service = AuthorityService(self.contracts_dir)
         self.knowledge_service = KnowledgeService(self.contracts_dir)
         self.related_service = RelatedConverterService(self.converter_data_service)

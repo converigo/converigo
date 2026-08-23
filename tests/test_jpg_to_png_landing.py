@@ -5,17 +5,12 @@ from fastapi.testclient import TestClient
 from app.main import app
 
 
-def test_jpg_to_png_landing_page_renders_with_seo_and_faq():
+def test_jpg_to_png_legacy_page_is_retired():
     client = TestClient(app)
 
     response = client.get("/jpg-to-png")
 
-    assert response.status_code == 200
-    assert "JPG to PNG Converter Online Free - Converigo" in response.text
-    assert "What is JPG to PNG conversion?" in response.text
-    assert "How do I convert JPG to PNG?" in response.text
-    assert "Is JPG to PNG converter free?" in response.text
-    assert "application/ld+json" in response.text
+    assert response.status_code == 410
 
 
 def test_jpg_to_png_conversion_endpoint_still_accepts_uploads():
