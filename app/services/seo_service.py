@@ -56,7 +56,8 @@ class SeoService:
 
         title = f"{brand} | {heading}"
 
-        # Homepage canonical: use root to align with x-default and non-home pages
+        # Homepage canonical must be the root canonical URL without a locale query parameter.
+        # hreflang alternates remain locale-aware in the template layer.
         canonical = f"{base_url}/"
         og_url = canonical
 

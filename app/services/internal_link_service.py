@@ -11,7 +11,6 @@ from app.services.hub_page_service import HubPageService
 from app.services.knowledge_service import KnowledgeService
 from app.services.landing_service import LandingPageBuilder
 from app.services.related_converter_service import RelatedConverterService
-from app.services.seo_service import SeoService
 
 
 class InternalLinkService:
@@ -21,8 +20,7 @@ class InternalLinkService:
         self.contracts_dir = Path(contracts_dir or "app/data/converters")
         self.converter_data_service = ConverterDataService(self.contracts_dir)
         self.converter_registry_service = ConverterRegistryService(self.contracts_dir)
-        self.seo_service = SeoService(self.contracts_dir)
-        self.landing_builder = LandingPageBuilder(self.seo_service, self.converter_data_service)
+        self.landing_builder = LandingPageBuilder(self.converter_data_service)
         self.authority_service = AuthorityService(self.contracts_dir)
         self.knowledge_service = KnowledgeService(self.contracts_dir)
         self.related_service = RelatedConverterService(self.converter_data_service)

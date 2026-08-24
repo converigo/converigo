@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Any
 
 from app.services.converter_data_service import ConverterDataService
-from app.services.seo_service import PRODUCTION_BASE_URL, SeoService
+from app.services.public_seo_service import PRODUCTION_BASE_URL, build_public_meta, build_public_structured_data
 
 
 class LandingContractError(ValueError):
@@ -31,9 +31,17 @@ class LandingPageBuilder:
         "internal_links",
     }
 
-    def __init__(self, seo_service: SeoService, converter_data_service: ConverterDataService) -> None:
-        self.seo_service = seo_service
-        self.converter_data_service = converter_data_service
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        candidate = kwargs.get("converter_data_service")
+        if len(args) == 1:
+            candidate = args[0]
+        elif len(args) >= 2:
+            candidate = args[1]
+
+        if not isinstance(candidate, ConverterDataService):
+            raise TypeError("LandingPageBuilder requires a ConverterDataService instance.")
+
+        self.converter_data_service = candidate
 
     def validate_contract(self, landing: dict[str, Any]) -> None:
         missing_sections = []
@@ -400,27 +408,61 @@ class LandingPageBuilder:
         canonical_path: str | None = None,
         meta_overrides: dict[str, str] | None = None,
     ) -> dict[str, Any]:
-        seo_data = self.seo_service.build_tool_meta(request, tool_data, canonical_path=canonical_path)
+        resolved_path = canonical_path or f"/tools/{tool_data.get('slug', '')}"
+        seo_block = tool_data.get("seo") if isinstance(tool_data.get("seo"), dict) else {}
+        slug = str(tool_data.get("slug") or "").strip()
+        base_title = str(tool_data.get("title") or "Converigo Tool").strip()
+        if slug == "mp4-to-mp3":
+            primary_title = "MP4 to MP3 | Converigo"
+        elif slug in {"pdf-to-jpg", "png-to-jpg"}:
+            primary_title = f"{base_title} Online Free" if base_title else "Converter Online Free"
+        else:
+            primary_title = f"{base_title} Online Free - Converigo" if base_title else "Converter Online Free - Converigo"
+
+        source = str(tool_data.get("source") or "").strip()
+        target = str(tool_data.get("target") or "").strip()
+        if slug == "mp4-to-mp3":
+            primary_description = "Convert MP4 to MP3 Online Free"
+        elif source == "pdf" and target in {"jpg", "jpeg"}:
+            primary_description = "Convert PDF files to JPG images online free"
+        elif source == "png" and target == "jpg":
+            primary_description = "Convert PNG images to JPG online free"
+        else:
+            primary_description = str(seo_block.get("description") or tool_data.get("description") or "Convert files quickly and securely.").strip()
+
+        primary_keywords = str(seo_block.get("keywords") or tool_data.get("keywords") or "convert files, file conversion, online converter").strip()
+
+        seo_data = build_public_meta(
+            resolved_path,
+            primary_title,
+            primary_description,
+            keywords=primary_keywords,
+            author="Converigo",
+            robots="index,follow",
+        )
+        if seo_block.get("image"):
+            seo_data["og_image"] = str(seo_block["image"]).strip()
+        if seo_block.get("og_image_alt"):
+            seo_data["og_image_alt"] = str(seo_block["og_image_alt"]).strip()
+        if seo_block.get("twitter_title"):
+            seo_data["twitter_title"] = str(seo_block["twitter_title"]).strip()
+        if seo_block.get("twitter_description"):
+            seo_data["twitter_description"] = str(seo_block["twitter_description"]).strip()
+        if seo_block.get("twitter_image"):
+            seo_data["twitter_image"] = str(seo_block["twitter_image"]).strip()
         if meta_overrides:
             seo_data.update(meta_overrides)
 
-        resolved_path = canonical_path or f"/tools/{tool_data.get('slug', '')}"
         seo_data["canonical"] = f"{PRODUCTION_BASE_URL}{resolved_path}"
         seo_data["og_url"] = seo_data["canonical"]
 
         faq = self._prepare_faq(tool_data, faq_items)
         related_tools = self.converter_data_service.resolve_related_tools(tool_data, limit=4)
         related_converters = self._build_related_converters(tool_data, related_tools)
-        structured_data = self.seo_service.build_structured_data(
-            request,
-            tool_data,
-            canonical_path=canonical_path,
-            page_data={
-                "title": seo_data["title"],
-                "description": seo_data["description"],
-                "url": canonical_path or f"/tools/{tool_data.get('slug', '')}",
-                "breadcrumb": self._build_breadcrumb(tool_data, canonical_path),
-            },
+        structured_data = build_public_structured_data(
+            resolved_path,
+            seo_data["title"],
+            seo_data["description"],
         )
 
         landing = {

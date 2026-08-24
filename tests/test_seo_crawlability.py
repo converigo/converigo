@@ -17,15 +17,10 @@ def test_missing_page_returns_404_status_and_custom_content():
     assert 'name="robots" content="noindex,follow"' in html
 
 
-def test_converter_page_renders_visible_breadcrumb():
+def test_legacy_root_converter_page_is_retired():
     response = client.get("/mp4-to-mp3")
 
-    assert response.status_code == 200
-    html = response.text
-    assert 'aria-label="Breadcrumb"' in html
-    assert 'Home' in html
-    assert 'Converters' in html
-    assert 'MP4 to MP3' in html
+    assert response.status_code == 410
 
 
 def test_blog_page_keeps_breadcrumb_json_ld_unchanged():

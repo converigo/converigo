@@ -7,7 +7,7 @@
 {% include "partials/ga4_bootstrap.html" %}
 
 {% include "partials/converigo_analytics.html" %}
-{% include "partials/seo_meta.html" %}
+{% include "partials/public_seo_meta.html" %}
 {% include "partials/structured_data.html" %}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -916,7 +916,7 @@
         <span class="language-icon" aria-hidden="true">🌐</span>
         <label for="languageSelect" class="sr-only">{{ request.state.t('language.selector_label', 'Language') }}</label>
         <select id="languageSelect" onchange="handleLanguageChange(event)" data-current-locale="{{ request.state.locale.lang_code }}">
-          {% set visible_locales = ['en', 'id', 'ja'] %}
+          {% set visible_locales = ['en', 'id', 'ja', 'es', 'fr'] %}
           {% for locale_code in request.state.supported_locales %}
             {% if locale_code in visible_locales %}
               <option value="{{ locale_code }}" {% if request.state.locale.lang_code == locale_code %}selected{% endif %}>
@@ -938,11 +938,11 @@
     <div class="hero-connector hero-connector-left" aria-hidden="true"></div>
     <div class="dz-stage">
     <div class="orbit-field" id="orbitField"></div>
-    <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="{{ request.state.t('upload.drop_title', 'Unggah file untuk dikonversi') }}">
+    <div class="drop-zone dropzone" id="dropZone" tabindex="0" role="button" aria-label="{{ request.state.t('upload.drop_title', 'Unggah file untuk dikonversi') }}">
       <div class="morph-badge" id="morphBadge"><span id="morphLabel">PDF</span></div>
       <p class="dz-title">{{ request.state.t('upload.drop_title', 'Seret &amp; lepas file di sini') }}</p>
       <p class="dz-sub">{{ request.state.t('upload.choose_from_device', 'atau klik untuk memilih dari perangkatmu') }}</p>
-      <button class="dz-browse" type="button" id="browseBtn">{{ request.state.t('upload.browse', '📂 Pilih File') }}</button>
+      <button class="dz-browse" type="button" id="chooseFile">{{ request.state.t('upload.browse', '📂 Pilih File') }}</button>
       <p class="dz-note">{{ request.state.t('upload.supports_types', 'Mendukung gambar, dokumen, audio, video &amp; arsip · maks. 50 file sekaligus') }}</p>
     </div>
   </div>
@@ -950,34 +950,11 @@
   </div>
   <input type="file" id="fileInput" multiple hidden>
 
-  <div class="panel-zone" id="panelZone">
-    <div class="panel-head">
-      <h2>{{ request.state.t('upload.results_heading', 'Hasil Konversi') }}</h2>
-      <p>{{ request.state.t('upload.results_subtitle', 'File kamu siap — unduh sebelum terhapus otomatis') }}</p>
-    </div>
-    <div class="panel">
-      <div class="panel-toolbar">
-        <button class="ghost-btn" id="addMoreBtn" type="button">{{ request.state.t('upload.add_more_files', '📁 Tambahkan Lebih Banyak File') }} <span style="font-size:10px;">▾</span></button>
-      </div>
-      <div id="rows"></div>
-
-      <div class="panel-footer" id="footerPre">
-        <div class="footer-left">
-          <span id="footerLabel">{{ request.state.t('upload.conversion_instruction', 'Convert all files to:') }} (<span id="pendingCount">0</span>)</span>
-          <select class="fmt" id="globalFmt"></select>
-        </div>
-        <button class="go-btn" id="goBtn" type="button">{{ request.state.t('upload.convert_button', 'Mengubah') }} <span>→</span></button>
-      </div>
-
-      <div class="panel-footer footer-post" id="footerPost">
-        <div class="post-actions">
-          <button class="outline-btn" id="newBtn" type="button">{{ request.state.t('upload.add_more_files', 'Konversi File Baru') }}</button>
-          <button class="solid-btn" id="dlAllBtn" type="button">{{ request.state.t('upload.download_all', '⬇️ Unduh Semua') }}</button>
-        </div>
-        <p class="post-note">{{ request.state.t('upload.post_note', 'Semua file akan dihapus otomatis dalam 8 jam untuk menjaga privasi Anda. Pastikan unduh hasil sebelum terhapus.') }}</p>
-      </div>
-    </div>
+  <div class="upload-stage" aria-hidden="true" style="display:none;">
+    <div class="preview-container" id="previewContainer" hidden></div>
   </div>
+
+  {% include "components/conversion_results_panel.html" %}
 
   <div class="marquee-wrap" id="formats">
     <p class="marquee-label">{{ request.state.t('homepage.marquee_label', 'All formats you can change') }}</p>
@@ -1346,6 +1323,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <div id="toastHost"></div>
 
+<script src="/static/js/config.js"></script>
+<script src="/static/js/app.js"></script>
+<script src="/static/js/upload/upload_manager.js"></script>
+<script src="/static/js/recommendation/recommendation_manager.js"></script>
+<script src="/static/js/download/download_manager.js"></script>
+<script src="/static/js/convert/converter.js"></script>
+
 <script>
 /* ---------------- data model ---------------- */
 const CATEGORY = {
@@ -1392,8 +1376,17 @@ function toast(msg, icon){
 
 /* ---------------- add files ---------------- */
 function addFiles(fileList){
-  const files = Array.from(fileList).slice(0, 50);
+  const files = Array.from(fileList || []).slice(0, 50);
   if(!files.length) return;
+
+  if (window.uploadManager && typeof window.uploadManager.handleFiles === 'function') {
+    try {
+      window.uploadManager.handleFiles(files);
+    } catch (error) {
+      console.warn('homepage uploadManager bridge failed:', error);
+    }
+  }
+
   files.forEach(file=>{
     const {ext} = splitName(file.name);
     const cat = categoryOf(ext);
@@ -1645,8 +1638,11 @@ document.getElementById('dlAllBtn').addEventListener('click', downloadAll);
 
 /* file input wiring */
 const fileInput = document.getElementById('fileInput');
-document.getElementById('browseBtn').addEventListener('click', e=>{ e.stopPropagation(); fileInput.click(); });
-document.getElementById('addMoreBtn').addEventListener('click', ()=> fileInput.click());
+const chooseFileButton = document.getElementById('chooseFile');
+if (chooseFileButton) {
+  chooseFileButton.addEventListener('click', e=>{ e.stopPropagation(); fileInput?.click(); });
+}
+document.getElementById('addMoreBtn')?.addEventListener('click', ()=> fileInput?.click());
 window.handleLanguageChange = function (event) {
   const selectedLang = event.target.value;
   const params = new URLSearchParams(window.location.search);
@@ -1659,19 +1655,24 @@ window.handleLanguageChange = function (event) {
   window.location.search = query ? `?${query}` : window.location.pathname;
 };
 
-fileInput.addEventListener('change', e=>{ addFiles(e.target.files); fileInput.value=''; });
+fileInput?.addEventListener('change', e=>{
+  const files = Array.from(e.target.files || []);
+  if (!files.length) return;
+  addFiles(files);
+  fileInput.value = '';
+});
 
-const dz = document.getElementById('dropzone');
-dz.addEventListener('click', ()=> fileInput.click());
-dz.addEventListener('keydown', e=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); fileInput.click(); }});
+const dz = document.getElementById('dropZone');
+dz?.addEventListener('click', ()=> fileInput?.click());
+dz?.addEventListener('keydown', e=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); fileInput?.click(); }});
 ['dragenter','dragover'].forEach(evt=>{
-  dz.addEventListener(evt, e=>{ e.preventDefault(); dz.classList.add('drag'); });
+  dz?.addEventListener(evt, e=>{ e.preventDefault(); dz.classList.add('drag'); });
 });
 ['dragleave','drop'].forEach(evt=>{
-  dz.addEventListener(evt, e=>{ e.preventDefault(); dz.classList.remove('drag'); });
+  dz?.addEventListener(evt, e=>{ e.preventDefault(); dz.classList.remove('drag'); });
 });
-dz.addEventListener('drop', e=>{
-  if(e.dataTransfer?.files?.length) addFiles(e.dataTransfer.files);
+dz?.addEventListener('drop', e=>{
+  if(e.dataTransfer?.files?.length) addFiles(Array.from(e.dataTransfer.files));
 });
 
 /* ---------------- morph badge cycle ---------------- */

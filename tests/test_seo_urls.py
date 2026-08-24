@@ -31,5 +31,5 @@ def test_seo_service_uses_production_absolute_urls():
 
     meta = service.build_home_meta(request)
 
-    assert meta["canonical"] == "https://converigo.com/?lang=en"
-    assert meta["og_url"] == "https://converigo.com/?lang=en"
+    assert meta["canonical"] == "https://converigo.com/"
+    assert meta["og_url"] == "https://converigo.com/"

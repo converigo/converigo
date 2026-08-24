@@ -67,18 +67,34 @@ input {
 
 :root {
     --color-bg: #FFFFFF;
-    --color-text: #111827;
+    --color-bg-soft: #F6F4FF;
+    --color-text: #1C1832;
+    --color-text-light: #5D5883;
     --color-muted: #6B7280;
-    --color-border: #E5E7EB;
+    --color-border: rgba(92, 81, 206, 0.12);
     --color-surface: #FFFFFF;
     --color-surface-soft: #F8FAFC;
-    --color-accent: #2563EB;
-    --color-accent-soft: rgba(37, 99, 235, 0.08);
+    --color-surface-strong: #EEF2FF;
+    --color-accent: #5B4FE9;
+    --color-accent-soft: rgba(91, 79, 233, 0.08);
+    --color-primary: #5B4FE9;
+    --color-primary-soft: rgba(91, 79, 233, 0.08);
     --container-width: 1200px;
     --container-padding: 24px;
     --radius: 18px;
     --shadow: 0 10px 30px rgba(15, 23, 42, .08);
     --transition: .25s ease;
+}
+
+body {
+    background:
+        radial-gradient(circle at top, rgba(91, 79, 233, 0.05), transparent 30%),
+        linear-gradient(180deg, #ffffff 0%, #f8f9ff 100%);
+    color: var(--color-text);
+}
+
+.main {
+    background: transparent;
 }
 
 /* ==========================================
@@ -344,7 +360,8 @@ input {
 ========================================== */
 
 .tool-page .section {
-    padding: 30px 0;
+    padding: 40px 0;
+    position: relative;
 }
 
 .tool-page .section-heading {
@@ -355,6 +372,41 @@ input {
 .tool-page .section-heading .eyebrow {
     display: inline-flex;
     margin-bottom: 12px;
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+.tool-page .card,
+.tool-page .feature-card,
+.tool-page .faq-item,
+.tool-page .popular-grid article,
+.learning-page .card,
+.learning-page .feature-card,
+.learning-page .faq-item,
+.learning-page .popular-grid article {
+    background: rgba(255,255,255,0.92);
+    border: 1px solid var(--color-border);
+    border-radius: 22px;
+    box-shadow: 0 20px 45px -32px rgba(48, 50, 96, 0.28);
+}
+
+.tool-page .hero,
+.learning-page .hero {
+    background: linear-gradient(180deg, rgba(246, 244, 255, 0.82) 0%, rgba(255, 255, 255, 0.96) 100%);
+    border-bottom: 1px solid rgba(91, 79, 233, 0.08);
+}
+
+.tool-page .hero h1,
+.learning-page .hero h1 {
+    color: var(--color-text);
+    letter-spacing: -0.04em;
+}
+
+.tool-page .hero-sub,
+.learning-page .hero-sub,
+.tool-page .section-header p,
+.learning-page .section-header p {
+    color: var(--color-text-light);
 }
 
 @media (max-width: 900px) {

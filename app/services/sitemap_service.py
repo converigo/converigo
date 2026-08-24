@@ -142,11 +142,11 @@ class SitemapService:
         if raw_slug:
             slug = str(raw_slug).strip().lower().replace("_", "-")
             if slug:
-                return f"/tools/{slug}"
+                return f"/{slug}"
 
         if isinstance(converter, ConverterInfo):
             slug = str(converter.id).strip().lower().replace("_", "-")
-            return f"/tools/{slug}"
+            return f"/{slug}"
 
         return ""
 

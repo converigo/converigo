@@ -5,6 +5,7 @@ Version : 2.0.0
 """
 
 from datetime import datetime
+import os
 from pathlib import Path
 
 from fastapi import APIRouter, HTTPException, Request
@@ -15,6 +16,7 @@ from app.services.converter_data_service import ConverterDataService
 from app.services.hub_service import HubService
 from app.services.language_service import LanguageService
 from app.services.seo_service import PRODUCTION_BASE_URL, SeoService
+from app.services import public_seo_service
 from app.routers.tools import render_universal_tool_page
 
 router = APIRouter()
@@ -75,15 +77,21 @@ async def _render_trust_page(
     canonical_path: str,
 ) -> HTMLResponse:
     locale_data, t, supported_locales = _get_locale_context(request)
-    metadata = {
-        "title": title,
-        "description": description,
-        "canonical": f"{PRODUCTION_BASE_URL}{canonical_path}",
-        "og_url": f"{PRODUCTION_BASE_URL}{canonical_path}",
-        "keywords": "Converigo, file conversion, online converter, document conversion, image conversion",
-        "author": "Converigo",
-        "robots": "index,follow",
-    }
+    meta = public_seo_service.build_public_meta(
+        canonical_path,
+        title,
+        description,
+    )
+    structured = public_seo_service.build_public_structured_data(
+        canonical_path,
+        title,
+        description,
+        schema_type="WebPage",
+        breadcrumbs=[
+            {"name": "Home", "url": "/"},
+            {"name": title, "url": canonical_path},
+        ],
+    )
     return templates.TemplateResponse(
         request=request,
         name=f"pages/{template_name}",
@@ -92,17 +100,8 @@ async def _render_trust_page(
             "locale": locale_data,
             "t": t,
             "supported_locales": supported_locales,
-            "meta": metadata,
-            "structured_data": seo_service.build_structured_data(
-                request,
-                page_type="trust_page",
-                page_data={
-                    "title": title,
-                    "description": description,
-                    "url": canonical_path,
-                    "name": title,
-                },
-            ),
+            "meta": meta,
+            "structured_data": structured,
             "year": datetime.utcnow().year,
         },
     )
@@ -111,15 +110,21 @@ async def _render_trust_page(
 async def _render_not_found_page(request: Request, path: str | None = None) -> HTMLResponse:
     locale_data, t, supported_locales = _get_locale_context(request)
     popular = converter_data_service.list_popular_converters(limit=6)
-    metadata = {
-        "title": "Page Not Found | Converigo",
-        "description": "The page you requested could not be found. Explore popular converters and help articles instead.",
-        "canonical": f"{PRODUCTION_BASE_URL}/404",
-        "og_url": f"{PRODUCTION_BASE_URL}/404",
-        "keywords": "404 page, page not found, converter help",
-        "author": "Converigo",
-        "robots": "noindex,follow",
-    }
+    title = "Page Not Found | Converigo"
+    description = "The page you requested could not be found. Explore popular converters and help articles instead."
+    meta = public_seo_service.build_public_meta(
+        "/404",
+        title,
+        description,
+    )
+    meta["robots"] = "noindex,follow"
+    structured = public_seo_service.build_public_structured_data(
+        "/404",
+        title,
+        description,
+        schema_type="WebPage",
+        breadcrumbs=[{"name": "Home", "url": "/"}, {"name": "404", "url": "/404"}],
+    )
     return templates.TemplateResponse(
         request=request,
         name="pages/404.html",
@@ -129,19 +134,10 @@ async def _render_not_found_page(request: Request, path: str | None = None) -> H
             "locale": locale_data,
             "t": t,
             "supported_locales": supported_locales,
-            "meta": metadata,
+            "meta": meta,
             "path": path or "",
             "popular_converters": popular,
-            "structured_data": seo_service.build_structured_data(
-                request,
-                page_type="trust_page",
-                page_data={
-                    "title": metadata["title"],
-                    "description": metadata["description"],
-                    "url": "/404",
-                    "name": "Page Not Found",
-                },
-            ),
+            "structured_data": structured,
             "year": datetime.utcnow().year,
         },
     )
@@ -150,7 +146,28 @@ async def _render_not_found_page(request: Request, path: str | None = None) -> H
 @router.get("/", response_class=HTMLResponse)
 async def home(request: Request):
     locale_data, t, supported_locales = _get_locale_context(request)
-    metadata = seo_service.build_home_meta(request)
+    # Build public-facing metadata and structured data (avoid legacy SeoService output)
+    title = "Converigo | Convert Files Online"
+    description = "Converigo offers fast, secure, and automatic file conversion from video, audio, image, and document formats."
+    meta = public_seo_service.build_public_meta(
+        "/",
+        title,
+        description,
+    )
+
+    structured = public_seo_service.build_public_structured_data(
+        "/",
+        title,
+        description,
+        schema_type="WebSite",
+        breadcrumbs=[{"name": "Home", "url": "/"}],
+        faq_items=[
+            {"question": locale_data.get("homepage", {}).get("faq", {}).get(f"q{i}" , ""),
+             "answer": locale_data.get("homepage", {}).get("faq", {}).get(f"a{i}" , "")}
+            for i in range(1, 7)
+            if locale_data.get("homepage", {}).get("faq", {}).get(f"q{i}")
+        ],
+    )
 
     return templates.TemplateResponse(
         request=request,
@@ -160,16 +177,10 @@ async def home(request: Request):
             "locale": locale_data,
             "t": t,
             "supported_locales": supported_locales,
-            "meta": metadata,
-            "structured_data": seo_service.build_structured_data(
-                request,
-                page_data={
-                    "name": "Converigo",
-                    "description": metadata["description"],
-                    "url": "/",
-                    "breadcrumb": [{"name": "Home", "url": "/"}],
-                },
-            ),
+            "meta": meta,
+            "structured_data": structured,
+            "verification_token": os.getenv("GOOGLE_SITE_VERIFICATION", ""),
+            "bing_verification_token": os.getenv("BING_SITE_VERIFICATION", ""),
             "year": datetime.utcnow().year,
         },
     )
@@ -292,6 +303,21 @@ async def blog_index(request: Request):
 
     locale_data, t, supported_locales = _get_locale_context(request)
 
+    # Build public meta and structured data for blog index
+    meta = public_seo_service.build_public_meta(
+        "/blog",
+        metadata["title"],
+        metadata["description"],
+    )
+
+    structured = public_seo_service.build_public_structured_data(
+        "/blog",
+        metadata["title"],
+        metadata["description"],
+        schema_type="WebSite",
+        breadcrumbs=[{"name": "Home", "url": "/"}, {"name": "Blog", "url": "/blog"}],
+    )
+
     return templates.TemplateResponse(
         request=request,
         name="pages/blog_index.html",
@@ -300,18 +326,9 @@ async def blog_index(request: Request):
             "locale": locale_data,
             "t": t,
             "supported_locales": supported_locales,
-            "meta": metadata,
+            "meta": meta,
             "articles": articles,
-            "structured_data": seo_service.build_structured_data(
-                request,
-                page_type="blog_index",
-                page_data={
-                    "name": "Converigo Blog",
-                    "description": metadata["description"],
-                    "url": "/blog",
-                    "articles": articles,
-                },
-            ),
+            "structured_data": structured,
             "year": datetime.utcnow().year,
         },
     )
@@ -373,6 +390,24 @@ async def blog_article(request: Request, slug: str):
         "robots": "index,follow",
     }
 
+    # Build public meta and structured data for article
+    # public_seo_service accepts full canonical URLs as path too
+    # Pass a path (not a full URL) to public_seo_service to avoid double-prefixing
+    article_path = article["canonical"].replace(PRODUCTION_BASE_URL, "")
+    meta = public_seo_service.build_public_meta(
+        article_path,
+        article["title"],
+        article["description"],
+    )
+
+    structured = public_seo_service.build_public_structured_data(
+        article_path,
+        article["title"],
+        article["description"],
+        schema_type="Article",
+        breadcrumbs=article["breadcrumb"],
+    )
+
     return templates.TemplateResponse(
         request=request,
         name=article["template"],
@@ -381,18 +416,9 @@ async def blog_article(request: Request, slug: str):
             "locale": locale_data,
             "t": t,
             "supported_locales": supported_locales,
-            "meta": metadata,
+            "meta": meta,
             "article": article,
-            "structured_data": seo_service.build_structured_data(
-                request,
-                page_type="blog_article",
-                page_data={
-                    "headline": article["title"],
-                    "description": article["description"],
-                    "url": article["canonical"].replace(PRODUCTION_BASE_URL, ""),
-                    "breadcrumb": article["breadcrumb"],
-                },
-            ),
+            "structured_data": structured,
             "year": datetime.utcnow().year,
         },
     )

@@ -1,211 +1,709 @@
-{% extends "layouts/base.html" %}
+<!DOCTYPE html>
+<html lang="{{ request.state.locale.lang_code if request.state and request.state.locale else 'en' }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% include "partials/public_seo_meta.html" %}
+  {% if structured_data %}{% include "partials/structured_data.html" %}{% endif %}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    window.appLocale = {{ request.state.locale | tojson | safe }};
+    window.localeCode = "{{ request.state.locale.lang_code if request.state and request.state.locale else 'en' }}";
+    window.translate = function (key, defaultText) {
+      if (!window.appLocale || typeof key !== 'string') {
+        return defaultText || key;
+      }
+      const parts = key.split('.');
+      let value = window.appLocale;
+      for (const part of parts) {
+        if (value && typeof value === 'object' && part in value) {
+          value = value[part];
+        } else {
+          return defaultText || key;
+        }
+      }
+      return typeof value === 'string' ? value : (defaultText || key);
+    };
+  </script>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --ink: #1c1832;
+      --ink-soft: #625c7d;
+      --line: #e7e2ff;
+      --primary: #5b4fe9;
+      --primary-dark: #4335c7;
+      --surface: #f7f6ff;
+      --surface-strong: #ffffff;
+      --card-shadow: 0 24px 60px -32px rgba(63, 48, 170, 0.25);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #fff;
+      color: var(--ink);
+      line-height: 1.6;
+    }
+    h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; margin: 0 0 0.7rem; }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+    .topnav { position: sticky; top: 0; z-index: 50; background: rgba(247, 246, 255, 0.82); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    .nav-inner { max-width: 1180px; margin: 0 auto; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; font-weight: 800; font-family: 'Space Grotesk', sans-serif; }
+    .brand-mark { width: 38px; height: 38px; border-radius: 12px; background: linear-gradient(135deg, var(--primary), #ff6b4a); display: inline-block; }
+    .nav-links { display: flex; align-items: center; gap: 20px; color: var(--ink-soft); font-size: 14px; }
+    .modern-hero { padding: 64px 0 28px; }
+    .modern-hero-inner { display: grid; gap: 28px; grid-template-columns: 1.2fr 0.8fr; align-items: center; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; padding: 7px 12px; border-radius: 999px; background: #f1efff; color: var(--primary-dark); letter-spacing: 0.08em; text-transform: uppercase; font-size: 11px; font-weight: 800; }
+    .eyebrow::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #ff6b4a; }
+    .hero-title { font-size: clamp(2.3rem, 4vw, 4rem); line-height: 1.03; letter-spacing: -0.04em; margin: 16px 0 12px; }
+    .hero-sub { max-width: 650px; color: var(--ink-soft); font-size: 1.05rem; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+    .primary-btn, .secondary-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 11px 18px; border-radius: 12px; font-weight: 700; border: 1px solid transparent; }
+    .primary-btn { background: var(--primary); color: white; }
+    .secondary-btn { background: white; border-color: var(--line); color: var(--ink); }
+    .modern-panel { background: linear-gradient(180deg, #fff, #f8f7ff); border: 1px solid rgba(91,79,233,0.10); border-radius: var(--radius); box-shadow: var(--card-shadow); padding: 22px; }
+    .modern-upload { display: grid; gap: 14px; }
+    .modern-upload .drop-zone { border: 1.5px dashed rgba(91,79,233,0.35); background: rgba(255,255,255,0.7); border-radius: 18px; padding: 28px 18px; text-align: center; }
+    .modern-upload h3 { font-size: 1.2rem; }
+    .modern-upload input[type="file"] { display: none; }
+    .panel-zone{max-width:900px; width:min(100%,900px); margin:0 auto 0; display:none; position:relative; z-index:2;}
+    body.has-jobs .panel-zone{display:block; margin:48px auto 12px; animation:rise .55s cubic-bezier(.2,.8,.2,1);}
+    body:not(.has-jobs) .panel-zone{display:none;}
+    .panel{background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 22px 54px -34px rgba(63,48,170,0.28);overflow:hidden;}
+    .panel-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:12px;}
+    .panel-head h2{font-size:clamp(1.8rem,2.5vw,2.6rem);margin:0;}
+    .panel-head p{margin:0;color:var(--ink-soft);}
+    .panel-toolbar{padding:14px 18px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fff,#f8f7ff);}
+    .ghost-btn,.go-btn,.solid-btn,.outline-btn,.dl-main,.icon-btn,.code-copy,.dl-caret{font:inherit;}
+    .ghost-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--ink);font-weight:700;cursor:pointer;}
+    .panel-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px;border-top:1px solid var(--line);background:#fff;}
+    .panel-footer.footer-post{display:none;}
+    .panel-footer.footer-post.show{display:flex;}
+    .footer-left{display:flex;align-items:center;gap:12px;flex-wrap:wrap;color:var(--ink-soft);font-weight:600;}
+    .fmt{padding:9px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);}
+    .go-btn{padding:12px 18px;border:none;border-radius:12px;background:var(--primary);color:#fff;font-weight:800;cursor:pointer;}
+    .go-btn:disabled{opacity:.5;cursor:not-allowed;}
+    .outline-btn,.solid-btn,.dl-main{border-radius:12px;padding:10px 14px;font-weight:700;cursor:pointer;}
+    .outline-btn{background:#fff;border:1px solid var(--line);color:var(--ink);} .solid-btn,.dl-main{background:var(--primary);color:#fff;border:none;}
+    .post-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+    .post-note{margin:0;color:var(--ink-soft);font-size:0.92rem;}
+    #rows{padding:8px 12px 0;display:grid;gap:10px;}
+    .row{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:14px 12px;border:1px solid var(--line);border-radius:16px;background:#faf9ff;}
+    .badge{display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:14px;color:#fff;font-weight:800;font-size:0.8rem;}
+    .row-info{min-width:0;}
+    .row-name{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .row-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;color:var(--ink-soft);font-size:0.78rem;}
+    .row-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;}
+    .status-pill,.converting-pill{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:999px;font-size:0.82rem;font-weight:700;background:#effbf4;color:#118b5a;}
+    .converting-pill{background:#f3efff;color:var(--primary-dark);}
+    .dl-split{display:flex;align-items:center;gap:6px;}
+    .icon-btn,.dl-caret,.code-copy{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:10px;cursor:pointer;padding:8px 10px;}
+    .icon-btn.danger{color:#c0392b;}
+    .subpanel{display:none;}
+    .subpanel.open{display:block;margin-top:10px;}
+    .subpanel-inner{padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;}
+    .code-box{display:flex;align-items:center;gap:10px;justify-content:space-between;padding:10px 12px;border-radius:10px;background:#f2f0ff;overflow:auto;}
+    .progress-track{width:100%;height:8px;border-radius:999px;background:#ece9ff;overflow:hidden;margin-top:10px;}
+    .progress-fill{display:block;height:100%;width:0;background:linear-gradient(90deg,#5b4fe9,#ff6b4a);transition:width .35s ease;}
+    .toast{position:fixed;right:24px;bottom:24px;background:#1b1730;color:#fff;border-radius:12px;padding:12px 16px;box-shadow:0 20px 46px -20px rgba(24,16,59,.5);z-index:200;}
+    .modern-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; margin-top: 18px; }
+    .modern-card { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 18px; box-shadow: 0 15px 40px -30px rgba(63,48,170,0.24); }
+    .modern-section { padding: 28px 0; }
+    .section-head { display: flex; justify-content: space-between; gap: 20px; align-items: end; margin-bottom: 18px; }
+    .section-head h2 { font-size: clamp(1.8rem, 2.5vw, 2.6rem); }
+    .section-head p { color: var(--ink-soft); margin: 0; }
+    .modern-faq { display: grid; gap: 12px; }
+    .faq-item { background: #fff; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+    .faq-question { width: 100%; background: transparent; border: none; padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; font: inherit; font-weight: 700; text-align: left; }
+    .faq-answer { padding: 0 20px 18px; color: var(--ink-soft); }
+    .modern-footer { margin-top: 42px; border-top: 1px solid var(--line); padding: 26px 0 50px; background: #faf9ff; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 30px; flex-wrap: wrap; }
+    @media (max-width: 900px) {
+      .modern-hero-inner { grid-template-columns: 1fr; }
+      .modern-grid { grid-template-columns: 1fr; }
+      .section-head { display: block; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body class="tool-page modern-shell">
+  <nav class="topnav">
+    <div class="nav-inner">
+      <a href="/" class="brand" aria-label="Converigo home"><span class="brand-mark" aria-hidden="true"></span>Converigo</a>
+      <div class="nav-links">
+        <a href="/tools">Tools</a>
+        <a href="/learning">Learning</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="header-actions">
+        <div class="language-switcher">
+          <label for="languageSelect" class="sr-only">Language</label>
+          <select id="languageSelect" onchange="handleLanguageChange(event)" data-current-locale="{{ request.state.locale.lang_code if request.state and request.state.locale else 'en' }}">
+            {% set visible_locales = ['en', 'id', 'ja'] %}
+            {% for locale_code in request.state.supported_locales %}
+              {% if locale_code in visible_locales %}
+                <option value="{{ locale_code }}" {% if request.state.locale.lang_code == locale_code %}selected{% endif %}>{% if locale_code == 'en' %}English{% elif locale_code == 'id' %}Indonesia{% else %}日本語{% endif %}</option>
+              {% endif %}
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+    </div>
+  </nav>
 
-{% block title %}{{ landing.h1 if landing else hero.title or tool.title }}{% endblock %}
-
-{% block page_css %}{% endblock %}
-
-{% block body_class %}tool-page{% endblock %}
-
-{% block content %}
-    {% include "components/header.html" %}
-
-    <main class="main" role="main">
-        {% set breadcrumb = breadcrumb if breadcrumb is defined else landing.breadcrumb if landing is defined and landing.breadcrumb else [] %}
-    {% if breadcrumb %}
-        <section class="section section-white">
-            <div class="container">
-                <nav aria-label="Breadcrumb">
-                    <ol class="breadcrumb">
-                        {% for item in breadcrumb %}
-                        <li><a href="{{ item.url }}">{{ item.name }}</a></li>
-                        {% endfor %}
-                    </ol>
-                </nav>
+  <main role="main">
+    <section class="modern-hero">
+      <div class="wrap modern-hero-inner">
+        <div>
+          {% set breadcrumb = breadcrumb if breadcrumb is defined else landing.breadcrumb if landing is defined and landing.breadcrumb else [] %}
+          {% if hero and hero.eyebrow %}
+            <div class="eyebrow">{{ hero.eyebrow }}</div>
+          {% elif breadcrumb %}
+            <div class="eyebrow">{{ breadcrumb[-1].name }}</div>
+          {% endif %}
+          <h1 class="hero-title">{{ landing.h1 if landing else hero.title or tool.title }}</h1>
+          <p class="hero-sub">{{ hero.description or meta.description }}</p>
+          <div class="cta-row">
+            <a href="#converter" class="primary-btn">{{ cta.primary_text or 'Convert now' }}</a>
+            <a href="#how-to-use" class="secondary-btn">{{ cta.secondary_text or 'How it works' }}</a>
+            <a href="#supported-formats" class="text-link">Supported formats</a>
+            <a href="#faq" class="text-link">FAQ</a>
+            <a href="#related-tools" class="text-link">Related tools</a>
+          </div>
+        </div>
+        <div class="modern-panel">
+            <div class="modern-upload" id="converter">
+            <h3>{{ t('upload.label', 'Upload file') }}</h3>
+            <div class="drop-zone" id="dropZone" tabindex="0" aria-label="Upload file">
+              <p><strong>{{ t('upload.drop_title', 'Drop your file here') }}</strong></p>
+              <p>{{ t('upload.or', 'or choose from your device') }}</p>
+              <button type="button" id="chooseFile" class="primary-btn">{{ upload_form.button_text if upload_form and upload_form.button_text else t('upload.browse', 'Choose File') }}</button>
+              <input type="file" id="fileInput" multiple hidden>
             </div>
-        </section>
+            <div>
+              {% include "components/conversion_results_panel.html" %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {% if benefits %}
+    <section class="modern-section">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Benefits</div>
+            <h2>Why users choose this converter</h2>
+          </div>
+        </div>
+        <div class="modern-grid">
+          {% for item in benefits %}
+          <article class="modern-card">
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.text }}</p>
+          </article>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
     {% endif %}
 
-        <section class="tool-hero section">
-            <div class="container tool-hero-inner">
-                <div class="hero-copy">
-                    <span class="eyebrow">{{ hero.eyebrow or 'Converter tool' }}</span>
-                    <h1 class="hero-title">{{ landing.h1 if landing else hero.title or tool.title }}</h1>
-                    <p class="hero-sub">{{ hero.description or meta.description }}</p>
-                    <div class="hero-cta">
-                        <a href="{{ cta.primary_href or '#converter' }}" class="btn btn-primary">{{ cta.primary_text or t('tool_page.cta_convert', 'Convert now') }}</a>
-                        <a href="{{ cta.secondary_href or '#faq' }}" class="btn btn-outline">{{ cta.secondary_text or t('tool_page.cta_faq', 'Read FAQs') }}</a>
-                        <a href="#how-to-use" class="btn btn-outline">How it works</a>
-                        <a href="#supported-formats" class="btn btn-outline">Supported formats</a>
-                        <a href="#related-tools" class="btn btn-outline">Related tools</a>
-                    </div>
-                </div>
-                <div class="hero-panel">
-                    <div class="panel-head">
-                        <p class="panel-label">{{ hero.panel_label or t('tool_page.panel.label', 'Ready to convert') }}</p>
-                        <h2 class="panel-title">{{ hero.panel_title or t('tool_page.panel.title', 'Upload one file and get your converted result.') }}</h2>
-                    </div>
-                    {% include "components/upload_card.html" %}
-                </div>
-            </div>
-        </section>
+    {% if how_to_use %}
+    <section class="modern-section" id="how-to-use">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">How it works</div>
+            <h2>How to convert {{ tool.source|upper or 'FILE' }} to {{ tool.target|upper or 'OUTPUT' }}</h2>
+          </div>
+        </div>
+        <div class="modern-grid">
+          {% for step in how_to_use %}
+          <article class="modern-card">
+            <h3>{{ step.title }}</h3>
+            <p>{{ step.description }}</p>
+          </article>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+    {% endif %}
 
-        {% if benefits %}
-        <section id="benefits" class="section section-white">
-            <div class="container section-heading">
-                <span class="eyebrow">Benefits</span>
-                <h2>Why choose this converter</h2>
-            </div>
-            <div class="grid features-grid">
-                {% for item in benefits %}
-                <article class="feature-card hover-card">
-                    <i data-lucide="sparkles"></i>
-                    <h3>{{ item.title }}</h3>
-                    <p>{{ item.text }}</p>
-                </article>
-                {% endfor %}
-            </div>
-        </section>
-        {% endif %}
+    {% if supported_formats %}
+    <section class="modern-section" id="supported-formats">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Supported formats</div>
+            <h2>Current conversion flow</h2>
+          </div>
+        </div>
+        <div class="modern-card">
+          <p><strong>Input format:</strong> {{ supported_formats.input|join(', ') if supported_formats.input is iterable and supported_formats.input is not string else supported_formats.input }}</p>
+          <p><strong>Output format:</strong> {{ supported_formats.output|join(', ') if supported_formats.output is iterable and supported_formats.output is not string else supported_formats.output }}</p>
+          <p>{{ supported_formats.description or (tool.source|upper ~ ' input, ' ~ tool.target|upper ~ ' output') }}</p>
+        </div>
+      </div>
+    </section>
+    {% endif %}
 
-        {% if features %}
-        <section id="features" class="section">
-            <div class="container section-heading">
-                <span class="eyebrow">Features</span>
-                <h2>Built for quick and reliable conversions</h2>
-            </div>
-            <div class="grid features-grid">
-                {% for item in features %}
-                <article class="feature-card hover-card">
-                    <i data-lucide="check-circle"></i>
-                    <h3>{{ item.title }}</h3>
-                    <p>{{ item.text }}</p>
-                </article>
-                {% endfor %}
-            </div>
-        </section>
-        {% endif %}
+    {% if use_cases %}
+    <section class="modern-section" id="use-cases">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Use Cases</div>
+            <h2>Typical workflows for this tool</h2>
+          </div>
+        </div>
+        <div class="modern-grid">
+          {% for item in use_cases %}
+          <article class="modern-card">
+            <p>{{ item }}</p>
+          </article>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+    {% endif %}
 
-        {% if supported_formats %}
-        <section id="supported-formats" class="section section-white">
-            <div class="container section-heading">
-                <span class="eyebrow">Supported formats</span>
-                <h2>Input and output formats</h2>
-            </div>
-            <div class="container">
-                <p><strong>Input format:</strong> {{ supported_formats.input|join(', ') if supported_formats.input is iterable and supported_formats.input is not string else supported_formats.input }}</p>
-                <p><strong>Output format:</strong> {{ supported_formats.output|join(', ') if supported_formats.output is iterable and supported_formats.output is not string else supported_formats.output }}</p>
-                <p>{{ supported_formats.description or (tool.source|upper ~ ' input, ' ~ tool.target|upper ~ ' output') }}</p>
-            </div>
-        </section>
-        {% endif %}
+    {% if about_formats %}
+    <section class="modern-section" id="about-formats">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">About Formats</div>
+            <h2>Learn more about the input and output formats</h2>
+          </div>
+        </div>
+        <div class="modern-grid">
+          {% for item in about_formats %}
+          <article class="modern-card">
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.text }}</p>
+          </article>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+    {% endif %}
 
-        {% if how_to_use %}
-        <section id="how-to-use" class="section">
-            <div class="container section-heading">
-                <span class="eyebrow">{{ t('tool_page.how_it_works.eyebrow', 'How it works') }}</span>
-                <h2>{{ t('tool_page.how_it_works.heading', 'Simple conversion in three steps') }}</h2>
+    {% if faq %}
+    <section class="modern-section" id="faq">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">FAQ</div>
+            <h2>Frequently asked questions</h2>
+          </div>
+        </div>
+        <div class="modern-faq">
+          {% for item in faq %}
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>{{ item.question }}</span>
+              <span>+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>{{ item.answer }}</p>
             </div>
-            <div class="grid features-grid">
-                {% for step in how_to_use %}
-                <article class="feature-card hover-card">
-                    <i data-lucide="upload"></i>
-                    <h3>{{ step.title }}</h3>
-                    <p>{{ step.description }}</p>
-                </article>
-                {% endfor %}
-            </div>
-        </section>
-        {% endif %}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+    {% endif %}
 
-        {% if use_cases %}
-        <section id="use-cases" class="section section-white">
-            <div class="container section-heading">
-                <span class="eyebrow">Use Cases</span>
-                <h2>When this converter is useful</h2>
-            </div>
-            <div class="container">
-                <ul>
-                    {% for case in use_cases %}
-                    <li>{{ case }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </section>
-        {% endif %}
+    {% if related_tools %}
+    <section class="modern-section" id="related-tools">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Related tools</div>
+            <h2>Other converters you may need</h2>
+          </div>
+        </div>
+        <div class="modern-grid">
+          {% for related in related_tools %}
+          <article class="modern-card">
+            <h3><a href="/tools/{{ related.slug }}">{{ related.title }}</a></h3>
+            <p>{{ related.description or 'Discover another useful conversion flow.' }}</p>
+          </article>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+    {% endif %}
+  </main>
 
-        {% if about_formats %}
-        <section id="about-formats" class="section">
-            <div class="container section-heading">
-                <span class="eyebrow">About Formats</span>
-                <h2>Understanding the source and output formats</h2>
-            </div>
-            <div class="grid features-grid">
-                {% for item in about_formats %}
-                <article class="feature-card hover-card">
-                    <i data-lucide="info"></i>
-                    <h3>{{ item.title }}</h3>
-                    <p>{{ item.text }}</p>
-                </article>
-                {% endfor %}
-            </div>
-        </section>
-        {% endif %}
+  <footer class="modern-footer">
+    <div class="wrap footer-inner">
+      <div>
+        <h3>Converigo</h3>
+        <p>Fast, free, secure online file conversion.</p>
+      </div>
+      <div>
+        <a href="/tools">Tools</a>
+      </div>
+      <div>
+        <a href="/learning">Learning</a>
+      </div>
+      <div>
+        <a href="/about">About</a>
+      </div>
+    </div>
+  </footer>
 
-        <section id="faq" class="section">
-            <div class="container section-heading">
-                <span class="eyebrow">{{ t('tool_page.faq.eyebrow', 'FAQ') }}</span>
-                <h2>{{ t('tool_page.faq.heading', 'Frequently asked questions') }}</h2>
-            </div>
-            <div class="faq-grid">
-                {% for item in faq %}
-                <div class="faq-item">
-                    <button class="faq-question" type="button" id="faq-question-{{ loop.index }}" aria-expanded="false" aria-controls="faq-answer-{{ loop.index }}">
-                        <span>{{ item.question }}</span>
-                        <span class="faq-toggle">+</span>
-                    </button>
-                    <div class="faq-answer" id="faq-answer-{{ loop.index }}" role="region" aria-labelledby="faq-question-{{ loop.index }}" hidden>
-                        <p>{{ item.answer }}</p>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </section>
+  <script>
+    document.querySelectorAll('.faq-question').forEach((button) => {
+      button.addEventListener('click', () => {
+        const answer = button.parentElement.querySelector('.faq-answer');
+        const isOpen = button.getAttribute('aria-expanded') === 'true';
+        button.setAttribute('aria-expanded', String(!isOpen));
+        if (answer) answer.hidden = isOpen;
+        button.lastElementChild.textContent = isOpen ? '+' : '−';
+      });
+    });
+  </script>
 
-        <section id="related-tools" class="section section-white">
-            <div class="container section-heading">
-                <span class="eyebrow">{{ t('tool_page.related.eyebrow', 'Related Tools') }}</span>
-                <h2>{{ t('tool_page.related.heading', 'Other converters you may need') }}</h2>
-            </div>
-            <div class="grid popular-grid">
-                {% for related in related_tools %}
-                <article class="card card-lg hover-card">
-                    <div class="card-icon"><i data-lucide="layers"></i></div>
-                    <h3><a href="/tools/{{ related.slug }}">{{ related.title }}</a></h3>
-                    <p>{{ related.description or t('tool_page.related.fallback', 'Discover another useful conversion flow.') }}</p>
-                </article>
-                {% endfor %}
-            </div>
-        </section>
+  <script>
+    const CATEGORY = {
+      image:    {color:'#5B4FE9', light:'#ECE9FF', targets:['JPG','PNG','WEBP','GIF','SVG','BMP'], exts:['jpg','jpeg','png','webp','gif','svg','bmp','tiff','heic']},
+      document: {color:'#FF6B4A', light:'#FFE9E2', targets:['PDF','DOCX','TXT','PPTX','XLSX','CSV','HTML'], exts:['pdf','docx','doc','txt','pptx','ppt','xlsx','xls','csv','html','md','rtf']},
+      audio:    {color:'#12B3A0', light:'#DEF7F3', targets:['MP3','WAV','OGG','FLAC','M4A'], exts:['mp3','wav','ogg','flac','m4a','aac']},
+      video:    {color:'#F59E0B', light:'#FEF3DA', targets:['MP4','MOV','WEBM','MKV','GIF'], exts:['mp4','mov','avi','webm','mkv','flv']},
+      archive:  {color:'#6C7599', light:'#E8EAF3', targets:['ZIP','RAR','7Z','TAR'], exts:['zip','rar','7z','tar','gz']},
+      other:    {color:'#9333EA', light:'#F3E8FF', targets:['PDF','JPG','PNG','TXT','ZIP'], exts:[]}
+    };
 
-        {% if landing %}
-        {% include "components/landing_sections.html" %}
-        {% endif %}
+    function categoryOf(ext){
+      ext = (ext || '').toLowerCase();
+      for (const key in CATEGORY) {
+        if (CATEGORY[key].exts.includes(ext)) return key;
+      }
+      return 'other';
+    }
 
-        {% if cta and not landing %}
-        <section class="section">
-            <div class="container">
-                <div class="card card-lg">
-                    <h2>{{ cta.title }}</h2>
-                    <p>{{ cta.text }}</p>
-                    <div class="hero-cta">
-                        <a href="{{ cta.primary_href or '#converter' }}" class="btn btn-primary">{{ cta.primary_text or t('tool_page.cta_convert', 'Convert now') }}</a>
-                        <a href="{{ cta.secondary_href or '#faq' }}" class="btn btn-outline">{{ cta.secondary_text or t('tool_page.cta_faq', 'Read FAQs') }}</a>
-                    </div>
-                </div>
+    let jobs = [];
+    let uid = 0;
+
+    function splitName(filename){
+      const idx = filename.lastIndexOf('.');
+      if (idx <= 0) return {base: filename, ext: ''};
+      return {base: filename.slice(0, idx), ext: filename.slice(idx + 1)};
+    }
+
+    function fmtSize(bytes){
+      if (bytes < 1024) return bytes + ' B';
+      const kb = bytes / 1024;
+      if (kb < 1024) return kb.toFixed(2) + ' KB';
+      return (kb / 1024).toFixed(2) + ' MB';
+    }
+
+    function esc(s){ return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+    function toast(msg, icon){
+      const host = document.getElementById('toastHost');
+      if (!host) return;
+      const el = document.createElement('div');
+      el.className = 'toast';
+      el.innerHTML = (icon || '✔️') + ' ' + msg;
+      host.appendChild(el);
+      setTimeout(() => el.remove(), 2700);
+    }
+
+    function badgeStyle(cat){ return 'background:' + CATEGORY[cat].color + ';'; }
+
+    function rowTemplate(job){
+      const cat = CATEGORY[job.category];
+      let rightHTML = '';
+
+      if (job.status === 'pending') {
+        rightHTML = `
+          <select class="fmt" data-action="target" data-id="${job.id}">
+            ${cat.targets.map(t => `<option value="${t}" ${t === job.target ? 'selected' : ''}>${t}</option>`).join('')}
+          </select>
+          <button class="icon-btn" data-action="settings" data-id="${job.id}" title="Pengaturan" aria-label="Pengaturan">⚙️</button>
+          <button class="icon-btn" data-action="code" data-id="${job.id}" title="Lihat API" aria-label="Lihat API">&lt;/&gt;</button>
+          <button class="icon-btn danger" data-action="remove" data-id="${job.id}" title="Hapus" aria-label="Hapus">✖</button>`;
+      } else if (job.status === 'processing' || job.status === 'converting') {
+        rightHTML = `<div class="converting-pill"><span class="spin"></span>Mengonversi…</div>
+          <button class="icon-btn danger" data-action="remove" data-id="${job.id}" title="Hapus" aria-label="Hapus">✖</button>`;
+      } else {
+        rightHTML = `
+          <div class="status-pill">✔️ Selesai</div>
+          <div class="dl-split">
+            <button class="dl-main" data-action="download" data-id="${job.id}">⬇️ Unduh</button>
+            <button class="dl-caret" data-action="settings" data-id="${job.id}" aria-label="Opsi unduh">▾</button>
+          </div>
+          <button class="icon-btn danger" data-action="remove" data-id="${job.id}" title="Hapus" aria-label="Hapus">✖</button>`;
+      }
+
+      const progressHTML = job.status === 'converting' || job.status === 'processing'
+        ? `<div class="progress-track"><div class="progress-fill" id="fill-${job.id}"></div></div>` : '';
+
+      const sub = `
+        <div class="subpanel ${job.settingsOpen ? 'open' : ''}" data-sub="settings-${job.id}">
+          <div class="subpanel-inner">
+            <label>Kualitas Output: <b>${job.quality}%</b></label>
+            <input type="range" min="10" max="100" value="${job.quality}" data-action="quality" data-id="${job.id}">
+          </div>
+        </div>
+        <div class="subpanel ${job.codeOpen ? 'open' : ''}" data-sub="code-${job.id}">
+          <div class="subpanel-inner" style="display:block;">
+            <div class="code-box">curl -X POST https://api.ubah.in/v1/convert \\
+  -F "file=@${job.name}" \\
+  -F "target=${job.target.toLowerCase()}"<button class="code-copy" data-action="copy" data-id="${job.id}">Salin</button></div>
+          </div>
+        </div>`;
+
+      return `
+        <div class="row" data-row="${job.id}">
+          <div class="badge" style="${badgeStyle(job.category)}">${job.ext.slice(0, 4)}</div>
+          <div class="row-info">
+            <div class="row-name">${esc(job.name)}</div>
+            <div class="row-meta">
+              <span>${fmtSize(job.size)}</span>
+              <span class="arrow-tag">${job.ext} → <b>${job.status === 'done' ? job.target : job.target}</b></span>
             </div>
-        </section>
-        {% endif %}
-    </main>
-{% endblock %}
+          </div>
+          <div class="row-controls">${rightHTML}</div>
+          ${progressHTML}
+        </div>
+        ${sub}
+      `;
+    }
 
+    function render(){
+      const rowsEl = document.getElementById('rows');
+      if (!rowsEl) return;
+      rowsEl.innerHTML = jobs.map(rowTemplate).join('');
+
+      const allDone = jobs.length > 0 && jobs.every(j => j.status === 'done');
+      const pending = jobs.filter(j => j.status !== 'done');
+
+      const footerPre = document.getElementById('footerPre');
+      const footerPost = document.getElementById('footerPost');
+      if (footerPre) footerPre.style.display = allDone ? 'none' : 'flex';
+      if (footerPost) footerPost.classList.toggle('show', allDone);
+
+      const pendingCountEl = document.getElementById('pendingCount');
+      if (pendingCountEl) pendingCountEl.textContent = pending.length;
+
+      const goBtn = document.getElementById('goBtn');
+      if (goBtn) goBtn.disabled = pending.length === 0 || jobs.some(j => j.status === 'converting' || j.status === 'processing');
+
+      jobs.filter(j => j.status === 'converting').forEach(j => {
+        const fill = document.getElementById('fill-' + j.id);
+        if (fill) {
+          requestAnimationFrame(() => {
+            fill.style.transitionDuration = j._duration + 'ms';
+            fill.style.width = '100%';
+          });
+        }
+      });
+
+      buildGlobalFmt();
+    }
+
+    function buildGlobalFmt(){
+      const sel = document.getElementById('globalFmt');
+      const label = document.getElementById('footerLabel');
+      if (!sel || !label) return;
+      const pending = jobs.filter(j => j.status !== 'done');
+      const pendingTargets = [...new Set(pending.map(j => j.target))];
+      const sameTarget = pending.length > 0 && pendingTargets.length === 1;
+
+      if (sameTarget) {
+        const cats = [...new Set(pending.map(j => j.category))];
+        let opts = [];
+        if (cats.length === 1) {
+          opts = CATEGORY[cats[0]].targets;
+        } else {
+          opts = ['JPG','PNG','PDF','MP3','MP4','ZIP'];
+        }
+        const current = sel.value;
+        sel.innerHTML = opts.map(t => `<option value="${t}">${t}</option>`).join('');
+        if (opts.includes(current)) sel.value = current;
+        label.innerHTML = `${window.translate ? window.translate('upload.conversion_instruction', 'Convert all files to:') : 'Convert all files to:'} (<span id="pendingCount">${pending.length}</span>)`;
+        sel.style.display = '';
+      } else {
+        sel.innerHTML = '';
+        sel.style.display = 'none';
+        label.innerHTML = `${window.translate ? window.translate('upload.conversion_instruction', 'Convert all files to:') : 'Convert all files to:'} (<span id="pendingCount">${pending.length}</span>)`;
+      }
+    }
+
+    function convertAll(){
+      const pending = jobs.filter(j => j.status === 'pending');
+      if (!pending.length) return;
+      pending.forEach((j, i) => {
+        j._duration = 900 + Math.random() * 1400;
+        setTimeout(() => {
+          j.status = 'processing';
+          render();
+          setTimeout(() => {
+            j.status = 'converting';
+            render();
+            setTimeout(() => {
+              j.status = 'done';
+              render();
+            }, j._duration + 60);
+          }, 180);
+        }, i * 160);
+      });
+    }
+
+    function convertedBlobName(job){
+      const {base} = splitName(job.name);
+      return base + '.' + job.target.toLowerCase();
+    }
+
+    function downloadJob(job){
+      const url = URL.createObjectURL(job.file);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = convertedBlobName(job);
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
+      toast('Mengunduh ' + convertedBlobName(job));
+    }
+
+    async function downloadAll(){
+      const done = jobs.filter(j => j.status === 'done');
+      if (!done.length) return;
+      if (done.length === 1) { downloadJob(done[0]); return; }
+      toast('Menyiapkan ZIP…', '⏳');
+      const zip = new JSZip();
+      for (const j of done) {
+        const buf = await j.file.arrayBuffer();
+        zip.file(convertedBlobName(j), buf);
+      }
+      const blob = await zip.generateAsync({type: 'blob'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'converigo-hasil-konversi.zip';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
+      toast('Unduhan ZIP dimulai');
+    }
+
+    function resetAll(){
+      jobs = [];
+      document.body.classList.remove('has-jobs');
+      render();
+    }
+
+    function addFiles(fileList){
+      const files = Array.from(fileList || []).slice(0, 50);
+      if (!files.length) return;
+
+      if (window.uploadManager && typeof window.uploadManager.handleFiles === 'function') {
+        try {
+          window.uploadManager.handleFiles(files);
+        } catch (error) {
+          console.warn('uploadManager bridge failed:', error);
+        }
+      }
+
+      files.forEach(file => {
+        const {ext} = splitName(file.name);
+        const cat = categoryOf(ext);
+        const targets = CATEGORY[cat].targets;
+        let target = targets.find(t => t.toLowerCase() !== ext.toLowerCase()) || targets[0];
+        jobs.push({
+          id: 'j' + (uid++),
+          file, name: file.name, size: file.size, ext: ext.toUpperCase() || 'FILE',
+          category: cat, target, status: 'pending', progress: 0, settingsOpen: false, codeOpen: false, quality: 80
+        });
+      });
+      document.body.classList.add('has-jobs');
+      render();
+      toast(files.length + ' file ditambahkan');
+    }
+
+    document.getElementById('rows')?.addEventListener('click', e => {
+      const btn = e.target.closest('[data-action]');
+      if (!btn) return;
+      const id = btn.dataset.id;
+      const job = jobs.find(j => j.id === id);
+      if (!job) return;
+      const action = btn.dataset.action;
+
+      if (action === 'remove') {
+        jobs = jobs.filter(j => j.id !== id);
+        if (!jobs.length) document.body.classList.remove('has-jobs');
+        render();
+      } else if (action === 'settings') {
+        job.settingsOpen = !job.settingsOpen;
+        job.codeOpen = false;
+        render();
+      } else if (action === 'code') {
+        job.codeOpen = !job.codeOpen;
+        job.settingsOpen = false;
+        render();
+      } else if (action === 'download') {
+        downloadJob(job);
+      } else if (action === 'copy') {
+        const code = `curl -X POST https://api.ubah.in/v1/convert -F "file=@${job.name}" -F "target=${job.target.toLowerCase()}"`;
+        navigator.clipboard?.writeText(code);
+        toast('Perintah disalin ke clipboard');
+      }
+    });
+
+    document.getElementById('rows')?.addEventListener('change', e => {
+      const el = e.target.closest('[data-action]');
+      if (!el) return;
+      const id = el.dataset.id;
+      const job = jobs.find(j => j.id === id);
+      if (!job) return;
+      if (el.dataset.action === 'target') { job.target = el.value; render(); }
+    });
+
+    document.getElementById('rows')?.addEventListener('input', e => {
+      const el = e.target.closest('[data-action="quality"]');
+      if (!el) return;
+      const job = jobs.find(j => j.id === el.dataset.id);
+      if (!job) return;
+      job.quality = el.value;
+      const label = el.closest('.subpanel-inner').querySelector('label b');
+      if (label) label.textContent = el.value + '%';
+    });
+
+    document.getElementById('goBtn')?.addEventListener('click', convertAll);
+    document.getElementById('newBtn')?.addEventListener('click', resetAll);
+    document.getElementById('dlAllBtn')?.addEventListener('click', downloadAll);
+    document.getElementById('addMoreBtn')?.addEventListener('click', () => document.getElementById('fileInput')?.click());
+
+    const fileInput = document.getElementById('fileInput');
+    const chooseFileButton = document.getElementById('chooseFile');
+    if (chooseFileButton && fileInput) {
+      chooseFileButton.addEventListener('click', (e) => { e.stopPropagation(); fileInput.value = ''; fileInput.click(); });
+    }
+
+    fileInput?.addEventListener('change', (e) => {
+      const files = e.target.files;
+      if (files && files.length) {
+        addFiles(files);
+        e.target.value = '';
+      }
+    });
+  </script>
+
+  <script src="/static/js/config.js"></script>
+  <script src="/static/js/app.js"></script>
+  <script src="/static/js/api/plugin_api.js"></script>
+  <script src="/static/js/ui/button_renderer.js"></script>
+  <script src="/static/js/upload/upload_manager.js"></script>
+  <script src="/static/js/recommendation/recommendation_manager.js"></script>
+  <script src="/static/js/download/download_manager.js"></script>
+  <script src="/static/js/convert/converter.js"></script>
+</body>
 </html>

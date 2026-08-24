@@ -14,7 +14,8 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import FileResponse, JSONResponse, PlainTextResponse
+from starlette.exceptions import HTTPException as StarletteHTTPException
+from fastapi.responses import FileResponse, JSONResponse, PlainTextResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.datastructures import MutableHeaders
 from starlette.middleware.trustedhost import TrustedHostMiddleware
@@ -37,6 +38,8 @@ from app.core.observability import (
     response_status_label,
     start_timer,
 )
+from app.core.templates import templates
+from app.services.converter_data_service import ConverterDataService
 from app.core.settings import settings
 from app.services.cleanup_service import CleanupService
 from app.services.analytics_service import AnalyticsService
@@ -257,23 +260,15 @@ from app.routers.convert import (  # noqa: E402
 from app.routers.home import (  # noqa: E402
     router as home_router,
 )
-
-from app.routers.learning import (  # noqa: E402
-    router as learning_router,
+from app.routers.comparison import (  # noqa: E402
+    router as comparison_router,
 )
-
-from app.routers.plugins import (  # noqa: E402
-    router as plugins_router,
+from app.routers.dashboard import (  # noqa: E402
+    router as dashboard_router,
 )
-
-from app.routers.seo import (  # noqa: E402
-    router as seo_router,
+from app.routers.formats import (  # noqa: E402
+    router as formats_router,
 )
-
-from app.routers.tools import (  # noqa: E402
-    router as tools_router,
-)
-
 from app.routers.upload import (  # noqa: E402
     router as upload_router,
 )
@@ -281,9 +276,15 @@ from app.routers.upload import (  # noqa: E402
 from app.routers.recommend import (  # noqa: E402
     router as recommend_router,
 )
-from app.routers.formats import router as formats_router  # noqa: E402
-from app.routers.comparison import router as comparison_router  # noqa: E402
-from app.routers.dashboard import router as dashboard_router  # noqa: E402
+from app.routers.tools import (  # noqa: E402
+    router as tools_router,
+)
+from app.routers.learning import (  # noqa: E402
+    router as learning_router,
+)
+from app.routers.seo import (  # noqa: E402
+    router as seo_router,
+)
 from app.plugins.registry import registry  # noqa: E402
 
 
@@ -330,12 +331,54 @@ app.add_exception_handler(
 @app.exception_handler(HTTPException)
 async def correlated_http_exception_handler(request: Request, exc: HTTPException) -> JSONResponse:
     request.state.error_code = normalize_error_code(exc.detail, fallback=f"HTTP_{exc.status_code}")
+    # If the client expects HTML, render the branded 404 HTML page for browser-facing requests.
+    accept = (request.headers.get("accept") or "").lower()
+    # Render branded HTML for 404 on public, browser-facing routes (non-API paths).
+    wants_json = "application/json" in accept
+    path = request.url.path or ""
+    is_api_path = path.startswith("/api") or path.startswith("/internal")
+    logger.info("HTTPException handler invoked", extra={"accept": accept, "wants_json": wants_json, "path": path, "is_api_path": is_api_path})
+    if exc.status_code == 404 and not is_api_path:
+            try:
+                converters = ConverterDataService(Path("app/data/converters")).list_popular_converters()
+            except Exception:
+                converters = []
+            meta = {"title": "Page Not Found", "description": "The requested page could not be found.", "robots": "noindex,follow"}
+            try:
+                # Provide translation helper and locale context to the template.
+                locale_data = language_manager.load_locale(
+                    accept_language=request.headers.get("accept-language"),
+                    lang_query=request.query_params.get("lang"),
+                )
+
+                def t(key: str, default: str = "") -> str:
+                    return language_manager.translate(locale_data, key, default)
+
+                tpl = templates.env.get_template("pages/404.html")
+                content = tpl.render(request=request, meta=meta, popular_converters=converters, t=t)
+                return HTMLResponse(content, status_code=404)
+            except Exception as render_exc:
+                logger.exception("Failed to render 404 template", extra={"error": str(render_exc)})
+                # Fallback to JSON error if template rendering fails
+                return build_error_response(
+                    request,
+                    status_code=404,
+                    content=exc.detail,
+                    headers=dict(exc.headers or {}),
+                )
+
     return build_error_response(
         request,
         status_code=exc.status_code,
         content=exc.detail,
         headers=dict(exc.headers or {}),
     )
+
+
+@app.exception_handler(StarletteHTTPException)
+async def correlated_starlette_http_exception_handler(request: Request, exc: StarletteHTTPException) -> JSONResponse:
+    # Delegate to the same behavior as FastAPI HTTPException handler for consistency.
+    return await correlated_http_exception_handler(request, exc)
 
 
 @app.exception_handler(Exception)
@@ -484,15 +527,14 @@ app.mount(
 )
 
 
-app.include_router(seo_router)
+app.include_router(home_router)
 app.include_router(comparison_router)
 app.include_router(formats_router)
+app.include_router(dashboard_router)
 app.include_router(tools_router)
 app.include_router(learning_router)
-app.include_router(dashboard_router)
-app.include_router(home_router)
+app.include_router(seo_router)
 app.include_router(upload_router)
 app.include_router(convert_router)
 app.include_router(recommend_router)
-app.include_router(plugins_router)
 

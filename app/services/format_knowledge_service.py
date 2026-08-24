@@ -13,22 +13,36 @@ class FormatKnowledgeService:
     def __init__(self, format_knowledge_dir: Path | str | None = None) -> None:
         self.format_knowledge_dir = Path(format_knowledge_dir or "app/data/format_knowledge")
 
+    def get_format_knowledge(self, format_name: str) -> dict[str, Any] | None:
+        normalized = str(format_name or "").strip().lower()
+        if not normalized:
+            return None
+
+        file_path = self.format_knowledge_dir / f"{normalized}.json"
+        if not file_path.exists():
+            return None
+
+        try:
+            payload = self._load_json(file_path)
+        except (OSError, ValueError):
+            return None
+
+        if not isinstance(payload, dict):
+            return None
+
+        if validate_format_knowledge(payload):
+            return None
+
+        return payload
+
     def build_enrichment(self, format_name: str) -> dict[str, Any] | None:
         normalized = str(format_name or "").strip().lower()
         if not normalized:
             raise ValueError("format_name is required")
 
-        file_path = self.format_knowledge_dir / f"{normalized}.json"
-        if not file_path.exists():
-            raise OSError(f"Format knowledge file not found: {file_path}")
-
-        payload = self._load_json(file_path)
-        if not isinstance(payload, dict):
-            raise ValueError("Format knowledge payload must be an object")
-
-        errors = validate_format_knowledge(payload)
-        if errors:
-            raise ValueError(f"Invalid format knowledge payload for '{normalized}': {errors}")
+        payload = self.get_format_knowledge(normalized)
+        if payload is None:
+            raise OSError(f"Format knowledge file not found or invalid: {normalized}")
 
         return {"format_knowledge": payload}
 

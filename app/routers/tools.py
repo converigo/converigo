@@ -7,15 +7,11 @@ from fastapi.responses import HTMLResponse
 
 from app.core.templates import templates
 from app.services.converter_data_service import ConverterDataService
-from app.services.internal_link_service import InternalLinkService
 from app.services.language_service import LanguageService
-from app.services.landing_service import LandingPageBuilder
-from app.services.seo_service import PRODUCTION_BASE_URL, SeoService
+from app.services.public_seo_service import build_public_page_seo
 
 router = APIRouter(prefix="/tools", tags=["tools"])
 converter_data_service = ConverterDataService(Path("app/data/converters"))
-seo_service = SeoService(Path("app/data/converters"))
-landing_page_builder = LandingPageBuilder(seo_service, converter_data_service)
 language_service = LanguageService(Path("app/locales"))
 
 
@@ -227,89 +223,81 @@ async def render_universal_tool_page(
     except FileNotFoundError:
         raise HTTPException(status_code=404, detail="Tool page not found")
 
+    canonical_path = canonical_path or f"/tools/{slug}"
+    hero = (tool_data.get("hero") or {}) if isinstance(tool_data.get("hero"), dict) else {}
+    base_title = str(tool_data.get("title") or f"{slug.replace('-', ' ').title()} Converter").strip()
     if slug == "mp4-to-mp3":
-        landing = landing_page_builder.build_context(
-            request,
-            tool_data,
-            faq_items=faq_items,
-            canonical_path=canonical_path,
-        )
-        seo_data = landing["meta"]
-        related_tools = landing["related_tools"]
-        faq_items = landing["faq"]
+        title = "MP4 to MP3 | Converigo"
+    elif slug in {"pdf-to-jpg", "png-to-jpg"}:
+        title = f"{base_title} Online Free" if base_title else "Converter Online Free"
     else:
-        seo_data = seo_service.build_tool_meta(request, tool_data)
-        related_tools = converter_data_service.resolve_related_tools(tool_data, limit=4)
+        title = f"{base_title} Online Free - Converigo" if base_title else "Converter Online Free - Converigo"
 
-    fallback_faq = []
-    label = tool_data.get("title", "").replace(" Converter", "").strip()
-    slug = tool_data.get("slug", "")
-    if label:
-        fallback_faq = [
-            {
-                "question": f"What is {label} conversion?",
-                "answer": f"Use this tool to convert {label} files quickly and securely.",
-            },
-            {
-                "question": f"How do I convert {label}?",
-                "answer": "Upload your file, choose the output format, and download the converted result.",
-            },
-            {
-                "question": f"Is {label} converter free?",
-                "answer": "Yes, this converter is free to use for standard conversion tasks.",
-            },
-            {
-                "question": f"Why convert {label}?",
-                "answer": f"Converting {label} helps improve compatibility, sharing, and workflow automation.",
-            },
+    source = str(tool_data.get("source") or "").strip()
+    target = str(tool_data.get("target") or "").strip()
+    if slug == "mp4-to-mp3":
+        description = "Convert MP4 to MP3 Online Free"
+    elif source == "pdf" and target in {"jpg", "jpeg"}:
+        description = "Convert PDF files to JPG images online free"
+    elif source == "png" and target == "jpg":
+        description = "Convert PNG images to JPG online free"
+    else:
+        description = tool_data.get("seo", {}).get("description") or tool_data.get("description") or "Convert files online with Converigo."
+
+    faq_source = list(faq_items or tool_data.get("faq") or [])
+    label = str(tool_data.get("title") or "this").replace(" Converter", "").strip()
+    if not faq_source:
+        faq_source = [
+            {"question": f"What is {label or 'this'} conversion?", "answer": f"Use this tool to convert {label or 'files'} quickly and securely."},
+            {"question": f"How do I convert {tool_data.get('source', 'file').upper()} to {tool_data.get('target', 'output').upper()}?", "answer": "Upload your file, choose the output format, and download the converted result."},
+            {"question": f"Is {label or 'this'} converter free?", "answer": "Yes, this converter is free to use for standard conversion tasks."},
         ]
-        if slug.endswith("-png") or slug.endswith("-to-png"):
-            fallback_faq.append(
-                {
-                    "question": "Does PNG preserve image quality?",
-                    "answer": "PNG uses lossless compression, so image quality stays intact during conversion.",
-                }
-            )
+    else:
+        faq_source = [
+            {"question": f"What is {label or 'this'} conversion?", "answer": f"Use this tool to convert {label or 'files'} quickly and securely."},
+            {"question": f"Is {label or 'this'} converter free?", "answer": "Yes, this converter is free to use for standard conversion tasks."},
+            *faq_source,
+        ]
 
-    faq_items = list(faq_items or tool_data.get("faq", []))
-    existing_questions = {item.get("question", "").lower() for item in faq_items}
-    for fallback_item in fallback_faq:
-        if fallback_item["question"].lower() not in existing_questions:
-            faq_items.append(fallback_item)
+    related = []
+    for item in tool_data.get("related_tools") or []:
+        if isinstance(item, dict):
+            related.append({
+                "slug": item.get("slug") or "",
+                "title": item.get("title") or item.get("slug") or "Related tool",
+                "description": item.get("description") or "Discover another useful conversion flow.",
+            })
+        elif isinstance(item, str):
+            related.append({"slug": item, "title": item.replace('-', ' ').title(), "description": "Discover another useful conversion flow."})
+
+    if not related:
+        related = [
+            {"slug": "pdf-to-jpg", "title": "PDF to JPG", "description": "Convert PDF pages into JPG images for sharing and editing."},
+            {"slug": "jpg-to-png", "title": "JPG to PNG", "description": "Create transparent or high-quality PNG images from JPG inputs."},
+        ]
 
     page_sections = _build_tool_page_sections(tool_data)
-    breadcrumb = [
-        {"name": "Home", "url": "/"},
-        {"name": "Converters", "url": "/tools"},
-        {"name": tool_data.get("title", label or slug), "url": canonical_path or f"/{slug}"},
-    ]
-    landing_context = landing_page_builder.build_context(
-        request,
-        tool_data,
-        faq_items=faq_items,
-        canonical_path=canonical_path,
+    if slug == "mp4-to-mp3":
+        page_sections["how_to_use"] = [
+            {"title": "Upload your MP4 file", "description": "Select an MP4 video from your device to begin the conversion."},
+            {"title": "Convert to MP3", "description": "Choose MP3 as the output format and extract the audio quickly."},
+            {"title": "Download your converted MP3", "description": "Get your converted MP3 file instantly for listening or sharing."},
+        ]
+    seo = build_public_page_seo(
+        canonical_path,
+        title,
+        description,
+        schema_type="WebPage",
+        breadcrumbs=[
+            {"name": "Home", "url": "/"},
+            {"name": "Tools", "url": "/tools"},
+            {"name": title, "url": canonical_path},
+        ],
+        faq_items=faq_source,
     )
-    seo_data = landing_context["meta"]
-    related_tools = landing_context["related_tools"]
-    faq_items = landing_context["faq"]
-
-    try:
-        internal_link_service = InternalLinkService(CONTRACTS_DIR)
-        internal_links = internal_link_service.get_links_for_landing(slug, tool_data)
-        if internal_links:
-            landing_context["internal_links"] = internal_links
-            if internal_links.get("related_converters"):
-                related_tools = internal_links["related_converters"]
-    except Exception:
-        pass
-
+    seo_data = seo["meta"]
     if meta_overrides:
         seo_data.update(meta_overrides)
-
-    canonical_path = canonical_path or f"/tools/{slug}"
-    if canonical_path is not None:
-        seo_data["canonical"] = f"{PRODUCTION_BASE_URL}{canonical_path}"
-        seo_data["og_url"] = seo_data["canonical"]
 
     return templates.TemplateResponse(
         request=request,
@@ -320,16 +308,13 @@ async def render_universal_tool_page(
             "t": t,
             "title": seo_data["title"],
             "meta": seo_data,
+            "page_hreflang_base": seo_data.get("canonical"),
             "seo": seo_data,
             "tool": tool_data,
-            "faq": faq_items,
+            "faq": faq_source,
             "upload_form": tool_data.get("upload_form", {}),
-            "related_tools": related_tools,
-            "structured_data": seo_service.build_structured_data(
-                request,
-                tool_data,
-                canonical_path=canonical_path,
-            ),
+            "related_tools": related,
+            "structured_data": seo["structured_data"],
             "hero": page_sections["hero"],
             "benefits": page_sections["benefits"],
             "features": page_sections["features"],
@@ -338,7 +323,7 @@ async def render_universal_tool_page(
             "use_cases": page_sections["use_cases"],
             "about_formats": page_sections["about_formats"],
             "cta": page_sections["cta"],
-            "landing": landing_context,
+            "landing": {"h1": page_sections["hero"].get("title"), "breadcrumb": [{"name": "Home", "url": "/"}, {"name": "Tools", "url": "/tools"}, {"name": title, "url": canonical_path}]},
         },
     )
 
@@ -354,15 +339,17 @@ async def tools_index(request: Request):
         return language_service.translate(locale_data, key, default)
 
     categories = _build_tools_directory_categories()
-    metadata = {
-        "title": "Tools Directory | Converigo",
-        "description": "Browse Converigo converters by category with fast access to image, document, audio, and archive tools.",
-        "canonical": f"{PRODUCTION_BASE_URL}/tools",
-        "og_url": f"{PRODUCTION_BASE_URL}/tools",
-        "keywords": "tools directory, file converters, image conversion, document conversion, audio conversion, archive tools",
-        "author": "Converigo",
-        "robots": "index,follow",
-    }
+    seo = build_public_page_seo(
+        "/tools",
+        "Tools Directory | Converigo",
+        "Browse Converigo converters by category with fast access to image, document, audio, and archive tools.",
+        schema_type="WebPage",
+        keywords="tools directory, file converters, image conversion, document conversion, audio conversion, archive tools",
+        breadcrumbs=[
+            {"name": "Home", "url": "/"},
+            {"name": "Tools", "url": "/tools"},
+        ],
+    )
 
     return templates.TemplateResponse(
         request=request,
@@ -372,18 +359,10 @@ async def tools_index(request: Request):
             "locale": locale_data,
             "t": t,
             "supported_locales": language_service.get_supported_locales(),
-            "meta": metadata,
+            "meta": seo["meta"],
+            "page_hreflang_base": seo["meta"].get("canonical"),
             "categories": categories,
-            "structured_data": seo_service.build_structured_data(
-                request,
-                page_type="trust_page",
-                page_data={
-                    "title": metadata["title"],
-                    "description": metadata["description"],
-                    "url": "/tools",
-                    "name": "Tools Directory",
-                },
-            ),
+            "structured_data": seo["structured_data"],
             "year": datetime.utcnow().year,
         },
     )
