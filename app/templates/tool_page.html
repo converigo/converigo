@@ -71,6 +71,46 @@
     .modern-upload .drop-zone { border: 1.5px dashed rgba(91,79,233,0.35); background: rgba(255,255,255,0.7); border-radius: 18px; padding: 28px 18px; text-align: center; }
     .modern-upload h3 { font-size: 1.2rem; }
     .modern-upload input[type="file"] { display: none; }
+    .panel-zone{max-width:900px; width:min(100%,900px); margin:0 auto 0; display:none; position:relative; z-index:2;}
+    body.has-jobs .panel-zone{display:block; margin:48px auto 12px; animation:rise .55s cubic-bezier(.2,.8,.2,1);}
+    body:not(.has-jobs) .panel-zone{display:none;}
+    .panel{background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 22px 54px -34px rgba(63,48,170,0.28);overflow:hidden;}
+    .panel-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:12px;}
+    .panel-head h2{font-size:clamp(1.8rem,2.5vw,2.6rem);margin:0;}
+    .panel-head p{margin:0;color:var(--ink-soft);}
+    .panel-toolbar{padding:14px 18px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fff,#f8f7ff);}
+    .ghost-btn,.go-btn,.solid-btn,.outline-btn,.dl-main,.icon-btn,.code-copy,.dl-caret{font:inherit;}
+    .ghost-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--ink);font-weight:700;cursor:pointer;}
+    .panel-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px;border-top:1px solid var(--line);background:#fff;}
+    .panel-footer.footer-post{display:none;}
+    .panel-footer.footer-post.show{display:flex;}
+    .footer-left{display:flex;align-items:center;gap:12px;flex-wrap:wrap;color:var(--ink-soft);font-weight:600;}
+    .fmt{padding:9px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);}
+    .go-btn{padding:12px 18px;border:none;border-radius:12px;background:var(--primary);color:#fff;font-weight:800;cursor:pointer;}
+    .go-btn:disabled{opacity:.5;cursor:not-allowed;}
+    .outline-btn,.solid-btn,.dl-main{border-radius:12px;padding:10px 14px;font-weight:700;cursor:pointer;}
+    .outline-btn{background:#fff;border:1px solid var(--line);color:var(--ink);} .solid-btn,.dl-main{background:var(--primary);color:#fff;border:none;}
+    .post-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+    .post-note{margin:0;color:var(--ink-soft);font-size:0.92rem;}
+    #rows{padding:8px 12px 0;display:grid;gap:10px;}
+    .row{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:14px 12px;border:1px solid var(--line);border-radius:16px;background:#faf9ff;}
+    .badge{display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:14px;color:#fff;font-weight:800;font-size:0.8rem;}
+    .row-info{min-width:0;}
+    .row-name{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .row-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;color:var(--ink-soft);font-size:0.78rem;}
+    .row-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;}
+    .status-pill,.converting-pill{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:999px;font-size:0.82rem;font-weight:700;background:#effbf4;color:#118b5a;}
+    .converting-pill{background:#f3efff;color:var(--primary-dark);}
+    .dl-split{display:flex;align-items:center;gap:6px;}
+    .icon-btn,.dl-caret,.code-copy{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:10px;cursor:pointer;padding:8px 10px;}
+    .icon-btn.danger{color:#c0392b;}
+    .subpanel{display:none;}
+    .subpanel.open{display:block;margin-top:10px;}
+    .subpanel-inner{padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;}
+    .code-box{display:flex;align-items:center;gap:10px;justify-content:space-between;padding:10px 12px;border-radius:10px;background:#f2f0ff;overflow:auto;}
+    .progress-track{width:100%;height:8px;border-radius:999px;background:#ece9ff;overflow:hidden;margin-top:10px;}
+    .progress-fill{display:block;height:100%;width:0;background:linear-gradient(90deg,#5b4fe9,#ff6b4a);transition:width .35s ease;}
+    .toast{position:fixed;right:24px;bottom:24px;background:#1b1730;color:#fff;border-radius:12px;padding:12px 16px;box-shadow:0 20px 46px -20px rgba(24,16,59,.5);z-index:200;}
     .modern-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; margin-top: 18px; }
     .modern-card { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 18px; box-shadow: 0 15px 40px -30px rgba(63,48,170,0.24); }
     .modern-section { padding: 28px 0; }
@@ -146,19 +186,7 @@
               <input type="file" id="fileInput" multiple hidden>
             </div>
             <div>
-              <div id="conversionArea" hidden>
-                <h4>Convert to</h4>
-                <div id="conversionInstructionText" class="format-instruction">Convert all files to:</div>
-                <input type="search" id="formatSearch" class="format-search" placeholder="Search formats" autocomplete="off" hidden aria-label="Search formats">
-                <div id="formatOptions" class="supported-formats"></div>
-                <div class="conversion-actions" id="conversionStickyBar">
-                  <div class="conversion-summary"><span class="conversion-summary-label">Convert All</span><span class="conversion-summary-value" id="conversionSummaryOutput">—</span></div>
-                  <button id="convertButton" class="primary-btn" type="button" disabled>Convert</button>
-                  <div id="convertProgress" class="progress" hidden aria-hidden="true"><div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div></div>
-                  <div id="convertMessage" class="status-text" aria-live="polite"></div>
-                  <a id="downloadBtn" class="secondary-btn" hidden download>Download</a>
-                </div>
-              </div>
+              {% include "components/conversion_results_panel.html" %}
             </div>
           </div>
         </div>
@@ -343,5 +371,339 @@
       });
     });
   </script>
+
+  <script>
+    const CATEGORY = {
+      image:    {color:'#5B4FE9', light:'#ECE9FF', targets:['JPG','PNG','WEBP','GIF','SVG','BMP'], exts:['jpg','jpeg','png','webp','gif','svg','bmp','tiff','heic']},
+      document: {color:'#FF6B4A', light:'#FFE9E2', targets:['PDF','DOCX','TXT','PPTX','XLSX','CSV','HTML'], exts:['pdf','docx','doc','txt','pptx','ppt','xlsx','xls','csv','html','md','rtf']},
+      audio:    {color:'#12B3A0', light:'#DEF7F3', targets:['MP3','WAV','OGG','FLAC','M4A'], exts:['mp3','wav','ogg','flac','m4a','aac']},
+      video:    {color:'#F59E0B', light:'#FEF3DA', targets:['MP4','MOV','WEBM','MKV','GIF'], exts:['mp4','mov','avi','webm','mkv','flv']},
+      archive:  {color:'#6C7599', light:'#E8EAF3', targets:['ZIP','RAR','7Z','TAR'], exts:['zip','rar','7z','tar','gz']},
+      other:    {color:'#9333EA', light:'#F3E8FF', targets:['PDF','JPG','PNG','TXT','ZIP'], exts:[]}
+    };
+
+    function categoryOf(ext){
+      ext = (ext || '').toLowerCase();
+      for (const key in CATEGORY) {
+        if (CATEGORY[key].exts.includes(ext)) return key;
+      }
+      return 'other';
+    }
+
+    let jobs = [];
+    let uid = 0;
+
+    function splitName(filename){
+      const idx = filename.lastIndexOf('.');
+      if (idx <= 0) return {base: filename, ext: ''};
+      return {base: filename.slice(0, idx), ext: filename.slice(idx + 1)};
+    }
+
+    function fmtSize(bytes){
+      if (bytes < 1024) return bytes + ' B';
+      const kb = bytes / 1024;
+      if (kb < 1024) return kb.toFixed(2) + ' KB';
+      return (kb / 1024).toFixed(2) + ' MB';
+    }
+
+    function esc(s){ return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+    function toast(msg, icon){
+      const host = document.getElementById('toastHost');
+      if (!host) return;
+      const el = document.createElement('div');
+      el.className = 'toast';
+      el.innerHTML = (icon || '✔️') + ' ' + msg;
+      host.appendChild(el);
+      setTimeout(() => el.remove(), 2700);
+    }
+
+    function badgeStyle(cat){ return 'background:' + CATEGORY[cat].color + ';'; }
+
+    function rowTemplate(job){
+      const cat = CATEGORY[job.category];
+      let rightHTML = '';
+
+      if (job.status === 'pending') {
+        rightHTML = `
+          <select class="fmt" data-action="target" data-id="${job.id}">
+            ${cat.targets.map(t => `<option value="${t}" ${t === job.target ? 'selected' : ''}>${t}</option>`).join('')}
+          </select>
+          <button class="icon-btn" data-action="settings" data-id="${job.id}" title="Pengaturan" aria-label="Pengaturan">⚙️</button>
+          <button class="icon-btn" data-action="code" data-id="${job.id}" title="Lihat API" aria-label="Lihat API">&lt;/&gt;</button>
+          <button class="icon-btn danger" data-action="remove" data-id="${job.id}" title="Hapus" aria-label="Hapus">✖</button>`;
+      } else if (job.status === 'processing' || job.status === 'converting') {
+        rightHTML = `<div class="converting-pill"><span class="spin"></span>Mengonversi…</div>
+          <button class="icon-btn danger" data-action="remove" data-id="${job.id}" title="Hapus" aria-label="Hapus">✖</button>`;
+      } else {
+        rightHTML = `
+          <div class="status-pill">✔️ Selesai</div>
+          <div class="dl-split">
+            <button class="dl-main" data-action="download" data-id="${job.id}">⬇️ Unduh</button>
+            <button class="dl-caret" data-action="settings" data-id="${job.id}" aria-label="Opsi unduh">▾</button>
+          </div>
+          <button class="icon-btn danger" data-action="remove" data-id="${job.id}" title="Hapus" aria-label="Hapus">✖</button>`;
+      }
+
+      const progressHTML = job.status === 'converting' || job.status === 'processing'
+        ? `<div class="progress-track"><div class="progress-fill" id="fill-${job.id}"></div></div>` : '';
+
+      const sub = `
+        <div class="subpanel ${job.settingsOpen ? 'open' : ''}" data-sub="settings-${job.id}">
+          <div class="subpanel-inner">
+            <label>Kualitas Output: <b>${job.quality}%</b></label>
+            <input type="range" min="10" max="100" value="${job.quality}" data-action="quality" data-id="${job.id}">
+          </div>
+        </div>
+        <div class="subpanel ${job.codeOpen ? 'open' : ''}" data-sub="code-${job.id}">
+          <div class="subpanel-inner" style="display:block;">
+            <div class="code-box">curl -X POST https://api.ubah.in/v1/convert \\
+  -F "file=@${job.name}" \\
+  -F "target=${job.target.toLowerCase()}"<button class="code-copy" data-action="copy" data-id="${job.id}">Salin</button></div>
+          </div>
+        </div>`;
+
+      return `
+        <div class="row" data-row="${job.id}">
+          <div class="badge" style="${badgeStyle(job.category)}">${job.ext.slice(0, 4)}</div>
+          <div class="row-info">
+            <div class="row-name">${esc(job.name)}</div>
+            <div class="row-meta">
+              <span>${fmtSize(job.size)}</span>
+              <span class="arrow-tag">${job.ext} → <b>${job.status === 'done' ? job.target : job.target}</b></span>
+            </div>
+          </div>
+          <div class="row-controls">${rightHTML}</div>
+          ${progressHTML}
+        </div>
+        ${sub}
+      `;
+    }
+
+    function render(){
+      const rowsEl = document.getElementById('rows');
+      if (!rowsEl) return;
+      rowsEl.innerHTML = jobs.map(rowTemplate).join('');
+
+      const allDone = jobs.length > 0 && jobs.every(j => j.status === 'done');
+      const pending = jobs.filter(j => j.status !== 'done');
+
+      const footerPre = document.getElementById('footerPre');
+      const footerPost = document.getElementById('footerPost');
+      if (footerPre) footerPre.style.display = allDone ? 'none' : 'flex';
+      if (footerPost) footerPost.classList.toggle('show', allDone);
+
+      const pendingCountEl = document.getElementById('pendingCount');
+      if (pendingCountEl) pendingCountEl.textContent = pending.length;
+
+      const goBtn = document.getElementById('goBtn');
+      if (goBtn) goBtn.disabled = pending.length === 0 || jobs.some(j => j.status === 'converting' || j.status === 'processing');
+
+      jobs.filter(j => j.status === 'converting').forEach(j => {
+        const fill = document.getElementById('fill-' + j.id);
+        if (fill) {
+          requestAnimationFrame(() => {
+            fill.style.transitionDuration = j._duration + 'ms';
+            fill.style.width = '100%';
+          });
+        }
+      });
+
+      buildGlobalFmt();
+    }
+
+    function buildGlobalFmt(){
+      const sel = document.getElementById('globalFmt');
+      const label = document.getElementById('footerLabel');
+      if (!sel || !label) return;
+      const pending = jobs.filter(j => j.status !== 'done');
+      const pendingTargets = [...new Set(pending.map(j => j.target))];
+      const sameTarget = pending.length > 0 && pendingTargets.length === 1;
+
+      if (sameTarget) {
+        const cats = [...new Set(pending.map(j => j.category))];
+        let opts = [];
+        if (cats.length === 1) {
+          opts = CATEGORY[cats[0]].targets;
+        } else {
+          opts = ['JPG','PNG','PDF','MP3','MP4','ZIP'];
+        }
+        const current = sel.value;
+        sel.innerHTML = opts.map(t => `<option value="${t}">${t}</option>`).join('');
+        if (opts.includes(current)) sel.value = current;
+        label.innerHTML = `${window.translate ? window.translate('upload.conversion_instruction', 'Convert all files to:') : 'Convert all files to:'} (<span id="pendingCount">${pending.length}</span>)`;
+        sel.style.display = '';
+      } else {
+        sel.innerHTML = '';
+        sel.style.display = 'none';
+        label.innerHTML = `${window.translate ? window.translate('upload.conversion_instruction', 'Convert all files to:') : 'Convert all files to:'} (<span id="pendingCount">${pending.length}</span>)`;
+      }
+    }
+
+    function convertAll(){
+      const pending = jobs.filter(j => j.status === 'pending');
+      if (!pending.length) return;
+      pending.forEach((j, i) => {
+        j._duration = 900 + Math.random() * 1400;
+        setTimeout(() => {
+          j.status = 'processing';
+          render();
+          setTimeout(() => {
+            j.status = 'converting';
+            render();
+            setTimeout(() => {
+              j.status = 'done';
+              render();
+            }, j._duration + 60);
+          }, 180);
+        }, i * 160);
+      });
+    }
+
+    function convertedBlobName(job){
+      const {base} = splitName(job.name);
+      return base + '.' + job.target.toLowerCase();
+    }
+
+    function downloadJob(job){
+      const url = URL.createObjectURL(job.file);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = convertedBlobName(job);
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
+      toast('Mengunduh ' + convertedBlobName(job));
+    }
+
+    async function downloadAll(){
+      const done = jobs.filter(j => j.status === 'done');
+      if (!done.length) return;
+      if (done.length === 1) { downloadJob(done[0]); return; }
+      toast('Menyiapkan ZIP…', '⏳');
+      const zip = new JSZip();
+      for (const j of done) {
+        const buf = await j.file.arrayBuffer();
+        zip.file(convertedBlobName(j), buf);
+      }
+      const blob = await zip.generateAsync({type: 'blob'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'converigo-hasil-konversi.zip';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
+      toast('Unduhan ZIP dimulai');
+    }
+
+    function resetAll(){
+      jobs = [];
+      document.body.classList.remove('has-jobs');
+      render();
+    }
+
+    function addFiles(fileList){
+      const files = Array.from(fileList || []).slice(0, 50);
+      if (!files.length) return;
+
+      if (window.uploadManager && typeof window.uploadManager.handleFiles === 'function') {
+        try {
+          window.uploadManager.handleFiles(files);
+        } catch (error) {
+          console.warn('uploadManager bridge failed:', error);
+        }
+      }
+
+      files.forEach(file => {
+        const {ext} = splitName(file.name);
+        const cat = categoryOf(ext);
+        const targets = CATEGORY[cat].targets;
+        let target = targets.find(t => t.toLowerCase() !== ext.toLowerCase()) || targets[0];
+        jobs.push({
+          id: 'j' + (uid++),
+          file, name: file.name, size: file.size, ext: ext.toUpperCase() || 'FILE',
+          category: cat, target, status: 'pending', progress: 0, settingsOpen: false, codeOpen: false, quality: 80
+        });
+      });
+      document.body.classList.add('has-jobs');
+      render();
+      toast(files.length + ' file ditambahkan');
+    }
+
+    document.getElementById('rows')?.addEventListener('click', e => {
+      const btn = e.target.closest('[data-action]');
+      if (!btn) return;
+      const id = btn.dataset.id;
+      const job = jobs.find(j => j.id === id);
+      if (!job) return;
+      const action = btn.dataset.action;
+
+      if (action === 'remove') {
+        jobs = jobs.filter(j => j.id !== id);
+        if (!jobs.length) document.body.classList.remove('has-jobs');
+        render();
+      } else if (action === 'settings') {
+        job.settingsOpen = !job.settingsOpen;
+        job.codeOpen = false;
+        render();
+      } else if (action === 'code') {
+        job.codeOpen = !job.codeOpen;
+        job.settingsOpen = false;
+        render();
+      } else if (action === 'download') {
+        downloadJob(job);
+      } else if (action === 'copy') {
+        const code = `curl -X POST https://api.ubah.in/v1/convert -F "file=@${job.name}" -F "target=${job.target.toLowerCase()}"`;
+        navigator.clipboard?.writeText(code);
+        toast('Perintah disalin ke clipboard');
+      }
+    });
+
+    document.getElementById('rows')?.addEventListener('change', e => {
+      const el = e.target.closest('[data-action]');
+      if (!el) return;
+      const id = el.dataset.id;
+      const job = jobs.find(j => j.id === id);
+      if (!job) return;
+      if (el.dataset.action === 'target') { job.target = el.value; render(); }
+    });
+
+    document.getElementById('rows')?.addEventListener('input', e => {
+      const el = e.target.closest('[data-action="quality"]');
+      if (!el) return;
+      const job = jobs.find(j => j.id === el.dataset.id);
+      if (!job) return;
+      job.quality = el.value;
+      const label = el.closest('.subpanel-inner').querySelector('label b');
+      if (label) label.textContent = el.value + '%';
+    });
+
+    document.getElementById('goBtn')?.addEventListener('click', convertAll);
+    document.getElementById('newBtn')?.addEventListener('click', resetAll);
+    document.getElementById('dlAllBtn')?.addEventListener('click', downloadAll);
+    document.getElementById('addMoreBtn')?.addEventListener('click', () => document.getElementById('fileInput')?.click());
+
+    const fileInput = document.getElementById('fileInput');
+    const chooseFileButton = document.getElementById('chooseFile');
+    if (chooseFileButton && fileInput) {
+      chooseFileButton.addEventListener('click', (e) => { e.stopPropagation(); fileInput.value = ''; fileInput.click(); });
+    }
+
+    fileInput?.addEventListener('change', (e) => {
+      const files = e.target.files;
+      if (files && files.length) {
+        addFiles(files);
+        e.target.value = '';
+      }
+    });
+  </script>
+
+  <script src="/static/js/config.js"></script>
+  <script src="/static/js/app.js"></script>
+  <script src="/static/js/api/plugin_api.js"></script>
+  <script src="/static/js/ui/button_renderer.js"></script>
+  <script src="/static/js/upload/upload_manager.js"></script>
+  <script src="/static/js/recommendation/recommendation_manager.js"></script>
+  <script src="/static/js/download/download_manager.js"></script>
+  <script src="/static/js/convert/converter.js"></script>
 </body>
 </html>
