@@ -34,6 +34,12 @@ class RecommendationManager {
         this.convertButton = document.getElementById("convertButton");
         this.formatSearch = document.getElementById("formatSearch");
         this.selectedFormat = null;
+
+        if (!this.formatContainer && !this.conversionArea) {
+            console.warn("RecommendationManager: formatOptions/conversionArea not present on this page; homepage quick-picker has been removed.");
+            return;
+        }
+
         this._bindSearch();
     }
 
@@ -89,22 +95,17 @@ class RecommendationManager {
 
     renderFormats(data){
 
+        const liveContainer = document.getElementById('formatOptions');
 
-
-        if(!this.formatContainer){
-
+        if(!liveContainer){
             console.warn(
-                "formatOptions missing"
+                "formatOptions missing - skipping renderFormats on this page"
             );
-
+            this.formatContainer = null;
             return;
-
         }
 
-
-
-
-
+        this.formatContainer = liveContainer;
         this.formatContainer.innerHTML = "";
 
 
@@ -203,13 +204,17 @@ class RecommendationManager {
                     .forEach(
                         btn => btn.classList.remove("active")
                     );
+                        // Defensive: ensure the live DOM contains the container we will append to.
+                        const container = document.getElementById('formatOptions');
+                        if (!container) {
+                            console.warn('formatOptions element not present - skipping renderFormats');
+                            this.formatContainer = null;
+                            return;
+                        }
+                        // sync internal reference and clear existing content
+                        this.formatContainer = container;
 
-
-
-                    // preserve previous behaviour
                     button.classList.add('active');
-
-
 
                     this.selectedFormat = option.target;
 
