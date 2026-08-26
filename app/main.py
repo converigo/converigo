@@ -14,6 +14,7 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Request
+from fastapi.exceptions import RequestValidationError
 from fastapi.responses import FileResponse, JSONResponse, PlainTextResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.datastructures import MutableHeaders
@@ -325,6 +326,28 @@ app.add_exception_handler(
     UnsupportedConversionError,
     unsupported_conversion_exception_handler,
 )
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    # For validation errors, log the error details and request headers only.
+    # Avoid reading or logging the raw request body to prevent recording uploaded file contents.
+    logger.warning(
+        "Request validation error: %s",
+        exc.errors(),
+        extra={
+            "path": request.url.path,
+            "method": request.method,
+            "content_length": request.headers.get("content-length"),
+            "headers": {k: v for k, v in request.headers.items() if k.lower() != "authorization"},
+        },
+    )
+    request.state.error_code = "VALIDATION_ERROR"
+    return build_error_response(
+        request,
+        status_code=422,
+        content={"code": "VALIDATION_ERROR", "message": str(exc.errors())},
+    )
 
 
 @app.exception_handler(HTTPException)

@@ -39,6 +39,18 @@ outputs/
 *.swo
 *~
 
+# Phase A audit artifacts (temporary, not part of Phase B patch)
+audit_phase_a_matrix.py
+PHASE_A_MASTER_MATRIX.md
+*_capture*.txt
+*_verification.png
+routes_output.txt
+list_routes.py
+verify_prod_live.py
+scripts/pw_*.py
+tests/assets/scope_*
+tests/sample.csv
+
 # Temporary artifacts and generated media
 tmp_*
 tmp*/

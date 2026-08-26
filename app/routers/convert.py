@@ -78,15 +78,11 @@ async def convert_file(
 
     file: List[UploadFile] = File(...),
 
-    target_format: str = Form(...)
-
 ):
 
 
     tracker = ConversionTracker(request)
     tracker.observe_queue()
-
-    logger.info("Convert request received: files=%d target=%s", len(file), target_format)
 
     tracker.start("validation")
 
@@ -97,11 +93,49 @@ async def convert_file(
 
     tracker.finish("validation")
 
-    target_format = target_format.lower().strip()
+    # Read form fields manually to support multipart uploads with arbitrary fields
+    form = await request.form()
+    # Debug: log form keys and simple summaries to diagnose malformed multipart bodies
+    try:
+        form_summary = {k: ("<file>" if hasattr(v, "filename") else str(v)[:200]) for k, v in form.items()}
+        logger.debug("Convert form fields: %s", form_summary)
+    except Exception:
+        logger.debug("Convert form fields: <unserializable>")
+    target_format = (form.get('target_format') or '')
+    target_format = target_format.lower().strip() if target_format else ''
+    parsed_targets = None
+    # Strict validation: if `targets` present it MUST be a JSON array
+    if 'targets' in form:
+        try:
+            import json
+
+            parsed_targets = json.loads(form.get('targets'))
+        except Exception:
+            request.state.error_code = "INVALID_TARGETS"
+            tracker.fail("validation", request.state.error_code)
+            raise HTTPException(status_code=400, detail="targets must be a valid JSON array")
+
+        if not isinstance(parsed_targets, list):
+            request.state.error_code = "INVALID_TARGETS"
+            tracker.fail("validation", request.state.error_code)
+            raise HTTPException(status_code=400, detail="targets must be a valid JSON array")
+
+        # Ensure list length matches number of uploaded files
+        if len(parsed_targets) != len(file):
+            request.state.error_code = "INVALID_TARGETS_LENGTH"
+            tracker.fail("validation", request.state.error_code)
+            raise HTTPException(status_code=400, detail="targets length must match number of files")
+
+    # If no `targets` array was provided, ensure there's at least a legacy `target_format` value
+    if 'targets' not in form and not target_format:
+        request.state.error_code = "NO_TARGET_SPECIFIED"
+        tracker.fail("validation", request.state.error_code)
+        raise HTTPException(status_code=400, detail="no target format specified")
+
     analytics_service.track_conversion_start(
         request,
         page_path=request.url.path,
-        target_format=target_format,
+        target_format=(target_format or ""),
         event_status="started",
     )
     
@@ -111,16 +145,19 @@ async def convert_file(
     results = []
     saved_paths = []
 
+    # Log high-level request info after we've parsed form fields
+    logger.info("Convert request received: files=%d target=%s targets=%s", len(file), target_format, '[masked]' if parsed_targets else None)
+
     try:
-        # Process each file
-        for uploaded_file in file:
+        # Process each file independently; determine per-file target from `parsed_targets` or fallback to `target_format`
+        for idx, uploaded_file in enumerate(file):
             saved_path: Path | None = None
             try:
                 tracker.start("upload")
                 saved_path = await upload_service.process_upload(uploaded_file)
                 tracker.finish("upload")
                 saved_paths.append(saved_path)
-                
+
                 source_format = (
                     Path(saved_path)
                     .suffix
@@ -128,36 +165,53 @@ async def convert_file(
                     .lower()
                 )
 
-                # [CONVERTER_DEBUG] — log converter selection and upload path
+                # Determine this file's target format
+                this_target = None
+                if parsed_targets and idx < len(parsed_targets):
+                    this_target = (str(parsed_targets[idx]) or '').lower().strip()
+                elif target_format:
+                    this_target = target_format
+                else:
+                    this_target = ''
+
+                if not this_target:
+                    # No target provided for this file; mark as failed
+                    results.append({
+                        "filename": uploaded_file.filename,
+                        "status": "failed",
+                        "error": "NO_TARGET_SPECIFIED",
+                        "conversion_id": tracker.conversion_id,
+                    })
+                    continue
+
+                # Resolve plugin for this specific pair. If unsupported, record failed result and continue.
                 try:
-                    plugin = registry.get_plugin(source_format, target_format)
+                    plugin = registry.get_plugin(source_format, this_target)
                     slug = getattr(plugin, "slug", None)
-                except Exception:
-                    slug = None
-
-                tracker.set_converter(slug or f"{source_format}-to-{target_format}")
-
-                logger.info(
-                    "[CONVERTER_DEBUG] Request: converter_slug=%s source_format=%s target_format=%s upload_path=%s",
-                    slug,
-                    source_format,
-                    target_format,
-                    str(saved_path),
-                )
-
-                try:
-                    registry.get_plugin(
-                        source_format,
-                        target_format
+                except ValueError:
+                    analytics_service.track_conversion_failed(
+                        request,
+                        page_path=request.url.path,
+                        converter_name=f"{source_format}-to-{this_target}",
+                        output_format=this_target,
+                        error_type="UNSUPPORTED_CONVERSION",
+                        event_status="failure",
                     )
-                except ValueError as exc:
-                    request.state.error_code = "UNSUPPORTED_CONVERSION"
-                    raise UnsupportedConversionError(source_format, target_format) from exc
+                    results.append({
+                        "filename": uploaded_file.filename,
+                        "status": "failed",
+                        "error": "UNSUPPORTED_CONVERSION",
+                        "target_format": this_target,
+                        "conversion_id": tracker.conversion_id,
+                    })
+                    continue
+
+                tracker.set_converter(slug or f"{source_format}-to-{this_target}")
 
                 tracker.start("conversion")
                 output_path = await conversion_service.convert_file(
                     saved_path,
-                    target_format,
+                    this_target,
                     conversion_id=tracker.conversion_id,
                 )
                 tracker.finish("conversion")
@@ -177,9 +231,9 @@ async def convert_file(
                 analytics_service.track_conversion_success(
                     request,
                     page_path=request.url.path,
-                    converter_name=tracker.converter or f"{source_format}-to-{target_format}",
+                    converter_name=tracker.converter or f"{source_format}-to-{this_target}",
                     category=str(getattr(request.state, "converter", "converter") or "converter"),
-                    output_format=target_format,
+                    output_format=this_target,
                     event_status="success",
                     processing_ms=processing_ms,
                 )
@@ -188,20 +242,27 @@ async def convert_file(
                     "filename": output_path.name,
                     "download_path": download_path,
                     "status": "success",
+                    "target_format": this_target,
                     "conversion_id": tracker.conversion_id,
                 })
 
             except UnsupportedConversionError:
+                # In practice we avoid raising UnsupportedConversionError earlier; but handle defensively
                 tracker.fail("conversion", "UNSUPPORTED_CONVERSION")
                 analytics_service.track_conversion_failed(
                     request,
                     page_path=request.url.path,
                     converter_name=tracker.converter or f"{Path(uploaded_file.filename or 'file').suffix.lstrip('.') or 'file'}-to-{target_format}",
-                    output_format=target_format,
+                    output_format=(target_format or ""),
                     error_type="UNSUPPORTED_CONVERSION",
                     event_status="failure",
                 )
-                raise
+                results.append({
+                    "filename": uploaded_file.filename,
+                    "status": "failed",
+                    "error": "UNSUPPORTED_CONVERSION",
+                    "conversion_id": tracker.conversion_id,
+                })
             except (UploadError, ConversionError) as exc:
                 request.state.error_code = normalize_error_code(type(exc).__name__, fallback="CONVERSION_FAILED")
                 if isinstance(exc, UploadError):
@@ -212,7 +273,7 @@ async def convert_file(
                     request,
                     page_path=request.url.path,
                     converter_name=tracker.converter or f"{Path(uploaded_file.filename or 'file').suffix.lstrip('.') or 'file'}-to-{target_format}",
-                    output_format=target_format,
+                    output_format=(this_target if 'this_target' in locals() else (target_format or '')),
                     error_type=request.state.error_code,
                     event_status="failure",
                 )
@@ -229,14 +290,16 @@ async def convert_file(
         if len(file) == 1 and len(results) == 1:
             result = results[0]
             result["status"] = "success" if result["status"] == "success" else "failed"
-            result["target_format"] = target_format
+            # Keep compatibility: report the explicit target for single-file responses
+            result_target = result.get("target_format") or target_format
+            result["target_format"] = result_target
             if result["status"] == "failed":
                 request.state.error_code = normalize_error_code(result.get("error"), fallback="CONVERSION_FAILED")
                 analytics_service.track_conversion_failed(
                     request,
                     page_path=request.url.path,
                     converter_name=tracker.converter or f"{Path(file[0].filename or 'file').suffix.lstrip('.') or 'file'}-to-{target_format}",
-                    output_format=target_format,
+                    output_format=result.get("target_format") or (target_format or ''),
                     error_type=request.state.error_code,
                     event_status="failure",
                 )
@@ -254,7 +317,7 @@ async def convert_file(
             "results": results,
             "total": len(file),
             "successful": sum(1 for r in results if r["status"] == "success"),
-            "target_format": target_format,
+            "target_formats": [r.get("target_format") for r in results],
         }
 
     except HTTPException:
