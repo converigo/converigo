@@ -4,6 +4,7 @@ Author  : Pico Lala & ChatGPT
 Version : 2.0.0
 """
 
+import logging
 from datetime import datetime
 from pathlib import Path
 
@@ -17,6 +18,7 @@ from app.services.language_service import LanguageService
 from app.services.seo_service import PRODUCTION_BASE_URL, SeoService
 from app.routers.tools import render_universal_tool_page
 
+logger = logging.getLogger(__name__)
 router = APIRouter()
 
 RESERVED_PATHS = {
@@ -152,6 +154,21 @@ async def home(request: Request):
     locale_data, t, supported_locales = _get_locale_context(request)
     metadata = seo_service.build_home_meta(request)
 
+    # IMPORTANT: Phase B uses the frozen Phase A audit snapshot as the source of truth for
+    # which source->target pairs are allowed in the UI. This is intentionally NOT re-derived
+    # from the live plugin registry on every request. If registry plugins change later, the
+    # audit snapshot must be regenerated manually by rerunning `audit_phase_a_matrix.py` and
+    # refreshing the JSON snapshot used here.
+    matrix_path = Path(__file__).resolve().parents[1] / "data" / "phase_a_matrix.json"
+    phase_a_matrix = []
+    if matrix_path.exists():
+        try:
+            phase_a_matrix = __import__("json").loads(matrix_path.read_text(encoding="utf-8"))
+        except Exception:
+            phase_a_matrix = []
+    else:
+        logger.warning("Phase A matrix snapshot missing at %s; fail-closed UI filtering is enabled.", matrix_path)
+
     return templates.TemplateResponse(
         request=request,
         name="main/converigo_main.html",
@@ -161,6 +178,7 @@ async def home(request: Request):
             "t": t,
             "supported_locales": supported_locales,
             "meta": metadata,
+            "phase_a_matrix": phase_a_matrix,
             "structured_data": seo_service.build_structured_data(
                 request,
                 page_data={
