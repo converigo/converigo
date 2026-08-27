@@ -1427,6 +1427,11 @@ function rowTemplate(job){
   } else if(job.status === 'processing' || job.status === 'converting'){
     rightHTML = `<div class="converting-pill"><span class="spin"></span>Mengonversi…</div>
       <button class="icon-btn danger" data-action="remove" data-id="${job.id}" title="Hapus" aria-label="Hapus">✖</button>`;
+  } else if(job.status === 'error'){
+    rightHTML = `
+      <div class="status-pill">❌ Gagal</div>
+      <div class="row-error">${esc(job.errorMessage || 'Konversi gagal')}</div>
+      <button class="icon-btn danger" data-action="remove" data-id="${job.id}" title="Hapus" aria-label="Hapus">✖</button>`;
   } else {
     rightHTML = `
       <div class="status-pill">✔️ Selesai</div>
@@ -1476,8 +1481,8 @@ function render(){
   const rowsEl = document.getElementById('rows');
   rowsEl.innerHTML = jobs.map(rowTemplate).join('');
 
-  const allDone = jobs.length>0 && jobs.every(j=>j.status==='done');
-  const pending = jobs.filter(j=>j.status!=='done');
+  const allDone = jobs.length>0 && jobs.every(j=>j.status==='done' || j.status==='error');
+  const pending = jobs.filter(j=>j.status==='pending');
 
   document.getElementById('footerPre').style.display = allDone ? 'none' : 'flex';
   document.getElementById('footerPost').classList.toggle('show', allDone);
@@ -1518,7 +1523,14 @@ function buildGlobalFmt(){
     }
     const current = sel.value;
     sel.innerHTML = opts.map(t=>`<option value="${t}">${t}</option>`).join('');
-    if(opts.includes(current)) sel.value = current;
+    if(opts.includes(current)) {
+      sel.value = current;
+    } else {
+      const sourceFormats = new Set(
+        pending.map(j => String(j.ext || '').toLowerCase().replace(/^\./, ''))
+      );
+      sel.value = opts.find(option => !sourceFormats.has(option.toLowerCase())) || opts[0];
+    }
     label.innerHTML = `${window.translate('upload.conversion_instruction', 'Convert all files to:')} (<span id="pendingCount">${pending.length}</span>)`;
     sel.style.display = '';
   } else {
@@ -1529,24 +1541,83 @@ function buildGlobalFmt(){
 }
 
 /* ---------------- conversion logic ---------------- */
+function conversionErrorMessage(data, response){
+  if(data){
+    if(typeof data === 'string') return data;
+    if(Array.isArray(data.detail)){
+      return data.detail.map(item => typeof item === 'string' ? item : item.msg || JSON.stringify(item)).join('; ');
+    }
+    if(typeof data.detail === 'string') return data.detail;
+    if(typeof data.message === 'string') return data.message;
+    if(typeof data.error === 'string') return data.error;
+    if(typeof data.code === 'string') return data.code;
+  }
+  return response.statusText || `HTTP ${response.status}`;
+}
+
+function conversionDownloadPath(data){
+  if(!data || typeof data !== 'object') return '';
+  if(typeof data.download_path === 'string' && data.download_path) {
+    return data.download_path;
+  }
+  if(Array.isArray(data.results)){
+    const result = data.results.find(item => item && typeof item.download_path === 'string' && item.download_path);
+    return result ? result.download_path : '';
+  }
+  return '';
+}
+
+async function convertJob(job, targetFormat){
+  const formData = new FormData();
+  formData.append('file', job.file);
+  formData.append('target_format', targetFormat);
+
+  try {
+    const response = await fetch('/convert', {
+      method: 'POST',
+      body: formData,
+    });
+    const data = await response.json().catch(() => null);
+
+    if(!response.ok){
+      throw new Error(conversionErrorMessage(data, response));
+    }
+
+    const downloadPath = conversionDownloadPath(data);
+    if(!downloadPath){
+      throw new Error('Conversion response did not include download_path');
+    }
+
+    job.downloadPath = downloadPath;
+    job.status = 'done';
+    job.errorMessage = '';
+  } catch(error) {
+    job.status = 'error';
+    job.errorMessage = error && error.message ? error.message : String(error);
+    job.downloadPath = '';
+  }
+  render();
+}
+
 function convertAll(){
   const pending = jobs.filter(j=>j.status==='pending');
   if(!pending.length) return;
-  pending.forEach((j, i)=>{
-    j._duration = 900 + Math.random()*1400;
-    setTimeout(()=>{
-      j.status = 'processing';
-      render();
-      setTimeout(()=>{
-        j.status = 'converting';
-        render();
-        setTimeout(()=>{
-          j.status = 'done';
-          render();
-        }, j._duration + 60);
-      }, 180);
-    }, i * 160);
+
+  const globalFormat = document.getElementById('globalFmt');
+  const requests = pending.map(job => {
+    const row = document.querySelector(`[data-row="${job.id}"]`);
+    const rowFormat = row?.querySelector('select.fmt')?.value || job.target;
+    const targetFormat = globalFormat?.offsetParent !== null && globalFormat?.value
+      ? globalFormat.value
+      : rowFormat;
+
+    job.target = targetFormat;
+    job.status = 'processing';
+    return {job, targetFormat};
   });
+
+  render();
+  Promise.all(requests.map(({job, targetFormat}) => convertJob(job, targetFormat)));
 }
 
 /* ---------------- download ---------------- */
@@ -1554,8 +1625,17 @@ function convertedBlobName(job){
   const {base} = splitName(job.name);
   return base + '.' + job.target.toLowerCase();
 }
-function downloadJob(job){
-  const url = URL.createObjectURL(job.file);
+async function downloadJob(job){
+  if(!job.downloadPath) return;
+
+  const response = await fetch(job.downloadPath);
+  if(!response.ok){
+    toast('Unduhan gagal', '❌');
+    return;
+  }
+
+  const blob = await response.blob();
+  const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
   a.download = convertedBlobName(job);

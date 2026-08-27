@@ -2,11 +2,20 @@ import os
 import socket
 import subprocess
 import sys
+import threading
 import time
 import urllib.request
 from pathlib import Path
 
 import pytest
+
+
+def _drain_subprocess_output(stream, log_path: Path) -> None:
+    log_path.parent.mkdir(parents=True, exist_ok=True)
+    with log_path.open("a", encoding="utf-8") as log_file:
+        for line in iter(stream.readline, ""):
+            log_file.write(line)
+            log_file.flush()
 
 
 def _is_port_open(host_name: str, port_number: int) -> bool:
@@ -92,16 +101,27 @@ def app_server(request):
         text=True,
     )
 
+    stdout_log_path = repo_root / "tmp" / "e2e_uvicorn_stdout_debug.log"
+    if process.stdout is not None:
+        stdout_thread = threading.Thread(
+            target=_drain_subprocess_output,
+            args=(process.stdout, stdout_log_path),
+            daemon=True,
+        )
+        stdout_thread.start()
+
     try:
         for _ in range(120):
             if _is_port_open(host, port):
                 break
             if process.poll() is not None:
-                output = process.stdout.read() if process.stdout else ""
+                output = stdout_log_path.read_text(encoding="utf-8", errors="replace") \
+                    if stdout_log_path.exists() else "(no stdout captured yet)"
                 raise RuntimeError(f"Uvicorn server exited early: {output}")
             time.sleep(0.5)
         else:
-            output = process.stdout.read() if process.stdout else ""
+            output = stdout_log_path.read_text(encoding="utf-8", errors="replace") \
+                if stdout_log_path.exists() else "(no stdout captured yet)"
             raise RuntimeError(f"Uvicorn server did not become ready: {output}")
 
         yield {"host": host, "port": port, "process": process}
