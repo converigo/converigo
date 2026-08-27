@@ -188,7 +188,7 @@ async def convert_file(
                 try:
                     plugin = registry.get_plugin(source_format, this_target)
                     slug = getattr(plugin, "slug", None)
-                except ValueError:
+                except ValueError as exc:
                     analytics_service.track_conversion_failed(
                         request,
                         page_path=request.url.path,
@@ -201,6 +201,7 @@ async def convert_file(
                         "filename": uploaded_file.filename,
                         "status": "failed",
                         "error": "UNSUPPORTED_CONVERSION",
+                        "message": str(exc) or "Conversion not supported",
                         "target_format": this_target,
                         "conversion_id": tracker.conversion_id,
                     })
@@ -246,8 +247,7 @@ async def convert_file(
                     "conversion_id": tracker.conversion_id,
                 })
 
-            except UnsupportedConversionError:
-                # In practice we avoid raising UnsupportedConversionError earlier; but handle defensively
+            except UnsupportedConversionError as exc:
                 tracker.fail("conversion", "UNSUPPORTED_CONVERSION")
                 analytics_service.track_conversion_failed(
                     request,
@@ -261,6 +261,7 @@ async def convert_file(
                     "filename": uploaded_file.filename,
                     "status": "failed",
                     "error": "UNSUPPORTED_CONVERSION",
+                    "message": str(exc) or "Conversion not supported",
                     "conversion_id": tracker.conversion_id,
                 })
             except (UploadError, ConversionError) as exc:
@@ -303,9 +304,19 @@ async def convert_file(
                     error_type=request.state.error_code,
                     event_status="failure",
                 )
+                if result.get("error") == "UNSUPPORTED_CONVERSION":
+                    error_status_code = status.HTTP_422_UNPROCESSABLE_ENTITY
+                    error_detail = {
+                        "success": False,
+                        "code": "UNSUPPORTED_CONVERSION",
+                        "message": result.get("message") or "Conversion not supported",
+                    }
+                else:
+                    error_status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
+                    error_detail = result["error"]
                 raise HTTPException(
-                    status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                    detail=result["error"],
+                    status_code=error_status_code,
+                    detail=error_detail,
                 )
             result["conversion_id"] = tracker.conversion_id
             return result

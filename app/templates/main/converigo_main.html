@@ -35,57 +35,55 @@
   :root{
     --bg:#FFFFFF;
     --bg-deep:#FFFFFF;
-    if(sameTarget){
-      // If all pending targets are identical, use allowed targets for that source
-      const opts = getAllowedTargetsForJob(active[0]);
-      const current = sel.value || active[0].target;
-      sel.innerHTML = opts.map(t=>`<option value="${t}">${t}</option>`).join('');
-      if(opts.includes(current)) sel.value = current;
-      label.innerHTML = `${window.translate('upload.conversion_instruction', 'Convert all files to:')} (<span id="pendingCount">${active.length}</span>)`;
-      sel.style.display = '';
-      // No explicit selection required when all pending targets are identical
-      window._globalFmtRequiresSelection = false;
-    } else {
-      // Compute the intersection of allowed targets across all active jobs
-      const activeExts = new Set(active.map(j => (j.ext || '').toUpperCase()));
-      let intersection = null;
-      for (const j of active) {
-        try{
-          const allowed = (getAllowedTargetsForJob(j) || []).map(t => String(t).toUpperCase()).filter(Boolean);
-          // Exclude targets that are identical to a pending source extension
-          const filtered = allowed.filter(t => !activeExts.has(String(t).toUpperCase()));
-          const set = new Set(filtered);
-          if (intersection === null) {
-            intersection = set;
-          } else {
-            // intersect
-            intersection = new Set([...intersection].filter(x => set.has(x)));
-          }
-        }catch(e){ /* ignore and treat as empty */ intersection = new Set(); }
-      }
-      const opts = intersection ? Array.from(intersection) : [];
-      const placeholder = window.translate('upload.choose_format_placeholder', 'Pilih format');
-      const currentVal = sel.value || '';
-      // Always include an empty placeholder option first so sel.value === '' is valid
-      if(opts.length === 0){
-        // No common target for all files — show placeholder only and do not require global selection
-        sel.innerHTML = `<option value=\"\">${placeholder}</option>`;
-        window._globalFmtRequiresSelection = false;
-        label.innerHTML = `${window.translate('upload.conversion_instruction', 'Convert all files to:')} (<span id=\"pendingCount\">${active.length}</span>) — ${window.translate('upload.no_common_format', 'Tidak ada format yang cocok untuk semua file')}`;
-      } else {
-        sel.innerHTML = `<option value=\"\">${placeholder}</option>` + opts.map(t=>`<option value=\"${t}\">${t}</option>`).join('');
-        if(currentVal && opts.includes(currentVal)){
-          sel.value = currentVal;
-        } else {
-          sel.value = '';
-        }
-        // When multiple different per-row targets exist but there is an intersection,
-        // require explicit global selection to apply to all files.
-        window._globalFmtRequiresSelection = true;
-        label.innerHTML = `${window.translate('upload.conversion_instruction', 'Convert all files to:')} (<span id=\"pendingCount\">${active.length}</span>) — ${window.translate('upload.choose_format_prompt', 'Pilih format untuk semua file')}`;
-      }
-      sel.style.display = '';
-    }
+    --surface:#FFFFFF;
+    --ink:#1C1832;
+    --ink-soft:#6C6690;
+    --ink-faint:#A7A1C7;
+    --primary:#5B4FE9;
+    --primary-dark:#4335C7;
+    --primary-light:#ECE9FF;
+    --coral:#FF6B4A;
+    --coral-light:#FFE9E2;
+    --teal:#12B3A0;
+    --teal-light:#DEF7F3;
+    --amber:#F59E0B;
+    --amber-light:#FEF3DA;
+    --slate:#6C7599;
+    --slate-light:#E8EAF3;
+    --success:#1FAE63;
+    --danger:#E14B4B;
+    --line:#E6E1FB;
+    --shadow-lg:0 30px 70px -25px rgba(56,42,168,.35);
+    --shadow-sm:0 8px 20px -10px rgba(56,42,168,.25);
+    --radius:20px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:#FFFFFF;
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{font-family:'Space Grotesk',sans-serif;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{color:inherit;}
+  button{font-family:inherit;}
+  :focus-visible{outline:2.5px solid var(--primary-dark); outline-offset:2px; border-radius:6px;}
+
+  /* ---------- layout shells ---------- */
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+  @media (max-width:640px){ .wrap{padding:0 18px;} }
+
+  /* ---------- nav ---------- */
+  nav.topnav{
+    position:sticky; top:0; z-index:50;
+    background:#FFFFFF;
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:16px 32px; max-width:1180px; margin:0 auto;}
   .brand{display:inline-flex; align-items:center; gap:14px; font-family:'Space Grotesk'; font-weight:800; font-size:20px; letter-spacing:0.01em; color:var(--ink); text-decoration:none; cursor:pointer; transition:opacity .18s ease;}
   .brand:hover, .brand:focus-visible{opacity:.85;}
   .brand:focus-visible{outline:2px solid var(--primary-dark); outline-offset:4px; border-radius:8px;}
@@ -1348,11 +1346,6 @@ document.addEventListener('DOMContentLoaded', () => {
 <div id="toastHost"></div>
 
 <script>
-// Phase A matrix snapshot is intentionally used as the UI capability source-of-truth.
-// This snapshot is generated by the audit script and must be refreshed manually if the
-// plugin registry changes; otherwise the UI can drift from the real runtime state.
-window.PHASE_A_MATRIX = {{ phase_a_matrix | tojson | safe }};
-
 /* ---------------- data model ---------------- */
 const CATEGORY = {
   image:    {color:'#5B4FE9', light:'#ECE9FF', targets:['JPG','PNG','WEBP','GIF','SVG','BMP'], exts:['jpg','jpeg','png','webp','gif','svg','bmp','tiff','heic']},
@@ -1362,36 +1355,6 @@ const CATEGORY = {
   archive:  {color:'#6C7599', light:'#E8EAF3', targets:['ZIP','RAR','7Z','TAR'], exts:['zip','rar','7z','tar','gz']},
   other:    {color:'#9333EA', light:'#F3E8FF', targets:['PDF','JPG','PNG','TXT','ZIP'], exts:[]}
 };
-
-function normalizeMatrixKey(value){
-  return String(value || '').trim().toUpperCase();
-}
-
-function getPhaseAKeepTargetsForSource(sourceExt){
-  const sourceKey = normalizeMatrixKey(sourceExt);
-  if (!window.PHASE_A_MATRIX || !Array.isArray(window.PHASE_A_MATRIX) || !sourceKey) {
-    return [];
-  }
-  const allowed = new Set();
-  for (const row of window.PHASE_A_MATRIX) {
-    if (normalizeMatrixKey(row.INPUT) !== sourceKey) continue;
-    if (String(row.CLASSIFICATION || '').trim().toUpperCase() !== 'KEEP') continue;
-    const target = String(row.TARGET || '').trim().toUpperCase();
-    if (target) allowed.add(target);
-  }
-  return Array.from(allowed);
-}
-
-function getAllowedTargetsForJob(job){
-  const sourceKey = normalizeMatrixKey(job.ext || job.file?.name || '');
-  const matrixTargets = getPhaseAKeepTargetsForSource(sourceKey);
-  if (Array.isArray(matrixTargets) && matrixTargets.length > 0) {
-    return matrixTargets;
-  }
-  // Fail closed: when the Phase A snapshot is missing or not usable, do not silently expose
-  // the full category fallback. This prevents a broken deploy from re-enabling invalid pairs.
-  return [];
-}
 
 function categoryOf(ext){
   ext = (ext||'').toLowerCase();
@@ -1403,7 +1366,6 @@ function categoryOf(ext){
 
 let jobs = [];
 let uid = 0;
-let conversionRequestInFlight = false;
 
 /* ---------------- helpers ---------------- */
 function splitName(filename){
@@ -1426,9 +1388,6 @@ function toast(msg, icon){
   host.appendChild(el);
   setTimeout(()=> el.remove(), 2700);
 }
-function isTerminalStatus(status){
-  return status === 'done' || status === 'failed';
-}
 
 /* ---------------- add files ---------------- */
 function addFiles(fileList){
@@ -1437,14 +1396,12 @@ function addFiles(fileList){
   files.forEach(file=>{
     const {ext} = splitName(file.name);
     const cat = categoryOf(ext);
-    const matrixTargets = getPhaseAKeepTargetsForSource(ext);
-    const allowedTargets = Array.isArray(matrixTargets) && matrixTargets.length ? matrixTargets : [];
-    let target = allowedTargets.find(t => t.toLowerCase() !== ext.toLowerCase()) || allowedTargets[0] || '';
+    const targets = CATEGORY[cat].targets;
+    let target = targets.find(t => t.toLowerCase() !== ext.toLowerCase()) || targets[0];
     jobs.push({
       id: 'j'+(uid++),
       file, name:file.name, size:file.size, ext: ext.toUpperCase() || 'FILE',
-      category:cat, target, status:'pending', progress:0, settingsOpen:false, codeOpen:false, quality:80,
-      outputFilename: '', download_path: '', conversion_id: '', error: ''
+      category:cat, target, status:'pending', progress:0, settingsOpen:false, codeOpen:false, quality:80
     });
   });
   document.body.classList.add('has-jobs');
@@ -1460,23 +1417,20 @@ function rowTemplate(job){
   let rightHTML = '';
 
   if(job.status === 'pending'){
-    const allowedTargets = getAllowedTargetsForJob(job);
-    if (!allowedTargets.includes(job.target)) {
-      job.target = allowedTargets[0] || '';
-    }
     rightHTML = `
       <select class="fmt" data-action="target" data-id="${job.id}">
-        ${allowedTargets.map(t=>`<option value="${t}" ${t===job.target?'selected':''}>${t}</option>`).join('')}
+        ${cat.targets.map(t=>`<option value="${t}" ${t===job.target?'selected':''}>${t}</option>`).join('')}
       </select>
       <button class="icon-btn" data-action="settings" data-id="${job.id}" title="Pengaturan" aria-label="Pengaturan">⚙️</button>
       <button class="icon-btn" data-action="code" data-id="${job.id}" title="Lihat API" aria-label="Lihat API">&lt;/&gt;</button>
       <button class="icon-btn danger" data-action="remove" data-id="${job.id}" title="Hapus" aria-label="Hapus">✖</button>`;
-  } else if(job.status === 'processing'){
-    rightHTML = `<div class="converting-pill"><span class="spin"></span>Memproses…</div>
+  } else if(job.status === 'processing' || job.status === 'converting'){
+    rightHTML = `<div class="converting-pill"><span class="spin"></span>Mengonversi…</div>
       <button class="icon-btn danger" data-action="remove" data-id="${job.id}" title="Hapus" aria-label="Hapus">✖</button>`;
-  } else if(job.status === 'failed'){
+  } else if(job.status === 'error'){
     rightHTML = `
-      <div class="status-pill" style="background:#FEE2E2;color:#991B1B;">❌ Gagal</div>
+      <div class="status-pill">❌ Gagal</div>
+      <div class="row-error">${esc(job.errorMessage || 'Konversi gagal')}</div>
       <button class="icon-btn danger" data-action="remove" data-id="${job.id}" title="Hapus" aria-label="Hapus">✖</button>`;
   } else {
     rightHTML = `
@@ -1488,8 +1442,8 @@ function rowTemplate(job){
       <button class="icon-btn danger" data-action="remove" data-id="${job.id}" title="Hapus" aria-label="Hapus">✖</button>`;
   }
 
-  const progressHTML = job.status === 'processing'
-    ? `<div class="progress-track"><div class="progress-fill" id="fill-${job.id}" style="width:100%"></div></div>` : '';
+  const progressHTML = job.status === 'converting' || job.status === 'processing'
+    ? `<div class="progress-track"><div class="progress-fill" id="fill-${job.id}"></div></div>` : '';
 
   const sub = `
     <div class="subpanel ${job.settingsOpen ? 'open':''}" data-sub="settings-${job.id}">
@@ -1506,8 +1460,6 @@ function rowTemplate(job){
       </div>
     </div>`;
 
-  const errorHTML = job.status === 'failed' && job.error ? `<div class="row-error" style="margin-top:8px;color:#991B1B;font-size:12px;">${esc(job.error)}</div>` : '';
-
   return `
     <div class="row" data-row="${job.id}">
       <div class="badge" style="${badgeStyle(job.category)}">${job.ext.slice(0,4)}</div>
@@ -1515,9 +1467,8 @@ function rowTemplate(job){
         <div class="row-name">${esc(job.name)}</div>
         <div class="row-meta">
           <span>${fmtSize(job.size)}</span>
-          <span class="arrow-tag">${job.ext} → <b>${job.target}</b></span>
+          <span class="arrow-tag">${job.ext} → <b>${job.status==='done' ? job.target : job.target}</b></span>
         </div>
-        ${errorHTML}
       </div>
       <div class="row-controls">${rightHTML}</div>
       ${progressHTML}
@@ -1530,251 +1481,212 @@ function render(){
   const rowsEl = document.getElementById('rows');
   rowsEl.innerHTML = jobs.map(rowTemplate).join('');
 
-  const allTerminal = jobs.length > 0 && jobs.every(j => isTerminalStatus(j.status));
-  const pendingCount = jobs.filter(j => !isTerminalStatus(j.status)).length;
+  const allDone = jobs.length>0 && jobs.every(j=>j.status==='done' || j.status==='error');
+  const pending = jobs.filter(j=>j.status==='pending');
 
-  document.getElementById('footerPre').style.display = allTerminal ? 'none' : 'flex';
-  document.getElementById('footerPost').classList.toggle('show', allTerminal);
+  document.getElementById('footerPre').style.display = allDone ? 'none' : 'flex';
+  document.getElementById('footerPost').classList.toggle('show', allDone);
 
   const pendingCountEl = document.getElementById('pendingCount');
-  if(pendingCountEl) pendingCountEl.textContent = pendingCount;
-
-  // Ensure global format selector is built before computing goBtn state
-  buildGlobalFmt();
-
+  if(pendingCountEl) pendingCountEl.textContent = pending.length;
   const goBtn = document.getElementById('goBtn');
-  const globalFmtRequiresSelection = window._globalFmtRequiresSelection === true;
-  const globalFmtHasValue = (document.getElementById('globalFmt')?.value || '') !== '';
-  // Allow converting when all pending rows have explicit per-row targets even if global selector requires a selection.
-  const allPendingHaveTargets = jobs.filter(j => !isTerminalStatus(j.status)).every(j => (j.target || '').toString().trim() !== '');
-  goBtn.disabled = pendingCount === 0 || conversionRequestInFlight || (globalFmtRequiresSelection && !globalFmtHasValue && !allPendingHaveTargets);
+  goBtn.disabled = pending.length === 0 || jobs.some(j=>j.status==='converting' || j.status==='processing');
+
+  // start any newly-converting progress bars
+  jobs.filter(j=>j.status==='converting').forEach(j=>{
+    const fill = document.getElementById('fill-'+j.id);
+    if(fill){
+      requestAnimationFrame(()=>{
+        fill.style.transitionDuration = j._duration + 'ms';
+        fill.style.width = '100%';
+      });
+    }
+  });
+
+  buildGlobalFmt();
 }
 
 function buildGlobalFmt(){
   const sel = document.getElementById('globalFmt');
   const label = document.getElementById('footerLabel');
-  const active = jobs.filter(j => !isTerminalStatus(j.status));
-  const pendingTargets = [...new Set(active.map(j => j.target))];
-  const sameTarget = active.length > 0 && pendingTargets.length === 1;
+  const pending = jobs.filter(j=>j.status!=='done');
+  const pendingTargets = [...new Set(pending.map(j => j.target))];
+  const sameTarget = pending.length > 0 && pendingTargets.length === 1;
 
   if(sameTarget){
-    const cats = [...new Set(active.map(j=>j.category))];
+    const cats = [...new Set(pending.map(j=>j.category))];
     let opts = [];
     if(cats.length === 1){
-      opts = getAllowedTargetsForJob(active[0]);
+      opts = CATEGORY[cats[0]].targets;
     } else {
       opts = ['JPG','PNG','PDF','MP3','MP4','ZIP'];
     }
-    const current = sel.value || active[0].target;
+    const current = sel.value;
     sel.innerHTML = opts.map(t=>`<option value="${t}">${t}</option>`).join('');
-    if(opts.includes(current)) sel.value = current;
-    label.innerHTML = `${window.translate('upload.conversion_instruction', 'Convert all files to:')} (<span id="pendingCount">${active.length}</span>)`;
-    sel.style.display = '';
-    // No explicit selection required when all pending targets are identical
-    window._globalFmtRequiresSelection = false;
-  } else {
-    // Compute intersection of allowed targets across active jobs,
-    // excluding any target that equals a source extension present in the pending set.
-    const activeExts = new Set(active.map(j => (j.ext || '').toUpperCase()));
-    let intersection = null;
-    active.forEach(j => {
-      try{
-        const allowedTargets = (getAllowedTargetsForJob(j) || []).filter(t => !activeExts.has(String(t).toUpperCase()));
-        if(intersection === null) intersection = allowedTargets.slice();
-        else intersection = intersection.filter(x => allowedTargets.includes(x));
-      }catch(e){/* ignore */}
-    });
-    const opts = intersection ? intersection : [];
-    const placeholder = window.translate('upload.choose_format_placeholder', 'Pilih format');
-    const currentVal = sel.value || '';
-    // Always include an empty placeholder option first so sel.value === '' is valid
-    if(opts.length === 0){
-      sel.innerHTML = `<option value="">${placeholder}</option>`;
-      sel.value = '';
-      sel.disabled = true;
+    if(opts.includes(current)) {
+      sel.value = current;
     } else {
-      sel.innerHTML = `<option value="">${placeholder}</option>` + opts.map(t=>`<option value="${t}">${t}</option>`).join('');
-      if(currentVal && opts.includes(currentVal)) sel.value = currentVal;
-      else sel.value = '';
-      sel.disabled = false;
+      const sourceFormats = new Set(
+        pending.map(j => String(j.ext || '').toLowerCase().replace(/^\./, ''))
+      );
+      sel.value = opts.find(option => !sourceFormats.has(option.toLowerCase())) || opts[0];
     }
+    label.innerHTML = `${window.translate('upload.conversion_instruction', 'Convert all files to:')} (<span id="pendingCount">${pending.length}</span>)`;
     sel.style.display = '';
-    // Mark that an explicit global selection is required while conflict exists
-    window._globalFmtRequiresSelection = true;
-    label.innerHTML = `${window.translate('upload.conversion_instruction', 'Convert all files to:')} (<span id=\"pendingCount\">${active.length}</span>) — ${window.translate('upload.choose_format_prompt', 'Pilih format untuk semua file')}`;
+  } else {
+    sel.innerHTML = '';
+    sel.style.display = 'none';
+    label.innerHTML = `${window.translate('upload.conversion_instruction', 'Convert all files to:')} (<span id="pendingCount">${pending.length}</span>)`;
   }
 }
 
-// Register a single change listener on the global format selector so
-// selecting a global format re-renders and updates the go button state.
-// This is attached once during wiring to avoid duplicate handlers.
-;(function registerGlobalFmtChange(){
-  const g = document.getElementById('globalFmt');
-  if(!g) return;
-  // Use a data flag to avoid double-registration in case this script is evaluated twice
-  if(g.dataset._change_registered) return;
-  g.addEventListener('change', () => { render(); });
-  g.dataset._change_registered = '1';
-})();
-
 /* ---------------- conversion logic ---------------- */
-function convertAll(){
-  const pending = jobs.filter(j => j.status === 'pending');
-  if(!pending.length || conversionRequestInFlight) return;
-  // Validate per-row targets using Phase A matrix before sending
-  const invalid = [];
-  const targets = [];
-  pending.forEach((job, idx) => {
-    const allowed = getAllowedTargetsForJob(job) || [];
-    const chosen = (job.target || '').toString();
-    if (!allowed.includes(chosen)) {
-      invalid.push({index: idx, id: job.id, filename: job.name});
+function conversionErrorMessage(data, response){
+  if(data){
+    if(typeof data === 'string') return data;
+    if(Array.isArray(data.detail)){
+      return data.detail.map(item => typeof item === 'string' ? item : item.msg || JSON.stringify(item)).join('; ');
     }
-    targets.push(chosen.toLowerCase());
-  });
-
-  if (invalid.length) {
-    invalid.forEach(i => {
-      const job = jobs.find(j=>j.id===i.id);
-      if (job) {
-        job.error = window.translate('upload.invalid_target', 'Target tidak valid untuk file ini');
-        job.status = 'pending';
-      }
-    });
-    render();
-    toast(window.translate('upload.invalid_targets_block', 'Beberapa file memiliki target tidak valid. Perbaiki terlebih dahulu.'), '⚠️');
-    return;
+    if(typeof data.detail === 'string') return data.detail;
+    if(typeof data.message === 'string') return data.message;
+    if(typeof data.error === 'string') return data.error;
+    if(typeof data.code === 'string') return data.code;
   }
+  return response.statusText || `HTTP ${response.status}`;
+}
 
-  conversionRequestInFlight = true;
-  pending.forEach(job => {
-    job.status = 'processing';
-    job.error = '';
-    job.outputFilename = '';
-    job.download_path = '';
-  });
-  render();
+function conversionDownloadPath(data){
+  if(!data || typeof data !== 'object') return '';
+  if(typeof data.download_path === 'string' && data.download_path) {
+    return data.download_path;
+  }
+  if(Array.isArray(data.results)){
+    const result = data.results.find(item => item && typeof item.download_path === 'string' && item.download_path);
+    return result ? result.download_path : '';
+  }
+  return '';
+}
 
+async function convertJob(job, targetFormat){
   const formData = new FormData();
-  pending.forEach(job => {
-    formData.append('file', job.file);
-  });
-  // Send per-file targets as JSON array; server supports legacy `target_format`.
-  formData.append('targets', JSON.stringify(targets));
+  formData.append('file', job.file);
+  formData.append('target_format', targetFormat);
 
-  fetch('/convert', {
-    method: 'POST',
-    body: formData
-  })
-    .then(async response => {
-      const data = await response.json().catch(() => null);
-      if (!response.ok) {
-        let errorMessage = 'Conversion failed.';
-        if (data) {
-          if (typeof data === 'string') errorMessage = data;
-          else if (Array.isArray(data.detail)) errorMessage = data.detail.map(item => typeof item === 'string' ? item : (item.msg || JSON.stringify(item))).join('; ');
-          else if (data.detail && typeof data.detail === 'string') errorMessage = data.detail;
-          else if (data.message && typeof data.message === 'string') errorMessage = data.message;
-          else if (data.error && typeof data.error === 'string') errorMessage = data.error;
-          else errorMessage = JSON.stringify(data);
-        }
-        throw new Error(errorMessage);
-      }
-      return data;
-    })
-    .then(data => {
-      const resultItems = Array.isArray(data && data.results) ? data.results : (data ? [data] : []);
-      if (!resultItems.length) {
-        throw new Error('No conversion result returned');
-      }
-
-      pending.forEach((job, index) => {
-        const item = resultItems[index] || null;
-        if (!item) {
-          job.status = 'failed';
-          job.error = 'Missing conversion result for this file.';
-          return;
-        }
-
-        if (item.status === 'success') {
-          job.status = 'done';
-          job.outputFilename = item.filename || job.name;
-          job.download_path = item.download_path || '';
-          job.conversion_id = item.conversion_id || '';
-          job.error = '';
-          // Reflect explicit per-row target if provided by server
-          if (item.target_format) job.target = item.target_format;
-        } else {
-          job.status = 'failed';
-          job.outputFilename = '';
-          job.download_path = '';
-          job.error = item.error || 'Conversion failed.';
-          job.conversion_id = item.conversion_id || '';
-        }
-      });
-      render();
-      const successful = jobs.filter(j => j.status === 'done' && j.download_path).length;
-      if (successful) {
-        toast('Konversi selesai (' + successful + ')', '✔️');
-      } else {
-        toast('Semua konversi gagal', '⚠️');
-      }
-    })
-    .catch(error => {
-      const message = error && error.message ? error.message : 'Conversion failed.';
-      pending.forEach(job => {
-        job.status = 'failed';
-        job.error = message;
-        job.outputFilename = '';
-        job.download_path = '';
-      });
-      render();
-      toast(message, '⚠️');
-    })
-    .finally(() => {
-      conversionRequestInFlight = false;
-      render();
+  try {
+    const response = await fetch('/convert', {
+      method: 'POST',
+      body: formData,
     });
+    const data = await response.json().catch(() => null);
+
+    if(!response.ok){
+      throw new Error(conversionErrorMessage(data, response));
+    }
+
+    const downloadPath = conversionDownloadPath(data);
+    if(!downloadPath){
+      throw new Error('Conversion response did not include download_path');
+    }
+
+    job.downloadPath = downloadPath;
+    job.status = 'done';
+    job.errorMessage = '';
+  } catch(error) {
+    job.status = 'error';
+    job.errorMessage = error && error.message ? error.message : String(error);
+    job.downloadPath = '';
+  }
+  render();
+}
+
+function convertAll(){
+  const pending = jobs.filter(j=>j.status==='pending');
+  if(!pending.length) return;
+
+  const globalFormat = document.getElementById('globalFmt');
+  const requests = pending.map(job => {
+    const row = document.querySelector(`[data-row="${job.id}"]`);
+    const rowFormat = row?.querySelector('select.fmt')?.value || job.target;
+    const targetFormat = globalFormat?.offsetParent !== null && globalFormat?.value
+      ? globalFormat.value
+      : rowFormat;
+
+    job.target = targetFormat;
+    job.status = 'processing';
+    return {job, targetFormat};
+  });
+
+  render();
+  Promise.all(requests.map(({job, targetFormat}) => convertJob(job, targetFormat)));
 }
 
 /* ---------------- download ---------------- */
-function downloadJob(job){
-  if(!job || !job.download_path){
-    toast('File belum siap diunduh', '⚠️');
+function convertedBlobName(job){
+  const {base} = splitName(job.name);
+  return base + '.' + job.target.toLowerCase();
+}
+async function downloadJob(job){
+  if(!job.downloadPath) return;
+
+  const response = await fetch(job.downloadPath);
+  if(!response.ok){
+    toast('Unduhan gagal', '❌');
     return;
   }
-  const url = job.download_path;
+
+  const blob = await response.blob();
+  const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = job.outputFilename || job.name;
-  a.rel = 'noopener noreferrer';
-  a.target = '_self';
+  a.download = convertedBlobName(job);
   document.body.appendChild(a);
   a.click();
   a.remove();
-  toast('Mengunduh ' + (job.outputFilename || job.name));
+  setTimeout(()=>URL.revokeObjectURL(url), 4000);
+  toast('Mengunduh ' + convertedBlobName(job));
 }
 async function downloadAll(){
-  const done = jobs.filter(j => j.status === 'done' && j.download_path);
+  const done = jobs.filter(j=>j.status==='done');
   if(!done.length) return;
   if(done.length === 1){ downloadJob(done[0]); return; }
-  done.forEach(job => {
-    const a = document.createElement('a');
-    a.href = job.download_path;
-    a.download = job.outputFilename || job.name;
-    a.rel = 'noopener noreferrer';
-    a.target = '_self';
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-  });
-  toast('Mengunduh ' + done.length + ' file', '✔️');
+  toast('Menyiapkan ZIP…', '⏳');
+  const zip = new JSZip();
+  let includedCount = 0;
+  let skippedCount = 0;
+  for(const j of done){
+    if(!j.downloadPath){
+      skippedCount++;
+      continue;
+    }
+    try {
+      const response = await fetch(j.downloadPath);
+      if(!response.ok){
+        skippedCount++;
+        continue;
+      }
+      const blob = await response.blob();
+      zip.file(convertedBlobName(j), blob);
+      includedCount++;
+    } catch(error) {
+      skippedCount++;
+    }
+  }
+  if(!includedCount){
+    toast('Tidak ada hasil konversi yang tersedia untuk ZIP', '⚠️');
+    return;
+  }
+  const blob = await zip.generateAsync({type:'blob'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'converigo-hasil-konversi.zip';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url), 4000);
+  toast(skippedCount ? `Unduhan ZIP dimulai (${skippedCount} file dilewati)` : 'Unduhan ZIP dimulai');
 }
 
 /* ---------------- reset ---------------- */
 function resetAll(){
   jobs = [];
-  conversionRequestInFlight = false;
   document.body.classList.remove('has-jobs');
   render();
 }
@@ -1826,43 +1738,40 @@ document.getElementById('rows').addEventListener('input', e=>{
   if(label) label.textContent = el.value + '%';
 });
 
-const fileInput = document.getElementById('fileInput');
-const browseBtn = document.getElementById('browseBtn');
-const addMoreBtn = document.getElementById('addMoreBtn');
-const dz = document.getElementById('dropzone');
-
-if(fileInput){
-  fileInput.addEventListener('change', e => {
-    const files = e.target?.files;
-    if(files && files.length){
-      addFiles(files);
-      fileInput.value = '';
-    }
-  });
-}
-
-const openFilePicker = () => fileInput && fileInput.click();
-if(browseBtn) browseBtn.addEventListener('click', openFilePicker);
-if(addMoreBtn) addMoreBtn.addEventListener('click', openFilePicker);
-if(dz){
-  dz.addEventListener('click', openFilePicker);
-  dz.addEventListener('keydown', e => {
-    if((e.key === 'Enter' || e.key === ' ') && !e.defaultPrevented){
-      e.preventDefault();
-      openFilePicker();
-    }
-  });
-  ['dragleave','drop'].forEach(evt=>{
-    dz.addEventListener(evt, e=>{ e.preventDefault(); dz.classList.remove('drag'); });
-  });
-  dz.addEventListener('drop', e=>{
-    if(e.dataTransfer?.files?.length) addFiles(e.dataTransfer.files);
-  });
-}
-
 document.getElementById('goBtn').addEventListener('click', convertAll);
 document.getElementById('newBtn').addEventListener('click', resetAll);
 document.getElementById('dlAllBtn').addEventListener('click', downloadAll);
+
+/* file input wiring */
+const fileInput = document.getElementById('fileInput');
+document.getElementById('browseBtn').addEventListener('click', e=>{ e.stopPropagation(); fileInput.click(); });
+document.getElementById('addMoreBtn').addEventListener('click', ()=> fileInput.click());
+window.handleLanguageChange = function (event) {
+  const selectedLang = event.target.value;
+  const params = new URLSearchParams(window.location.search);
+  if (selectedLang) {
+    params.set('lang', selectedLang);
+  } else {
+    params.delete('lang');
+  }
+  const query = params.toString();
+  window.location.search = query ? `?${query}` : window.location.pathname;
+};
+
+fileInput.addEventListener('change', e=>{ addFiles(e.target.files); fileInput.value=''; });
+
+const dz = document.getElementById('dropzone');
+dz.addEventListener('click', ()=> fileInput.click());
+dz.addEventListener('keydown', e=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); fileInput.click(); }});
+['dragenter','dragover'].forEach(evt=>{
+  dz.addEventListener(evt, e=>{ e.preventDefault(); dz.classList.add('drag'); });
+});
+['dragleave','drop'].forEach(evt=>{
+  dz.addEventListener(evt, e=>{ e.preventDefault(); dz.classList.remove('drag'); });
+});
+dz.addEventListener('drop', e=>{
+  if(e.dataTransfer?.files?.length) addFiles(e.dataTransfer.files);
+});
 
 /* ---------------- morph badge cycle ---------------- */
 const morphCycle = [

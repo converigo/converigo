@@ -75,9 +75,24 @@ def run_conversion_flow(page, file_paths):
 
     assert not convert_button.is_disabled(), "PanelZone go button should be enabled when files pending"
 
+    all_requests = []
+    all_responses = []
+    page.on("request", lambda req: all_requests.append((req.method, req.url)))
+    page.on("response", lambda res: all_responses.append((res.status, res.url)))
+
     # Click and wait for backend /convert response and assert download_path exists
-    with page.expect_response(lambda r: "/convert" in r.url and r.status in (200, 201), timeout=TIMEOUT) as resp_info:
-        convert_button.click()
+    try:
+        with page.expect_response(lambda r: "/convert" in r.url and r.status in (200, 201), timeout=TIMEOUT) as resp_info:
+            convert_button.click()
+    except Exception:
+        print("ALL REQUESTS:")
+        for request_method, request_url in all_requests:
+            print(f"{request_method} {request_url}")
+        print("ALL RESPONSES:")
+        for response_status, response_url in all_responses:
+            print(f"{response_status} {response_url}")
+        raise
+
     convert_response = resp_info.value
     try:
         body = convert_response.json()
