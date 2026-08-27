@@ -1651,9 +1651,29 @@ async function downloadAll(){
   if(done.length === 1){ downloadJob(done[0]); return; }
   toast('Menyiapkan ZIP…', '⏳');
   const zip = new JSZip();
+  let includedCount = 0;
+  let skippedCount = 0;
   for(const j of done){
-    const buf = await j.file.arrayBuffer();
-    zip.file(convertedBlobName(j), buf);
+    if(!j.downloadPath){
+      skippedCount++;
+      continue;
+    }
+    try {
+      const response = await fetch(j.downloadPath);
+      if(!response.ok){
+        skippedCount++;
+        continue;
+      }
+      const blob = await response.blob();
+      zip.file(convertedBlobName(j), blob);
+      includedCount++;
+    } catch(error) {
+      skippedCount++;
+    }
+  }
+  if(!includedCount){
+    toast('Tidak ada hasil konversi yang tersedia untuk ZIP', '⚠️');
+    return;
   }
   const blob = await zip.generateAsync({type:'blob'});
   const url = URL.createObjectURL(blob);
@@ -1661,7 +1681,7 @@ async function downloadAll(){
   a.href = url; a.download = 'converigo-hasil-konversi.zip';
   document.body.appendChild(a); a.click(); a.remove();
   setTimeout(()=>URL.revokeObjectURL(url), 4000);
-  toast('Unduhan ZIP dimulai');
+  toast(skippedCount ? `Unduhan ZIP dimulai (${skippedCount} file dilewati)` : 'Unduhan ZIP dimulai');
 }
 
 /* ---------------- reset ---------------- */
