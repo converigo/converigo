@@ -46,11 +46,22 @@ class PNGToTIFFPlugin(ConverterPlugin):
 
     seo_description = "Convert PNG images to TIFF for archival and printing."
 
-    async def convert(self, source_path: Path, target_format: str) -> Path:
+    async def convert(
+        self,
+        source_path: Path,
+        target_format: str,
+        output_dir: Path | None = None,
+        temp_dir: Path | None = None,
+    ) -> Path:
 
         if not self.supports(source_path.suffix, target_format):
             raise RuntimeError("PNGToTIFFPlugin only supports PNG -> TIFF.")
 
         engine = ImageEngine()
 
-        return await engine.convert(source_path=source_path, target_format=target_format)
+        return await engine.convert(
+            source_path=source_path,
+            target_format=target_format,
+            output_dir=output_dir,
+            temp_dir=temp_dir,
+        )

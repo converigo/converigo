@@ -41,4 +41,4 @@ class JPGToICOPlugin(ConverterPlugin):
 
         engine = ImageEngine()
 
-        return await engine.convert(source_path=source_path, target_format=target_format)
+        return await engine.convert(source_path=source_path, target_format=target_format, output_dir=output_dir, temp_dir=temp_dir)

@@ -114,6 +114,8 @@ class ArchiveEngine(BaseEngine):
         self,
         source_path: Path,
         target_format: str,
+        output_dir: Path | None = None,
+        temp_dir: Path | None = None,
     ) -> Path:
         """Extract archive to output directory (hardened against traversal + zip bombs)."""
 
@@ -126,10 +128,11 @@ class ArchiveEngine(BaseEngine):
         else:
             extract_dir_name = stem
 
-        output_dir = settings.OUTPUT_DIR / "archive"
-        output_dir.mkdir(parents=True, exist_ok=True)
+        resolved_output_dir = (output_dir or settings.OUTPUT_DIR) / "archive"
+        _ = temp_dir
+        resolved_output_dir.mkdir(parents=True, exist_ok=True)
 
-        extract_path = output_dir / extract_dir_name
+        extract_path = resolved_output_dir / extract_dir_name
         extract_path.mkdir(parents=True, exist_ok=True)
 
         try:

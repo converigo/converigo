@@ -37,9 +37,11 @@ class HEICToJPGPlugin(ConverterPlugin):
         self,
         source_path: Path,
         target_format: str,
+        output_dir: Path | None = None,
+        temp_dir: Path | None = None,
     ) -> Path:
         if not self.supports(source_path.suffix, target_format):
             raise RuntimeError("HEICToJPGPlugin only supports HEIC/HEIF -> JPG.")
 
         engine = ImageEngine()
-        return await engine.convert(source_path=source_path, target_format=target_format)
+        return await engine.convert(source_path=source_path, target_format=target_format, output_dir=output_dir, temp_dir=temp_dir)

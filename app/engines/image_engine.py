@@ -39,6 +39,8 @@ class ImageEngine(BaseEngine):
         self,
         source_path: Path,
         target_format: str,
+        output_dir: Path | None = None,
+        temp_dir: Path | None = None,
     ) -> Path:
 
         logger.info("[CONVERTER_DEBUG] ImageEngine start conversion source=%s target=%s", str(source_path), target_format)
@@ -50,14 +52,15 @@ class ImageEngine(BaseEngine):
                 f"Unsupported target format: {target}"
             )
 
-        output_dir = settings.OUTPUT_DIR / "image"
+        resolved_output_dir = (output_dir or settings.OUTPUT_DIR) / "image"
+        _ = temp_dir
 
-        output_dir.mkdir(
+        resolved_output_dir.mkdir(
             parents=True,
             exist_ok=True,
         )
 
-        output_path = output_dir / (
+        output_path = resolved_output_dir / (
             f"{source_path.stem}.{target}"
         )
 
