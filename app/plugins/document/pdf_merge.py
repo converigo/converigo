@@ -36,12 +36,16 @@ class PDFMergePlugin(ConverterPlugin):
         self,
         source_path: Path,
         target_format: str,
+        output_dir: Path | None = None,
+        temp_dir: Path | None = None,
     ) -> Path:
         if not self.supports(source_path.suffix, target_format):
             raise RuntimeError("PDFMergePlugin only supports PDF -> PDF.")
 
-        output_dir = Path("outputs") / "document"
-        output_dir.mkdir(parents=True, exist_ok=True)
-        output_path = output_dir / f"{source_path.stem}_merged.pdf"
+        from app.core.settings import settings
+
+        working_root = (temp_dir or output_dir or (settings.OUTPUT_DIR / "document"))
+        working_root.mkdir(parents=True, exist_ok=True)
+        output_path = working_root / f"{source_path.stem}_merged.pdf"
         output_path.write_bytes(source_path.read_bytes())
         return output_path

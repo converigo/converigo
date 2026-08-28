@@ -52,17 +52,17 @@ class ImageEngine(BaseEngine):
                 f"Unsupported target format: {target}"
             )
 
-        resolved_output_dir = (output_dir or settings.OUTPUT_DIR) / "image"
-        _ = temp_dir
+        # Use a request-local temp_dir for working files when provided.
+        # Fallback to output_dir then global settings.OUTPUT_DIR to avoid
+        # writing directly to the public output root during conversion.
+        resolved_output_dir = (temp_dir or output_dir or settings.OUTPUT_DIR) / "image"
 
         resolved_output_dir.mkdir(
             parents=True,
             exist_ok=True,
         )
 
-        output_path = resolved_output_dir / (
-            f"{source_path.stem}.{target}"
-        )
+        output_path = resolved_output_dir / (f"{source_path.stem}.{target}")
 
         suffix = source_path.suffix.lower()
         if suffix == ".svg":

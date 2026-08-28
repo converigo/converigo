@@ -29,6 +29,8 @@ class DocumentEngine(BaseEngine):
         self,
         source_path: Path,
         target_format: str,
+        output_dir: Path | None = None,
+        temp_dir: Path | None = None,
     ) -> Path:
         logger.info("[CONVERTER_DEBUG] DocumentEngine start conversion source=%s target=%s", str(source_path), target_format)
         target = target_format.lower().lstrip(".")
@@ -40,29 +42,28 @@ class DocumentEngine(BaseEngine):
             target = "pptx"
 
         source_format = source_path.suffix.lower().lstrip(".")
-        # Use configured OUTPUT_DIR to avoid environment-dependent CWD issues.
-        # settings.OUTPUT_DIR is mapped from OUTPUT_DIR env var in app/core/settings.py
         from app.core.settings import settings
 
-        output_dir = settings.OUTPUT_DIR / "document"
-        output_dir.mkdir(parents=True, exist_ok=True)
+        working_root = temp_dir or output_dir or settings.OUTPUT_DIR
+        resolved_output_dir = working_root
+        resolved_output_dir.mkdir(parents=True, exist_ok=True)
 
 
         if source_format == "pdf":
             if target == "docx":
-                return self._convert_pdf_to_docx(source_path, output_dir)
+                return self._convert_pdf_to_docx(source_path, resolved_output_dir)
 
             if target == "xlsx":
-                return self._convert_pdf_to_xlsx(source_path, output_dir)
+                return self._convert_pdf_to_xlsx(source_path, resolved_output_dir)
 
             if target == "pptx":
-                return self._convert_pdf_to_pptx(source_path, output_dir)
+                return self._convert_pdf_to_pptx(source_path, resolved_output_dir)
 
             if target == "odt":
-                return self._convert_pdf_to_odt(source_path, output_dir)
+                return self._convert_pdf_to_odt(source_path, resolved_output_dir)
 
             if target in {"jpg", "jpeg"}:
-                return self._convert_pdf_to_jpg(source_path, output_dir)
+                return self._convert_pdf_to_jpg(source_path, resolved_output_dir)
 
             raise ValueError(
                 f"Unsupported target format for document engine: {target}"
@@ -74,13 +75,13 @@ class DocumentEngine(BaseEngine):
             )
 
         if source_format in {"xlsx", "xls", "csv"}:
-            return self._convert_spreadsheet_to_pdf(source_path, output_dir)
+            return self._convert_spreadsheet_to_pdf(source_path, resolved_output_dir)
 
         if source_format in {"pptx", "ppt"}:
-            return self._convert_presentation_to_pdf(source_path, output_dir)
+            return self._convert_presentation_to_pdf(source_path, resolved_output_dir)
 
         if source_format == "odt":
-            return self._convert_odt_to_pdf(source_path, output_dir)
+            return self._convert_odt_to_pdf(source_path, resolved_output_dir)
 
         raise ValueError(
             f"Unsupported source format for document engine: {source_path.suffix}"
@@ -145,16 +146,19 @@ class DocumentEngine(BaseEngine):
 
         if source_path.suffix.lower() in {".xlsx", ".xls"}:
             workbook = load_workbook(str(source_path), data_only=True, read_only=True)
-            for sheet in workbook.worksheets:
-                lines.append(f"Sheet: {sheet.title}")
-                for row in sheet.iter_rows(values_only=True):
-                    if row and any(cell is not None for cell in row):
-                        row_text = " | ".join(
-                            "" if cell is None else str(cell)
-                            for cell in row
-                        )
-                        lines.append(row_text)
-                lines.append("")
+            try:
+                for sheet in workbook.worksheets:
+                    lines.append(f"Sheet: {sheet.title}")
+                    for row in sheet.iter_rows(values_only=True):
+                        if row and any(cell is not None for cell in row):
+                            row_text = " | ".join(
+                                "" if cell is None else str(cell)
+                                for cell in row
+                            )
+                            lines.append(row_text)
+                    lines.append("")
+            finally:
+                workbook.close()
         else:
             import csv
 
@@ -364,25 +368,27 @@ class DocumentEngine(BaseEngine):
                 workbook = Workbook()
                 workbook.remove(workbook.active)
                 found_table = False
-
-                for page_index, page in enumerate(pdf.pages, start=1):
-                    tables = page.extract_tables() or []
-                    if tables:
-                        found_table = True
-                        sheet = workbook.create_sheet(title=f"page_{page_index}")
-                        for row_index, row in enumerate(tables[0], start=1):
-                            for col_index, cell in enumerate(row, start=1):
-                                sheet.cell(row=row_index, column=col_index, value=cell)
-
-                if not found_table:
-                    sheet = workbook.create_sheet(title="page_1")
+                try:
                     for page_index, page in enumerate(pdf.pages, start=1):
-                        text = page.extract_text() or ""
-                        for line_index, line in enumerate(text.splitlines(), start=1):
-                            sheet.cell(row=line_index, column=1, value=line)
+                        tables = page.extract_tables() or []
+                        if tables:
+                            found_table = True
+                            sheet = workbook.create_sheet(title=f"page_{page_index}")
+                            for row_index, row in enumerate(tables[0], start=1):
+                                for col_index, cell in enumerate(row, start=1):
+                                    sheet.cell(row=row_index, column=col_index, value=cell)
 
-                workbook.save(str(output_path))
-                logger.info("XLSX output path: %s", output_path)
+                    if not found_table:
+                        sheet = workbook.create_sheet(title="page_1")
+                        for page_index, page in enumerate(pdf.pages, start=1):
+                            text = page.extract_text() or ""
+                            for line_index, line in enumerate(text.splitlines(), start=1):
+                                sheet.cell(row=line_index, column=1, value=line)
+
+                    workbook.save(str(output_path))
+                    logger.info("XLSX output path: %s", output_path)
+                finally:
+                    workbook.close()
         except Exception as exc:
             logger.exception("PDF to XLSX conversion failed")
             raise RuntimeError(f"PDF to XLSX conversion failed: {type(exc).__name__}: {exc}") from exc

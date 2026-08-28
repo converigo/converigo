@@ -34,7 +34,13 @@ class WEBPToICOPlugin(ConverterPlugin):
 
     priority = 75
 
-    async def convert(self, source_path: Path, target_format: str) -> Path:
+    async def convert(
+        self,
+        source_path: Path,
+        target_format: str,
+        output_dir: Path | None = None,
+        temp_dir: Path | None = None,
+    ) -> Path:
 
         if not self.supports(source_path.suffix, target_format):
             raise RuntimeError("WEBPToICOPlugin only supports WEBP -> ICO.")

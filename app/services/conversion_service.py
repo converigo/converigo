@@ -152,7 +152,7 @@ class ConversionService:
             raise ConversionError("Invalid output path.")
 
         output_path = output_path.resolve(strict=False)
-        public_output_path = self._publish_output(output_path, public_root, temp_root)
+        public_output_path = self._publish_output(output_path, public_root, temp_root, conversion_id=conversion_id)
 
         resolved_output_path = public_output_path.resolve(strict=False)
         resolved_public_root = public_root.resolve(strict=False)
@@ -180,22 +180,33 @@ class ConversionService:
         temp_root.mkdir(parents=True, exist_ok=True)
         return temp_root
 
-    def _publish_output(self, output_path: Path, public_root: Path, temp_root: Path) -> Path:
+    def _publish_output(
+        self,
+        output_path: Path,
+        public_root: Path,
+        temp_root: Path,
+        conversion_id: str | None = None,
+    ) -> Path:
         if not output_path.exists():
-            self._cleanup_temp_artifacts(temp_root)
+            self._cleanup_temp_artifacts(temp_root, conversion_id=conversion_id)
             raise ConversionError("Converted file was not saved.")
 
         public_root.mkdir(parents=True, exist_ok=True)
         public_output_path = public_root / output_path.name
+
+        output_path_abs = output_path.resolve(strict=False)
+        public_output_path_abs = public_output_path.resolve(strict=False)
+        if output_path_abs == public_output_path_abs:
+            return public_output_path
+
         if public_output_path.exists():
             public_output_path.unlink(missing_ok=True)
-        if output_path != public_output_path:
-            shutil.move(str(output_path), str(public_output_path))
+        shutil.move(str(output_path), str(public_output_path))
 
-        self._cleanup_temp_artifacts(temp_root)
+        self._cleanup_temp_artifacts(temp_root, conversion_id=conversion_id)
         return public_output_path
 
-    def _cleanup_temp_artifacts(self, temp_root: Path) -> None:
+    def _cleanup_temp_artifacts(self, temp_root: Path, conversion_id: str | None = None) -> None:
         if not temp_root.exists():
             return
         try:

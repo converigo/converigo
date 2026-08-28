@@ -106,6 +106,8 @@ class WEBPToJPGPlugin(ConverterPlugin):
         self,
         source_path: Path,
         target_format: str,
+        output_dir: Path | None = None,
+        temp_dir: Path | None = None,
     ):
 
 
@@ -125,4 +127,6 @@ class WEBPToJPGPlugin(ConverterPlugin):
         return await engine.convert(
             source_path=source_path,
             target_format=target_format,
+            output_dir=output_dir,
+            temp_dir=temp_dir,
         )

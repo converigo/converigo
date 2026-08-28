@@ -17,7 +17,11 @@ class AudioEngine(BaseEngine):
         self,
         source_path: Path,
         target_format: str,
+        output_dir: Path | None = None,
+        temp_dir: Path | None = None,
     ) -> Path:
+        # Default audio engine is a prototype; ensure signature accepts
+        # request-local output_dir and temp_dir so plugins can forward them.
         raise NotImplementedError(
             "Audio conversion is not implemented in this prototype."
         )

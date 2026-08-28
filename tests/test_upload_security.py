@@ -5,9 +5,11 @@ from unittest.mock import patch
 
 import pytest
 from fastapi import UploadFile
+from openpyxl import Workbook
 
 import app.services.upload_service as upload_service_module
 from app.core.settings import settings
+from app.engines.document_engine import DocumentEngine
 from app.services.conversion_service import ConversionError, ConversionService
 from app.services.upload_service import UploadError, UploadService
 
@@ -122,6 +124,51 @@ def test_failed_upload_cleans_up_partial_file(monkeypatch, tmp_path):
     assert not any(tmp_path.iterdir())
 
 
+def test_xlsx_conversion_closes_workbook_before_upload_cleanup(tmp_path):
+    engine = DocumentEngine()
+    for i in range(3):
+        source_path = tmp_path / f"sample_{i}.xlsx"
+        output_dir = tmp_path / f"out_{i}"
+
+        workbook = Workbook()
+        worksheet = workbook.active
+        worksheet.title = "Sheet1"
+        worksheet.append(["Name", "Score"])
+        worksheet.append(["Alice", 100])
+        workbook.save(source_path)
+        workbook.close()
+
+        output_path = engine._convert_spreadsheet_to_pdf(source_path, output_dir)
+        assert output_path.exists()
+
+        source_path.unlink()
+        assert not source_path.exists()
+
+
+def test_pdf_to_xlsx_conversion_closes_workbook_before_upload_cleanup(tmp_path):
+    engine = DocumentEngine()
+    from reportlab.pdfgen import canvas
+
+    for i in range(3):
+        source_path = tmp_path / f"sample_{i}.pdf"
+        output_dir = tmp_path / f"out_{i}"
+        output_dir.mkdir(parents=True, exist_ok=True)
+
+        c = canvas.Canvas(str(source_path))
+        c.drawString(72, 720, "Converigo line one")
+        c.drawString(72, 700, "Converigo line two")
+        c.save()
+
+        output_path = engine._convert_pdf_to_xlsx(source_path, output_dir)
+        assert output_path.exists()
+
+        source_path.unlink()
+        assert not source_path.exists()
+
+        output_path.unlink()
+        assert not output_path.exists()
+
+
 def test_conversion_rejects_output_path_outside_output_dir(monkeypatch, tmp_path):
     output_dir = tmp_path / "outputs"
     output_dir.mkdir(parents=True)
@@ -131,7 +178,7 @@ def test_conversion_rejects_output_path_outside_output_dir(monkeypatch, tmp_path
     escaped_output_path.write_bytes(b"escaped")
 
     class DummyPlugin:
-        async def convert(self, source_path, target_format):
+        async def convert(self, source_path, target_format, output_dir=None, temp_dir=None, **kwargs):
             return escaped_output_path
 
     monkeypatch.setattr(

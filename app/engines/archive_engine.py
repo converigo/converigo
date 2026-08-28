@@ -128,8 +128,9 @@ class ArchiveEngine(BaseEngine):
         else:
             extract_dir_name = stem
 
-        resolved_output_dir = (output_dir or settings.OUTPUT_DIR) / "archive"
-        _ = temp_dir
+        # Prefer a request-local temp_dir for working files when provided.
+        # Fallback to output_dir then global settings.OUTPUT_DIR.
+        resolved_output_dir = (temp_dir or output_dir or settings.OUTPUT_DIR) / "archive"
         resolved_output_dir.mkdir(parents=True, exist_ok=True)
 
         extract_path = resolved_output_dir / extract_dir_name

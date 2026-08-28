@@ -34,7 +34,13 @@ class TIFFToJPGPlugin(ConverterPlugin):
 
     priority = 70
 
-    async def convert(self, source_path: Path, target_format: str) -> Path:
+    async def convert(
+        self,
+        source_path: Path,
+        target_format: str,
+        output_dir: Path | None = None,
+        temp_dir: Path | None = None,
+    ) -> Path:
 
         if not self.supports(source_path.suffix, target_format):
             raise RuntimeError("TIFFToJPGPlugin only supports TIFF -> JPG.")
