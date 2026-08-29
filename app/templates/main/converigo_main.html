@@ -1356,6 +1356,43 @@ const CATEGORY = {
   other:    {color:'#9333EA', light:'#F3E8FF', targets:['PDF','JPG','PNG','TXT','ZIP'], exts:[]}
 };
 
+/* ---------------- static source-to-targets map (P1a) ---------------- */
+/* Dihasilkan dari registry dump aktual per source-format.
+   Self-conversions (source===target) dihapus karena tidak berguna
+   sebagai opsi konversi di dropdown.
+   Fallback: array kosong → "tidak ada converter". */
+const STATIC_TARGET_MAP = {
+  // image sources
+  jpg:['ICO','PDF','PNG','TIFF','WEBP'],  jpeg:['ICO','PDF','PNG','TIFF','WEBP'],
+  png:['BMP','ICO','JPEG','JPG','TIFF','WEBP'],  webp:['ICO','JPEG','JPG','PNG','TIFF'],
+  bmp:['JPEG','JPG','PNG','WEBP'],  tiff:['JPEG','JPG','PNG'],
+  svg:['PNG'],  heic:['JPEG','JPG'],  heif:['JPEG','JPG'],  avif:['JPEG','JPG'],
+  gif:[],  // tidak ada registered converter
+  // document sources
+  pdf:['DOC','DOCX','JPEG','JPG','ODT','PPT','PPTX','WORD','XLS','XLSX'],
+  docx:['JPEG','JPG','PDF','POWERPOINT','PPT','PPTX','SPREADSHEET','XLS','XLSX'],
+  doc:['JPEG','JPG','PDF','POWERPOINT','PPT','PPTX','SPREADSHEET','XLS','XLSX'],
+  pptx:['DOC','DOCX','JPEG','JPG','PDF','SPREADSHEET','WORD','XLS','XLSX'],
+  ppt:['DOC','DOCX','JPEG','JPG','PDF','SPREADSHEET','WORD','XLS','XLSX'],
+  xlsx:['DOC','DOCX','ODS','PDF','POWERPOINT','PPT','PPTX','WORD'],
+  xls:['DOC','DOCX','PDF','POWERPOINT','PPT','PPTX','WORD'],
+  txt:['PDF'],  csv:['PDF'],  ods:['XLSX'],  odt:['PDF'],
+  powerpoint:['DOC','DOCX','JPEG','JPG','SPREADSHEET','WORD','XLS','XLSX'],
+  spreadsheet:['DOC','DOCX','POWERPOINT','PPT','PPTX','WORD'],
+  word:['JPEG','JPG','PDF','POWERPOINT','PPT','PPTX','SPREADSHEET','XLS','XLSX'],
+  html:[],  md:[],  rtf:[],  // tidak ada registered converter
+  // audio sources
+  mp3:['WAV'],  wav:[],  ogg:[],  flac:[],  m4a:[],  aac:[],  // hanya mp3->wav
+  // video sources
+  mp4:['AAC','FLAC','M4A','MP3','OGG','WAV'],  mov:[],  avi:[],  webm:[],  mkv:[],  flv:[],
+  // archive sources (self-conversions dihapus — hanya extract operation)
+  gz:['GZIP'],  gzip:['GZ'],  zip:[],  '7z':[],  rar:[],  tar:[],
+};
+
+function getValidTargets(ext){
+  return STATIC_TARGET_MAP[(ext||'').toLowerCase()] || [];
+}
+
 function categoryOf(ext){
   ext = (ext||'').toLowerCase();
   for(const key in CATEGORY){
@@ -1396,7 +1433,7 @@ function addFiles(fileList){
   files.forEach(file=>{
     const {ext} = splitName(file.name);
     const cat = categoryOf(ext);
-    const targets = CATEGORY[cat].targets;
+    const targets = getValidTargets(ext);
     let target = targets.find(t => t.toLowerCase() !== ext.toLowerCase()) || targets[0];
     jobs.push({
       id: 'j'+(uid++),
@@ -1414,13 +1451,15 @@ function badgeStyle(cat){ return 'background:'+CATEGORY[cat].color+';'; }
 
 function rowTemplate(job){
   const cat = CATEGORY[job.category];
+  const validTargets = getValidTargets(job.ext);
   let rightHTML = '';
 
   if(job.status === 'pending'){
-    rightHTML = `
-      <select class="fmt" data-action="target" data-id="${job.id}">
-        ${cat.targets.map(t=>`<option value="${t}" ${t===job.target?'selected':''}>${t}</option>`).join('')}
-      </select>
+    rightHTML = `\n` + (validTargets.length
+      ? `<select class="fmt" data-action="target" data-id="${job.id}">
+        ${validTargets.map(t=>`<option value="${t}" ${t===job.target?'selected':''}>${t}</option>`).join('')}
+      </select>`
+      : `<span class="no-converter" title="Tidak ada converter untuk format ini">— Tidak ada converter</span>`) + `
       <button class="icon-btn" data-action="settings" data-id="${job.id}" title="Pengaturan" aria-label="Pengaturan">⚙️</button>
       <button class="icon-btn" data-action="code" data-id="${job.id}" title="Lihat API" aria-label="Lihat API">&lt;/&gt;</button>
       <button class="icon-btn danger" data-action="remove" data-id="${job.id}" title="Hapus" aria-label="Hapus">✖</button>`;
@@ -1456,7 +1495,7 @@ function rowTemplate(job){
       <div class="subpanel-inner" style="display:block;">
         <div class="code-box">curl -X POST https://api.ubah.in/v1/convert \\
   -F "file=@${job.name}" \\
-  -F "target=${job.target.toLowerCase()}"<button class="code-copy" data-action="copy" data-id="${job.id}">Salin</button></div>
+  -F "target=${(job.target||'').toLowerCase()}"<button class="code-copy" data-action="copy" data-id="${job.id}">Salin</button></div>
       </div>
     </div>`;
 
@@ -1517,7 +1556,8 @@ function buildGlobalFmt(){
     const cats = [...new Set(pending.map(j=>j.category))];
     let opts = [];
     if(cats.length === 1){
-      opts = CATEGORY[cats[0]].targets;
+      opts = pending.map(j => getValidTargets(j.ext))
+                    .reduce((a,b) => a.filter(t => b.includes(t)), getValidTargets(pending[0].ext));
     } else {
       opts = ['JPG','PNG','PDF','MP3','MP4','ZIP'];
     }
