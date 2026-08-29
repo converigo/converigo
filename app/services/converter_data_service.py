@@ -17,6 +17,11 @@ NON_PRODUCTION_READY_SLUGS = {
     "7z-extract",
 }
 
+PUBLIC_UI_DISABLED_SLUGS = {
+    "pdf-compress",
+    "pdf-merge",
+}
+
 
 def _is_production_ready(contract: dict[str, Any] | None) -> bool:
     if contract is None:
@@ -101,6 +106,9 @@ class ConverterDataService:
         active_converters = []
 
         for tool in self.list_all_converters():
+            slug = str(tool.get("slug", "")).strip().lower()
+            if slug in PUBLIC_UI_DISABLED_SLUGS:
+                continue
             active_flag = tool.get("active", tool.get("enabled", True))
             if active_flag is False:
                 continue
