@@ -18,6 +18,12 @@ seo_service = SeoService(Path("app/data/converters"))
 landing_page_builder = LandingPageBuilder(seo_service, converter_data_service)
 language_service = LanguageService(Path("app/locales"))
 
+# Disabled converter slugs — these tools are hidden from the UI and their
+# dedicated tool pages return 404.  Set the `"active": false` flag in the
+# converter JSON to also exclude them from directories, sitemaps, and
+# recommendations.
+DISABLED_TOOL_SLUGS = {"pdf-compress", "pdf-merge"}
+
 
 def _build_tool_page_sections(tool_data: dict[str, Any]) -> dict[str, Any]:
     source = (tool_data.get("source") or "file").upper()
@@ -186,6 +192,9 @@ def _build_tools_directory_categories() -> list[dict[str, Any]]:
     converters = converter_data_service.list_supported_converters()
     grouped: dict[str, list[dict[str, Any]]] = {key: [] for key in TOOL_DIRECTORY_CATEGORIES}
     for tool in converters:
+        slug = str(tool.get("slug", "")).strip().lower()
+        if slug in DISABLED_TOOL_SLUGS:
+            continue
         category = _normalize_directory_category(tool)
         if not category:
             continue
@@ -214,6 +223,12 @@ async def render_universal_tool_page(
     meta_overrides: dict[str, str] | None = None,
     faq_items: list[dict[str, str]] | None = None,
 ) -> HTMLResponse:
+    slug = (slug or "").strip().lower()
+
+    # Disabled tools must not be reachable through their dedicated pages.
+    if slug in DISABLED_TOOL_SLUGS:
+        raise HTTPException(status_code=404, detail="Tool page not found")
+
     locale_data = language_service.load_locale(
         accept_language=request.headers.get("accept-language"),
         lang_query=request.query_params.get("lang"),
@@ -302,6 +317,14 @@ async def render_universal_tool_page(
                 related_tools = internal_links["related_converters"]
     except Exception:
         pass
+
+    # Defensive: never surface links to disabled tools in related-tools cards.
+    if related_tools:
+        related_tools = [
+            rt
+            for rt in related_tools
+            if str(rt.get("slug", "")).strip().lower() not in DISABLED_TOOL_SLUGS
+        ]
 
     if meta_overrides:
         seo_data.update(meta_overrides)

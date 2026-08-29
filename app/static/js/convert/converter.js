@@ -216,6 +216,17 @@ class ConverterController {
         }
         formData.append("target_format", this.selectedFormat);
 
+        // Include the URL slug as `operation` when on a /tools/* page so the
+        // server can disambiguate converters that share the same format pair
+        // (e.g. pdf-compress vs pdf-split for pdf -> pdf).
+        const pathParts = (window.location.pathname || "").split("/").filter(Boolean);
+        if (pathParts.length >= 2 && pathParts[0] === "tools") {
+            const opSlug = pathParts[1].toLowerCase();
+            if (opSlug) {
+                formData.append("operation", opSlug);
+            }
+        }
+
         const originalLabel = this.convertBtn ? this.convertBtn.textContent : window.translate('upload.convert', 'Convert');
         let wasSuccess = false;
 

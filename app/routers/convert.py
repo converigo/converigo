@@ -103,6 +103,23 @@ async def convert_file(
         logger.debug("Convert form fields: <unserializable>")
     target_format = (form.get('target_format') or '')
     target_format = target_format.lower().strip() if target_format else ''
+
+    # Optional `operation` slug (e.g. "pdf-compress", "pdf-split") sent by the
+    # /tools/* frontend to disambiguate converters that share the same pair.
+    operation = (form.get('operation') or '')
+    operation = operation.lower().strip() if operation else None
+    if operation is not None and not registry.has_slug(operation):
+        request.state.error_code = "UNSUPPORTED_CONVERSION"
+        tracker.fail("validation", request.state.error_code)
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail={
+                "success": False,
+                "code": "UNSUPPORTED_CONVERSION",
+                "message": f"Operation '{operation}' is not registered (slug tidak tersedia).",
+            },
+        )
+
     parsed_targets = None
     # Strict validation: if `targets` present it MUST be a JSON array
     if 'targets' in form:
@@ -186,7 +203,7 @@ async def convert_file(
 
                 # Resolve plugin for this specific pair. If unsupported, record failed result and continue.
                 try:
-                    plugin = registry.get_plugin(source_format, this_target)
+                    plugin = registry.get_plugin(source_format, this_target, slug=operation)
                     slug = getattr(plugin, "slug", None)
                 except ValueError as exc:
                     analytics_service.track_conversion_failed(
@@ -214,6 +231,7 @@ async def convert_file(
                     saved_path,
                     this_target,
                     conversion_id=tracker.conversion_id,
+                    plugin_slug=operation,
                 )
                 tracker.finish("conversion")
 

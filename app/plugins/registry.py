@@ -27,6 +27,13 @@ class PluginRegistry:
 
         # source -> [plugin]
         self.source_cache = defaultdict(list)
+
+        # slug -> plugin
+        self.by_slug: dict[str, object] = {}
+
+        # slug -> [(source,target), ...]
+        self.registered_keys: dict[str, list[tuple[str, str]]] = defaultdict(list)
+
         self.discovery_summary = {
             "loaded_plugins": [],
             "skipped_plugins": [],
@@ -98,16 +105,50 @@ class PluginRegistry:
 
                 self.plugins[key] = plugin
 
+        # Populate slug index
+        slug = getattr(plugin, "slug", None)
+        if slug:
+            slug = slug.lower().strip()
+            self.by_slug[slug] = plugin
+            for source in plugin.source_formats:
+                for target in plugin.target_formats:
+                    self.registered_keys[slug].append(
+                        (source.lower(), target.lower())
+                    )
+
+    def has_slug(self, slug: str) -> bool:
+        """Return True when a plugin with the given slug is registered."""
+        if not slug:
+            return False
+        return slug.lower().strip() in self.by_slug
+
     def get_plugin(
         self,
         source_format: str,
         target_format: str,
+        slug: str | None = None,
     ):
 
-        key = (
-            source_format.lower(),
-            target_format.lower(),
-        )
+        source = source_format.lower()
+        target = target_format.lower()
+
+        # Slug-aware resolution: the slug must map to a registered plugin and
+        # the requested (source, target) pair must be one of its registered keys.
+        if slug:
+            slug = slug.lower().strip()
+            plugin = self.by_slug.get(slug)
+            if plugin is None:
+                raise ValueError(
+                    f"Operation '{slug}' is not registered (slug tidak tersedia)."
+                )
+            if (source, target) not in self.registered_keys.get(slug, []):
+                raise ValueError(
+                    f"Operation '{slug}' does not support {source} -> {target}."
+                )
+            return plugin
+
+        # Legacy pair-based resolution.
+        key = (source, target)
 
         if key not in self.plugins:
 

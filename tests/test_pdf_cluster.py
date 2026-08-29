@@ -1,5 +1,11 @@
 from pathlib import Path
+from unittest.mock import Mock
 
+import pytest
+from fastapi.testclient import TestClient
+
+from app.main import app
+from app.plugins.registry import registry
 from app.services.converter_data_service import ConverterDataService
 from app.services.converter_registry_service import ConverterRegistryService
 from app.services.landing_service import LandingPageBuilder
@@ -69,3 +75,50 @@ def test_related_converter_service_supports_pdf_cluster() -> None:
     assert len(related) >= 4
     assert converter["slug"] not in {item["slug"] for item in related}
     assert len({item["slug"] for item in related}) == len(related)
+
+
+def test_operation_slug_resolves_pdf_merge_plugin_for_matching_pair() -> None:
+    plugin = registry.get_plugin("pdf", "pdf", slug="pdf-merge")
+    assert plugin.slug == "pdf-merge"
+
+
+def test_operation_slug_rejects_mismatched_pair_and_skips_plugin_call() -> None:
+    mock_plugin = Mock()
+    mock_plugin.slug = "pdf-merge"
+
+    with pytest.raises(ValueError, match="does not support pdf -> png|not support.*pdf.*png"):
+        registry.get_plugin("pdf", "png", slug="pdf-merge")
+
+    mock_plugin.convert.assert_not_called()
+
+
+def test_operation_slug_rejects_unknown_slug_with_422() -> None:
+    client = TestClient(app)
+    response = client.post(
+        "/convert",
+        files=[("file", ("sample.pdf", b"%PDF-1.4\n%%EOF", "application/pdf"))],
+        data={"target_format": "pdf", "operation": "bogus"},
+    )
+
+    assert response.status_code == 422
+    payload = response.json()
+    assert "slug tidak tersedia" in payload["message"]
+
+
+def test_legacy_operationless_call_still_uses_pdf_split_for_pdf_pdf() -> None:
+    plugin = registry.get_plugin("pdf", "pdf")
+    assert plugin.slug == "pdf-split"
+
+
+def test_disabled_pdf_tools_are_404_and_absent_from_homepage() -> None:
+    client = TestClient(app)
+
+    for slug in ("pdf-compress", "pdf-merge"):
+        response = client.get(f"/tools/{slug}")
+        assert response.status_code == 404
+
+    home_response = client.get("/")
+    assert home_response.status_code == 200
+    body = home_response.text.lower()
+    assert "pdf-compress" not in body
+    assert "pdf-merge" not in body

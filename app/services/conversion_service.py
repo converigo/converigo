@@ -78,6 +78,7 @@ class ConversionService:
         source_path: Path,
         target_format: str,
         conversion_id: str | None = None,
+        plugin_slug: str | None = None,
     ) -> Path:
 
         source_format = source_path.suffix.replace(".", "").lower()
@@ -85,10 +86,17 @@ class ConversionService:
         conversion_id = conversion_id or uuid.uuid4().hex
 
         try:
-            plugin = registry.get_plugin(
-                source_format,
-                target_format,
-            )
+            if plugin_slug is not None:
+                plugin = registry.get_plugin(
+                    source_format,
+                    target_format,
+                    slug=plugin_slug,
+                )
+            else:
+                plugin = registry.get_plugin(
+                    source_format,
+                    target_format,
+                )
             try:
                 slug = getattr(plugin, "slug", None)
             except Exception:
