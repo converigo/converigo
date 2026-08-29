@@ -6,9 +6,15 @@ from typing import Any
 from xml.sax.saxutils import escape
 
 from app.services.article_service import ArticleService
+from app.services.authority_service import AuthorityService
 from app.services.converter_data_service import ConverterDataService
 
 PRODUCTION_BASE_URL = "https://converigo.com"
+
+# Same contracts directory used by app/routers/formats.py (CONTRACTS_DIR),
+# derived identically from __file__ so the sitemap format set always matches
+# the live /formats/* routes regardless of CWD.
+CONTRACTS_DIR = (Path(__file__).resolve().parents[1] / "data" / "converters").resolve()
 
 
 class SeoService:
@@ -185,6 +191,20 @@ class SeoService:
 
         return entries
 
+    def _build_format_entries(self, base_url: str) -> list[dict[str, str]]:
+        today = datetime.utcnow().date().isoformat()
+        formats = sorted(AuthorityService(CONTRACTS_DIR).generate_all().keys())
+        entries: list[dict[str, str]] = [
+            {"loc": base_url.rstrip("/") + "/formats", "lastmod": today}
+        ]
+
+        for slug in formats:
+            entries.append(
+                {"loc": base_url.rstrip("/") + f"/formats/{slug}", "lastmod": today}
+            )
+
+        return entries
+
     def build_sitemap_xml(self, request: Any) -> str:
 
         base_url = self._build_base_url(request)
@@ -192,6 +212,7 @@ class SeoService:
         entries = self.data_service.sitemap_entries(base_url)
         entries.extend(self._build_blog_entries(base_url))
         entries.extend(self._build_learning_entries(base_url))
+        entries.extend(self._build_format_entries(base_url))
 
         lines = [
             '<?xml version="1.0" encoding="UTF-8"?>',
