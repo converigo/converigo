@@ -4,6 +4,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+_COUNTRY_TO_LOCALE: dict[str, str] = {"ID": "id", "JP": "ja"}
+
 
 class LanguageService:
     def __init__(self, locales_dir: Path, default_locale: str = "en") -> None:
@@ -25,11 +27,21 @@ class LanguageService:
         locale_file = self.locales_dir / f"{locale_code}.json"
         return locale_file.exists()
 
-    def determine_locale(self, accept_language: str | None = None, lang_query: str | None = None) -> str:
+    def determine_locale(
+        self,
+        accept_language: str | None = None,
+        lang_query: str | None = None,
+        cf_country: str | None = None,
+    ) -> str:
         if lang_query:
             candidate = lang_query.strip().lower().split("-")[0]
             if self.locale_exists(candidate):
                 return candidate
+
+        if cf_country:
+            mapped = _COUNTRY_TO_LOCALE.get(cf_country)
+            if mapped and self.locale_exists(mapped):
+                return mapped
 
         if accept_language:
             for language_entry in accept_language.split(","):
@@ -49,8 +61,11 @@ class LanguageService:
         self,
         accept_language: str | None = None,
         lang_query: str | None = None,
+        cf_country: str | None = None,
     ) -> dict[str, Any]:
-        locale_code = self.determine_locale(accept_language=accept_language, lang_query=lang_query)
+        locale_code = self.determine_locale(
+            accept_language=accept_language, lang_query=lang_query, cf_country=cf_country
+        )
         # If cached, validate mtime to avoid serving stale content when files change
         locale_file = self.locales_dir / f"{locale_code}.json"
         try:

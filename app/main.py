@@ -385,9 +385,11 @@ async def correlated_unhandled_exception_handler(request: Request, exc: Exceptio
 
 @app.middleware("http")
 async def locale_middleware(request: Request, call_next):
+    cf_country = request.headers.get("cf-ipcountry", "").strip().upper()
     locale_data = language_manager.load_locale(
         accept_language=request.headers.get("accept-language"),
         lang_query=request.query_params.get("lang"),
+        cf_country=cf_country or None,
     )
 
     def t(key: str, default: str = "") -> str:
