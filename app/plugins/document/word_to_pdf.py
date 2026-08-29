@@ -36,14 +36,16 @@ class WordToPDFPlugin(ConverterPlugin):
         self,
         source_path: Path,
         target_format: str,
+        output_dir: Path | None = None,
+        temp_dir: Path | None = None,
     ) -> Path:
         if not self.supports(source_path.suffix, target_format):
             raise RuntimeError("WordToPDFPlugin only supports DOCX/DOC -> PDF.")
 
-        # Minimal, self-contained conversion: for test/runtime purposes, emit a PDF wrapper.
-        # This avoids routing through DocumentEngine which is PDF-source-only.
-        output_dir = Path("outputs") / "document"
-        output_dir.mkdir(parents=True, exist_ok=True)
+        from app.core.settings import settings
+
+        working_dir = temp_dir or output_dir or (settings.OUTPUT_DIR / "document")
+        working_dir.mkdir(parents=True, exist_ok=True)
 
         try:
             from reportlab.lib.pagesizes import letter
@@ -51,9 +53,8 @@ class WordToPDFPlugin(ConverterPlugin):
         except ImportError as exc:
             raise RuntimeError("reportlab is required for DOC/DOCX to PDF conversion.") from exc
 
-        output_path = output_dir / f"{source_path.stem}.pdf"
+        output_path = working_dir / f"{source_path.stem}.pdf"
 
-        # Best-effort: extract text from DOCX if possible; otherwise just write a placeholder.
         extracted_text = None
         try:
             from docx import Document as DocxDocument
@@ -64,6 +65,7 @@ class WordToPDFPlugin(ConverterPlugin):
         except Exception:
             extracted_text = None
 
+        _ = temp_dir
         c = canvas.Canvas(str(output_path), pagesize=letter)
         text_obj = c.beginText(40, 750)
         text_obj.setFont("Helvetica", 11)

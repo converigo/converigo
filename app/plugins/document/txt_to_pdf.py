@@ -31,27 +31,25 @@ class TXTToPDFPlugin(ConverterPlugin):
         self,
         source_path: Path,
         target_format: str,
+        output_dir: Path | None = None,
+        temp_dir: Path | None = None,
     ) -> Path:
         if not self.supports(source_path.suffix, target_format):
             raise RuntimeError("TXTToPDFPlugin only supports TXT -> PDF.")
 
-        # Use the DocumentEngine rendering helper to generate a real PDF.
-        output_dir = Path("outputs") / "document"
-        output_dir.mkdir(parents=True, exist_ok=True)
+        from app.core.settings import settings
 
-        output_path = output_dir / f"{source_path.stem}.pdf"
+        working_dir = temp_dir or output_dir or (settings.OUTPUT_DIR / "document")
+        working_dir.mkdir(parents=True, exist_ok=True)
 
-        # Read source lines safely (utf-8, replace errors)
+        output_path = working_dir / f"{source_path.stem}.pdf"
+
         with source_path.open("r", encoding="utf-8", errors="replace") as f:
             lines = [line.rstrip('\n') for line in f.readlines()]
 
         engine = DocumentEngine()
-
-        # DocumentEngine._render_text_lines_to_pdf is synchronous and
-        # returns a Path to the written PDF. Call it and return the result.
         pdf_path = engine._render_text_lines_to_pdf(lines, output_path)
 
-        # Ensure we never return the original source_path
         if pdf_path.resolve() == source_path.resolve():
             raise RuntimeError("Plugin produced source path as output, aborting.")
 

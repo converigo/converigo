@@ -105,6 +105,8 @@ class MP3ToWAVPlugin(ConverterPlugin):
         self,
         source_path: Path,
         target_format: str,
+        output_dir: Path | None = None,
+        temp_dir: Path | None = None,
     ) -> Path:
 
 
@@ -117,13 +119,11 @@ class MP3ToWAVPlugin(ConverterPlugin):
                 "MP3ToWAVPlugin only supports MP3 -> WAV."
             )
 
+        # prefer request-local temp_dir for working files
+        working_root = (temp_dir or output_dir or settings.OUTPUT_DIR) / "audio"
+        working_root.mkdir(parents=True, exist_ok=True)
 
-        output_path = (
-            settings.OUTPUT_DIR
-            / "audio"
-            / f"{source_path.stem}.wav"
-        )
-
+        output_path = working_root / f"{source_path.stem}.wav"
 
         return await FFmpegEngine.convert(
             source_path=source_path,

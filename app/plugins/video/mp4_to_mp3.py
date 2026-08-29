@@ -184,6 +184,8 @@ class MP4ToMP3Plugin(ConverterPlugin):
         self,
         source_path: Path,
         target_format: str,
+        output_dir: Path | None = None,
+        temp_dir: Path | None = None,
     ) -> Path:
 
 
@@ -198,12 +200,13 @@ class MP4ToMP3Plugin(ConverterPlugin):
 
         self._ensure_audio_stream(source_path)
 
-        output_path = (
-            settings.OUTPUT_DIR
-            / "audio"
-            / f"{source_path.stem}.mp3"
-        )
+        # use request-local temp_dir when available so engines write
+        # working files into the conversion-specific temp area instead
+        # of writing directly into the public output directory.
+        working_root = (temp_dir or output_dir or settings.OUTPUT_DIR) / "audio"
+        working_root.mkdir(parents=True, exist_ok=True)
 
+        output_path = working_root / f"{source_path.stem}.mp3"
 
         return await FFmpegEngine.convert(
             source_path=source_path,

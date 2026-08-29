@@ -34,11 +34,19 @@ class MP4ToM4APlugin(ConverterPlugin):
     seo_title = "MP4 to M4A Converter | Converigo"
     seo_description = "Convert MP4 videos to M4A audio quickly and easily."
 
-    async def convert(self, source_path: Path, target_format: str) -> Path:
+    async def convert(
+        self,
+        source_path: Path,
+        target_format: str,
+        output_dir: Path | None = None,
+        temp_dir: Path | None = None,
+    ) -> Path:
         if not self.supports(source_path.suffix, target_format):
             raise RuntimeError("MP4ToM4APlugin only supports MP4 -> M4A.")
 
-        output_path = settings.OUTPUT_DIR / "audio" / f"{source_path.stem}.m4a"
+        base_output_dir = output_dir or settings.OUTPUT_DIR
+        _ = temp_dir
+        output_path = base_output_dir / "audio" / f"{source_path.stem}.m4a"
         return await FFmpegEngine.convert(
             source_path=source_path,
             output_path=output_path,

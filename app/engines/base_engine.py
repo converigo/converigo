@@ -28,9 +28,15 @@ class BaseEngine(ABC):
         self,
         source_path: Path,
         target_format: str,
+        output_dir: Path | None = None,
+        temp_dir: Path | None = None,
     ) -> Path:
         """
         Convert a source file into the requested format.
+
+        In the staged transition, output_dir/temp_dir are optional so existing
+        callers remain compatible while the migration proceeds. These will
+        become required after the refactor is complete.
         """
         raise NotImplementedError
 

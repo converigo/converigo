@@ -21,15 +21,23 @@ class _OfficePlaceholderPlugin(ConverterPlugin):
     estimated_saving = 5
     badge = "Office Conversion"
 
-    async def convert(self, source_path: Path, target_format: str) -> Path:
+    async def convert(
+        self,
+        source_path: Path,
+        target_format: str,
+        output_dir: Path | None = None,
+        temp_dir: Path | None = None,
+    ) -> Path:
         if not self.supports(source_path.suffix, target_format):
             raise RuntimeError(f"{self.slug} only supports {self.source_formats} -> {self.target_formats}.")
 
-        output_dir = Path("outputs") / "document"
-        output_dir.mkdir(parents=True, exist_ok=True)
+        from app.core.settings import settings
+
+        working_dir = temp_dir or output_dir or (settings.OUTPUT_DIR / "document")
+        working_dir.mkdir(parents=True, exist_ok=True)
 
         normalized_target = self._resolve_output_extension(target_format)
-        output_path = output_dir / f"{source_path.stem}.{normalized_target}"
+        output_path = working_dir / f"{source_path.stem}.{normalized_target}"
         output_path.write_text(
             f"Placeholder conversion for {self.slug}: {source_path.name} -> {normalized_target}\n",
             encoding="utf-8",

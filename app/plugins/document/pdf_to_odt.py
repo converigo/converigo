@@ -19,9 +19,20 @@ class PDFToODTPlugin(ConverterPlugin):
     source_formats = ["pdf"]
     target_formats = ["odt"]
 
-    async def convert(self, source_path: Path, target_format: str) -> Path:
+    async def convert(
+        self,
+        source_path: Path,
+        target_format: str,
+        output_dir: Path | None = None,
+        temp_dir: Path | None = None,
+    ) -> Path:
         if not self.supports(source_path.suffix, target_format):
             raise RuntimeError("PDFToODTPlugin only supports PDF -> ODT.")
 
         engine = DocumentEngine()
-        return await engine.convert(source_path=source_path, target_format=target_format)
+        return await engine.convert(
+            source_path=source_path,
+            target_format=target_format,
+            output_dir=output_dir,
+            temp_dir=temp_dir,
+        )

@@ -36,13 +36,16 @@ class JPGToPDFPlugin(ConverterPlugin):
         self,
         source_path: Path,
         target_format: str,
+        output_dir: Path | None = None,
+        temp_dir: Path | None = None,
     ) -> Path:
         if not self.supports(source_path.suffix, target_format):
             raise RuntimeError("JPGToPDFPlugin only supports JPG -> PDF.")
 
-        # Minimal, self-contained conversion: render the input image onto a single PDF page.
-        output_dir = Path("outputs") / "document"
-        output_dir.mkdir(parents=True, exist_ok=True)
+        from app.core.settings import settings
+
+        working_dir = temp_dir or output_dir or (settings.OUTPUT_DIR / "document")
+        working_dir.mkdir(parents=True, exist_ok=True)
 
         # Use ReportLab if available; otherwise raise a clear error.
         try:
@@ -56,7 +59,7 @@ class JPGToPDFPlugin(ConverterPlugin):
         except ImportError as exc:
             raise RuntimeError("Pillow is required for JPG to PDF conversion.") from exc
 
-        output_path = output_dir / f"{source_path.stem}.pdf"
+        output_path = working_dir / f"{source_path.stem}.pdf"
 
         img = Image.open(source_path)
         # Convert to RGB for consistent PDF embedding.

@@ -107,15 +107,18 @@ class ConversionService:
             raise UnsupportedConversionError(source_format, target_format) from exc
 
         timeout_seconds = self._get_timeout_seconds(source_format, target_format)
-        temp_root = self._build_temp_root(conversion_id)
+        temp_root = settings.TEMP_DIR / conversion_id
         public_root = settings.OUTPUT_DIR / conversion_id
-        original_output_dir = settings.OUTPUT_DIR
+        temp_root.mkdir(parents=True, exist_ok=True)
 
         try:
-            temp_root.mkdir(parents=True, exist_ok=True)
-            settings.OUTPUT_DIR = temp_root
             output_path = await asyncio.wait_for(
-                plugin.convert(source_path, target_format),
+                plugin.convert(
+                    source_path,
+                    target_format,
+                    output_dir=public_root,
+                    temp_dir=temp_root,
+                ),
                 timeout=timeout_seconds,
             )
         except asyncio.TimeoutError as exc:
@@ -141,9 +144,6 @@ class ConversionService:
             self._cleanup_temp_artifacts(temp_root)
             logger.exception("[CONVERTER_DEBUG] ConversionService raised an unexpected exception")
             raise ConversionError(f"{type(exc).__name__}: {exc}") from exc
-        finally:
-            settings.OUTPUT_DIR = original_output_dir
-
         logger.info("Plugin returned output path: %s", str(output_path))
         logger.info("[CONVERTER_DEBUG] ConversionService output_path=%s", str(output_path))
 
@@ -152,20 +152,20 @@ class ConversionService:
             raise ConversionError("Invalid output path.")
 
         output_path = output_path.resolve(strict=False)
-        public_output_path = self._publish_output(output_path, public_root, temp_root)
+        public_output_path = self._publish_output(output_path, public_root, temp_root, conversion_id=conversion_id)
 
         resolved_output_path = public_output_path.resolve(strict=False)
-        resolved_output_dir = settings.OUTPUT_DIR.resolve(strict=False)
+        resolved_public_root = public_root.resolve(strict=False)
         resolved_workdir = Path.cwd().resolve(strict=False)
         resolved_source_dir = source_path.resolve(strict=False).parent
 
-        allowed_roots = {resolved_output_dir, resolved_workdir, resolved_source_dir}
+        allowed_roots = {resolved_public_root, resolved_workdir, resolved_source_dir}
         if not any(
             resolved_output_path == root or root in resolved_output_path.parents
             for root in allowed_roots
         ):
             raise ConversionError(
-                f"Output path is outside the allowed output directory: {resolved_output_dir}"
+                f"Output path is outside the allowed output directory: {resolved_public_root}"
             )
 
         if not public_output_path.exists():
@@ -180,22 +180,33 @@ class ConversionService:
         temp_root.mkdir(parents=True, exist_ok=True)
         return temp_root
 
-    def _publish_output(self, output_path: Path, public_root: Path, temp_root: Path) -> Path:
+    def _publish_output(
+        self,
+        output_path: Path,
+        public_root: Path,
+        temp_root: Path,
+        conversion_id: str | None = None,
+    ) -> Path:
         if not output_path.exists():
-            self._cleanup_temp_artifacts(temp_root)
+            self._cleanup_temp_artifacts(temp_root, conversion_id=conversion_id)
             raise ConversionError("Converted file was not saved.")
 
         public_root.mkdir(parents=True, exist_ok=True)
         public_output_path = public_root / output_path.name
+
+        output_path_abs = output_path.resolve(strict=False)
+        public_output_path_abs = public_output_path.resolve(strict=False)
+        if output_path_abs == public_output_path_abs:
+            return public_output_path
+
         if public_output_path.exists():
             public_output_path.unlink(missing_ok=True)
-        if output_path != public_output_path:
-            shutil.move(str(output_path), str(public_output_path))
+        shutil.move(str(output_path), str(public_output_path))
 
-        self._cleanup_temp_artifacts(temp_root)
+        self._cleanup_temp_artifacts(temp_root, conversion_id=conversion_id)
         return public_output_path
 
-    def _cleanup_temp_artifacts(self, temp_root: Path) -> None:
+    def _cleanup_temp_artifacts(self, temp_root: Path, conversion_id: str | None = None) -> None:
         if not temp_root.exists():
             return
         try:

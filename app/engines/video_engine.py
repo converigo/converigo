@@ -27,6 +27,8 @@ class VideoEngine(BaseEngine):
         self,
         source_path: Path,
         target_format: str,
+        output_dir: Path | None = None,
+        temp_dir: Path | None = None,
     ) -> Path:
 
         normalized_target = target_format.lower().strip()
@@ -39,14 +41,15 @@ class VideoEngine(BaseEngine):
                 f"VideoEngine currently supports only MP4 -> {supported_targets}."
             )
 
-        output_dir = settings.OUTPUT_DIR / "audio"
-        output_dir.mkdir(
+        resolved_output_dir = (output_dir or settings.OUTPUT_DIR) / "audio"
+        _ = temp_dir
+        resolved_output_dir.mkdir(
             parents=True,
             exist_ok=True,
         )
 
         config = self.AUDIO_TARGETS[normalized_target]
-        output_path = output_dir / f"{source_path.stem}.{config['extension']}"
+        output_path = resolved_output_dir / f"{source_path.stem}.{config['extension']}"
 
         command = [
             "ffmpeg",

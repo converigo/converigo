@@ -24,7 +24,7 @@ def test_normal_conversion_succeeds(monkeypatch, tmp_path):
     service = ConversionService()
 
     class FakePlugin:
-        async def convert(self, source_path, target_format):
+        async def convert(self, source_path, target_format, output_dir=None, temp_dir=None, **kwargs):
             output_path = tmp_path / f"converted.{target_format}"
             output_path.write_text("ok", encoding="utf-8")
             return output_path
@@ -44,7 +44,7 @@ def test_timeout_conversion_is_stopped_safely(monkeypatch, tmp_path):
     service = ConversionService()
 
     class SlowPlugin:
-        async def convert(self, source_path, target_format):
+        async def convert(self, source_path, target_format, output_dir=None, temp_dir=None, **kwargs):
             await asyncio.sleep(10)
             return tmp_path / f"converted.{target_format}"
 

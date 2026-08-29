@@ -45,7 +45,11 @@ def test_ui_partial_failure_shows_per_row_status(tmp_path):
         page.locator("#goBtn").click()
 
         # Wait for final state: either .dl-main for success or .status-pill for failure per row
-        page.wait_for_selector("#rows .row", timeout=TIMEOUT)
+        page.wait_for_selector(".dl-main, .status-pill", timeout=TIMEOUT)
+        page.wait_for_function(
+            "() => Array.from(document.querySelectorAll('#rows .row')).every(r => !r.querySelector('.converting-pill'))",
+            timeout=TIMEOUT
+        )
 
         # Gather statuses
         rows = page.locator("#rows .row")
