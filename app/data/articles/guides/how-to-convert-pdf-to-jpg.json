@@ -79,7 +79,7 @@
   ],
   "call_to_action": {
     "text": "Convert your PDF to JPG instantly with Converigo's secure online converter. No sign-up required.",
-    "url": "/pdf-to-jpg",
+    "url": "/tools/pdf-to-jpg",
     "button_text": "Convert PDF to JPG"
   },
   "breadcrumb_override": [
