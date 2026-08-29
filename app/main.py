@@ -460,6 +460,13 @@ async def apple_touch_icon() -> FileResponse:
         raise HTTPException(status_code=404, detail="Icon not found")
     return FileResponse(icon_path, media_type="image/png")
 
+@app.get("/favicon.ico")
+async def favicon() -> FileResponse:
+    icon_path = STATIC_DIR / "images" / "favicon.ico"
+    if not icon_path.exists():
+        raise HTTPException(status_code=404, detail="Favicon not found")
+    return FileResponse(icon_path, media_type="image/x-icon")
+
 
 @app.get("/download/{path:path}")
 async def download_file(request: Request, path: str) -> FileResponse:
