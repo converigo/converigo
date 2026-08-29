@@ -1,0 +1,45 @@
+﻿...............s.................................................F...... [ 12%]
+........................................................................ [ 24%]
+........................................................................ [ 36%]
+...................x..s....F......................FFF.F................. [ 49%]
+.................F.............................................F........ [ 61%]
+.........................................F.............................. [ 73%]
+........................................................................ [ 86%]
+....FF....F.F........................................................... [ 98%]
+...F.F....                                                               [100%]
+============================== warnings summary ===============================
+tests/certified/document/test_pdf_to_pptx.py::test_pdf_to_pptx_conversion_creates_pptx
+tests/certified/document/test_pdf_to_pptx.py::test_pdf_to_pptx_conversion_creates_pptx
+  <frozen importlib._bootstrap>:241: DeprecationWarning: builtin type SwigPyPacked has no __module__ attribute
+
+tests/certified/document/test_pdf_to_pptx.py::test_pdf_to_pptx_conversion_creates_pptx
+tests/certified/document/test_pdf_to_pptx.py::test_pdf_to_pptx_conversion_creates_pptx
+  <frozen importlib._bootstrap>:241: DeprecationWarning: builtin type SwigPyObject has no __module__ attribute
+
+tests/certified/document/test_pdf_to_pptx.py::test_pdf_to_pptx_conversion_creates_pptx
+  <frozen importlib._bootstrap>:241: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+
+tests/certified/pdf/test_pdf_to_docx_certified.py::TestPDFToDocxCertified::test_007_empty_pdf_rejected_with_422
+tests/certified/pdf/test_pdf_to_docx_certified.py::test_pdf_to_docx_empty_pdf_rejected
+tests/test_observability.py::test_unsupported_conversion_error_includes_correlation_ids
+  C:\converigo\.venv\Lib\site-packages\fastapi\routing.py:344: StarletteDeprecationWarning: 'HTTP_422_UNPROCESSABLE_ENTITY' is deprecated. Use 'HTTP_422_UNPROCESSABLE_CONTENT' instead.
+    return await dependant.call(**values)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/e2e/test_phase_c_partial_failure_ui.py::test_ui_partial_failure_shows_per_row_status
+FAILED tests/test_globalfmt_intersection.py::test_globalfmt_no_common_target_for_jpg_png
+FAILED tests/test_i18n.py::test_homepage_hero_has_no_extra_ctas_and_visible_drop_zone
+FAILED tests/test_i18n.py::test_japanese_homepage_uses_translated_trust_and_support_copy
+FAILED tests/test_i18n.py::test_navbar_and_hero_subtitle_are_localized_for_spanish_and_french
+FAILED tests/test_i18n.py::test_jpg_to_pdf_landing_page_renders_localized_text_and_frontend_locale
+FAILED tests/test_jpg_to_png_landing.py::test_jpg_to_png_landing_page_renders_with_seo_and_faq
+FAILED tests/test_office_converter_cluster.py::test_hub_and_sitemap_and_audit
+FAILED tests/test_production_audit_service.py::test_audit_passes_for_valid_converters
+FAILED tests/test_seo_crawlability.py::test_missing_page_returns_404_status_and_custom_content
+FAILED tests/test_seo_crawlability.py::test_converter_page_renders_visible_breadcrumb
+FAILED tests/test_seo_urls.py::test_seo_service_uses_production_absolute_urls
+FAILED tests/test_sitemap_service.py::test_sitemap_service_generates_category_sitemaps_and_validates_entries
+FAILED tests/test_webp_to_jpg_landing.py::test_webp_to_jpg_landing_page_renders_with_seo_and_faq
+FAILED tests/test_webp_to_png_landing.py::test_webp_to_png_landing_page_renders_with_seo_and_faq
+15 failed, 568 passed, 2 skipped, 1 xfailed, 8 warnings in 911.71s (0:15:11)
