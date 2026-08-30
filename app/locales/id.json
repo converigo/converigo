@@ -43,6 +43,10 @@
   },
   "homepage": {
     "marquee_label": "Semua format yang bisa diubah",
+    "nav": {
+      "formats_label": "Format",
+      "faq_label": "FAQ"
+    },
     "find_format": {
       "eyebrow": "Temukan Format",
       "heading": "Temukan format yang cocok untuk kebutuhan konversi Anda.",

@@ -906,9 +906,9 @@
   <div class="nav-inner">
     <a href="/" class="brand" aria-label="Go to the Converigo homepage"><span class="brand-mark" aria-hidden="true"></span>Converigo</a>
     <div class="nav-links">
-      <a href="#formats">Format</a>
+      <a href="#formats">{{ request.state.t('homepage.nav.formats_label', 'Formats') }}</a>
       <a href="#how-it-works">{{ request.state.t('homepage.how_it_works.eyebrow', 'How It Works') }}</a>
-      <a href="#faq">{{ request.state.t('homepage.faq.eyebrow', 'FAQ') }}</a>
+      <a href="#faq">{{ request.state.t('homepage.nav.faq_label', 'FAQ') }}</a>
     </div>
     <div class="header-actions">
       <div class="language-switcher">
