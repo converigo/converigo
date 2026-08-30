@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 {% set runtime_ga_measurement_id = ga_measurement_id or get_template_globals().ga_measurement_id %}
+{% set disable_analytics = disable_analytics or request.query_params.get('dev') == 'true' %}
 {% include "partials/ga4_bootstrap.html" %}
 
 {% include "partials/converigo_analytics.html" %}
