@@ -42,6 +42,10 @@
   },
   "homepage": {
     "marquee_label": "All formats you can change",
+    "nav": {
+      "formats_label": "Formats",
+      "faq_label": "FAQ"
+    },
     "find_format": {
       "eyebrow": "Find Format",
       "heading": "Find the right format for your conversion needs.",

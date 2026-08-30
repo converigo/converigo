@@ -43,6 +43,10 @@
   },
   "homepage": {
     "marquee_label": "変換できるすべての形式",
+    "nav": {
+      "formats_label": "形式",
+      "faq_label": "よくある質問"
+    },
     "find_format": {
       "eyebrow": "形式を見つける",
       "heading": "変換に適した形式を見つけましょう。",
