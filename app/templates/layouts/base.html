@@ -216,7 +216,7 @@
             params.delete('lang');
         }
         const query = params.toString();
-        window.location.search = query ? `?${query}` : window.location.pathname;
+        window.location.href = window.location.pathname + (query ? `?${query}` : '');
     };
 
     document.addEventListener('DOMContentLoaded', function () {
