@@ -385,9 +385,11 @@ async def correlated_unhandled_exception_handler(request: Request, exc: Exceptio
 
 @app.middleware("http")
 async def locale_middleware(request: Request, call_next):
+    cf_country = request.headers.get("cf-ipcountry", "").strip().upper()
     locale_data = language_manager.load_locale(
         accept_language=request.headers.get("accept-language"),
         lang_query=request.query_params.get("lang"),
+        cf_country=cf_country or None,
     )
 
     def t(key: str, default: str = "") -> str:
@@ -457,6 +459,13 @@ async def apple_touch_icon() -> FileResponse:
     if not icon_path.exists():
         raise HTTPException(status_code=404, detail="Icon not found")
     return FileResponse(icon_path, media_type="image/png")
+
+@app.get("/favicon.ico")
+async def favicon() -> FileResponse:
+    icon_path = STATIC_DIR / "images" / "favicon.ico"
+    if not icon_path.exists():
+        raise HTTPException(status_code=404, detail="Favicon not found")
+    return FileResponse(icon_path, media_type="image/x-icon")
 
 
 @app.get("/download/{path:path}")

@@ -13,15 +13,25 @@ class LanguageManager:
     def locale_exists(self, locale_code: str) -> bool:
         return self.service.locale_exists(locale_code)
 
-    def determine_locale(self, accept_language: str | None = None, lang_query: str | None = None) -> str:
-        return self.service.determine_locale(accept_language=accept_language, lang_query=lang_query)
+    def determine_locale(
+        self,
+        accept_language: str | None = None,
+        lang_query: str | None = None,
+        cf_country: str | None = None,
+    ) -> str:
+        return self.service.determine_locale(
+            accept_language=accept_language, lang_query=lang_query, cf_country=cf_country
+        )
 
     def load_locale(
         self,
         accept_language: str | None = None,
         lang_query: str | None = None,
+        cf_country: str | None = None,
     ) -> dict[str, str]:
-        return self.service.load_locale(accept_language=accept_language, lang_query=lang_query)
+        return self.service.load_locale(
+            accept_language=accept_language, lang_query=lang_query, cf_country=cf_country
+        )
 
     def translate(self, locale_data: dict[str, str], key: str, default: str = "") -> str:
         return self.service.translate(locale_data, key, default)
