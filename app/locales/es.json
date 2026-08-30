@@ -64,7 +64,8 @@
     "convert_another": "Convertir otro archivo",
     "back_to_upload": "Volver a subir",
     "file_ready_for_download": "Archivo listo para descargar",
-    "ready_to_convert": "Listo para convertir"
+    "ready_to_convert": "Listo para convertir",
+    "not_available": "Este conversor aún no está disponible. Llegará pronto — vuelva a intentarlo más tarde."
   },
   "supported_formats": {
     "heading": "Formatos compatibles",

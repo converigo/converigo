@@ -38,7 +38,8 @@
     "add_more_files": "Add More Files",
     "convert_button": "Convert",
     "download_all": "Download All",
-    "post_note": "All files will be deleted automatically in 8 hours for your privacy. Be sure to download results before they are removed."
+    "post_note": "All files will be deleted automatically in 8 hours for your privacy. Be sure to download results before they are removed.",
+    "not_available": "This converter is not available yet. It's coming soon — please check back later."
   },
   "homepage": {
     "marquee_label": "All formats you can change",

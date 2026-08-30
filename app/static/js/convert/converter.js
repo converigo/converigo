@@ -288,6 +288,12 @@ class ConverterController {
                                 .join('; ');
                         } else if (data.detail && typeof data.detail === 'string') {
                             errorMsg = data.detail;
+                        } else if (data.detail && typeof data.detail === 'object' && typeof data.detail.message === 'string') {
+                            // Structured error detail, e.g. {code: 'UNSUPPORTED_CONVERSION', message: '...'}
+                            errorMsg = data.detail.message;
+                            if (data.detail.code === 'UNSUPPORTED_CONVERSION') {
+                                errorMsg = window.translate('upload.not_available', errorMsg);
+                            }
                         } else if (data.message && typeof data.message === 'string') {
                             errorMsg = data.message;
                         } else if (data.error && typeof data.error === 'string') {
