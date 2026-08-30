@@ -39,7 +39,8 @@
     "add_more_files": "Tambahkan Lebih Banyak File",
     "convert_button": "Mengubah",
     "download_all": "Unduh Semua",
-    "post_note": "Semua file akan dihapus otomatis dalam 8 jam untuk menjaga privasi Anda. Pastikan unduh hasil sebelum terhapus."
+    "post_note": "Semua file akan dihapus otomatis dalam 8 jam untuk menjaga privasi Anda. Pastikan unduh hasil sebelum terhapus.",
+    "not_available": "Konverter ini belum tersedia. Segera hadir — silakan cek kembali nanti."
   },
   "homepage": {
     "marquee_label": "Semua format yang bisa diubah",

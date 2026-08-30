@@ -31,18 +31,25 @@ class _OfficePlaceholderPlugin(ConverterPlugin):
         if not self.supports(source_path.suffix, target_format):
             raise RuntimeError(f"{self.slug} only supports {self.source_formats} -> {self.target_formats}.")
 
-        from app.core.settings import settings
+        # PR-0 (Opsi B — honest-message stopgap): this converter is still a
+        # placeholder and the real conversion has NOT been implemented yet.
+        # Never fabricate a fake .txt file disguised as the target format.
+        # Instead raise an honest UnsupportedConversionError so the existing
+        # error pipeline (convert.py -> HTTP 422 + code UNSUPPORTED_CONVERSION)
+        # surfaces a clear "not available yet" message to the user.
+        # Local import keeps the module safe during plugin discovery (no
+        # circular import with app.services.conversion_service).
+        # Real conversion implementation lands in PR-1 / PR-2.
+        from app.services.conversion_service import UnsupportedConversionError
 
-        working_dir = temp_dir or output_dir or (settings.OUTPUT_DIR / "document")
-        working_dir.mkdir(parents=True, exist_ok=True)
-
-        normalized_target = self._resolve_output_extension(target_format)
-        output_path = working_dir / f"{source_path.stem}.{normalized_target}"
-        output_path.write_text(
-            f"Placeholder conversion for {self.slug}: {source_path.name} -> {normalized_target}\n",
-            encoding="utf-8",
+        raise UnsupportedConversionError(
+            source_path.suffix.lstrip(".").lower(),
+            target_format,
+            message=(
+                f"{self.slug} conversion is not available yet. "
+                "This converter is coming soon — please check back later."
+            ),
         )
-        return output_path
 
     @staticmethod
     def _resolve_output_extension(target_format: str) -> str:
