@@ -908,7 +908,7 @@
     <div class="nav-links">
       <a href="#formats">Format</a>
       <a href="#how-it-works">{{ request.state.t('homepage.how_it_works.eyebrow', 'How It Works') }}</a>
-      <a href="#faq">FAQ</a>
+      <a href="#faq">{{ request.state.t('homepage.faq.eyebrow', 'FAQ') }}</a>
     </div>
     <div class="header-actions">
       <div class="language-switcher">
@@ -1795,7 +1795,7 @@ window.handleLanguageChange = function (event) {
     params.delete('lang');
   }
   const query = params.toString();
-  window.location.search = query ? `?${query}` : window.location.pathname;
+  window.location.href = window.location.pathname + (query ? `?${query}` : '');
 };
 
 fileInput.addEventListener('change', e=>{ addFiles(e.target.files); fileInput.value=''; });
