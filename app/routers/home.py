@@ -220,15 +220,11 @@ async def privacy_policy(request: Request):
     )
 
 
-@router.get("/privacy", response_class=HTMLResponse)
+@router.get("/privacy", response_class=RedirectResponse)
 async def privacy(request: Request):
-    return await _render_trust_page(
-        request,
-        "privacy-policy.html",
-        "Privacy Policy | Converigo",
-        "Read Converigo's privacy policy and understand how we handle your files, analytics, cookies, and uploads.",
-        "/privacy",
-    )
+    # LD-02: legacy /privacy URL permanently redirects to /privacy-policy.
+    # The dedicated template remains in use (served via /privacy-policy).
+    return RedirectResponse(url="/privacy-policy", status_code=301)
 
 
 @router.get("/terms", response_class=HTMLResponse)

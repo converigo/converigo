@@ -47,10 +47,6 @@
   ],
   "related_tools": [
     {
-      "slug": "pdf-merge",
-      "title": "PDF Merge"
-    },
-    {
       "slug": "pdf-split",
       "title": "PDF Split"
     },

@@ -88,7 +88,7 @@
   ],
   "call_to_action": {
     "text": "Need to convert SVG to PNG or other formats? Use Converigo's fast online converter for high-quality results.",
-    "url": "/svg-to-png",
+    "url": "/tools/svg-to-png",
     "button_text": "Convert SVG Files"
   },
   "breadcrumb_override": [

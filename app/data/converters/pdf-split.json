@@ -47,14 +47,6 @@
   ],
   "related_tools": [
     {
-      "slug": "pdf-compress",
-      "title": "PDF Compress"
-    },
-    {
-      "slug": "pdf-merge",
-      "title": "PDF Merge"
-    },
-    {
       "slug": "pdf-to-jpg",
       "title": "PDF to JPG"
     },
