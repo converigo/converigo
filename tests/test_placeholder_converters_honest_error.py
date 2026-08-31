@@ -5,10 +5,10 @@ return an honest "not available yet" response (HTTP 422 + code
 UNSUPPORTED_CONVERSION + clear message).
 
 Covered slugs (PR-1a removed ppt-to-docx & xlsx-to-docx; PR-1b removed
-docx-to-xlsx & ppt-to-xlsx — all now native converters):
-  docx-to-jpg, docx-to-ppt,
-  ppt-to-jpg,
-  xlsx-to-ppt
+docx-to-xlsx & ppt-to-xlsx; PR-1c removed docx-to-ppt & xlsx-to-ppt — all now
+native converters):
+  docx-to-jpg,
+  ppt-to-jpg
 """
 
 import asyncio
@@ -26,13 +26,11 @@ REGRESSION_DIR = Path(__file__).parent / "assets" / "regression"
 # (slug, sample_filename, target_format)
 # PR-1a: ppt-to-docx & xlsx-to-docx removed (now real native converters).
 # PR-1b: docx-to-xlsx & ppt-to-xlsx removed (now real native converters).
-# Remaining placeholders: docx-to-jpg, docx-to-ppt,
-#   ppt-to-jpg, xlsx-to-ppt (PR-1c + PR-2)
+# PR-1c: docx-to-ppt & xlsx-to-ppt removed (now real native converters).
+# Remaining placeholders: docx-to-jpg, ppt-to-jpg (PR-2).
 PLACEHOLDER_CASES = [
     ("docx-to-jpg", "sample.docx", "jpg"),
-    ("docx-to-ppt", "sample.docx", "pptx"),
     ("ppt-to-jpg", "sample.pptx", "jpg"),
-    ("xlsx-to-ppt", "sample.xlsx", "pptx"),
 ]
 
 
