@@ -7,18 +7,18 @@ from app.plugins.document.office_conversion_plugins import (
     DOCXToPPTPlugin,
     DOCXToXLSXPlugin,
     PDFToWordPlugin,
-    PPTToDOCXPlugin,
     PPTToJPGPlugin,
     PPTToXLSXPlugin,
     WordToPDFPlugin,
-    XLSXToDOCXPlugin,
     XLSXToPPTPlugin,
 )
 from app.plugins.document.pdf_to_excel import PDFToExcelPlugin
 from app.plugins.document.pdf_to_ppt import PDFToPPTPlugin
 from app.plugins.document.pdf_to_word import PDFToWordPlugin
+from app.plugins.document.ppt_to_docx import PPTToDOCXPlugin
 from app.plugins.document.ppt_to_pdf import PPTToPDFPlugin
 from app.plugins.document.word_to_pdf import WordToPDFPlugin
+from app.plugins.document.xlsx_to_docx import XLSXToDOCXPlugin
 
 __all__ = [
     "ExcelToPDFPlugin",
