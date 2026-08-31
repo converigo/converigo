@@ -2,7 +2,7 @@
   "id": "ppt-to-xlsx",
   "slug": "ppt-to-xlsx",
   "name": "PPT to XLSX",
-  "description": "Convert PPT presentations to XLSX spreadsheets (deprecated).",
+  "description": "Convert PPT presentations to XLSX spreadsheets quickly and easily.",
   "category": "document",
   "input_formats": [
     "ppt"
@@ -25,5 +25,5 @@
     "web",
     "api"
   ],
-  "lifecycle_status": "deprecated"
+  "lifecycle_status": "certified"
 }

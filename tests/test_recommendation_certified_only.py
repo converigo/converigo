@@ -40,9 +40,10 @@ class TestRecommendationEngineFiltering:
     def test_recommendation_excludes_deprecated(self, contract_registry):
         """Verify deprecated converters are not recommended."""
         # These are deprecated/disabled converters that should NOT appear
+        # PR-1b removed docx-to-xlsx & ppt-to-xlsx (now native/certified).
         disabled_converters = {
-            "xlsx-to-ods", "docx-to-xlsx", "docx-to-ppt",
-            "ppt-to-jpg", "ppt-to-xlsx"
+            "xlsx-to-ods", "docx-to-ppt",
+            "ppt-to-jpg"
         }
         
         # Test common source formats
