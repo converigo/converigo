@@ -5,7 +5,7 @@ from typing import Any
 
 from app.services.authority_service import AuthorityService
 from app.services.comparison_service import ComparisonService
-from app.services.converter_data_service import ConverterDataService
+from app.services.converter_data_service import ConverterDataService, PUBLIC_UI_DISABLED_SLUGS
 from app.services.converter_registry_service import ConverterRegistryService
 from app.services.hub_page_service import HubPageService
 from app.services.knowledge_service import KnowledgeService
@@ -365,6 +365,11 @@ class InternalLinkService:
 
         format_lower = format_name.lower()
         for converter in converters:
+            slug = str(converter.get("slug", ""))
+            # Permanently disabled tools (LD-06) must never surface as related
+            # converters, even when their contract lifecycle_status is "active".
+            if slug in PUBLIC_UI_DISABLED_SLUGS:
+                continue
             score = 0
             input_formats = [str(f).lower() for f in (converter.get("input_formats") or [])]
             output_formats = [str(f).lower() for f in (converter.get("output_formats") or [])]

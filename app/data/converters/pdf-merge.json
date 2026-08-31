@@ -47,10 +47,6 @@
   ],
   "related_tools": [
     {
-      "slug": "pdf-compress",
-      "title": "PDF Compress"
-    },
-    {
       "slug": "pdf-split",
       "title": "PDF Split"
     },

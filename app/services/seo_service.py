@@ -191,6 +191,40 @@ class SeoService:
 
         return entries
 
+    def _build_hub_entries(self, base_url: str) -> list[dict[str, str]]:
+        today = datetime.utcnow().date().isoformat()
+        paths = [
+            "/image-conversion",
+            "/pdf-conversion",
+            "/audio-conversion",
+            "/video-conversion",
+            "/document-conversion",
+        ]
+        return [
+            {
+                "loc": base_url.rstrip("/") + path,
+                "lastmod": today,
+            }
+            for path in paths
+        ]
+
+    def _build_comparison_entries(self, base_url: str) -> list[dict[str, str]]:
+        today = datetime.utcnow().date().isoformat()
+        paths = [
+            "/pdf-vs-docx",
+            "/png-vs-jpg",
+            "/webp-vs-png",
+            "/mp4-vs-mov",
+            "/mp3-vs-wav",
+        ]
+        return [
+            {
+                "loc": base_url.rstrip("/") + path,
+                "lastmod": today,
+            }
+            for path in paths
+        ]
+
     def _build_format_entries(self, base_url: str) -> list[dict[str, str]]:
         today = datetime.utcnow().date().isoformat()
         formats = sorted(AuthorityService(CONTRACTS_DIR).generate_all().keys())
@@ -213,6 +247,16 @@ class SeoService:
         entries.extend(self._build_blog_entries(base_url))
         entries.extend(self._build_learning_entries(base_url))
         entries.extend(self._build_format_entries(base_url))
+        entries.extend(self._build_hub_entries(base_url))
+        entries.extend(self._build_comparison_entries(base_url))
+
+        # Static marketing/index pages (excludes /privacy, which 301s to
+        # /privacy-policy, and /dashboard/seo-operations, which is internal-only).
+        today = datetime.utcnow().date().isoformat()
+        for path in ("/pricing", "/tools"):
+            entries.append(
+                {"loc": base_url.rstrip("/") + path, "lastmod": today}
+            )
 
         lines = [
             '<?xml version="1.0" encoding="UTF-8"?>',

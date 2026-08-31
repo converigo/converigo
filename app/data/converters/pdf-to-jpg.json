@@ -51,10 +51,6 @@
       "title": "JPG to PDF"
     },
     {
-      "slug": "pdf-compress",
-      "title": "PDF Compress"
-    },
-    {
       "slug": "pdf-split",
       "title": "PDF Split"
     },
