@@ -2,7 +2,7 @@
   "id": "docx-to-xlsx",
   "slug": "docx-to-xlsx",
   "name": "DOCX to XLSX",
-  "description": "Convert DOCX documents to XLSX spreadsheets (deprecated).",
+  "description": "Convert DOCX documents to XLSX spreadsheets quickly and easily.",
   "category": "document",
   "input_formats": [
     "docx"
@@ -25,5 +25,5 @@
     "web",
     "api"
   ],
-  "lifecycle_status": "deprecated"
+  "lifecycle_status": "certified"
 }

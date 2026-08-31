@@ -83,16 +83,6 @@ class DOCXToPPTPlugin(_OfficePlaceholderPlugin):
     seo_description = "Convert DOCX documents into PowerPoint files quickly and easily."
 
 
-class DOCXToXLSXPlugin(_OfficePlaceholderPlugin):
-    slug = "docx-to-xlsx"
-    name = "DOCX to XLSX"
-    description = "Convert DOCX documents into Excel spreadsheets."
-    source_formats = ["docx", "doc", "word"]
-    target_formats = ["xlsx", "xls", "spreadsheet"]
-    seo_title = "DOCX to XLSX Converter | Converigo"
-    seo_description = "Convert DOCX documents into Excel spreadsheets quickly and easily."
-
-
 class PDFToWordPlugin(_OfficePlaceholderPlugin):
     slug = "pdf-to-word"
     name = "PDF to Word"
@@ -111,16 +101,6 @@ class PPTToJPGPlugin(_OfficePlaceholderPlugin):
     target_formats = ["jpg", "jpeg"]
     seo_title = "PPT to JPG Converter | Converigo"
     seo_description = "Convert PowerPoint presentations into JPG images quickly and easily."
-
-
-class PPTToXLSXPlugin(_OfficePlaceholderPlugin):
-    slug = "ppt-to-xlsx"
-    name = "PPT to XLSX"
-    description = "Convert PowerPoint presentations into Excel spreadsheets."
-    source_formats = ["ppt", "pptx", "powerpoint"]
-    target_formats = ["xlsx", "xls", "spreadsheet"]
-    seo_title = "PPT to XLSX Converter | Converigo"
-    seo_description = "Convert PowerPoint presentations into Excel spreadsheets quickly and easily."
 
 
 class WordToPDFPlugin(_OfficePlaceholderPlugin):

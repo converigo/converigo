@@ -181,5 +181,5 @@
     "twitter_image": "/static/images/og-default.png",
     "canonical": "https://converigo.com/tools/ppt-to-xlsx"
   },
-  "lifecycle_status": "deprecated"
+  "lifecycle_status": "certified"
 }
