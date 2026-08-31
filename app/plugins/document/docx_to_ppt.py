@@ -22,9 +22,13 @@ Mapping (v1):
 - Inline pictures are copied onto a slide when available (best-effort).
 """
 
+import logging
+
 from pathlib import Path
 
 from app.plugins.base import ConverterPlugin
+
+logger = logging.getLogger(__name__)
 
 # Tunable mapping flags (see plan: .tmp/PLAN_PR1C_DOCX_PPT_XLSX_PPT.md).
 MAX_TABLE_NATIVE_COLUMNS = 8
@@ -245,8 +249,13 @@ class DOCXToPPTPlugin(ConverterPlugin):
                 if inline.type != WD_INLINE_SHAPE.PICTURE:
                     continue
                 try:
-                    blob = inline.blob
-                except Exception:
+                    # python-docx 1.1.x InlineShape has no `.blob`/`.image`; read the
+                    # image bytes through its relationship instead.
+                    blip = inline._inline.graphic.graphicData.pic.blipFill.blip
+                    embed_rid = blip.embed
+                    blob = document.part.related_parts[embed_rid].blob
+                except (AttributeError, KeyError) as exc:
+                    logger.warning("Could not extract inline picture from DOCX: %s", exc)
                     blob = None
                 if blob:
                     target_slide = (
@@ -254,16 +263,21 @@ class DOCXToPPTPlugin(ConverterPlugin):
                         if presentation.slides
                         else self._new_slide(presentation, source_path.stem)
                     )
-                    target_slide.shapes.add_picture(
-                        io.BytesIO(blob),
-                        Inches(0.5),
-                        Inches(4.0),
-                        width=Inches(4.0),
-                    )
-                    break
-        except Exception:
-            # Images are best-effort; text fidelity is the guaranteed core.
-            pass
+                    try:
+                        target_slide.shapes.add_picture(
+                            io.BytesIO(blob),
+                            Inches(0.5),
+                            Inches(4.0),
+                            width=Inches(4.0),
+                        )
+                    except (OSError, ValueError) as exc:
+                        logger.warning("Could not embed picture into PPTX: %s", exc)
+                    else:
+                        break
+        except Exception as exc:
+            # Images are best-effort; text fidelity is the guaranteed core. Log the
+            # failure instead of swallowing it silently so regressions stay visible.
+            logger.warning("Inline-picture copy step failed: %s", exc)
 
         from app.core.settings import settings
 
