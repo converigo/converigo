@@ -1,13 +1,13 @@
 """
-PR-0 stopgap regression tests — the 8 placeholder office converters must NOT
+PR-0 stopgap regression tests — the placeholder office converters must NOT
 serve a fake .txt file disguised as a successful conversion. Instead they must
 return an honest "not available yet" response (HTTP 422 + code
 UNSUPPORTED_CONVERSION + clear message).
 
-Covered slugs:
+Covered slugs (PR-1a removed the now-native ppt-to-docx & xlsx-to-docx):
   docx-to-jpg, docx-to-ppt, docx-to-xlsx,
-  ppt-to-docx, ppt-to-jpg, ppt-to-xlsx,
-  xlsx-to-docx, xlsx-to-ppt
+  ppt-to-jpg, ppt-to-xlsx,
+  xlsx-to-ppt
 """
 
 import asyncio
@@ -23,14 +23,15 @@ from app.services.conversion_service import UnsupportedConversionError
 REGRESSION_DIR = Path(__file__).parent / "assets" / "regression"
 
 # (slug, sample_filename, target_format)
+# PR-1a: ppt-to-docx & xlsx-to-docx removed (now real native converters).
+# Remaining placeholders: docx-to-jpg, docx-to-ppt, docx-to-xlsx,
+#   ppt-to-jpg, ppt-to-xlsx, xlsx-to-ppt (PR-1b/1c + PR-2)
 PLACEHOLDER_CASES = [
     ("docx-to-jpg", "sample.docx", "jpg"),
     ("docx-to-ppt", "sample.docx", "pptx"),
     ("docx-to-xlsx", "sample.docx", "xlsx"),
-    ("ppt-to-docx", "sample.pptx", "docx"),
     ("ppt-to-jpg", "sample.pptx", "jpg"),
     ("ppt-to-xlsx", "sample.pptx", "xlsx"),
-    ("xlsx-to-docx", "sample.xlsx", "docx"),
     ("xlsx-to-ppt", "sample.xlsx", "pptx"),
 ]
 

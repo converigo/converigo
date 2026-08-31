@@ -42,7 +42,7 @@ class TestRecommendationEngineFiltering:
         # These are deprecated/disabled converters that should NOT appear
         disabled_converters = {
             "xlsx-to-ods", "docx-to-xlsx", "docx-to-ppt",
-            "ppt-to-docx", "ppt-to-jpg", "ppt-to-xlsx"
+            "ppt-to-jpg", "ppt-to-xlsx"
         }
         
         # Test common source formats

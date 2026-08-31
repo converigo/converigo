@@ -103,16 +103,6 @@ class PDFToWordPlugin(_OfficePlaceholderPlugin):
     seo_description = "Convert PDF documents into editable Word files quickly and easily."
 
 
-class PPTToDOCXPlugin(_OfficePlaceholderPlugin):
-    slug = "ppt-to-docx"
-    name = "PPT to DOCX"
-    description = "Convert PowerPoint presentations into editable Word documents."
-    source_formats = ["ppt", "pptx", "powerpoint"]
-    target_formats = ["docx", "doc", "word"]
-    seo_title = "PPT to DOCX Converter | Converigo"
-    seo_description = "Convert PowerPoint presentations into editable Word documents quickly and easily."
-
-
 class PPTToJPGPlugin(_OfficePlaceholderPlugin):
     slug = "ppt-to-jpg"
     name = "PPT to JPG"
@@ -141,16 +131,6 @@ class WordToPDFPlugin(_OfficePlaceholderPlugin):
     target_formats = ["pdf"]
     seo_title = "Word to PDF Converter | Converigo"
     seo_description = "Convert Word documents into PDF files quickly and easily."
-
-
-class XLSXToDOCXPlugin(_OfficePlaceholderPlugin):
-    slug = "xlsx-to-docx"
-    name = "XLSX to DOCX"
-    description = "Convert Excel spreadsheets into Word documents."
-    source_formats = ["xlsx", "xls", "spreadsheet"]
-    target_formats = ["docx", "doc", "word"]
-    seo_title = "XLSX to DOCX Converter | Converigo"
-    seo_description = "Convert Excel spreadsheets into Word documents quickly and easily."
 
 
 class XLSXToPPTPlugin(_OfficePlaceholderPlugin):
