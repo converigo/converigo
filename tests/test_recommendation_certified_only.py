@@ -41,9 +41,9 @@ class TestRecommendationEngineFiltering:
         """Verify deprecated converters are not recommended."""
         # These are deprecated/disabled converters that should NOT appear
         # PR-1b removed docx-to-xlsx & ppt-to-xlsx (now native/certified).
+        # PR-A2 removed ppt-to-jpg (now certified converter).
         disabled_converters = {
             "xlsx-to-ods",
-            "ppt-to-jpg"
         }
         
         # Test common source formats
