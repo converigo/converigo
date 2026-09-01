@@ -4,11 +4,14 @@ serve a fake .txt file disguised as a successful conversion. Instead they must
 return an honest "not available yet" response (HTTP 422 + code
 UNSUPPORTED_CONVERSION + clear message).
 
-Covered slugs (PR-1a removed ppt-to-docx & xlsx-to-docx; PR-1b removed
-docx-to-xlsx & ppt-to-xlsx; PR-1c removed docx-to-ppt & xlsx-to-ppt — all now
-native converters):
-  docx-to-jpg,
-  ppt-to-jpg
+PR-A2 finalises docx-to-jpg and ppt-to-jpg as real converters with first-page
+rasterization (python-docx/python-pptx -> reportlab PDF -> PyMuPDF -> JPG).
+Their placeholder entries have been removed; the two remaining placeholders
+(XLSX-to-PNG? ODT-to-APNG?) will land in future PRs.
+
+All placeholder converters have been delivered — this file is kept as a
+regression placeholder to guard against future regressions. When new
+placeholder converters are added, re-register them in PLACEHOLDER_CASES.
 """
 
 import asyncio
@@ -27,11 +30,9 @@ REGRESSION_DIR = Path(__file__).parent / "assets" / "regression"
 # PR-1a: ppt-to-docx & xlsx-to-docx removed (now real native converters).
 # PR-1b: docx-to-xlsx & ppt-to-xlsx removed (now real native converters).
 # PR-1c: docx-to-ppt & xlsx-to-ppt removed (now real native converters).
-# Remaining placeholders: docx-to-jpg, ppt-to-jpg (PR-2).
-PLACEHOLDER_CASES = [
-    ("docx-to-jpg", "sample.docx", "jpg"),
-    ("ppt-to-jpg", "sample.pptx", "jpg"),
-]
+# PR-A2: docx-to-jpg & ppt-to-jpg removed (now real raster converters).
+# No placeholder converters remain; re-register future placeholders here.
+PLACEHOLDER_CASES: list[tuple[str, str, str]] = []
 
 
 @pytest.fixture(scope="module")

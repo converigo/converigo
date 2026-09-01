@@ -15,11 +15,25 @@
       "test_files": []
     },
     {
+      "slug": "docx-to-jpg",
+      "lifecycle_status": "certified",
+      "name": "DOCX to JPG",
+      "locked": true,
+      "test_files": ["tests/certified/office/test_docx_to_jpg_certified.py"]
+    },
+    {
       "slug": "docx-to-pdf",
       "lifecycle_status": "certified",
       "name": "DOCX to PDF",
       "locked": true,
       "test_files": []
+    },
+    {
+      "slug": "ppt-to-jpg",
+      "lifecycle_status": "certified",
+      "name": "PPT to JPG",
+      "locked": true,
+      "test_files": ["tests/certified/office/test_ppt_to_jpg_certified.py"]
     },
     {
       "slug": "heic-to-jpg",
@@ -175,13 +189,6 @@
       "slug": "ppt-to-docx",
       "lifecycle_status": "deprecated",
       "name": "PPT to DOCX",
-      "locked": false,
-      "test_files": []
-    },
-    {
-      "slug": "ppt-to-jpg",
-      "lifecycle_status": "deprecated",
-      "name": "PPT to JPG",
       "locked": false,
       "test_files": []
     },

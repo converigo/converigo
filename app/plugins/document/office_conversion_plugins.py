@@ -63,16 +63,6 @@ class _OfficePlaceholderPlugin(ConverterPlugin):
         return normalized
 
 
-class DOCXToJPGPlugin(_OfficePlaceholderPlugin):
-    slug = "docx-to-jpg"
-    name = "DOCX to JPG"
-    description = "Convert DOCX documents into JPG images."
-    source_formats = ["docx", "doc", "word"]
-    target_formats = ["jpg", "jpeg"]
-    seo_title = "DOCX to JPG Converter | Converigo"
-    seo_description = "Convert DOCX documents into JPG images quickly and easily."
-
-
 class PDFToWordPlugin(_OfficePlaceholderPlugin):
     slug = "pdf-to-word"
     name = "PDF to Word"
@@ -81,16 +71,6 @@ class PDFToWordPlugin(_OfficePlaceholderPlugin):
     target_formats = ["docx", "doc", "word"]
     seo_title = "PDF to Word Converter | Converigo"
     seo_description = "Convert PDF documents into editable Word files quickly and easily."
-
-
-class PPTToJPGPlugin(_OfficePlaceholderPlugin):
-    slug = "ppt-to-jpg"
-    name = "PPT to JPG"
-    description = "Convert PowerPoint presentations into JPG images."
-    source_formats = ["ppt", "pptx", "powerpoint"]
-    target_formats = ["jpg", "jpeg"]
-    seo_title = "PPT to JPG Converter | Converigo"
-    seo_description = "Convert PowerPoint presentations into JPG images quickly and easily."
 
 
 class WordToPDFPlugin(_OfficePlaceholderPlugin):

@@ -76,6 +76,14 @@ class DocumentEngine(BaseEngine):
         if source_format in {"xlsx", "xls"} and target == "ods":
             return self._convert_xlsx_to_ods(source_path, resolved_output_dir)
 
+        # PR-A2: DOCX -> JPG (first page only)
+        if source_format == "docx" and target in {"jpg", "jpeg"}:
+            return self._convert_docx_to_jpg(source_path, resolved_output_dir)
+
+        # PR-A2: PPTX/PPT -> JPG (first slide only)
+        if source_format in {"pptx", "ppt"} and target in {"jpg", "jpeg"}:
+            return self._convert_presentation_to_jpg(source_path, resolved_output_dir)
+
         if target != "pdf":
             raise ValueError(
                 f"Unsupported target format for document engine: {target}"
@@ -628,6 +636,80 @@ class DocumentEngine(BaseEngine):
             raise RuntimeError("PDF to ODT conversion did not produce output.")
 
         return output_path
+
+    def _convert_docx_to_jpg(self, source_path: Path, output_dir: Path) -> Path:
+        """PR-A2: DOCX -> JPG (first page only).
+
+        Pure-Python pipeline: python-docx extracts text -> reportlab renders a
+        one-page PDF -> PyMuPDF renders the first page to JPG.
+        """
+        try:
+            from docx import Document
+        except ImportError as exc:
+            raise RuntimeError(
+                "python-docx is required for DOCX to JPG conversion."
+            ) from exc
+
+        intermediate_pdf = output_dir / f"{source_path.stem}.pdf"
+        lines: list[str] = []
+
+        try:
+            document = Document(str(source_path))
+            for paragraph in document.paragraphs:
+                text = paragraph.text.strip()
+                if text:
+                    lines.append(text)
+        except Exception as exc:
+            raise RuntimeError(f"DOCX to JPG conversion failed: {exc}") from exc
+
+        if not lines:
+            lines.append("(no extractable text found in document)")
+
+        # Render the extracted text to a single-page PDF then rasterize page 1.
+        self._render_text_lines_to_pdf(lines, intermediate_pdf)
+        return self._convert_pdf_to_jpg(intermediate_pdf, output_dir)
+
+    def _convert_presentation_to_jpg(self, source_path: Path, output_dir: Path) -> Path:
+        """PR-A2: PPTX/PPT -> JPG (first slide only).
+
+        Pure-Python pipeline: python-pptx extracts the first slide's text ->
+        reportlab renders a PDF -> PyMuPDF renders the first page to JPG.
+        """
+        try:
+            from pptx import Presentation
+        except ImportError as exc:
+            raise RuntimeError(
+                "python-pptx is required for PPTX to JPG conversion."
+            ) from exc
+
+        intermediate_pdf = output_dir / f"{source_path.stem}.pdf"
+        lines: list[str] = []
+
+        try:
+            presentation = Presentation(str(source_path))
+        except Exception as exc:
+            raise RuntimeError(f"PPTX to JPG conversion failed: {exc}") from exc
+
+        if presentation.slides:
+            # First slide only (PR-A2 scope).
+            slide = presentation.slides[0]
+            found_text = False
+            for shape in slide.shapes:
+                if not shape.has_text_frame:
+                    continue
+                for paragraph in shape.text_frame.paragraphs:
+                    text = "".join(run.text or "" for run in paragraph.runs).strip()
+                    if text:
+                        lines.append(text)
+                        found_text = True
+            if not found_text:
+                lines.append("(slide contains non-text content)")
+        else:
+            lines.append("(presentation has no slides)")
+
+        # Render the first slide's text to a single-page PDF then rasterize page 1.
+        self._render_text_lines_to_pdf(lines, intermediate_pdf)
+        return self._convert_pdf_to_jpg(intermediate_pdf, output_dir)
 
     def _convert_pdf_to_jpg(self, source_path: Path, output_dir: Path) -> Path:
         try:

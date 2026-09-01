@@ -4,12 +4,12 @@ from app.plugins.document.docx_to_ppt import DOCXToPPTPlugin
 from app.plugins.document.docx_to_xlsx import DOCXToXLSXPlugin
 from app.plugins.document.excel_to_pdf import ExcelToPDFPlugin
 from app.plugins.document.jpg_to_pdf import JPGToPDFPlugin
+from app.plugins.document.docx_to_jpg import DOCXToJPGPlugin
 from app.plugins.document.office_conversion_plugins import (
-    DOCXToJPGPlugin,
     PDFToWordPlugin,
-    PPTToJPGPlugin,
     WordToPDFPlugin,
 )
+from app.plugins.document.ppt_to_jpg import PPTToJPGPlugin
 from app.plugins.document.pdf_to_excel import PDFToExcelPlugin
 from app.plugins.document.pdf_to_ppt import PDFToPPTPlugin
 from app.plugins.document.pdf_to_word import PDFToWordPlugin
