@@ -58,6 +58,7 @@ ALLOWED_EXTENSIONS = {
     "xlsx",
     "xls",
     "odt",
+    "ods",
     "pptx",
     "ppt",
 
@@ -118,6 +119,7 @@ FILE_SIGNATURES = {
     "pptx": [b"PK\x03\x04", b"PK\x05\x06", b"PK\x07\x08"],  # ZIP-based container
     "ppt": [b"\xD0\xCF\x11\xE0"],  # OLE2 format
     "odt": [b"PK\x03\x04", b"PK\x05\x06", b"PK\x07\x08"],  # ZIP-based container
+    "ods": [b"PK\x03\x04", b"PK\x05\x06", b"PK\x07\x08"],  # ZIP-based container
     "doc": [b"\xD0\xCF\x11\xE0"],
     "txt": [],  # Text files no specific signature
     # Archives
@@ -164,6 +166,7 @@ CONTENT_TYPE_BY_EXTENSION = {
     "pptx": ["application/vnd.openxmlformats-officedocument.presentationml.presentation"],
     "ppt": ["application/vnd.ms-powerpoint"],
     "odt": ["application/vnd.oasis.opendocument.text"],
+    "ods": ["application/vnd.oasis.opendocument.spreadsheet"],
     # Archives
     "7z": ["application/x-7z-compressed"],
     "tar": ["application/x-tar"],
@@ -275,7 +278,7 @@ PERMISSIVE_EXTENSIONS = {
     "txt",  # Text files no specific signature requirement
 }
 
-CONTAINER_EXTENSIONS = {"docx", "xlsx", "pptx", "odt", "zip"}
+CONTAINER_EXTENSIONS = {"docx", "xlsx", "pptx", "odt", "ods", "zip"}
 
 
 def _validate_media_with_ffprobe(file: UploadFile, extension: str) -> None:
