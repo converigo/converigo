@@ -1,4 +1,5 @@
-﻿import logging
+﻿import datetime
+import logging
 from pathlib import Path
 import tempfile
 
@@ -68,6 +69,12 @@ class DocumentEngine(BaseEngine):
             raise ValueError(
                 f"Unsupported target format for document engine: {target}"
             )
+
+        if source_format == "ods" and target == "xlsx":
+            return self._convert_ods_to_xlsx(source_path, resolved_output_dir)
+
+        if source_format in {"xlsx", "xls"} and target == "ods":
+            return self._convert_xlsx_to_ods(source_path, resolved_output_dir)
 
         if target != "pdf":
             raise ValueError(
@@ -243,6 +250,152 @@ class DocumentEngine(BaseEngine):
                 text_parts.append(node.data)
 
         return "".join(text_parts)
+
+    def _convert_ods_to_xlsx(self, source_path: Path, output_dir: Path) -> Path:
+        try:
+            from odf.opendocument import load as ods_load
+            from odf.table import Table, TableCell, TableRow
+            import openpyxl
+        except ImportError as exc:
+            raise RuntimeError(
+                "odfpy and openpyxl are required for ODS to XLSX conversion."
+            ) from exc
+
+        output_path = output_dir / f"{source_path.stem}.xlsx"
+
+        try:
+            workbook = openpyxl.Workbook()
+            workbook.remove(workbook.active)
+
+            doc = ods_load(str(source_path))
+            sheets = doc.spreadsheet.getElementsByType(Table)
+            if not sheets:
+                raise RuntimeError("ODS file contains no spreadsheets.")
+
+            for sheet_index, sheet in enumerate(sheets):
+                sheet_name = sheet.getAttribute("name") or f"Sheet{sheet_index + 1}"
+                worksheet = workbook.create_sheet(title=sheet_name[:31])
+
+                for table_row in sheet.getElementsByType(TableRow):
+                    row_values: list[object] = []
+                    for cell in table_row.getElementsByType(TableCell):
+                        repeat_count = 1
+                        repeat_raw = cell.getAttribute("numbercolumnsrepeated")
+                        if repeat_raw is not None:
+                            try:
+                                repeat_count = int(repeat_raw)
+                            except (TypeError, ValueError):
+                                repeat_count = 1
+                        value = self._ods_cell_value(cell)
+                        row_values.extend([value] * repeat_count)
+
+                    if any(value is not None for value in row_values):
+                        worksheet.append(row_values)
+
+            workbook.save(str(output_path))
+        except RuntimeError:
+            raise
+        except Exception as exc:
+            raise RuntimeError(f"ODS to XLSX conversion failed: {exc}") from exc
+
+        if not output_path.exists():
+            raise RuntimeError("ODS to XLSX conversion did not produce output.")
+
+        return output_path
+
+    @staticmethod
+    def _ods_cell_value(cell) -> object:
+        """Extract a usable Python value from an ODS TableCell element."""
+        value_type = cell.getAttribute("valuetype") or "string"
+        if value_type in {"float", "percentage", "currency"}:
+            raw = cell.getAttribute("value")
+            if raw is None:
+                return None
+            try:
+                number = float(raw)
+                return int(number) if number.is_integer() else number
+            except (TypeError, ValueError):
+                return raw
+        if value_type == "boolean":
+            raw = cell.getAttribute("booleanvalue")
+            return raw in ("true", "1", "TRUE") if raw is not None else None
+        if value_type == "date":
+            return cell.getAttribute("datevalue")
+        text = ""
+        if hasattr(cell, "childNodes"):
+            from odf import teletype
+            from odf.text import P
+            paragraphs = cell.getElementsByType(P)
+            if paragraphs:
+                # ODS string cell text lives in <text:p> paragraph elements.
+                # Use teletype.extractText() for robust text extraction (handles
+                # <text:s>, <text:tab>, <text:line-break> within paragraphs).
+                # Join multi-paragraph cells with newlines to preserve line breaks.
+                text = "\n".join(
+                    teletype.extractText(p) for p in paragraphs
+                )
+            else:
+                # Fallback for cells without explicit paragraphs: direct text nodes.
+                text = "".join(
+                    getattr(node, "data", "") or ""
+                    for node in cell.childNodes
+                    if getattr(node, "data", None)
+                )
+        text = text.strip()
+        return text if text else None
+
+    def _convert_xlsx_to_ods(self, source_path: Path, output_dir: Path) -> Path:
+        try:
+            import openpyxl
+            from odf.opendocument import OpenDocumentSpreadsheet
+            from odf.table import Table, TableCell, TableRow
+            from odf.text import P
+        except ImportError as exc:
+            raise RuntimeError(
+                "openpyxl and odfpy are required for XLSX to ODS conversion."
+            ) from exc
+
+        output_path = output_dir / f"{source_path.stem}.ods"
+
+        try:
+            ods_doc = OpenDocumentSpreadsheet()
+            workbook = openpyxl.load_workbook(
+                str(source_path), data_only=True, read_only=True
+            )
+            try:
+                for sheet in workbook.worksheets:
+                    table = Table(name=sheet.title)
+                    for row in sheet.iter_rows(values_only=True):
+                        table_row = TableRow()
+                        for value in row:
+                            cell = TableCell()
+                            if isinstance(value, bool):
+                                cell.setAttribute("valuetype", "boolean")
+                                cell.setAttribute("booleanvalue", "true" if value else "false")
+                            elif isinstance(value, (int, float)) and not isinstance(value, bool):
+                                cell.setAttribute("valuetype", "float")
+                                cell.setAttribute("value", str(value))
+                            elif isinstance(value, (datetime.datetime, datetime.date)):
+                                cell.setAttribute("valuetype", "date")
+                                cell.setAttribute("datevalue", value.isoformat())
+                            elif value is not None:
+                                cell.setAttribute("valuetype", "string")
+                                paragraph = P(text=str(value))
+                                cell.addElement(paragraph)
+                            table_row.addElement(cell)
+                        table.addElement(table_row)
+                    ods_doc.spreadsheet.addElement(table)
+            finally:
+                workbook.close()
+
+            ods_doc.save(str(output_path))
+        except Exception as exc:
+            raise RuntimeError(f"XLSX to ODS conversion failed: {exc}") from exc
+
+        if not output_path.exists():
+            raise RuntimeError("XLSX to ODS conversion did not produce output.")
+
+        return output_path
 
     def _validate_pdf_input(self, source_path: Path) -> None:
         """
