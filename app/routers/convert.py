@@ -166,6 +166,57 @@ async def convert_file(
     logger.info("Convert request received: files=%d target=%s targets=%s", len(file), target_format, '[masked]' if parsed_targets else None)
 
     try:
+        # PDF Merge (DOC-27) is a multi-file operation: upload every file
+        # first, then merge them into a single PDF output via pypdf.
+        if operation == "pdf-merge":
+            tracker.set_converter("pdf-merge")
+            tracker.start("upload")
+            for uploaded_file in file:
+                merge_saved = await upload_service.process_upload(uploaded_file)
+                saved_paths.append(merge_saved)
+            tracker.finish("upload")
+
+            if len(saved_paths) < 2:
+                raise HTTPException(
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                    detail="pdf-merge requires at least 2 PDF files",
+                )
+
+            tracker.start("conversion")
+            merge_output = await conversion_service.merge_files(
+                saved_paths,
+                conversion_id=tracker.conversion_id,
+                plugin_slug=operation,
+            )
+            tracker.finish("conversion")
+
+            tracker.start("download")
+            try:
+                rel = merge_output.relative_to(settings.OUTPUT_DIR)
+                merge_download_path = "/download/" + rel.as_posix()
+            except Exception:
+                merge_download_path = "/download/" + merge_output.parent.name + "/" + merge_output.name
+            tracker.finish("download")
+
+            merge_ms = elapsed_ms(getattr(request.state, "request_started_ns", 0)) if getattr(request.state, "request_started_ns", None) else None
+            analytics_service.track_conversion_success(
+                request,
+                page_path=request.url.path,
+                converter_name="pdf-merge",
+                category="document",
+                output_format="pdf",
+                event_status="success",
+                processing_ms=merge_ms,
+            )
+
+            return {
+                "filename": merge_output.name,
+                "download_path": merge_download_path,
+                "status": "success",
+                "target_format": "pdf",
+                "conversion_id": tracker.conversion_id,
+            }
+
         # Process each file independently; determine per-file target from `parsed_targets` or fallback to `target_format`
         for idx, uploaded_file in enumerate(file):
             saved_path: Path | None = None

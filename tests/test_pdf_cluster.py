@@ -110,15 +110,22 @@ def test_legacy_operationless_call_still_uses_pdf_split_for_pdf_pdf() -> None:
     assert plugin.slug == "pdf-split"
 
 
-def test_disabled_pdf_tools_are_404_and_absent_from_homepage() -> None:
+def test_disabled_pdf_compress_is_404_and_absent_from_homepage() -> None:
     client = TestClient(app)
 
-    for slug in ("pdf-compress", "pdf-merge"):
-        response = client.get(f"/tools/{slug}")
-        assert response.status_code == 404
+    slug = "pdf-compress"
+    response = client.get(f"/tools/{slug}")
+    assert response.status_code == 404
 
     home_response = client.get("/")
     assert home_response.status_code == 200
     body = home_response.text.lower()
     assert "pdf-compress" not in body
-    assert "pdf-merge" not in body
+
+
+def test_pdf_merge_is_now_live() -> None:
+    """PDF Merge (DOC-27) was approved for activation in Sub-batch B."""
+    client = TestClient(app)
+    response = client.get("/tools/pdf-merge")
+    # Should no longer be 404 (was previously disabled).
+    assert response.status_code == 200, response.text

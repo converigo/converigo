@@ -1,12 +1,18 @@
 """
 Project : Converigo
 Author  : Pico Lala & ChatGPT
-Version : 3.0.0
+Version : 3.1.0
 
 PDF Split Plugin
+
+Backed by pypdf (BSD-3-Clause). Genuine page-level split packaged as a ZIP
+of per-page PDF files, not a byte copy.
 """
 
+import zipfile
 from pathlib import Path
+
+from pypdf import PdfReader, PdfWriter
 
 from app.plugins.base import ConverterPlugin
 
@@ -44,14 +50,28 @@ class PDFSplitPlugin(ConverterPlugin):
 
         from app.core.settings import settings
 
-        # Create a request-local working directory for split outputs
         working_root = (temp_dir or output_dir or (settings.OUTPUT_DIR / "document"))
         working_root.mkdir(parents=True, exist_ok=True)
 
-        # Historically this plugin returned a single PDF file path. To avoid
-        # breaking the `/download` endpoint contract, return a single file
-        # path under the request-local working dir even if internally multiple
-        # pages may be produced.
-        output_path = working_root / f"{source_path.stem}_split.pdf"
-        output_path.write_bytes(source_path.read_bytes())
-        return output_path
+        reader = PdfReader(str(source_path))
+        if reader.pages:
+            total_pages = len(reader.pages)
+        else:
+            total_pages = 0
+        if total_pages == 0:
+            raise RuntimeError("PDF has no pages to split.")
+
+        # Split: one PDF per page, packaged into a single ZIP archive so the
+        # conversion pipeline still returns one downloadable artifact.
+        zip_path = working_root / f"{source_path.stem}_split.zip"
+        with zipfile.ZipFile(str(zip_path), "w", zipfile.ZIP_DEFLATED) as archive:
+            for index, page in enumerate(reader.pages, start=1):
+                writer = PdfWriter()
+                writer.add_page(page)
+                page_path = working_root / f"{source_path.stem}_page_{index:03d}.pdf"
+                with open(page_path, "wb") as f:
+                    writer.write(f)
+                archive.write(str(page_path), arcname=page_path.name)
+                page_path.unlink(missing_ok=True)
+
+        return zip_path
