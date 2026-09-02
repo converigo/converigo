@@ -1,0 +1,29 @@
+{
+  "id": "jpg-to-webp",
+  "slug": "jpg-to-webp",
+  "name": "JPG to WebP",
+  "category": "image",
+  "description": "Convert JPG images into WebP format.",
+  "input_formats": [
+    "jpg",
+    "jpeg"
+  ],
+  "output_formats": [
+    "webp"
+  ],
+  "accepted_mime_types": [
+    "image/jpeg"
+  ],
+  "max_upload_size": 104857600,
+  "conversion_engine": "image",
+  "landing_path": "/jpg-to-webp",
+  "canonical_url": "https://converigo.com/jpg-to-webp",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.jpg",
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "certified"
+}
