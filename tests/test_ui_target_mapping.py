@@ -2,12 +2,10 @@
 
 This is a permanent regression test for P1a (STATIC_TARGET_MAP).
 It derives the expected per-source target list DIRECTLY from the converter
-plugin registry (app.plugins.discover_plugins), using the same enumeration
+plugin registry (app.plugins.registry.registry), using the same enumeration
 of source_formats/target_formats that was used to build the static map.
-Self-conversions (source==target) are excluded.
-
-Additionally, it verifies that the marquee, orbit, and morph badge are
-unaffected (they still use the CATEGORY object, which is unchanged).
+Self-conversions (source==target) and alias format variants (jpg↔jpeg,
+gz↔gzip) are excluded to mirror the map generation logic.
 """
 import os
 from pathlib import Path
@@ -15,33 +13,47 @@ from pathlib import Path
 import pytest
 from playwright.sync_api import sync_playwright
 
-from app.plugins import discover_plugins
+from app.plugins.registry import registry
+
+# Alias groups: pairs of format strings that should be treated as
+# self-conversions (same format, different name variant).
+ALIAS_GROUPS = {frozenset({"jpg", "jpeg"}), frozenset({"gz", "gzip"})}
 
 pytestmark = pytest.mark.usefixtures("app_base_url")
 
 
-def _build_expected_targets() -> dict[str, list[str]]:
-    """Derive expected per-source target list from the plugin registry.
+def _alias_group(fmt: str):
+    """Return the alias group containing fmt, or None."""
+    for group in ALIAS_GROUPS:
+        if fmt in group:
+            return group
+    return None
 
-    Iterates all discovered plugin classes, collects their source_formats and
-    target_formats (which already enumerate alias tokens such as 'word',
-    'spreadsheet', 'powerpoint'), and for each source format collects the set
-    of unique target formats, excluding self-conversions (source==target).
-    This exactly mirrors how the registry dump (audit_collect.json) was built
-    and how STATIC_TARGET_MAP in the HTML was derived.
+
+def _is_self_or_alias(source: str, target: str) -> bool:
+    """Return True if target is a self-conversion or alias variant of source."""
+    if source.lower() == target.lower():
+        return True
+    group = _alias_group(source.lower())
+    return bool(group) and target.lower() in group
+
+
+def _build_expected_targets() -> dict[str, list[str]]:
+    """Derive expected per-source target list from the FIX 1 plugin registry.
+
+    Iterates all (source, target) pairs registered in registry.plugins
+    (which already reflects the supports() filter applied at registration time),
+    and for each source format collects the set of unique target formats,
+    excluding self-conversions and alias format variants.
+
+    This exactly mirrors the map generation logic in
+    tmp/regenerate_static_map.py::build_map_from_registry.
     """
-    result = discover_plugins()
     raw: dict[str, set[str]] = {}
-    for cls in result.plugin_classes:
-        srcs = getattr(cls, "source_formats", []) or []
-        tgts = getattr(cls, "target_formats", []) or []
-        for src in srcs:
-            src = src.lower()
-            for tgt in tgts:
-                tgt = tgt.lower()
-                if src == tgt:
-                    continue  # skip self-conversion
-                raw.setdefault(src, set()).add(tgt.upper())
+    for src, tgt in registry.plugins:
+        if _is_self_or_alias(src, tgt):
+            continue
+        raw.setdefault(src, set()).add(tgt.upper())
     return {k: sorted(v) for k, v in sorted(raw.items())}
 
 

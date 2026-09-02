@@ -30,12 +30,40 @@ def test_globalfmt_no_common_target_for_jpg_png():
         page.locator("#fileInput").set_input_files([str(jpg), str(png)])
         page.wait_for_selector("#rows .row", timeout=TIMEOUT)
 
+        # The global "convert all" selector only appears when every pending
+        # file shares the SAME default target. Here jpg defaults to ICO and
+        # png defaults to BMP (first non-self target in the registry-derived
+        # STATIC_TARGET_MAP), so the defaults diverge -> selector is hidden
+        # and offers NO common batch target.
         global_sel = page.locator("#globalFmt")
         assert global_sel.count() == 1, "Expected a global format selector"
         # collect non-empty option values
         options = global_sel.evaluate("el => Array.from(el.options).map(o => o.value).filter(v=>!!v)")
-        # Real Phase A matrix contains TIFF and WEBP for both JPG and PNG — assert intersection accordingly
-        assert set(options) == {"TIFF", "WEBP"}, f"Global selector options mismatch for JPG+PNG, found: {options}"
+        assert options == [], (
+            f"Global selector should offer no options when per-file default "
+            f"targets diverge (jpg->ICO, png->BMP), found: {options}"
+        )
+
+        # Per-row dropdowns must reflect the FIX 1 registry exactly:
+        # - jpg row: NO BMP (no registered jpg->bmp converter)
+        # - png row: includes PDF (registered via images_to_pdf plugin)
+        rows = page.locator("#rows .row")
+        row_opts = {}
+        for i in range(rows.count()):
+            name = rows.nth(i).locator(".row-name").inner_text()
+            ext = name.rsplit(".", 1)[-1].lower() if "." in name else name.lower()
+            row_opts[ext] = rows.nth(i).locator("select.fmt").evaluate(
+                "el => Array.from(el.options).map(o => o.value)"
+            )
+        assert "jpg" in row_opts and "png" in row_opts, (
+            f"Expected jpg and png rows, got: {list(row_opts)}"
+        )
+        assert row_opts["jpg"] == ["ICO", "PDF", "PNG", "TIFF", "WEBP"], (
+            f"jpg row dropdown must match registry (no BMP), got: {row_opts['jpg']}"
+        )
+        assert "PDF" in row_opts["png"], (
+            f"png row dropdown should include PDF (images_to_pdf), got: {row_opts['png']}"
+        )
 
         browser.close()
 

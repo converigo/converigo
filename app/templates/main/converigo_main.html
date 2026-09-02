@@ -1358,19 +1358,18 @@ const CATEGORY = {
 };
 
 /* ---------------- static source-to-targets map (P1a) ---------------- */
-/* Dihasilkan dari registry dump aktual per source-format.
-   Self-conversions (source===target) dihapus karena tidak berguna
-   sebagai opsi konversi di dropdown.
-   Fallback: array kosong → "tidak ada converter". */
+/* Dihasilkan dari registry dump aktual pasca-FIX1 (supports() filter).
+   Self-conversions (source===target) dan alias format variant
+   (jpg↔jpeg, gz↔gzip) dihapus. Jangan diedit manual. */
 const STATIC_TARGET_MAP = {
   // image sources
   jpg:['ICO','PDF','PNG','TIFF','WEBP'],  jpeg:['ICO','PDF','PNG','TIFF','WEBP'],
-  png:['BMP','ICO','JPEG','JPG','TIFF','WEBP'],  webp:['ICO','JPEG','JPG','PNG','TIFF'],
-  bmp:['JPEG','JPG','PNG','WEBP'],  tiff:['JPEG','JPG','PNG'],
+  png:['BMP','ICO','JPEG','JPG','PDF','TIFF','WEBP'],  webp:['ICO','JPEG','JPG','PDF','PNG','TIFF'],
+  bmp:['JPEG','JPG','PDF','PNG','WEBP'],  tiff:['JPEG','JPG','PDF','PNG'],
   svg:['PNG'],  heic:['JPEG','JPG'],  heif:['JPEG','JPG'],  avif:['JPEG','JPG'],
-  gif:[],  // tidak ada registered converter
+  gif:['PDF'],
   // document sources
-  pdf:['DOC','DOCX','JPEG','JPG','ODT','PPT','PPTX','WORD','XLS','XLSX'],
+  pdf:['DOC','DOCX','JPEG','JPG','ODT','PPT','PPTX','TXT','WORD','XLS','XLSX'],
   docx:['JPEG','JPG','PDF','POWERPOINT','PPT','PPTX','SPREADSHEET','XLS','XLSX'],
   doc:['JPEG','JPG','PDF','POWERPOINT','PPT','PPTX','SPREADSHEET','XLS','XLSX'],
   pptx:['DOC','DOCX','JPEG','JPG','PDF','SPREADSHEET','WORD','XLS','XLSX'],
@@ -1381,13 +1380,13 @@ const STATIC_TARGET_MAP = {
   powerpoint:['DOC','DOCX','JPEG','JPG','SPREADSHEET','WORD','XLS','XLSX'],
   spreadsheet:['DOC','DOCX','POWERPOINT','PPT','PPTX','WORD'],
   word:['JPEG','JPG','PDF','POWERPOINT','PPT','PPTX','SPREADSHEET','XLS','XLSX'],
-  html:[],  md:[],  rtf:[],  // tidak ada registered converter
+  html:[],  md:[],  rtf:[],
   // audio sources
-  mp3:['WAV'],  wav:[],  ogg:[],  flac:[],  m4a:[],  aac:[],  // hanya mp3->wav
+  mp3:['WAV'],  wav:[],  ogg:[],  flac:[],  m4a:[],  aac:[],
   // video sources
   mp4:['AAC','FLAC','M4A','MP3','OGG','WAV'],  mov:[],  avi:[],  webm:[],  mkv:[],  flv:[],
-  // archive sources (self-conversions dihapus — hanya extract operation)
-  gz:['GZIP'],  gzip:['GZ'],  zip:[],  '7z':[],  rar:[],  tar:[],
+  // archive sources (self-conversions & alias variants dihapus)
+  gz:[],  gzip:[],  zip:[],  '7z':[],  rar:[],  tar:[],
 };
 
 function getValidTargets(ext){
