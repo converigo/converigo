@@ -22,7 +22,7 @@ language_service = LanguageService(Path("app/locales"))
 # dedicated tool pages return 404.  Set the `"active": false` flag in the
 # converter JSON to also exclude them from directories, sitemaps, and
 # recommendations.
-DISABLED_TOOL_SLUGS = {"pdf-compress", "pdf-merge"}
+DISABLED_TOOL_SLUGS = {"pdf-compress"}
 
 
 def _build_tool_page_sections(tool_data: dict[str, Any]) -> dict[str, Any]:

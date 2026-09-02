@@ -183,6 +183,55 @@ class ConversionService:
 
         return public_output_path
 
+    async def merge_files(
+        self,
+        source_paths: list[Path],
+        conversion_id: str | None = None,
+        plugin_slug: str | None = None,
+    ) -> Path:
+        """Merge multiple PDF files into one output file.
+
+        Uses the PDFMergePlugin's ``merge()`` method under the hood.
+        Validates the output and publishes it under the conversion ID.
+        """
+        source_format = "pdf"
+        target_format = "pdf"
+        conversion_id = conversion_id or uuid.uuid4().hex
+
+        plugin = registry.get_plugin(source_format, target_format, slug=plugin_slug)
+
+        timeout_seconds = self._get_timeout_seconds(source_format, target_format)
+        temp_root = self._build_temp_root(conversion_id)
+        public_root = settings.OUTPUT_DIR / conversion_id
+        public_root.mkdir(parents=True, exist_ok=True)
+
+        try:
+            output_path = await asyncio.wait_for(
+                plugin.merge(
+                    source_paths,
+                    output_dir=public_root,
+                    temp_dir=temp_root,
+                ),
+                timeout=timeout_seconds,
+            )
+        except Exception as exc:
+            self._cleanup_temp_artifacts(temp_root, conversion_id=conversion_id)
+            raise ConversionError(str(exc)) from exc
+
+        logger.info("Plugin returned output path: %s", str(output_path))
+
+        if not isinstance(output_path, Path):
+            self._cleanup_temp_artifacts(temp_root)
+            raise ConversionError("Invalid output path.")
+
+        output_path = output_path.resolve(strict=False)
+        public_output_path = self._publish_output(output_path, public_root, temp_root, conversion_id=conversion_id)
+
+        if not public_output_path.exists():
+            raise ConversionError("Converted file was not saved.")
+
+        return public_output_path
+
     def _build_temp_root(self, conversion_id: str) -> Path:
         temp_root = settings.TEMP_DIR / conversion_id
         temp_root.mkdir(parents=True, exist_ok=True)

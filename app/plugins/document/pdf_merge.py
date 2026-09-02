@@ -1,12 +1,17 @@
 """
 Project : Converigo
 Author  : Pico Lala & ChatGPT
-Version : 3.0.0
+Version : 3.1.0
 
 PDF Merge Plugin
+
+Backed by pypdf (BSD-3-Clause). Genuine page-level merge, not a byte copy.
 """
 
 from pathlib import Path
+from typing import List
+
+from pypdf import PdfReader, PdfWriter
 
 from app.plugins.base import ConverterPlugin
 
@@ -39,13 +44,37 @@ class PDFMergePlugin(ConverterPlugin):
         output_dir: Path | None = None,
         temp_dir: Path | None = None,
     ) -> Path:
+        """Single-file merge: wraps a single PDF for backward compatibility."""
         if not self.supports(source_path.suffix, target_format):
             raise RuntimeError("PDFMergePlugin only supports PDF -> PDF.")
 
         from app.core.settings import settings
 
-        working_root = (temp_dir or output_dir or (settings.OUTPUT_DIR / "document"))
+        return await self.merge(
+            [source_path],
+            output_dir=output_dir,
+            temp_dir=temp_dir or (settings.OUTPUT_DIR / "document"),
+        )
+
+    async def merge(
+        self,
+        source_paths: List[Path],
+        output_dir: Path | None = None,
+        temp_dir: Path | None = None,
+    ) -> Path:
+        """Merge multiple PDFs into one. Uses pypdf for genuine page-level merge."""
+        writer = PdfWriter()
+        for path in source_paths:
+            reader = PdfReader(str(path))
+            for page in reader.pages:
+                writer.add_page(page)
+
+        working_root = temp_dir or output_dir
+        if working_root is None:
+            from app.core.settings import settings
+            working_root = settings.OUTPUT_DIR / "document"
         working_root.mkdir(parents=True, exist_ok=True)
-        output_path = working_root / f"{source_path.stem}_merged.pdf"
-        output_path.write_bytes(source_path.read_bytes())
+        output_path = working_root / "merged.pdf"
+        with open(output_path, "wb") as f:
+            writer.write(f)
         return output_path
