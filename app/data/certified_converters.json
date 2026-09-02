@@ -50,6 +50,13 @@
       "test_files": []
     },
     {
+      "slug": "jpg-to-webp",
+      "lifecycle_status": "certified",
+      "name": "JPG to WEBP",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_jpg_to_webp_certified.py"]
+    },
+    {
       "slug": "mp4-to-aac",
       "lifecycle_status": "certified",
       "name": "MP4 to AAC",
