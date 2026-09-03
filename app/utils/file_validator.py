@@ -55,6 +55,8 @@ ALLOWED_EXTENSIONS = {
     "docx",
     "doc",
     "txt",
+    "csv",
+    "json",
     "xlsx",
     "xls",
     "odt",
@@ -122,6 +124,8 @@ FILE_SIGNATURES = {
     "ods": [b"PK\x03\x04", b"PK\x05\x06", b"PK\x07\x08"],  # ZIP-based container
     "doc": [b"\xD0\xCF\x11\xE0"],
     "txt": [],  # Text files no specific signature
+    "csv": [],  # CSV files no specific signature
+    "json": [],  # JSON files no specific signature
     # Archives
     "7z": [b"7z\xBC\xAF\x27\x1C"],
     "tar": [],  # TAR has no consistent magic bytes, allow permissively
@@ -161,6 +165,8 @@ CONTENT_TYPE_BY_EXTENSION = {
     "docx": ["application/vnd.openxmlformats-officedocument.wordprocessingml.document"],
     "doc": ["application/msword"],
     "txt": ["text/plain"],
+    "csv": ["text/csv", "text/plain"],
+    "json": ["application/json", "text/plain"],
     "xlsx": ["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"],
     "xls": ["application/vnd.ms-excel"],
     "pptx": ["application/vnd.openxmlformats-officedocument.presentationml.presentation"],
