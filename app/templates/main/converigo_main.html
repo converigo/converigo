@@ -1365,12 +1365,12 @@ const CATEGORY = {
 const STATIC_TARGET_MAP = {
   // image sources
   jpg:['ICO','PDF','PNG','TIFF','WEBP'],  jpeg:['ICO','PDF','PNG','TIFF','WEBP'],
-  png:['BMP','ICO','JPEG','JPG','TIFF','WEBP'],  webp:['ICO','JPEG','JPG','PNG','TIFF'],
-  bmp:['JPEG','JPG','PNG','WEBP'],  tiff:['JPEG','JPG','PNG'],
+  png:['BMP','ICO','JPEG','JPG','PDF','TIFF','WEBP'],  webp:['ICO','JPEG','JPG','PDF','PNG','TIFF'],
+  bmp:['JPEG','JPG','PDF','PNG','WEBP'],  tiff:['JPEG','JPG','PDF','PNG'],
   svg:['PNG'],  heic:['JPEG','JPG'],  heif:['JPEG','JPG'],  avif:['JPEG','JPG'],
-  gif:[],  // tidak ada registered converter
+  gif:['PDF'],  // VAR-10 images-to-pdf (Batch 3)
   // document sources
-  pdf:['DOC','DOCX','JPEG','JPG','ODT','PPT','PPTX','WORD','XLS','XLSX'],
+  pdf:['DOC','DOCX','JPEG','JPG','ODT','PPT','PPTX','TXT','WORD','XLS','XLSX'],
   docx:['JPEG','JPG','PDF','POWERPOINT','PPT','PPTX','SPREADSHEET','XLS','XLSX'],
   doc:['JPEG','JPG','PDF','POWERPOINT','PPT','PPTX','SPREADSHEET','XLS','XLSX'],
   pptx:['DOC','DOCX','JPEG','JPG','PDF','SPREADSHEET','WORD','XLS','XLSX'],
