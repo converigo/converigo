@@ -1375,17 +1375,17 @@ const STATIC_TARGET_MAP = {
   doc:['JPEG','JPG','PDF','POWERPOINT','PPT','PPTX','SPREADSHEET','XLS','XLSX'],
   pptx:['DOC','DOCX','JPEG','JPG','PDF','SPREADSHEET','WORD','XLS','XLSX'],
   ppt:['DOC','DOCX','JPEG','JPG','PDF','SPREADSHEET','WORD','XLS','XLSX'],
-  xlsx:['DOC','DOCX','ODS','PDF','POWERPOINT','PPT','PPTX','WORD'],
+  xlsx:['CSV','DOC','DOCX','HTML','JSON','ODS','PDF','POWERPOINT','PPT','PPTX','WORD'],
   xls:['DOC','DOCX','PDF','POWERPOINT','PPT','PPTX','WORD'],
-  txt:['PDF'],  csv:['PDF'],  ods:['XLSX'],  odt:['PDF'],
+  txt:['PDF'],  csv:['JSON','PDF','XLSX'],  json:['CSV','XLSX'],  ods:['XLSX'],  odt:['PDF'],
   powerpoint:['DOC','DOCX','JPEG','JPG','SPREADSHEET','WORD','XLS','XLSX'],
   spreadsheet:['DOC','DOCX','POWERPOINT','PPT','PPTX','WORD'],
   word:['JPEG','JPG','PDF','POWERPOINT','PPT','PPTX','SPREADSHEET','XLS','XLSX'],
   html:[],  md:[],  rtf:[],  // tidak ada registered converter
   // audio sources
-  mp3:['WAV'],  wav:[],  ogg:[],  flac:[],  m4a:[],  aac:[],  // hanya mp3->wav
+  mp3:['WAV'],  wav:['MP3'],  ogg:[],  flac:['MP3'],  m4a:['MP3'],  aac:['MP3'],
   // video sources
-  mp4:['AAC','FLAC','M4A','MP3','OGG','WAV'],  mov:[],  avi:[],  webm:[],  mkv:[],  flv:[],
+  mp4:['AAC','FLAC','GIF','M4A','MP3','OGG','WAV'],  mov:[],  avi:[],  webm:[],  mkv:[],  flv:[],
   // archive sources (self-conversions dihapus — hanya extract operation)
   gz:['GZIP'],  gzip:['GZ'],  zip:[],  '7z':[],  rar:[],  tar:[],
 };

@@ -99,11 +99,25 @@
       "test_files": []
     },
     {
+      "slug": "mp3-to-wav",
+      "lifecycle_status": "certified",
+      "name": "MP3 to WAV",
+      "locked": true,
+      "test_files": ["tests/certified/audio/test_mp3_to_wav.py"]
+    },
+    {
       "slug": "pdf-to-docx",
       "lifecycle_status": "certified",
       "name": "PDF to DOCX",
       "locked": true,
       "test_files": ["tests/certified/pdf/test_pdf_to_docx_certified.py"]
+    },
+    {
+      "slug": "pdf-merge",
+      "lifecycle_status": "certified",
+      "name": "PDF Merge",
+      "locked": true,
+      "test_files": ["tests/certified/pdf/test_pdf_merge_certified.py"]
     },
     {
       "slug": "pdf-to-odt",
@@ -125,6 +139,13 @@
       "name": "PDF to XLSX",
       "locked": true,
       "test_files": ["tests/certified/pdf/test_pdf_to_excel_certified.py"]
+    },
+    {
+      "slug": "pdf-split",
+      "lifecycle_status": "certified",
+      "name": "PDF Split",
+      "locked": true,
+      "test_files": ["tests/certified/pdf/test_pdf_split_certified.py"]
     },
     {
       "slug": "png-to-jpg",
@@ -174,6 +195,90 @@
       "name": "XLSX to PDF",
       "locked": true,
       "test_files": []
+    },
+    {
+      "slug": "xlsx-to-csv",
+      "lifecycle_status": "certified",
+      "name": "XLSX to CSV",
+      "locked": true,
+      "test_files": ["tests/certified/spreadsheet/test_spreadsheet_certified.py"]
+    },
+    {
+      "slug": "csv-to-xlsx",
+      "lifecycle_status": "certified",
+      "name": "CSV to XLSX",
+      "locked": true,
+      "test_files": ["tests/certified/spreadsheet/test_spreadsheet_certified.py"]
+    },
+    {
+      "slug": "csv-to-json",
+      "lifecycle_status": "certified",
+      "name": "CSV to JSON",
+      "locked": true,
+      "test_files": ["tests/certified/spreadsheet/test_spreadsheet_certified.py"]
+    },
+    {
+      "slug": "json-to-csv",
+      "lifecycle_status": "certified",
+      "name": "JSON to CSV",
+      "locked": true,
+      "test_files": ["tests/certified/spreadsheet/test_spreadsheet_certified.py"]
+    },
+    {
+      "slug": "xlsx-to-json",
+      "lifecycle_status": "certified",
+      "name": "XLSX to JSON",
+      "locked": true,
+      "test_files": ["tests/certified/spreadsheet/test_spreadsheet_certified.py"]
+    },
+    {
+      "slug": "json-to-xlsx",
+      "lifecycle_status": "certified",
+      "name": "JSON to XLSX",
+      "locked": true,
+      "test_files": ["tests/certified/spreadsheet/test_spreadsheet_certified.py"]
+    },
+    {
+      "slug": "xlsx-to-html",
+      "lifecycle_status": "certified",
+      "name": "XLSX to HTML",
+      "locked": true,
+      "test_files": ["tests/certified/spreadsheet/test_spreadsheet_certified.py"]
+    },
+    {
+      "slug": "wav-to-mp3",
+      "lifecycle_status": "certified",
+      "name": "WAV to MP3",
+      "locked": true,
+      "test_files": ["tests/certified/audio/test_audio_plugin_certified.py"]
+    },
+    {
+      "slug": "m4a-to-mp3",
+      "lifecycle_status": "certified",
+      "name": "M4A to MP3",
+      "locked": true,
+      "test_files": ["tests/certified/audio/test_audio_plugin_certified.py"]
+    },
+    {
+      "slug": "flac-to-mp3",
+      "lifecycle_status": "certified",
+      "name": "FLAC to MP3",
+      "locked": true,
+      "test_files": ["tests/certified/audio/test_audio_plugin_certified.py"]
+    },
+    {
+      "slug": "aac-to-mp3",
+      "lifecycle_status": "certified",
+      "name": "AAC to MP3",
+      "locked": true,
+      "test_files": ["tests/certified/audio/test_audio_plugin_certified.py"]
+    },
+    {
+      "slug": "mp4-to-gif",
+      "lifecycle_status": "certified",
+      "name": "MP4 to GIF",
+      "locked": true,
+      "test_files": ["tests/certified/audio/test_audio_plugin_certified.py"]
     }
   ],
   "beta": [],
