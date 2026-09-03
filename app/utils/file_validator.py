@@ -30,6 +30,7 @@ ALLOWED_EXTENSIONS = {
     "gif",
     "webp",
     "bmp",
+    "tiff",
     "avif",
     "heic",
     "heif",
@@ -96,6 +97,7 @@ FILE_SIGNATURES = {
     "gif": [b"GIF87a", b"GIF89a"],
     "webp": [b"RIFF"],
     "bmp": [b"BM"],
+    "tiff": [b"II*\x00", b"MM\x00*"],
     "svg": [b"<", b"<?xml"],  # SVG is XML-based, flexible start
     "avif": [b"ftyp"],  # AVIF is MP4-based container
     "heic": [b"ftyp"],  # HEIC is MP4-based container
@@ -143,6 +145,7 @@ CONTENT_TYPE_BY_EXTENSION = {
     "gif": ["image/gif"],
     "webp": ["image/webp"],
     "bmp": ["image/bmp"],
+    "tiff": ["image/tiff"],
     "svg": ["image/svg+xml", "text/svg"],
     "avif": ["image/avif"],
     "heic": ["image/heic"],
