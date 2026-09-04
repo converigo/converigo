@@ -18,9 +18,9 @@ NON_PRODUCTION_READY_SLUGS = {
 }
 
 PUBLIC_UI_DISABLED_SLUGS = {
-    "pdf-compress",
     "pdf-merge",
 }
+
 
 
 def _is_production_ready(contract: dict[str, Any] | None) -> bool:

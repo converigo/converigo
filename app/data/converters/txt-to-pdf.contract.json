@@ -1,26 +1,26 @@
 {
-  "id": "pdf-compress",
-  "slug": "pdf-compress",
-  "name": "PDF Compress",
+  "id": "txt-to-pdf",
+  "slug": "txt-to-pdf",
+  "name": "TXT to PDF",
   "category": "document",
-  "description": "Compress PDF documents to reduce file size.",
+  "description": "Convert plain text files into PDF documents.",
   "input_formats": [
-    "pdf"
+    "txt"
   ],
   "output_formats": [
     "pdf"
   ],
   "accepted_mime_types": [
-    "application/pdf"
+    "text/plain"
   ],
   "max_upload_size": 104857600,
   "conversion_engine": "document",
-  "landing_path": "/tools/pdf-compress",
-  "canonical_url": "https://converigo.com/tools/pdf-compress",
+  "landing_path": "/tools/txt-to-pdf",
+  "canonical_url": "https://converigo.com/tools/txt-to-pdf",
   "seo_status": "ready",
   "schema_status": "ready",
   "faq_status": "ready",
-  "regression_sample": "tests/sample.pdf",
+  "regression_sample": "tests/sample.txt",
   "supported_platforms": [
     "web"
   ],

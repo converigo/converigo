@@ -22,7 +22,10 @@ language_service = LanguageService(Path("app/locales"))
 # dedicated tool pages return 404.  Set the `"active": false` flag in the
 # converter JSON to also exclude them from directories, sitemaps, and
 # recommendations.
-DISABLED_TOOL_SLUGS = {"pdf-compress"}
+# Batch 5 (DOC-29): "pdf-compress" was removed from this set — the plugin
+# was rewritten as a genuine pypdf compressor and re-certified.
+DISABLED_TOOL_SLUGS: set[str] = set()
+
 
 
 def _build_tool_page_sections(tool_data: dict[str, Any]) -> dict[str, Any]:
