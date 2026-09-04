@@ -85,7 +85,9 @@ class TestArchiveConverterContracts:
             assert contract["seo_status"] == "ready"
             assert contract["schema_status"] == "ready"
             assert contract["faq_status"] == "ready"
-            assert contract["lifecycle_status"] == "active"
+            # Batch 5 (VAR-33): zip-extract reached "certified" lifecycle, so
+            # the archive cluster now accepts both production-ready states.
+            assert contract["lifecycle_status"] in {"active", "certified"}
     
     def test_archive_contract_fields_valid(self, registry_service):
         """Verify all required fields are present and valid."""

@@ -363,6 +363,41 @@
       "name": "WEBP to TIFF",
       "locked": true,
       "test_files": ["tests/certified/image/test_batch4_pillow_certified.py"]
+    },
+    {
+      "slug": "jpg-to-pdf",
+      "lifecycle_status": "certified",
+      "name": "JPG to PDF",
+      "locked": true,
+      "test_files": ["tests/certified/document/test_jpg_to_pdf_certified.py"]
+    },
+    {
+      "slug": "pdf-compress",
+      "lifecycle_status": "certified",
+      "name": "PDF Compress",
+      "locked": true,
+      "test_files": ["tests/certified/document/test_pdf_compress_certified.py"]
+    },
+    {
+      "slug": "txt-to-pdf",
+      "lifecycle_status": "certified",
+      "name": "TXT to PDF",
+      "locked": true,
+      "test_files": ["tests/certified/document/test_txt_to_pdf_certified.py"]
+    },
+    {
+      "slug": "webp-to-jpg",
+      "lifecycle_status": "certified",
+      "name": "WEBP to JPG",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_webp_to_jpg_certified.py"]
+    },
+    {
+      "slug": "zip-extract",
+      "lifecycle_status": "certified",
+      "name": "ZIP Extract",
+      "locked": true,
+      "test_files": ["tests/certified/archive/test_zip_extract_certified.py"]
     }
   ],
   "beta": [],

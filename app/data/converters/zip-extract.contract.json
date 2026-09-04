@@ -16,8 +16,8 @@
   ],
   "max_upload_size": 524288000,
   "conversion_engine": "archive",
-  "landing_path": "/zip-extract",
-  "canonical_url": "https://converigo.com/zip-extract",
+  "landing_path": "/tools/zip-extract",
+  "canonical_url": "https://converigo.com/tools/zip-extract",
   "seo_status": "ready",
   "schema_status": "ready",
   "faq_status": "ready",
@@ -25,5 +25,5 @@
   "supported_platforms": [
     "web"
   ],
-  "lifecycle_status": "active"
+  "lifecycle_status": "certified"
 }

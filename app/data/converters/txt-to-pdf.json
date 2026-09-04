@@ -1,0 +1,184 @@
+{
+  "slug": "txt-to-pdf",
+  "title": "TXT to PDF Converter",
+  "description": "Convert plain text files into PDF documents online with clean, printable output.",
+  "category": "document",
+  "popular": false,
+  "featured": false,
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".txt",
+    "button_text": "Upload TXT"
+  },
+  "faq": [
+    {
+      "question": "How do I convert a TXT file to PDF?",
+      "answer": "Upload your .txt file, and the converter renders every line of text into a clean, printable PDF document you can download instantly."
+    },
+    {
+      "question": "Will the text formatting be preserved?",
+      "answer": "The converter preserves line structure and wraps long lines so the PDF remains readable and ready for printing or sharing."
+    },
+    {
+      "question": "Is the TXT to PDF converter free?",
+      "answer": "Yes. TXT to PDF conversion is free and works directly in your browser with no installation required."
+    },
+    {
+      "question": "Can I use this tool on mobile?",
+      "answer": "Yes. The tool works in modern mobile and desktop browsers."
+    },
+    {
+      "question": "Is there a file size limit?",
+      "answer": "Standard text files convert instantly. Very large text files may take a few seconds longer to render."
+    },
+    {
+      "question": "Is the conversion secure?",
+      "answer": "Yes. Files are processed securely and automatically deleted after conversion."
+    },
+    {
+      "question": "What character encoding is supported?",
+      "answer": "UTF-8 text files are fully supported. Unrecognized characters are handled safely so the conversion never fails silently."
+    },
+    {
+      "question": "What if conversion fails?",
+      "answer": "Try re-uploading the file or use a smaller TXT file if the upload size is too large."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "jpg-to-pdf",
+      "title": "JPG to PDF"
+    },
+    {
+      "slug": "images-to-pdf",
+      "title": "Images to PDF"
+    },
+    {
+      "slug": "pdf-merge",
+      "title": "PDF Merge"
+    },
+    {
+      "slug": "word-to-pdf",
+      "title": "Word to PDF"
+    }
+  ],
+  "seo": {
+    "title": "Convert TXT to PDF Online Free | Converigo",
+    "description": "Convert TXT to PDF online for free using Converigo. Turn plain text files into clean, printable PDF documents. Fast, secure, browser-based conversion with no installation required.",
+    "keywords": "txt to pdf, text to pdf, convert txt to pdf, txt pdf converter, online text converter",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert TXT to PDF - Converigo free online converter",
+    "twitter_title": "Convert TXT to PDF Online Free | Converigo",
+    "twitter_description": "Convert TXT to PDF online for free using Converigo. Turn plain text files into clean, printable PDF documents with no installation required.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/txt-to-pdf"
+  },
+  "source": "txt",
+  "target": "pdf",
+  "active": true,
+  "hero": {
+    "eyebrow": "Converter tool",
+    "title": "Convert TXT to PDF Online Free",
+    "description": "Convert TXT files to PDF online for free. Fast, secure browser-based conversion with no software installation. Get clean, printable pdf output in seconds using Converigo.",
+    "panel_label": "Ready to convert",
+    "panel_title": "Upload a TXT file and receive a printable PDF document in seconds."
+  },
+  "features": [
+    {
+      "title": "Clean, printable output",
+      "text": "Every line of your text file is rendered into a tidy, readable PDF document."
+    },
+    {
+      "title": "Fast workflow",
+      "text": "Upload, convert, and download in a few quick steps without installing software."
+    },
+    {
+      "title": "Secure processing",
+      "text": "Your files are handled securely and automatically deleted after conversion."
+    },
+    {
+      "title": "Fast txt to pdf conversion",
+      "text": "Convert TXT to PDF in seconds with our optimized processing engine."
+    },
+    {
+      "title": "No software installation required",
+      "text": "Convert files directly in your browser without downloading or installing any software."
+    },
+    {
+      "title": "High-quality pdf output",
+      "text": "Receive a polished PDF file ready for printing, sharing, or archiving."
+    },
+    {
+      "title": "Free txt to pdf converter",
+      "text": "Convert TXT to PDF online completely free with no registration or hidden costs."
+    },
+    {
+      "title": "Works on any device",
+      "text": "Use the converter on desktop, tablet, or mobile — anywhere you have a browser."
+    }
+  ],
+  "supported_formats": {
+    "input": [
+      "TXT"
+    ],
+    "output": [
+      "PDF"
+    ],
+    "description": "TXT input, PDF output"
+  },
+  "how_to_use": [
+    {
+      "title": "Upload your file",
+      "description": "Select a TXT file from your device to start the conversion."
+    },
+    {
+      "title": "Choose the output format",
+      "description": "Pick PDF as the result format and review the conversion options."
+    },
+    {
+      "title": "Download the converted file",
+      "description": "Get your converted PDF file immediately without installing extra software."
+    },
+    {
+      "title": "Upload your txt",
+      "description": "Select a TXT file from your device to begin the conversion process."
+    },
+    {
+      "title": "Choose pdf as format",
+      "description": "Pick PDF as your desired format and review any available options."
+    },
+    {
+      "title": "Convert txt to pdf",
+      "description": "Click convert and our engine processes your txt instantly."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is TXT?",
+      "text": "TXT is a plain text file format that contains unformatted, human-readable characters supported by virtually every editor and device."
+    },
+    {
+      "title": "What is PDF?",
+      "text": "PDF is a portable document format ideal for printing, sharing, and archiving documents with consistent layout everywhere."
+    },
+    {
+      "title": "What is TXT format?",
+      "text": "TXT is a widely used file format known for its simplicity and universal compatibility across main applications."
+    },
+    {
+      "title": "What is PDF format?",
+      "text": "PDF is a popular file format chosen for its broad compatibility and consistent rendering on every platform."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Convert TXT files to PDF in seconds",
+    "text": "Upload your file and receive a ready-to-use result instantly.",
+    "primary_text": "Convert now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  },
+  "lifecycle_status": "active"
+}
