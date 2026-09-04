@@ -1,0 +1,28 @@
+{
+  "id": "png-to-bmp",
+  "slug": "png-to-bmp",
+  "name": "PNG to BMP",
+  "category": "image",
+  "description": "Convert PNG images to BMP format.",
+  "input_formats": [
+    "png"
+  ],
+  "output_formats": [
+    "bmp"
+  ],
+  "accepted_mime_types": [
+    "image/png"
+  ],
+  "max_upload_size": 104857600,
+  "conversion_engine": "image",
+  "landing_path": "/tools/png-to-bmp",
+  "canonical_url": "https://converigo.com/tools/png-to-bmp",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.png",
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "certified"
+}

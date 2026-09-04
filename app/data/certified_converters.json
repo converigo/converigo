@@ -317,6 +317,76 @@
       "name": "XLSX to ODS",
       "locked": false,
       "test_files": []
+    },
+    {
+      "slug": "bmp-to-png",
+      "lifecycle_status": "certified",
+      "name": "BMP to PNG",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_batch4_pillow_certified.py"]
+    },
+    {
+      "slug": "bmp-to-webp",
+      "lifecycle_status": "certified",
+      "name": "BMP to WEBP",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_batch4_pillow_certified.py"]
+    },
+    {
+      "slug": "jpg-to-ico",
+      "lifecycle_status": "certified",
+      "name": "JPG to ICO",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_batch4_pillow_certified.py"]
+    },
+    {
+      "slug": "jpg-to-tiff",
+      "lifecycle_status": "certified",
+      "name": "JPG to TIFF",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_batch4_pillow_certified.py"]
+    },
+    {
+      "slug": "png-to-bmp",
+      "lifecycle_status": "certified",
+      "name": "PNG to BMP",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_batch4_pillow_certified.py"]
+    },
+    {
+      "slug": "png-to-ico",
+      "lifecycle_status": "certified",
+      "name": "PNG to ICO",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_batch4_pillow_certified.py"]
+    },
+    {
+      "slug": "png-to-tiff",
+      "lifecycle_status": "certified",
+      "name": "PNG to TIFF",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_batch4_pillow_certified.py"]
+    },
+    {
+      "slug": "tiff-to-png",
+      "lifecycle_status": "certified",
+      "name": "TIFF to PNG",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_batch4_pillow_certified.py"]
+    },
+    {
+      "slug": "webp-to-ico",
+      "lifecycle_status": "certified",
+      "name": "WEBP to ICO",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_batch4_pillow_certified.py"]
+    },
+    {
+      "slug": "webp-to-tiff",
+      "lifecycle_status": "certified",
+      "name": "WEBP to TIFF",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_batch4_pillow_certified.py"]
     }
   ]
 }

@@ -1,0 +1,29 @@
+{
+  "id": "tiff-to-png",
+  "slug": "tiff-to-png",
+  "name": "TIFF to PNG",
+  "category": "image",
+  "description": "Convert TIFF images to PNG format for web and editing.",
+  "input_formats": [
+    "tiff",
+    "tif"
+  ],
+  "output_formats": [
+    "png"
+  ],
+  "accepted_mime_types": [
+    "image/tiff"
+  ],
+  "max_upload_size": 104857600,
+  "conversion_engine": "image",
+  "landing_path": "/tools/tiff-to-png",
+  "canonical_url": "https://converigo.com/tools/tiff-to-png",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.tiff",
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "certified"
+}
