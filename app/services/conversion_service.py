@@ -189,12 +189,19 @@ class ConversionService:
         conversion_id: str | None = None,
         plugin_slug: str | None = None,
     ) -> Path:
-        """Merge multiple PDF files into one output file.
+        """Merge multiple source files into one output file.
 
-        Uses the PDFMergePlugin's ``merge()`` method under the hood.
+        Derives the source format from the first input file so the same merge
+        path serves pdf-merge (pdf -> pdf) and images-to-pdf
+        (png/webp/bmp/tiff/gif -> pdf) without changing legacy behavior.
         Validates the output and publishes it under the conversion ID.
         """
-        source_format = "pdf"
+        first_suffix = (
+            source_paths[0].suffix.replace(".", "").lower()
+            if source_paths
+            else "pdf"
+        )
+        source_format = first_suffix or "pdf"
         target_format = "pdf"
         conversion_id = conversion_id or uuid.uuid4().hex
 

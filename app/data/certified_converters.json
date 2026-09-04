@@ -43,6 +43,13 @@
       "test_files": ["tests/certified/image/test_heic_to_jpg.py"]
     },
     {
+      "slug": "images-to-pdf",
+      "lifecycle_status": "certified",
+      "name": "Images to PDF",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_images_to_pdf_certified.py"]
+    },
+    {
       "slug": "jpg-to-png",
       "lifecycle_status": "certified",
       "name": "JPG to PNG",
@@ -146,6 +153,13 @@
       "name": "PDF Split",
       "locked": true,
       "test_files": ["tests/certified/pdf/test_pdf_split_certified.py"]
+    },
+    {
+      "slug": "pdf-to-txt",
+      "lifecycle_status": "certified",
+      "name": "PDF to TXT",
+      "locked": true,
+      "test_files": ["tests/certified/pdf/test_pdf_to_txt_certified.py"]
     },
     {
       "slug": "png-to-jpg",

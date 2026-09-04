@@ -1,0 +1,128 @@
+{
+  "slug": "pdf-to-txt",
+  "title": "PDF to TXT Converter",
+  "description": "Extract text from PDF documents into a plain text file.",
+  "category": "document",
+  "popular": true,
+  "featured": false,
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".pdf",
+    "button_text": "Upload PDF"
+  },
+  "faq": [
+    {
+      "question": "How do I convert PDF to text?",
+      "answer": "Upload a PDF and the converter extracts readable text into a plain TXT file."
+    },
+    {
+      "question": "Are scanned PDFs supported?",
+      "answer": "Text extraction works best on digital PDFs. Scanned pages without a text layer may produce empty output."
+    },
+    {
+      "question": "Is PDF to TXT free?",
+      "answer": "Yes. PDF to TXT conversion is free and works directly in your browser."
+    },
+    {
+      "question": "Can I use this on mobile?",
+      "answer": "Yes. The converter is designed for modern mobile and desktop browsers."
+    },
+    {
+      "question": "What is TXT?",
+      "answer": "TXT is a plain text format that can be opened in any editor."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "pdf-to-docx",
+      "title": "PDF to DOCX"
+    },
+    {
+      "slug": "pdf-split",
+      "title": "PDF Split"
+    },
+    {
+      "slug": "pdf-merge",
+      "title": "PDF Merge"
+    }
+  ],
+  "seo": {
+    "title": "PDF to TXT Converter Online Free | Converigo",
+    "description": "Extract text from PDF files into plain TXT online for free using Converigo. Fast, secure and browser-based conversion with no installation required.",
+    "keywords": "pdf to txt, pdf to text, extract text from pdf",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert PDF to TXT - Converigo free online converter",
+    "twitter_title": "PDF to TXT Converter Online Free | Converigo",
+    "twitter_description": "Extract text from PDF files into plain TXT online for free using Converigo.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/pdf-to-txt"
+  },
+  "source": "pdf",
+  "target": "txt",
+  "active": true,
+  "hero": {
+    "eyebrow": "Converter tool",
+    "title": "PDF to TXT Converter Online Free",
+    "description": "Extract text from PDF files online for free. Fast, secure browser-based conversion with no software installation.",
+    "panel_label": "Ready to convert",
+    "panel_title": "Upload a PDF and receive its extracted text instantly."
+  },
+  "features": [
+    {
+      "title": "Genuine text extraction",
+      "text": "The converter pulls real text from PDF pages instead of producing a fake output."
+    },
+    {
+      "title": "Easy editing",
+      "text": "Plain TXT output is simple to edit, search, and reuse."
+    },
+    {
+      "title": "No software installation required",
+      "text": "Convert files directly in your browser without installing anything."
+    },
+    {
+      "title": "Secure PDF processing",
+      "text": "Your PDF files are encrypted during upload and automatically deleted after conversion."
+    }
+  ],
+  "supported_formats": {
+    "input": ["PDF"],
+    "output": ["TXT"],
+    "description": "PDF input, TXT output"
+  },
+  "how_to_use": [
+    {
+      "title": "Upload your PDF",
+      "description": "Select a PDF file from your device."
+    },
+    {
+      "title": "Extract the text",
+      "description": "The converter pulls readable text from every page."
+    },
+    {
+      "title": "Download the TXT",
+      "description": "Get your plain text file immediately."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is PDF?",
+      "text": "PDF is a portable document format that preserves layout across devices."
+    },
+    {
+      "title": "What is TXT?",
+      "text": "TXT is a universal plain text format readable in any editor."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Extract PDF text in seconds",
+    "text": "Upload a PDF and receive its text instantly.",
+    "primary_text": "Convert now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  },
+  "lifecycle_status": "active"
+}

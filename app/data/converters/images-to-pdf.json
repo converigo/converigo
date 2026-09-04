@@ -1,0 +1,128 @@
+{
+  "slug": "images-to-pdf",
+  "title": "Images to PDF Converter",
+  "description": "Combine multiple images into a single PDF document with one click.",
+  "category": "image",
+  "popular": true,
+  "featured": false,
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".png,.webp,.bmp,.tiff,.gif",
+    "button_text": "Upload Images"
+  },
+  "faq": [
+    {
+      "question": "How many images can I combine?",
+      "answer": "Upload at least 2 images and they are combined into a single PDF document."
+    },
+    {
+      "question": "What image formats are supported?",
+      "answer": "PNG, WEBP, BMP, TIFF and GIF images can be combined into one PDF. JPG images are handled by the dedicated JPG to PDF converter."
+    },
+    {
+      "question": "Is images to PDF free?",
+      "answer": "Yes. The converter is free and works directly in your browser."
+    },
+    {
+      "question": "Will the images stay readable?",
+      "answer": "Yes. Every image is embedded at high resolution in the resulting PDF."
+    },
+    {
+      "question": "Can I use this on mobile?",
+      "answer": "Yes. The converter is designed for modern mobile and desktop browsers."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "jpg-to-pdf",
+      "title": "JPG to PDF"
+    },
+    {
+      "slug": "pdf-merge",
+      "title": "PDF Merge"
+    },
+    {
+      "slug": "image-compress",
+      "title": "Image Compress"
+    }
+  ],
+  "seo": {
+    "title": "Images to PDF Converter Online Free | Converigo",
+    "description": "Combine multiple images into one PDF online for free using Converigo. Fast, secure and browser-based conversion with no installation required.",
+    "keywords": "images to pdf, jpg to pdf, combine images into pdf",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Combine images into PDF - Converigo free online converter",
+    "twitter_title": "Images to PDF Converter Online Free | Converigo",
+    "twitter_description": "Combine multiple images into one PDF online for free using Converigo.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/images-to-pdf"
+  },
+  "source": "image",
+  "target": "pdf",
+  "active": true,
+  "hero": {
+    "eyebrow": "Converter tool",
+    "title": "Images to PDF Converter Online Free",
+    "description": "Combine multiple images into one PDF online for free. Fast, secure browser-based conversion with no software installation.",
+    "panel_label": "Ready to convert",
+    "panel_title": "Upload your images and receive a single PDF document instantly."
+  },
+  "features": [
+    {
+      "title": "Combine images",
+      "text": "Join several images into one clean, portable PDF document."
+    },
+    {
+      "title": "Multiple formats",
+      "text": "Works with PNG, WEBP, BMP, TIFF and GIF images."
+    },
+    {
+      "title": "No software installation required",
+      "text": "Convert files directly in your browser without installing anything."
+    },
+    {
+      "title": "Secure image processing",
+      "text": "Your images are encrypted during upload and automatically deleted after conversion."
+    }
+  ],
+  "supported_formats": {
+    "input": ["PNG", "WEBP", "BMP", "TIFF", "GIF"],
+    "output": ["PDF"],
+    "description": "Image input, PDF output"
+  },
+  "how_to_use": [
+    {
+      "title": "Upload your images",
+      "description": "Select at least 2 images from your device."
+    },
+    {
+      "title": "Combine the files",
+      "description": "All images are embedded into a single PDF in upload order."
+    },
+    {
+      "title": "Download the result",
+      "description": "Get your combined PDF document immediately."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is PDF?",
+      "text": "PDF is a portable document format that preserves layout across devices."
+    },
+    {
+      "title": "Why combine images into PDF?",
+      "text": "A single PDF is easier to share, print, and archive than many loose image files."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Combine images into one PDF in seconds",
+    "text": "Upload multiple images and receive a single PDF instantly.",
+    "primary_text": "Convert now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  },
+  "lifecycle_status": "active"
+}
