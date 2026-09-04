@@ -293,44 +293,6 @@
       "name": "MP4 to GIF",
       "locked": true,
       "test_files": ["tests/certified/audio/test_audio_plugin_certified.py"]
-    }
-  ],
-  "beta": [],
-  "disabled": [
-    {
-      "slug": "docx-to-ppt",
-      "lifecycle_status": "deprecated",
-      "name": "DOCX to PPT",
-      "locked": false,
-      "test_files": []
-    },
-    {
-      "slug": "docx-to-xlsx",
-      "lifecycle_status": "deprecated",
-      "name": "DOCX to XLSX",
-      "locked": false,
-      "test_files": []
-    },
-    {
-      "slug": "ppt-to-docx",
-      "lifecycle_status": "deprecated",
-      "name": "PPT to DOCX",
-      "locked": false,
-      "test_files": []
-    },
-    {
-      "slug": "ppt-to-xlsx",
-      "lifecycle_status": "deprecated",
-      "name": "PPT to XLSX",
-      "locked": false,
-      "test_files": []
-    },
-    {
-      "slug": "xlsx-to-ods",
-      "lifecycle_status": "deprecated",
-      "name": "XLSX to ODS",
-      "locked": false,
-      "test_files": []
     },
     {
       "slug": "bmp-to-png",
@@ -401,6 +363,44 @@
       "name": "WEBP to TIFF",
       "locked": true,
       "test_files": ["tests/certified/image/test_batch4_pillow_certified.py"]
+    }
+  ],
+  "beta": [],
+  "disabled": [
+    {
+      "slug": "docx-to-ppt",
+      "lifecycle_status": "deprecated",
+      "name": "DOCX to PPT",
+      "locked": false,
+      "test_files": []
+    },
+    {
+      "slug": "docx-to-xlsx",
+      "lifecycle_status": "deprecated",
+      "name": "DOCX to XLSX",
+      "locked": false,
+      "test_files": []
+    },
+    {
+      "slug": "ppt-to-docx",
+      "lifecycle_status": "deprecated",
+      "name": "PPT to DOCX",
+      "locked": false,
+      "test_files": []
+    },
+    {
+      "slug": "ppt-to-xlsx",
+      "lifecycle_status": "deprecated",
+      "name": "PPT to XLSX",
+      "locked": false,
+      "test_files": []
+    },
+    {
+      "slug": "xlsx-to-ods",
+      "lifecycle_status": "deprecated",
+      "name": "XLSX to ODS",
+      "locked": false,
+      "test_files": []
     }
   ]
 }
