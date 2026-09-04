@@ -35,6 +35,7 @@ ALLOWED_EXTENSIONS = {
     "heic",
     "heif",
     "svg",
+    "tif",
 
     # AUDIO
     "mp3",

@@ -1,0 +1,28 @@
+{
+  "id": "bmp-to-webp",
+  "slug": "bmp-to-webp",
+  "name": "BMP to WEBP",
+  "category": "image",
+  "description": "Convert BMP images to WEBP format for smaller sizes.",
+  "input_formats": [
+    "bmp"
+  ],
+  "output_formats": [
+    "webp"
+  ],
+  "accepted_mime_types": [
+    "image/bmp"
+  ],
+  "max_upload_size": 104857600,
+  "conversion_engine": "image",
+  "landing_path": "/tools/bmp-to-webp",
+  "canonical_url": "https://converigo.com/tools/bmp-to-webp",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.bmp",
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "certified"
+}

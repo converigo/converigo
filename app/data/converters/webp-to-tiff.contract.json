@@ -1,0 +1,28 @@
+{
+  "id": "webp-to-tiff",
+  "slug": "webp-to-tiff",
+  "name": "WEBP to TIFF",
+  "category": "image",
+  "description": "Convert WEBP images to TIFF format for archival and printing.",
+  "input_formats": [
+    "webp"
+  ],
+  "output_formats": [
+    "tiff"
+  ],
+  "accepted_mime_types": [
+    "image/webp"
+  ],
+  "max_upload_size": 104857600,
+  "conversion_engine": "image",
+  "landing_path": "/tools/webp-to-tiff",
+  "canonical_url": "https://converigo.com/tools/webp-to-tiff",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.webp",
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "certified"
+}
