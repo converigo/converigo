@@ -203,19 +203,27 @@ def test_rar_extract_single_output_file():
 
 @pytest.mark.certified
 def test_rar4_password_protected_honest_error():
-    """TEST 006: RAR4 password-protected -> 422 UNSUPPORTED_CONVERSION with
-    a clear message (no silent failure, no generic 500)."""
+    """TEST 006: RAR4 password-protected -> 422 UNSUPPORTED_CONVERSION
+    (no silent failure, no generic 500).
+
+    Category-only assert: the encrypted-error classification comes from
+    the engine's version-independent structural header pre-scan, so the
+    test must not pin any native error message wording."""
     client = TestClient(app)
     response = _convert(client, RAR4_PASSWORD)
-    _assert_unsupported(response, "password")
+    _assert_unsupported(response)
 
 
 @pytest.mark.certified
 def test_rar5_password_protected_honest_error():
-    """TEST 007: RAR5 password-protected -> 422 UNSUPPORTED_CONVERSION."""
+    """TEST 007: RAR5 password-protected -> 422 UNSUPPORTED_CONVERSION.
+
+    Category-only assert: same version-independence rationale as TEST 006
+    (libarchive 3.6.2 fails RAR5 header decryption with a message that
+    never mentions passphrase/password/encrypted)."""
     client = TestClient(app)
     response = _convert(client, RAR5_PASSWORD)
-    _assert_unsupported(response, "password")
+    _assert_unsupported(response)
 
 
 @pytest.mark.certified

@@ -92,6 +92,97 @@ def _rar_is_multivolume(data: bytes) -> bool | None:
     return None
 
 
+def _rar_has_encrypted_headers(data: bytes) -> bool | None:
+    """Pure-Python structural pre-scan for RAR encryption markers.
+
+    Returns True when the on-disk headers positively indicate encryption:
+
+    - RAR4: ``MHD_PASSWORD`` (0x0080) in the main archive header flags, or
+      ``LHD_PASSWORD`` (0x0004) in any file header flags;
+    - RAR5: an archive-encryption header (block type 4, i.e. encrypted
+      headers), or a ``FHEXTRA_CRYPT`` extra record (type 0x01) on any
+      FILE (2) or SERVICE (3) header.  Record type 0x01 on the MAIN
+      header's extra area is ``MHEXTRA_LOCATOR`` and must NOT count.
+
+    Returns False when the scan walks the header chain to the end-of-
+    archive marker without finding any marker, and None when the bytes
+    cannot be parsed (truncated/corrupt) — the native reader then owns
+    the classification.
+
+    Version-independent by construction: only documented on-disk
+    structures are inspected, never native libarchive error messages.
+    """
+    if data[:7] == _RAR4_SIGNATURE:
+        try:
+            pos = 7
+            while pos + 7 <= len(data):
+                _crc, btype, flags, hsize = struct.unpack_from("<HBHH", data, pos)
+                if hsize < 7:
+                    return None
+                if btype == 0x73:  # main archive header
+                    if flags & 0x0080:  # MHD_PASSWORD
+                        return True
+                elif btype == 0x74:  # file header
+                    if flags & 0x0004:  # LHD_PASSWORD
+                        return True
+                    if flags & 0x0100:  # LHD_LARGE: 64-bit packed size
+                        high_pack, _high_unp, pack, _unp = struct.unpack_from(
+                            "<IIII", data, pos + 7
+                        )
+                        packed_size = (high_pack << 32) | pack
+                    else:
+                        (packed_size,) = struct.unpack_from("<I", data, pos + 7)
+                    pos += hsize + packed_size
+                    continue
+                elif btype == 0x7B:  # end of archive: chain fully walked
+                    return False
+                pos += hsize
+            return None
+        except (ValueError, struct.error):
+            return None
+    if data[:8] == _RAR5_SIGNATURE:
+        try:
+            pos = 8
+            while pos + 5 <= len(data):
+                hsize, body_pos = _read_vint(data, pos + 4)
+                body = data[body_pos : body_pos + hsize]
+                if len(body) < hsize:
+                    return None
+                p = 0
+                btype, p = _read_vint(body, p)
+                bflags, p = _read_vint(body, p)
+                extra_size = 0
+                data_size = 0
+                if bflags & 0x0001:  # extra area present
+                    extra_size, p = _read_vint(body, p)
+                if bflags & 0x0002:  # data area present
+                    data_size, p = _read_vint(body, p)
+                if btype == 4:  # archive encryption header (headers encrypted)
+                    return True
+                if btype == 5:  # end of archive: chain fully walked
+                    return False
+                if btype in (2, 3) and extra_size:
+                    # Extra area is the tail of the fixed header.  Records:
+                    # size(vint) then size bytes starting with type(vint).
+                    rec_pos = hsize - extra_size
+                    while rec_pos < hsize:
+                        rec_size, rec_pos = _read_vint(body, rec_pos)
+                        if rec_size <= 0 or rec_pos + rec_size > hsize:
+                            return None
+                        rec_type, _rec_data = _read_vint(body, rec_pos)
+                        if rec_type == 1:  # FHEXTRA_CRYPT
+                            return True
+                        rec_pos += rec_size
+                nxt = body_pos + hsize + data_size
+                if nxt <= pos:
+                    return None
+                pos = nxt
+            return None
+        except ValueError:
+            return None
+    return None
+
+
 def _load_rar_ffi_helpers() -> tuple:
     """Bind libarchive C symbols that libarchive-c does not wrap.
 
@@ -240,6 +331,38 @@ class ArchiveEngine(BaseEngine):
         errors for password-protected / multi-volume / non-RAR input
         instead of failing silently or producing partial output.
         """
+        # Pure-Python structural pre-scan BEFORE any native call: typed
+        # classification must not depend on the libarchive version/build
+        # or on native error-message wording.  Multi-volume check first,
+        # then the signature gate, then the encryption markers.
+        with open(source_path, "rb") as handle:
+            data = handle.read()
+        if _rar_is_multivolume(data) is True:
+            raise RarMultiVolumeError(
+                "RAR extraction blocked: multi-volume (split) RAR archives are "
+                "not supported. Please provide a single-volume RAR archive."
+            )
+
+        # Gate on the RAR signature so garbage/placeholder files and
+        # other archive formats mislabeled as .rar surface as honest
+        # errors instead of entering the generic read path.
+        if not (data[:7] == _RAR4_SIGNATURE or data[:8] == _RAR5_SIGNATURE):
+            raise RarUnsupportedContentError(
+                "The uploaded file is not a valid RAR archive."
+            )
+
+        # Encryption pre-scan (version-independent): MHD_PASSWORD /
+        # LHD_PASSWORD (RAR4) or an archive-encryption header /
+        # FHEXTRA_CRYPT record (RAR5) raise the typed error here, before
+        # libarchive is touched.  None (unparseable bytes) defers to the
+        # native reader below.
+        if _rar_has_encrypted_headers(data) is True:
+            raise RarEncryptedError(
+                "RAR extraction blocked: the archive is "
+                "password-protected. Password-protected RAR "
+                "archives are not supported."
+            )
+
         # Import lazily so the rest of the archive engine (zip/tar/gz)
         # keeps working on hosts where libarchive-c is not installed.
         try:
@@ -250,26 +373,6 @@ class ArchiveEngine(BaseEngine):
             ) from exc
 
         format_name_fn, is_encrypted_fn = _load_rar_ffi_helpers()
-
-        # Multi-volume sets must be rejected up-front: the RAR5 reader
-        # yields silent empty output for continuation volumes, and a first
-        # volume alone can never be fully extracted. Only the header is
-        # needed - do not buffer the whole archive for this check.
-        with open(source_path, "rb") as handle:
-            raw = handle.read(64)
-        if _rar_is_multivolume(raw) is True:
-            raise RarMultiVolumeError(
-                "RAR extraction blocked: multi-volume (split) RAR archives are "
-                "not supported. Please provide a single-volume RAR archive."
-            )
-
-        # Gate on the RAR signature so garbage/placeholder files and
-        # other archive formats mislabeled as .rar surface as honest
-        # errors instead of entering the generic read path.
-        if not (raw[:7] == _RAR4_SIGNATURE or raw[:8] == _RAR5_SIGNATURE):
-            raise RarUnsupportedContentError(
-                "The uploaded file is not a valid RAR archive."
-            )
 
         files = 0
         written = 0
@@ -334,17 +437,15 @@ class ArchiveEngine(BaseEngine):
         except (RarEncryptedError, RarMultiVolumeError, RarUnsupportedContentError):
             raise
         except libarchive.ArchiveError as exc:
-            message = str(exc)
-            lowered = message.lower()
-            # Header-encrypted RAR4 archives fail during header read with an
-            # explicit passphrase error; classify those as password errors.
-            if "passphrase" in lowered or "password" in lowered or "encrypted" in lowered:
-                raise RarEncryptedError(
-                    "RAR extraction blocked: the archive is password-protected. "
-                    "Password-protected RAR archives are not supported."
-                ) from exc
+            # No keyword matching on native messages: libarchive error
+            # strings are version- and locale-dependent (libarchive 3.6.2
+            # reports RAR5 header-decryption failures as "Unsupported block
+            # header size", never mentioning encryption).  Password cases
+            # are already classified by the structural pre-scan above, so
+            # anything still reaching this handler is unreadable/unsupported
+            # content.
             raise RarUnsupportedContentError(
-                f"RAR extraction failed: {message}"
+                f"RAR extraction failed: {exc}"
             ) from exc
 
         if files == 0:
