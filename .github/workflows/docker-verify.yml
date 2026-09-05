@@ -74,8 +74,10 @@ jobs:
 
       - name: "[5/5] Full certified RAR suite inside the image"
         run: |
-          docker run --rm --workdir /app converigo-verify:ci sh -c \
-            'pip install -q pytest pytest-asyncio httpx && python -m pytest $VERIFY_SUITE -v --tb=short'
+          docker run --rm --workdir /app \
+            -e VERIFY_SUITE="$VERIFY_SUITE" \
+            converigo-verify:ci sh -c \
+            'pip install -q pytest pytest-asyncio httpx && python -m pytest "${VERIFY_SUITE:-tests/certified/archive/test_rar_extract_certified.py}" -v --tb=short'
           echo "POINT [5/5] PASS: certified suite green inside the production image" >> "$GITHUB_STEP_SUMMARY"
 
       - name: "Verification summary"
