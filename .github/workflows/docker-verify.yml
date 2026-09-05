@@ -1,0 +1,83 @@
+name: docker-runtime-verify
+
+# CI infrastructure (not converter code). Builds the production image from
+# the branch Dockerfile and executes the Docker runtime verification
+# checklist INSIDE the real container:
+#   [1/5] docker build from the branch Dockerfile
+#   [2/5] ldconfig -p | grep libarchive  (expect libarchive.so.13)
+#   [3/5] python -c "import libarchive"
+#   [4/5] extract real RAR4/RAR5 fixtures in-image + validate output
+#   [5/5] full certified RAR suite in-image (E2E + 422 error classes)
+#
+# Reusable: runs automatically for every PR (pull_request), for pushes to
+# main (post-merge image check), and on demand via workflow_dispatch.
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Git ref to verify (defaults to the triggering ref)"
+        required: false
+        default: ""
+      rar_fixtures:
+        description: "Space-separated RAR fixtures for the in-image probe"
+        required: false
+        default: "tests/fixtures/rar/rar4_members.rar tests/fixtures/rar/rar5_members.rar tests/fixtures/rar/rar5_single.rar"
+      certified_suite:
+        description: "Certified pytest suite executed inside the built image"
+        required: false
+        default: "tests/certified/archive/test_rar_extract_certified.py"
+
+permissions:
+  contents: read
+
+jobs:
+  in-image-verify:
+    name: Build image + in-container verification
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      VERIFY_FIXTURES: ${{ inputs.rar_fixtures || 'tests/fixtures/rar/rar4_members.rar tests/fixtures/rar/rar5_members.rar tests/fixtures/rar/rar5_single.rar' }}
+      VERIFY_SUITE: ${{ inputs.certified_suite || 'tests/certified/archive/test_rar_extract_certified.py' }}
+    steps:
+      - name: Checkout (PR head / dispatch ref / pushed ref)
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref || github.ref }}
+          fetch-depth: 0
+
+      - name: "[1/5] Build image from the branch Dockerfile"
+        run: |
+          docker build -t converigo-verify:ci .
+          docker image ls converigo-verify:ci
+
+      - name: "[2/5] ldconfig -p | grep libarchive (expect libarchive.so.13)"
+        run: |
+          docker run --rm converigo-verify:ci sh -c 'ldconfig -p | grep libarchive' | tee ldconfig_container.txt
+          grep -q 'libarchive\.so\.13' ldconfig_container.txt
+          echo "POINT [2/5] PASS: libarchive.so.13 present and linked in the container" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: "[3/5] python -c 'import libarchive'"
+        run: |
+          docker run --rm converigo-verify:ci python -c 'import libarchive; print("IMPORT_LIBARCHIVE_OK")'
+          echo "POINT [3/5] PASS: import libarchive OK in the container" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: "[4/5] Extract real RAR4/RAR5 fixtures in-image and validate"
+        run: |
+          docker run --rm --workdir /app converigo-verify:ci \
+            python scripts/ci_in_image_rar_probe.py $VERIFY_FIXTURES
+          echo "POINT [4/5] PASS: real fixtures extracted in-image, output validated" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: "[5/5] Full certified RAR suite inside the image"
+        run: |
+          docker run --rm --workdir /app converigo-verify:ci sh -c \
+            'pip install -q pytest pytest-asyncio httpx && python -m pytest $VERIFY_SUITE -v --tb=short'
+          echo "POINT [5/5] PASS: certified suite green inside the production image" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: "Verification summary"
+        if: always()
+        run: echo "docker-runtime-verify finished for ${{ github.event_name }} @ ${{ github.sha }}"
