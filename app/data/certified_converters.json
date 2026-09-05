@@ -29,6 +29,48 @@
       "test_files": []
     },
     {
+      "slug": "pdf-metadata",
+      "lifecycle_status": "certified",
+      "name": "PDF Metadata",
+      "locked": true,
+      "test_files": ["tests/certified/pdf/test_pdf_ops_factory_certified.py"]
+    },
+    {
+      "slug": "pdf-rotate",
+      "lifecycle_status": "certified",
+      "name": "PDF Rotate",
+      "locked": true,
+      "test_files": ["tests/certified/pdf/test_pdf_ops_factory_certified.py"]
+    },
+    {
+      "slug": "pdf-to-html",
+      "lifecycle_status": "certified",
+      "name": "PDF to HTML",
+      "locked": true,
+      "test_files": ["tests/certified/pdf/test_pdf_ops_factory_certified.py"]
+    },
+    {
+      "slug": "pdf-to-md",
+      "lifecycle_status": "certified",
+      "name": "PDF to Markdown",
+      "locked": true,
+      "test_files": ["tests/certified/pdf/test_pdf_ops_factory_certified.py"]
+    },
+    {
+      "slug": "pdf-unlock",
+      "lifecycle_status": "certified",
+      "name": "PDF Unlock",
+      "locked": true,
+      "test_files": ["tests/certified/pdf/test_pdf_ops_factory_certified.py"]
+    },
+    {
+      "slug": "pdf-watermark",
+      "lifecycle_status": "certified",
+      "name": "PDF Watermark",
+      "locked": true,
+      "test_files": ["tests/certified/pdf/test_pdf_ops_factory_certified.py"]
+    },
+    {
       "slug": "png-compress",
       "lifecycle_status": "certified",
       "name": "PNG Compress",
