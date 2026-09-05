@@ -325,6 +325,71 @@ class RecommendationManager {
 }
 
 
+/*
+ * Popular upload defaults for the consolidated homepage.
+ * The homepage uses STATIC_TARGET_MAP order for its first automatic target.
+ * Keep this as a preference layer: available targets are never added or removed.
+ *
+ * Priority is based on common conversion demand plus compatibility/usefulness.
+ * In particular, PNG -> JPG is intentionally preferred over legacy BMP.
+ */
+const POPULAR_UPLOAD_TARGETS = {
+    jpg:  ['WEBP','PNG','PDF','ICO','TIFF','JPEG'],
+    jpeg: ['WEBP','PNG','PDF','ICO','TIFF','JPEG'],
+    png:  ['JPG','WEBP','PDF','JPEG','TIFF','BMP','ICO'],
+    webp: ['JPG','PNG','PDF','JPEG','TIFF','ICO'],
+    heic: ['JPG','PNG','WEBP'],
+    heif: ['JPG','PNG','WEBP'],
+    avif: ['JPG','PNG','WEBP'],
+    bmp:  ['JPG','PNG','WEBP','PDF','JPEG','TIFF','ICO'],
+    tiff: ['JPG','PNG','PDF','WEBP','JPEG'],
+    svg:  ['PNG'],
+    gif:  ['PDF'],
+    pdf:  ['DOCX','JPG','PNG','TXT','XLSX','PPTX','DOC','PPT','XLS','ODT'],
+    docx: ['PDF','JPG','XLSX','PPTX','DOC','TXT'],
+    doc:  ['PDF','JPG','XLSX','PPTX','DOCX','TXT'],
+    pptx: ['PDF','JPG','DOCX','XLSX','PPTX','TXT'],
+    ppt:  ['PDF','JPG','DOCX','XLSX','PPTX','TXT'],
+    xlsx: ['PDF','CSV','DOCX','PPTX','XLSX'],
+    xls:  ['PDF','CSV','DOCX','PPTX','XLSX'],
+    txt:  ['PDF'],
+    csv:  ['XLSX','PDF','JSON'],
+    json: ['CSV','XLSX'],
+    ods:  ['XLSX'],
+    odt:  ['PDF'],
+    word: ['PDF','JPG','PPTX','XLSX','DOCX'],
+    powerpoint: ['PPTX','PDF','DOCX','XLSX'],
+    spreadsheet: ['XLSX','PDF','DOCX','PPTX'],
+    mp3:  ['WAV'],
+    wav:  ['MP3'],
+    flac: ['MP3'],
+    m4a:  ['MP3'],
+    aac:  ['MP3'],
+    mp4:  ['MP3','GIF','AAC','WAV','M4A','FLAC','OGG'],
+    gz:   ['GZIP'],
+    gzip: ['GZ']
+};
+
+function applyPopularUploadDefaults(){
+    if(typeof STATIC_TARGET_MAP === 'undefined') return;
+
+    Object.entries(POPULAR_UPLOAD_TARGETS).forEach(([source, preferred]) => {
+        const available = STATIC_TARGET_MAP[source];
+        if(!Array.isArray(available) || !available.length) return;
+
+        const ordered = [];
+        preferred.forEach(target => {
+            const match = available.find(item => String(item).toUpperCase() === target);
+            if(match && !ordered.includes(match)) ordered.push(match);
+        });
+        available.forEach(target => {
+            if(!ordered.includes(target)) ordered.push(target);
+        });
+        STATIC_TARGET_MAP[source] = ordered;
+    });
+}
+
+applyPopularUploadDefaults();
 
 
 
