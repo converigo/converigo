@@ -1,6 +1,13 @@
 {
   "certified": [
     {
+      "slug": "avi-to-mp4",
+      "lifecycle_status": "certified",
+      "name": "AVI to MP4",
+      "locked": true,
+      "test_files": ["tests/certified/video/test_f4_media_factory_certified.py"]
+    },
+    {
       "slug": "avif-to-jpg",
       "lifecycle_status": "certified",
       "name": "AVIF to JPG",
@@ -27,6 +34,55 @@
       "name": "DOCX to PDF",
       "locked": true,
       "test_files": []
+    },
+    {
+      "slug": "gif-to-mp4",
+      "lifecycle_status": "certified",
+      "name": "GIF to MP4",
+      "locked": true,
+      "test_files": ["tests/certified/video/test_f4_media_factory_certified.py"]
+    },
+    {
+      "slug": "mkv-to-mp4",
+      "lifecycle_status": "certified",
+      "name": "MKV to MP4",
+      "locked": true,
+      "test_files": ["tests/certified/video/test_f4_media_factory_certified.py"]
+    },
+    {
+      "slug": "mov-to-mp4",
+      "lifecycle_status": "certified",
+      "name": "MOV to MP4",
+      "locked": true,
+      "test_files": ["tests/certified/video/test_f4_media_factory_certified.py"]
+    },
+    {
+      "slug": "mp4-compress",
+      "lifecycle_status": "certified",
+      "name": "MP4 Compress",
+      "locked": true,
+      "test_files": ["tests/certified/video/test_f4_media_factory_certified.py"]
+    },
+    {
+      "slug": "mp4-to-avi",
+      "lifecycle_status": "certified",
+      "name": "MP4 to AVI",
+      "locked": true,
+      "test_files": ["tests/certified/video/test_f4_media_factory_certified.py"]
+    },
+    {
+      "slug": "mp4-to-webm",
+      "lifecycle_status": "certified",
+      "name": "MP4 to WEBM",
+      "locked": true,
+      "test_files": ["tests/certified/video/test_f4_media_factory_certified.py"]
+    },
+    {
+      "slug": "ogg-to-mp3",
+      "lifecycle_status": "certified",
+      "name": "OGG to MP3",
+      "locked": true,
+      "test_files": ["tests/certified/video/test_f4_media_factory_certified.py"]
     },
     {
       "slug": "pdf-metadata",
@@ -300,6 +356,20 @@
       "name": "TIFF to JPG",
       "locked": true,
       "test_files": []
+    },
+    {
+      "slug": "wav-to-flac",
+      "lifecycle_status": "certified",
+      "name": "WAV to FLAC",
+      "locked": true,
+      "test_files": ["tests/certified/video/test_f4_media_factory_certified.py"]
+    },
+    {
+      "slug": "webm-to-mp4",
+      "lifecycle_status": "certified",
+      "name": "WEBM to MP4",
+      "locked": true,
+      "test_files": ["tests/certified/video/test_f4_media_factory_certified.py"]
     },
     {
       "slug": "webp-to-png",

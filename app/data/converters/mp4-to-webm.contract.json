@@ -1,0 +1,28 @@
+{
+  "id": "mp4-to-webm",
+  "slug": "mp4-to-webm",
+  "name": "MP4 to WEBM",
+  "category": "video",
+  "description": "Convert MP4 videos to WebM (VP9 + Opus re-encode) for efficient HTML5 web playback.",
+  "input_formats": [
+    "mp4"
+  ],
+  "output_formats": [
+    "webm"
+  ],
+  "accepted_mime_types": [
+    "video/mp4"
+  ],
+  "max_upload_size": 524288000,
+  "conversion_engine": "ffmpeg",
+  "landing_path": "/mp4-to-webm",
+  "canonical_url": "https://converigo.com/mp4-to-webm",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.mp4",
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "certified"
+}

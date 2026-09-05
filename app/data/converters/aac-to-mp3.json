@@ -1,0 +1,115 @@
+{
+  "slug": "aac-to-mp3",
+  "title": "AAC to MP3 Converter",
+  "description": "Convert AAC audio files to MP3 format.",
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".aac",
+    "button_text": "Upload AAC"
+  },
+  "faq": [
+    {
+      "question": "How do I convert a AAC file to MP3?",
+      "answer": "Upload your AAC file to Converigo and the MP3 output will be ready for download immediately."
+    },
+    {
+      "question": "Is the conversion secure?",
+      "answer": "Yes, files are processed securely on our servers and automatically deleted after conversion."
+    },
+    {
+      "question": "What file sizes are supported?",
+      "answer": "AAC files up to 500MB can be converted instantly on Converigo."
+    },
+    {
+      "question": "Can I convert files on mobile?",
+      "answer": "Yes, Converigo works on all modern browsers and devices."
+    }
+  ],
+  "related_tools": [],
+  "seo": {
+    "title": "AAC to MP3 Converter Online Free | Converigo",
+    "description": "Convert AAC files to MP3 online for free using Converigo. Fast, secure browser-based conversion with no software installation required.",
+    "keywords": "aac-to-mp3, AAC to MP3, converigo",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert AAC to MP3 - Converigo free online converter",
+    "twitter_title": "AAC to MP3 Converter Online Free | Converigo",
+    "twitter_description": "Convert AAC files to MP3 online for free using Converigo. Fast, secure browser-based conversion with no software installation required.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/aac-to-mp3"
+  },
+  "source": "aac",
+  "target": "mp3",
+  "category": "audio",
+  "active": true,
+  "popular": false,
+  "featured": false,
+  "hero": {
+    "eyebrow": "Converter",
+    "title": "Convert AAC to MP3 Online Free",
+    "description": "Convert AAC files to MP3 online for free. Fast, secure browser-based conversion with no software installation. Get high-quality mp3 output in seconds using Converigo.",
+    "panel_label": "Ready to convert",
+    "panel_title": "Upload a AAC file and receive your mp3 output instantly."
+  },
+  "features": [
+    {
+      "title": "Instant conversion",
+      "text": "Convert AAC to MP3 in seconds without installing any software."
+    },
+    {
+      "title": "Secure processing",
+      "text": "Your files are processed securely and automatically deleted after conversion."
+    },
+    {
+      "title": "Large file support",
+      "text": "Convert AAC files up to 500MB in size instantly."
+    },
+    {
+      "title": "Cross-platform",
+      "text": "Works on Windows, Mac, Linux, and all modern mobile devices."
+    }
+  ],
+  "supported_formats": {
+    "input": [
+      "AAC"
+    ],
+    "output": [
+      "MP3"
+    ],
+    "description": "AAC input, mp3 output"
+  },
+  "how_to_use": [
+    {
+      "title": "Upload your AAC file",
+      "description": "Select a AAC file from your device to begin the conversion."
+    },
+    {
+      "title": "Wait for processing",
+      "description": "Converigo processes the conversion instantly with secure handling."
+    },
+    {
+      "title": "Download your MP3 file",
+      "description": "Get the mp3 output ready to download immediately."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is a AAC file?",
+      "text": "A AAC file is processed fully server-side by Converigo - no plugin or download needed."
+    },
+    {
+      "title": "Why convert AAC to MP3?",
+      "text": "The mp3 output keeps your data portable and ready for the tools you use next."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Convert AAC files in seconds",
+    "text": "Upload your AAC file and get the mp3 output instantly.",
+    "primary_text": "Convert now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  },
+  "lifecycle_status": "certified"
+}
