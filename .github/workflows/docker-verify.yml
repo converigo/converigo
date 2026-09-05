@@ -27,6 +27,10 @@ on:
         description: "Space-separated RAR fixtures for the in-image probe"
         required: false
         default: "tests/fixtures/rar/rar4_members.rar tests/fixtures/rar/rar5_members.rar tests/fixtures/rar/rar5_single.rar"
+      probe_script:
+        description: "In-image probe script executed in [4/5] (default: RAR probe)"
+        required: false
+        default: "scripts/ci_in_image_rar_probe.py"
       certified_suite:
         description: "Certified pytest suite executed inside the built image"
         required: false
@@ -42,6 +46,7 @@ jobs:
     timeout-minutes: 60
     env:
       VERIFY_FIXTURES: ${{ inputs.rar_fixtures || 'tests/fixtures/rar/rar4_members.rar tests/fixtures/rar/rar5_members.rar tests/fixtures/rar/rar5_single.rar' }}
+      VERIFY_PROBE: ${{ inputs.probe_script || 'scripts/ci_in_image_rar_probe.py' }}
       VERIFY_SUITE: ${{ inputs.certified_suite || 'tests/certified/archive/test_rar_extract_certified.py' }}
     steps:
       - name: Checkout (PR head / dispatch ref / pushed ref)
@@ -69,8 +74,8 @@ jobs:
       - name: "[4/5] Extract real RAR4/RAR5 fixtures in-image and validate"
         run: |
           docker run --rm --workdir /app converigo-verify:ci \
-            python scripts/ci_in_image_rar_probe.py $VERIFY_FIXTURES
-          echo "POINT [4/5] PASS: real fixtures extracted in-image, output validated" >> "$GITHUB_STEP_SUMMARY"
+            python "$VERIFY_PROBE" $VERIFY_FIXTURES
+          echo "POINT [4/5] PASS: in-image probe ($VERIFY_PROBE) validated real fixtures" >> "$GITHUB_STEP_SUMMARY"
 
       - name: "[5/5] Full certified RAR suite inside the image"
         run: |
