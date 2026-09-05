@@ -134,7 +134,7 @@ FILE_SIGNATURES = {
     "tar": [],  # TAR has no consistent magic bytes, allow permissively
     "tgz": [b"\x1f\x8b\x08"],  # gzip signature
     "gz": [b"\x1f\x8b\x08"],
-    "rar": [b"Rar!\x1A\x07\x00"],
+    "rar": [b"Rar!\x1A\x07\x00", b"Rar!\x1A\x07\x01\x00"],  # RAR4 + RAR5
     "zip": [b"PK\x03\x04", b"PK\x05\x06", b"PK\x07\x08"],
 }
 
