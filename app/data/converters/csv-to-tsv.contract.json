@@ -1,0 +1,28 @@
+{
+  "id": "csv-to-tsv",
+  "slug": "csv-to-tsv",
+  "name": "CSV to TSV",
+  "category": "spreadsheet",
+  "description": "Convert CSV data files to TSV (tab-separated values) format.",
+  "input_formats": [
+    "csv"
+  ],
+  "output_formats": [
+    "tsv"
+  ],
+  "accepted_mime_types": [
+    "text/csv"
+  ],
+  "max_upload_size": 524288000,
+  "conversion_engine": "spreadsheet",
+  "landing_path": "/csv-to-tsv",
+  "canonical_url": "https://converigo.com/csv-to-tsv",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.csv",
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "certified"
+}

@@ -1,0 +1,115 @@
+{
+  "slug": "csv-to-tsv",
+  "title": "CSV to TSV Converter",
+  "description": "Convert CSV data files to TSV (tab-separated values) format.",
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".csv",
+    "button_text": "Upload CSV"
+  },
+  "faq": [
+    {
+      "question": "How do I convert a CSV file to TSV?",
+      "answer": "Upload your CSV file to Converigo and the TSV output will be ready for download immediately."
+    },
+    {
+      "question": "Is the conversion secure?",
+      "answer": "Yes, files are processed securely on our servers and automatically deleted after conversion."
+    },
+    {
+      "question": "What file sizes are supported?",
+      "answer": "CSV files up to 500MB can be converted instantly on Converigo."
+    },
+    {
+      "question": "Can I convert files on mobile?",
+      "answer": "Yes, Converigo works on all modern browsers and devices."
+    }
+  ],
+  "related_tools": [],
+  "seo": {
+    "title": "CSV to TSV Converter Online Free | Converigo",
+    "description": "Convert CSV files to TSV online for free using Converigo. Fast, secure browser-based conversion with no software installation required.",
+    "keywords": "csv-to-tsv, CSV to TSV, converigo",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert CSV to TSV - Converigo free online converter",
+    "twitter_title": "CSV to TSV Converter Online Free | Converigo",
+    "twitter_description": "Convert CSV files to TSV online for free using Converigo. Fast, secure browser-based conversion with no software installation required.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/csv-to-tsv"
+  },
+  "source": "csv",
+  "target": "tsv",
+  "category": "spreadsheet",
+  "active": true,
+  "popular": false,
+  "featured": false,
+  "hero": {
+    "eyebrow": "Converter",
+    "title": "Convert CSV to TSV Online Free",
+    "description": "Convert CSV files to TSV online for free. Fast, secure browser-based conversion with no software installation. Get high-quality tsv output in seconds using Converigo.",
+    "panel_label": "Ready to convert",
+    "panel_title": "Upload a CSV file and receive your tsv output instantly."
+  },
+  "features": [
+    {
+      "title": "Instant conversion",
+      "text": "Convert CSV to TSV in seconds without installing any software."
+    },
+    {
+      "title": "Secure processing",
+      "text": "Your files are processed securely and automatically deleted after conversion."
+    },
+    {
+      "title": "Large file support",
+      "text": "Convert CSV files up to 500MB in size instantly."
+    },
+    {
+      "title": "Cross-platform",
+      "text": "Works on Windows, Mac, Linux, and all modern mobile devices."
+    }
+  ],
+  "supported_formats": {
+    "input": [
+      "CSV"
+    ],
+    "output": [
+      "TSV"
+    ],
+    "description": "CSV input, tsv output"
+  },
+  "how_to_use": [
+    {
+      "title": "Upload your CSV file",
+      "description": "Select a CSV file from your device to begin the conversion."
+    },
+    {
+      "title": "Wait for processing",
+      "description": "Converigo processes the conversion instantly with secure handling."
+    },
+    {
+      "title": "Download your TSV file",
+      "description": "Get the tsv output ready to download immediately."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is a CSV file?",
+      "text": "A CSV file is processed fully server-side by Converigo - no plugin or download needed."
+    },
+    {
+      "title": "Why convert CSV to TSV?",
+      "text": "The tsv output keeps your data portable and ready for the tools you use next."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Convert CSV files in seconds",
+    "text": "Upload your CSV file and get the tsv output instantly.",
+    "primary_text": "Convert now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  },
+  "lifecycle_status": "certified"
+}

@@ -59,6 +59,7 @@ ALLOWED_EXTENSIONS = {
     "txt",
     "csv",
     "json",
+    "tsv",
     "xlsx",
     "xls",
     "odt",
@@ -129,6 +130,7 @@ FILE_SIGNATURES = {
     "txt": [],  # Text files no specific signature
     "csv": [],  # CSV files no specific signature
     "json": [],  # JSON files no specific signature
+    "tsv": [],  # TSV files no specific signature (tab-separated text)
     # Archives
     "7z": [b"7z\xBC\xAF\x27\x1C"],
     "tar": [],  # TAR has no consistent magic bytes, allow permissively
@@ -171,6 +173,7 @@ CONTENT_TYPE_BY_EXTENSION = {
     "txt": ["text/plain"],
     "csv": ["text/csv", "text/plain"],
     "json": ["application/json", "text/plain"],
+    "tsv": ["text/tab-separated-values", "text/plain"],
     "xlsx": ["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"],
     "xls": ["application/vnd.ms-excel"],
     "pptx": ["application/vnd.openxmlformats-officedocument.presentationml.presentation"],

@@ -398,6 +398,20 @@
       "name": "ZIP Extract",
       "locked": true,
       "test_files": ["tests/certified/archive/test_zip_extract_certified.py"]
+    },
+    {
+      "slug": "csv-to-tsv",
+      "lifecycle_status": "certified",
+      "name": "CSV to TSV",
+      "locked": true,
+      "test_files": ["tests/certified/spreadsheet/test_tsv_factory_certified.py"]
+    },
+    {
+      "slug": "tsv-to-csv",
+      "lifecycle_status": "certified",
+      "name": "TSV to CSV",
+      "locked": true,
+      "test_files": ["tests/certified/spreadsheet/test_tsv_factory_certified.py"]
     }
   ],
   "beta": [],
