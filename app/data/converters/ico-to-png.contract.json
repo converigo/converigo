@@ -1,0 +1,29 @@
+{
+  "id": "ico-to-png",
+  "slug": "ico-to-png",
+  "name": "ICO to PNG",
+  "category": "image",
+  "description": "Convert ICO icon files to PNG images.",
+  "input_formats": [
+    "ico"
+  ],
+  "output_formats": [
+    "png"
+  ],
+  "accepted_mime_types": [
+    "image/x-icon",
+    "image/vnd.microsoft.icon"
+  ],
+  "max_upload_size": 524288000,
+  "conversion_engine": "image",
+  "landing_path": "/ico-to-png",
+  "canonical_url": "https://converigo.com/ico-to-png",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.ico",
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "certified"
+}

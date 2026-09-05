@@ -34,6 +34,7 @@ ALLOWED_EXTENSIONS = {
     "avif",
     "heic",
     "heif",
+    "ico",
     "svg",
     "tif",
 
@@ -104,6 +105,7 @@ FILE_SIGNATURES = {
     "avif": [b"ftyp"],  # AVIF is MP4-based container
     "heic": [b"ftyp"],  # HEIC is MP4-based container
     "heif": [b"ftyp"],  # HEIF is MP4-based container
+    "ico": [b"\x00\x00\x01\x00"],  # ICO header: reserved(2) + type(1) + count(1)
     # Audio
     "mp3": [b"ID3", b"\xff\xfb"],
     "wav": [b"RIFF"],
@@ -153,6 +155,7 @@ CONTENT_TYPE_BY_EXTENSION = {
     "avif": ["image/avif"],
     "heic": ["image/heic"],
     "heif": ["image/heif"],
+    "ico": ["image/x-icon", "image/vnd.microsoft.icon"],
     # Audio
     "mp3": ["audio/mpeg"],
     "wav": ["audio/wav", "audio/x-wav"],

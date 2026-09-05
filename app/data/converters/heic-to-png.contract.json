@@ -1,0 +1,28 @@
+{
+  "id": "heic-to-png",
+  "slug": "heic-to-png",
+  "name": "HEIC to PNG",
+  "category": "image",
+  "description": "Convert HEIC photos to PNG images with transparency support.",
+  "input_formats": [
+    "heic"
+  ],
+  "output_formats": [
+    "png"
+  ],
+  "accepted_mime_types": [
+    "image/heic"
+  ],
+  "max_upload_size": 524288000,
+  "conversion_engine": "image",
+  "landing_path": "/heic-to-png",
+  "canonical_url": "https://converigo.com/heic-to-png",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.heic",
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "certified"
+}

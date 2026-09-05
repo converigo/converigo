@@ -29,6 +29,69 @@
       "test_files": []
     },
     {
+      "slug": "png-compress",
+      "lifecycle_status": "certified",
+      "name": "PNG Compress",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_image_ops_factory_certified.py"]
+    },
+    {
+      "slug": "jpg-watermark",
+      "lifecycle_status": "certified",
+      "name": "JPG Watermark",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_image_ops_factory_certified.py"]
+    },
+    {
+      "slug": "jpg-rotate",
+      "lifecycle_status": "certified",
+      "name": "JPG Rotate",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_image_ops_factory_certified.py"]
+    },
+    {
+      "slug": "jpg-grayscale",
+      "lifecycle_status": "certified",
+      "name": "JPG Grayscale",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_image_ops_factory_certified.py"]
+    },
+    {
+      "slug": "jpg-flip",
+      "lifecycle_status": "certified",
+      "name": "JPG Flip",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_image_ops_factory_certified.py"]
+    },
+    {
+      "slug": "jpg-crop",
+      "lifecycle_status": "certified",
+      "name": "JPG Crop",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_image_ops_factory_certified.py"]
+    },
+    {
+      "slug": "jpg-compress",
+      "lifecycle_status": "certified",
+      "name": "JPG Compress",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_image_ops_factory_certified.py"]
+    },
+    {
+      "slug": "ico-to-png",
+      "lifecycle_status": "certified",
+      "name": "ICO to PNG",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_image_ops_factory_certified.py"]
+    },
+    {
+      "slug": "heic-to-png",
+      "lifecycle_status": "certified",
+      "name": "HEIC to PNG",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_image_ops_factory_certified.py"]
+    },
+    {
       "slug": "ppt-to-jpg",
       "lifecycle_status": "certified",
       "name": "PPT to JPG",
