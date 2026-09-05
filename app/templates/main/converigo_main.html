@@ -1368,7 +1368,7 @@ const STATIC_TARGET_MAP = {
   png:['BMP','ICO','JPEG','JPG','PDF','TIFF','WEBP'],  webp:['ICO','JPEG','JPG','PDF','PNG','TIFF'],
   bmp:['JPEG','JPG','PDF','PNG','WEBP'],  tiff:['JPEG','JPG','PDF','PNG'],
   ico:['PNG'],  svg:['PNG'],  heic:['JPEG','JPG','PNG'],  heif:['JPEG','JPG'],  avif:['JPEG','JPG'],
-  gif:['PDF'],  // VAR-10 images-to-pdf (Batch 3)
+  gif:['MP4','PDF'],  // VAR-10 images-to-pdf (Batch 3) + F4 gif-to-mp4
   // document sources
   pdf:['DOC','DOCX','HTML','JPEG','JPG','MD','ODT','PPT','PPTX','TXT','WORD','XLS','XLSX'], // F3: +HTML,+MD via pdf-to-html / pdf-to-md
   docx:['JPEG','JPG','PDF','POWERPOINT','PPT','PPTX','SPREADSHEET','XLS','XLSX'],
@@ -1382,10 +1382,10 @@ const STATIC_TARGET_MAP = {
   spreadsheet:['DOC','DOCX','POWERPOINT','PPT','PPTX','WORD'],
   word:['JPEG','JPG','PDF','POWERPOINT','PPT','PPTX','SPREADSHEET','XLS','XLSX'],
   html:[],  md:[],  rtf:[],  // tidak ada registered converter
-  // audio sources
-  mp3:['WAV'],  wav:['MP3'],  ogg:[],  flac:['MP3'],  m4a:['MP3'],  aac:['MP3'],
-  // video sources
-  mp4:['AAC','FLAC','GIF','M4A','MP3','OGG','WAV'],  mov:[],  avi:[],  webm:[],  mkv:[],  flv:[],
+  // audio sources (F4: wav +FLAC via wav-to-flac; ogg +MP3 via ogg-to-mp3)
+  mp3:['WAV'],  wav:['FLAC','MP3'],  ogg:['MP3'],  flac:['MP3'],  m4a:['MP3'],  aac:['MP3'],
+  // video sources (F4: FFmpeg container transcodes, re-encoded libx264+aac)
+  mp4:['AAC','AVI','FLAC','GIF','M4A','MP3','OGG','WAV','WEBM'],  mov:['MP4'],  avi:['MP4'],  webm:['MP4'],  mkv:['MP4'],  flv:[],
   // archive sources (self-conversions dihapus — hanya extract operation)
   gz:['GZIP'],  gzip:['GZ'],  zip:[],  '7z':[],  rar:[],  tar:[],
 };
