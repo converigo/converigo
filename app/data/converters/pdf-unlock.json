@@ -1,0 +1,115 @@
+{
+  "slug": "pdf-unlock",
+  "title": "PDF to PDF Converter",
+  "description": "Remove owner restrictions from PDF files that open without a password.",
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".pdf",
+    "button_text": "Upload PDF"
+  },
+  "faq": [
+    {
+      "question": "How do I convert a PDF file to PDF?",
+      "answer": "Upload your PDF file to Converigo and the PDF output will be ready for download immediately."
+    },
+    {
+      "question": "Is the conversion secure?",
+      "answer": "Yes, files are processed securely on our servers and automatically deleted after conversion."
+    },
+    {
+      "question": "What file sizes are supported?",
+      "answer": "PDF files up to 500MB can be converted instantly on Converigo."
+    },
+    {
+      "question": "Can I convert files on mobile?",
+      "answer": "Yes, Converigo works on all modern browsers and devices."
+    }
+  ],
+  "related_tools": [],
+  "seo": {
+    "title": "PDF to PDF Converter Online Free | Converigo",
+    "description": "Convert PDF files to PDF online for free using Converigo. Fast, secure browser-based conversion with no software installation required.",
+    "keywords": "pdf-unlock, PDF to PDF, converigo",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert PDF to PDF - Converigo free online converter",
+    "twitter_title": "PDF to PDF Converter Online Free | Converigo",
+    "twitter_description": "Convert PDF files to PDF online for free using Converigo. Fast, secure browser-based conversion with no software installation required.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/pdf-unlock"
+  },
+  "source": "pdf",
+  "target": "pdf",
+  "category": "document",
+  "active": true,
+  "popular": false,
+  "featured": false,
+  "hero": {
+    "eyebrow": "Converter",
+    "title": "Convert PDF to PDF Online Free",
+    "description": "Convert PDF files to PDF online for free. Fast, secure browser-based conversion with no software installation. Get high-quality pdf output in seconds using Converigo.",
+    "panel_label": "Ready to convert",
+    "panel_title": "Upload a PDF file and receive your pdf output instantly."
+  },
+  "features": [
+    {
+      "title": "Instant conversion",
+      "text": "Convert PDF to PDF in seconds without installing any software."
+    },
+    {
+      "title": "Secure processing",
+      "text": "Your files are processed securely and automatically deleted after conversion."
+    },
+    {
+      "title": "Large file support",
+      "text": "Convert PDF files up to 500MB in size instantly."
+    },
+    {
+      "title": "Cross-platform",
+      "text": "Works on Windows, Mac, Linux, and all modern mobile devices."
+    }
+  ],
+  "supported_formats": {
+    "input": [
+      "PDF"
+    ],
+    "output": [
+      "PDF"
+    ],
+    "description": "PDF input, pdf output"
+  },
+  "how_to_use": [
+    {
+      "title": "Upload your PDF file",
+      "description": "Select a PDF file from your device to begin the conversion."
+    },
+    {
+      "title": "Wait for processing",
+      "description": "Converigo processes the conversion instantly with secure handling."
+    },
+    {
+      "title": "Download your PDF file",
+      "description": "Get the pdf output ready to download immediately."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is a PDF file?",
+      "text": "A PDF file is processed fully server-side by Converigo - no plugin or download needed."
+    },
+    {
+      "title": "Why convert PDF to PDF?",
+      "text": "The pdf output keeps your data portable and ready for the tools you use next."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Convert PDF files in seconds",
+    "text": "Upload your PDF file and get the pdf output instantly.",
+    "primary_text": "Convert now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  },
+  "lifecycle_status": "certified"
+}

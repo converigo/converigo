@@ -1,0 +1,28 @@
+{
+  "id": "pdf-to-md",
+  "slug": "pdf-to-md",
+  "name": "PDF to Markdown",
+  "category": "document",
+  "description": "Extract the text content of PDF pages into a Markdown file (text extraction MVP, not a layout-preserving conversion).",
+  "input_formats": [
+    "pdf"
+  ],
+  "output_formats": [
+    "md"
+  ],
+  "accepted_mime_types": [
+    "application/pdf"
+  ],
+  "max_upload_size": 524288000,
+  "conversion_engine": "document",
+  "landing_path": "/pdf-to-md",
+  "canonical_url": "https://converigo.com/pdf-to-md",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.pdf",
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "certified"
+}
