@@ -1,0 +1,115 @@
+{
+  "slug": "jpg-compress",
+  "title": "JPG to JPG Converter",
+  "description": "Recompress JPG images at reduced quality to shrink file size.",
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".jpg",
+    "button_text": "Upload JPG"
+  },
+  "faq": [
+    {
+      "question": "How do I convert a JPG file to JPG?",
+      "answer": "Upload your JPG file to Converigo and the JPG output will be ready for download immediately."
+    },
+    {
+      "question": "Is the conversion secure?",
+      "answer": "Yes, files are processed securely on our servers and automatically deleted after conversion."
+    },
+    {
+      "question": "What file sizes are supported?",
+      "answer": "JPG files up to 500MB can be converted instantly on Converigo."
+    },
+    {
+      "question": "Can I convert files on mobile?",
+      "answer": "Yes, Converigo works on all modern browsers and devices."
+    }
+  ],
+  "related_tools": [],
+  "seo": {
+    "title": "JPG to JPG Converter Online Free | Converigo",
+    "description": "Convert JPG files to JPG online for free using Converigo. Fast, secure browser-based conversion with no software installation required.",
+    "keywords": "jpg-compress, JPG to JPG, converigo",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert JPG to JPG - Converigo free online converter",
+    "twitter_title": "JPG to JPG Converter Online Free | Converigo",
+    "twitter_description": "Convert JPG files to JPG online for free using Converigo. Fast, secure browser-based conversion with no software installation required.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/jpg-compress"
+  },
+  "source": "jpg",
+  "target": "jpg",
+  "category": "image",
+  "active": true,
+  "popular": false,
+  "featured": false,
+  "hero": {
+    "eyebrow": "Converter",
+    "title": "Convert JPG to JPG Online Free",
+    "description": "Convert JPG files to JPG online for free. Fast, secure browser-based conversion with no software installation. Get high-quality jpg output in seconds using Converigo.",
+    "panel_label": "Ready to convert",
+    "panel_title": "Upload a JPG file and receive your jpg output instantly."
+  },
+  "features": [
+    {
+      "title": "Instant conversion",
+      "text": "Convert JPG to JPG in seconds without installing any software."
+    },
+    {
+      "title": "Secure processing",
+      "text": "Your files are processed securely and automatically deleted after conversion."
+    },
+    {
+      "title": "Large file support",
+      "text": "Convert JPG files up to 500MB in size instantly."
+    },
+    {
+      "title": "Cross-platform",
+      "text": "Works on Windows, Mac, Linux, and all modern mobile devices."
+    }
+  ],
+  "supported_formats": {
+    "input": [
+      "JPG"
+    ],
+    "output": [
+      "JPG"
+    ],
+    "description": "JPG input, jpg output"
+  },
+  "how_to_use": [
+    {
+      "title": "Upload your JPG file",
+      "description": "Select a JPG file from your device to begin the conversion."
+    },
+    {
+      "title": "Wait for processing",
+      "description": "Converigo processes the conversion instantly with secure handling."
+    },
+    {
+      "title": "Download your JPG file",
+      "description": "Get the jpg output ready to download immediately."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is a JPG file?",
+      "text": "A JPG file is processed fully server-side by Converigo - no plugin or download needed."
+    },
+    {
+      "title": "Why convert JPG to JPG?",
+      "text": "The jpg output keeps your data portable and ready for the tools you use next."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Convert JPG files in seconds",
+    "text": "Upload your JPG file and get the jpg output instantly.",
+    "primary_text": "Convert now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  },
+  "lifecycle_status": "certified"
+}
