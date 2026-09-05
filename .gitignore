@@ -49,7 +49,6 @@ list_routes.py
 verify_prod_live.py
 scripts/pw_*.py
 tests/assets/scope_*
-tests/sample.csv
 
 # Temporary artifacts and generated media
 tmp_*
