@@ -10,6 +10,7 @@ RUN apt-get update && \
         poppler-utils \
         p7zip-full \
         unrar-free \
+        libarchive13 \
         libcairo2 \
         libpango-1.0-0 \
         libgdk-pixbuf-xlib-2.0-0 \
