@@ -1,0 +1,119 @@
+{
+  "slug": "pptx-to-jpg",
+  "title": "PPTX to JPG Converter",
+  "description": "Convert PowerPoint presentations to JPG images (first slide, text preview).",
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".pptx",
+    "button_text": "Upload PPTX"
+  },
+  "faq": [
+    {
+      "question": "How do I convert a PPTX file to JPG?",
+      "answer": "Upload your PPTX file to Converigo and the JPG output will be ready for download immediately."
+    },
+    {
+      "question": "What exactly does the JPG contain?",
+      "answer": "The JPG is a text preview of the first slide: the slide's title and body text are re-rendered as text on a white page. It is not a full visual render of the slide - original images, shapes, colors, fonts, backgrounds and layout are not reproduced, and only the first slide is converted (MVP scope)."
+    },
+    {
+      "question": "Is the conversion secure?",
+      "answer": "Yes, files are processed securely on our servers and automatically deleted after conversion."
+    },
+    {
+      "question": "What file sizes are supported?",
+      "answer": "PPTX files up to 50MB can be converted instantly on Converigo."
+    },
+    {
+      "question": "Can I convert files on mobile?",
+      "answer": "Yes, Converigo works on all modern browsers and devices."
+    }
+  ],
+  "related_tools": [],
+  "seo": {
+    "title": "PPTX to JPG Converter Online Free | Converigo",
+    "description": "Convert PPTX files to JPG online for free using Converigo. Fast, secure browser-based conversion with no software installation required.",
+    "keywords": "pptx to jpg, pptx to jpg converter, powerpoint to jpg, converigo",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert PPTX to JPG - Converigo free online converter",
+    "twitter_title": "PPTX to JPG Converter Online Free | Converigo",
+    "twitter_description": "Convert PPTX files to JPG online for free using Converigo. Fast, secure browser-based conversion with no software installation required.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/pptx-to-jpg"
+  },
+  "source": "pptx",
+  "target": "jpg",
+  "category": "document",
+  "active": true,
+  "popular": false,
+  "featured": false,
+  "hero": {
+    "eyebrow": "Converter",
+    "title": "Convert PPTX to JPG Online Free",
+    "description": "Convert PPTX files to JPG online for free. Fast, secure browser-based conversion with no software installation. Get high-quality jpg output in seconds using Converigo.",
+    "panel_label": "Ready to convert",
+    "panel_title": "Upload a PPTX file and receive your jpg output instantly."
+  },
+  "features": [
+    {
+      "title": "Instant conversion",
+      "text": "Convert PPTX to JPG in seconds without installing any software."
+    },
+    {
+      "title": "Secure processing",
+      "text": "Your files are processed securely and automatically deleted after conversion."
+    },
+    {
+      "title": "Large file support",
+      "text": "Convert PPTX files up to 500MB in size instantly."
+    },
+    {
+      "title": "Cross-platform",
+      "text": "Works on Windows, Mac, Linux, and all modern mobile devices."
+    }
+  ],
+  "supported_formats": {
+    "input": [
+      "PPTX"
+    ],
+    "output": [
+      "JPG"
+    ],
+    "description": "PPTX input, jpg output"
+  },
+  "how_to_use": [
+    {
+      "title": "Upload your PPTX file",
+      "description": "Select a PPTX file from your device to begin the conversion."
+    },
+    {
+      "title": "Wait for processing",
+      "description": "Converigo processes the conversion instantly with secure handling."
+    },
+    {
+      "title": "Download your JPG file",
+      "description": "Get the jpg output ready to download immediately."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is a PPTX file?",
+      "text": "A PPTX file is processed fully server-side by Converigo - no plugin or download needed."
+    },
+    {
+      "title": "Why convert PPTX to JPG?",
+      "text": "The JPG output is a text preview of your first slide, handy as a thumbnail or quick share - keep in mind it is not a pixel-perfect copy of the slide design (MVP scope)."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Convert PPTX files in seconds",
+    "text": "Upload your PPTX file and get the jpg output instantly.",
+    "primary_text": "Convert now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  },
+  "lifecycle_status": "certified"
+}

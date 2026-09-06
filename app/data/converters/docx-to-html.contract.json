@@ -1,0 +1,29 @@
+{
+  "id": "docx-to-html",
+  "slug": "docx-to-html",
+  "name": "DOCX to HTML",
+  "category": "document",
+  "description": "Convert DOCX documents to clean, semantic HTML files.",
+  "input_formats": [
+    "docx"
+  ],
+  "output_formats": [
+    "html"
+  ],
+  "accepted_mime_types": [
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+  ],
+  "max_upload_size": 52428800,
+  "conversion_engine": "document",
+  "landing_path": "/docx-to-html",
+  "canonical_url": "https://converigo.com/docx-to-html",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.docx",
+  "supported_platforms": [
+    "web",
+    "api"
+  ],
+  "lifecycle_status": "certified"
+}
