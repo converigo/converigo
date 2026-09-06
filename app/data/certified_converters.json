@@ -50,6 +50,20 @@
       "test_files": ["tests/certified/video/test_f4_media_factory_certified.py"]
     },
     {
+      "slug": "json-to-xml",
+      "lifecycle_status": "certified",
+      "name": "JSON to XML",
+      "locked": true,
+      "test_files": ["tests/certified/data/test_data_interchange_factory_certified.py"]
+    },
+    {
+      "slug": "json-to-yaml",
+      "lifecycle_status": "certified",
+      "name": "JSON to YAML",
+      "locked": true,
+      "test_files": ["tests/certified/data/test_data_interchange_factory_certified.py"]
+    },
+    {
       "slug": "mkv-to-mp4",
       "lifecycle_status": "certified",
       "name": "MKV to MP4",
@@ -580,6 +594,20 @@
       "name": "XLSX to TSV",
       "locked": true,
       "test_files": ["tests/certified/spreadsheet/test_data_output_factory_certified.py"]
+    },
+    {
+      "slug": "xml-to-json",
+      "lifecycle_status": "certified",
+      "name": "XML to JSON",
+      "locked": true,
+      "test_files": ["tests/certified/data/test_data_interchange_factory_certified.py"]
+    },
+    {
+      "slug": "yaml-to-json",
+      "lifecycle_status": "certified",
+      "name": "YAML to JSON",
+      "locked": true,
+      "test_files": ["tests/certified/data/test_data_interchange_factory_certified.py"]
     },
     {
       "slug": "zip-extract",
