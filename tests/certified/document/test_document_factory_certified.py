@@ -2,14 +2,27 @@
 PROJECT: CONVERIGO
 TEST SUITE: Certified Document Factory Cluster - Factory Batch F7 (Jalur 2)
 
-Factory Batch F7 (office/document cluster): the two net-new document
-converters (DOC-14 docx-to-html via mammoth; pptx-to-png via the certified
-python-pptx -> reportlab -> PyMuPDF engine pipeline).  ONE parametric test
-file for the whole F7 batch, using the shared factory harness uniform
-contract:
+Factory Batch F7 (office/document cluster): the three document converters
+(DOC-14 docx-to-html via mammoth; pptx-to-png and pptx-to-jpg via the
+certified python-pptx -> reportlab -> PyMuPDF engine pipeline; the JPG variant
+was added in the FIX round to honor the full original F7 scope).  ONE
+parametric test file for the whole F7 batch, using the shared factory harness
+uniform contract:
 
     plugin discovered -> POST /convert 201 -> GET /download 200 ->
     output content verified -> honest 422 UNSUPPORTED_CONVERSION
+
+Governance note (FIX round): PPTX -> JPG was part of the original F7 scope and
+is shipped in this same batch rather than silently narrowed - the shared
+first-slide text-render pipeline makes the JPEG variant a 1:1 reuse of
+pptx-to-png.
+
+Fidelity note (MVP scope, D5b pattern - explicit): pptx-to-png / pptx-to-jpg
+produce a TEXT-ONLY render of the first slide (title + body text lines on a
+white page).  Original images, shapes, colors, fonts, backgrounds and layout
+are NOT reproduced; this is not a full visual render of the slide, and the
+same limitation plus first-slide-only scope apply to the certified document
+engine's jpg paths.  Landing pages disclose this in FAQ + about-formats.
 
 Governance note: tracked regression samples exist for BOTH source formats
 (tests/assets/regression/sample.docx, tests/assets/regression/sample.pptx),
@@ -62,6 +75,7 @@ CORRUPT_OOXML_JUNK = b"PK\x03\x04" + b"not-a-real-ooxml-container" * 8
 F7_CASES = [
     ("docx-to-html", "html", RUNTIME_DOCX_SAMPLE),
     ("pptx-to-png", "png", RUNTIME_PPTX_SAMPLE),
+    ("pptx-to-jpg", "jpg", RUNTIME_PPTX_SAMPLE),
 ]
 
 F7_SLUGS = [slug for slug, _, _ in F7_CASES]
@@ -111,9 +125,17 @@ def _verify_png(output_path: Path) -> None:
         assert image.width > 0 and image.height > 0
 
 
+def _verify_jpg(output_path: Path) -> None:
+    assert output_path.stat().st_size > 0, "Output JPG is empty"
+    with Image.open(str(output_path)) as image:
+        assert image.format == "JPEG", image.format
+        assert image.width > 0 and image.height > 0
+
+
 _VERIFIERS = {
     "docx-to-html": _verify_html,
     "pptx-to-png": _verify_png,
+    "pptx-to-jpg": _verify_jpg,
 }
 
 
@@ -184,7 +206,8 @@ def test_factory_honest_error_for_corrupt_input(
 @pytest.mark.certified
 def test_static_target_map_f7_rows() -> None:
     """The deployed STATIC_TARGET_MAP rows reflect the F7 delta: docx gains
-    HTML, pptx gains PNG (registry-derived, alphabetically sorted)."""
+    HTML; pptx gains PNG and now registers pptx-to-jpg behind its advertised
+    JPG entry (registry-derived, alphabetically sorted)."""
     html_text = Path("app/templates/main/converigo_main.html").read_text(
         encoding="utf-8"
     )
@@ -215,6 +238,7 @@ def test_contract_artifacts_shipped() -> None:
     contract_samples = {
         "docx-to-html": Path("tests/sample.docx"),
         "pptx-to-png": Path("tests/sample.pptx"),
+        "pptx-to-jpg": Path("tests/sample.pptx"),
     }
     for slug, sample in contract_samples.items():
         contract_path = converters_dir / f"{slug}.contract.json"

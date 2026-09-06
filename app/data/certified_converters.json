@@ -643,6 +643,13 @@
       "name": "PPTX to PNG",
       "locked": true,
       "test_files": ["tests/certified/document/test_document_factory_certified.py"]
+    },
+    {
+      "slug": "pptx-to-jpg",
+      "lifecycle_status": "certified",
+      "name": "PPTX to JPG",
+      "locked": true,
+      "test_files": ["tests/certified/document/test_document_factory_certified.py"]
     }
   ],
   "beta": [],

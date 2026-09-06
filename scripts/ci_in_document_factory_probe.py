@@ -4,7 +4,7 @@ Author  : Converigo Factory (Jalur 2 / F7)
 Version : 1.0.0
 
 In-image probe for Factory Batch F7 (office/document cluster:
-DOC-14 docx-to-html + pptx-to-png).
+DOC-14 docx-to-html + pptx-to-png + pptx-to-jpg).
 
 Executed INSIDE the production image by docker-runtime-verify step [4/5]
 (dispatch with probe_script=scripts/ci_in_document_factory_probe.py):
@@ -12,11 +12,11 @@ Executed INSIDE the production image by docker-runtime-verify step [4/5]
     python scripts/ci_in_document_factory_probe.py
 
 All fixtures are generated in-image (python-docx / python-pptx), so the
-probe is self-sufficient exactly like the F1-F6 probes.  The two F7 net-new
-plugins are resolved through the real registry and executed through their
-public async convert(); the honest-error path and the office-cluster
-contract artifacts (<slug>.contract.json + <slug>.json) are asserted.
-Exit code 0 = PASS.
+probe is self-sufficient exactly like the F1-F6 probes.  The three F7
+plugins (pptx-to-jpg added in the FIX round) are resolved through the real
+registry and executed through their public async convert(); the honest-error
+path and the office-cluster contract artifacts (<slug>.contract.json +
+<slug>.json) are asserted.  Exit code 0 = PASS.
 """
 from __future__ import annotations
 
@@ -29,7 +29,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from app.plugins.registry import registry  # noqa: E402
 
-F7_SLUGS = ("docx-to-html", "pptx-to-png")
+F7_SLUGS = ("docx-to-html", "pptx-to-png", "pptx-to-jpg")
 
 
 def _build_docx(path: Path) -> Path:
@@ -73,6 +73,15 @@ def _verify_png(payload: Path) -> None:
         assert image.width > 0 and image.height > 0
 
 
+def _verify_jpg(payload: Path) -> None:
+    from PIL import Image
+
+    assert payload.stat().st_size > 0
+    with Image.open(str(payload)) as image:
+        assert image.format == "JPEG", image.format
+        assert image.width > 0 and image.height > 0
+
+
 async def _convert(slug: str, source: Path, target: str, working: Path) -> Path:
     plugin = registry.by_slug[slug]
     return await plugin.convert(source, target, output_dir=working)
@@ -88,6 +97,7 @@ def main() -> int:
         plan = [
             ("docx-to-html", docx_fixture, "html", _verify_html),
             ("pptx-to-png", pptx_fixture, "png", _verify_png),
+            ("pptx-to-jpg", pptx_fixture, "jpg", _verify_jpg),
         ]
         for slug, fixture, target, verifier in plan:
             try:
@@ -126,7 +136,7 @@ def main() -> int:
         for item in failures:
             print(f"  - {item}")
         return 1
-    print("F7 PROBE: PASS (2/2 document converters verified in-image)")
+    print("F7 PROBE: PASS (3/3 document converters verified in-image)")
     return 0
 
 

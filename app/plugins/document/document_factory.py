@@ -3,8 +3,8 @@ Project : Converigo
 Author  : Converigo Factory (Jalur 2 / F7)
 Version : 1.0.0
 
-Document Converters (DOC-14 docx-to-html, pptx-to-png)
-Factory Batch F7 - office/document cluster, net-new pair.
+Document Converters (DOC-14 docx-to-html, pptx-to-png, pptx-to-jpg)
+Factory Batch F7 - office/document cluster (FIX round adds pptx-to-jpg).
 
 Built on the F0 certified factory scaffolding: the conversion pipeline
 (discovery -> supports() check -> working root -> single servable file ->
@@ -23,6 +23,17 @@ Semantics (fixed, deterministic, single-servable-file):
   page 1 to PNG with the engine's rendering profile (fitz.Matrix(2, 2),
   alpha=False).  Presentations without text render the engine's placeholder
   line, mirroring the certified engine behavior.
+
+  MVP scope (explicit, D5b): the output renders the slide's TEXT lines only -
+  it is NOT a full visual render of the slide.  Original images, shapes,
+  colors, fonts, backgrounds and layout are not reproduced.  This mirrors the
+  engine's own first-page-only text-extraction pipeline; scope = slide 1 of
+  the presentation (single-page output), and the limitation is documented in
+  the landing-page FAQ/about-formats so users are not misled.
+
+- pptx-to-jpg: same first-slide text-only render, rasterized to JPEG at
+  quality 95 (the engine's JPEG profile) via PIL.  Restores the pair that the
+  STATIC_TARGET_MAP has advertised all along; shares the png pipeline 1:1.
 """
 from __future__ import annotations
 
@@ -227,6 +238,25 @@ def _convert_pptx_to_png(
     return output_path
 
 
+def _convert_pptx_to_jpg(
+    plugin: object, source_path: Path, target_format: str, working_root: Path
+) -> Path:
+    """PPTX -> JPG: identical first-slide text-only pipeline, rasterized to
+    JPEG (quality 95, the engine's JPEG profile) via Pillow.  Restores the
+    pair the STATIC_TARGET_MAP has advertised all along (FIX round)."""
+    png_path = _convert_pptx_to_png(plugin, source_path, "png", working_root)
+    output_path = png_path.with_suffix(".jpg")
+    try:
+        from PIL import Image
+    except ImportError as exc:  # pragma: no cover - Pillow is a hard dependency
+        raise RuntimeError("Pillow is required for PPTX to JPG conversion.") from exc
+    with Image.open(str(png_path)) as image:
+        image.convert("RGB").save(str(output_path), format="JPEG", quality=95)
+    png_path.unlink(missing_ok=True)
+    del target_format  # hook signature parity with the png hook; target is fixed
+    return output_path
+
+
 DocxToHtmlPlugin = make_plugin_class(
     slug="docx-to-html",
     source_formats=["docx"],
@@ -267,4 +297,25 @@ PptxToPngPlugin = make_plugin_class(
     icon="🖼️",
     seo_title="PPTX to PNG Converter | Converigo",
     seo_description="Convert PPTX presentations to PNG images quickly and easily.",
+)
+
+PptxToJpgPlugin = make_plugin_class(
+    slug="pptx-to-jpg",
+    source_formats=["pptx"],
+    target_formats=["jpg"],
+    engine_hook=_convert_pptx_to_jpg,
+    name="PPTX to JPG",
+    description="Convert PowerPoint presentations to JPG images (first slide, text preview).",
+    category="document",
+    engine="document",
+    goal="document",
+    use_case="Best for turning PowerPoint slides into JPG images for previews and thumbnails.",
+    priority=75,
+    quality=85,
+    compatibility=80,
+    estimated_saving=8,
+    badge="Office Conversion",
+    icon="🖼️",
+    seo_title="PPTX to JPG Converter | Converigo",
+    seo_description="Convert PPTX presentations to JPG images quickly and easily.",
 )
