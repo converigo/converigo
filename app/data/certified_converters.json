@@ -629,6 +629,20 @@
       "name": "TSV to CSV",
       "locked": true,
       "test_files": ["tests/certified/spreadsheet/test_tsv_factory_certified.py"]
+    },
+    {
+      "slug": "docx-to-html",
+      "lifecycle_status": "certified",
+      "name": "DOCX to HTML",
+      "locked": true,
+      "test_files": ["tests/certified/document/test_document_factory_certified.py"]
+    },
+    {
+      "slug": "pptx-to-png",
+      "lifecycle_status": "certified",
+      "name": "PPTX to PNG",
+      "locked": true,
+      "test_files": ["tests/certified/document/test_document_factory_certified.py"]
     }
   ],
   "beta": [],

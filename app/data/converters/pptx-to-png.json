@@ -1,0 +1,115 @@
+{
+  "slug": "pptx-to-png",
+  "title": "PPTX to PNG Converter",
+  "description": "Convert PowerPoint presentations to PNG images (first slide).",
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".pptx",
+    "button_text": "Upload PPTX"
+  },
+  "faq": [
+    {
+      "question": "How do I convert a PPTX file to PNG?",
+      "answer": "Upload your PPTX file to Converigo and the PNG output will be ready for download immediately."
+    },
+    {
+      "question": "Is the conversion secure?",
+      "answer": "Yes, files are processed securely on our servers and automatically deleted after conversion."
+    },
+    {
+      "question": "What file sizes are supported?",
+      "answer": "PPTX files up to 500MB can be converted instantly on Converigo."
+    },
+    {
+      "question": "Can I convert files on mobile?",
+      "answer": "Yes, Converigo works on all modern browsers and devices."
+    }
+  ],
+  "related_tools": [],
+  "seo": {
+    "title": "PPTX to PNG Converter Online Free | Converigo",
+    "description": "Convert PPTX files to PNG online for free using Converigo. Fast, secure browser-based conversion with no software installation required.",
+    "keywords": "pptx to png, pptx to png converter, powerpoint to png, converigo",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert PPTX to PNG - Converigo free online converter",
+    "twitter_title": "PPTX to PNG Converter Online Free | Converigo",
+    "twitter_description": "Convert PPTX files to PNG online for free using Converigo. Fast, secure browser-based conversion with no software installation required.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/pptx-to-png"
+  },
+  "source": "pptx",
+  "target": "png",
+  "category": "document",
+  "active": true,
+  "popular": false,
+  "featured": false,
+  "hero": {
+    "eyebrow": "Converter",
+    "title": "Convert PPTX to PNG Online Free",
+    "description": "Convert PPTX files to PNG online for free. Fast, secure browser-based conversion with no software installation. Get high-quality png output in seconds using Converigo.",
+    "panel_label": "Ready to convert",
+    "panel_title": "Upload a PPTX file and receive your png output instantly."
+  },
+  "features": [
+    {
+      "title": "Instant conversion",
+      "text": "Convert PPTX to PNG in seconds without installing any software."
+    },
+    {
+      "title": "Secure processing",
+      "text": "Your files are processed securely and automatically deleted after conversion."
+    },
+    {
+      "title": "Large file support",
+      "text": "Convert PPTX files up to 500MB in size instantly."
+    },
+    {
+      "title": "Cross-platform",
+      "text": "Works on Windows, Mac, Linux, and all modern mobile devices."
+    }
+  ],
+  "supported_formats": {
+    "input": [
+      "PPTX"
+    ],
+    "output": [
+      "PNG"
+    ],
+    "description": "PPTX input, png output"
+  },
+  "how_to_use": [
+    {
+      "title": "Upload your PPTX file",
+      "description": "Select a PPTX file from your device to begin the conversion."
+    },
+    {
+      "title": "Wait for processing",
+      "description": "Converigo processes the conversion instantly with secure handling."
+    },
+    {
+      "title": "Download your PNG file",
+      "description": "Get the png output ready to download immediately."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is a PPTX file?",
+      "text": "A PPTX file is processed fully server-side by Converigo - no plugin or download needed."
+    },
+    {
+      "title": "Why convert PPTX to PNG?",
+      "text": "The png output keeps your data portable and ready for the tools you use next."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Convert PPTX files in seconds",
+    "text": "Upload your PPTX file and get the png output instantly.",
+    "primary_text": "Convert now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  },
+  "lifecycle_status": "certified"
+}
