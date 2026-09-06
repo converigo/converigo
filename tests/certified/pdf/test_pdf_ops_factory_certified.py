@@ -394,4 +394,6 @@ def test_cross_format_targets_and_dropdown_map() -> None:
     assert ("pdf", "pdf") in registry.plugins  # ops live here, off the map
 
     sources = {src for (src, _tgt) in registry.plugins}
-    assert "html" not in sources and "md" not in sources
+    # F8-B/F8-C lift the earlier download-only status: md becomes a source
+    # (md-to-html) and html becomes a source (html-to-csv).
+    assert sources >= {"md", "html"}

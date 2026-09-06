@@ -245,5 +245,6 @@ def test_static_target_map_f5_rows() -> None:
 
     assert "TSV" in mapping.get("xlsx", []), mapping.get("xlsx")
     assert "HTML" in mapping.get("csv", []), mapping.get("csv")
-    assert mapping.get("html") == [], "html must stay download-only"
+    # F8-C: html-to-csv lifts the earlier download-only status for html.
+    assert mapping.get("html") == ["CSV"], mapping.get("html")
     assert mapping.get("tsv") == ["CSV"], mapping.get("tsv")

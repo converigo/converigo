@@ -70,6 +70,8 @@ ALLOWED_EXTENSIONS = {
     "ods",
     "pptx",
     "ppt",
+    "md",
+    "html",
 
     # ARCHIVE
     "7z",
@@ -139,6 +141,8 @@ FILE_SIGNATURES = {
     "xml": [],  # XML files no specific signature (text-based markup)
     "yaml": [],  # YAML files no specific signature (text-based)
     "yml": [],  # YML files no specific signature (text-based)
+    "md": [],  # F8-B: Markdown files no specific signature (text-based)
+    "html": [],  # F8-C: HTML files no specific signature (text-based markup)
     # Archives
     "7z": [b"7z\xBC\xAF\x27\x1C"],
     "tar": [],  # TAR has no consistent magic bytes, allow permissively
@@ -186,6 +190,8 @@ CONTENT_TYPE_BY_EXTENSION = {
     "xml": ["application/xml", "text/xml", "text/plain"],
     "yaml": ["application/yaml", "application/x-yaml", "text/yaml", "text/plain"],
     "yml": ["application/yaml", "application/x-yaml", "text/yaml", "text/plain"],
+    "md": ["text/markdown", "text/x-markdown", "text/plain"],
+    "html": ["text/html", "application/xhtml+xml", "text/plain"],
     "xlsx": ["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"],
     "xls": ["application/vnd.ms-excel"],
     "pptx": ["application/vnd.openxmlformats-officedocument.presentationml.presentation"],

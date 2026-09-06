@@ -1,0 +1,121 @@
+{
+  "slug": "image-to-base64",
+  "title": "JPG to TXT Converter",
+  "description": "Encode JPG, PNG, WebP, BMP, GIF, or TIFF images as a single Base64 data URI text file.",
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".jpg .jpeg .png .webp .bmp .gif .tiff",
+    "button_text": "Upload JPG"
+  },
+  "faq": [
+    {
+      "question": "How do I convert an image to Base64?",
+      "answer": "Upload your image and download the .txt output containing the data URI, ready to paste into HTML, CSS, JSON or Markdown."
+    },
+    {
+      "question": "What exactly is inside the output file?",
+      "answer": "Exactly one RFC 2397 data URI (data:image/png;base64,...) of your ORIGINAL uploaded bytes - bit-exact, no re-encoding, nothing else."
+    },
+    {
+      "question": "Why is the text file bigger than my image?",
+      "answer": "Base64 encoding adds about one third overhead (4 characters per 3 bytes); the underlying image data is unchanged."
+    },
+    {
+      "question": "Is the conversion secure?",
+      "answer": "Yes, files are processed securely on our servers and automatically deleted after conversion."
+    }
+  ],
+  "related_tools": [],
+  "seo": {
+    "title": "JPG to TXT Converter Online Free | Converigo",
+    "description": "Convert JPG files to TXT online for free using Converigo. Fast, secure browser-based conversion with no software installation required.",
+    "keywords": "image-to-base64, JPG to TXT, converigo",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert JPG to TXT - Converigo free online converter",
+    "twitter_title": "JPG to TXT Converter Online Free | Converigo",
+    "twitter_description": "Convert JPG files to TXT online for free using Converigo. Fast, secure browser-based conversion with no software installation required.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/image-to-base64"
+  },
+  "source": "jpg",
+  "target": "txt",
+  "category": "image",
+  "active": true,
+  "popular": false,
+  "featured": false,
+  "hero": {
+    "eyebrow": "Converter",
+    "title": "Convert JPG to TXT Online Free",
+    "description": "Convert JPG files to TXT online for free. Fast, secure browser-based conversion with no software installation. Get high-quality txt output in seconds using Converigo.",
+    "panel_label": "Ready to convert",
+    "panel_title": "Upload a JPG file and receive your txt output instantly."
+  },
+  "features": [
+    {
+      "title": "Instant conversion",
+      "text": "Convert JPG to TXT in seconds without installing any software."
+    },
+    {
+      "title": "Secure processing",
+      "text": "Your files are processed securely and automatically deleted after conversion."
+    },
+    {
+      "title": "Large file support",
+      "text": "Convert JPG files up to 500MB in size instantly."
+    },
+    {
+      "title": "Cross-platform",
+      "text": "Works on Windows, Mac, Linux, and all modern mobile devices."
+    }
+  ],
+  "supported_formats": {
+    "input": [
+      "JPG",
+      "JPEG",
+      "PNG",
+      "WEBP",
+      "BMP",
+      "GIF",
+      "TIFF"
+    ],
+    "output": [
+      "TXT"
+    ],
+    "description": "JPG input, txt output"
+  },
+  "how_to_use": [
+    {
+      "title": "Upload your JPG file",
+      "description": "Select a JPG file from your device to begin the conversion."
+    },
+    {
+      "title": "Wait for processing",
+      "description": "Converigo processes the conversion instantly with secure handling."
+    },
+    {
+      "title": "Download your TXT file",
+      "description": "Get the txt output ready to download immediately."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is a JPG file?",
+      "text": "Supported inputs: JPG/JPEG, PNG, WebP, BMP, GIF and TIFF images, processed fully server-side."
+    },
+    {
+      "title": "Why convert JPG to TXT?",
+      "text": "The .txt output is a single self-contained data URI - ideal for embedding images directly in code or documents without external files."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Convert JPG files in seconds",
+    "text": "Upload your JPG file and get the txt output instantly.",
+    "primary_text": "Convert now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  },
+  "lifecycle_status": "certified"
+}

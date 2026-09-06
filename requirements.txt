@@ -19,3 +19,9 @@ pillow-avif-plugin>=0.1.5
 cairosvg>=2.0.0
 pypdf>=6.16.2
 libarchive-c==5.3
+# F8 Gate 0 (dependency hygiene, audit Bagian 4.5): declare previously
+# undeclared/deprioritized runtime dependencies with security-informed floors.
+PyYAML>=6.0.1
+lxml>=6.0.0
+beautifulsoup4>=4.12.0
+Markdown>=3.10.3

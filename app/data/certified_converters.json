@@ -15,6 +15,13 @@
       "test_files": ["tests/certified/image/test_avif_to_jpg.py"]
     },
     {
+      "slug": "base64-to-image",
+      "lifecycle_status": "certified",
+      "name": "Base64 to Image",
+      "locked": true,
+      "test_files": ["tests/certified/factory/test_f8_net_new_certified.py"]
+    },
+    {
       "slug": "bmp-to-jpg",
       "lifecycle_status": "certified",
       "name": "BMP to JPG",
@@ -27,6 +34,13 @@
       "name": "CSV to HTML",
       "locked": true,
       "test_files": ["tests/certified/spreadsheet/test_data_output_factory_certified.py"]
+    },
+    {
+      "slug": "docx-to-md",
+      "lifecycle_status": "certified",
+      "name": "DOCX to MD",
+      "locked": true,
+      "test_files": ["tests/certified/factory/test_f8_net_new_certified.py"]
     },
     {
       "slug": "docx-to-jpg",
@@ -62,6 +76,13 @@
       "name": "JSON to YAML",
       "locked": true,
       "test_files": ["tests/certified/data/test_data_interchange_factory_certified.py"]
+    },
+    {
+      "slug": "md-to-html",
+      "lifecycle_status": "certified",
+      "name": "MD to HTML",
+      "locked": true,
+      "test_files": ["tests/certified/factory/test_f8_net_new_certified.py"]
     },
     {
       "slug": "mkv-to-mp4",
@@ -197,6 +218,13 @@
       "test_files": ["tests/certified/image/test_image_ops_factory_certified.py"]
     },
     {
+      "slug": "html-to-csv",
+      "lifecycle_status": "certified",
+      "name": "HTML to CSV",
+      "locked": true,
+      "test_files": ["tests/certified/factory/test_f8_net_new_certified.py"]
+    },
+    {
       "slug": "ico-to-png",
       "lifecycle_status": "certified",
       "name": "ICO to PNG",
@@ -223,6 +251,13 @@
       "name": "HEIC to JPG",
       "locked": true,
       "test_files": ["tests/certified/image/test_heic_to_jpg.py"]
+    },
+    {
+      "slug": "image-to-base64",
+      "lifecycle_status": "certified",
+      "name": "Image to Base64",
+      "locked": true,
+      "test_files": ["tests/certified/factory/test_f8_net_new_certified.py"]
     },
     {
       "slug": "images-to-pdf",

@@ -219,7 +219,7 @@ def test_static_target_map_f7_rows() -> None:
         ]
 
     assert mapping.get("docx") == [
-        "HTML", "JPEG", "JPG", "PDF", "POWERPOINT", "PPT", "PPTX",
+        "HTML", "JPEG", "JPG", "MD", "PDF", "POWERPOINT", "PPT", "PPTX",
         "SPREADSHEET", "XLS", "XLSX",
     ], mapping.get("docx")
     assert mapping.get("pptx") == [

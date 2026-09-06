@@ -1,0 +1,39 @@
+{
+  "id": "image-to-base64",
+  "slug": "image-to-base64",
+  "name": "Image to Base64",
+  "category": "image",
+  "description": "Encode JPG, PNG, WebP, BMP, GIF, or TIFF images as a single Base64 data URI text file.",
+  "input_formats": [
+    "jpg",
+    "jpeg",
+    "png",
+    "webp",
+    "bmp",
+    "gif",
+    "tiff"
+  ],
+  "output_formats": [
+    "txt"
+  ],
+  "accepted_mime_types": [
+    "image/jpeg",
+    "image/png",
+    "image/webp",
+    "image/bmp",
+    "image/gif",
+    "image/tiff"
+  ],
+  "max_upload_size": 52428800,
+  "conversion_engine": "image",
+  "landing_path": "/image-to-base64",
+  "canonical_url": "https://converigo.com/image-to-base64",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.png",
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "certified"
+}
