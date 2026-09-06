@@ -61,6 +61,9 @@ ALLOWED_EXTENSIONS = {
     "csv",
     "json",
     "tsv",
+    "xml",
+    "yaml",
+    "yml",
     "xlsx",
     "xls",
     "odt",
@@ -133,6 +136,9 @@ FILE_SIGNATURES = {
     "csv": [],  # CSV files no specific signature
     "json": [],  # JSON files no specific signature
     "tsv": [],  # TSV files no specific signature (tab-separated text)
+    "xml": [],  # XML files no specific signature (text-based markup)
+    "yaml": [],  # YAML files no specific signature (text-based)
+    "yml": [],  # YML files no specific signature (text-based)
     # Archives
     "7z": [b"7z\xBC\xAF\x27\x1C"],
     "tar": [],  # TAR has no consistent magic bytes, allow permissively
@@ -177,6 +183,9 @@ CONTENT_TYPE_BY_EXTENSION = {
     "csv": ["text/csv", "text/plain"],
     "json": ["application/json", "text/plain"],
     "tsv": ["text/tab-separated-values", "text/plain"],
+    "xml": ["application/xml", "text/xml", "text/plain"],
+    "yaml": ["application/yaml", "application/x-yaml", "text/yaml", "text/plain"],
+    "yml": ["application/yaml", "application/x-yaml", "text/yaml", "text/plain"],
     "xlsx": ["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"],
     "xls": ["application/vnd.ms-excel"],
     "pptx": ["application/vnd.openxmlformats-officedocument.presentationml.presentation"],
