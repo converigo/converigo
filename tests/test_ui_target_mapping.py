@@ -144,8 +144,14 @@ def test_ui_target_mapping_matches_registry() -> None:
                 opts = row.locator("select.fmt").evaluate(
                     "el => Array.from(el.options).map(o => o.value)"
                 )
-                assert opts == exp, (
-                    f"FP ({ext}): dropdown options {opts} != expected {exp}"
+                # P1a contract is 0 FP / 0 FN: the dropdown must contain exactly
+                # the registry-derived targets. ORDER is a UI default policy
+                # (addFiles() auto-selects the first non-self entry), not part
+                # of the registry contract — since WS1, wav is intentionally
+                # ['MP3','FLAC'] so the homepage default target is MP3
+                # (production "WAV upload produced FLAC" regression fix).
+                assert set(opts) == set(exp) and len(opts) == len(exp), (
+                    f"FP/FN ({ext}): dropdown options {opts} != expected set {exp}"
                 )
             else:
                 select_count = row.locator("select.fmt").count()
