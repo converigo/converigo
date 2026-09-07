@@ -1,0 +1,28 @@
+{
+  "id": "csv-to-xlsx",
+  "slug": "csv-to-xlsx",
+  "name": "CSV to XLSX",
+  "category": "spreadsheet",
+  "description": "Convert CSV files to Excel XLSX spreadsheets.",
+  "input_formats": [
+    "csv"
+  ],
+  "output_formats": [
+    "xlsx"
+  ],
+  "accepted_mime_types": [
+    "text/csv"
+  ],
+  "max_upload_size": 524288000,
+  "conversion_engine": "spreadsheet",
+  "landing_path": "/csv-to-xlsx",
+  "canonical_url": "https://converigo.com/csv-to-xlsx",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.csv",
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "certified"
+}
