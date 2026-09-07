@@ -288,7 +288,8 @@ def test_operation_slugs_never_leak_into_dropdown_map() -> None:
         for (src, tgt) in registry.plugins
         if src == "jpg" and tgt != "jpg" and tgt != "jpeg"
     }
-    assert jpg_targets == {"ico", "pdf", "png", "tiff", "webp"}
+    # F8-A adds image-to-base64 (jpg -> txt data-URI transport) to the map.
+    assert jpg_targets == {"ico", "pdf", "png", "tiff", "txt", "webp"}
     assert ("jpg", "jpg") in registry.plugins  # ops live here, off the map
     assert ("ico", "png") in registry.plugins
     assert ("heic", "png") in registry.plugins

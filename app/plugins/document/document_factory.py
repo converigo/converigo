@@ -278,6 +278,75 @@ DocxToHtmlPlugin = make_plugin_class(
     seo_description="Convert DOCX documents to HTML files quickly and easily.",
 )
 
+
+def _convert_docx_to_md(
+    plugin: object, source_path: Path, target_format: str, working_root: Path
+) -> Path:
+    """DOCX -> Markdown (F8-A): mammoth.convert_to_markdown, the sibling of
+    the certified docx-to-html hook.  Only real OOXML ZIP containers are
+    accepted (shared guard); legacy OLE2 .doc is rejected honestly.
+    mammoth inlines embedded images as base64 data URIs, so the output
+    stays one servable file.  A document with no convertible content
+    raises the honest 422 instead of shipping an empty file."""
+    _guard_ooxml_container(
+        source_path,
+        "docx",
+        "md",
+        legacy_label="doc",
+        canonical_label="docx",
+    )
+
+    try:
+        import mammoth
+    except ImportError as exc:  # pragma: no cover - requirements pin it
+        raise RuntimeError("mammoth is required for DOCX to MD conversion.") from exc
+
+    with source_path.open("rb") as docx_file:
+        try:
+            result = mammoth.convert_to_markdown(docx_file)
+        except Exception as exc:  # noqa: BLE001 - mammoth raises bare Exception
+            raise _unsupported(
+                "docx",
+                "md",
+                "DOCX to MD conversion failed: the file is not a readable DOCX "
+                f"document ({exc}).",
+            ) from exc
+
+    markdown_text = (result.value or "").strip()
+    if not markdown_text:
+        raise _unsupported(
+            "docx",
+            "md",
+            "DOCX to MD conversion failed: the document contains no "
+            "convertible content.",
+        )
+
+    output_path = working_root / f"{source_path.stem}.md"
+    output_path.write_text(markdown_text + "\n", encoding="utf-8")
+    return output_path
+
+
+DocxToMdPlugin = make_plugin_class(
+    slug="docx-to-md",
+    source_formats=["docx"],
+    target_formats=["md"],
+    engine_hook=_convert_docx_to_md,
+    name="DOCX to MD",
+    description="Convert DOCX documents to clean Markdown files.",
+    category="document",
+    engine="document",
+    goal="document",
+    use_case="Best for publishing Word documents as Markdown for wikis and docs sites.",
+    priority=60,
+    quality=85,
+    compatibility=80,
+    estimated_saving=8,
+    badge="Office Conversion",
+    icon="📝",
+    seo_title="DOCX to MD Converter | Converigo",
+    seo_description="Convert DOCX documents to Markdown files quickly and easily.",
+)
+
 PptxToPngPlugin = make_plugin_class(
     slug="pptx-to-png",
     source_formats=["pptx"],
