@@ -1,0 +1,28 @@
+{
+  "id": "json-to-csv",
+  "slug": "json-to-csv",
+  "name": "JSON to CSV",
+  "category": "spreadsheet",
+  "description": "Convert JSON data files to CSV format.",
+  "input_formats": [
+    "json"
+  ],
+  "output_formats": [
+    "csv"
+  ],
+  "accepted_mime_types": [
+    "application/json"
+  ],
+  "max_upload_size": 524288000,
+  "conversion_engine": "spreadsheet",
+  "landing_path": "/json-to-csv",
+  "canonical_url": "https://converigo.com/json-to-csv",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.csv",
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "certified"
+}
