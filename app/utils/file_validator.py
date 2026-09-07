@@ -203,7 +203,7 @@ CONTENT_TYPE_BY_EXTENSION = {
     "tar": ["application/x-tar"],
     "tgz": ["application/gzip", "application/x-gzip"],
     "gz": ["application/gzip", "application/x-gzip"],
-    "rar": ["application/x-rar-compressed"],
+    "rar": ["application/x-rar-compressed", "application/vnd.rar"],
     "zip": ["application/zip"],
 }
 
