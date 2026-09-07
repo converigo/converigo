@@ -685,6 +685,20 @@
       "name": "PPTX to JPG",
       "locked": true,
       "test_files": ["tests/certified/document/test_document_factory_certified.py"]
+    },
+    {
+      "slug": "rar-extract",
+      "lifecycle_status": "certified",
+      "name": "RAR Extract",
+      "locked": true,
+      "test_files": ["tests/certified/archive/test_rar_extract_certified.py"]
+    },
+    {
+      "slug": "tar-extract",
+      "lifecycle_status": "certified",
+      "name": "TAR Extract",
+      "locked": true,
+      "test_files": ["tests/certified/archive/test_tar_extract_certified.py"]
     }
   ],
   "beta": [],
