@@ -1,9 +1,11 @@
 {
   "slug": "pdf-to-xlsx",
+  "title": "PDF to XLSX Converter",
+  "description": "Convert PDF documents into editable XLSX spreadsheets online for free.",
   "hero": {
     "title": "PDF to XLSX",
     "subtitle": "Turn PDF tables into editable Excel spreadsheets.",
-    "description": "Convert  files to  online for free. Fast, secure browser-based conversion with no software installation. Get high-quality  output in seconds using Converigo."
+    "description": "Convert PDF files to XLSX online for free. Fast, secure browser-based conversion with no software installation. Get high-quality XLSX output in seconds using Converigo."
   },
   "steps": [
     "Upload PDF",
@@ -150,12 +152,12 @@
     "name": "PDF to XLSX Converter"
   },
   "seo": {
-    "title": "Pdf To Xlsx Online Free | Converigo",
-    "description": " Fast, secure and browser-based file conversion with no installation required. Try Converigo for free today.",
+    "title": "Convert PDF to XLSX Online Free | Converigo",
+    "description": "Convert PDF files to XLSX spreadsheets online for free. Extract tables from PDF into editable Excel workbooks with Converigo. No software installation required.",
     "image": "/static/images/og-default.png",
     "og_image_alt": "Converigo free online file converter",
-    "twitter_title": "Pdf To Xlsx Online Free | Converigo",
-    "twitter_description": " Fast, secure and browser-based file conversion with no installation required. Try Converigo for free today.",
+    "twitter_title": "Convert PDF to XLSX Online Free | Converigo",
+    "twitter_description": "Convert PDF files to XLSX spreadsheets online for free. Extract tables from PDF into editable Excel workbooks with Converigo. No software installation required.",
     "twitter_image": "/static/images/og-default.png",
     "keywords": "pdf to xlsx, online converter, file conversion, free converter, Converigo",
     "canonical": "https://converigo.com/tools/pdf-to-xlsx"

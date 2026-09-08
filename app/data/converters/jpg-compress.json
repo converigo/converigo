@@ -1,6 +1,6 @@
 {
   "slug": "jpg-compress",
-  "title": "JPG to JPG Converter",
+  "title": "JPG Compression Converter",
   "description": "Recompress JPG images at reduced quality to shrink file size.",
   "upload_form": {
     "action": "/upload",
@@ -28,13 +28,13 @@
   ],
   "related_tools": [],
   "seo": {
-    "title": "JPG to JPG Converter Online Free | Converigo",
-    "description": "Convert JPG files to JPG online for free using Converigo. Fast, secure browser-based conversion with no software installation required.",
+    "title": "JPG Compression Converter Online Free | Converigo",
+    "description": "Compress JPG images online for free with Converigo. Recompress JPG photos at reduced quality to shrink file size with fast, secure browser-based processing.",
     "keywords": "jpg-compress, JPG to JPG, converigo",
     "image": "/static/images/og-default.png",
     "og_image_alt": "Convert JPG to JPG - Converigo free online converter",
-    "twitter_title": "JPG to JPG Converter Online Free | Converigo",
-    "twitter_description": "Convert JPG files to JPG online for free using Converigo. Fast, secure browser-based conversion with no software installation required.",
+    "twitter_title": "JPG Compression Converter Online Free | Converigo",
+    "twitter_description": "Compress JPG images online for free with Converigo. Recompress JPG photos at reduced quality to shrink file size with fast, secure browser-based processing.",
     "twitter_image": "/static/images/og-default.png",
     "canonical": "https://converigo.com/tools/jpg-compress"
   },

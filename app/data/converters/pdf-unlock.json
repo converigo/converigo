@@ -1,6 +1,6 @@
 {
   "slug": "pdf-unlock",
-  "title": "PDF to PDF Converter",
+  "title": "PDF Unlock Converter",
   "description": "Remove owner restrictions from PDF files that open without a password.",
   "upload_form": {
     "action": "/upload",
@@ -28,13 +28,13 @@
   ],
   "related_tools": [],
   "seo": {
-    "title": "PDF to PDF Converter Online Free | Converigo",
-    "description": "Convert PDF files to PDF online for free using Converigo. Fast, secure browser-based conversion with no software installation required.",
+    "title": "PDF Unlock Converter Online Free | Converigo",
+    "description": "Unlock PDF files online for free with Converigo. Remove owner restrictions from PDFs that open without a password, securely in your browser.",
     "keywords": "pdf-unlock, PDF to PDF, converigo",
     "image": "/static/images/og-default.png",
     "og_image_alt": "Convert PDF to PDF - Converigo free online converter",
-    "twitter_title": "PDF to PDF Converter Online Free | Converigo",
-    "twitter_description": "Convert PDF files to PDF online for free using Converigo. Fast, secure browser-based conversion with no software installation required.",
+    "twitter_title": "PDF Unlock Converter Online Free | Converigo",
+    "twitter_description": "Unlock PDF files online for free with Converigo. Remove owner restrictions from PDFs that open without a password, securely in your browser.",
     "twitter_image": "/static/images/og-default.png",
     "canonical": "https://converigo.com/tools/pdf-unlock"
   },

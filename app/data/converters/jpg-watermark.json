@@ -1,6 +1,6 @@
 {
   "slug": "jpg-watermark",
-  "title": "JPG to JPG Converter",
+  "title": "JPG Watermark Converter",
   "description": "Stamp a semi-transparent CONVERIGO watermark on JPG images.",
   "upload_form": {
     "action": "/upload",
@@ -28,13 +28,13 @@
   ],
   "related_tools": [],
   "seo": {
-    "title": "JPG to JPG Converter Online Free | Converigo",
-    "description": "Convert JPG files to JPG online for free using Converigo. Fast, secure browser-based conversion with no software installation required.",
+    "title": "JPG Watermark Converter Online Free | Converigo",
+    "description": "Watermark JPG images online for free with Converigo. Stamp a semi-transparent CONVERIGO watermark on JPG photos in seconds with secure browser-based processing.",
     "keywords": "jpg-watermark, JPG to JPG, converigo",
     "image": "/static/images/og-default.png",
     "og_image_alt": "Convert JPG to JPG - Converigo free online converter",
-    "twitter_title": "JPG to JPG Converter Online Free | Converigo",
-    "twitter_description": "Convert JPG files to JPG online for free using Converigo. Fast, secure browser-based conversion with no software installation required.",
+    "twitter_title": "JPG Watermark Converter Online Free | Converigo",
+    "twitter_description": "Watermark JPG images online for free with Converigo. Stamp a semi-transparent CONVERIGO watermark on JPG photos in seconds with secure browser-based processing.",
     "twitter_image": "/static/images/og-default.png",
     "canonical": "https://converigo.com/tools/jpg-watermark"
   },

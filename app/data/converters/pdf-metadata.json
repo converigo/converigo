@@ -1,6 +1,6 @@
 {
   "slug": "pdf-metadata",
-  "title": "PDF to PDF Converter",
+  "title": "PDF Metadata Converter",
   "description": "Stamp Converigo producer and creator metadata onto PDF documents.",
   "upload_form": {
     "action": "/upload",
@@ -28,13 +28,13 @@
   ],
   "related_tools": [],
   "seo": {
-    "title": "PDF to PDF Converter Online Free | Converigo",
-    "description": "Convert PDF files to PDF online for free using Converigo. Fast, secure browser-based conversion with no software installation required.",
+    "title": "PDF Metadata Converter Online Free | Converigo",
+    "description": "Stamp PDF metadata online for free with Converigo. Add producer and creator details to PDF documents in seconds with secure browser-based processing.",
     "keywords": "pdf-metadata, PDF to PDF, converigo",
     "image": "/static/images/og-default.png",
     "og_image_alt": "Convert PDF to PDF - Converigo free online converter",
-    "twitter_title": "PDF to PDF Converter Online Free | Converigo",
-    "twitter_description": "Convert PDF files to PDF online for free using Converigo. Fast, secure browser-based conversion with no software installation required.",
+    "twitter_title": "PDF Metadata Converter Online Free | Converigo",
+    "twitter_description": "Stamp PDF metadata online for free with Converigo. Add producer and creator details to PDF documents in seconds with secure browser-based processing.",
     "twitter_image": "/static/images/og-default.png",
     "canonical": "https://converigo.com/tools/pdf-metadata"
   },
