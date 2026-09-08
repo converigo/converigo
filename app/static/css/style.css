@@ -339,6 +339,21 @@ input {
 
 }
 
+/* G1-3 F-2: "Coming soon" badge on hub cards for deprecated converters. */
+.tool-card-badge {
+    display: inline-flex;
+    margin-left: 8px;
+    padding: 2px 10px;
+    border-radius: 999px;
+    background: var(--color-surface-soft);
+    border: 1px solid var(--color-border);
+    color: var(--color-muted);
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
 /* ==========================================
    FEATURES
 ========================================== */

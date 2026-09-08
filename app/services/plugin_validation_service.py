@@ -23,7 +23,7 @@ from typing import Any
 
 from app.plugins import discover_plugin_classes
 from app.plugins.registry import PluginRegistry
-from app.services.converter_data_service import ConverterDataService
+from app.services.converter_data_service import SEARCH_INDEX_DISABLED_SLUGS, ConverterDataService
 from app.services.hub_service import HubService
 from app.services.recommendation_service import RecommendationService
 from app.services.seo_service import SeoService
@@ -336,6 +336,22 @@ class PluginValidationService:
         try:
             base_url = "https://converigo.com"
             entries = self.converter_data_service.sitemap_entries(base_url)
+
+            # G1-3 F-2: deprecated converters (ledger `disabled` group) are
+            # intentionally excluded from sitemap entries while they await
+            # re-certification. Expect absence instead of flagging a
+            # missing-sitemap error for those slugs.
+            if (slug or "").strip().lower() in SEARCH_INDEX_DISABLED_SLUGS:
+                still_listed = any(
+                    f"/tools/{(slug or '').strip().lower()}" in str(entry.get("loc", ""))
+                    for entry in entries
+                )
+                if still_listed:
+                    result.add_error(f"Deprecated converter '{slug}' must not appear in sitemap entries")
+                    result.add_check(check_name, False)
+                else:
+                    result.add_check(check_name, True)
+                return
 
             # Check if converter slug appears in any sitemap entry
             entry_slugs = []
