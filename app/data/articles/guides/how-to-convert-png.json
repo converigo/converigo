@@ -43,7 +43,7 @@
   ],
   "call_to_action": {
     "text": "Start converting your files with a fast, secure online image converter.",
-    "url": "/jpg-to-png",
+    "url": "/tools/jpg-to-png",
     "button_text": "Convert Files"
   },
   "breadcrumb_override": [

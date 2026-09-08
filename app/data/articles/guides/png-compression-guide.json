@@ -43,7 +43,7 @@
   ],
   "call_to_action": {
     "text": "Optimize or convert PNG files with a simple online workflow.",
-    "url": "/png-to-webp",
+    "url": "/tools/png-to-webp",
     "button_text": "Convert PNG"
   },
   "breadcrumb_override": [

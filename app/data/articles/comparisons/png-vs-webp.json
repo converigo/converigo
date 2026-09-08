@@ -43,7 +43,7 @@
   ],
   "call_to_action": {
     "text": "Choose the right format and convert files with Converigo's converters.",
-    "url": "/webp-to-png",
+    "url": "/tools/webp-to-png",
     "button_text": "Try the Converter"
   },
   "breadcrumb_override": [

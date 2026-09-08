@@ -39,4 +39,6 @@ def test_blog_page_keeps_breadcrumb_json_ld_unchanged():
     assert structured_data is not None
     assert structured_data["@graph"][-1]["itemListElement"][0]["name"] == "Home"
     assert structured_data["@graph"][-1]["itemListElement"][1]["name"] == "Blog"
-    assert structured_data["@graph"][-1]["itemListElement"][2]["name"] == "Cara Convert MP4 ke MP3 Online Gratis Tanpa Aplikasi"
+    # G1-1 CD-04: breadcrumb literal synced with the EN metadata translation in
+    # app/routers/home.py (was: "Cara Convert MP4 ke MP3 Online Gratis Tanpa Aplikasi").
+    assert structured_data["@graph"][-1]["itemListElement"][2]["name"] == "How to Convert MP4 to MP3 Online for Free (No Apps Needed)"

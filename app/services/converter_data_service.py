@@ -287,8 +287,10 @@ class ConverterDataService:
                 }
             )
 
+        emitted_slugs: set[str] = set()
         for tool in self.list_supported_converters():
             path = f"/tools/{tool['slug']}"
+            emitted_slugs.add(str(tool.get("slug", "")).strip().lower())
             entries.append(
                 {
                     "loc": base_url.rstrip("/") + path,
@@ -299,6 +301,24 @@ class ConverterDataService:
                             datetime.utcnow().date().isoformat(),
                         ),
                     ),
+                }
+            )
+
+        # G1-1 F-3 residue: converters with published contracts (active or
+        # certified) that serve live /tools/<slug> pages must be emitted even
+        # when list_supported_converters() skips them (UI-disabled slugs or
+        # sources without a 1:1 plugin mapping, e.g. images-to-pdf / pdf-merge).
+        # Non-production-ready slugs stay excluded.
+        for contract in self._get_contract_registry().get_active():
+            slug = str(contract.get("slug", "")).strip().lower()
+            if not slug:
+                continue
+            if slug in emitted_slugs or slug in NON_PRODUCTION_READY_SLUGS:
+                continue
+            entries.append(
+                {
+                    "loc": base_url.rstrip("/") + f"/tools/{slug}",
+                    "lastmod": datetime.utcnow().date().isoformat(),
                 }
             )
 
