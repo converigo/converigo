@@ -6,7 +6,7 @@ from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import HTMLResponse
 
 from app.core.templates import templates
-from app.services.converter_data_service import ConverterDataService
+from app.services.converter_data_service import SEARCH_INDEX_DISABLED_SLUGS, ConverterDataService
 from app.services.internal_link_service import InternalLinkService
 from app.services.language_service import LanguageService
 from app.services.landing_service import LandingPageBuilder
@@ -25,6 +25,19 @@ language_service = LanguageService(Path("app/locales"))
 # Batch 5 (DOC-29): "pdf-compress" was removed from this set — the plugin
 # was rewritten as a genuine pypdf compressor and re-certified.
 DISABLED_TOOL_SLUGS: set[str] = set()
+
+
+def apply_search_index_policy(seo_data: dict[str, Any], slug: str) -> dict[str, Any]:
+    """G1-3 F-2 (§1): force `noindex,follow` for ledger-deprecated converters.
+
+    The certification ledger's `disabled` group (see
+    ``ConverterDataService.SEARCH_INDEX_DISABLED_SLUGS``) is the source of
+    truth. Runs after meta overrides so the temporary de-index policy always
+    wins, and only narrows crawler exposure — it never widens it.
+    """
+    if (slug or "").strip().lower() in SEARCH_INDEX_DISABLED_SLUGS:
+        seo_data["robots"] = "noindex,follow"
+    return seo_data
 
 
 
@@ -331,6 +344,12 @@ async def render_universal_tool_page(
 
     if meta_overrides:
         seo_data.update(meta_overrides)
+
+    # G1-3 F-2 (§1): temporarily de-index deprecated converters. Pages stay
+    # live for existing visitors, but crawlers are told to drop the page and
+    # keep following links. Applied last so the ledger policy wins over any
+    # meta overrides.
+    seo_data = apply_search_index_policy(seo_data, slug)
 
     canonical_path = canonical_path or f"/tools/{slug}"
     if canonical_path is not None:

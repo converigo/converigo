@@ -21,6 +21,13 @@ PUBLIC_UI_DISABLED_SLUGS = {
     "pdf-merge",
 }
 
+# G1-3 F-2: temporary de-index policy (§1/§2). Derived from the certification
+# ledger's `disabled` group (lifecycle_status "deprecated") — see
+# ConverterRegistryService.get_search_index_disabled_slugs(). The five listed
+# converters stay reachable but must not be advertised to search crawlers
+# (robots noindex on their pages, excluded from sitemap entries).
+SEARCH_INDEX_DISABLED_SLUGS: set[str] = ConverterRegistryService.get_search_index_disabled_slugs()
+
 
 
 def _is_production_ready(contract: dict[str, Any] | None) -> bool:
@@ -322,7 +329,18 @@ class ConverterDataService:
                 }
             )
 
-        return entries
+        # G1-3 F-2: deprecated converters (ledger `disabled` group) are
+        # temporarily de-indexed — their /tools/<slug> pages remain reachable
+        # but must not be advertised to crawlers. Single policy filter, kept
+        # deliberately separate from the G1-1 F-3 residue loop above (F-3
+        # restores published-contract slugs; F-2 removes ledger-disabled ones).
+        filtered_entries: List[dict[str, str]] = []
+        for entry in entries:
+            loc = str(entry.get("loc", ""))
+            if "/tools/" in loc and loc.split("/tools/")[-1] in SEARCH_INDEX_DISABLED_SLUGS:
+                continue
+            filtered_entries.append(entry)
+        return filtered_entries
 
     def _get_active_contract_slugs(self) -> set[str]:
         return {

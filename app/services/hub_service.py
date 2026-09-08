@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from app.services.converter_data_service import ConverterDataService
+from app.services.converter_data_service import SEARCH_INDEX_DISABLED_SLUGS, ConverterDataService
 
 
 class HubService:
@@ -81,6 +81,12 @@ class HubService:
             tool for tool in all_converters if self._matches_hub(tool, slug)
         ]
         matching_converters = self._dedupe_converters(matching_converters)
+
+        # G1-3 F-2 (§3): flag deprecated converters (ledger `disabled` group)
+        # so the hub template can render a localized "Coming soon" badge while
+        # every anchor link is kept intact.
+        for tool in matching_converters:
+            tool["not_available"] = str(tool.get("slug", "")).strip().lower() in SEARCH_INDEX_DISABLED_SLUGS
 
         featured_converters = [
             tool for tool in matching_converters if tool.get("featured", False)
