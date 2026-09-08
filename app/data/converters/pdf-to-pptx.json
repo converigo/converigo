@@ -1,9 +1,11 @@
 {
   "slug": "pdf-to-pptx",
+  "title": "PDF to PPTX Converter",
+  "description": "Convert PDF documents into editable PPTX slide decks online for free.",
   "hero": {
     "title": "PDF to PPTX",
     "subtitle": "Create editable slides from PDFs.",
-    "description": "Convert  files to  online for free. Fast, secure browser-based conversion with no software installation. Get high-quality  output in seconds using Converigo."
+    "description": "Convert PDF files to PPTX online for free. Fast, secure browser-based conversion with no software installation. Get high-quality PPTX output in seconds using Converigo."
   },
   "steps": [
     "Upload PDF",
@@ -149,12 +151,12 @@
     "name": "PDF to PPTX Converter"
   },
   "seo": {
-    "title": "Pdf To Pptx Online Free | Converigo",
-    "description": " Fast, secure and browser-based file conversion with no installation required. Try Converigo for free today.",
+    "title": "Convert PDF to PPTX Online Free | Converigo",
+    "description": "Convert PDF files to PPTX presentations online for free. Turn PDF pages into editable PowerPoint slides with Converigo. No software installation required.",
     "image": "/static/images/og-default.png",
     "og_image_alt": "Converigo free online file converter",
-    "twitter_title": "Pdf To Pptx Online Free | Converigo",
-    "twitter_description": " Fast, secure and browser-based file conversion with no installation required. Try Converigo for free today.",
+    "twitter_title": "Convert PDF to PPTX Online Free | Converigo",
+    "twitter_description": "Convert PDF files to PPTX presentations online for free. Turn PDF pages into editable PowerPoint slides with Converigo. No software installation required.",
     "twitter_image": "/static/images/og-default.png",
     "keywords": "pdf to pptx, online converter, file conversion, free converter, Converigo",
     "canonical": "https://converigo.com/tools/pdf-to-pptx"
