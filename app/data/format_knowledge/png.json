@@ -76,25 +76,25 @@
       "slug": "png-to-jpg",
       "title": "PNG to JPG Converter",
       "description": "Convert PNG files to JPG quickly and easily.",
-      "href": "/png-to-jpg"
+      "href": "/tools/png-to-jpg"
     },
     {
       "slug": "png-to-webp",
       "title": "PNG to WEBP Converter",
       "description": "Convert PNG files to WEBP quickly and easily.",
-      "href": "/png-to-webp"
+      "href": "/tools/png-to-webp"
     },
     {
       "slug": "jpg-to-png",
       "title": "JPG to PNG Converter",
       "description": "Convert JPG files to PNG quickly and easily.",
-      "href": "/jpg-to-png"
+      "href": "/tools/jpg-to-png"
     },
     {
       "slug": "webp-to-png",
       "title": "WEBP to PNG Converter",
       "description": "Convert WEBP files to PNG quickly and easily.",
-      "href": "/webp-to-png"
+      "href": "/tools/webp-to-png"
     }
   ],
   "faq": [

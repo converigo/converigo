@@ -76,13 +76,13 @@
       "slug": "webp-to-jpg",
       "title": "WEBP to JPG Converter",
       "description": "Convert WEBP files to JPG quickly and easily.",
-      "href": "/webp-to-jpg"
+      "href": "/tools/webp-to-jpg"
     },
     {
       "slug": "webp-to-png",
       "title": "WEBP to PNG Converter",
       "description": "Convert WEBP files to PNG quickly and easily.",
-      "href": "/webp-to-png"
+      "href": "/tools/webp-to-png"
     },
     {
       "slug": "jpg-to-webp",
@@ -94,7 +94,7 @@
       "slug": "png-to-webp",
       "title": "PNG to WEBP Converter",
       "description": "Convert PNG files to WEBP quickly and easily.",
-      "href": "/png-to-webp"
+      "href": "/tools/png-to-webp"
     }
   ],
   "faq": [

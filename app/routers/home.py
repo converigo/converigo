@@ -276,30 +276,30 @@ async def blog_index(request: Request):
     articles = [
         {
             "slug": "how-to-convert-mp4-to-mp3",
-            "title": "Cara Convert MP4 ke MP3 Online Gratis Tanpa Aplikasi",
-            "description": "Panduan lengkap tentang cara mengubah video MP4 menjadi audio MP3 secara online, cepat, aman, dan tanpa aplikasi tambahan.",
+            "title": "How to Convert MP4 to MP3 Online for Free (No Apps Needed)",
+            "description": "Convert MP4 video to MP3 audio online quickly, safely, and free, with no extra software required.",
             "category": "Audio",
         },
         {
             "slug": "jpg-to-pdf-guide",
-            "title": "Panduan JPG ke PDF: Cara Mengubah Gambar Menjadi PDF dengan Mudah",
-            "description": "Pelajari langkah-langkah mengonversi file JPG ke PDF secara online untuk dokumen, portofolio, dan arsip.",
+            "title": "JPG to PDF Guide: Convert Images to PDF the Easy Way",
+            "description": "Learn how to convert JPG images to PDF online for documents, portfolios, and archives.",
             "category": "Documents",
         },
         {
             "slug": "png-to-jpg-guide",
-            "title": "Panduan PNG ke JPG: Ubah Gambar Transparan Menjadi JPG tanpa Ribet",
-            "description": "Temukan cara mengubah file PNG ke JPG online dengan hasil yang tajam dan cepat untuk kebutuhan sehari-hari.",
+            "title": "PNG to JPG Guide: Convert Transparent PNG to JPG Online",
+            "description": "Find out how to convert PNG files to JPG online with sharp, fast results for everyday needs.",
             "category": "Images",
         },
     ]
 
     metadata = {
-        "title": "Blog Converigo | Panduan Konversi File dan Tips SEO",
-        "description": "Temukan panduan praktis, tips konversi file, dan artikel SEO tentang alat online Converigo.",
+        "title": "Converigo Blog | File Conversion Guides and SEO Tips",
+        "description": "Find practical guides, file conversion tips, and SEO articles about Converigo's online tools.",
         "canonical": f"{PRODUCTION_BASE_URL}/blog",
         "og_url": f"{PRODUCTION_BASE_URL}/blog",
-        "keywords": "blog converigo, panduan convert file, tips konversi online",
+        "keywords": "converigo blog, file conversion guides, online converter tips",
         "author": "Converigo",
         "robots": "index,follow",
     }
@@ -335,39 +335,39 @@ async def blog_index(request: Request):
 async def blog_article(request: Request, slug: str):
     article_map = {
         "how-to-convert-mp4-to-mp3": {
-            "title": "Cara Convert MP4 ke MP3 Online Gratis Tanpa Aplikasi",
-            "description": "Panduan lengkap cara mengonversi MP4 ke MP3 secara online gratis dengan hasil yang cepat, aman, dan praktis.",
+            "title": "How to Convert MP4 to MP3 Online for Free (No Apps Needed)",
+            "description": "A complete guide to converting MP4 to MP3 online for free with fast, safe, and practical results.",
             "canonical": f"{PRODUCTION_BASE_URL}/blog/how-to-convert-mp4-to-mp3",
             "og_url": f"{PRODUCTION_BASE_URL}/blog/how-to-convert-mp4-to-mp3",
             "template": "pages/blog_mp4_to_mp3.html",
             "breadcrumb": [
                 {"name": "Home", "url": "/"},
                 {"name": "Blog", "url": "/blog"},
-                {"name": "Cara Convert MP4 ke MP3 Online Gratis Tanpa Aplikasi", "url": "/blog/how-to-convert-mp4-to-mp3"},
+                {"name": "How to Convert MP4 to MP3 Online for Free (No Apps Needed)", "url": "/blog/how-to-convert-mp4-to-mp3"},
             ],
         },
         "jpg-to-pdf-guide": {
-            "title": "Panduan JPG ke PDF: Cara Mengubah Gambar Menjadi PDF dengan Mudah",
-            "description": "Pelajari langkah mudah mengubah JPG ke PDF online secara gratis untuk dokumen, portofolio, dan arsip digital.",
+            "title": "JPG to PDF Guide: Convert Images to PDF the Easy Way",
+            "description": "Learn the easy steps to convert JPG to PDF online for free, ideal for documents, portfolios, and archives.",
             "canonical": f"{PRODUCTION_BASE_URL}/blog/jpg-to-pdf-guide",
             "og_url": f"{PRODUCTION_BASE_URL}/blog/jpg-to-pdf-guide",
             "template": "pages/blog_jpg_to_pdf.html",
             "breadcrumb": [
                 {"name": "Home", "url": "/"},
                 {"name": "Blog", "url": "/blog"},
-                {"name": "Panduan JPG ke PDF", "url": "/blog/jpg-to-pdf-guide"},
+                {"name": "JPG to PDF Guide", "url": "/blog/jpg-to-pdf-guide"},
             ],
         },
         "png-to-jpg-guide": {
-            "title": "Panduan PNG ke JPG: Ubah Gambar Transparan Menjadi JPG tanpa Ribet",
-            "description": "Pelajari cara mengubah PNG ke JPG online untuk kebutuhan desain, dokumen, dan berbagi gambar secara lebih luas.",
+            "title": "PNG to JPG Guide: Convert Transparent PNG to JPG Online",
+            "description": "Learn how to convert PNG to JPG online for design, documents, and wider image sharing needs.",
             "canonical": f"{PRODUCTION_BASE_URL}/blog/png-to-jpg-guide",
             "og_url": f"{PRODUCTION_BASE_URL}/blog/png-to-jpg-guide",
             "template": "pages/blog_png_to_jpg.html",
             "breadcrumb": [
                 {"name": "Home", "url": "/"},
                 {"name": "Blog", "url": "/blog"},
-                {"name": "Panduan PNG ke JPG", "url": "/blog/png-to-jpg-guide"},
+                {"name": "PNG to JPG Guide", "url": "/blog/png-to-jpg-guide"},
             ],
         },
     }
@@ -382,7 +382,7 @@ async def blog_article(request: Request, slug: str):
         "title": article["title"],
         "description": article["description"],
         "canonical": article["canonical"],
-        "keywords": "blog converigo, panduan konversi file, converter online",
+        "keywords": "converigo blog, file conversion guides, online converter",
         "author": "Converigo",
         "robots": "index,follow",
     }

@@ -79,7 +79,7 @@
   ],
   "call_to_action": {
     "text": "Optimize your web images with WebP conversion. Use Converigo to convert PNG to WebP and other formats.",
-    "url": "/webp-to-png",
+    "url": "/tools/webp-to-png",
     "button_text": "Convert to WebP"
   },
   "breadcrumb_override": [

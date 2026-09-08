@@ -42,7 +42,7 @@
   ],
   "call_to_action": {
     "text": "Find the best PNG workflow for your file and convert it with confidence.",
-    "url": "/jpg-to-png",
+    "url": "/tools/jpg-to-png",
     "button_text": "Start Converting"
   },
   "breadcrumb_override": [

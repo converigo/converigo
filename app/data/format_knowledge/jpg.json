@@ -76,7 +76,7 @@
       "slug": "jpg-to-png",
       "title": "JPG to PNG Converter",
       "description": "Convert JPG files to PNG quickly and easily.",
-      "href": "/jpg-to-png"
+      "href": "/tools/jpg-to-png"
     },
     {
       "slug": "jpg-to-webp",
@@ -88,13 +88,13 @@
       "slug": "png-to-jpg",
       "title": "PNG to JPG Converter",
       "description": "Convert PNG files to JPG quickly and easily.",
-      "href": "/png-to-jpg"
+      "href": "/tools/png-to-jpg"
     },
     {
       "slug": "pdf-to-jpg",
       "title": "PDF to JPG Converter",
       "description": "Convert PDF files to JPG quickly and easily.",
-      "href": "/pdf-to-jpg"
+      "href": "/tools/pdf-to-jpg"
     }
   ],
   "faq": [
