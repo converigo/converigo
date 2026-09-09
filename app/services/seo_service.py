@@ -199,6 +199,7 @@ class SeoService:
             "/audio-conversion",
             "/video-conversion",
             "/document-conversion",
+            "/data-conversion",
         ]
         return [
             {
