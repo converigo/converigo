@@ -1,27 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- F-10a (G1-5): the previous 6-URL hand-maintained stub (lastmod 2026-07-11) is retired. -->
+<!-- The authoritative sitemap is the dynamic one served at https://converigo.com/sitemap.xml -->
+<!-- (app/routers/seo.py -> SeoService.build_sitemap_xml; ~200 URLs, generated per request). -->
+<!-- Do NOT hand-maintain a URL list in this file: it inevitably goes stale. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>/</loc>
-    <lastmod>2026-07-11</lastmod>
-  </url>
-  <url>
-    <loc>/tools</loc>
-    <lastmod>2026-07-11</lastmod>
-  </url>
-  <url>
-    <loc>/about</loc>
-    <lastmod>2026-07-11</lastmod>
-  </url>
-  <url>
-    <loc>/privacy</loc>
-    <lastmod>2026-07-11</lastmod>
-  </url>
-  <url>
-    <loc>/terms</loc>
-    <lastmod>2026-07-11</lastmod>
-  </url>
-  <url>
-    <loc>/contact</loc>
-    <lastmod>2026-07-11</lastmod>
+    <lastmod>2026-09-09</lastmod>
   </url>
 </urlset>
