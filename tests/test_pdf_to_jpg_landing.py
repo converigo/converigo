@@ -15,8 +15,8 @@ def test_pdf_to_jpg_canonical_page_renders_with_seo_and_faq():
     response = client.get("/tools/pdf-to-jpg")
 
     assert response.status_code == 200
-    assert "PDF to JPG Converter Online Free" in response.text
-    assert "Convert PDF files to JPG images online free" in response.text
+    assert "Convert PDF to JPG Online Free | Converigo" in response.text
+    assert "Convert PDF to JPG online for free using Converigo. Fast, secure and browser-based file conversion from pdf to jpg with no installation required." in response.text
     assert "href=\"#converter\"" in response.text
     assert "href=\"#how-to-use\"" in response.text
     assert "href=\"#supported-formats\"" in response.text
