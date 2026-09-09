@@ -15,7 +15,7 @@ def test_word_to_pdf_canonical_page_renders_with_seo_and_faq():
     response = client.get("/tools/word-to-pdf")
 
     assert response.status_code == 200
-    assert "Word to PDF Converter Online Free - Converigo" in response.text
+    assert "Convert WORD to PDF Online Free | Converigo" in response.text
     assert "What is Word to PDF conversion?" in response.text
     assert "FAQPage" in response.text
     assert "application/ld+json" in response.text

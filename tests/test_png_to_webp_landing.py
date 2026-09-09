@@ -19,7 +19,7 @@ def test_png_to_webp_canonical_page_renders_with_seo_and_faq():
     response = client.get("/tools/png-to-webp")
 
     assert response.status_code == 200
-    assert "PNG to WEBP Converter Online Free - Converigo" in response.text
+    assert "Convert PNG to WEBP Online Free | Converigo" in response.text
     assert "What is PNG to WEBP conversion?" in response.text
     assert "Why convert PNG to WEBP?" in response.text
     assert "Is PNG to WEBP converter free?" in response.text
