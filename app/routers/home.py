@@ -467,6 +467,11 @@ async def document_hub(request: Request):
     return await _render_hub_page(request, "document-conversion")
 
 
+@router.get("/data-conversion", response_class=HTMLResponse)
+async def data_hub(request: Request):
+    return await _render_hub_page(request, "data-conversion")
+
+
 async def _render_hub_page(request: Request, slug: str) -> HTMLResponse:
     locale_data = language_service.load_locale(
         accept_language=request.headers.get("accept-language"),

@@ -5,8 +5,8 @@ Policy under test (source of truth: certification ledger
 ``lifecycle_status == "deprecated"``):
 
 1. /tools/<slug> pages of deprecated converters emit ``robots: noindex,follow``.
-2. Deprecated converters are excluded from sitemap entries (209 -> 204 with
-   the current data), while the G1-1 F-3 residue pairs stay included.
+2. Deprecated converters are excluded from sitemap entries (209 -> 205 with
+   the current data; 204 pre-G1-5 plus the G1-5 F-7 data-conversion hub loc), while the G1-1 F-3 residue pairs stay included.
 3. Hub pages keep every converter anchor but flag deprecated converters with
    a localized "Coming soon" badge.
 
@@ -39,7 +39,7 @@ F2_DEPRECATED_SLUGS = {
 }
 CONTROL_SLUGS = ["docx-to-pdf", "xlsx-to-docx"]
 CONVERTERS_DIR = Path("app/data/converters")
-EXPECTED_SITEMAP_COUNT = 204  # 209 pre-F-2 entries minus the 5 deprecated slugs
+EXPECTED_SITEMAP_COUNT = 205  # 209 pre-F-2 entries minus the 5 deprecated slugs, plus the G1-5 F-7 data-conversion hub
 
 
 @pytest.fixture(scope="module")
