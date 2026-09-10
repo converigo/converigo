@@ -10,19 +10,27 @@
   },
   "faq": [
     {
-      "question": "How do I convert a PDF file to PDF?",
-      "answer": "Upload your PDF file to Converigo and the PDF output will be ready for download immediately."
+      "question": "How do I add metadata to a PDF?",
+      "answer": "Upload your PDF file to Converigo. The document is rebuilt with the Converigo /Producer and /Creator entries stamped in and is ready to download immediately."
     },
     {
-      "question": "Is the conversion secure?",
-      "answer": "Yes, files are processed securely on our servers and automatically deleted after conversion."
+      "question": "Will my PDF content change?",
+      "answer": "No. Page content and every other existing metadata entry are preserved exactly as-is. Only the /Producer and /Creator fields are stamped by Converigo."
+    },
+    {
+      "question": "Can I edit or remove any metadata field?",
+      "answer": "No. This tool stamps the fixed Converigo producer and creator entries onto the document; it does not offer arbitrary metadata editing, EXIF editing, or metadata removal."
+    },
+    {
+      "question": "Is it secure?",
+      "answer": "Yes, files are processed securely on our servers and automatically deleted after processing."
     },
     {
       "question": "What file sizes are supported?",
-      "answer": "PDF files up to 500MB can be converted instantly on Converigo."
+      "answer": "PDF files up to 500MB can be processed instantly on Converigo."
     },
     {
-      "question": "Can I convert files on mobile?",
+      "question": "Can I use it on mobile?",
       "answer": "Yes, Converigo works on all modern browsers and devices."
     }
   ],
@@ -30,9 +38,9 @@
   "seo": {
     "title": "PDF Metadata Converter Online Free | Converigo",
     "description": "Stamp PDF metadata online for free with Converigo. Add producer and creator details to PDF documents in seconds with secure browser-based processing.",
-    "keywords": "pdf-metadata, PDF to PDF, converigo",
+    "keywords": "pdf metadata, add pdf metadata, pdf metadata converter, converigo",
     "image": "/static/images/og-default.png",
-    "og_image_alt": "Convert PDF to PDF - Converigo free online converter",
+    "og_image_alt": "Add PDF Metadata - Converigo free online tool",
     "twitter_title": "PDF Metadata Converter Online Free | Converigo",
     "twitter_description": "Stamp PDF metadata online for free with Converigo. Add producer and creator details to PDF documents in seconds with secure browser-based processing.",
     "twitter_image": "/static/images/og-default.png",
@@ -46,27 +54,27 @@
   "featured": false,
   "hero": {
     "eyebrow": "Converter",
-    "title": "Convert PDF to PDF Online Free",
-    "description": "Convert PDF files to PDF online for free. Fast, secure browser-based conversion with no software installation. Get high-quality pdf output in seconds using Converigo.",
-    "panel_label": "Ready to convert",
-    "panel_title": "Upload a PDF file and receive your pdf output instantly."
+    "title": "Add PDF Metadata Online Free",
+    "description": "Stamp Converigo producer and creator metadata onto your PDF online for free. Converigo rebuilds the document and writes the Converigo /Producer and /Creator entries while page content and every other metadata entry stay exactly as they are.",
+    "panel_label": "Ready to stamp",
+    "panel_title": "Upload a PDF file and download it with Converigo producer and creator metadata stamped in."
   },
   "features": [
     {
-      "title": "Instant conversion",
-      "text": "Convert PDF to PDF in seconds without installing any software."
+      "title": "Converigo provenance stamp",
+      "text": "Sets the PDF /Producer and /Creator document-info entries to Converigo (https://converigo.com)."
+    },
+    {
+      "title": "Content stays intact",
+      "text": "Page content and every other existing metadata entry are preserved exactly as-is."
+    },
+    {
+      "title": "Owner-restricted PDFs supported",
+      "text": "Files that open without a password are handled automatically; files that need a user password return an honest unsupported message."
     },
     {
       "title": "Secure processing",
-      "text": "Your files are processed securely and automatically deleted after conversion."
-    },
-    {
-      "title": "Large file support",
-      "text": "Convert PDF files up to 500MB in size instantly."
-    },
-    {
-      "title": "Cross-platform",
-      "text": "Works on Windows, Mac, Linux, and all modern mobile devices."
+      "text": "Your files are processed securely and automatically deleted after processing."
     }
   ],
   "supported_formats": {
@@ -76,37 +84,37 @@
     "output": [
       "PDF"
     ],
-    "description": "PDF input, pdf output"
+    "description": "PDF input, PDF output with Converigo producer and creator metadata stamped"
   },
   "how_to_use": [
     {
       "title": "Upload your PDF file",
-      "description": "Select a PDF file from your device to begin the conversion."
+      "description": "Select a PDF file from your device to begin."
     },
     {
-      "title": "Wait for processing",
-      "description": "Converigo processes the conversion instantly with secure handling."
+      "title": "Stamp the metadata",
+      "description": "Converigo rebuilds the document and writes the Converigo /Producer and /Creator entries."
     },
     {
       "title": "Download your PDF file",
-      "description": "Get the pdf output ready to download immediately."
+      "description": "Get the updated PDF back with its page content unchanged."
     }
   ],
   "about_formats": [
     {
-      "title": "What is a PDF file?",
-      "text": "A PDF file is processed fully server-side by Converigo - no plugin or download needed."
+      "title": "What is PDF metadata?",
+      "text": "PDF documents carry document-info entries such as /Producer and /Creator that record the software behind the file."
     },
     {
-      "title": "Why convert PDF to PDF?",
-      "text": "The pdf output keeps your data portable and ready for the tools you use next."
+      "title": "What does this tool change?",
+      "text": "It stamps the Converigo producer and creator entries only. Page content and all other metadata entries are left exactly as they were."
     }
   ],
   "cta": {
-    "eyebrow": "Ready to convert",
-    "title": "Convert PDF files in seconds",
-    "text": "Upload your PDF file and get the pdf output instantly.",
-    "primary_text": "Convert now",
+    "eyebrow": "Ready to stamp",
+    "title": "Stamp PDF metadata in seconds",
+    "text": "Upload your PDF file and get it back with the Converigo producer and creator metadata applied.",
+    "primary_text": "Stamp metadata now",
     "secondary_text": "Read FAQs",
     "primary_href": "#converter",
     "secondary_href": "#faq"
