@@ -17,9 +17,7 @@ NON_PRODUCTION_READY_SLUGS = {
     "7z-extract",
 }
 
-PUBLIC_UI_DISABLED_SLUGS = {
-    "pdf-merge",
-}
+PUBLIC_UI_DISABLED_SLUGS = set()
 
 # G1-3 F-2: temporary de-index policy (§1/§2). Derived from the certification
 # ledger's `disabled` group (lifecycle_status "deprecated") — see
