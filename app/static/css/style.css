@@ -470,9 +470,27 @@ input {
     padding: 10px 14px;
 }
 
+.category-view-all {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 18px;
+}
+
+.category-back {
+    margin-top: 32px;
+}
+
+.section-white {
+    background: var(--surface);
+}
+
 @media (max-width: 900px) {
     .category-tools li {
         grid-template-columns: 1fr;
+    }
+
+    .category-view-all {
+        justify-content: stretch;
     }
 }
 

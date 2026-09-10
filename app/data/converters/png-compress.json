@@ -1,6 +1,6 @@
 {
   "slug": "png-compress",
-  "title": "PNG to PNG Converter",
+  "title": "PNG Compression Converter",
   "description": "Losslessly optimize PNG images to shrink file size.",
   "upload_form": {
     "action": "/upload",
@@ -28,12 +28,12 @@
   ],
   "related_tools": [],
   "seo": {
-    "title": "PNG to PNG Converter Online Free | Converigo",
+    "title": "PNG Compression Converter Online Free | Converigo",
     "description": "Convert PNG files to PNG online for free using Converigo. Fast, secure browser-based conversion with no software installation required.",
     "keywords": "png-compress, PNG to PNG, converigo",
     "image": "/static/images/og-default.png",
     "og_image_alt": "Convert PNG to PNG - Converigo free online converter",
-    "twitter_title": "PNG to PNG Converter Online Free | Converigo",
+    "twitter_title": "PNG Compression Converter Online Free | Converigo",
     "twitter_description": "Convert PNG files to PNG online for free using Converigo. Fast, secure browser-based conversion with no software installation required.",
     "twitter_image": "/static/images/og-default.png",
     "canonical": "https://converigo.com/tools/png-compress"
