@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="{{ locale.lang_code or 'en' }}">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% include "partials/seo_meta.html" %}
+    <link rel="stylesheet" href="/static/css/style.css">
+    {% include "partials/structured_data.html" %}
+</head>
+
+<body>
+    {% include "components/header.html" %}
+
+    <main class="main" role="main">
+        <section class="section tools-directory-hero">
+            <div class="container section-heading">
+                <span class="eyebrow">Tools Directory</span>
+                <h1>{{ category.title }}</h1>
+                <p>{{ category.description }}</p>
+            </div>
+        </section>
+
+        <section class="section section-white">
+            <div class="container">
+                <div class="section-header">
+                    <h2>All {{ category.total }} {{ category.title|lower }}</h2>
+                    <p>Browse every converter in this category. The curated overview lives on the <a href="/tools">tools directory</a>.</p>
+                </div>
+
+                <ul class="category-tools">
+                    {% for tool in category.tools %}
+                    <li>
+                        <div>
+                            <a href="/tools/{{ tool.slug }}"><strong>{{ tool.title }}</strong></a>
+                            <p>{{ tool.description or 'Fast, dependable conversion for everyday use.' }}</p>
+                        </div>
+                        <a class="btn btn-outline category-tool-btn" href="/tools/{{ tool.slug }}">Open</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+
+                <div class="category-back">
+                    <a class="btn btn-outline" href="/tools">&larr; Back to all categories</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    {% include "components/footer.html" %}
+</body>
+
+</html>
