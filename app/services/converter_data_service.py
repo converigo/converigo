@@ -131,6 +131,19 @@ class ConverterDataService:
             plugin_registry.get_plugin(source, target)
             return True
         except ValueError:
+            # P2.2: slug-aware fallback. Pair-lookup fails for converters whose
+            # `source` is a category rather than a concrete format (e.g.
+            # images-to-pdf declares source "image"), so a registered plugin
+            # slug is accepted instead. Fail-closed: the slug must exist in the
+            # plugin registry and must not be non-production or de-indexed.
+            slug = str(converter.get("slug", "")).strip().lower()
+            if (
+                slug
+                and plugin_registry.has_slug(slug)
+                and slug not in NON_PRODUCTION_READY_SLUGS
+                and slug not in SEARCH_INDEX_DISABLED_SLUGS
+            ):
+                return True
             return False
 
     def list_supported_converters(self) -> List[dict[str, Any]]:
