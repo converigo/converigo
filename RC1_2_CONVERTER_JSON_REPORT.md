@@ -1,5 +1,5 @@
 CONVERTER JSON VALIDATION REPORT
 
-Checked files: 62
+Checked files: 82
 
 Files with issues: 0

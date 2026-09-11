@@ -1,0 +1,28 @@
+{
+  "id": "pdf-rotate",
+  "slug": "pdf-rotate",
+  "name": "PDF Rotate",
+  "category": "document",
+  "description": "Rotate every page of a PDF document 90 degrees clockwise.",
+  "input_formats": [
+    "pdf"
+  ],
+  "output_formats": [
+    "pdf"
+  ],
+  "accepted_mime_types": [
+    "application/pdf"
+  ],
+  "max_upload_size": 524288000,
+  "conversion_engine": "document",
+  "landing_path": "/pdf-rotate",
+  "canonical_url": "https://converigo.com/pdf-rotate",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.pdf",
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "certified"
+}

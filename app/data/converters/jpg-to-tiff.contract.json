@@ -1,0 +1,29 @@
+{
+  "id": "jpg-to-tiff",
+  "slug": "jpg-to-tiff",
+  "name": "JPG to TIFF",
+  "category": "image",
+  "description": "Convert JPG images to TIFF format for archival and printing.",
+  "input_formats": [
+    "jpg",
+    "jpeg"
+  ],
+  "output_formats": [
+    "tiff"
+  ],
+  "accepted_mime_types": [
+    "image/jpeg"
+  ],
+  "max_upload_size": 104857600,
+  "conversion_engine": "image",
+  "landing_path": "/tools/jpg-to-tiff",
+  "canonical_url": "https://converigo.com/tools/jpg-to-tiff",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.jpg",
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "certified"
+}

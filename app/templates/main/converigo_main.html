@@ -1364,28 +1364,29 @@ const CATEGORY = {
    Fallback: array kosong → "tidak ada converter". */
 const STATIC_TARGET_MAP = {
   // image sources
-  jpg:['ICO','PDF','PNG','TIFF','WEBP'],  jpeg:['ICO','PDF','PNG','TIFF','WEBP'],
-  png:['BMP','ICO','JPEG','JPG','TIFF','WEBP'],  webp:['ICO','JPEG','JPG','PNG','TIFF'],
-  bmp:['JPEG','JPG','PNG','WEBP'],  tiff:['JPEG','JPG','PNG'],
-  svg:['PNG'],  heic:['JPEG','JPG'],  heif:['JPEG','JPG'],  avif:['JPEG','JPG'],
-  gif:[],  // tidak ada registered converter
+  jpg:['ICO','PDF','PNG','TIFF','TXT','WEBP'],  jpeg:['ICO','PDF','PNG','TIFF','TXT','WEBP'],  // F8-A: +TXT via image-to-base64
+  png:['BMP','ICO','JPEG','JPG','PDF','TIFF','TXT','WEBP'],  webp:['ICO','JPEG','JPG','PDF','PNG','TIFF','TXT'],  // F8-A: png/webp +TXT via image-to-base64
+  bmp:['JPEG','JPG','PDF','PNG','TXT','WEBP'],  tiff:['JPEG','JPG','PDF','PNG','TXT'],  // F8-A: +TXT via image-to-base64
+  ico:['PNG'],  svg:['PNG'],  heic:['JPEG','JPG','PNG'],  heif:['JPEG','JPG'],  avif:['JPEG','JPG'],
+  gif:['MP4','PDF','TXT'],  // VAR-10 images-to-pdf (Batch 3) + F4 gif-to-mp4 + F8-A TXT
   // document sources
-  pdf:['DOC','DOCX','JPEG','JPG','ODT','PPT','PPTX','WORD','XLS','XLSX'],
-  docx:['JPEG','JPG','PDF','POWERPOINT','PPT','PPTX','SPREADSHEET','XLS','XLSX'],
+  pdf:['DOC','DOCX','HTML','JPEG','JPG','MD','ODT','PPT','PPTX','TXT','WORD','XLS','XLSX'], // F3: +HTML,+MD via pdf-to-html / pdf-to-md
+  docx:['HTML','JPEG','JPG','MD','PDF','POWERPOINT','PPT','PPTX','SPREADSHEET','XLS','XLSX'],  // F7: +HTML via docx-to-html; F8-A: +MD via docx-to-md
   doc:['JPEG','JPG','PDF','POWERPOINT','PPT','PPTX','SPREADSHEET','XLS','XLSX'],
-  pptx:['DOC','DOCX','JPEG','JPG','PDF','SPREADSHEET','WORD','XLS','XLSX'],
+  pptx:['DOC','DOCX','JPEG','JPG','PDF','PNG','SPREADSHEET','WORD','XLS','XLSX'],  // F7: +PNG,+JPG via pptx-to-png / pptx-to-jpg (FIX round)
   ppt:['DOC','DOCX','JPEG','JPG','PDF','SPREADSHEET','WORD','XLS','XLSX'],
-  xlsx:['CSV','DOC','DOCX','HTML','JSON','ODS','PDF','POWERPOINT','PPT','PPTX','WORD'],
+  xlsx:['CSV','DOC','DOCX','HTML','JSON','ODS','PDF','POWERPOINT','PPT','PPTX','TSV','WORD'],
   xls:['DOC','DOCX','PDF','POWERPOINT','PPT','PPTX','WORD'],
-  txt:['PDF'],  csv:['JSON','PDF','XLSX'],  json:['CSV','XLSX'],  ods:['XLSX'],  odt:['PDF'],
+  txt:['BMP','GIF','JPG','PDF','PNG','TIFF','WEBP'],  csv:['HTML','JSON','PDF','TSV','XLSX'],  tsv:['CSV'],  json:['CSV','XLSX','XML','YAML'],  ods:['XLSX'],  odt:['PDF'],  // F6: json +XML,+YAML; F8-A: txt +raster targets via base64-to-image
+  xml:['JSON'],  yaml:['JSON'],  yml:['JSON'],  // F6: XML/YAML data interchange (net-new rows)
   powerpoint:['DOC','DOCX','JPEG','JPG','SPREADSHEET','WORD','XLS','XLSX'],
   spreadsheet:['DOC','DOCX','POWERPOINT','PPT','PPTX','WORD'],
   word:['JPEG','JPG','PDF','POWERPOINT','PPT','PPTX','SPREADSHEET','XLS','XLSX'],
-  html:[],  md:[],  rtf:[],  // tidak ada registered converter
-  // audio sources
-  mp3:['WAV'],  wav:['MP3'],  ogg:[],  flac:['MP3'],  m4a:['MP3'],  aac:['MP3'],
-  // video sources
-  mp4:['AAC','FLAC','GIF','M4A','MP3','OGG','WAV'],  mov:[],  avi:[],  webm:[],  mkv:[],  flv:[],
+  html:['CSV'],  md:['HTML'],  rtf:[],  // F8-B: md→HTML (md-to-html); F8-C: html→CSV (html-to-csv); rtf tetap kosong
+  // audio sources (F4: wav +FLAC via wav-to-flac; ogg +MP3 via ogg-to-mp3)
+  mp3:['WAV'],  wav:['MP3','FLAC'],  ogg:['MP3'],  flac:['MP3'],  m4a:['MP3'],  aac:['MP3'],  // WS1: MP3 first — addFiles() auto-selects the first non-self entry as the default target; FLAC-first made the homepage default WAV→FLAC (regression from 368475b, see f7_evidence/WS1_WAV_MP3_AUDIT_REPORT.md)
+  // video sources (F4: FFmpeg container transcodes, re-encoded libx264+aac)
+  mp4:['AAC','AVI','FLAC','GIF','M4A','MP3','OGG','WAV','WEBM'],  mov:['MP4'],  avi:['MP4'],  webm:['MP4'],  mkv:['MP4'],  flv:[],
   // archive sources (self-conversions dihapus — hanya extract operation)
   gz:['GZIP'],  gzip:['GZ'],  zip:[],  '7z':[],  rar:[],  tar:[],
 };

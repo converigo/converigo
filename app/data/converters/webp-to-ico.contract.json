@@ -1,0 +1,28 @@
+{
+  "id": "webp-to-ico",
+  "slug": "webp-to-ico",
+  "name": "WEBP to ICO",
+  "category": "image",
+  "description": "Convert WEBP images to ICO format for favicon and icons.",
+  "input_formats": [
+    "webp"
+  ],
+  "output_formats": [
+    "ico"
+  ],
+  "accepted_mime_types": [
+    "image/webp"
+  ],
+  "max_upload_size": 104857600,
+  "conversion_engine": "image",
+  "landing_path": "/tools/webp-to-ico",
+  "canonical_url": "https://converigo.com/tools/webp-to-ico",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.webp",
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "certified"
+}

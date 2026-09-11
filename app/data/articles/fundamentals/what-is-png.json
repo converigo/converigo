@@ -43,7 +43,7 @@
   ],
   "call_to_action": {
     "text": "Convert your image to PNG and keep quality intact.",
-    "url": "/jpg-to-png",
+    "url": "/tools/jpg-to-png",
     "button_text": "Convert to PNG"
   },
   "breadcrumb_override": [

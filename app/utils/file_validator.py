@@ -30,10 +30,13 @@ ALLOWED_EXTENSIONS = {
     "gif",
     "webp",
     "bmp",
+    "tiff",
     "avif",
     "heic",
     "heif",
+    "ico",
     "svg",
+    "tif",
 
     # AUDIO
     "mp3",
@@ -57,12 +60,18 @@ ALLOWED_EXTENSIONS = {
     "txt",
     "csv",
     "json",
+    "tsv",
+    "xml",
+    "yaml",
+    "yml",
     "xlsx",
     "xls",
     "odt",
     "ods",
     "pptx",
     "ppt",
+    "md",
+    "html",
 
     # ARCHIVE
     "7z",
@@ -96,10 +105,12 @@ FILE_SIGNATURES = {
     "gif": [b"GIF87a", b"GIF89a"],
     "webp": [b"RIFF"],
     "bmp": [b"BM"],
+    "tiff": [b"II*\x00", b"MM\x00*"],
     "svg": [b"<", b"<?xml"],  # SVG is XML-based, flexible start
     "avif": [b"ftyp"],  # AVIF is MP4-based container
     "heic": [b"ftyp"],  # HEIC is MP4-based container
     "heif": [b"ftyp"],  # HEIF is MP4-based container
+    "ico": [b"\x00\x00\x01\x00"],  # ICO header: reserved(2) + type(1) + count(1)
     # Audio
     "mp3": [b"ID3", b"\xff\xfb"],
     "wav": [b"RIFF"],
@@ -126,12 +137,18 @@ FILE_SIGNATURES = {
     "txt": [],  # Text files no specific signature
     "csv": [],  # CSV files no specific signature
     "json": [],  # JSON files no specific signature
+    "tsv": [],  # TSV files no specific signature (tab-separated text)
+    "xml": [],  # XML files no specific signature (text-based markup)
+    "yaml": [],  # YAML files no specific signature (text-based)
+    "yml": [],  # YML files no specific signature (text-based)
+    "md": [],  # F8-B: Markdown files no specific signature (text-based)
+    "html": [],  # F8-C: HTML files no specific signature (text-based markup)
     # Archives
     "7z": [b"7z\xBC\xAF\x27\x1C"],
     "tar": [],  # TAR has no consistent magic bytes, allow permissively
     "tgz": [b"\x1f\x8b\x08"],  # gzip signature
     "gz": [b"\x1f\x8b\x08"],
-    "rar": [b"Rar!\x1A\x07\x00"],
+    "rar": [b"Rar!\x1A\x07\x00", b"Rar!\x1A\x07\x01\x00"],  # RAR4 + RAR5
     "zip": [b"PK\x03\x04", b"PK\x05\x06", b"PK\x07\x08"],
 }
 
@@ -143,10 +160,12 @@ CONTENT_TYPE_BY_EXTENSION = {
     "gif": ["image/gif"],
     "webp": ["image/webp"],
     "bmp": ["image/bmp"],
+    "tiff": ["image/tiff"],
     "svg": ["image/svg+xml", "text/svg"],
     "avif": ["image/avif"],
     "heic": ["image/heic"],
     "heif": ["image/heif"],
+    "ico": ["image/x-icon", "image/vnd.microsoft.icon"],
     # Audio
     "mp3": ["audio/mpeg"],
     "wav": ["audio/wav", "audio/x-wav"],
@@ -167,6 +186,12 @@ CONTENT_TYPE_BY_EXTENSION = {
     "txt": ["text/plain"],
     "csv": ["text/csv", "text/plain"],
     "json": ["application/json", "text/plain"],
+    "tsv": ["text/tab-separated-values", "text/plain"],
+    "xml": ["application/xml", "text/xml", "text/plain"],
+    "yaml": ["application/yaml", "application/x-yaml", "text/yaml", "text/plain"],
+    "yml": ["application/yaml", "application/x-yaml", "text/yaml", "text/plain"],
+    "md": ["text/markdown", "text/x-markdown", "text/plain"],
+    "html": ["text/html", "application/xhtml+xml", "text/plain"],
     "xlsx": ["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"],
     "xls": ["application/vnd.ms-excel"],
     "pptx": ["application/vnd.openxmlformats-officedocument.presentationml.presentation"],
@@ -178,7 +203,7 @@ CONTENT_TYPE_BY_EXTENSION = {
     "tar": ["application/x-tar"],
     "tgz": ["application/gzip", "application/x-gzip"],
     "gz": ["application/gzip", "application/x-gzip"],
-    "rar": ["application/x-rar-compressed"],
+    "rar": ["application/x-rar-compressed", "application/vnd.rar"],
     "zip": ["application/zip", "application/x-zip-compressed"],
 }
 

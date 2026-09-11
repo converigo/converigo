@@ -1,0 +1,120 @@
+{
+  "slug": "base64-to-image",
+  "title": "TXT to PNG Converter",
+  "description": "Decode a Base64 data URI text file back into a real image file.",
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".txt",
+    "button_text": "Upload TXT"
+  },
+  "faq": [
+    {
+      "question": "How do I convert Base64 back to an image?",
+      "answer": "Upload a .txt file that contains exactly one data URI (data:image/png;base64,...), pick the target format, and download the image."
+    },
+    {
+      "question": "Which inputs are accepted?",
+      "answer": "A single data:image/*;base64,... URI (JPEG, PNG, WebP, BMP, GIF or TIFF). Raw base64 without the data: header is rejected in this MVP."
+    },
+    {
+      "question": "Is the output identical to the embedded image?",
+      "answer": "The payload is decoded, verified as a real image, and re-encoded to your chosen raster format. PNG targets stay lossless; JPEG targets re-encode at default quality."
+    },
+    {
+      "question": "What is the size limit?",
+      "answer": "Decoded payloads up to 20 MiB are accepted; anything larger fails with an honest error instead of a truncated file."
+    }
+  ],
+  "related_tools": [],
+  "seo": {
+    "title": "TXT to PNG Converter Online Free | Converigo",
+    "description": "Convert TXT files to PNG online for free using Converigo. Fast, secure browser-based conversion with no software installation required.",
+    "keywords": "base64-to-image, TXT to PNG, converigo",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert TXT to PNG - Converigo free online converter",
+    "twitter_title": "TXT to PNG Converter Online Free | Converigo",
+    "twitter_description": "Convert TXT files to PNG online for free using Converigo. Fast, secure browser-based conversion with no software installation required.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/base64-to-image"
+  },
+  "source": "txt",
+  "target": "png",
+  "category": "image",
+  "active": true,
+  "popular": false,
+  "featured": false,
+  "hero": {
+    "eyebrow": "Converter",
+    "title": "Convert TXT to PNG Online Free",
+    "description": "Convert TXT files to PNG online for free. Fast, secure browser-based conversion with no software installation. Get high-quality png output in seconds using Converigo.",
+    "panel_label": "Ready to convert",
+    "panel_title": "Upload a TXT file and receive your png output instantly."
+  },
+  "features": [
+    {
+      "title": "Instant conversion",
+      "text": "Convert TXT to PNG in seconds without installing any software."
+    },
+    {
+      "title": "Secure processing",
+      "text": "Your files are processed securely and automatically deleted after conversion."
+    },
+    {
+      "title": "Large file support",
+      "text": "Convert TXT files up to 500MB in size instantly."
+    },
+    {
+      "title": "Cross-platform",
+      "text": "Works on Windows, Mac, Linux, and all modern mobile devices."
+    }
+  ],
+  "supported_formats": {
+    "input": [
+      "TXT"
+    ],
+    "output": [
+      "PNG",
+      "JPG",
+      "WEBP",
+      "BMP",
+      "GIF",
+      "TIFF"
+    ],
+    "description": "TXT input, png output"
+  },
+  "how_to_use": [
+    {
+      "title": "Upload your TXT file",
+      "description": "Select a TXT file from your device to begin the conversion."
+    },
+    {
+      "title": "Wait for processing",
+      "description": "Converigo processes the conversion instantly with secure handling."
+    },
+    {
+      "title": "Download your PNG file",
+      "description": "Get the png output ready to download immediately."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is a TXT file?",
+      "text": "The input is plain text holding one data URI; oversized or malformed payloads are rejected honestly (no fabricated output)."
+    },
+    {
+      "title": "Why convert TXT to PNG?",
+      "text": "The output is always a genuine image file verified through Pillow before it is served."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Convert TXT files in seconds",
+    "text": "Upload your TXT file and get the png output instantly.",
+    "primary_text": "Convert now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  },
+  "lifecycle_status": "certified"
+}

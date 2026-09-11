@@ -102,7 +102,9 @@ class SeoService:
         if base_title and "converter" not in base_title.lower():
             base_title = f"{base_title} Converter"
 
-        if slug == "mp4-to-mp3":
+        if seo_meta.get("title"):
+            title = seo_meta["title"]
+        elif slug == "mp4-to-mp3":
             title = "MP4 to MP3 | Converigo"
         elif slug in {"pdf-to-jpg", "png-to-jpg"}:
             title = f"{base_title} Online Free"
@@ -114,7 +116,9 @@ class SeoService:
         source_display = source.upper() if source else ""
         target_display = target.upper() if target else ""
 
-        if slug == "mp4-to-mp3":
+        if seo_meta.get("description"):
+            description = seo_meta["description"]
+        elif slug == "mp4-to-mp3":
             description = "Convert MP4 to MP3 Online Free"
         elif source == "pdf" and target in {"jpg", "jpeg"}:
             description = "Convert PDF files to JPG images online free"
@@ -199,6 +203,7 @@ class SeoService:
             "/audio-conversion",
             "/video-conversion",
             "/document-conversion",
+            "/data-conversion",
         ]
         return [
             {

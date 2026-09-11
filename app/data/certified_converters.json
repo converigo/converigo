@@ -1,6 +1,13 @@
 {
   "certified": [
     {
+      "slug": "avi-to-mp4",
+      "lifecycle_status": "certified",
+      "name": "AVI to MP4",
+      "locked": true,
+      "test_files": ["tests/certified/video/test_f4_media_factory_certified.py"]
+    },
+    {
       "slug": "avif-to-jpg",
       "lifecycle_status": "certified",
       "name": "AVIF to JPG",
@@ -8,11 +15,32 @@
       "test_files": ["tests/certified/image/test_avif_to_jpg.py"]
     },
     {
+      "slug": "base64-to-image",
+      "lifecycle_status": "certified",
+      "name": "Base64 to Image",
+      "locked": true,
+      "test_files": ["tests/certified/factory/test_f8_net_new_certified.py"]
+    },
+    {
       "slug": "bmp-to-jpg",
       "lifecycle_status": "certified",
       "name": "BMP to JPG",
       "locked": true,
       "test_files": []
+    },
+    {
+      "slug": "csv-to-html",
+      "lifecycle_status": "certified",
+      "name": "CSV to HTML",
+      "locked": true,
+      "test_files": ["tests/certified/spreadsheet/test_data_output_factory_certified.py"]
+    },
+    {
+      "slug": "docx-to-md",
+      "lifecycle_status": "certified",
+      "name": "DOCX to MD",
+      "locked": true,
+      "test_files": ["tests/certified/factory/test_f8_net_new_certified.py"]
     },
     {
       "slug": "docx-to-jpg",
@@ -29,6 +57,188 @@
       "test_files": []
     },
     {
+      "slug": "gif-to-mp4",
+      "lifecycle_status": "certified",
+      "name": "GIF to MP4",
+      "locked": true,
+      "test_files": ["tests/certified/video/test_f4_media_factory_certified.py"]
+    },
+    {
+      "slug": "json-to-xml",
+      "lifecycle_status": "certified",
+      "name": "JSON to XML",
+      "locked": true,
+      "test_files": ["tests/certified/data/test_data_interchange_factory_certified.py"]
+    },
+    {
+      "slug": "json-to-yaml",
+      "lifecycle_status": "certified",
+      "name": "JSON to YAML",
+      "locked": true,
+      "test_files": ["tests/certified/data/test_data_interchange_factory_certified.py"]
+    },
+    {
+      "slug": "md-to-html",
+      "lifecycle_status": "certified",
+      "name": "MD to HTML",
+      "locked": true,
+      "test_files": ["tests/certified/factory/test_f8_net_new_certified.py"]
+    },
+    {
+      "slug": "mkv-to-mp4",
+      "lifecycle_status": "certified",
+      "name": "MKV to MP4",
+      "locked": true,
+      "test_files": ["tests/certified/video/test_f4_media_factory_certified.py"]
+    },
+    {
+      "slug": "mov-to-mp4",
+      "lifecycle_status": "certified",
+      "name": "MOV to MP4",
+      "locked": true,
+      "test_files": ["tests/certified/video/test_f4_media_factory_certified.py"]
+    },
+    {
+      "slug": "mp4-compress",
+      "lifecycle_status": "certified",
+      "name": "MP4 Compress",
+      "locked": true,
+      "test_files": ["tests/certified/video/test_f4_media_factory_certified.py"]
+    },
+    {
+      "slug": "mp4-to-avi",
+      "lifecycle_status": "certified",
+      "name": "MP4 to AVI",
+      "locked": true,
+      "test_files": ["tests/certified/video/test_f4_media_factory_certified.py"]
+    },
+    {
+      "slug": "mp4-to-webm",
+      "lifecycle_status": "certified",
+      "name": "MP4 to WEBM",
+      "locked": true,
+      "test_files": ["tests/certified/video/test_f4_media_factory_certified.py"]
+    },
+    {
+      "slug": "ogg-to-mp3",
+      "lifecycle_status": "certified",
+      "name": "OGG to MP3",
+      "locked": true,
+      "test_files": ["tests/certified/video/test_f4_media_factory_certified.py"]
+    },
+    {
+      "slug": "pdf-metadata",
+      "lifecycle_status": "certified",
+      "name": "PDF Metadata",
+      "locked": true,
+      "test_files": ["tests/certified/pdf/test_pdf_ops_factory_certified.py"]
+    },
+    {
+      "slug": "pdf-rotate",
+      "lifecycle_status": "certified",
+      "name": "PDF Rotate",
+      "locked": true,
+      "test_files": ["tests/certified/pdf/test_pdf_ops_factory_certified.py"]
+    },
+    {
+      "slug": "pdf-to-html",
+      "lifecycle_status": "certified",
+      "name": "PDF to HTML",
+      "locked": true,
+      "test_files": ["tests/certified/pdf/test_pdf_ops_factory_certified.py"]
+    },
+    {
+      "slug": "pdf-to-md",
+      "lifecycle_status": "certified",
+      "name": "PDF to Markdown",
+      "locked": true,
+      "test_files": ["tests/certified/pdf/test_pdf_ops_factory_certified.py"]
+    },
+    {
+      "slug": "pdf-unlock",
+      "lifecycle_status": "certified",
+      "name": "PDF Unlock",
+      "locked": true,
+      "test_files": ["tests/certified/pdf/test_pdf_ops_factory_certified.py"]
+    },
+    {
+      "slug": "pdf-watermark",
+      "lifecycle_status": "certified",
+      "name": "PDF Watermark",
+      "locked": true,
+      "test_files": ["tests/certified/pdf/test_pdf_ops_factory_certified.py"]
+    },
+    {
+      "slug": "png-compress",
+      "lifecycle_status": "certified",
+      "name": "PNG Compress",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_image_ops_factory_certified.py"]
+    },
+    {
+      "slug": "jpg-watermark",
+      "lifecycle_status": "certified",
+      "name": "JPG Watermark",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_image_ops_factory_certified.py"]
+    },
+    {
+      "slug": "jpg-rotate",
+      "lifecycle_status": "certified",
+      "name": "JPG Rotate",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_image_ops_factory_certified.py"]
+    },
+    {
+      "slug": "jpg-grayscale",
+      "lifecycle_status": "certified",
+      "name": "JPG Grayscale",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_image_ops_factory_certified.py"]
+    },
+    {
+      "slug": "jpg-flip",
+      "lifecycle_status": "certified",
+      "name": "JPG Flip",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_image_ops_factory_certified.py"]
+    },
+    {
+      "slug": "jpg-crop",
+      "lifecycle_status": "certified",
+      "name": "JPG Crop",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_image_ops_factory_certified.py"]
+    },
+    {
+      "slug": "jpg-compress",
+      "lifecycle_status": "certified",
+      "name": "JPG Compress",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_image_ops_factory_certified.py"]
+    },
+    {
+      "slug": "html-to-csv",
+      "lifecycle_status": "certified",
+      "name": "HTML to CSV",
+      "locked": true,
+      "test_files": ["tests/certified/factory/test_f8_net_new_certified.py"]
+    },
+    {
+      "slug": "ico-to-png",
+      "lifecycle_status": "certified",
+      "name": "ICO to PNG",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_image_ops_factory_certified.py"]
+    },
+    {
+      "slug": "heic-to-png",
+      "lifecycle_status": "certified",
+      "name": "HEIC to PNG",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_image_ops_factory_certified.py"]
+    },
+    {
       "slug": "ppt-to-jpg",
       "lifecycle_status": "certified",
       "name": "PPT to JPG",
@@ -41,6 +251,20 @@
       "name": "HEIC to JPG",
       "locked": true,
       "test_files": ["tests/certified/image/test_heic_to_jpg.py"]
+    },
+    {
+      "slug": "image-to-base64",
+      "lifecycle_status": "certified",
+      "name": "Image to Base64",
+      "locked": true,
+      "test_files": ["tests/certified/factory/test_f8_net_new_certified.py"]
+    },
+    {
+      "slug": "images-to-pdf",
+      "lifecycle_status": "certified",
+      "name": "Images to PDF",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_images_to_pdf_certified.py"]
     },
     {
       "slug": "jpg-to-png",
@@ -148,6 +372,13 @@
       "test_files": ["tests/certified/pdf/test_pdf_split_certified.py"]
     },
     {
+      "slug": "pdf-to-txt",
+      "lifecycle_status": "certified",
+      "name": "PDF to TXT",
+      "locked": true,
+      "test_files": ["tests/certified/pdf/test_pdf_to_txt_certified.py"]
+    },
+    {
       "slug": "png-to-jpg",
       "lifecycle_status": "certified",
       "name": "PNG to JPG",
@@ -181,6 +412,20 @@
       "name": "TIFF to JPG",
       "locked": true,
       "test_files": []
+    },
+    {
+      "slug": "wav-to-flac",
+      "lifecycle_status": "certified",
+      "name": "WAV to FLAC",
+      "locked": true,
+      "test_files": ["tests/certified/video/test_f4_media_factory_certified.py"]
+    },
+    {
+      "slug": "webm-to-mp4",
+      "lifecycle_status": "certified",
+      "name": "WEBM to MP4",
+      "locked": true,
+      "test_files": ["tests/certified/video/test_f4_media_factory_certified.py"]
     },
     {
       "slug": "webp-to-png",
@@ -279,6 +524,181 @@
       "name": "MP4 to GIF",
       "locked": true,
       "test_files": ["tests/certified/audio/test_audio_plugin_certified.py"]
+    },
+    {
+      "slug": "bmp-to-png",
+      "lifecycle_status": "certified",
+      "name": "BMP to PNG",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_batch4_pillow_certified.py"]
+    },
+    {
+      "slug": "bmp-to-webp",
+      "lifecycle_status": "certified",
+      "name": "BMP to WEBP",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_batch4_pillow_certified.py"]
+    },
+    {
+      "slug": "jpg-to-ico",
+      "lifecycle_status": "certified",
+      "name": "JPG to ICO",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_batch4_pillow_certified.py"]
+    },
+    {
+      "slug": "jpg-to-tiff",
+      "lifecycle_status": "certified",
+      "name": "JPG to TIFF",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_batch4_pillow_certified.py"]
+    },
+    {
+      "slug": "png-to-bmp",
+      "lifecycle_status": "certified",
+      "name": "PNG to BMP",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_batch4_pillow_certified.py"]
+    },
+    {
+      "slug": "png-to-ico",
+      "lifecycle_status": "certified",
+      "name": "PNG to ICO",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_batch4_pillow_certified.py"]
+    },
+    {
+      "slug": "png-to-tiff",
+      "lifecycle_status": "certified",
+      "name": "PNG to TIFF",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_batch4_pillow_certified.py"]
+    },
+    {
+      "slug": "tiff-to-png",
+      "lifecycle_status": "certified",
+      "name": "TIFF to PNG",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_batch4_pillow_certified.py"]
+    },
+    {
+      "slug": "webp-to-ico",
+      "lifecycle_status": "certified",
+      "name": "WEBP to ICO",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_batch4_pillow_certified.py"]
+    },
+    {
+      "slug": "webp-to-tiff",
+      "lifecycle_status": "certified",
+      "name": "WEBP to TIFF",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_batch4_pillow_certified.py"]
+    },
+    {
+      "slug": "jpg-to-pdf",
+      "lifecycle_status": "certified",
+      "name": "JPG to PDF",
+      "locked": true,
+      "test_files": ["tests/certified/document/test_jpg_to_pdf_certified.py"]
+    },
+    {
+      "slug": "pdf-compress",
+      "lifecycle_status": "certified",
+      "name": "PDF Compress",
+      "locked": true,
+      "test_files": ["tests/certified/document/test_pdf_compress_certified.py"]
+    },
+    {
+      "slug": "txt-to-pdf",
+      "lifecycle_status": "certified",
+      "name": "TXT to PDF",
+      "locked": true,
+      "test_files": ["tests/certified/document/test_txt_to_pdf_certified.py"]
+    },
+    {
+      "slug": "webp-to-jpg",
+      "lifecycle_status": "certified",
+      "name": "WEBP to JPG",
+      "locked": true,
+      "test_files": ["tests/certified/image/test_webp_to_jpg_certified.py"]
+    },
+    {
+      "slug": "xlsx-to-tsv",
+      "lifecycle_status": "certified",
+      "name": "XLSX to TSV",
+      "locked": true,
+      "test_files": ["tests/certified/spreadsheet/test_data_output_factory_certified.py"]
+    },
+    {
+      "slug": "xml-to-json",
+      "lifecycle_status": "certified",
+      "name": "XML to JSON",
+      "locked": true,
+      "test_files": ["tests/certified/data/test_data_interchange_factory_certified.py"]
+    },
+    {
+      "slug": "yaml-to-json",
+      "lifecycle_status": "certified",
+      "name": "YAML to JSON",
+      "locked": true,
+      "test_files": ["tests/certified/data/test_data_interchange_factory_certified.py"]
+    },
+    {
+      "slug": "zip-extract",
+      "lifecycle_status": "certified",
+      "name": "ZIP Extract",
+      "locked": true,
+      "test_files": ["tests/certified/archive/test_zip_extract_certified.py"]
+    },
+    {
+      "slug": "csv-to-tsv",
+      "lifecycle_status": "certified",
+      "name": "CSV to TSV",
+      "locked": true,
+      "test_files": ["tests/certified/spreadsheet/test_tsv_factory_certified.py"]
+    },
+    {
+      "slug": "tsv-to-csv",
+      "lifecycle_status": "certified",
+      "name": "TSV to CSV",
+      "locked": true,
+      "test_files": ["tests/certified/spreadsheet/test_tsv_factory_certified.py"]
+    },
+    {
+      "slug": "docx-to-html",
+      "lifecycle_status": "certified",
+      "name": "DOCX to HTML",
+      "locked": true,
+      "test_files": ["tests/certified/document/test_document_factory_certified.py"]
+    },
+    {
+      "slug": "pptx-to-png",
+      "lifecycle_status": "certified",
+      "name": "PPTX to PNG",
+      "locked": true,
+      "test_files": ["tests/certified/document/test_document_factory_certified.py"]
+    },
+    {
+      "slug": "pptx-to-jpg",
+      "lifecycle_status": "certified",
+      "name": "PPTX to JPG",
+      "locked": true,
+      "test_files": ["tests/certified/document/test_document_factory_certified.py"]
+    },
+    {
+      "slug": "rar-extract",
+      "lifecycle_status": "certified",
+      "name": "RAR Extract",
+      "locked": true,
+      "test_files": ["tests/certified/archive/test_rar_extract_certified.py"]
+    },
+    {
+      "slug": "tar-extract",
+      "lifecycle_status": "certified",
+      "name": "TAR Extract",
+      "locked": true,
+      "test_files": ["tests/certified/archive/test_tar_extract_certified.py"]
     }
   ],
   "beta": [],

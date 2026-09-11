@@ -1,0 +1,20 @@
+{
+  "id": "images-to-pdf",
+  "slug": "images-to-pdf",
+  "name": "Images to PDF",
+  "category": "image",
+  "description": "Combine multiple images into a single PDF document.",
+  "input_formats": ["png", "webp", "bmp", "tiff", "gif"],
+  "output_formats": ["pdf"],
+  "accepted_mime_types": ["image/png", "image/webp", "image/bmp", "image/tiff", "image/gif"],
+  "max_upload_size": 209715200,
+  "conversion_engine": "image",
+  "landing_path": "/images-to-pdf",
+  "canonical_url": "https://converigo.com/images-to-pdf",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.png",
+  "supported_platforms": ["web"],
+  "lifecycle_status": "active"
+}

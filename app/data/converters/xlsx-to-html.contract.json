@@ -1,0 +1,28 @@
+{
+  "id": "xlsx-to-html",
+  "slug": "xlsx-to-html",
+  "name": "XLSX to HTML",
+  "category": "spreadsheet",
+  "description": "Convert Excel XLSX workbooks to HTML table documents.",
+  "input_formats": [
+    "xlsx"
+  ],
+  "output_formats": [
+    "html"
+  ],
+  "accepted_mime_types": [
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+  ],
+  "max_upload_size": 524288000,
+  "conversion_engine": "spreadsheet",
+  "landing_path": "/xlsx-to-html",
+  "canonical_url": "https://converigo.com/xlsx-to-html",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.xlsx",
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "certified"
+}

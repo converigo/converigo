@@ -1,0 +1,28 @@
+{
+  "id": "jpg-flip",
+  "slug": "jpg-flip",
+  "name": "JPG Flip",
+  "category": "image",
+  "description": "Flip JPG images horizontally (mirror).",
+  "input_formats": [
+    "jpg"
+  ],
+  "output_formats": [
+    "jpg"
+  ],
+  "accepted_mime_types": [
+    "image/jpeg"
+  ],
+  "max_upload_size": 524288000,
+  "conversion_engine": "image",
+  "landing_path": "/jpg-flip",
+  "canonical_url": "https://converigo.com/jpg-flip",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.jpg",
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "certified"
+}

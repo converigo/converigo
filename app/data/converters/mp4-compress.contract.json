@@ -1,0 +1,28 @@
+{
+  "id": "mp4-compress",
+  "slug": "mp4-compress",
+  "name": "MP4 Compress",
+  "category": "video",
+  "description": "Re-encode MP4 videos with a fixed, size-prioritized quality (CRF 28, preset medium, +faststart, audio stream copy) to shrink file size.",
+  "input_formats": [
+    "mp4"
+  ],
+  "output_formats": [
+    "mp4"
+  ],
+  "accepted_mime_types": [
+    "video/mp4"
+  ],
+  "max_upload_size": 524288000,
+  "conversion_engine": "ffmpeg",
+  "landing_path": "/mp4-compress",
+  "canonical_url": "https://converigo.com/mp4-compress",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.mp4",
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "certified"
+}

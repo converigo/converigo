@@ -82,13 +82,13 @@
       "slug": "pdf-to-jpg",
       "title": "PDF to JPG Converter",
       "description": "Convert PDF files to JPG quickly and easily.",
-      "href": "/pdf-to-jpg"
+      "href": "/tools/pdf-to-jpg"
     },
     {
       "slug": "jpg-to-pdf",
       "title": "JPG to PDF Converter",
       "description": "Convert JPG files to PDF quickly and easily.",
-      "href": "/jpg-to-pdf"
+      "href": "/tools/jpg-to-pdf"
     },
     {
       "slug": "png-to-pdf",

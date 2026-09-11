@@ -50,6 +50,12 @@
                             </li>
                             {% endfor %}
                         </ul>
+
+                        {% if category.has_more %}
+                        <div class="category-view-all">
+                            <a class="btn btn-outline" href="/tools/category/{{ category.slug }}">View all {{ category.total }} tools</a>
+                        </div>
+                        {% endif %}
                     </article>
                     {% endfor %}
                 </div>

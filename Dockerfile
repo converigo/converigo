@@ -10,6 +10,7 @@ RUN apt-get update && \
         poppler-utils \
         p7zip-full \
         unrar-free \
+        libarchive13 \
         libcairo2 \
         libpango-1.0-0 \
         libgdk-pixbuf-xlib-2.0-0 \
@@ -36,4 +37,4 @@ RUN python scripts/verify_plugin_imports.py
 
 EXPOSE 8000
 
-CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
+CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000} --proxy-headers --forwarded-allow-ips='*'"]

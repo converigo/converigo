@@ -6,7 +6,11 @@ from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import HTMLResponse
 
 from app.core.templates import templates
-from app.services.converter_data_service import ConverterDataService
+from app.services.converter_data_service import (
+    NON_PRODUCTION_READY_SLUGS,
+    SEARCH_INDEX_DISABLED_SLUGS,
+    ConverterDataService,
+)
 from app.services.internal_link_service import InternalLinkService
 from app.services.language_service import LanguageService
 from app.services.landing_service import LandingPageBuilder
@@ -23,7 +27,23 @@ language_service = LanguageService(Path("app/locales"))
 # dedicated tool pages return 404.  Set the `"active": false` flag in the
 # converter JSON to also exclude them from directories, sitemaps, and
 # recommendations.
-DISABLED_TOOL_SLUGS = {"pdf-compress"}
+# Batch 5 (DOC-29): "pdf-compress" was removed from this set — the plugin
+# was rewritten as a genuine pypdf compressor and re-certified.
+DISABLED_TOOL_SLUGS: set[str] = set()
+
+
+def apply_search_index_policy(seo_data: dict[str, Any], slug: str) -> dict[str, Any]:
+    """G1-3 F-2 (§1): force `noindex,follow` for ledger-deprecated converters.
+
+    The certification ledger's `disabled` group (see
+    ``ConverterDataService.SEARCH_INDEX_DISABLED_SLUGS``) is the source of
+    truth. Runs after meta overrides so the temporary de-index policy always
+    wins, and only narrows crawler exposure — it never widens it.
+    """
+    if (slug or "").strip().lower() in SEARCH_INDEX_DISABLED_SLUGS:
+        seo_data["robots"] = "noindex,follow"
+    return seo_data
+
 
 
 def _build_tool_page_sections(tool_data: dict[str, Any]) -> dict[str, Any]:
@@ -189,6 +209,69 @@ def _sort_tools_for_directory(tool: dict[str, Any]) -> tuple[int, int, str]:
     )
 
 
+def _is_listable_converter(tool: dict[str, Any], public_slugs: set[str]) -> bool:
+    """Fail-closed gate for the *full* category listing (P2.3 C-1/O-2).
+
+    The curated top-5 ``/tools`` cards keep their pre-existing behaviour (they
+    may surface non-production-ready / de-indexed slugs — a documented
+    pre-existing leak).  The uncapped "view all" listing must not widen that
+    exposure, so it excludes non-production-ready (NPR), search-index-disabled
+    (SID) and non-public slugs.
+    """
+    slug = str(tool.get("slug", "")).strip().lower()
+    if not slug or slug in DISABLED_TOOL_SLUGS:
+        return False
+    if slug in NON_PRODUCTION_READY_SLUGS or slug in SEARCH_INDEX_DISABLED_SLUGS:
+        return False
+    if slug not in public_slugs:
+        return False
+    return True
+
+
+def _build_directory_full_groups() -> dict[str, list[dict[str, Any]]]:
+    """Strictly filtered, uncapped tool groups per directory category.
+
+    Only used for the "view all" affordance (counts + the full listing page);
+    it never feeds the curated top-5 display.
+    """
+    public_slugs = {
+        str(tool.get("slug", "")).strip().lower()
+        for tool in converter_data_service.list_public_converters()
+    }
+    groups: dict[str, list[dict[str, Any]]] = {key: [] for key in TOOL_DIRECTORY_CATEGORIES}
+    for tool in converter_data_service.list_supported_converters():
+        if not _is_listable_converter(tool, public_slugs):
+            continue
+        category = _normalize_directory_category(tool)
+        if not category:
+            continue
+        groups[category].append(tool)
+
+    for key in groups:
+        groups[key].sort(key=_sort_tools_for_directory)
+
+    return groups
+
+
+def _build_category_full_listing(slug: str) -> dict[str, Any] | None:
+    """Return the full, strictly filtered listing for one directory category.
+
+    Returns ``None`` for an unknown category slug so the route can 404.
+    """
+    definition = TOOL_DIRECTORY_CATEGORIES.get(slug)
+    if not definition:
+        return None
+    tools = _build_directory_full_groups().get(slug, [])
+    return {
+        "slug": slug,
+        "title": definition["title"],
+        "description": definition["description"],
+        "icon": definition["icon"],
+        "tools": tools,
+        "total": len(tools),
+    }
+
+
 def _build_tools_directory_categories() -> list[dict[str, Any]]:
     converters = converter_data_service.list_supported_converters()
     grouped: dict[str, list[dict[str, Any]]] = {key: [] for key in TOOL_DIRECTORY_CATEGORIES}
@@ -201,17 +284,24 @@ def _build_tools_directory_categories() -> list[dict[str, Any]]:
             continue
         grouped[category].append(tool)
 
+    # P2.3 C-1/O-2: sizes of the strict full listing, used only to render the
+    # "View all (N)" affordance.  The curated top-5 below is unchanged.
+    full_groups = _build_directory_full_groups()
+
     category_list: list[dict[str, Any]] = []
     for slug, definition in TOOL_DIRECTORY_CATEGORIES.items():
         tools = sorted(grouped[slug], key=_sort_tools_for_directory)[:5]
         if not tools:
             continue
+        total = len(full_groups.get(slug, []))
         category_list.append({
             "slug": slug,
             "title": definition["title"],
             "description": definition["description"],
             "icon": definition["icon"],
             "tools": tools,
+            "total": total,
+            "has_more": total > len(tools),
         })
 
     return category_list
@@ -330,6 +420,12 @@ async def render_universal_tool_page(
     if meta_overrides:
         seo_data.update(meta_overrides)
 
+    # G1-3 F-2 (§1): temporarily de-index deprecated converters. Pages stay
+    # live for existing visitors, but crawlers are told to drop the page and
+    # keep following links. Applied last so the ledger policy wins over any
+    # meta overrides.
+    seo_data = apply_search_index_policy(seo_data, slug)
+
     canonical_path = canonical_path or f"/tools/{slug}"
     if canonical_path is not None:
         seo_data["canonical"] = f"{PRODUCTION_BASE_URL}{canonical_path}"
@@ -413,6 +509,63 @@ async def tools_index(request: Request):
                     "description": metadata["description"],
                     "url": "/tools",
                     "name": "Tools Directory",
+                },
+            ),
+            "year": datetime.utcnow().year,
+        },
+    )
+
+
+@router.get("/category/{category_slug}", response_class=HTMLResponse)
+async def tools_category(request: Request, category_slug: str):
+    """Full, strictly filtered listing for one directory category (P2.3 C-1/O-2).
+
+    Additive access path only: the curated top-5 ``/tools`` display and its
+    ordering are untouched.  Rendered ``noindex,follow`` so the uncapped
+    listing does not expand the indexable surface (sitemap stays unchanged).
+    """
+    category_slug = (category_slug or "").strip().lower()
+    category = _build_category_full_listing(category_slug)
+    if category is None:
+        raise HTTPException(status_code=404, detail="Category not found")
+
+    locale_data = language_service.load_locale(
+        accept_language=request.headers.get("accept-language"),
+        lang_query=request.query_params.get("lang"),
+    )
+
+    def t(key: str, default: str = "") -> str:
+        return language_service.translate(locale_data, key, default)
+
+    canonical = f"{PRODUCTION_BASE_URL}/tools/category/{category_slug}"
+    metadata = {
+        "title": f"{category['title']} | Converigo",
+        "description": category["description"],
+        "canonical": canonical,
+        "og_url": canonical,
+        "keywords": f"{category['title']}, file converters, converigo",
+        "author": "Converigo",
+        "robots": "noindex,follow",
+    }
+
+    return templates.TemplateResponse(
+        request=request,
+        name="pages/tools_category.html",
+        context={
+            "request": request,
+            "locale": locale_data,
+            "t": t,
+            "supported_locales": language_service.get_supported_locales(),
+            "meta": metadata,
+            "category": category,
+            "structured_data": seo_service.build_structured_data(
+                request,
+                page_type="trust_page",
+                page_data={
+                    "title": metadata["title"],
+                    "description": metadata["description"],
+                    "url": f"/tools/category/{category_slug}",
+                    "name": category["title"],
                 },
             ),
             "year": datetime.utcnow().year,

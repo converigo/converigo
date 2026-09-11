@@ -1,0 +1,28 @@
+{
+  "id": "xlsx-to-tsv",
+  "slug": "xlsx-to-tsv",
+  "name": "XLSX to TSV",
+  "category": "spreadsheet",
+  "description": "Convert Excel XLSX workbooks to TSV (tab-separated values) data files.",
+  "input_formats": [
+    "xlsx"
+  ],
+  "output_formats": [
+    "tsv"
+  ],
+  "accepted_mime_types": [
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+  ],
+  "max_upload_size": 524288000,
+  "conversion_engine": "spreadsheet",
+  "landing_path": "/xlsx-to-tsv",
+  "canonical_url": "https://converigo.com/xlsx-to-tsv",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.xlsx",
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "certified"
+}

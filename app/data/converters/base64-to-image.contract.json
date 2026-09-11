@@ -1,0 +1,33 @@
+{
+  "id": "base64-to-image",
+  "slug": "base64-to-image",
+  "name": "Base64 to Image",
+  "category": "image",
+  "description": "Decode a Base64 data URI text file back into a real image file.",
+  "input_formats": [
+    "txt"
+  ],
+  "output_formats": [
+    "png",
+    "jpg",
+    "webp",
+    "bmp",
+    "gif",
+    "tiff"
+  ],
+  "accepted_mime_types": [
+    "text/plain"
+  ],
+  "max_upload_size": 52428800,
+  "conversion_engine": "image",
+  "landing_path": "/base64-to-image",
+  "canonical_url": "https://converigo.com/base64-to-image",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.txt",
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "certified"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "png-compress",
+  "slug": "png-compress",
+  "name": "PNG Compress",
+  "category": "image",
+  "description": "Losslessly optimize PNG images to shrink file size.",
+  "input_formats": [
+    "png"
+  ],
+  "output_formats": [
+    "png"
+  ],
+  "accepted_mime_types": [
+    "image/png"
+  ],
+  "max_upload_size": 524288000,
+  "conversion_engine": "image",
+  "landing_path": "/png-compress",
+  "canonical_url": "https://converigo.com/png-compress",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.png",
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "certified"
+}

@@ -217,6 +217,57 @@ async def convert_file(
                 "conversion_id": tracker.conversion_id,
             }
 
+        # Images to PDF (VAR-10) is a multi-file operation: upload every image
+        # first, then combine them into a single PDF via Pillow.
+        if operation == "images-to-pdf":
+            tracker.set_converter("images-to-pdf")
+            tracker.start("upload")
+            for uploaded_file in file:
+                merge_saved = await upload_service.process_upload(uploaded_file)
+                saved_paths.append(merge_saved)
+            tracker.finish("upload")
+
+            if len(saved_paths) < 2:
+                raise HTTPException(
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                    detail="images-to-pdf requires at least 2 image files",
+                )
+
+            tracker.start("conversion")
+            merge_output = await conversion_service.merge_files(
+                saved_paths,
+                conversion_id=tracker.conversion_id,
+                plugin_slug=operation,
+            )
+            tracker.finish("conversion")
+
+            tracker.start("download")
+            try:
+                rel = merge_output.relative_to(settings.OUTPUT_DIR)
+                merge_download_path = "/download/" + rel.as_posix()
+            except Exception:
+                merge_download_path = "/download/" + merge_output.parent.name + "/" + merge_output.name
+            tracker.finish("download")
+
+            merge_ms = elapsed_ms(getattr(request.state, "request_started_ns", 0)) if getattr(request.state, "request_started_ns", None) else None
+            analytics_service.track_conversion_success(
+                request,
+                page_path=request.url.path,
+                converter_name="images-to-pdf",
+                category="image",
+                output_format="pdf",
+                event_status="success",
+                processing_ms=merge_ms,
+            )
+
+            return {
+                "filename": merge_output.name,
+                "download_path": merge_download_path,
+                "status": "success",
+                "target_format": "pdf",
+                "conversion_id": tracker.conversion_id,
+            }
+
         # Process each file independently; determine per-file target from `parsed_targets` or fallback to `target_format`
         for idx, uploaded_file in enumerate(file):
             saved_path: Path | None = None

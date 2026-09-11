@@ -1,0 +1,28 @@
+{
+  "id": "pdf-metadata",
+  "slug": "pdf-metadata",
+  "name": "PDF Metadata",
+  "category": "document",
+  "description": "Stamp Converigo producer and creator metadata onto PDF documents.",
+  "input_formats": [
+    "pdf"
+  ],
+  "output_formats": [
+    "pdf"
+  ],
+  "accepted_mime_types": [
+    "application/pdf"
+  ],
+  "max_upload_size": 524288000,
+  "conversion_engine": "document",
+  "landing_path": "/pdf-metadata",
+  "canonical_url": "https://converigo.com/pdf-metadata",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.pdf",
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "certified"
+}

@@ -17,10 +17,15 @@ NON_PRODUCTION_READY_SLUGS = {
     "7z-extract",
 }
 
-PUBLIC_UI_DISABLED_SLUGS = {
-    "pdf-compress",
-    "pdf-merge",
-}
+PUBLIC_UI_DISABLED_SLUGS = set()
+
+# G1-3 F-2: temporary de-index policy (§1/§2). Derived from the certification
+# ledger's `disabled` group (lifecycle_status "deprecated") — see
+# ConverterRegistryService.get_search_index_disabled_slugs(). The five listed
+# converters stay reachable but must not be advertised to search crawlers
+# (robots noindex on their pages, excluded from sitemap entries).
+SEARCH_INDEX_DISABLED_SLUGS: set[str] = ConverterRegistryService.get_search_index_disabled_slugs()
+
 
 
 def _is_production_ready(contract: dict[str, Any] | None) -> bool:
@@ -126,6 +131,19 @@ class ConverterDataService:
             plugin_registry.get_plugin(source, target)
             return True
         except ValueError:
+            # P2.2: slug-aware fallback. Pair-lookup fails for converters whose
+            # `source` is a category rather than a concrete format (e.g.
+            # images-to-pdf declares source "image"), so a registered plugin
+            # slug is accepted instead. Fail-closed: the slug must exist in the
+            # plugin registry and must not be non-production or de-indexed.
+            slug = str(converter.get("slug", "")).strip().lower()
+            if (
+                slug
+                and plugin_registry.has_slug(slug)
+                and slug not in NON_PRODUCTION_READY_SLUGS
+                and slug not in SEARCH_INDEX_DISABLED_SLUGS
+            ):
+                return True
             return False
 
     def list_supported_converters(self) -> List[dict[str, Any]]:
@@ -287,8 +305,10 @@ class ConverterDataService:
                 }
             )
 
+        emitted_slugs: set[str] = set()
         for tool in self.list_supported_converters():
             path = f"/tools/{tool['slug']}"
+            emitted_slugs.add(str(tool.get("slug", "")).strip().lower())
             entries.append(
                 {
                     "loc": base_url.rstrip("/") + path,
@@ -302,7 +322,36 @@ class ConverterDataService:
                 }
             )
 
-        return entries
+        # G1-1 F-3 residue: converters with published contracts (active or
+        # certified) that serve live /tools/<slug> pages must be emitted even
+        # when list_supported_converters() skips them (UI-disabled slugs or
+        # sources without a 1:1 plugin mapping, e.g. images-to-pdf / pdf-merge).
+        # Non-production-ready slugs stay excluded.
+        for contract in self._get_contract_registry().get_active():
+            slug = str(contract.get("slug", "")).strip().lower()
+            if not slug:
+                continue
+            if slug in emitted_slugs or slug in NON_PRODUCTION_READY_SLUGS:
+                continue
+            entries.append(
+                {
+                    "loc": base_url.rstrip("/") + f"/tools/{slug}",
+                    "lastmod": datetime.utcnow().date().isoformat(),
+                }
+            )
+
+        # G1-3 F-2: deprecated converters (ledger `disabled` group) are
+        # temporarily de-indexed — their /tools/<slug> pages remain reachable
+        # but must not be advertised to crawlers. Single policy filter, kept
+        # deliberately separate from the G1-1 F-3 residue loop above (F-3
+        # restores published-contract slugs; F-2 removes ledger-disabled ones).
+        filtered_entries: List[dict[str, str]] = []
+        for entry in entries:
+            loc = str(entry.get("loc", ""))
+            if "/tools/" in loc and loc.split("/tools/")[-1] in SEARCH_INDEX_DISABLED_SLUGS:
+                continue
+            filtered_entries.append(entry)
+        return filtered_entries
 
     def _get_active_contract_slugs(self) -> set[str]:
         return {

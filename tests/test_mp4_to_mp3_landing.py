@@ -22,8 +22,8 @@ def test_mp4_to_mp3_canonical_page_renders_with_seo_and_faq():
     response = client.get("/tools/mp4-to-mp3")
 
     assert response.status_code == 200
-    assert "MP4 to MP3 | Converigo" in response.text
-    assert "Convert MP4 to MP3 Online Free" in response.text
+    assert "Convert MP4 to MP3 Online Free | Converigo" in response.text
+    assert "Convert MP4 videos to MP3 audio online for free. Extract audio from video, preserve quality, and download your MP3 instantly in the browser." in response.text
     assert "application/ld+json" in response.text
     assert "@type\": \"SoftwareApplication\"" in response.text
     assert "@type\": \"BreadcrumbList\"" in response.text

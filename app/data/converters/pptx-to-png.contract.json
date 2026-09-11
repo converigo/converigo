@@ -1,0 +1,29 @@
+{
+  "id": "pptx-to-png",
+  "slug": "pptx-to-png",
+  "name": "PPTX to PNG",
+  "category": "document",
+  "description": "Convert PowerPoint presentations to PNG images (first slide, text preview).",
+  "input_formats": [
+    "pptx"
+  ],
+  "output_formats": [
+    "png"
+  ],
+  "accepted_mime_types": [
+    "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+  ],
+  "max_upload_size": 52428800,
+  "conversion_engine": "document",
+  "landing_path": "/pptx-to-png",
+  "canonical_url": "https://converigo.com/pptx-to-png",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.pptx",
+  "supported_platforms": [
+    "web",
+    "api"
+  ],
+  "lifecycle_status": "certified"
+}

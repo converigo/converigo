@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from app.services.converter_data_service import ConverterDataService
+from app.services.converter_data_service import SEARCH_INDEX_DISABLED_SLUGS, ConverterDataService
 
 
 class HubService:
@@ -11,6 +11,17 @@ class HubService:
 
     def get_hub_definitions(self) -> list[dict[str, Any]]:
         return [
+            {
+                "slug": "data-conversion",
+                "path": "/data-conversion",
+                "title": "Data Conversion Hub",
+                "eyebrow": "Data Conversion",
+                "hero_title": "Data Conversion Hub: Convert between data and spreadsheet formats",
+                "hero_subtitle": "Move structured data between CSV, TSV, HTML, JSON, XML, and YAML with clean, reliable online converters.",
+                "description": "Convert structured data between CSV, TSV, HTML, JSON, XML, and YAML formats with workflow-driven online converter tools.",
+                "keywords": "data conversion hub, csv converter, json converter, xml to json, yaml converter, tsv converter",
+                "all_converters_label": "All data converters",
+            },
             {
                 "slug": "image-conversion",
                 "path": "/image-conversion",
@@ -82,6 +93,12 @@ class HubService:
         ]
         matching_converters = self._dedupe_converters(matching_converters)
 
+        # G1-3 F-2 (§3): flag deprecated converters (ledger `disabled` group)
+        # so the hub template can render a localized "Coming soon" badge while
+        # every anchor link is kept intact.
+        for tool in matching_converters:
+            tool["not_available"] = str(tool.get("slug", "")).strip().lower() in SEARCH_INDEX_DISABLED_SLUGS
+
         featured_converters = [
             tool for tool in matching_converters if tool.get("featured", False)
         ]
@@ -149,6 +166,9 @@ class HubService:
         if slug == "document-conversion":
             return category == "document" or source in self._document_formats() or target in self._document_formats()
 
+        if slug == "data-conversion":
+            return category in {"data", "spreadsheet"} or target in self._data_formats()
+
         return False
 
     def _dedupe_converters(self, tools: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -173,3 +193,6 @@ class HubService:
 
     def _document_formats(self) -> set[str]:
         return {"doc", "docx", "pdf", "ppt", "pptx", "xls", "xlsx", "txt", "odt", "rtf"}
+
+    def _data_formats(self) -> set[str]:
+        return {"csv", "tsv", "html", "json", "xml", "yaml", "yml"}

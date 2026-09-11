@@ -1,0 +1,29 @@
+{
+  "id": "jpg-to-ico",
+  "slug": "jpg-to-ico",
+  "name": "JPG to ICO",
+  "category": "image",
+  "description": "Convert JPG images to ICO format for favicon and icons.",
+  "input_formats": [
+    "jpg",
+    "jpeg"
+  ],
+  "output_formats": [
+    "ico"
+  ],
+  "accepted_mime_types": [
+    "image/jpeg"
+  ],
+  "max_upload_size": 104857600,
+  "conversion_engine": "image",
+  "landing_path": "/tools/jpg-to-ico",
+  "canonical_url": "https://converigo.com/tools/jpg-to-ico",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.jpg",
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "certified"
+}

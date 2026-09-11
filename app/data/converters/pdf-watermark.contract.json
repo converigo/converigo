@@ -1,0 +1,28 @@
+{
+  "id": "pdf-watermark",
+  "slug": "pdf-watermark",
+  "name": "PDF Watermark",
+  "category": "document",
+  "description": "Stamp a semi-transparent CONVERIGO watermark on every PDF page.",
+  "input_formats": [
+    "pdf"
+  ],
+  "output_formats": [
+    "pdf"
+  ],
+  "accepted_mime_types": [
+    "application/pdf"
+  ],
+  "max_upload_size": 524288000,
+  "conversion_engine": "document",
+  "landing_path": "/pdf-watermark",
+  "canonical_url": "https://converigo.com/pdf-watermark",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.pdf",
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "certified"
+}

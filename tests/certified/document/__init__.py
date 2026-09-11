@@ -1,0 +1,1 @@
+"""Certified document factory converter tests (DOCX->HTML, PPTX->PNG) - Factory Batch F7."""

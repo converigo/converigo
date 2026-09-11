@@ -134,8 +134,11 @@ def test_partial_success_via_api():
     a = (Path(__file__).resolve().parent / "assets" / "real-test.jpg").resolve()
     b = (Path(__file__).resolve().parent / "assets" / "real-test.png").resolve()
 
-    # Choose targets where png->pdf is unsupported (known in phase A matrix) and jpg->webp is supported
-    targets = ["webp", "pdf"]
+    # Choose targets where png->mp3 is unsupported (image -> audio has no
+    # registered converter) and jpg->webp is supported. Note: png->pdf became
+    # a supported, certified pair in Batch 3 (images-to-pdf), so it no longer
+    # qualifies as the failing leg of this partial-success test.
+    targets = ["webp", "mp3"]
     files = {
         'file': (
             (a.name, open(a, 'rb'), 'application/octet-stream'),

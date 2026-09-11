@@ -1,0 +1,115 @@
+{
+  "slug": "mov-to-mp4",
+  "title": "MOV to MP4 Converter",
+  "description": "Convert QuickTime MOV videos to universally playable MP4 (H.264 + AAC re-encode, first video/audio streams).",
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".mov",
+    "button_text": "Upload MOV"
+  },
+  "faq": [
+    {
+      "question": "How do I convert a MOV file to MP4?",
+      "answer": "Upload your MOV file to Converigo and the MP4 output will be ready for download immediately."
+    },
+    {
+      "question": "Is the conversion secure?",
+      "answer": "Yes, files are processed securely on our servers and automatically deleted after conversion."
+    },
+    {
+      "question": "What file sizes are supported?",
+      "answer": "MOV files up to 500MB can be converted instantly on Converigo."
+    },
+    {
+      "question": "Can I convert files on mobile?",
+      "answer": "Yes, Converigo works on all modern browsers and devices."
+    }
+  ],
+  "related_tools": [],
+  "seo": {
+    "title": "MOV to MP4 Converter Online Free | Converigo",
+    "description": "Convert MOV files to MP4 online for free using Converigo. Fast, secure browser-based conversion with no software installation required.",
+    "keywords": "mov-to-mp4, MOV to MP4, converigo",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert MOV to MP4 - Converigo free online converter",
+    "twitter_title": "MOV to MP4 Converter Online Free | Converigo",
+    "twitter_description": "Convert MOV files to MP4 online for free using Converigo. Fast, secure browser-based conversion with no software installation required.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/mov-to-mp4"
+  },
+  "source": "mov",
+  "target": "mp4",
+  "category": "video",
+  "active": true,
+  "popular": false,
+  "featured": false,
+  "hero": {
+    "eyebrow": "Converter",
+    "title": "Convert MOV to MP4 Online Free",
+    "description": "Convert MOV files to MP4 online for free. Fast, secure browser-based conversion with no software installation. Get high-quality mp4 output in seconds using Converigo.",
+    "panel_label": "Ready to convert",
+    "panel_title": "Upload a MOV file and receive your mp4 output instantly."
+  },
+  "features": [
+    {
+      "title": "Instant conversion",
+      "text": "Convert MOV to MP4 in seconds without installing any software."
+    },
+    {
+      "title": "Secure processing",
+      "text": "Your files are processed securely and automatically deleted after conversion."
+    },
+    {
+      "title": "Large file support",
+      "text": "Convert MOV files up to 500MB in size instantly."
+    },
+    {
+      "title": "Cross-platform",
+      "text": "Works on Windows, Mac, Linux, and all modern mobile devices."
+    }
+  ],
+  "supported_formats": {
+    "input": [
+      "MOV"
+    ],
+    "output": [
+      "MP4"
+    ],
+    "description": "MOV input, mp4 output"
+  },
+  "how_to_use": [
+    {
+      "title": "Upload your MOV file",
+      "description": "Select a MOV file from your device to begin the conversion."
+    },
+    {
+      "title": "Wait for processing",
+      "description": "Converigo processes the conversion instantly with secure handling."
+    },
+    {
+      "title": "Download your MP4 file",
+      "description": "Get the mp4 output ready to download immediately."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is a MOV file?",
+      "text": "A MOV file is processed fully server-side by Converigo - no plugin or download needed."
+    },
+    {
+      "title": "Why convert MOV to MP4?",
+      "text": "The mp4 output keeps your data portable and ready for the tools you use next."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Convert MOV files in seconds",
+    "text": "Upload your MOV file and get the mp4 output instantly.",
+    "primary_text": "Convert now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  },
+  "lifecycle_status": "certified"
+}

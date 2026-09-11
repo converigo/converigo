@@ -11,7 +11,7 @@ def test_webp_to_png_landing_page_renders_with_seo_and_faq():
     response = client.get("/webp-to-png")
 
     assert response.status_code == 200
-    assert "WEBP to PNG Converter Online Free - Converigo" in response.text
+    assert "Convert WEBP to PNG Online Free | Converigo" in response.text
     assert "What is WEBP to PNG conversion?" in response.text
     assert "Why convert WEBP to PNG?" in response.text
     assert "Does PNG preserve image quality?" in response.text

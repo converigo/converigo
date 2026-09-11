@@ -1,0 +1,123 @@
+{
+  "slug": "pdf-metadata",
+  "title": "PDF Metadata Converter",
+  "description": "Stamp Converigo producer and creator metadata onto PDF documents.",
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".pdf",
+    "button_text": "Upload PDF"
+  },
+  "faq": [
+    {
+      "question": "How do I add metadata to a PDF?",
+      "answer": "Upload your PDF file to Converigo. The document is rebuilt with the Converigo /Producer and /Creator entries stamped in and is ready to download immediately."
+    },
+    {
+      "question": "Will my PDF content change?",
+      "answer": "No. Page content and every other existing metadata entry are preserved exactly as-is. Only the /Producer and /Creator fields are stamped by Converigo."
+    },
+    {
+      "question": "Can I edit or remove any metadata field?",
+      "answer": "No. This tool stamps the fixed Converigo producer and creator entries onto the document; it does not offer arbitrary metadata editing, EXIF editing, or metadata removal."
+    },
+    {
+      "question": "Is it secure?",
+      "answer": "Yes, files are processed securely on our servers and automatically deleted after processing."
+    },
+    {
+      "question": "What file sizes are supported?",
+      "answer": "PDF files up to 500MB can be processed instantly on Converigo."
+    },
+    {
+      "question": "Can I use it on mobile?",
+      "answer": "Yes, Converigo works on all modern browsers and devices."
+    }
+  ],
+  "related_tools": [],
+  "seo": {
+    "title": "PDF Metadata Converter Online Free | Converigo",
+    "description": "Stamp PDF metadata online for free with Converigo. Add producer and creator details to PDF documents in seconds with secure browser-based processing.",
+    "keywords": "pdf metadata, add pdf metadata, pdf metadata converter, converigo",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Add PDF Metadata - Converigo free online tool",
+    "twitter_title": "PDF Metadata Converter Online Free | Converigo",
+    "twitter_description": "Stamp PDF metadata online for free with Converigo. Add producer and creator details to PDF documents in seconds with secure browser-based processing.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/pdf-metadata"
+  },
+  "source": "pdf",
+  "target": "pdf",
+  "category": "document",
+  "active": true,
+  "popular": false,
+  "featured": false,
+  "hero": {
+    "eyebrow": "Converter",
+    "title": "Add PDF Metadata Online Free",
+    "description": "Stamp Converigo producer and creator metadata onto your PDF online for free. Converigo rebuilds the document and writes the Converigo /Producer and /Creator entries while page content and every other metadata entry stay exactly as they are.",
+    "panel_label": "Ready to stamp",
+    "panel_title": "Upload a PDF file and download it with Converigo producer and creator metadata stamped in."
+  },
+  "features": [
+    {
+      "title": "Converigo provenance stamp",
+      "text": "Sets the PDF /Producer and /Creator document-info entries to Converigo (https://converigo.com)."
+    },
+    {
+      "title": "Content stays intact",
+      "text": "Page content and every other existing metadata entry are preserved exactly as-is."
+    },
+    {
+      "title": "Owner-restricted PDFs supported",
+      "text": "Files that open without a password are handled automatically; files that need a user password return an honest unsupported message."
+    },
+    {
+      "title": "Secure processing",
+      "text": "Your files are processed securely and automatically deleted after processing."
+    }
+  ],
+  "supported_formats": {
+    "input": [
+      "PDF"
+    ],
+    "output": [
+      "PDF"
+    ],
+    "description": "PDF input, PDF output with Converigo producer and creator metadata stamped"
+  },
+  "how_to_use": [
+    {
+      "title": "Upload your PDF file",
+      "description": "Select a PDF file from your device to begin."
+    },
+    {
+      "title": "Stamp the metadata",
+      "description": "Converigo rebuilds the document and writes the Converigo /Producer and /Creator entries."
+    },
+    {
+      "title": "Download your PDF file",
+      "description": "Get the updated PDF back with its page content unchanged."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is PDF metadata?",
+      "text": "PDF documents carry document-info entries such as /Producer and /Creator that record the software behind the file."
+    },
+    {
+      "title": "What does this tool change?",
+      "text": "It stamps the Converigo producer and creator entries only. Page content and all other metadata entries are left exactly as they were."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to stamp",
+    "title": "Stamp PDF metadata in seconds",
+    "text": "Upload your PDF file and get it back with the Converigo producer and creator metadata applied.",
+    "primary_text": "Stamp metadata now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  },
+  "lifecycle_status": "certified"
+}

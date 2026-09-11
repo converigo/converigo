@@ -15,8 +15,8 @@
   ],
   "max_upload_size": 104857600,
   "conversion_engine": "document",
-  "landing_path": "/pdf-compress",
-  "canonical_url": "https://converigo.com/pdf-compress",
+  "landing_path": "/tools/pdf-compress",
+  "canonical_url": "https://converigo.com/tools/pdf-compress",
   "seo_status": "ready",
   "schema_status": "ready",
   "faq_status": "ready",
@@ -24,5 +24,5 @@
   "supported_platforms": [
     "web"
   ],
-  "lifecycle_status": "active"
+  "lifecycle_status": "certified"
 }

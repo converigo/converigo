@@ -1,0 +1,28 @@
+{
+  "id": "png-to-ico",
+  "slug": "png-to-ico",
+  "name": "PNG to ICO",
+  "category": "image",
+  "description": "Convert PNG images into ICO format for website and application icons.",
+  "input_formats": [
+    "png"
+  ],
+  "output_formats": [
+    "ico"
+  ],
+  "accepted_mime_types": [
+    "image/png"
+  ],
+  "max_upload_size": 104857600,
+  "conversion_engine": "image",
+  "landing_path": "/tools/png-to-ico",
+  "canonical_url": "https://converigo.com/tools/png-to-ico",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.png",
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "certified"
+}

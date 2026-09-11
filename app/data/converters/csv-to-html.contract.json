@@ -1,0 +1,28 @@
+{
+  "id": "csv-to-html",
+  "slug": "csv-to-html",
+  "name": "CSV to HTML",
+  "category": "spreadsheet",
+  "description": "Convert CSV data files to a clean, self-contained HTML table document.",
+  "input_formats": [
+    "csv"
+  ],
+  "output_formats": [
+    "html"
+  ],
+  "accepted_mime_types": [
+    "text/csv"
+  ],
+  "max_upload_size": 524288000,
+  "conversion_engine": "spreadsheet",
+  "landing_path": "/csv-to-html",
+  "canonical_url": "https://converigo.com/csv-to-html",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.csv",
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "certified"
+}

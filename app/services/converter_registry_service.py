@@ -32,6 +32,13 @@ class ConverterRegistryService:
     ]
     VALID_LIFECYCLE_STATUSES = {"active", "deprecated", "beta", "certified"}
 
+    # G1-3 F-2: single source of truth for the temporary de-index policy is
+    # the certification ledger (`certified_converters.json`, sibling of the
+    # contracts dir). Its `disabled` group lists converters awaiting
+    # re-certification that must temporarily stay out of the public sitemap
+    # and carry `robots: noindex,follow`.
+    LEDGER_FILE_NAME = "certified_converters.json"
+
     def __init__(self, contracts_dir: Path | str) -> None:
         self.contracts_dir = Path(contracts_dir)
         self._contracts: list[dict[str, Any]] = []
@@ -126,3 +133,33 @@ class ConverterRegistryService:
 
     def get_beta(self) -> list[dict[str, Any]]:
         return [contract for contract in self._contracts if str(contract.get("lifecycle_status", "")).strip().lower() == "beta"]
+
+    @staticmethod
+    def get_search_index_disabled_slugs(contracts_dir: Path | str = Path("app/data/converters")) -> set[str]:
+        """Slugs excluded from search indexing per the certification ledger.
+
+        G1-3 F-2: the ledger's `disabled` group is the source of truth; a slug
+        is selected while its entry carries `lifecycle_status: "deprecated"`.
+        The ledger is read on every call, so re-certifying a converter in the
+        ledger immediately re-includes it with no code change. A missing or
+        unreadable ledger degrades to an empty set (fail-open): the policy
+        must never break page rendering, only narrow crawler exposure.
+        """
+        ledger_path = Path(contracts_dir).parent / ConverterRegistryService.LEDGER_FILE_NAME
+        try:
+            with ledger_path.open("r", encoding="utf-8") as handle:
+                ledger = json.load(handle)
+        except (OSError, json.JSONDecodeError):
+            return set()
+
+        disabled_group = ledger.get("disabled")
+        if not isinstance(disabled_group, list):
+            return set()
+
+        return {
+            str(entry.get("slug", "")).strip().lower()
+            for entry in disabled_group
+            if isinstance(entry, dict)
+            and str(entry.get("slug", "")).strip()
+            and str(entry.get("lifecycle_status", "")).strip().lower() == "deprecated"
+        }

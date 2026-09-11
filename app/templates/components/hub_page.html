@@ -37,7 +37,7 @@
         {% for tool in featured_converters %}
         <article class="card card-lg hover-card">
           <div class="card-content">
-            <h3><a href="/tools/{{ tool.slug }}">{{ tool.title }}</a></h3>
+            <h3><a href="/tools/{{ tool.slug }}">{{ tool.title }}</a>{% if tool.not_available %} <span class="tool-card-badge">Coming soon</span>{% endif %}</h3>
             <p>{{ tool.description }}</p>
             <a class="btn btn-outline" href="/tools/{{ tool.slug }}">Use {{ tool.title }}</a>
           </div>
@@ -88,7 +88,7 @@
       <div class="grid tools-grid">
         {% for tool in all_converters %}
         <a href="/tools/{{ tool.slug }}" class="tool-card">
-          <strong>{{ tool.title }}</strong>
+          <strong>{{ tool.title }}</strong>{% if tool.not_available %} <span class="tool-card-badge">Coming soon</span>{% endif %}
         </a>
         {% endfor %}
       </div>
