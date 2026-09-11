@@ -40,7 +40,15 @@
     "convert_button": "Mengubah",
     "download_all": "Unduh Semua",
     "post_note": "Semua file akan dihapus otomatis dalam 8 jam untuk menjaga privasi Anda. Pastikan unduh hasil sebelum terhapus.",
-    "not_available": "Konverter ini belum tersedia. Segera hadir — silakan cek kembali nanti."
+    "not_available": "Konverter ini belum tersedia. Segera hadir — silakan cek kembali nanti.",
+    "extract_drop_tar": "Seret & lepas file .tar Anda di sini",
+    "extract_drop_zip": "Seret & lepas file .zip Anda di sini",
+    "extract_drop_gz": "Seret & lepas file .gz atau .tar.gz Anda di sini",
+    "extract_supports_tar": "Mendukung arsip .tar · maks. 50 file sekaligus",
+    "extract_supports_zip": "Mendukung arsip .zip · maks. 50 file sekaligus",
+    "extract_supports_gz": "Mendukung arsip .gz dan .tar.gz · maks. 50 file sekaligus",
+    "extract_button": "Ekstrak",
+    "extract_new": "Ekstrak File Baru"
   },
   "homepage": {
     "marquee_label": "Semua format yang bisa diubah",

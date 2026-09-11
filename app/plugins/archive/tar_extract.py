@@ -5,13 +5,13 @@ Version : 3.0.1
 
 TAR -> Extract Plugin
 
-Batch 6 (VAR-33) fix: the archive engine extracts into a temporary
-directory, but the /convert download route expects a single downloadable
-FILE.  This plugin now repackages the extracted directory into a single
-TAR archive (stdlib ``tarfile`` with clean POSIX member names —
-``shutil.make_archive`` emitted ``./``-prefixed entries on Windows during
-the Gate 1 probe) and returns that file so the normal upload -> convert
--> download pipeline works.  Mirrors the Batch 5 zip-extract pattern.
+P2.4-F2 (Option 1) fix: the archive engine extracts into a temporary
+directory but the /convert download route expects a single downloadable
+FILE.  This plugin forwards the request-local temp_dir to the engine and
+repackages the extracted directory into a single TAR archive (stdlib
+``tarfile`` with clean POSIX member names — ``shutil.make_archive``
+emitted ``./``-prefixed entries on Windows during the Gate 1 probe).
+ArchiveEngine is unchanged.  Mirrors the Batch 5 zip-extract pattern.
 """
 
 import tarfile
@@ -87,11 +87,12 @@ class TARExtractPlugin(ConverterPlugin):
                 "TARExtractPlugin only supports TAR extraction."
             )
 
-        # Working directory mirrors the Batch 5 zip-extract pattern: the
-        # engine extracts into ``<working_root>/archive/<stem>/`` and returns
-        # that directory; we repackage it into a single TAR file so the
-        # download route (which serves files, not directories) can deliver
-        # the result.
+        # Working root is request-local: the service passes temp_dir
+        # (settings.TEMP_DIR/<conversion_id>) and output_dir
+        # (settings.OUTPUT_DIR/<conversion_id>).  The engine extracts into
+        # ``<working_root>/archive/<stem>/`` and returns that directory;
+        # we repackage it into a single TAR file so the download route
+        # (which serves files, not directories) can deliver the result.
         from app.core.settings import settings
 
         working_root = temp_dir or output_dir or (settings.OUTPUT_DIR / "archive")

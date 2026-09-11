@@ -33,6 +33,7 @@ class Settings:
         self.RATE_LIMIT_UPLOAD_REQUESTS_PER_MINUTE = int(os.getenv("RATE_LIMIT_UPLOAD_REQUESTS_PER_MINUTE", "20"))
         self.RATE_LIMIT_API_REQUESTS_PER_MINUTE = int(os.getenv("RATE_LIMIT_API_REQUESTS_PER_MINUTE", "60"))
         self.RATE_LIMIT_OTHER_REQUESTS_PER_MINUTE = int(os.getenv("RATE_LIMIT_OTHER_REQUESTS_PER_MINUTE", "120"))
+        self.FEATURE_FLAGS_PATH = Path(os.getenv("FEATURE_FLAGS_PATH", "app/data/feature_flags.json"))
 
         default_allowed_hosts = [
             "localhost",

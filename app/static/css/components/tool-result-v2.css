@@ -1,0 +1,171 @@
+/* Converigo — Tool-Page Result Widget V2 (Option A), namespace "tv2-".
+   Self-contained styles for the /tools/tar-extract pilot.
+   Only classes used by tool_result_widget_v2.html are defined here; the homepage
+   inline <style> (converigo_main.html) is NOT modified. Colour values are declared
+   locally on .tv2-root so the component styles correctly regardless of the page's
+   CSS custom properties. */
+.tv2-root{
+  --tv2-ink:#1C1832;
+  --tv2-ink-soft:#6C6690;
+  --tv2-ink-faint:#A7A1C7;
+  --tv2-primary:#5B4FE9;
+  --tv2-primary-dark:#4335C7;
+  --tv2-primary-light:#ECE9FF;
+  --tv2-coral:#FF6B4A;
+  --tv2-success:#1FAE63;
+  --tv2-danger:#E14B4B;
+  --tv2-line:#E6E1FB;
+  --tv2-surface:#FFFFFF;
+  --tv2-shadow-lg:0 30px 70px -25px rgba(56,42,168,.35);
+  --tv2-shadow-sm:0 8px 20px -10px rgba(56,42,168,.25);
+  position:relative;
+  width:100%;
+}
+.tv2-root *{box-sizing:border-box;}
+
+/* ---------- upload dropzone ---------- */
+.tv2-dz-stage{position:relative; max-width:700px; margin:0 auto; z-index:4;}
+.tv2-dropzone{
+  position:relative; z-index:2; text-align:center;
+  background:var(--tv2-surface); border:1px solid rgba(91,79,233,.14);
+  border-radius:24px; padding:28px 22px 22px;
+  box-shadow:0 22px 52px -32px rgba(56,42,168,.22);
+  transition:border-color .2s, transform .2s, box-shadow .2s;
+  cursor:pointer;
+}
+.tv2-dropzone.drag{border-color:var(--tv2-primary); transform:scale(1.01); box-shadow:0 26px 60px -26px rgba(56,42,168,.28);}
+.tv2-dz-title{font-weight:700; font-size:19px; margin:0 0 8px; letter-spacing:-.03em; color:var(--tv2-ink);}
+.tv2-dz-sub{color:var(--tv2-ink-soft); font-size:13.5px; margin:0 0 16px;}
+.tv2-dz-browse{
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--tv2-ink); color:#fff; border:1px solid rgba(255,255,255,.2);
+  padding:10px 18px; min-height:40px; border-radius:999px;
+  font-weight:700; font-size:13px; cursor:pointer;
+  transition:transform .15s, background .15s, box-shadow .15s;
+  box-shadow:0 10px 22px -14px rgba(0,0,0,.14);
+}
+.tv2-dz-browse:hover{background:var(--tv2-primary-dark); transform:translateY(-1px);}
+.tv2-dz-note{margin-top:12px; font-size:12px; color:var(--tv2-ink-soft);}
+
+/* ---------- results panel ---------- */
+.tv2-panel-zone{max-width:900px; width:min(100%,900px); margin:0 auto; display:none; position:relative; z-index:2;}
+.tv2-root.tv2-has-jobs .tv2-panel-zone{display:block; margin:48px auto 12px; animation:tv2-rise .55s cubic-bezier(.2,.8,.2,1);}
+.tv2-root.tv2-has-jobs .tv2-dz-stage{display:none;}
+@keyframes tv2-rise{from{opacity:0; transform:translateY(26px) scale(.985);} to{opacity:1; transform:translateY(0) scale(1);}}
+.tv2-panel-head{text-align:center; margin-bottom:22px;}
+.tv2-panel-head h2{font-size:clamp(20px,2.6vw,24px); margin:0 0 4px; color:var(--tv2-ink);}
+.tv2-panel-head p{color:var(--tv2-ink-soft); margin:0; font-size:13px;}
+.tv2-panel{background:var(--tv2-surface); border-radius:20px; box-shadow:var(--tv2-shadow-lg); border:1px solid var(--tv2-line); overflow:hidden;}
+.tv2-panel-toolbar{display:flex; justify-content:flex-end; padding:20px 24px 6px;}
+.tv2-ghost-btn{
+  display:flex; align-items:center; gap:6px; background:var(--tv2-primary-light); color:var(--tv2-primary-dark);
+  border:none; padding:9px 16px; border-radius:12px; font-weight:600; font-size:13.5px; cursor:pointer; transition:background .15s;
+}
+.tv2-ghost-btn:hover{background:#DEDAFF;}
+/* ---------- rows ---------- */
+.tv2-row{
+  display:flex; align-items:center; gap:16px; padding:18px 24px;
+  border:1px solid rgba(108,102,144,.12); position:relative; overflow:hidden;
+  background:var(--tv2-surface); border-radius:20px; box-shadow:0 16px 40px -30px rgba(67,53,199,.35);
+  margin:0 24px 14px;
+}
+.tv2-row:first-of-type{margin-top:0;}
+.tv2-badge{
+  position:relative; flex:none; width:44px; height:44px; border-radius:11px 11px 11px 3px;
+  display:flex; align-items:center; justify-content:center; color:#fff;
+  font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:10.5px;
+  box-shadow:0 8px 16px -8px rgba(0,0,0,.35);
+}
+.tv2-row-info{flex:1; min-width:0;}
+.tv2-row-name{font-weight:600; font-size:14.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:var(--tv2-ink);}
+.tv2-row-meta{display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--tv2-ink-faint); margin-top:3px;}
+.tv2-arrow-tag{display:inline-flex; align-items:center; gap:5px; font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:11.5px; color:var(--tv2-ink-soft);}
+.tv2-arrow-tag b{color:var(--tv2-primary-dark);}
+.tv2-row-controls{display:flex; align-items:center; gap:8px; flex:none; flex-wrap:wrap; justify-content:flex-end;}
+select.tv2-fmt{
+  appearance:none; -webkit-appearance:none; background:var(--tv2-surface);
+  border:1.5px solid var(--tv2-line); font-weight:700; font-family:'IBM Plex Mono',monospace;
+  font-size:12.5px; color:var(--tv2-ink); padding:9px 12px; border-radius:11px; cursor:pointer; min-width:82px;
+}
+.tv2-icon-btn{
+  width:36px; height:36px; border-radius:10px; border:1.5px solid var(--tv2-line); background:var(--tv2-surface);
+  color:var(--tv2-ink-soft); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:14px;
+  transition:background .15s, color .15s, border-color .15s;
+}
+.tv2-icon-btn:hover{background:var(--tv2-primary-light); color:var(--tv2-primary-dark);}
+.tv2-icon-btn.danger:hover{background:#FDE7E7; color:var(--tv2-danger);}
+.tv2-no-converter{font-size:12px; color:var(--tv2-ink-soft); white-space:nowrap;}
+.tv2-status-pill{
+  display:flex; align-items:center; gap:6px; font-size:13px; font-weight:700; color:var(--tv2-success);
+  background:#EAFAF1; border:1px solid #CFF3DD; padding:8px 14px; border-radius:11px; white-space:nowrap;
+}
+.tv2-status-pill-error{color:var(--tv2-danger); background:#FDE7E7; border-color:#F8D2D2;}
+.tv2-converting-pill{
+  display:flex; align-items:center; gap:8px; font-size:12.5px; font-weight:600; color:var(--tv2-primary-dark);
+  background:var(--tv2-primary-light); padding:8px 14px; border-radius:11px; white-space:nowrap;
+}
+.tv2-spin{width:13px; height:13px; border-radius:50%; border:2px solid #C9C2FA; border-top-color:var(--tv2-primary-dark); animation:tv2-spin .8s linear infinite;}
+@keyframes tv2-spin{to{transform:rotate(360deg);}}
+.tv2-row-error{font-size:12px; color:var(--tv2-danger); max-width:220px; word-break:break-word;}
+.tv2-retry-btn{
+  background:var(--tv2-surface); border:1.5px solid var(--tv2-primary); color:var(--tv2-primary-dark);
+  padding:8px 14px; border-radius:11px; font-weight:700; font-size:12.5px; cursor:pointer; white-space:nowrap; transition:background .15s;
+}
+.tv2-retry-btn:hover{background:var(--tv2-primary-light);}
+.tv2-dl-split{display:flex; border-radius:14px; overflow:hidden; box-shadow:0 14px 32px -20px rgba(67,53,199,.28);}
+.tv2-dl-main{
+  background:var(--tv2-primary); color:#fff; border:none; padding:12px 22px; min-height:44px;
+  font-weight:700; font-size:14px; cursor:pointer; display:flex; align-items:center; gap:8px; border-radius:999px;
+  transition:background .15s, transform .15s;
+}
+.tv2-dl-main:hover{background:var(--tv2-primary-dark); transform:translateY(-1px);}
+.tv2-progress-track{position:absolute; left:0; right:0; bottom:0; height:5px; background:var(--tv2-line); overflow:hidden;}
+.tv2-progress-fill{height:100%; width:0%; background:linear-gradient(90deg,var(--tv2-primary),var(--tv2-coral)); transition:width linear;}
+/* ---------- footers ---------- */
+.tv2-panel-footer{
+  display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  padding:20px 24px; background:var(--tv2-primary-light);
+}
+.tv2-footer-left{display:flex; align-items:center; gap:10px; font-size:14px; font-weight:600; color:var(--tv2-ink);}
+.tv2-footer-left select.tv2-fmt{background-color:#fff;}
+.tv2-go-btn{
+  display:flex; align-items:center; gap:8px; background:var(--tv2-ink); color:#fff; border:none;
+  padding:12px 22px; min-height:44px; border-radius:999px; font-weight:700; font-size:14px; cursor:pointer;
+  transition:background .15s, transform .15s, box-shadow .15s; box-shadow:0 14px 30px -18px rgba(67,53,199,.16);
+}
+.tv2-go-btn:hover:not(:disabled){background:var(--tv2-primary-dark); transform:translateY(-1px);}
+.tv2-go-btn:disabled{opacity:.5; cursor:not-allowed;}
+.tv2-footer-post{display:none; width:100%; flex-direction:column; gap:18px;}
+.tv2-footer-post.show{display:flex;}
+.tv2-post-actions{display:flex; gap:12px; flex-wrap:wrap; align-items:center; width:100%;}
+.tv2-outline-btn{
+  flex:1; min-width:180px; background:var(--tv2-surface); border:1.5px solid var(--tv2-primary); color:var(--tv2-primary-dark);
+  padding:14px 22px; border-radius:14px; font-weight:700; font-size:14.5px; cursor:pointer; transition:background .15s;
+}
+.tv2-outline-btn:hover{background:var(--tv2-primary-light);}
+.tv2-solid-btn{
+  flex:2; min-width:220px; background:var(--tv2-primary); color:#fff; border:none;
+  padding:14px 22px; border-radius:14px; font-weight:700; font-size:14.5px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; gap:10px; transition:background .15s, transform .15s;
+}
+.tv2-solid-btn:hover{background:var(--tv2-primary-dark); transform:translateY(-1px);}
+.tv2-post-note{font-size:12.5px; color:var(--tv2-ink-soft); text-align:center; margin:0;}
+
+/* ---------- toast ---------- */
+.tv2-toast-host{position:fixed; bottom:26px; left:50%; transform:translateX(-50%); z-index:200; display:flex; flex-direction:column; gap:8px; align-items:center; pointer-events:none;}
+.tv2-toast{
+  background:var(--tv2-ink); color:#fff; padding:12px 20px; border-radius:100px; font-size:13.5px; font-weight:600;
+  box-shadow:var(--tv2-shadow-lg); animation:tv2-toast-in .25s ease, tv2-toast-out .25s ease 2.3s forwards;
+  display:flex; align-items:center; gap:8px;
+}
+@keyframes tv2-toast-in{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);}}
+@keyframes tv2-toast-out{to{opacity:0; transform:translateY(-8px);}}
+
+@media (max-width:640px){
+  .tv2-row{flex-wrap:wrap;}
+  .tv2-row-controls{width:100%; justify-content:flex-start;}
+  .tv2-panel-zone{margin:26px auto 30px;}
+}
+@media (prefers-reduced-motion:reduce){
+  .tv2-root *{animation-duration:.001s !important; animation-iteration-count:1 !important; transition-duration:.1s !important;}
+}

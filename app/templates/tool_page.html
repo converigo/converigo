@@ -2,7 +2,13 @@
 
 {% block title %}{{ landing.h1 if landing else hero.title or tool.title }}{% endblock %}
 
-{% block page_css %}{% endblock %}
+{% block page_css %}
+    {% if result_widget_v2 is defined and result_widget_v2 %}
+    <link rel="stylesheet" href="/static/css/components/tool-result-v2.css">
+    {% else %}
+    <link rel="stylesheet" href="/static/css/pages/home.css">
+    {% endif %}
+{% endblock %}
 
 {% block body_class %}tool-page{% endblock %}
 
@@ -44,7 +50,45 @@
                         <p class="panel-label">{{ hero.panel_label or t('tool_page.panel.label', 'Ready to convert') }}</p>
                         <h2 class="panel-title">{{ hero.panel_title or t('tool_page.panel.title', 'Upload one file and get your converted result.') }}</h2>
                     </div>
+                    {% if result_widget_v2 is defined and result_widget_v2 %}
+                    {# Per-slug config for the V2 tool-page widget. `tool.slug` selects the
+                       entry; each entry drives data-operation, data-target-format, the
+                       file-input `accept` filter, and the per-slug dropzone copy keys. #}
+                    {% set tv2_configs = {
+                        "tar-extract": {
+                            "operation": "tar-extract",
+                            "target_format": "tar",
+                            "accept": ".tar,application/x-tar",
+                            "title_key": "upload.extract_drop_tar",
+                            "title_default": "Drag & drop your .tar file here",
+                            "supports_key": "upload.extract_supports_tar",
+                            "supports_default": "Supports .tar archives · max 50 files at once"
+                        },
+                        "zip-extract": {
+                            "operation": "zip-extract",
+                            "target_format": "zip",
+                            "accept": ".zip,application/zip",
+                            "title_key": "upload.extract_drop_zip",
+                            "title_default": "Drag & drop your .zip file here",
+                            "supports_key": "upload.extract_supports_zip",
+                            "supports_default": "Supports .zip archives · max 50 files at once"
+                        },
+                        "gz-extract": {
+                            "operation": "gz-extract",
+                            "target_format": "gz",
+                            "accept": ".gz,.gzip,application/gzip",
+                            "title_key": "upload.extract_drop_gz",
+                            "title_default": "Drag & drop your .gz or .tar.gz file here",
+                            "supports_key": "upload.extract_supports_gz",
+                            "supports_default": "Supports .gz and .tar.gz archives · max 50 files at once"
+                        }
+                    } %}
+                    {% set tv2 = tv2_configs.get(tool.slug) %}
+                    {% include "components/tool_result_widget_v2.html" %}
+                    <script src="/static/js/widgets/tool_result_widget_v2.js"></script>
+                    {% else %}
                     {% include "components/upload_card.html" %}
+                    {% endif %}
                 </div>
             </div>
         </section>

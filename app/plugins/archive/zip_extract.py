@@ -1,15 +1,17 @@
 """
 Project : Converigo
-Author  : Pico Lala & ChatGPT
+Author  : Archive Cluster - Growth Sprint
 Version : 3.0.1
 
 ZIP -> Extract Plugin
 
-Batch 5 (VAR-33) fix: the archive engine extracts into a temporary
-directory, but the /convert download route expects a single downloadable
-FILE.  This plugin now packages the extracted directory into a ZIP
-archive (stdlib ``shutil.make_archive``, no new dependencies) and returns
-that file so the normal upload -> convert -> download pipeline works.
+P2.4-F2 (Option 1) fix: the archive engine extracts into a temporary
+directory but the /convert download route expects a single downloadable
+FILE.  This plugin now forwards the request-local temp_dir to the engine
+and packages the extracted directory into a single ZIP file (stdlib
+``shutil.make_archive``, no new dependencies) so the normal
+upload -> convert -> download pipeline works.  Mirrors the Batch 5
+zip-extract pattern.  ArchiveEngine is unchanged.
 """
 
 import shutil
@@ -85,8 +87,9 @@ class ZIPExtractPlugin(ConverterPlugin):
                 "ZIPExtractPlugin only supports ZIP extraction."
             )
 
-        # Working directory for the temporary extraction folder and the
-        # packaged result.  The engine extracts into
+        # Working root is request-local: the service passes temp_dir
+        # (settings.TEMP_DIR/<conversion_id>) and output_dir
+        # (settings.OUTPUT_DIR/<conversion_id>).  The engine extracts into
         # ``<working_root>/archive/<stem>/`` and returns that directory;
         # we package it into a ZIP file so the download route (which serves
         # files, not directories) can deliver the result.

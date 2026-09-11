@@ -5,15 +5,16 @@ Version : 3.0.1
 
 GZ -> Extract Plugin
 
-Batch 6 (VAR-33) fix: the archive engine extracts into a temporary
-directory, but the /convert download route expects a single downloadable
-FILE.  Mirroring the Batch 5 zip-extract pattern, this plugin now returns
-a single servable file, deterministic per input type:
+P2.4-F2 (Option 1) fix: the archive engine extracts into a temporary
+directory but the /convert download route expects a single downloadable
+FILE.  This plugin forwards the request-local temp_dir to the engine and
+returns a single servable file, deterministic per input type:
 - standalone ``.gz`` (e.g. ``notes.txt.gz``): the engine already wrote
   exactly one decompressed file -> return that file directly;
 - ``.tar.gz`` / ``.tgz``: the engine extracted the full tar tree ->
   repackage it into one downloadable TAR archive (stdlib ``tarfile``,
   clean POSIX member names) — the decompressed-archive form.
+ArchiveEngine is unchanged.  Mirrors the Batch 5 zip-extract pattern.
 """
 
 import tarfile
@@ -89,10 +90,11 @@ class GZExtractPlugin(ConverterPlugin):
                 "GZExtractPlugin only supports GZIP extraction."
             )
 
-        # Working directory mirrors the Batch 5 zip-extract pattern: the
-        # engine extracts into ``<working_root>/archive/<stem>/`` and returns
-        # that directory.  Behavior is deterministic per input type — see
-        # the module docstring.
+        # Working root is request-local: the service passes temp_dir
+        # (settings.TEMP_DIR/<conversion_id>) and output_dir
+        # (settings.OUTPUT_DIR/<conversion_id>).  The engine extracts into
+        # ``<working_root>/archive/<stem>/`` and returns that directory.
+        # Behavior is deterministic per input type — see the module docstring.
         from app.core.settings import settings
 
         working_root = temp_dir or output_dir or (settings.OUTPUT_DIR / "archive")
