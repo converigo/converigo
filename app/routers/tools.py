@@ -10,6 +10,7 @@ from app.services.converter_data_service import ConverterDataService
 from app.services.internal_link_service import InternalLinkService
 from app.services.language_service import LanguageService
 from app.services.landing_service import LandingPageBuilder
+from app.services.result_widget_service import is_result_widget_v2_enabled
 from app.services.seo_service import PRODUCTION_BASE_URL, SeoService
 
 router = APIRouter(prefix="/tools", tags=["tools"])
@@ -334,6 +335,12 @@ async def render_universal_tool_page(
         seo_data["canonical"] = f"{PRODUCTION_BASE_URL}{canonical_path}"
         seo_data["og_url"] = seo_data["canonical"]
 
+    # F3 wiring: read the runtime feature flag once per request. Default state is
+    # {"enabled": false, "scope": []}, so every /tools/<slug> keeps rendering the
+    # legacy upload_card.html widget path.
+    tool_category = str(tool_data.get("category", "") or "").strip().lower()
+    result_widget_v2 = is_result_widget_v2_enabled(slug=slug, category=tool_category)
+
     return templates.TemplateResponse(
         request=request,
         name="tool_page.html",
@@ -362,6 +369,7 @@ async def render_universal_tool_page(
             "about_formats": page_sections["about_formats"],
             "cta": page_sections["cta"],
             "landing": landing_context,
+            "result_widget_v2": result_widget_v2,
         },
     )
 

@@ -1,0 +1,58 @@
+{# Tool-page-specific Result Widget V2 (Option A). Self-contained, namespace "tv2-".
+   Rendered for the archive-extract tool pages (tar-extract, zip-extract, gz-extract).
+   Per-slug values (data-operation, data-target-format, accept, dropzone copy) are
+   supplied by tool_page.html through the `tv2` config dict.
+   Does NOT depend on any homepage-only markup (#toastHost, #orbitField, #morphBadge,
+   #trackA/#trackB, .marquee-wrap, body.has-jobs). Ids are namespaced "tv2-" so the
+   legacy bundle in base.html (upload_manager.js binding #fileInput/#dropZone/#chooseFile)
+   cannot collide.
+   Endpoint contract: POST /convert with target_format=<slug target> +
+   operation=<slug>-extract. #}
+<div class="tv2-root" id="tv2-root"
+     data-operation="{{ tv2.operation }}"
+     data-target-format="{{ tv2.target_format }}">
+
+  <!-- ================= upload (self-contained) ================= -->
+  <div class="tv2-dz-stage">
+    <div class="tv2-dropzone" id="tv2-dropzone" tabindex="0" role="button"
+         aria-label="{{ request.state.t(tv2.title_key, tv2.title_default) }}">
+      <p class="tv2-dz-title">{{ request.state.t(tv2.title_key, tv2.title_default) }}</p>
+      <p class="tv2-dz-sub">{{ request.state.t('upload.choose_from_device', 'atau klik untuk memilih dari perangkatmu') }}</p>
+      <button class="tv2-dz-browse" type="button" id="tv2-browseBtn">{{ request.state.t('upload.browse', '📂 Pilih File') }}</button>
+      <p class="tv2-dz-note">{{ request.state.t(tv2.supports_key, tv2.supports_default) }}</p>
+    </div>
+  </div>
+  <input type="file" id="tv2-fileInput" multiple hidden accept="{{ tv2.accept }}">
+
+  <!-- ================= results panel ================= -->
+  <div class="tv2-panel-zone" id="tv2-panelZone">
+    <div class="tv2-panel-head">
+      <h2>{{ request.state.t('upload.results_heading', 'Hasil Konversi') }}</h2>
+      <p>{{ request.state.t('upload.results_subtitle', 'File kamu siap — unduh sebelum terhapus otomatis') }}</p>
+    </div>
+    <div class="tv2-panel">
+      <div class="tv2-panel-toolbar">
+        <button class="tv2-ghost-btn" id="tv2-addMoreBtn" type="button">{{ request.state.t('upload.add_more_files', '📁 Tambahkan Lebih Banyak File') }} <span style="font-size:10px;">▾</span></button>
+      </div>
+      <div id="tv2-rows"></div>
+
+      <div class="tv2-panel-footer" id="tv2-footerPre">
+        <div class="tv2-footer-left">
+          <span id="tv2-footerLabel">{{ request.state.t('upload.conversion_instruction', 'Ekstrak semua file ke:') }} (<span id="tv2-pendingCount">0</span>)</span>
+          <select class="tv2-fmt" id="tv2-globalFmt"></select>
+        </div>
+        <button class="tv2-go-btn" id="tv2-goBtn" type="button">{{ request.state.t('upload.extract_button', 'Extract') }} <span>→</span></button>
+      </div>
+
+      <div class="tv2-panel-footer tv2-footer-post" id="tv2-footerPost">
+        <div class="tv2-post-actions">
+          <button class="tv2-outline-btn" id="tv2-newBtn" type="button">{{ request.state.t('upload.extract_new', 'Extract New Files') }}</button>
+          <button class="tv2-solid-btn" id="tv2-dlAllBtn" type="button">{{ request.state.t('upload.download_all', '⬇️ Unduh Semua') }}</button>
+        </div>
+        <p class="tv2-post-note">{{ request.state.t('upload.post_note', 'Semua file akan dihapus otomatis dalam 8 jam untuk menjaga privasi Anda. Pastikan unduh hasil sebelum terhapus.') }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tv2-toast-host" id="tv2-toastHost"></div>
+</div>

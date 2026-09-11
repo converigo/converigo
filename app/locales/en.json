@@ -39,7 +39,15 @@
     "convert_button": "Convert",
     "download_all": "Download All",
     "post_note": "All files will be deleted automatically in 8 hours for your privacy. Be sure to download results before they are removed.",
-    "not_available": "This converter is not available yet. It's coming soon — please check back later."
+    "not_available": "This converter is not available yet. It's coming soon — please check back later.",
+    "extract_drop_tar": "Drag & drop your .tar file here",
+    "extract_drop_zip": "Drag & drop your .zip file here",
+    "extract_drop_gz": "Drag & drop your .gz or .tar.gz file here",
+    "extract_supports_tar": "Supports .tar archives · max 50 files at once",
+    "extract_supports_zip": "Supports .zip archives · max 50 files at once",
+    "extract_supports_gz": "Supports .gz and .tar.gz archives · max 50 files at once",
+    "extract_button": "Extract",
+    "extract_new": "Extract New Files"
   },
   "homepage": {
     "marquee_label": "All formats you can change",
