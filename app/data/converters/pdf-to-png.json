@@ -1,0 +1,176 @@
+{
+  "slug": "pdf-to-png",
+  "title": "PDF to PNG Converter",
+  "description": "Convert PDF documents into PNG images page by page.",
+  "category": "document",
+  "popular": true,
+  "featured": false,
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".pdf",
+    "button_text": "Upload PDF"
+  },
+  "faq": [
+    {
+      "question": "Can I convert a multi-page PDF into PNG images?",
+      "answer": "Yes. Each PDF page is converted into its own PNG image so it is easy to view, share, or save individually."
+    },
+    {
+      "question": "Is the converter free to use?",
+      "answer": "Yes. The PDF to PNG tool is available online for free and works directly in your browser."
+    },
+    {
+      "question": "Will the output quality be good enough for sharing?",
+      "answer": "Yes. The conversion produces clear PNG images that are suitable for email, web use, and quick sharing."
+    },
+    {
+      "question": "What file formats are supported?",
+      "answer": "Upload a PDF file and receive PNG image output for the pages in your document."
+    },
+    {
+      "question": "Can I use this for screenshots or document pages?",
+      "answer": "Yes. It is useful for turning document pages, scanned pages, and simple PDF content into PNG images for easier viewing."
+    },
+    {
+      "question": "Can I use this tool on mobile?",
+      "answer": "Yes. The converter works in modern mobile and desktop browsers."
+    },
+    {
+      "question": "How do I download the PNG images?",
+      "answer": "Download your PNG images immediately after the conversion completes."
+    },
+    {
+      "question": "What if conversion fails?",
+      "answer": "Try re-uploading the PDF file or selecting a different PDF and convert again."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "png-to-pdf",
+      "title": "PNG to PDF"
+    },
+    {
+      "slug": "pdf-split",
+      "title": "PDF Split"
+    },
+    {
+      "slug": "pdf-to-jpg",
+      "title": "PDF to JPG"
+    }
+  ],
+  "seo": {
+    "title": "Convert PDF to PNG Online Free | Converigo",
+    "description": "Convert PDF to PNG online for free using Converigo. Fast, secure and browser-based file conversion from pdf to png with no installation required.",
+    "keywords": "pdf to png, convert pdf to png, pdf image converter, online pdf to png",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert PDF to PNG - Converigo free online converter",
+    "twitter_title": "Convert PDF to PNG Online Free | Converigo",
+    "twitter_description": "Convert PDF to PNG online for free using Converigo. Fast, secure and browser-based file conversion from pdf to png with no installation required.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/pdf-to-png"
+  },
+  "source": "pdf",
+  "target": "png",
+  "active": true,
+  "hero": {
+    "eyebrow": "Converter tool",
+    "title": "PDF to PNG Converter Free Online",
+    "description": "Convert PDF files to PNG online for free. Fast, secure browser-based conversion with no software installation. Get high-quality png output in seconds using Converigo.",
+    "panel_label": "Ready to convert",
+    "panel_title": "Upload a PDF file and receive PNG images in seconds."
+  },
+  "features": [
+    {
+      "title": "Fast PDF to PNG conversion",
+      "text": "Convert PDF pages into PNG images quickly without installing software."
+    },
+    {
+      "title": "Clear image output",
+      "text": "Create PNG files that are easy to view, send, and use in everyday workflows."
+    },
+    {
+      "title": "Simple sharing workflow",
+      "text": "Turn document pages into image files that are convenient for email, web use, and quick uploads."
+    },
+    {
+      "title": "No software installation required",
+      "text": "Convert files directly in your browser without downloading or installing any software."
+    },
+    {
+      "title": "High-quality png output",
+      "text": "Receive a polished PNG file ready for immediate use in your workflow."
+    },
+    {
+      "title": "Free pdf to png converter",
+      "text": "Convert PDF to PNG online completely free with no registration or hidden costs."
+    },
+    {
+      "title": "Secure pdf processing",
+      "text": "Your PDF files are encrypted during upload and automatically deleted after conversion."
+    }
+  ],
+  "supported_formats": {
+    "input": [
+      "PDF"
+    ],
+    "output": [
+      "PNG"
+    ],
+    "description": "PDF input, PNG output"
+  },
+  "how_to_use": [
+    {
+      "title": "Upload your PDF",
+      "description": "Select a PDF file from your device to start the conversion process."
+    },
+    {
+      "title": "Convert to PNG",
+      "description": "Choose PNG as the output format and let the tool turn each page into an image."
+    },
+    {
+      "title": "Download your images",
+      "description": "Get your converted PNG files right away for sharing, storage, or further editing."
+    },
+    {
+      "title": "Choose png as format",
+      "description": "Pick PNG as your desired format and review any available options."
+    },
+    {
+      "title": "Convert pdf to png",
+      "description": "Click convert and our engine processes your pdf instantly."
+    },
+    {
+      "title": "Download your png file",
+      "description": "Get your converted PNG immediately for use in your projects."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is PDF?",
+      "text": "PDF is a common document format used for reports, forms, and pages that need to retain their layout."
+    },
+    {
+      "title": "What is PNG?",
+      "text": "PNG is a widely supported image format that is ideal for sharing, viewing, and uploading document pages online."
+    },
+    {
+      "title": "What is PDF format?",
+      "text": "PDF is a widely used file format known for its versatility and compatibility across many applications."
+    },
+    {
+      "title": "What is PNG format?",
+      "text": "PNG is a popular file format chosen for its broad compatibility and lossless image quality."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Convert PDF files to PNG in seconds",
+    "text": "Upload your file and receive a ready-to-use result instantly.",
+    "primary_text": "Convert now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  },
+  "lifecycle_status": "active"
+}

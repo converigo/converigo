@@ -1370,7 +1370,7 @@ const STATIC_TARGET_MAP = {
   ico:['PNG'],  svg:['PNG'],  heic:['JPEG','JPG','PNG'],  heif:['JPEG','JPG'],  avif:['JPEG','JPG'],
   gif:['MP4','PDF','TXT'],  // VAR-10 images-to-pdf (Batch 3) + F4 gif-to-mp4 + F8-A TXT
   // document sources
-  pdf:['DOC','DOCX','HTML','JPEG','JPG','MD','ODT','PPT','PPTX','TXT','WORD','XLS','XLSX'], // F3: +HTML,+MD via pdf-to-html / pdf-to-md
+  pdf:['DOC','DOCX','HTML','JPEG','JPG','MD','ODT','PNG','PPT','PPTX','TXT','WORD','XLS','XLSX'], // F3: +HTML,+MD via pdf-to-html / pdf-to-md; Batch 2: +PNG via pdf-to-png
   docx:['HTML','JPEG','JPG','MD','PDF','POWERPOINT','PPT','PPTX','SPREADSHEET','XLS','XLSX'],  // F7: +HTML via docx-to-html; F8-A: +MD via docx-to-md
   doc:['JPEG','JPG','PDF','POWERPOINT','PPT','PPTX','SPREADSHEET','XLS','XLSX'],
   pptx:['DOC','DOCX','JPEG','JPG','PDF','PNG','SPREADSHEET','WORD','XLS','XLSX'],  // F7: +PNG,+JPG via pptx-to-png / pptx-to-jpg (FIX round)
@@ -1384,7 +1384,7 @@ const STATIC_TARGET_MAP = {
   word:['JPEG','JPG','PDF','POWERPOINT','PPT','PPTX','SPREADSHEET','XLS','XLSX'],
   html:['CSV'],  md:['HTML'],  rtf:[],  // F8-B: md→HTML (md-to-html); F8-C: html→CSV (html-to-csv); rtf tetap kosong
   // audio sources (F4: wav +FLAC via wav-to-flac; ogg +MP3 via ogg-to-mp3)
-  mp3:['WAV'],  wav:['MP3','FLAC'],  ogg:['MP3'],  flac:['MP3'],  m4a:['MP3'],  aac:['MP3'],  // WS1: MP3 first — addFiles() auto-selects the first non-self entry as the default target; FLAC-first made the homepage default WAV→FLAC (regression from 368475b, see f7_evidence/WS1_WAV_MP3_AUDIT_REPORT.md)
+  mp3:['WAV','AAC'],  wav:['MP3','FLAC','AAC'],  ogg:['MP3'],  flac:['MP3'],  m4a:['MP3'],  aac:['MP3'],  // WS1: MP3 first — addFiles() auto-selects the first non-self entry as the default target; FLAC-first made the homepage default WAV→FLAC (regression from 368475b, see f7_evidence/WS1_WAV_MP3_AUDIT_REPORT.md); Batch 2: +AAC via mp3-to-aac / wav-to-aac
   // video sources (F4: FFmpeg container transcodes, re-encoded libx264+aac)
   mp4:['AAC','AVI','FLAC','GIF','M4A','MP3','OGG','WAV','WEBM'],  mov:['MP4'],  avi:['MP4'],  webm:['MP4'],  mkv:['MP4'],  flv:[],
   // archive sources (self-conversions dihapus — hanya extract operation)

@@ -4,6 +4,8 @@ from app.plugins.document.docx_to_ppt import DOCXToPPTPlugin
 from app.plugins.document.docx_to_xlsx import DOCXToXLSXPlugin
 from app.plugins.document.excel_to_pdf import ExcelToPDFPlugin
 from app.plugins.document.jpg_to_pdf import JPGToPDFPlugin
+from app.plugins.document.png_to_pdf import PNGToPDFPlugin
+from app.plugins.document.pdf_to_png import PDFToPNGPlugin
 from app.plugins.document.docx_to_jpg import DOCXToJPGPlugin
 from app.plugins.document.office_conversion_plugins import (
     PDFToWordPlugin,
@@ -24,8 +26,10 @@ __all__ = [
     "ExcelToPDFPlugin",
     "JPGToPDFPlugin",
     "PDFToExcelPlugin",
+    "PDFToPNGPlugin",
     "PDFToPPTPlugin",
     "PDFToWordPlugin",
+    "PNGToPDFPlugin",
     "PPTToPDFPlugin",
     "WordToPDFPlugin",
     "DOCXToJPGPlugin",

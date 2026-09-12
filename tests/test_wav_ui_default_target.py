@@ -108,7 +108,7 @@ def test_served_homepage_wav_default_target_is_mp3() -> None:
     mapping = _served_static_target_map(client)
     # Full order lock — the whole point of WS1. FLAC must stay AVAILABLE,
     # but must not be the default.
-    assert mapping["wav"] == ["MP3", "FLAC"], mapping["wav"]
+    assert mapping["wav"] == ["MP3", "FLAC", "AAC"], mapping["wav"]
     default = _homepage_default_target(mapping["wav"], "wav")
     assert default == "MP3", (
         f"Homepage default target for .wav resolved to {default!r}, expected 'MP3'"
@@ -183,6 +183,6 @@ def test_browser_wav_row_defaults_to_mp3(tmp_path: Path, app_base_url) -> None:
         selected = select.evaluate("el => el.value")
         browser.close()
 
-    assert options == ["MP3", "FLAC"], f"Unexpected dropdown order: {options}"
+    assert options == ["MP3", "FLAC", "AAC"], f"Unexpected dropdown order: {options}"
     assert selected == "MP3", f"Homepage default selected {selected!r}, expected 'MP3'"
 

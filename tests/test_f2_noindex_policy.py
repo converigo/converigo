@@ -39,7 +39,14 @@ F2_DEPRECATED_SLUGS = {
 }
 CONTROL_SLUGS = ["docx-to-pdf", "xlsx-to-docx"]
 CONVERTERS_DIR = Path("app/data/converters")
-EXPECTED_SITEMAP_COUNT = 205  # 209 pre-F-2 entries minus the 5 deprecated slugs, plus the G1-5 F-7 data-conversion hub
+# Tree as it ships in this batch: 207 locs on current main (post-Batch-1;
+# itself never corrected from the original 205 F-2 baseline when mp3-to-aac /
+# wav-to-aac landed -- pre-existing gap, tracked as a separate ticket) plus the
+# 2 new Phase 22 slugs png-to-pdf and pdf-to-png = 209.
+# Out of scope: VAR Sub-batch C converters (batch-jpg-to-webp, image-compress,
+# image-resize) remain uncommitted in this batch; while their converter JSONs
+# sit in a local working tree the live sitemap measures 212 instead.
+EXPECTED_SITEMAP_COUNT = 209
 
 
 @pytest.fixture(scope="module")

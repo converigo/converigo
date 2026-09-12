@@ -387,9 +387,10 @@ def test_cross_format_targets_and_dropdown_map() -> None:
         for (src, tgt) in registry.plugins
         if src == "pdf" and tgt != "pdf"
     }
+    # Batch 2 adds png (pdf-to-png) alongside the F3 html/md gains.
     assert pdf_targets == {
         "doc", "docx", "html", "jpeg", "jpg", "md", "odt",
-        "ppt", "pptx", "txt", "word", "xls", "xlsx",
+        "png", "ppt", "pptx", "txt", "word", "xls", "xlsx",
     }
     assert ("pdf", "pdf") in registry.plugins  # ops live here, off the map
 
