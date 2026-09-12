@@ -1,0 +1,28 @@
+{
+  "id": "png-to-pdf",
+  "slug": "png-to-pdf",
+  "name": "PNG to PDF",
+  "category": "document",
+  "description": "Convert PNG images into PDF documents while preserving image quality.",
+  "input_formats": [
+    "png"
+  ],
+  "output_formats": [
+    "pdf"
+  ],
+  "accepted_mime_types": [
+    "image/png"
+  ],
+  "max_upload_size": 104857600,
+  "conversion_engine": "document",
+  "landing_path": "/tools/png-to-pdf",
+  "canonical_url": "https://converigo.com/tools/png-to-pdf",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.png",
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "certified"
+}

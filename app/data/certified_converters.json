@@ -699,6 +699,18 @@
       "name": "TAR Extract",
       "locked": true,
       "test_files": ["tests/certified/archive/test_tar_extract_certified.py"]
+    },
+    {
+      "slug": "png-to-pdf",
+      "lifecycle_status": "certified",
+      "name": "PNG to PDF",
+      "test_files": ["tests/certified/document/test_png_to_pdf_certified.py"]
+    },
+    {
+      "slug": "pdf-to-png",
+      "lifecycle_status": "certified",
+      "name": "PDF to PNG",
+      "test_files": ["tests/certified/pdf/test_pdf_to_png_certified.py"]
     }
   ],
   "beta": [],

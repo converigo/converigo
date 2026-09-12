@@ -1,0 +1,28 @@
+{
+  "id": "pdf-to-png",
+  "slug": "pdf-to-png",
+  "name": "PDF to PNG",
+  "category": "document",
+  "description": "Convert PDF documents into PNG images page by page.",
+  "input_formats": [
+    "pdf"
+  ],
+  "output_formats": [
+    "png"
+  ],
+  "accepted_mime_types": [
+    "application/pdf"
+  ],
+  "max_upload_size": 104857600,
+  "conversion_engine": "document",
+  "landing_path": "/tools/pdf-to-png",
+  "canonical_url": "https://converigo.com/tools/pdf-to-png",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.pdf",
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "certified"
+}
