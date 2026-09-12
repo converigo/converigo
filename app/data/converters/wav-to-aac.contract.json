@@ -1,0 +1,28 @@
+{
+  "id": "wav-to-aac",
+  "slug": "wav-to-aac",
+  "name": "WAV to AAC",
+  "category": "audio",
+  "description": "Convert WAV audio files into AAC, shrinking uncompressed PCM audio.",
+  "input_formats": [
+    "wav"
+  ],
+  "output_formats": [
+    "aac"
+  ],
+  "accepted_mime_types": [
+    "audio/wav"
+  ],
+  "max_upload_size": 104857600,
+  "conversion_engine": "ffmpeg",
+  "landing_path": "/tools/wav-to-aac",
+  "canonical_url": "https://converigo.com/tools/wav-to-aac",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.wav",
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "active"
+}

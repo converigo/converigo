@@ -1,0 +1,28 @@
+{
+  "id": "mp3-to-aac",
+  "slug": "mp3-to-aac",
+  "name": "MP3 to AAC",
+  "category": "audio",
+  "description": "Convert MP3 audio files into AAC, the modern compressed audio format.",
+  "input_formats": [
+    "mp3"
+  ],
+  "output_formats": [
+    "aac"
+  ],
+  "accepted_mime_types": [
+    "audio/mpeg"
+  ],
+  "max_upload_size": 104857600,
+  "conversion_engine": "ffmpeg",
+  "landing_path": "/tools/mp3-to-aac",
+  "canonical_url": "https://converigo.com/tools/mp3-to-aac",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.mp3",
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "active"
+}

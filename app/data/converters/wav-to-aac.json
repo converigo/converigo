@@ -1,0 +1,156 @@
+{
+  "slug": "wav-to-aac",
+  "title": "WAV to AAC Converter",
+  "description": "Convert WAV audio files to AAC, shrinking uncompressed PCM into a compact format built for streaming and mobile playback.",
+  "upload_form": {
+    "action": "/convert",
+    "method": "post",
+    "accept": ".wav",
+    "button_text": "Convert WAV to AAC"
+  },
+  "faq": [
+    {
+      "question": "What file types can I upload?",
+      "answer": "Upload WAV audio files only."
+    },
+    {
+      "question": "What output do I get?",
+      "answer": "An AAC audio file that is far smaller than the uncompressed WAV source."
+    },
+    {
+      "question": "Is the conversion free?",
+      "answer": "Yes. WAV to AAC conversion is free and works directly in your browser."
+    },
+    {
+      "question": "Will audio quality be preserved?",
+      "answer": "Yes. The converter compresses your WAV audio into a high-quality AAC bitstream."
+    },
+    {
+      "question": "Can I use this on mobile?",
+      "answer": "Yes. The tool works in modern mobile browsers as well as desktop browsers."
+    },
+    {
+      "question": "How quickly can I download the file?",
+      "answer": "After conversion completes, your AAC file is ready to download immediately."
+    },
+    {
+      "question": "What is AAC used for?",
+      "answer": "AAC is widely used for streaming, mobile playback, and online audio delivery."
+    },
+    {
+      "question": "What if conversion fails?",
+      "answer": "Try again with a smaller file or re-upload the WAV, then restart the conversion."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "mp3-to-aac",
+      "title": "MP3 to AAC"
+    },
+    {
+      "slug": "wav-to-mp3",
+      "title": "WAV to MP3"
+    },
+    {
+      "slug": "mp3-to-wav",
+      "title": "MP3 to WAV"
+    },
+    {
+      "slug": "aac-to-mp3",
+      "title": "AAC to MP3"
+    }
+  ],
+  "seo": {
+    "title": "Convert WAV to AAC Online Free | Converigo",
+    "description": "Convert WAV to AAC online for free using Converigo. Fast, secure and browser-based file conversion from wav to aac with no installation required.",
+    "keywords": "wav to aac, audio converter, aac converter, online audio conversion",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert WAV to AAC - Converigo free online converter",
+    "twitter_title": "Convert WAV to AAC Online Free | Converigo",
+    "twitter_description": "Convert WAV to AAC online for free using Converigo. Fast, secure and browser-based file conversion from wav to aac with no installation required.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/wav-to-aac"
+  },
+  "source": "wav",
+  "target": "aac",
+  "category": "audio",
+  "active": true,
+  "popular": false,
+  "featured": false,
+  "hero": {
+    "eyebrow": "Audio converter",
+    "title": "Convert WAV to AAC Online Free",
+    "description": "Convert WAV files to AAC online for free. Fast, secure browser-based conversion with no software installation. Shrink large recordings into stream-ready aac in seconds using Converigo.",
+    "panel_label": "Ready to convert",
+    "panel_title": "Upload a WAV file and receive an AAC result in seconds."
+  },
+  "features": [
+    {
+      "title": "Much smaller files",
+      "text": "AAC compresses uncompressed PCM WAV audio into a fraction of its original size."
+    },
+    {
+      "title": "Modern audio format",
+      "text": "AAC is supported by most mobile devices, browsers, and streaming platforms."
+    },
+    {
+      "title": "Fast workflow",
+      "text": "Upload, convert, and download in a few quick steps."
+    },
+    {
+      "title": "Secure processing",
+      "text": "Your files are handled securely and the result is ready to use immediately."
+    },
+    {
+      "title": "No software installation required",
+      "text": "Convert files directly in your browser without downloading or installing any software."
+    },
+    {
+      "title": "Free wav to aac converter",
+      "text": "Convert WAV to AAC online completely free with no registration or hidden costs."
+    }
+  ],
+  "supported_formats": {
+    "input": [
+      "WAV"
+    ],
+    "output": [
+      "AAC"
+    ],
+    "description": "WAV input, AAC output"
+  },
+  "how_to_use": [
+    {
+      "title": "Upload your wav",
+      "description": "Select a WAV file from your device to begin the conversion process."
+    },
+    {
+      "title": "Choose aac as format",
+      "description": "Pick AAC as your desired format and review any available options."
+    },
+    {
+      "title": "Convert wav to aac",
+      "description": "Click convert and our engine processes your wav instantly."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is WAV?",
+      "text": "WAV is an uncompressed audio container commonly used for editing, recording, and archival."
+    },
+    {
+      "title": "What is AAC?",
+      "text": "AAC is a modern compressed audio format often used for streaming and mobile playback."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Convert WAV files to AAC in seconds",
+    "text": "Upload your file and receive a ready-to-use result instantly.",
+    "primary_text": "Convert now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  },
+  "lifecycle_status": "active"
+}
