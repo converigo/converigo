@@ -1,13 +1,15 @@
 {
   "title": "PPT to DOCX Converter",
   "description": "Convert PPT presentations to DOCX documents online for editing and reuse.",
+  "source": "pptx",
+  "target": "docx",
   "hero": {
     "title": "PPT to DOCX Converter Free Online",
     "subtitle": "Turn PowerPoint slides into Word documents.",
     "description": "Convert  files to  online for free. Fast, secure browser-based conversion with no software installation. Get high-quality  output in seconds using Converigo."
   },
   "steps": [
-    "Upload your PPT file.",
+    "Upload your .pptx file.",
     "Select DOCX as output.",
     "Download your editable Word document."
   ],

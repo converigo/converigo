@@ -127,7 +127,10 @@ def test_pdf_to_txt_rejects_invalid_pdf() -> None:
         files=[("file", ("a.pdf", fake_pdf, "application/pdf"))],
         data={"target_format": "txt", "operation": "pdf-to-txt"},
     )
-    assert response.status_code in (400, 422, 500), response.text
+    # 415 is included since PR-1 (OLE2 honest-disable): an upload refused by the
+    # validation policy is a client error, not a server-side 500. The contract of
+    # this test is "honest rejection with no fabricated output", any 4xx proves it.
+    assert response.status_code in (400, 415, 422, 500), response.text
 
 
 @pytest.mark.certified

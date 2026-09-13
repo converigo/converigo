@@ -18,6 +18,7 @@ content-based (magic bytes) rather than extension-based:
 from pathlib import Path
 
 from app.plugins.base import ConverterPlugin
+from app.utils.legacy_office import legacy_format_unsupported_error
 
 
 class XLSXToDOCXPlugin(ConverterPlugin):
@@ -28,7 +29,9 @@ class XLSXToDOCXPlugin(ConverterPlugin):
     engine = "document"
     icon = "📄"
 
-    source_formats = ["xlsx", "xls", "spreadsheet"]
+    # PR-1 (OLE2 honest-disable): "xls" is dropped — openpyxl cannot read the
+    # legacy OLE2 container, so advertising it as an input was a dead end.
+    source_formats = ["xlsx", "spreadsheet"]
     target_formats = ["docx", "doc", "word"]
 
     goal = "document"
@@ -87,10 +90,8 @@ class XLSXToDOCXPlugin(ConverterPlugin):
         container = self._detect_container(source_path)
 
         if container == "xls":
-            raise RuntimeError(
-                "Legacy .xls format (OLE2 compound document) is not supported by "
-                "this converter. Please save your spreadsheet as .xlsx and try again."
-            )
+            # PR-1: honest 422 with re-save guidance (was RuntimeError -> 500).
+            raise legacy_format_unsupported_error("xls", target_format)
         if container == "unknown":
             raise RuntimeError(
                 "The uploaded file is not a valid XLSX spreadsheet. Please save it "

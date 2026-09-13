@@ -40,6 +40,7 @@ from app.services.conversion_service import (
 
 from app.services.upload_service import (
     UploadError,
+    UploadRejectedError,
     UploadService,
 )
 
@@ -403,6 +404,12 @@ async def convert_file(
                     "filename": uploaded_file.filename,
                     "status": "failed",
                     "error": str(exc),
+                    "error_code": request.state.error_code,
+                    # PR-1: a validation-policy rejection is a client error. Tag it
+                    # so the single-file response can answer 415 instead of
+                    # masking a refusal as a server-side 500. Genuine storage/IO
+                    # failures keep raising the plain UploadError and stay 500s.
+                    "upload_rejected": isinstance(exc, UploadRejectedError),
                     "conversion_id": tracker.conversion_id,
                 })
 
@@ -430,6 +437,17 @@ async def convert_file(
                         "success": False,
                         "code": "UNSUPPORTED_CONVERSION",
                         "message": result.get("message") or "Conversion not supported",
+                    }
+                elif result.get("upload_rejected"):
+                    # PR-1: the upload was refused by policy (e.g. a legacy OLE2
+                    # .xls/.doc/.ppt, or any disallowed type). Report it honestly
+                    # as an unsupported media type with the re-save guidance, never
+                    # as a 500 that implies the server broke.
+                    error_status_code = status.HTTP_415_UNSUPPORTED_MEDIA_TYPE
+                    error_detail = {
+                        "success": False,
+                        "code": "UNSUPPORTED_FILE_TYPE",
+                        "message": result.get("error") or "Uploaded file was rejected.",
                     }
                 else:
                     error_status_code = status.HTTP_500_INTERNAL_SERVER_ERROR

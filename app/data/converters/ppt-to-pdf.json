@@ -5,7 +5,7 @@
   "upload_form": {
     "action": "/convert",
     "method": "post",
-    "accept": ".ppt,.pptx",
+    "accept": ".pptx",
     "button_text": "Convert PowerPoint to PDF"
   },
   "faq": [
@@ -15,7 +15,7 @@
     },
     {
       "question": "What PowerPoint formats are supported?",
-      "answer": "Both .ppt and .pptx formats are supported for conversion to PDF."
+      "answer": "Modern .pptx presentations are supported. Legacy .ppt files cannot be converted here: open the deck in PowerPoint, save it as .pptx, then upload that file."
     },
     {
       "question": "Why convert PowerPoint to PDF?",
@@ -71,7 +71,7 @@
     "twitter_image": "/static/images/og-default.png",
     "canonical": "https://converigo.com/tools/ppt-to-pdf"
   },
-  "source": "ppt",
+  "source": "pptx",
   "target": "pdf",
   "category": "document",
   "active": true,
@@ -90,8 +90,8 @@
       "text": "Keep your slide layouts, images, fonts, and animations intact when converting to PDF."
     },
     {
-      "title": "Support for ppt and pptx",
-      "text": "Convert both legacy .ppt and modern .pptx files with full compatibility."
+      "title": "Support for modern .pptx presentations",
+      "text": "Convert .pptx files with full compatibility. Legacy .ppt presentations must be re-saved as .pptx before converting."
     },
     {
       "title": "Fast secure online conversion",
@@ -120,7 +120,6 @@
   ],
   "supported_formats": {
     "input": [
-      "PPT",
       "PPTX"
     ],
     "output": [
@@ -131,7 +130,7 @@
   "how_to_use": [
     {
       "title": "Upload your PowerPoint file",
-      "description": "Select a .ppt or .pptx presentation from your device to begin."
+      "description": "Select a .pptx presentation from your device to begin."
     },
     {
       "title": "Convert to PDF",

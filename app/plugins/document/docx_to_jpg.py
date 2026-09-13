@@ -12,6 +12,7 @@ from pathlib import Path
 
 from app.engines.document_engine import DocumentEngine
 from app.plugins.base import ConverterPlugin
+from app.utils.legacy_office import legacy_format_unsupported_error
 
 
 class DOCXToJPGPlugin(ConverterPlugin):
@@ -22,7 +23,9 @@ class DOCXToJPGPlugin(ConverterPlugin):
     engine = "document"
     icon = "🖼️"
 
-    source_formats = ["docx", "doc", "word"]
+    # PR-1 (OLE2 honest-disable): "doc" is dropped — python-docx cannot read the
+    # legacy OLE2 container, so advertising it as an input was a dead end.
+    source_formats = ["docx", "word"]
     target_formats = ["jpg", "jpeg"]
 
     goal = "document"
@@ -72,10 +75,10 @@ class DOCXToJPGPlugin(ConverterPlugin):
         container = self._detect_container(source_path)
 
         if container == "doc":
-            raise RuntimeError(
-                "Legacy .doc format (OLE2 compound document) is not supported by "
-                "this converter. Please save your document as .docx and try again."
-            )
+            # PR-1: honest 422 with re-save guidance (was RuntimeError, which
+            # conversion_service turned into ConversionError -> HTTP 500 with the
+            # guidance text leaking as the response body).
+            raise legacy_format_unsupported_error("doc", target_format)
         if container == "unknown":
             raise RuntimeError(
                 "The uploaded file is not a valid DOCX document. Please save it "

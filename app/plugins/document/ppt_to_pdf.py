@@ -20,7 +20,9 @@ class PPTToPDFPlugin(ConverterPlugin):
     engine = "document"
     icon = "📽️"
 
-    source_formats = ["ppt", "pptx"]
+    # PR-1 (OLE2 honest-disable): "ppt" is dropped — python-pptx cannot read the
+    # legacy OLE2 container, so advertising it as an input was a dead end.
+    source_formats = ["pptx"]
     target_formats = ["pdf"]
 
     goal = "document"

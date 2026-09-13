@@ -30,6 +30,16 @@ class UploadError(Exception):
     pass
 
 
+class UploadRejectedError(UploadError):
+    """The upload was refused by the validation policy (a client-side problem).
+
+    Subclasses UploadError so every existing ``except UploadError`` handler keeps
+    working unchanged; the distinct type exists so the router can answer a
+    rejection with an honest 4xx instead of masking it as a server-side 500.
+    Genuine storage/IO failures still raise the plain UploadError.
+    """
+
+
 class UploadService:
 
     async def process_upload(
@@ -101,7 +111,7 @@ class UploadService:
                 except Exception:
                     logger.exception("Failed to remove partial upload %s", target_path)
 
-            raise UploadError(
+            raise UploadRejectedError(
                 str(exc)
             ) from exc
 

@@ -5,13 +5,13 @@
   "description": "Convert PPT presentations to JPG images (deprecated).",
   "category": "document",
   "input_formats": [
-    "ppt"
+    "pptx"
   ],
   "output_formats": [
     "jpg"
   ],
   "accepted_mime_types": [
-    "application/vnd.ms-powerpoint"
+    "application/vnd.openxmlformats-officedocument.presentationml.presentation"
   ],
   "max_upload_size": 52428800,
   "conversion_engine": "document",
