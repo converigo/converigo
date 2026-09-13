@@ -6,6 +6,7 @@ import tempfile
 from PIL import Image
 
 from app.engines.base_engine import BaseEngine
+from app.utils.legacy_office import guard_legacy_container
 
 logger = logging.getLogger(__name__)
 
@@ -16,13 +17,10 @@ class DocumentEngine(BaseEngine):
     SUPPORTED_FORMATS = [
         "pdf",
         "docx",
-        "doc",
         "txt",
         "md",
         "xlsx",
-        "xls",
         "pptx",
-        "ppt",
         "odt",
     ]
 
@@ -35,6 +33,11 @@ class DocumentEngine(BaseEngine):
     ) -> Path:
         logger.info("[CONVERTER_DEBUG] DocumentEngine start conversion source=%s target=%s", str(source_path), target_format)
         target = target_format.lower().lstrip(".")
+        # Legacy OUTPUT tokens are accepted as aliases on purpose: they always
+        # produce a real OOXML file whose name carries the true modern extension
+        # (.docx/.xlsx/.pptx), so nothing is ever written mislabelled. This is a
+        # pinned contract (tests/certified/pdf/test_pdf_to_docx_certified.py::
+        # test_009_doc_alias_converts_to_docx), not a silent substitution.
         if target == "doc":
             target = "docx"
         if target == "xls":
@@ -43,6 +46,17 @@ class DocumentEngine(BaseEngine):
             target = "pptx"
 
         source_format = source_path.suffix.lower().lstrip(".")
+
+        # PR-1 (OLE2 honest-disable): refuse legacy binary Office inputs before
+        # any library touches them. openpyxl / python-docx / python-pptx cannot
+        # read the OLE2 container, and letting them try surfaced as an HTTP 500
+        # whose body leaked library text ("openpyxl does not support the old .xls
+        # file format...") and even upload paths ("PackageNotFoundError: Package
+        # not found at 'uploads\<id>.ppt'"). The check is content-based, so a file
+        # whose name says .xls but whose bytes are a genuine ZIP/OOXML workbook is
+        # still routed normally below and keeps working.
+        guard_legacy_container(source_path, source_format, target)
+
         from app.core.settings import settings
 
         working_root = temp_dir or output_dir or settings.OUTPUT_DIR

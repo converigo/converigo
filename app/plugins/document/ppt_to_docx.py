@@ -18,6 +18,7 @@ content-based (magic bytes) rather than extension-based:
 from pathlib import Path
 
 from app.plugins.base import ConverterPlugin
+from app.utils.legacy_office import legacy_format_unsupported_error
 
 
 class PPTToDOCXPlugin(ConverterPlugin):
@@ -28,7 +29,9 @@ class PPTToDOCXPlugin(ConverterPlugin):
     engine = "document"
     icon = "📄"
 
-    source_formats = ["ppt", "pptx", "powerpoint"]
+    # PR-1 (OLE2 honest-disable): "ppt" is dropped — python-pptx cannot read the
+    # legacy OLE2 container, so advertising it as an input was a dead end.
+    source_formats = ["pptx", "powerpoint"]
     target_formats = ["docx", "doc", "word"]
 
     goal = "document"
@@ -114,10 +117,8 @@ class PPTToDOCXPlugin(ConverterPlugin):
         container = self._detect_container(source_path)
 
         if container == "ppt":
-            raise RuntimeError(
-                "Legacy .ppt format (OLE2 compound document) is not supported by "
-                "this converter. Please save your presentation as .pptx and try again."
-            )
+            # PR-1: honest 422 with re-save guidance (was RuntimeError -> 500).
+            raise legacy_format_unsupported_error("ppt", target_format)
         if container == "unknown":
             raise RuntimeError(
                 "The uploaded file is not a valid PPTX presentation. Please save it "

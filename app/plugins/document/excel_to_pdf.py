@@ -20,7 +20,9 @@ class ExcelToPDFPlugin(ConverterPlugin):
     engine = "document"
     icon = "📊"
 
-    source_formats = ["xlsx", "xls", "csv"]
+    # PR-1 (OLE2 honest-disable): "xls" is dropped — openpyxl cannot read the
+    # legacy OLE2 container, so advertising it as an input was a dead end.
+    source_formats = ["xlsx", "csv"]
     target_formats = ["pdf"]
 
     goal = "document"
@@ -41,7 +43,7 @@ class ExcelToPDFPlugin(ConverterPlugin):
         temp_dir: Path | None = None,
     ) -> Path:
         if not self.supports(source_path.suffix, target_format):
-            raise RuntimeError("ExcelToPDFPlugin only supports XLSX/XLS/CSV -> PDF.")
+            raise RuntimeError("ExcelToPDFPlugin only supports XLSX/CSV -> PDF.")
 
         engine = DocumentEngine()
         return await engine.convert(source_path=source_path, target_format=target_format, output_dir=output_dir, temp_dir=temp_dir)

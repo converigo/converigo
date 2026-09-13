@@ -14,6 +14,10 @@ from pathlib import Path
 from fastapi import UploadFile
 
 from app.core.settings import settings
+from app.utils.legacy_office import (
+    LEGACY_OFFICE_REPLACEMENTS,
+    legacy_guidance,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -54,9 +58,14 @@ ALLOWED_EXTENSIONS = {
     "webm",
 
     # DOCUMENT
+    # PR-1 (OLE2 honest-disable): legacy "doc", "xls" and "ppt" are deliberately
+    # NOT accepted. Every document converter in this app reads OOXML (ZIP) via
+    # python-docx / openpyxl / python-pptx, which cannot open the legacy OLE2 /
+    # Compound File Binary container, so those uploads could only ever dead-end.
+    # validate_extension() rejects them with explicit "re-save as .docx/.xlsx/
+    # .pptx" guidance instead of pretending the conversion might work.
     "pdf",
     "docx",
-    "doc",
     "txt",
     "csv",
     "json",
@@ -65,11 +74,9 @@ ALLOWED_EXTENSIONS = {
     "yaml",
     "yml",
     "xlsx",
-    "xls",
     "odt",
     "ods",
     "pptx",
-    "ppt",
     "md",
     "html",
 
@@ -128,12 +135,13 @@ FILE_SIGNATURES = {
     "pdf": [b"%PDF-"],
     "docx": [b"PK\x03\x04", b"PK\x05\x06", b"PK\x07\x08"],  # ZIP-based container
     "xlsx": [b"PK\x03\x04", b"PK\x05\x06", b"PK\x07\x08"],  # ZIP-based container
-    "xls": [b"\xD0\xCF\x11\xE0"],  # OLE2 format
     "pptx": [b"PK\x03\x04", b"PK\x05\x06", b"PK\x07\x08"],  # ZIP-based container
-    "ppt": [b"\xD0\xCF\x11\xE0"],  # OLE2 format
+    # PR-1: the legacy OLE2 trio (xls/doc/ppt) is no longer an accepted upload
+    # extension at all, so it deliberately has no signature entry here. The OLE2
+    # magic itself lives in app/utils/legacy_office.py (OLE2_MAGIC) and is used
+    # to refuse legacy bytes hidden behind an OOXML filename.
     "odt": [b"PK\x03\x04", b"PK\x05\x06", b"PK\x07\x08"],  # ZIP-based container
     "ods": [b"PK\x03\x04", b"PK\x05\x06", b"PK\x07\x08"],  # ZIP-based container
-    "doc": [b"\xD0\xCF\x11\xE0"],
     "txt": [],  # Text files no specific signature
     "csv": [],  # CSV files no specific signature
     "json": [],  # JSON files no specific signature
@@ -182,7 +190,6 @@ CONTENT_TYPE_BY_EXTENSION = {
     # Documents
     "pdf": ["application/pdf"],
     "docx": ["application/vnd.openxmlformats-officedocument.wordprocessingml.document"],
-    "doc": ["application/msword"],
     "txt": ["text/plain"],
     "csv": ["text/csv", "text/plain"],
     "json": ["application/json", "text/plain"],
@@ -193,9 +200,7 @@ CONTENT_TYPE_BY_EXTENSION = {
     "md": ["text/markdown", "text/x-markdown", "text/plain"],
     "html": ["text/html", "application/xhtml+xml", "text/plain"],
     "xlsx": ["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"],
-    "xls": ["application/vnd.ms-excel"],
     "pptx": ["application/vnd.openxmlformats-officedocument.presentationml.presentation"],
-    "ppt": ["application/vnd.ms-powerpoint"],
     "odt": ["application/vnd.oasis.opendocument.text"],
     "ods": ["application/vnd.oasis.opendocument.spreadsheet"],
     # Archives
@@ -265,6 +270,12 @@ def validate_extension(filename: str) -> str:
 
     if extension in DISALLOWED_EXTENSIONS:
         raise FileValidationError("Unsupported file type.")
+
+    # PR-1 (OLE2 honest-disable): legacy .xls/.doc/.ppt are refused with explicit
+    # re-save guidance rather than the generic allow-list dump, because the only
+    # honest outcome for them anywhere in this app is "not convertible".
+    if extension in LEGACY_OFFICE_REPLACEMENTS:
+        raise FileValidationError(legacy_guidance(extension))
 
     if extension not in ALLOWED_EXTENSIONS:
 

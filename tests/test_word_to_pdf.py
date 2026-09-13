@@ -90,44 +90,98 @@ def test_word_to_pdf_plugin_is_discovered_and_converts():
     assert _PLACEHOLDER_TEXT not in pdf_text
 
 
-def test_docx_renamed_as_doc_gets_real_content(tmp_path):
-    """A .doc with PK magic (docx renamed) → real content, not placeholder.
+# Strings that must never reach an HTTP response body: internal library names,
+# exception class names and on-disk upload paths.
+_INTERNAL_MARKERS = (
+    "Traceback",
+    "openpyxl",
+    "python-docx",
+    "docx.api",
+    "DocxDocument",
+    "PackageNotFoundError",
+    "BadZipFile",
+    "InvalidFileException",
+    "uploads\\",
+    "uploads/",
+    ".venv",
+    "site-packages",
+)
 
-    Uses plugin-level convert because the upload validator expects OLE2
-    magic for .doc extensions and rejects PK magic at the upload gate.
-    """
-    plugin = registry.get_plugin("doc", "pdf")
+
+def _assert_no_internal_leak(message: str) -> None:
+    leaked = [marker for marker in _INTERNAL_MARKERS if marker.lower() in message.lower()]
+    assert not leaked, f"Response body leaks internal details: {leaked} in {message!r}"
+
+
+def test_legacy_doc_pair_is_no_longer_registered():
+    """PR-1: (doc -> pdf) could never work, so it must not be routable at all."""
+    with pytest.raises(ValueError):
+        registry.get_plugin("doc", "pdf")
+
+    plugin = registry.get_plugin("docx", "pdf")
     assert plugin.slug == "word-to-pdf"
-    assert plugin.supports(".doc", "pdf")
-
-    renamed = tmp_path / "renamed.doc"
-    renamed.write_bytes(
-        _make_docx_bytes(["Real content inside a renamed DOC"])
-    )
-
-    output_path = _run_convert(plugin, renamed, tmp_path / "out")
-    pdf_text = _pdf_text(output_path)
-    assert "Real content inside a renamed DOC" in pdf_text
-    assert _PLACEHOLDER_TEXT not in pdf_text
+    assert "doc" not in plugin.source_formats
+    assert "docx" in plugin.source_formats
 
 
-def test_legacy_doc_ole2_fails_explicitly(tmp_path):
-    """A genuine legacy .doc (OLE2 magic) must fail with a clear message."""
-    plugin = registry.get_plugin("doc", "pdf")
-    legacy_doc = tmp_path / "legacy.doc"
-    legacy_doc.write_bytes(_OLE2_HEADER + b"\x00" * 512)
+def test_legacy_doc_upload_is_refused_with_resave_guidance():
+    """A genuine .doc upload gets an honest 4xx + re-save guidance, never a 500.
 
-    with pytest.raises(RuntimeError, match="not supported"):
-        _run_convert(plugin, legacy_doc, tmp_path / "out")
-
+    Before PR-1 this returned HTTP 500.
+    """
     client = TestClient(app)
     response = _upload(
-        client, "legacy.doc", legacy_doc.read_bytes(), "application/msword"
+        client,
+        "legacy.doc",
+        _OLE2_HEADER + b"\x00" * 512,
+        "application/msword",
     )
-    assert response.status_code == 500
-    detail = response.json()["detail"]
-    assert "not supported" in detail
-    assert "docx" in detail.lower()
+
+    assert response.status_code == 415, response.text
+    body = response.json()
+    assert body["code"] == "UNSUPPORTED_FILE_TYPE", body
+    message = body["message"]
+    assert "Legacy .doc" in message, message
+    assert ".docx" in message, message
+    _assert_no_internal_leak(message)
+
+
+def test_ole2_masquerading_as_docx_returns_honest_422(tmp_path):
+    """OLE2 bytes behind a .docx name must give 422 UNSUPPORTED_CONVERSION.
+
+    The upload gate cannot stop this one: the container signature check is
+    skipped when the MIME matches, so the honest refusal has to happen in the
+    converter. Before PR-1 this returned HTTP 500.
+    """
+    client = TestClient(app)
+    response = client.post(
+        "/convert",
+        files={"file": ("fake.docx", _OLE2_HEADER + b"\x00" * 512, _DOCX_MIME)},
+        data={"target_format": "pdf"},
+    )
+
+    assert response.status_code == 422, response.text
+    body = response.json()
+    assert body["code"] == "UNSUPPORTED_CONVERSION", body
+    assert "ole2" in body["message"].lower(), body
+    assert "docx" in body["message"].lower(), body
+    _assert_no_internal_leak(body["message"])
+
+
+def test_plugin_raises_legacy_format_unsupported_error(tmp_path):
+    """The plugin layer raises the dedicated, honestly-typed legacy error."""
+    from app.services.conversion_service import UnsupportedConversionError
+
+    plugin = registry.get_plugin("docx", "pdf")
+    legacy_docx = tmp_path / "masquerade.docx"
+    legacy_docx.write_bytes(_OLE2_HEADER + b"\x00" * 512)
+
+    with pytest.raises(UnsupportedConversionError) as excinfo:
+        _run_convert(plugin, legacy_docx, tmp_path / "out")
+
+    assert type(excinfo.value).__name__ == "LegacyFormatUnsupportedError"
+    assert "docx" in str(excinfo.value).lower()
+    _assert_no_internal_leak(str(excinfo.value))
 
 
 def test_corrupt_docx_fails_explicitly(tmp_path):

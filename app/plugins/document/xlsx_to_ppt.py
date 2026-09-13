@@ -24,6 +24,7 @@ Mapping (v1):
 from pathlib import Path
 
 from app.plugins.base import ConverterPlugin
+from app.utils.legacy_office import legacy_format_unsupported_error
 
 # Tunable mapping flags (see plan: .tmp/PLAN_PR1C_DOCX_PPT_XLSX_PPT.md).
 MAX_TABLE_NATIVE_COLUMNS = 8
@@ -38,7 +39,9 @@ class XLSXToPPTPlugin(ConverterPlugin):
     engine = "document"
     icon = "📄"
 
-    source_formats = ["xlsx", "xls", "spreadsheet"]
+    # PR-1 (OLE2 honest-disable): "xls" is dropped — openpyxl cannot read the
+    # legacy OLE2 container, so advertising it as an input was a dead end.
+    source_formats = ["xlsx", "spreadsheet"]
     target_formats = ["ppt", "pptx", "powerpoint"]
 
     goal = "document"
@@ -165,10 +168,8 @@ class XLSXToPPTPlugin(ConverterPlugin):
         container = self._detect_container(source_path)
 
         if container == "xls":
-            raise RuntimeError(
-                "Legacy .xls format (OLE2 compound document) is not supported by "
-                "this converter. Please save your spreadsheet as .xlsx and try again."
-            )
+            # PR-1: honest 422 with re-save guidance (was RuntimeError -> 500).
+            raise legacy_format_unsupported_error("xls", target_format)
         if container == "unknown":
             raise RuntimeError(
                 "The uploaded file is not a valid XLSX spreadsheet. Please save it "

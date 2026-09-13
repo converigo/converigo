@@ -1,13 +1,15 @@
 {
   "title": "PPT to JPG Converter",
   "description": "Convert PPT slides to JPG images online with a fast and simple workflow.",
+  "source": "pptx",
+  "target": "jpg",
   "hero": {
     "title": "PPT to JPG Converter Free Online",
     "subtitle": "Export presentation slides as images.",
     "description": "Convert  files to  online for free. Fast, secure browser-based conversion with no software installation. Get high-quality  output in seconds using Converigo."
   },
   "steps": [
-    "Upload your PPT file.",
+    "Upload your .pptx file.",
     "Choose JPG as output.",
     "Download your JPG images."
   ],

@@ -77,7 +77,8 @@ class WordToPDFPlugin(_OfficePlaceholderPlugin):
     slug = "word-to-pdf"
     name = "Word to PDF"
     description = "Convert Word documents into PDF files."
-    source_formats = ["docx", "doc", "word"]
+    # PR-1 (OLE2 honest-disable): "doc" is dropped from the advertised inputs.
+    source_formats = ["docx", "word"]
     target_formats = ["pdf"]
     seo_title = "Word to PDF Converter | Converigo"
     seo_description = "Convert Word documents into PDF files quickly and easily."

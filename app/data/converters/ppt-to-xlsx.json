@@ -1,13 +1,15 @@
 {
   "title": "PPT to XLSX Converter",
   "description": "Convert PPT presentations into XLSX spreadsheets online for data extraction and reuse.",
+  "source": "pptx",
+  "target": "xlsx",
   "hero": {
     "title": "PPT to XLSX Converter Free Online",
     "subtitle": "Extract slide data into Excel format.",
     "description": "Convert  files to  online for free. Fast, secure browser-based conversion with no software installation. Get high-quality  output in seconds using Converigo."
   },
   "steps": [
-    "Upload your PPT file.",
+    "Upload your .pptx file.",
     "Choose XLSX as output.",
     "Download your XLSX spreadsheet."
   ],
