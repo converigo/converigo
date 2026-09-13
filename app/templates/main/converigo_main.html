@@ -1372,11 +1372,13 @@ const STATIC_TARGET_MAP = {
   // document sources
   pdf:['DOC','DOCX','HTML','JPEG','JPG','MD','ODT','PNG','PPT','PPTX','TXT','WORD','XLS','XLSX'], // F3: +HTML,+MD via pdf-to-html / pdf-to-md; Batch 2: +PNG via pdf-to-png
   docx:['HTML','JPEG','JPG','MD','PDF','POWERPOINT','PPT','PPTX','SPREADSHEET','XLS','XLSX'],  // F7: +HTML via docx-to-html; F8-A: +MD via docx-to-md
-  doc:['JPEG','JPG','PDF','POWERPOINT','PPT','PPTX','SPREADSHEET','XLS','XLSX'],
+  // PR-1 (OLE2 honest-disable): the legacy OLE2 source row `doc` is removed —
+  // .doc uploads are refused at the validator (415 + re-save guidance) and no
+  // converter can read the container, so a target list here would be a lie.
   pptx:['DOC','DOCX','JPEG','JPG','PDF','PNG','SPREADSHEET','WORD','XLS','XLSX'],  // F7: +PNG,+JPG via pptx-to-png / pptx-to-jpg (FIX round)
-  ppt:['DOC','DOCX','JPEG','JPG','PDF','SPREADSHEET','WORD','XLS','XLSX'],
+  // PR-1: legacy `ppt` source row removed (same reason as `doc` above).
   xlsx:['CSV','DOC','DOCX','HTML','JSON','ODS','PDF','POWERPOINT','PPT','PPTX','TSV','WORD'],
-  xls:['DOC','DOCX','PDF','POWERPOINT','PPT','PPTX','WORD'],
+  // PR-1: legacy `xls` source row removed (same reason as `doc` above).
   txt:['BMP','GIF','JPG','PDF','PNG','TIFF','WEBP'],  csv:['HTML','JSON','PDF','TSV','XLSX'],  tsv:['CSV'],  json:['CSV','XLSX','XML','YAML'],  ods:['XLSX'],  odt:['PDF'],  // F6: json +XML,+YAML; F8-A: txt +raster targets via base64-to-image
   xml:['JSON'],  yaml:['JSON'],  yml:['JSON'],  // F6: XML/YAML data interchange (net-new rows)
   powerpoint:['DOC','DOCX','JPEG','JPG','SPREADSHEET','WORD','XLS','XLSX'],
