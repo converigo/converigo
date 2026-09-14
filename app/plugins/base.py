@@ -134,6 +134,20 @@ class ConverterPlugin(ABC):
 
         }
 
+    def registration_pairs(self) -> list[tuple[str, str]]:
+        """(source, target) pairs this plugin occupies in the registry index.
+        Defaults to the full source x target cross product. Plugins whose real
+        capability is narrower than that product (e.g. format-preserving
+        operations like image-resize, where jpg -> bmp is NOT supported)
+        should override this so unsupported pairs never enter the registry
+        or the derived converter dropdown map.
+        """
+        return [
+            (source.lower(), target.lower())
+            for source in self.source_formats
+            for target in self.target_formats
+        ]
+
     @abstractmethod
     async def convert(
         self,
