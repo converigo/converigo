@@ -55,7 +55,11 @@ def get_base_url() -> str:
 # ---------------------------------------------------------------------------
 
 _MAP_BLOCK_RE = re.compile(r"const STATIC_TARGET_MAP = \{(.*?)\};", re.S)
-_ENTRY_RE = re.compile(r"([A-Za-z0-9_]+):\[([^\]]*)\]")
+# D5: the map is server-rendered now, so its keys arrive quoted ("wav":[...]) instead
+# of the historical bare-key literal. Accept both forms. Only the lexical shape of
+# the parse changes: every assertion below is unchanged, including the full-order
+# lock that is the whole point of WS1.
+_ENTRY_RE = re.compile(r'"?([A-Za-z0-9_]+)"?\s*:\s*\[([^\]]*)\]')
 
 
 def _served_static_target_map(client: TestClient) -> dict[str, list[str]]:

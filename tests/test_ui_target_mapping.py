@@ -21,28 +21,22 @@ pytestmark = pytest.mark.usefixtures("app_base_url")
 
 
 def _build_expected_targets() -> dict[str, list[str]]:
-    """Derive expected per-source target list from the plugin registry.
+    """The expectation IS the authoritative capability (D5).
 
-    Iterates all discovered plugin classes, collects their source_formats and
-    target_formats (which already enumerate alias tokens such as 'word',
-    'spreadsheet', 'powerpoint'), and for each source format collects the set
-    of unique target formats, excluding self-conversions (source==target).
-    This exactly mirrors how the registry dump (audit_collect.json) was built
-    and how STATIC_TARGET_MAP in the HTML was derived.
+    This used to re-derive the answer by iterating discovered plugin classes and
+    taking ``source_formats x target_formats``, which is what each class
+    *claims*. That oracle could not fail in the ways that mattered: it counted a
+    placeholder's claims as capability, it accepted non-extension alias tokens
+    such as ``word``/``powerpoint``/``spreadsheet`` as options, and it kept rows
+    for sources the upload validator refuses. ``app.services.target_capability``
+    is the single source the page is actually rendered from - pair index
+    (dispatch) intersected with the upload allow-list, alias tokens folded to the
+    extension that is really delivered - so this test now compares the browser
+    against production truth instead of against another hand-derived guess.
     """
-    result = discover_plugins()
-    raw: dict[str, set[str]] = {}
-    for cls in result.plugin_classes:
-        srcs = getattr(cls, "source_formats", []) or []
-        tgts = getattr(cls, "target_formats", []) or []
-        for src in srcs:
-            src = src.lower()
-            for tgt in tgts:
-                tgt = tgt.lower()
-                if src == tgt:
-                    continue  # skip self-conversion
-                raw.setdefault(src, set()).add(tgt.upper())
-    return {k: sorted(v) for k, v in sorted(raw.items())}
+    from app.services.target_capability import conversion_capability
+
+    return conversion_capability()
 
 
 def _expected_for(ext: str, expected_map: dict[str, list[str]]) -> list[str]:

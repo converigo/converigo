@@ -1357,41 +1357,23 @@ const CATEGORY = {
   other:    {color:'#9333EA', light:'#F3E8FF', targets:['PDF','JPG','PNG','TXT','ZIP'], exts:[]}
 };
 
-/* ---------------- static source-to-targets map (P1a) ---------------- */
-/* Dihasilkan dari registry dump aktual per source-format.
-   Self-conversions (source===target) dihapus karena tidak berguna
-   sebagai opsi konversi di dropdown.
-   Fallback: array kosong → "tidak ada converter". */
-const STATIC_TARGET_MAP = {
-  // image sources
-  jpg:['ICO','PDF','PNG','TIFF','TXT','WEBP'],  jpeg:['ICO','PDF','PNG','TIFF','TXT','WEBP'],  // F8-A: +TXT via image-to-base64
-  png:['BMP','ICO','JPEG','JPG','PDF','TIFF','TXT','WEBP'],  webp:['ICO','JPEG','JPG','PDF','PNG','TIFF','TXT'],  // F8-A: png/webp +TXT via image-to-base64
-  bmp:['JPEG','JPG','PDF','PNG','TXT','WEBP'],  tiff:['JPEG','JPG','PDF','PNG','TXT'],  // F8-A: +TXT via image-to-base64
-  ico:['PNG'],  svg:['PNG'],  heic:['JPEG','JPG','PNG'],  heif:['JPEG','JPG'],  avif:['JPEG','JPG'],
-  gif:['MP4','PDF','TXT'],  // VAR-10 images-to-pdf (Batch 3) + F4 gif-to-mp4 + F8-A TXT
-  // document sources
-  pdf:['DOC','DOCX','HTML','JPEG','JPG','MD','ODT','PNG','PPT','PPTX','TXT','WORD','XLS','XLSX'], // F3: +HTML,+MD via pdf-to-html / pdf-to-md; Batch 2: +PNG via pdf-to-png
-  docx:['HTML','JPEG','JPG','MD','PDF','POWERPOINT','PPT','PPTX','SPREADSHEET','XLS','XLSX'],  // F7: +HTML via docx-to-html; F8-A: +MD via docx-to-md
-  // PR-1 (OLE2 honest-disable): the legacy OLE2 source row `doc` is removed —
-  // .doc uploads are refused at the validator (415 + re-save guidance) and no
-  // converter can read the container, so a target list here would be a lie.
-  pptx:['DOC','DOCX','JPEG','JPG','PDF','PNG','SPREADSHEET','WORD','XLS','XLSX'],  // F7: +PNG,+JPG via pptx-to-png / pptx-to-jpg (FIX round)
-  // PR-1: legacy `ppt` source row removed (same reason as `doc` above).
-  xlsx:['CSV','DOC','DOCX','HTML','JSON','ODS','PDF','POWERPOINT','PPT','PPTX','TSV','WORD'],
-  // PR-1: legacy `xls` source row removed (same reason as `doc` above).
-  txt:['BMP','GIF','JPG','PDF','PNG','TIFF','WEBP'],  csv:['HTML','JSON','PDF','TSV','XLSX'],  tsv:['CSV'],  json:['CSV','XLSX','XML','YAML'],  ods:['XLSX'],  odt:['PDF'],  // F6: json +XML,+YAML; F8-A: txt +raster targets via base64-to-image
-  xml:['JSON'],  yaml:['JSON'],  yml:['JSON'],  // F6: XML/YAML data interchange (net-new rows)
-  powerpoint:['DOC','DOCX','JPEG','JPG','SPREADSHEET','WORD','XLS','XLSX'],
-  spreadsheet:['DOC','DOCX','POWERPOINT','PPT','PPTX','WORD'],
-  word:['JPEG','JPG','PDF','POWERPOINT','PPT','PPTX','SPREADSHEET','XLS','XLSX'],
-  html:['CSV'],  md:['HTML'],  rtf:[],  // F8-B: md→HTML (md-to-html); F8-C: html→CSV (html-to-csv); rtf tetap kosong
-  // audio sources (F4: wav +FLAC via wav-to-flac; ogg +MP3 via ogg-to-mp3)
-  mp3:['WAV','AAC'],  wav:['MP3','FLAC','AAC'],  ogg:['MP3'],  flac:['MP3'],  m4a:['MP3'],  aac:['MP3'],  // WS1: MP3 first — addFiles() auto-selects the first non-self entry as the default target; FLAC-first made the homepage default WAV→FLAC (regression from 368475b, see f7_evidence/WS1_WAV_MP3_AUDIT_REPORT.md); Batch 2: +AAC via mp3-to-aac / wav-to-aac
-  // video sources (F4: FFmpeg container transcodes, re-encoded libx264+aac)
-  mp4:['AAC','AVI','FLAC','GIF','M4A','MP3','OGG','WAV','WEBM'],  mov:['MP4'],  avi:['MP4'],  webm:['MP4'],  mkv:['MP4'],  flv:[],
-  // archive sources (self-conversions dihapus — hanya extract operation)
-  gz:['GZIP'],  gzip:['GZ'],  zip:[],  '7z':[],  rar:[],  tar:[],
-};
+/* ---------------- conversion capability (D5) ---------------- */
+/* Single authoritative source: app/services/target_capability.py, rendered into
+   this document by app/routers/home.py. Derived live from the registry pair
+   index (what /convert can actually dispatch) intersected with the upload
+   allow-list (what a user can actually send), excluding placeholder-backed
+   pairs and folding legacy/alias target tokens to the canonical extension the
+   winning plugin really delivers.
+
+   Do NOT reintroduce a hand-maintained literal here. That is what let this map
+   drift into advertising pdf -> WORD long after the pair behind it became an
+   honest-failure placeholder, and it is locked in both directions by
+   tests/test_target_capability_authority.py, which parses the SERVED page.
+
+   Array order IS the auto-default policy (addFiles() takes the first non-self
+   entry) and is pinned inside the resolver — see WS1 /
+   tests/test_wav_ui_default_target.py. A missing row means "no converter". */
+const STATIC_TARGET_MAP = {{ target_capability_json | safe }};
 
 function getValidTargets(ext){
   return STATIC_TARGET_MAP[(ext||'').toLowerCase()] || [];
@@ -1557,14 +1539,16 @@ function buildGlobalFmt(){
   const sameTarget = pending.length > 0 && pendingTargets.length === 1;
 
   if(sameTarget){
-    const cats = [...new Set(pending.map(j=>j.category))];
-    let opts = [];
-    if(cats.length === 1){
-      opts = pending.map(j => getValidTargets(j.ext))
-                    .reduce((a,b) => a.filter(t => b.includes(t)), getValidTargets(pending[0].ext));
-    } else {
-      opts = ['JPG','PNG','PDF','MP3','MP4','ZIP'];
-    }
+    /* D5: the bulk control may only offer a target every pending row can really
+       reach, so options are always the intersection of each row's own
+       capability. The cross-category branch used to substitute a hardcoded
+       six-format guess that was valid for none of the rows in a mixed batch, so
+       picking it turned one upload set into N doomed requests. An honest empty
+       intersection now yields an empty control, which convertAll() ignores
+       because it only lets a bulk pick win when it has a value — so the
+       row-level targets stay authoritative. */
+    const opts = pending.map(j => getValidTargets(j.ext))
+                  .reduce((a,b) => a.filter(t => b.includes(t)), getValidTargets(pending[0].ext));
     const current = sel.value;
     /* RC-1: `pendingTargets[0]` is the consensus every pending row already
        agrees on. The bulk control summarises that consensus, so it must be

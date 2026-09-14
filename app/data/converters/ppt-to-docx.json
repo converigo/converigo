@@ -20,12 +20,12 @@
   ],
   "supported_formats": {
     "input": [
-      ".ppt"
+      ".pptx"
     ],
     "output": [
       ".docx"
     ],
-    "description": "PPT input, DOCX output"
+    "description": "PPTX input, DOCX output"
   },
   "tips": [
     "Review slide text after conversion",

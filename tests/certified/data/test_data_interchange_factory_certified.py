@@ -251,15 +251,13 @@ def test_yml_alias_registered_and_converted(tmp_path: Path) -> None:
 
 @pytest.mark.certified
 def test_static_target_map_f6_rows() -> None:
-    """The deployed STATIC_TARGET_MAP rows reflect the F6 delta: json gains
+    """The deployed target picker reflects the F6 delta: json gains
     XML + YAML; xml/yaml/yml are net-new sources targeting JSON."""
-    html_text = Path("app/templates/main/converigo_main.html").read_text(encoding="utf-8")
-    block = html_text.split("const STATIC_TARGET_MAP = {", 1)[1].split("};", 1)[0]
-    mapping: dict[str, list[str]] = {}
-    for key, values in re.findall(r"(['\"a-zA-Z0-9_]+):\[(.*?)\]", block):
-        mapping[key.strip("'\"")] = [
-            v.strip().strip("'\"") for v in values.split(",") if v.strip()
-        ]
+    # D5: read the authoritative capability the page is rendered from instead of
+    # slicing a literal out of the template file.
+    from app.services.target_capability import conversion_capability
+
+    mapping = conversion_capability()
 
     assert mapping.get("json") == ["CSV", "XLSX", "XML", "YAML"], mapping.get("json")
     assert mapping.get("xml") == ["JSON"], mapping.get("xml")

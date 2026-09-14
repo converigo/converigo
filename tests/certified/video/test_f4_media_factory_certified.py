@@ -421,26 +421,22 @@ def test_d9_pageless_slugs_now_have_page_and_contract() -> None:
 def test_static_target_map_f4_rows() -> None:
     """In-suite proof that the F4 map delta is exactly what the registry
     derivation requires (standalone gate: tmp/verify_f4_map.py)."""
-    html = (ROOT / "app" / "templates" / "main" / "converigo_main.html").read_text(
-        encoding="utf-8"
-    )
-    block = html.split("const STATIC_TARGET_MAP = {", 1)[1].split("};", 1)[0]
-    static_map: dict[str, set[str]] = {}
-    for key, values in __import__("re").findall(
-        r"(['\"a-zA-Z0-9_]+):\[(.*?)\]", block
-    ):
-        static_map[key.strip("'\"").lower()] = {
-            v.strip().strip("'\"") for v in values.split(",") if v.strip()
-        }
+    # D5: read the authoritative capability the page is rendered from. A source
+    # with no converter simply has no row (get() -> empty set), which is what the
+    # literal spelled as `flv: []`.
+    from app.services.target_capability import conversion_capability
+
+    derived = conversion_capability()
+    static_map: dict[str, set[str]] = {k: set(v) for k, v in derived.items()}
 
     for source_ext in ("mov", "mkv", "avi", "webm"):
-        assert static_map[source_ext] == {"MP4"}
-    assert {"MP4", "PDF"} <= static_map["gif"]
-    assert "MP3" in static_map["ogg"]
-    assert {"FLAC", "MP3"} <= static_map["wav"]
-    assert {"AVI", "WEBM"} <= static_map["mp4"]
-    assert "MP4" not in static_map["mp4"]  # self-pair excluded
-    assert static_map["flv"] == set()      # D6b residuals deferred
+        assert static_map.get(source_ext, set()) == {"MP4"}
+    assert {"MP4", "PDF"} <= static_map.get("gif", set())
+    assert "MP3" in static_map.get("ogg", set())
+    assert {"FLAC", "MP3"} <= static_map.get("wav", set())
+    assert {"AVI", "WEBM"} <= static_map.get("mp4", set())
+    assert "MP4" not in static_map.get("mp4", set())  # self-pair excluded
+    assert static_map.get("flv", set()) == set()     # D6b residuals deferred
 
 
 

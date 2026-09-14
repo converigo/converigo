@@ -194,25 +194,24 @@ def test_html_to_csv_first_table(tmp_path: Path) -> None:
 
 
 def _static_target_map() -> dict[str, list[str]]:
-    html_text = Path("app/templates/main/converigo_main.html").read_text(encoding="utf-8")
-    block = html_text.split("const STATIC_TARGET_MAP = {", 1)[1].split("};", 1)[0]
-    mapping: dict[str, list[str]] = {}
-    for key, values in re.findall(r"(['\"a-zA-Z0-9_]+):\[(.*?)\]", block):
-        mapping[key.strip("'\"")] = [
-            v.strip().strip("'\"") for v in values.split(",") if v.strip()
-        ]
-    return mapping
+    # D5: the deployed rows ARE the authoritative capability - app/routers/home.py
+    # renders this exact object into the page, so a drift between UI and registry
+    # can no longer be represented at all, let alone go unnoticed.
+    from app.services.target_capability import conversion_capability
+
+    return conversion_capability()
 
 
 @pytest.mark.certified
 def test_static_target_map_f8_rows() -> None:
-    """The deployed STATIC_TARGET_MAP reflects the F8 delta exactly."""
+    """The deployed target picker reflects the F8 delta exactly."""
     mapping = _static_target_map()
     assert mapping.get("md") == ["HTML"], mapping.get("md")
-    assert mapping.get("html") == ["CSV"], mapping.get("html")
+    # D5: values are the canonical extension the winning plugin delivers, and
+    # html-to-pdf is a live capability the hand-kept literal had lost.
+    assert mapping.get("html") == ["CSV", "PDF"], mapping.get("html")
     assert mapping.get("docx") == [
-        "HTML", "JPEG", "JPG", "MD", "PDF", "POWERPOINT", "PPT", "PPTX",
-        "SPREADSHEET", "XLS", "XLSX",
+        "HTML", "JPEG", "JPG", "MD", "PDF", "PPTX", "XLSX",
     ], mapping.get("docx")
     assert mapping.get("jpg") == ["ICO", "PDF", "PNG", "TIFF", "TXT", "WEBP"], mapping.get("jpg")
     assert mapping.get("png") == [
