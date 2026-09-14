@@ -75,6 +75,9 @@ def measure(source: Path, scratch: Path) -> dict:
         "size": source.stat().st_size,
         "decision": "serve",
         "reason": "",
+        # `child` is the structural fact behind the cost claim: an intake
+        # refusal never spawns a process. It is deterministic, unlike timing.
+        "child": "yes",
         "pages": 0,
         "ink_total": 0,
         "ink_min_page": 0,
@@ -85,7 +88,7 @@ def measure(source: Path, scratch: Path) -> dict:
     try:
         html_text = runner.prepare_html_source(source)
     except Exception as exc:  # noqa: BLE001 - recorded, not handled
-        row.update(decision="refuse-intake", reason=type(exc).__name__)
+        row.update(decision="refuse-intake", reason=type(exc).__name__, child="no")
         row["seconds"] = round(time.perf_counter() - started, 2)
         return row
 
@@ -120,7 +123,7 @@ def measure(source: Path, scratch: Path) -> dict:
     return row
 
 
-def render_markdown(rows: list[dict]) -> str:
+def render_markdown(rows: list[dict], reruns: list[dict], budget_bucket: int | None) -> str:
     """Format the measurement table plus the reasoning it supports."""
     served = [row for row in rows if row["decision"] == "serve"]
     refused_empty = [
@@ -135,9 +138,7 @@ def render_markdown(rows: list[dict]) -> str:
         (row for row in rows if row["fixture"] == "just_under_ceiling.html"), {}
     )
     timeout_margin = (
-        round(runner.RENDER_TIMEOUT_SECONDS / worst_row["seconds"], 1)
-        if worst_row.get("seconds")
-        else 0
+        runner.RENDER_TIMEOUT_SECONDS // budget_bucket if budget_bucket else 0
     )
 
     lines = [
@@ -148,27 +149,34 @@ def render_markdown(rows: list[dict]) -> str:
         "",
         "Every row is the real pipeline (intake guards -> render in an isolated",
         "child -> output validation), so these numbers are reproducible instead of",
-        "quoted from a chat log.",
+        "quoted from a chat log. Each served fixture is rendered twice and the",
+        "second pass is compared against the first, so a number that drifts between",
+        "runs is reported instead of committed. Per-row wall-clock times are",
+        "deliberately absent for the same reason: they measure the load of the",
+        "machine, not the behavior of the code, so timing appears once as a",
+        "conservative bucket below.",
         "",
-        f"- PyMuPDF `{fitz.VersionBind}`, Python `{platform.python_version()}` on "
-        f"`{platform.system()}`",
-        f"- Ink metric: DeviceGray pixmap at `{runner.INK_SAMPLE_DPI}` dpi; samples "
-        f">= `{runner.INK_NEAR_WHITE_FLOOR}` are paper, everything else is ink",
-        f"- Ceilings under test: input `{runner.MAX_HTML_INPUT_BYTES}` bytes, depth "
+        (f"- PyMuPDF `{fitz.VersionBind}`, Python `{platform.python_version()}` on "
+        f"`{platform.system()}`"),
+        (f"- Ink metric: DeviceGray pixmap at `{runner.INK_SAMPLE_DPI}` dpi; samples "
+        f">= `{runner.INK_NEAR_WHITE_FLOOR}` are paper, everything else is ink"),
+        (f"- Ceilings under test: input `{runner.MAX_HTML_INPUT_BYTES}` bytes, depth "
         f"`{runner.MAX_ELEMENT_DEPTH}`, token `{runner.MAX_TOKEN_LENGTH}`, pages "
         f"`{runner.MAX_RENDER_PAGES}`, render timeout "
         f"`{runner.RENDER_TIMEOUT_SECONDS}` s, ink floor "
-        f"`{runner.MIN_TOTAL_INK_PIXELS}`",
+        f"`{runner.MIN_TOTAL_INK_PIXELS}`"),
+        (f"- Double-render check: {len(reruns)} served fixtures rendered a second "
+        "time; pages, ink totals and unresolved image counts matched exactly"),
         "",
-        "| fixture | bytes | decision | reason | pages | ink total | ink min page | "
-        "unresolved <img> | s |",
-        "|---|---:|---|---|---:|---:|---:|---:|---:|",
+        ("| fixture | bytes | decision | reason | child spawned | pages | "
+        "ink total | ink min page | unresolved <img> |"),
+        "|---|---:|---|---|---|---:|---:|---:|---:|",
     ]
 
     for row in rows:
         lines.append(
-            "| {fixture} | {size:,} | {decision} | {reason} | {pages} | "
-            "{ink_total:,} | {ink_min_page:,} | {unresolved_imgs} | {seconds} |".format(
+            "| {fixture} | {size:,} | {decision} | {reason} | {child} | {pages} | "
+            "{ink_total:,} | {ink_min_page:,} | {unresolved_imgs} |".format(
                 **row
             ).replace("|  |", "| - |")
         )
@@ -177,35 +185,42 @@ def render_markdown(rows: list[dict]) -> str:
         "",
         "## What the separation proves",
         "",
-        f"- Visually-empty documents that passed structural validation and were "
-        f"still refused: "
+        "- Visually-empty documents that passed structural validation and were "
+        "still refused: "
         + ", ".join(f"`{row['fixture']}`={row['ink_total']}" for row in refused_empty)
         + ".",
-        f"- Smallest ink total among served documents: `{smallest_served}` "
-        f"(`{smallest_row.get('fixture', '-')}`).",
-        "- Every empty case measures exactly 0 ink while every served document "
+        (f"- Smallest ink total among served documents: `{smallest_served}` "
+        f"(`{smallest_row.get('fixture', '-')}`)."),
+        ("- Every empty case measures exactly 0 ink while every served document "
         f"reaches at least {runner.MIN_TOTAL_INK_PIXELS}, which is why the floor is "
         f"{runner.MIN_TOTAL_INK_PIXELS}: a higher floor starts refusing legitimate "
-        "minimal pages while catching nothing additional.",
-        f"- `{tail_row.get('fixture', '-')}` totals {tail_row.get('ink_total', 0):,} ink "
+        "minimal pages while catching nothing additional."),
+        (f"- `{tail_row.get('fixture', '-')}` totals {tail_row.get('ink_total', 0):,} ink "
         f"while its least-ink page measures {tail_row.get('ink_min_page', 0)}: a "
-        "per-page rule would wrongly refuse it, the document total accepts it.",
-        f"- `{worst_row.get('fixture', '-')}` ({worst_row.get('size', 0):,} bytes, "
-        f"{worst_row.get('pages', 0)} pages) is the measured worst legitimate case at "
-        f"{worst_row.get('seconds', 0)} s including child start-up, which is what makes "
-        f"the {runner.RENDER_TIMEOUT_SECONDS} s render timeout a "
-        f"{timeout_margin}x margin rather than a guess.",
+        "per-page rule would wrongly refuse it, the document total accepts it."),
+        (
+            f"- The heaviest legitimate document is "
+            f"`{worst_row.get('fixture', '-')}` ({worst_row.get('size', 0):,} bytes, "
+            f"{worst_row.get('pages', 0)} pages). Every document that spawns a child "
+            f"rendered in under {budget_bucket} s including child start-up, which is "
+            f"what makes the {runner.RENDER_TIMEOUT_SECONDS} s render timeout at least "
+            f"a {timeout_margin}x margin rather than a guess."
+            if budget_bucket
+            else "- At least one document that spawned a child took as long as the "
+            f"{runner.RENDER_TIMEOUT_SECONDS} s render timeout, so there is no margin "
+            "to quote: the budget or the fixture set has to be revisited."
+        ),
         "",
         "## Known rendering limits measured here (disclosed on the landing page)",
         "",
-        "- `css_flexbox_layout.html` keeps its text but ignores flex/grid/float "
-        "layout.",
-        "- `external_image_only.html` renders MuPDF's `[image]` placeholder instead "
+        ("- `css_flexbox_layout.html` keeps its text but ignores flex/grid/float "
+        "layout."),
+        ("- `external_image_only.html` renders MuPDF's `[image]` placeholder instead "
         "of the network image: it is served (placeholders are not a failure) and "
         "the `unresolved <img>` column is the observability signal behind the "
-        "landing-page caveat that images work only as data-URIs.",
-        "- `script_generated_body.html` produces no ink at all: JavaScript is not "
-        "executed.",
+        "landing-page caveat that images work only as data-URIs."),
+        ("- `script_generated_body.html` produces no ink at all: JavaScript is not "
+        "executed."),
         "",
     ]
     return "\n".join(lines)
@@ -223,8 +238,18 @@ def main() -> int:
     scratch = HERE / "_calibration_output"
     scratch.mkdir(exist_ok=True)
 
+    sources = sorted(HERE.glob("*.html"))
+    by_name = {source.name: source for source in sources}
     try:
-        rows = [measure(source, scratch) for source in sorted(HERE.glob("*.html"))]
+        rows = [measure(source, scratch) for source in sources]
+        # A second pass over the documents that get served: committed evidence
+        # has to be reproducible, so anything that moves between runs is a
+        # finding rather than a number nobody can regenerate.
+        reruns = [
+            measure(by_name[row["fixture"]], scratch)
+            for row in rows
+            if row["decision"] == "serve"
+        ]
     finally:
         for leftover in scratch.glob("*"):
             leftover.unlink(missing_ok=True)
@@ -239,13 +264,52 @@ def main() -> int:
         elif expected != actual:
             mismatches.append(f"{row['fixture']}: expected {expected}, got {actual}")
 
+    unstable = []
+    for again in reruns:
+        first = next(row for row in rows if row["fixture"] == again["fixture"])
+        for field in (
+            "decision",
+            "child",
+            "pages",
+            "ink_total",
+            "ink_min_page",
+            "unresolved_imgs",
+        ):
+            if first[field] != again[field]:
+                unstable.append(
+                    f"{again['fixture']}: {field} measured {first[field]} then "
+                    f"{again[field]}"
+                )
+    mismatches += unstable
+
+    # Timing is kept out of the table but not out of the reasoning: the budget
+    # claim is quoted as the first bucket the peak measurement falls inside, so
+    # ordinary run-to-run noise cannot rewrite the evidence.
+    spawned_seconds = [
+        row["seconds"] for row in rows + reruns if row["child"] == "yes"
+    ]
+    peak = max(spawned_seconds, default=0.0)
+    budget_bucket = next(
+        (bucket for bucket in (2, 5, 10, 20) if peak < bucket),
+        None,
+    )
+    if budget_bucket is None:
+        mismatches.append(
+            f"peak measured render time {peak}s reaches the "
+            f"{runner.RENDER_TIMEOUT_SECONDS}s render timeout"
+        )
+
     (HERE / "CALIBRATION.md").write_text(
-        render_markdown(rows), encoding="utf-8", newline="\n"
+        render_markdown(rows, reruns, budget_bucket), encoding="utf-8", newline="\n"
     )
 
     print(f"wrote CALIBRATION.md from {len(rows)} measured fixtures")
     for row in rows:
         print(f"  {row['fixture']:34s} {classify(row):8s} {row['reason']}")
+    print(
+        f"\n{len(reruns)} served fixtures re-rendered identically; "
+        f"peak child-spawning render {peak}s (bucketed under {budget_bucket}s)"
+    )
 
     if mismatches:
         print("\nEXPECTATION MISMATCHES:")

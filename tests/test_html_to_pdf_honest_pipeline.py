@@ -668,6 +668,10 @@ def test_calibration_evidence_still_matches_the_shipped_constants():
     measured = [dict(zip(headers, cells)) for cells in table_rows[1:]]
 
     assert len(measured) == len(list(FIXTURES.glob("*.html")))
+    # Wall-clock columns would rewrite this file on every regeneration, which is
+    # how committed evidence stops meaning anything.
+    assert "s" not in headers and "seconds" not in headers
+    assert "child spawned" in headers
 
     for row in measured:
         ink_total = int(row["ink total"].replace(",", ""))
@@ -676,15 +680,20 @@ def test_calibration_evidence_still_matches_the_shipped_constants():
         if row["reason"] == "HtmlOutputVisuallyEmpty":
             assert ink_total == 0
         if row["decision"] == "refuse-intake":
-            # No child was spawned, so the cost is the source scan alone.
+            # The structural fact behind "intake is cheap": no process was
+            # spawned, so a refusal cannot cost a render.
+            assert row["child spawned"] == "no"
             assert int(row["pages"]) == 0
-            assert float(row["s"]) < 1.0, f"{row['fixture']} intake cost {row['s']}s"
             assert row["reason"] in {
                 "HtmlInputTooLarge",
                 "HtmlStructureRejected",
                 "HtmlEncodingUnsupported",
                 "HtmlInputEmpty",
             }
+        else:
+            assert row["child spawned"] == "yes"
+
+    assert "rendered a second" in text  # the double-render reproducibility check
 
 
 # ---------------------------------------------------------------------------
