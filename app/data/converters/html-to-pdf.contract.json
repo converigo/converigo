@@ -1,0 +1,29 @@
+{
+  "id": "html-to-pdf",
+  "slug": "html-to-pdf",
+  "name": "HTML to PDF",
+  "category": "document",
+  "description": "Convert HTML documents into paginated PDF documents.",
+  "input_formats": [
+    "html"
+  ],
+  "output_formats": [
+    "pdf"
+  ],
+  "accepted_mime_types": [
+    "text/html",
+    "application/xhtml+xml"
+  ],
+  "max_upload_size": 512000,
+  "conversion_engine": "document",
+  "landing_path": "/tools/html-to-pdf",
+  "canonical_url": "https://converigo.com/tools/html-to-pdf",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/fixtures/html_to_pdf/valid_report.html",
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "active"
+}
