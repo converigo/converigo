@@ -1,0 +1,184 @@
+{
+  "slug": "html-to-pdf",
+  "title": "HTML to PDF Converter",
+  "description": "Convert HTML files into paginated PDF documents online with a real HTML layout engine.",
+  "category": "document",
+  "popular": false,
+  "featured": false,
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".html",
+    "button_text": "Upload HTML"
+  },
+  "faq": [
+    {
+      "question": "How do I convert an HTML file to PDF?",
+      "answer": "Upload your .html file and the converter lays the document out page by page, then gives you a PDF to download."
+    },
+    {
+      "question": "Will my CSS styling be preserved?",
+      "answer": "Partly. Headings, paragraphs, lists, tables, fonts, sizes, colors and simple spacing are applied. Advanced layout such as flexbox, grid and floats is not supported, so multi-column pages can end up stacked instead of side by side."
+    },
+    {
+      "question": "Is JavaScript executed?",
+      "answer": "No. Only the HTML that is already in the file is rendered. Content that a script injects after the page loads will not appear in the PDF."
+    },
+    {
+      "question": "Are images included in the PDF?",
+      "answer": "Only images embedded in the file as data URIs. Nothing is fetched from the network, so an image referenced by URL is replaced by a placeholder in the output."
+    },
+    {
+      "question": "Is the text still selectable in the output?",
+      "answer": "Yes. The PDF carries a real text layer rather than a screenshot of the page, so you can select, search and copy text."
+    },
+    {
+      "question": "How large a file can I upload?",
+      "answer": "Up to 500 KB of HTML, rendering up to 500 pages within 20 seconds. Documents beyond those limits are refused with a clear message instead of a partial PDF."
+    },
+    {
+      "question": "Which file encodings work?",
+      "answer": "UTF-8, with or without a byte-order mark, and UTF-16 when it carries a BOM. If a file is not UTF-8 you will be told, rather than receiving a PDF of garbled characters."
+    },
+    {
+      "question": "What if the conversion fails?",
+      "answer": "You get the reason: an unreadable encoding, a document over one of the limits, a render that ran out of time, or a page that would have come out blank. Files are processed securely and deleted after conversion."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "html-to-csv",
+      "title": "HTML to CSV"
+    },
+    {
+      "slug": "txt-to-pdf",
+      "title": "TXT to PDF"
+    },
+    {
+      "slug": "pdf-to-html",
+      "title": "PDF to HTML"
+    },
+    {
+      "slug": "images-to-pdf",
+      "title": "Images to PDF"
+    }
+  ],
+  "seo": {
+    "title": "Convert HTML to PDF Online Free | Converigo",
+    "description": "Convert HTML to PDF online for free using Converigo. Turn HTML files into paginated PDF documents with a real HTML renderer. Fast, secure, browser-based conversion with no installation required.",
+    "keywords": "html to pdf, convert html to pdf, html pdf converter, online html converter, web page to pdf",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert HTML to PDF - Converigo free online converter",
+    "twitter_title": "Convert HTML to PDF Online Free | Converigo",
+    "twitter_description": "Convert HTML to PDF online for free using Converigo. Turn HTML files into paginated PDF documents with a real HTML renderer.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/html-to-pdf"
+  },
+  "source": "html",
+  "target": "pdf",
+  "active": true,
+  "hero": {
+    "eyebrow": "Converter tool",
+    "title": "Convert HTML to PDF Online Free",
+    "description": "Convert HTML files to PDF online for free. Fast, secure browser-based conversion with no software installation. Get a paginated, selectable-text pdf document in seconds using Converigo.",
+    "panel_label": "Ready to convert",
+    "panel_title": "Upload an HTML file and receive a paginated PDF document in seconds."
+  },
+  "features": [
+    {
+      "title": "Real pagination",
+      "text": "The document is laid out page by page, so headings and paragraphs break where a reader expects them."
+    },
+    {
+      "title": "Selectable text",
+      "text": "Output carries a text layer you can search, copy and annotate instead of a flat image of the page."
+    },
+    {
+      "title": "Honest limitations",
+      "text": "CSS layout, JavaScript and remote images are not fully supported, and the rules are written here rather than discovered after your upload."
+    },
+    {
+      "title": "Fast workflow",
+      "text": "Upload, convert, and download in a few quick steps without installing software."
+    },
+    {
+      "title": "Secure processing",
+      "text": "Your files are handled securely and automatically deleted after conversion."
+    },
+    {
+      "title": "Clear refusals",
+      "text": "A document that cannot be rendered safely is refused with the reason, never served as a broken or blank PDF."
+    },
+    {
+      "title": "Free html to pdf converter",
+      "text": "Convert HTML to PDF online completely free with no registration or hidden costs."
+    },
+    {
+      "title": "Works on any device",
+      "text": "Use the converter on desktop, tablet, or mobile - anywhere you have a browser."
+    }
+  ],
+  "supported_formats": {
+    "input": [
+      "HTML"
+    ],
+    "output": [
+      "PDF"
+    ],
+    "description": "HTML input, PDF output"
+  },
+  "how_to_use": [
+    {
+      "title": "Upload your file",
+      "description": "Select an HTML file from your device to start the conversion."
+    },
+    {
+      "title": "Choose the output format",
+      "description": "PDF is the result format for this tool, so there is nothing to configure."
+    },
+    {
+      "title": "Download the converted file",
+      "description": "Get your converted PDF file immediately without installing extra software."
+    },
+    {
+      "title": "Save the page first",
+      "description": "For pages that rely on scripts or remote images, save the complete page locally so the content is already inside the file."
+    },
+    {
+      "title": "Check the layout",
+      "description": "Complex CSS layouts can change, so review the result before distributing it."
+    },
+    {
+      "title": "Convert html to pdf",
+      "description": "Click convert and the renderer lays out your html page by page."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is HTML?",
+      "text": "HTML is the markup language behind web pages. It describes content and structure, while styling and behavior can depend on CSS files, scripts and network resources that are not part of the file."
+    },
+    {
+      "title": "What is PDF?",
+      "text": "PDF is a portable document format ideal for printing, sharing, and archiving documents with consistent layout everywhere."
+    },
+    {
+      "title": "How faithful is the conversion?",
+      "text": "This converter uses a real HTML layout engine, so text, headings, lists, tables and basic CSS come through with a selectable text layer. It does not run JavaScript, does not fetch anything over the network, and does not implement flexbox, grid or float layout."
+    },
+    {
+      "title": "What is PDF format?",
+      "text": "PDF is a popular file format chosen for its broad compatibility and consistent rendering on every platform."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Convert HTML files to PDF in seconds",
+    "text": "Upload your file and receive a ready-to-use result instantly.",
+    "primary_text": "Convert now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  },
+  "lifecycle_status": "active"
+}
