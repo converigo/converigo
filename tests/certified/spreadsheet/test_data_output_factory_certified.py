@@ -235,16 +235,15 @@ def test_d9_contract_policy() -> None:
 def test_static_target_map_f5_rows() -> None:
     """The deployed STATIC_TARGET_MAP rows reflect the F5 delta: xlsx gains
     TSV, csv gains HTML; html stays download-only (target-only)."""
-    html_text = Path("app/templates/main/converigo_main.html").read_text(encoding="utf-8")
-    block = html_text.split("const STATIC_TARGET_MAP = {", 1)[1].split("};", 1)[0]
-    mapping: dict[str, list[str]] = {}
-    for key, values in re.findall(r"(['\"a-zA-Z0-9_]+):\[(.*?)\]", block):
-        mapping[key.strip("'\"")] = [
-            v.strip().strip("'\"") for v in values.split(",") if v.strip()
-        ]
+    # D5: the deployed rows are the authoritative capability the page renders
+    # from, not a literal to slice out of the template file.
+    from app.services.target_capability import conversion_capability
+
+    mapping = conversion_capability()
 
     assert "TSV" in mapping.get("xlsx", []), mapping.get("xlsx")
     assert "HTML" in mapping.get("csv", []), mapping.get("csv")
-    # F8-C: html-to-csv lifts the earlier download-only status for html.
-    assert mapping.get("html") == ["CSV"], mapping.get("html")
+    # F8-C: html-to-csv lifts the earlier download-only status for html, and
+    # html-to-pdf is a live capability the old hand-kept literal had lost.
+    assert mapping.get("html") == ["CSV", "PDF"], mapping.get("html")
     assert mapping.get("tsv") == ["CSV"], mapping.get("tsv")

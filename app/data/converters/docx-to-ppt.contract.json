@@ -8,7 +8,7 @@
     "docx"
   ],
   "output_formats": [
-    "ppt"
+    "pptx"
   ],
   "accepted_mime_types": [
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document"

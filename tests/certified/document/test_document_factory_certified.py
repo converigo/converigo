@@ -205,26 +205,23 @@ def test_factory_honest_error_for_corrupt_input(
 
 @pytest.mark.certified
 def test_static_target_map_f7_rows() -> None:
-    """The deployed STATIC_TARGET_MAP rows reflect the F7 delta: docx gains
-    HTML; pptx gains PNG and now registers pptx-to-jpg behind its advertised
-    JPG entry (registry-derived, alphabetically sorted)."""
-    html_text = Path("app/templates/main/converigo_main.html").read_text(
-        encoding="utf-8"
-    )
-    block = html_text.split("const STATIC_TARGET_MAP = {", 1)[1].split("};", 1)[0]
-    mapping: dict[str, list[str]] = {}
-    for key, values in re.findall(r"(['\"a-zA-Z0-9_]+):\[(.*?)\]", block):
-        mapping[key.strip("'\"")] = [
-            v.strip().strip("'\"") for v in values.split(",") if v.strip()
-        ]
+    """The deployed target picker reflects the F7 delta: docx gains HTML; pptx
+    gains PNG and registers pptx-to-jpg behind its advertised JPG entry."""
+    # D5: row content is no longer a literal inside the template - the page is
+    # rendered from the authoritative capability (app/services/target_capability.py),
+    # so that is what this test reads. The F7 capabilities are still asserted, but
+    # expressed as the canonical extension the winning plugin delivers:
+    # POWERPOINT/SPREADSHEET/WORD/DOC/XLS were alias tokens the picker could not
+    # honour, and D5 folds them to PPTX/XLSX/DOCX.
+    from app.services.target_capability import conversion_capability
+
+    mapping = conversion_capability()
 
     assert mapping.get("docx") == [
-        "HTML", "JPEG", "JPG", "MD", "PDF", "POWERPOINT", "PPT", "PPTX",
-        "SPREADSHEET", "XLS", "XLSX",
+        "HTML", "JPEG", "JPG", "MD", "PDF", "PPTX", "XLSX",
     ], mapping.get("docx")
     assert mapping.get("pptx") == [
-        "DOC", "DOCX", "JPEG", "JPG", "PDF", "PNG", "SPREADSHEET", "WORD",
-        "XLS", "XLSX",
+        "DOCX", "JPEG", "JPG", "PDF", "PNG", "XLSX",
     ], mapping.get("pptx")
 
 

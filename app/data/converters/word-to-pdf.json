@@ -8,7 +8,7 @@
   "upload_form": {
     "action": "/upload",
     "method": "post",
-    "accept": ".docx,.doc",
+    "accept": ".docx",
     "button_text": "Upload Word"
   },
   "faq": [
@@ -18,7 +18,7 @@
     },
     {
       "question": "What file formats are supported?",
-      "answer": "Upload DOCX or DOC files to receive a PDF file."
+      "answer": "Upload DOCX files to receive a PDF file. Legacy .doc files are not accepted; re-save them as .docx first."
     },
     {
       "question": "Is this word converter free to use?",
@@ -106,12 +106,12 @@
   ],
   "supported_formats": {
     "input": [
-      "Word"
+      "DOCX"
     ],
     "output": [
       "PDF"
     ],
-    "description": "Word input, PDF output"
+    "description": "DOCX input, PDF output"
   },
   "how_to_use": [
     {

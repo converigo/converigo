@@ -119,9 +119,9 @@
       "PDF"
     ],
     "output": [
-      "Word"
+      "DOCX"
     ],
-    "description": "PDF input, Word output"
+    "description": "PDF input, DOCX output"
   },
   "how_to_use": [
     {

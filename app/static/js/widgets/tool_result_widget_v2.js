@@ -26,32 +26,25 @@
     other:    {color:'#9333EA', exts:[]}
   };
 
-  /* Static source-to-targets map. Identical to the homepage V2 map EXCEPT
-     tar:['TAR'] — the homepage keeps tar:[] (untouched); for the tar-extract
-     pilot we present a valid target so the row renders a <select> and
-     convertJob sends target_format="tar". */
-  var STATIC_TARGET_MAP = {
-    jpg:['ICO','PDF','PNG','TIFF','WEBP'],  jpeg:['ICO','PDF','PNG','TIFF','WEBP'],
-    png:['BMP','ICO','JPEG','JPG','TIFF','WEBP'],  webp:['ICO','JPEG','JPG','PNG','TIFF'],
-    bmp:['JPEG','JPG','PNG','WEBP'],  tiff:['JPEG','JPG','PNG'],
-    svg:['PNG'],  heic:['JPEG','JPG'],  heif:['JPEG','JPG'],  avif:['JPEG','JPG'],
-    gif:[],
-    pdf:['DOC','DOCX','JPEG','JPG','ODT','PPT','PPTX','WORD','XLS','XLSX'],
-    docx:['JPEG','JPG','PDF','POWERPOINT','PPT','PPTX','SPREADSHEET','XLS','XLSX'],
-    doc:['JPEG','JPG','PDF','POWERPOINT','PPT','PPTX','SPREADSHEET','XLS','XLSX'],
-    pptx:['DOC','DOCX','JPEG','JPG','PDF','SPREADSHEET','WORD','XLS','XLSX'],
-    ppt:['DOC','DOCX','JPEG','JPG','PDF','SPREADSHEET','WORD','XLS','XLSX'],
-    xlsx:['CSV','DOC','DOCX','HTML','JSON','ODS','PDF','POWERPOINT','PPT','PPTX','WORD'],
-    xls:['DOC','DOCX','PDF','POWERPOINT','PPT','PPTX','WORD'],
-    txt:['PDF'],  csv:['JSON','PDF','XLSX'],  json:['CSV','XLSX'],  ods:['XLSX'],  odt:['PDF'],
-    powerpoint:['DOC','DOCX','JPEG','JPG','SPREADSHEET','WORD','XLS','XLSX'],
-    spreadsheet:['DOC','DOCX','POWERPOINT','PPT','PPTX','WORD'],
-    word:['JPEG','JPG','PDF','POWERPOINT','PPT','PPTX','SPREADSHEET','XLS','XLSX'],
-    html:[],  md:[],  rtf:[],
-    mp3:['WAV'],  wav:['MP3'],  ogg:[],  flac:['MP3'],  m4a:['MP3'],  aac:['MP3'],
-    mp4:['AAC','FLAC','GIF','M4A','MP3','OGG','WAV'],  mov:[],  avi:[],  webm:[],  mkv:[],  flv:[],
-    gz:['GZIP'],  gzip:['GZ'],  zip:['ZIP'],  '7z':[],  rar:[],  tar:['TAR']
-  };
+  /* D5: the capability map is injected by the server as data-target-map on this
+     mount element (components/tool_result_widget_v2.html, fed by
+     app/routers/tools.py from app/services/target_capability.py). The widget used
+     to carry its own copy of the homepage map and that copy had drifted: it still
+     offered pdf -> WORD (a placeholder-backed pair), kept .doc/.xls/.ppt source
+     rows PR-1 had honestly disabled, and was missing rows the homepage had. There
+     is now exactly one source of truth. An absent or unparseable payload yields
+     "no advertised targets" - never a fallback literal, because a silently stale
+     map is the failure mode D5 exists to remove. */
+  var STATIC_TARGET_MAP = (function () {
+    var raw = (root.dataset.targetMap || '').trim();
+    if (!raw) return {};
+    try {
+      var parsed = JSON.parse(raw);
+      return parsed && typeof parsed === 'object' ? parsed : {};
+    } catch (err) {
+      return {};
+    }
+  })();
 
   function getValidTargets(ext){
     return STATIC_TARGET_MAP[(ext || '').toLowerCase()] || [];
@@ -207,14 +200,12 @@
     var sameTarget = pending.length > 0 && pendingTargets.length === 1;
 
     if (sameTarget){
-      var cats = pending.map(function(j){ return j.category; }).filter(function(v, i, a){ return a.indexOf(v) === i; });
-      var opts = [];
-      if (cats.length === 1){
-        opts = pending.map(function(j){ return getValidTargets(j.ext); })
-          .reduce(function(a, b){ return a.filter(function(x){ return b.indexOf(x) !== -1; }); }, getValidTargets(pending[0].ext));
-      } else {
-        opts = ['JPG','PNG','PDF','MP3','MP4','ZIP'];
-      }
+      /* D5: options are always the intersection of what each pending row can
+         really reach. The cross-category branch used to substitute a hardcoded
+         six-format guess that was valid for none of the rows in a mixed batch,
+         so picking it turned one upload set into N doomed requests. */
+      var opts = pending.map(function(j){ return getValidTargets(j.ext); })
+        .reduce(function(a, b){ return a.filter(function(x){ return b.indexOf(x) !== -1; }); }, getValidTargets(pending[0].ext));
       var current = sel.value;
       sel.innerHTML = opts.map(function(x){ return '<option value="' + x + '">' + x + '</option>'; }).join('');
       if (opts.indexOf(current) !== -1){

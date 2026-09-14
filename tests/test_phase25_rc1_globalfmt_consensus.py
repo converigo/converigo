@@ -35,9 +35,12 @@ import os
 import re
 import shutil
 import subprocess
+import tempfile
 from pathlib import Path
 
 import pytest
+
+from app.services.target_capability import capability_json
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 TEMPLATE = REPO_ROOT / "app" / "templates" / "main" / "converigo_main.html"
@@ -90,6 +93,7 @@ def _run_node_suite(tmp_path: Path | None = None, template_text: str | None = No
                     env_extra: dict | None = None):
     """Run the behavioural suite; returns (returncode, parsed summary, stderr)."""
     cmd = ["node", str(SUITE)]
+    scratch = tmp_path if tmp_path is not None else Path(tempfile.mkdtemp(prefix="rc1_"))
     if tmp_path is not None:
         # Mirror the layout the harness resolves TEMPLATE from:
         # <root>/tests/js/*.mjs  +  <root>/app/templates/main/*.html
@@ -103,7 +107,12 @@ def _run_node_suite(tmp_path: Path | None = None, template_text: str | None = No
         else:
             target.write_text(template_text, encoding="utf-8")
         cmd = ["node", str(tmp_path / "tests" / "js" / SUITE.name)]
-    env = {**os.environ, **(env_extra or {})}
+    # D5: run the behavioural suite on the same authoritative capability map the
+    # rendered page receives, not on a hand-typed copy of it. The harness keeps
+    # its own fixture for plain `node tests/js/globalfmt_rc1.test.mjs` runs.
+    capability_fixture = scratch / "target_capability.json"
+    capability_fixture.write_text(capability_json(), encoding="utf-8")
+    env = {**os.environ, "RC1_TARGET_MAP_JSON": str(capability_fixture), **(env_extra or {})}
     proc = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", env=env)
     try:
         summary = json.loads(proc.stdout)

@@ -15,6 +15,7 @@ from app.services.internal_link_service import InternalLinkService
 from app.services.language_service import LanguageService
 from app.services.landing_service import LandingPageBuilder
 from app.services.result_widget_service import is_result_widget_v2_enabled
+from app.services.target_capability import capability_json
 from app.services.seo_service import PRODUCTION_BASE_URL, SeoService
 
 router = APIRouter(prefix="/tools", tags=["tools"])
@@ -437,6 +438,13 @@ async def render_universal_tool_page(
     tool_category = str(tool_data.get("category", "") or "").strip().lower()
     result_widget_v2 = is_result_widget_v2_enabled(slug=slug, category=tool_category)
 
+    # D5: the V2 widget is fed the same authoritative capability map the homepage
+    # is, serialized into data-target-map on its mount element - no new endpoint,
+    # the page is already rendered server-side. The mounted slug is passed as the
+    # operation so the archive-extract pages keep their legitimate same-extension
+    # target (extract), which the plain conversion view deliberately omits.
+    widget_target_map_json = capability_json(slug) if result_widget_v2 else ""
+
     return templates.TemplateResponse(
         request=request,
         name="tool_page.html",
@@ -466,6 +474,7 @@ async def render_universal_tool_page(
             "cta": page_sections["cta"],
             "landing": landing_context,
             "result_widget_v2": result_widget_v2,
+            "widget_target_map_json": widget_target_map_json,
         },
     )
 

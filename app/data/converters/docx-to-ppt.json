@@ -21,9 +21,9 @@
       ".docx"
     ],
     "output": [
-      ".ppt"
+      ".pptx"
     ],
-    "description": "DOCX input, PPT output"
+    "description": "DOCX input, PPTX output"
   },
   "tips": [
     "Review slide formatting after conversion",

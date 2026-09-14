@@ -16,6 +16,7 @@ from app.services.converter_data_service import ConverterDataService
 from app.services.hub_service import HubService
 from app.services.language_service import LanguageService
 from app.services.seo_service import PRODUCTION_BASE_URL, SeoService
+from app.services.target_capability import capability_json
 from app.routers.tools import render_universal_tool_page
 
 logger = logging.getLogger(__name__)
@@ -154,20 +155,18 @@ async def home(request: Request):
     locale_data, t, supported_locales = _get_locale_context(request)
     metadata = seo_service.build_home_meta(request)
 
-    # IMPORTANT: Phase B uses the frozen Phase A audit snapshot as the source of truth for
-    # which source->target pairs are allowed in the UI. This is intentionally NOT re-derived
-    # from the live plugin registry on every request. If registry plugins change later, the
-    # audit snapshot must be regenerated manually by rerunning `audit_phase_a_matrix.py` and
-    # refreshing the JSON snapshot used here.
-    matrix_path = Path(__file__).resolve().parents[1] / "data" / "phase_a_matrix.json"
-    phase_a_matrix = []
-    if matrix_path.exists():
-        try:
-            phase_a_matrix = __import__("json").loads(matrix_path.read_text(encoding="utf-8"))
-        except Exception:
-            phase_a_matrix = []
-    else:
-        logger.warning("Phase A matrix snapshot missing at %s; fail-closed UI filtering is enabled.", matrix_path)
+    # D5: the target picker on this page is rendered from the single
+    # authoritative conversion capability (app/services/target_capability.py),
+    # derived live from the registry pair index and the upload allow-list.
+    #
+    # This replaces the "frozen Phase A matrix" snapshot that used to be loaded
+    # here: the template never read it, so it only pretended to gate the UI while
+    # the real source of truth was a hand-maintained JS literal that had already
+    # drifted (it advertised pdf -> WORD, backed by a placeholder). Removing the
+    # dead declaration is deliberate - a live derived authority plus
+    # tests/test_target_capability_authority.py is what keeps the picker honest
+    # now, and that test must not be replaced by another snapshot file.
+    target_capability_json = capability_json()
 
     return templates.TemplateResponse(
         request=request,
@@ -178,7 +177,7 @@ async def home(request: Request):
             "t": t,
             "supported_locales": supported_locales,
             "meta": metadata,
-            "phase_a_matrix": phase_a_matrix,
+            "target_capability_json": target_capability_json,
             "structured_data": seo_service.build_structured_data(
                 request,
                 page_data={

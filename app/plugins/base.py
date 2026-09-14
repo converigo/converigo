@@ -44,6 +44,16 @@ class ConverterPlugin(ABC):
     target_formats = []
 
     # --------------------------------------------------
+    # Discoverability
+    # --------------------------------------------------
+
+    # Set to False on plugins that are registered purely so the API can answer
+    # with an honest error (see _OfficePlaceholderPlugin). The pair still
+    # resolves through the registry, but app/services/target_capability.py must
+    # never offer it in a user-facing target picker. Added by D5.
+    advertisable = True
+
+    # --------------------------------------------------
     # Recommendation Metadata
     # --------------------------------------------------
 

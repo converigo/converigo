@@ -56,6 +56,32 @@ function constObject(src, name) {
   return `const ${name} = ${body};\n`;
 }
 
+/* D5: the template no longer embeds a target map - the server injects the
+ * authoritative capability (app/services/target_capability.py rendered by
+ * app/routers/home.py). This suite owns the selection/precedence BEHAVIOUR, not
+ * the content of the map (content parity against the served page is locked by
+ * tests/test_target_capability_authority.py), so it supplies its own map:
+ * the real derived one when the Python layer hands it over via
+ * RC1_TARGET_MAP_JSON, otherwise a deterministic fixture covering every row the
+ * cases below exercise. Either way the value under test is the code in the
+ * template, never a re-typed copy of it. */
+const BEHAVIOUR_FIXTURE = {
+  mp4: ['AAC', 'AVI', 'FLAC', 'GIF', 'M4A', 'MP3', 'OGG', 'WAV', 'WEBM'],
+  jpg: ['ICO', 'PDF', 'PNG', 'TIFF', 'TXT', 'WEBP'],
+  pdf: ['DOCX', 'HTML', 'JPEG', 'JPG', 'MD', 'ODT', 'PNG', 'PPTX', 'TXT', 'XLSX'],
+  wav: ['MP3', 'FLAC', 'AAC'],
+};
+
+function capabilityLiteral() {
+  const fromEnv = process.env.RC1_TARGET_MAP_JSON;
+  if (fromEnv) {
+    const data = JSON.parse(readFileSync(fromEnv, 'utf-8'));
+    if (!data || typeof data !== 'object') throw new Error(`bad capability fixture: ${fromEnv}`);
+    return `const STATIC_TARGET_MAP = ${JSON.stringify(data)};\n`;
+  }
+  return `const STATIC_TARGET_MAP = ${JSON.stringify(BEHAVIOUR_FIXTURE)};\n`;
+}
+
 function func(src, name) {
   const decl = `function ${name}(`;
   let start = src.indexOf(decl);
@@ -76,6 +102,8 @@ export function buildSource() {
   mustContain('function buildGlobalFmt()');
   mustContain('function convertAll()');
   mustContain("addEventListener('change'");
+  // D5 anchor: the map must be server-injected, never a literal in the template.
+  mustContain('const STATIC_TARGET_MAP = {{ target_capability_json | safe }};');
   if (!process.env.RC1_ALLOW_PREFIX) {
     // Only the revert fixture (tests/test_phase25_rc1_globalfmt_consensus.py,
     // layer 3) opts out, so it can demonstrate the assertions - not the guard -
@@ -92,7 +120,7 @@ export function buildSource() {
   }
 
   return [
-    constObject(src, 'STATIC_TARGET_MAP'),
+    capabilityLiteral(),
     constObject(src, 'CATEGORY'),
     'let jobs = [];\nlet uid = 0;\n',
     func(src, 'splitName'),

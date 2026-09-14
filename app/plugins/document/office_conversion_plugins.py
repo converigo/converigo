@@ -21,6 +21,13 @@ class _OfficePlaceholderPlugin(ConverterPlugin):
     estimated_saving = 5
     badge = "Office Conversion"
 
+    # D5: these classes exist only so ``/convert`` can keep answering
+    # UNSUPPORTED_CONVERSION with an honest "coming soon" message for users who
+    # bookmark or deep-link the operation. They cannot perform the conversion,
+    # so they must never be discoverable in the target picker — otherwise the
+    # homepage advertises a dead option such as ``pdf -> WORD``.
+    advertisable = False
+
     async def convert(
         self,
         source_path: Path,
