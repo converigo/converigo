@@ -20,6 +20,23 @@ class ConversionError(Exception):
     pass
 
 
+class ConversionTimeoutError(ConversionError):
+    """A conversion exceeded its time budget.
+
+    A distinct type so the HTTP layer can answer with a stable public code
+    (CONVERSION_TIMEOUT) instead of guessing one from an exception class name,
+    while the exception message keeps the budget itself for the logs only.
+    """
+
+
+# D4 (F1): the only conversion-failure wording a client is ever allowed to see
+# from the generic failure path. Plugin/engine detail stays server-side in the
+# log record (logger.exception); the response keeps a stable code plus the
+# request_id / conversion_id so support can correlate the two.
+GENERIC_CONVERSION_FAILURE_MESSAGE = "Conversion failed. Please try again."
+CONVERSION_TIMEOUT_FAILURE_MESSAGE = "Conversion timed out. Please try again."
+
+
 class UnsupportedConversionError(Exception):
     def __init__(self, source_format: str, target_format: str, message: str | None = None) -> None:
         self.source_format = source_format
@@ -131,13 +148,15 @@ class ConversionService:
             )
         except asyncio.TimeoutError as exc:
             self._cleanup_temp_artifacts(temp_root)
-            raise ConversionError(
+            raise ConversionTimeoutError(
                 f"Conversion timed out after {timeout_seconds} seconds."
             ) from exc
         except RuntimeError as exc:
             self._cleanup_temp_artifacts(temp_root)
             logger.exception("[CONVERTER_DEBUG] ConversionService runtime error during plugin.convert")
-            raise ConversionError(str(exc)) from exc
+            # D4 (F1): a plugin's RuntimeError text may name classes, engines or
+            # on-disk paths. It is logged above and never handed to the client.
+            raise ConversionError(GENERIC_CONVERSION_FAILURE_MESSAGE) from exc
         except UnsupportedConversionError:
             self._cleanup_temp_artifacts(temp_root)
             raise
@@ -147,11 +166,13 @@ class ConversionService:
             if message.startswith("Unsupported ") or "Unsupported" in message:
                 raise UnsupportedConversionError(source_format, target_format) from exc
             logger.exception("[CONVERTER_DEBUG] ConversionService value error during plugin.convert")
-            raise ConversionError(message) from exc
+            raise ConversionError(GENERIC_CONVERSION_FAILURE_MESSAGE) from exc
         except Exception as exc:
             self._cleanup_temp_artifacts(temp_root)
             logger.exception("[CONVERTER_DEBUG] ConversionService raised an unexpected exception")
-            raise ConversionError(f"{type(exc).__name__}: {exc}") from exc
+            # D4 (F1): never f"{type(exc).__name__}: {exc}" - that class name is
+            # what used to surface as the client-facing error code.
+            raise ConversionError(GENERIC_CONVERSION_FAILURE_MESSAGE) from exc
         logger.info("Plugin returned output path: %s", str(output_path))
         logger.info("[CONVERTER_DEBUG] ConversionService output_path=%s", str(output_path))
 
@@ -172,9 +193,13 @@ class ConversionService:
             resolved_output_path == root or root in resolved_output_path.parents
             for root in allowed_roots
         ):
-            raise ConversionError(
-                f"Output path is outside the allowed output directory: {resolved_public_root}"
+            # D4 (F1): the offending path is a server-side filesystem detail.
+            logger.error(
+                "Rejected output path outside the allowed roots: %s (allowed=%s)",
+                resolved_output_path,
+                sorted(str(root) for root in allowed_roots),
             )
+            raise ConversionError(GENERIC_CONVERSION_FAILURE_MESSAGE)
 
         if not public_output_path.exists():
             raise ConversionError(
@@ -223,7 +248,8 @@ class ConversionService:
             )
         except Exception as exc:
             self._cleanup_temp_artifacts(temp_root, conversion_id=conversion_id)
-            raise ConversionError(str(exc)) from exc
+            logger.exception("[CONVERTER_DEBUG] ConversionService error during plugin.merge")
+            raise ConversionError(GENERIC_CONVERSION_FAILURE_MESSAGE) from exc
 
         logger.info("Plugin returned output path: %s", str(output_path))
 

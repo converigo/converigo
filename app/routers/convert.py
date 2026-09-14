@@ -33,8 +33,11 @@ from app.core.settings import settings
 from app.plugins.registry import registry
 from app.services.analytics_service import AnalyticsService
 from app.services.conversion_service import (
+    CONVERSION_TIMEOUT_FAILURE_MESSAGE,
+    GENERIC_CONVERSION_FAILURE_MESSAGE,
     ConversionError,
     ConversionService,
+    ConversionTimeoutError,
     UnsupportedConversionError,
 )
 
@@ -51,6 +54,34 @@ router = APIRouter(
     tags=["convert"],
 )
 analytics_service = AnalyticsService()
+
+# ---------------------------------------------------------------------------
+# D4 (F1): client-facing failure contract
+#
+# Plugin and engine exceptions are internal: their text can name classes,
+# engines, module paths or on-disk locations. A failing response therefore only
+# ever carries one of the stable codes and safe literals below, plus the
+# request_id / conversion_id that correlate it with the server-side log record.
+# Nothing here is derived from a Python exception class name.
+# ---------------------------------------------------------------------------
+CONVERSION_FAILED_CODE = "CONVERSION_FAILED"
+CONVERSION_TIMEOUT_CODE = "CONVERSION_TIMEOUT"
+UPLOAD_FAILED_CODE = "UPLOAD_FAILED"
+UNSUPPORTED_FILE_TYPE_CODE = "UNSUPPORTED_FILE_TYPE"
+GENERIC_UPLOAD_FAILURE_MESSAGE = "The file could not be uploaded. Please try again."
+
+
+def client_failure_fields(exc: Exception) -> tuple[str, str, bool]:
+    """Map a per-file failure to (public code, safe message, upload_rejected)."""
+    if isinstance(exc, UploadRejectedError):
+        # PR-1: this text is the validator's own re-save guidance, built from
+        # public policy literals - it is the purpose of the response, not a leak.
+        return UNSUPPORTED_FILE_TYPE_CODE, str(exc), True
+    if isinstance(exc, UploadError):
+        return UPLOAD_FAILED_CODE, GENERIC_UPLOAD_FAILURE_MESSAGE, False
+    if isinstance(exc, ConversionTimeoutError):
+        return CONVERSION_TIMEOUT_CODE, CONVERSION_TIMEOUT_FAILURE_MESSAGE, False
+    return CONVERSION_FAILED_CODE, GENERIC_CONVERSION_FAILURE_MESSAGE, False
 
 
 async def unsupported_conversion_exception_handler(
@@ -386,30 +417,36 @@ async def convert_file(
                     "conversion_id": tracker.conversion_id,
                 })
             except (UploadError, ConversionError) as exc:
-                request.state.error_code = normalize_error_code(type(exc).__name__, fallback="CONVERSION_FAILED")
+                error_code, error_message, upload_rejected = client_failure_fields(exc)
+                request.state.error_code = error_code
                 if isinstance(exc, UploadError):
-                    tracker.fail("upload", request.state.error_code)
+                    tracker.fail("upload", error_code)
                 else:
-                    tracker.fail("conversion", request.state.error_code)
+                    tracker.fail("conversion", error_code)
                 analytics_service.track_conversion_failed(
                     request,
                     page_path=request.url.path,
                     converter_name=tracker.converter or f"{Path(uploaded_file.filename or 'file').suffix.lstrip('.') or 'file'}-to-{target_format}",
                     output_format=(this_target if 'this_target' in locals() else (target_format or '')),
-                    error_type=request.state.error_code,
+                    error_type=error_code,
                     event_status="failure",
                 )
-                logger.warning("Conversion failed for %s: %s", uploaded_file.filename, exc)
+                # The exception itself - and therefore any plugin/engine detail -
+                # stays in this log record only. exc_info keeps the traceback
+                # available for correlation with the returned IDs.
+                logger.warning(
+                    "Conversion failed for %s: %s", uploaded_file.filename, exc, exc_info=True
+                )
                 results.append({
                     "filename": uploaded_file.filename,
                     "status": "failed",
-                    "error": str(exc),
-                    "error_code": request.state.error_code,
+                    "error": error_message,
+                    "error_code": error_code,
                     # PR-1: a validation-policy rejection is a client error. Tag it
                     # so the single-file response can answer 415 instead of
                     # masking a refusal as a server-side 500. Genuine storage/IO
                     # failures keep raising the plain UploadError and stay 500s.
-                    "upload_rejected": isinstance(exc, UploadRejectedError),
+                    "upload_rejected": upload_rejected,
                     "conversion_id": tracker.conversion_id,
                 })
 
@@ -422,7 +459,12 @@ async def convert_file(
             result_target = result.get("target_format") or target_format
             result["target_format"] = result_target
             if result["status"] == "failed":
-                request.state.error_code = normalize_error_code(result.get("error"), fallback="CONVERSION_FAILED")
+                # Prefer the code the failure handler already chose. Normalizing a
+                # free-text message is how internal strings reached analytics.
+                request.state.error_code = (
+                    result.get("error_code")
+                    or normalize_error_code(result.get("error"), fallback=CONVERSION_FAILED_CODE)
+                )
                 analytics_service.track_conversion_failed(
                     request,
                     page_path=request.url.path,
@@ -446,12 +488,19 @@ async def convert_file(
                     error_status_code = status.HTTP_415_UNSUPPORTED_MEDIA_TYPE
                     error_detail = {
                         "success": False,
-                        "code": "UNSUPPORTED_FILE_TYPE",
+                        "code": UNSUPPORTED_FILE_TYPE_CODE,
                         "message": result.get("error") or "Uploaded file was rejected.",
                     }
                 else:
+                    # D4 (F1): the same structured contract as the 422/415 paths.
+                    # The internal exception text (and its traceback) lives in the
+                    # log record, correlated through request_id / conversion_id.
                     error_status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
-                    error_detail = result["error"]
+                    error_detail = {
+                        "success": False,
+                        "code": request.state.error_code,
+                        "message": result.get("error") or GENERIC_CONVERSION_FAILURE_MESSAGE,
+                    }
                 raise HTTPException(
                     status_code=error_status_code,
                     detail=error_detail,

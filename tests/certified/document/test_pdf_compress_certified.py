@@ -32,6 +32,29 @@ SAMPLE_PDF = Path("tests/sample.pdf")
 OUTPUT_DIR = settings.OUTPUT_DIR
 
 
+#: Every internal detail that D4 (F1/F2) committed to keep out of a response
+#: body: exception-class names, plugin/engine/module names, tracebacks and
+#: on-disk paths. Any of these reaching a client is a disclosure regression.
+_INTERNAL_MARKERS = (
+    "PDFCompressPlugin",
+    "Plugin",
+    "RuntimeError",
+    "ConversionError",
+    "UnsupportedConversionError",
+    "PDFPasswordProtectedError",
+    "Traceback",
+    "pypdf",
+    "PdfReader",
+    "PdfWriter",
+    "app.plugins",
+    "conversion_service",
+    "site-packages",
+    ".venv",
+    "/app/",
+    "uploads\\",
+)
+
+
 def _resolve_public_output_path(response) -> Path:
     payload = response.json()
     download_path = payload.get("download_path")
@@ -208,7 +231,14 @@ def test_pdf_compress_never_larger_than_input(tmp_path: Path) -> None:
 
 @pytest.mark.certified
 def test_pdf_compress_honest_error_for_encrypted_pdf():
-    """TEST 007: Password-protected PDFs fail honestly (no fake output)."""
+    """TEST 007: Password-protected PDFs fail honestly (no fake output).
+
+    Locked here as the sanctioned 422 UNSUPPORTED_CONVERSION contract. This case
+    used to answer 500 whose detail echoed the plugin's raw RuntimeError text,
+    which D4 (F1) removed: that echo was the only reason the guidance reached a
+    client, so an input-side condition now needs the typed channel. A 500 stays
+    reserved for failures the user cannot fix by re-uploading a file.
+    """
     client = TestClient(app)
     sample = _make_encrypted_pdf(
         Path(settings.TEMP_DIR) / "batch5_encrypted.pdf"
@@ -220,12 +250,74 @@ def test_pdf_compress_honest_error_for_encrypted_pdf():
                 files={"file": ("batch5_encrypted.pdf", handle, "application/pdf")},
                 data={"target_format": "pdf", "operation": "pdf-compress"},
             )
-        assert response.status_code in (400, 422, 500), response.text
+
+        # A permanent property of the input, not a server fault: never a 500.
+        assert response.status_code == 422, response.text
+
         body = response.json()
-        detail = str(body.get("detail") or body)
-        assert "password" in detail.lower(), detail
+        assert body["success"] is False, body
+        assert body["code"] == "UNSUPPORTED_CONVERSION", body
+        # The 500-era shape was {"detail": ...}; the honest channel is the flat
+        # {success, code, message} contract.
+        assert "detail" not in body, body
+
+        # The user-facing guidance survived the migration and is actionable.
+        message = body["message"]
+        assert "password protected" in message.lower(), message
+        assert "remove the password" in message.lower(), message
+
+        # ...without dragging any internal detail along with it.
+        leaked = [m for m in _INTERNAL_MARKERS if m.lower() in response.text.lower()]
+        assert leaked == [], response.text
+
+        # Correlation with the server-side log record is still available.
+        assert body["request_id"], body
+        assert body.get("conversion_id"), body
+        assert response.headers["X-Request-ID"] == body["request_id"]
+
+        # Honest refusal means no fabricated artifact either.
+        assert not list(OUTPUT_DIR.glob("*/batch5_encrypted_compressed.pdf")), (
+            "encrypted PDF produced output despite the honest 422"
+        )
     finally:
         sample.unlink(missing_ok=True)
+
+
+@pytest.mark.certified
+def test_pdf_compress_encrypted_batch_stays_honest_and_silent():
+    """TEST 010: The batch amplifier must not reintroduce a class-name leak.
+
+    Two encrypted PDFs share the honest per-item channel; the pre-D4 batch shape
+    derived error_code from the exception class name, which is exactly the F2
+    failure mode this guard exists to keep closed.
+    """
+    client = TestClient(app)
+    first = _make_encrypted_pdf(Path(settings.TEMP_DIR) / "batch5_enc_a.pdf")
+    second = _make_encrypted_pdf(Path(settings.TEMP_DIR) / "batch5_enc_b.pdf")
+    try:
+        with first.open("rb") as a, second.open("rb") as b:
+            response = client.post(
+                "/convert",
+                files=[
+                    ("file", (first.name, a, "application/pdf")),
+                    ("file", (second.name, b, "application/pdf")),
+                ],
+                data={"target_format": "pdf", "operation": "pdf-compress"},
+            )
+        assert response.status_code == 201, response.text
+        body = response.json()
+        assert {"status", "conversion_id", "results", "total", "successful"} <= set(body), body
+        assert body["total"] == 2 and len(body["results"]) == 2, body
+        assert body["successful"] == 0, body
+        for item in body["results"]:
+            assert item["status"] == "failed", item
+            assert item["error"] == "UNSUPPORTED_CONVERSION", item
+            assert "password protected" in str(item["message"]).lower(), item
+        leaked = [m for m in _INTERNAL_MARKERS if m.lower() in response.text.lower()]
+        assert leaked == [], response.text
+    finally:
+        first.unlink(missing_ok=True)
+        second.unlink(missing_ok=True)
 
 
 @pytest.mark.certified

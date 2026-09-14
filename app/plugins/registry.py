@@ -32,7 +32,17 @@ class PluginRegistry:
         self.by_slug: dict[str, object] = {}
 
         # slug -> [(source,target), ...]
+        # Accumulated union of every pair claimed by every class that ever
+        # registered this slug. Duplicate slugs make this wider than the
+        # instance by_slug actually dispatches to, so it is a claims/history
+        # index only and must NEVER be used to authorize a request.
         self.registered_keys: dict[str, list[tuple[str, str]]] = defaultdict(list)
+
+        # slug -> {(source,target), ...} claimed by the winner in by_slug.
+        # Guard authority for slug-aware resolution: it is written in the same
+        # statement as by_slug, so the pair the guard accepts and the instance
+        # that resolves can never disagree (see get_plugin).
+        self.slug_winner_pairs: dict[str, set[tuple[str, str]]] = {}
 
         self.discovery_summary = {
             "loaded_plugins": [],
@@ -96,12 +106,12 @@ class PluginRegistry:
 
             self.source_cache[source.lower()].append(plugin)
 
-            for target in plugin.target_formats:
+            # Plugins may register fewer pairs than the naive source x target
+            # cross product (see ConverterPlugin.registration_pairs), e.g.
+            # format-preserving ops that only support same-format pairs.
+            registration_pairs = plugin.registration_pairs()
 
-                key = (
-                    source.lower(),
-                    target.lower(),
-                )
+            for key in registration_pairs:
 
                 self.plugins[key] = plugin
 
@@ -109,12 +119,14 @@ class PluginRegistry:
         slug = getattr(plugin, "slug", None)
         if slug:
             slug = slug.lower().strip()
+            # by_slug is a single-winner index: the last class to register this
+            # slug replaces the previous one, whose pairs stay in the union
+            # index. Track the winner's own claim set in lockstep with that
+            # assignment so the resolution guard below can never authorize a
+            # pair the dispatched instance does not actually implement.
             self.by_slug[slug] = plugin
-            for source in plugin.source_formats:
-                for target in plugin.target_formats:
-                    self.registered_keys[slug].append(
-                        (source.lower(), target.lower())
-                    )
+            self.slug_winner_pairs[slug] = set(plugin.registration_pairs())
+            self.registered_keys[slug].extend(registration_pairs)
 
     def has_slug(self, slug: str) -> bool:
         """Return True when a plugin with the given slug is registered."""
@@ -133,7 +145,11 @@ class PluginRegistry:
         target = target_format.lower()
 
         # Slug-aware resolution: the slug must map to a registered plugin and
-        # the requested (source, target) pair must be one of its registered keys.
+        # the requested (source, target) pair must be one the *dispatched*
+        # plugin itself declared. The accumulated union in registered_keys is
+        # not consulted: with a duplicate slug it can advertise pairs that only
+        # a shadowed class claimed, which would clear the guard here and then
+        # blow up inside the winner at run time.
         if slug:
             slug = slug.lower().strip()
             plugin = self.by_slug.get(slug)
@@ -141,7 +157,7 @@ class PluginRegistry:
                 raise ValueError(
                     f"Operation '{slug}' is not registered (slug tidak tersedia)."
                 )
-            if (source, target) not in self.registered_keys.get(slug, []):
+            if (source, target) not in self.slug_winner_pairs.get(slug, set()):
                 raise ValueError(
                     f"Operation '{slug}' does not support {source} -> {target}."
                 )

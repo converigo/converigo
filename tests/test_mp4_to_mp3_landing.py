@@ -53,7 +53,40 @@ def test_mp4_to_mp3_conversion_endpoint_still_accepts_uploads():
     assert response.json()["status"] == "success"
 
 
+# Internal implementation detail that must never ride the public 422 message
+# channel (the same marker family tests/test_phase25_d4_guard_no_disclosure.py
+# sweeps for).
+_INTERNAL_MARKERS = (
+    "MP4ToMP3Plugin",
+    "Plugin",
+    "RuntimeError",
+    "ConversionError",
+    "UnsupportedConversionError",
+    "Traceback",
+    "ffmpeg",
+    "ffprobe",
+    "app.plugins",
+    "conversion_service",
+    "site-packages",
+    ".venv",
+    "/app/",
+    "uploads\\",
+    "uploads/",
+    "temp\\",
+    ".py",
+)
+
+
 def test_mp4_to_mp3_returns_clear_error_when_input_has_no_audio(tmp_path):
+    """An MP4 with no audio track is an unsupported INPUT, not a server fault.
+
+    Locked here as the sanctioned 422 UNSUPPORTED_CONVERSION contract. It used to
+    be a 500 whose detail echoed the plugin's raw RuntimeError text, which D4 (F1)
+    removed: that echo was the only reason the guidance reached a client, and the
+    batch shape of it leaked "error_code": "CONVERSIONERROR" - a Python class
+    name. The wording is preserved, but now through the typed channel, so a 500
+    stays reserved for failures the user cannot fix by re-uploading a file.
+    """
     ffmpeg = shutil.which("ffmpeg")
     if ffmpeg is None:
         pytest.skip("ffmpeg not available")
@@ -88,5 +121,25 @@ def test_mp4_to_mp3_returns_clear_error_when_input_has_no_audio(tmp_path):
             data={"target_format": "mp3"},
         )
 
-    assert response.status_code == 500
-    assert "does not contain an audio stream" in response.json()["detail"]
+    assert response.status_code == 422
+
+    body = response.json()
+    assert body["success"] is False
+    assert body["code"] == "UNSUPPORTED_CONVERSION"
+    # The 500-era shape was {"detail": ...}; the honest channel is the flat
+    # {success, code, message} contract.
+    assert "detail" not in body
+
+    # The user-facing guidance survived the migration and is still actionable.
+    assert "does not contain an audio stream" in body["message"]
+    assert "upload a video file that includes audio" in body["message"]
+
+    # ...without dragging any internal detail along with it.
+    leaked = [m for m in _INTERNAL_MARKERS if m.lower() in response.text.lower()]
+    assert leaked == []
+
+    # Correlation with the server-side log record is still available.
+    assert body["request_id"]
+    assert body.get("conversion_id")
+    assert response.headers["X-Request-ID"] == body["request_id"]
+
