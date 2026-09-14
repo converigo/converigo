@@ -31,6 +31,38 @@ from app.plugins.base import ConverterPlugin
 logger = logging.getLogger(__name__)
 
 
+# The one user-facing sentence this plugin emits for a password-protected PDF.
+#
+# It travels through the sanctioned UnsupportedConversionError channel (HTTP 422,
+# code UNSUPPORTED_CONVERSION), whose handler copies str(exc) straight into the
+# response body. That makes this literal the ONLY place in the plugin where
+# wording reaches a client, so it must stay plain prose: no Python class name,
+# no engine/module name and no filesystem path.
+#
+# D4 (F1) removed the old echo of a raised RuntimeError text into
+# HTTPException.detail, which is why an input-side condition now needs the typed
+# channel instead of a generic 500.
+PASSWORD_PROTECTED_MESSAGE = (
+    "PDF is password protected; remove the password before compressing."
+)
+
+
+def _password_protected_error(target_format: str) -> Exception:
+    """Build the typed honest error for a PDF that needs a user password.
+
+    Mirrors the sanctioned pattern of the sibling PDF converters
+    (app/plugins/document/pdf_ops_factory.py::_open_pdf, itself following the
+    rar-extract precedent): UnsupportedConversionError is imported lazily to
+    avoid a circular import, and ConversionService re-raises that type
+    untouched instead of folding it into the generic 500.
+    """
+    from app.services.conversion_service import UnsupportedConversionError
+
+    return UnsupportedConversionError(
+        "pdf", target_format, message=PASSWORD_PROTECTED_MESSAGE
+    )
+
+
 class PDFCompressPlugin(ConverterPlugin):
     slug = "pdf-compress"
     name = "PDF Compress"
@@ -71,12 +103,16 @@ class PDFCompressPlugin(ConverterPlugin):
         reader = PdfReader(str(source_path))
         if reader.is_encrypted:
             try:
+                # Owner-restricted PDFs carry an empty user password and decrypt
+                # cleanly here, so they keep flowing into the compression passes.
                 if not reader.decrypt(""):
                     raise RuntimeError("empty password rejected")
             except Exception as exc:
-                raise RuntimeError(
-                    "PDF is password protected; remove the password before compressing."
-                ) from exc
+                # Only a real user password reaches this branch. That is a
+                # permanent property of the uploaded input, not a server-side
+                # fault, so it takes the typed honest-error channel while every
+                # other failure in this plugin keeps the generic 500.
+                raise _password_protected_error(target_format) from exc
 
         if len(reader.pages) == 0:
             raise RuntimeError("PDF has no pages to compress.")
