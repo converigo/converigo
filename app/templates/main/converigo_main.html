@@ -1566,8 +1566,20 @@ function buildGlobalFmt(){
       opts = ['JPG','PNG','PDF','MP3','MP4','ZIP'];
     }
     const current = sel.value;
+    /* RC-1: `pendingTargets[0]` is the consensus every pending row already
+       agrees on. The bulk control summarises that consensus, so it must be
+       seeded from it — not from STATIC_TARGET_MAP array order. Seeding from
+       array order made convertAll()'s (intentional) bulk-wins precedence
+       silently overwrite a correct row-level target with an unrelated
+       default (production MP4->MP3 shipped as AAC). `dataset.consensus`
+       records the consensus seen on the previous render so a deliberate
+       bulk-only pick is still preserved while the rows have not moved. */
+    const consensus = pendingTargets[0];
+    const rowsMoved = consensus !== sel.dataset.consensus;
     sel.innerHTML = opts.map(t=>`<option value="${t}">${t}</option>`).join('');
-    if(opts.includes(current)) {
+    if((!current || rowsMoved) && opts.includes(consensus)){
+      sel.value = consensus;
+    } else if(opts.includes(current)) {
       sel.value = current;
     } else {
       const sourceFormats = new Set(
@@ -1575,6 +1587,7 @@ function buildGlobalFmt(){
       );
       sel.value = opts.find(option => !sourceFormats.has(option.toLowerCase())) || opts[0];
     }
+    sel.dataset.consensus = consensus;
     label.innerHTML = `${window.translate('upload.conversion_instruction', 'Convert all files to:')} (<span id="pendingCount">${pending.length}</span>)`;
     sel.style.display = '';
   } else {
