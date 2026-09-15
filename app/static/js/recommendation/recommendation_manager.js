@@ -52,12 +52,26 @@ class RecommendationManager {
         });
     }
 
+    _pageOperation() {
+        // Mirror converter.js exactly: on a /tools/<slug> page the conversion is
+        // dispatched by that slug (converter sends it as `operation`). The
+        // recommendation must be bounded by the same authority scope, otherwise the
+        // chip list can offer a target this page cannot dispatch (422 on convert).
+        const pathParts = (window.location.pathname || "").split("/").filter(Boolean);
+        if (pathParts.length >= 2 && pathParts[0] === "tools") {
+            return (pathParts[1] || "").toLowerCase();
+        }
+        return "";
+    }
+
     async analyzeFile(file) {
         if (!file || !file.name) return;
         console.log("Analyzing:", file.name);
         const extension = file.name.split('.').pop().toLowerCase();
         try {
-            const response = await fetch(`/recommend/${extension}`);
+            const operation = this._pageOperation();
+            const query = operation ? `?operation=${encodeURIComponent(operation)}` : "";
+            const response = await fetch(`/recommend/${extension}${query}`);
             if (!response.ok) {
                 throw new Error('No recommendation');
             }

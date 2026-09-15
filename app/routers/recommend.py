@@ -9,7 +9,7 @@ Converigo Core Architecture
 """
 
 import logging
-from fastapi import APIRouter
+from fastapi import APIRouter, Query
 
 from app.recommendation.engine import (
     recommendation_engine,
@@ -27,14 +27,28 @@ logger = logging.getLogger("app.recommend")
 @router.get("/{source_format}")
 async def recommend_converter(
     source_format: str,
+    operation: str | None = Query(
+        default=None,
+        max_length=64,
+        description=(
+            "Tool-page operation slug (e.g. 'pdf-compress'). /convert posts "
+            "operation=<page slug>, so the recommendation must be scoped by the "
+            "same key the dispatch registry uses; otherwise a chip can advertise "
+            "a target this page cannot dispatch."
+        ),
+    ),
 ):
     """
     Return best converter recommendation
     based on uploaded file format.
+
+    Eligibility is answered by the D5 target-capability authority for this
+    operation; this endpoint only ranks what the authority already allows.
     """
 
     result = recommendation_engine.recommend(
-        source_format
+        source_format,
+        operation=operation,
     )
 
 
@@ -57,18 +71,9 @@ async def recommend_converter(
             for option in result.alternatives
         ]
 
-        # If still empty, provide a small, safe fallback so the UI can render a choice.
-        if not alternatives:
-            # Prefer PDF as a generic target, then plain text — keep minimal and predictable.
-            alternatives = [
-                {
-                    "source": source_format,
-                    "target": "pdf",
-                    "title": "Save as PDF",
-                    "score": 0.0,
-                }
-            ]
-
+        # Fail closed. A target we cannot dispatch must never be invented here:
+        # the previous generic "Save as PDF" fallback advertised capability the
+        # authority had not granted (and /convert would reject with 422).
         return {
             "detected_type": detected,
             "best_choice": None,

@@ -46,13 +46,23 @@ class RecommendationScorer:
     def build_option(
         self,
         plugin,
+        *,
+        source: str | None = None,
+        target: str | None = None,
     ) -> RecommendationOption:
+        """Build one recommendation chip from the plugin that will run it.
+
+        ``source``/``target`` are optional overrides. The caller passes the values
+        the request actually carries, so a chip never describes a pair the plugin
+        declared only incidentally (a plugin whose ``target_formats[0]`` is the
+        legacy alias ``ppt`` delivers a ``.pptx``; the chip must say ``pptx``).
+        """
 
         return RecommendationOption(
 
-            source=plugin.source_formats[0],
+            source=plugin.source_formats[0] if source is None else source,
 
-            target=plugin.target_formats[0],
+            target=plugin.target_formats[0] if target is None else target,
 
             title=plugin.name,
 
