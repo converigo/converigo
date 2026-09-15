@@ -299,6 +299,21 @@ STATIC_DIR = Path(__file__).resolve().parent / "static"
 OUTPUT_DIR = settings.OUTPUT_DIR
 MANIFEST_PATH = STATIC_DIR / "site.webmanifest"
 
+# Explicit response types for converted outputs.
+#
+# ``mimetypes.guess_type`` is host-dependent: a container without a system MIME
+# database (or with a stale one) answers ``None`` for ``.epub`` and the download
+# would fall back to ``application/octet-stream``, which no e-reader will accept.
+# The EPUB 3 specification also fixes the media type, so the value is declared
+# here instead of being discovered.  ``/download`` uses the map below and the
+# ``/outputs`` StaticFiles mount is covered by registering the same type.
+EXPLICIT_DOWNLOAD_MEDIA_TYPES = {
+    ".epub": "application/epub+zip",
+}
+
+for _suffix, _media_type in EXPLICIT_DOWNLOAD_MEDIA_TYPES.items():
+    mimetypes.add_type(_media_type, _suffix, strict=False)
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -483,7 +498,9 @@ async def download_file(request: Request, path: str) -> FileResponse:
     if not candidate.exists() or not candidate.is_file():
         raise HTTPException(status_code=404, detail="File not found")
 
-    media_type, _ = mimetypes.guess_type(candidate.name)
+    media_type = EXPLICIT_DOWNLOAD_MEDIA_TYPES.get(candidate.suffix.lower())
+    if not media_type:
+        media_type, _ = mimetypes.guess_type(candidate.name)
     if not media_type:
         media_type = "application/octet-stream"
 
