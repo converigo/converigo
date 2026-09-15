@@ -22,6 +22,13 @@ from app.services.converter_registry_service import (
     ConverterRegistryService,
 )
 
+from app.services.target_capability import (
+    AUTO_DEFAULT_FIRST,
+    TARGET_CANONICAL,
+    TARGET_ORDER_PREFERENCE,
+    build_capability,
+)
+
 
 class RecommendationEngine:
 
@@ -79,39 +86,138 @@ class RecommendationEngine:
             return False
 
 
+    # ------------------------------------------------------------------
+    # Capability authority (D5) owns eligibility; this engine owns ranking.
+    # ------------------------------------------------------------------
+
+    @staticmethod
+    def _allowed_targets(source: str, operation: str | None) -> set[str]:
+        """What ``target_capability`` allows this source to be offered right now.
+
+        The authority already folds legacy alias tokens onto the extension that is
+        really delivered, drops placeholder-backed pairs, gates a source on
+        uploadability, and only authorizes a self-conversion when ``operation``
+        names the page that owns it. None of that is recomputed here.
+        """
+
+        view = build_capability(operation).map
+        return {str(target).lower() for target in view.get(source, [])}
+
+    @staticmethod
+    def _canonical_target(target: str, allowed: set[str]) -> str | None:
+        """Fold a declared token onto the canonical target the authority allows.
+
+        Same rule the authority applies in ``admit()``: a fold is honoured only onto
+        a pair that is itself dispatchable, so this can never invent capability - it
+        can only name an existing one correctly (``ppt`` -> ``pptx``).
+        """
+
+        token = str(target).lower().strip()
+        if token in allowed:
+            return token
+        canonical = TARGET_CANONICAL.get(token)
+        if canonical is not None and canonical in allowed:
+            return canonical
+        return None
+
+    @staticmethod
+    def _dispatch_winner(source: str, target: str, operation: str | None):
+        """The plugin ``/convert`` will actually run for this chip, else ``None``.
+
+        ``get_plugin`` raises ``ValueError`` for a pair/slug combination it cannot
+        resolve - precisely the ``422 UNSUPPORTED_CONVERSION`` the browser would
+        receive - so a chip that cannot dispatch is dropped instead of advertised.
+        """
+
+        try:
+            plugin = registry.get_plugin(source, target, slug=operation)
+        except Exception:
+            return None
+        if getattr(plugin, "advertisable", True) is False:
+            # Registered so the failure message stays honest, but it can never
+            # deliver the file: it must not turn into an offer.
+            return None
+        return plugin
+
+    @staticmethod
+    def _pin_default(source: str, options: list) -> list:
+        """Keep the authority's pinned default target in first position.
+
+        ``renderFormats()`` auto-selects the first chip, so position zero *is* the
+        default-target policy, which belongs to the authority
+        (``TARGET_ORDER_PREFERENCE`` / ``AUTO_DEFAULT_FIRST``) rather than to the
+        score formula: ranked on score alone a ``.wav`` upload on a legacy page
+        defaults to AAC, the silent-wrong-format regression WS1 had to fix on the
+        homepage. Everything after the pinned default stays score-ranked.
+        """
+
+        targets = [str(option.target).lower() for option in options]
+        preferred = next(
+            (token for token in TARGET_ORDER_PREFERENCE.get(source, ()) if token in targets),
+            None,
+        ) or AUTO_DEFAULT_FIRST.get(source)
+        if not preferred or preferred not in targets or targets[0] == preferred:
+            return options
+        index = targets.index(preferred)
+        return [options[index], *options[:index], *options[index + 1 :]]
+
     def recommend(
         self,
         source_format: str,
+        operation: str | None = None,
     ) -> RecommendationResult:
+        """Rank the targets a legacy surface may offer for one uploaded source.
+
+        Ordering and tool context stay this engine's job; *eligibility* is the D5
+        authority's. A chip survives only when the authority allows that target for
+        this source under this operation and ``registry.get_plugin()`` resolves a
+        real, advertisable, production-ready plugin for the exact request the
+        browser is about to post. So an advertised target can never be wider than a
+        dispatchable target, while ranking remains a recommendation.
+        """
+
+        source = str(source_format or "").lower().strip()
+        detected = source.upper()
+
+        allowed = self._allowed_targets(source, operation)
+        if not allowed:
+            # No authority row means nothing may be offered: a non-uploadable alias
+            # (word/xls/ppt/doc), an unknown token, or every pair unadvertisable.
+            return RecommendationResult(
+                detected_type=detected,
+                best_choice=None,
+                alternatives=[],
+            )
 
         plugins = registry.get_plugins_by_source(
-            source_format
+            source
         )
 
         # Filter to only production-ready (certified/active) converters
         plugins = [p for p in plugins if self._is_production_ready(p)]
 
-        if not plugins:
-
-            return RecommendationResult(
-
-                detected_type=source_format.upper(),
-
-                best_choice=None,
-
-                alternatives=[],
-
+        options = []
+        seen_targets: set[str] = set()
+        for plugin in plugins:
+            target_formats = getattr(plugin, "target_formats", []) or []
+            if not target_formats:
+                continue
+            target = self._canonical_target(target_formats[0], allowed)
+            if target is None or target in seen_targets:
+                # Out of authority: this plugin's claim is not something the user
+                # could actually convert to on this surface.
+                continue
+            winner = self._dispatch_winner(source, target, operation)
+            if winner is None:
+                continue
+            if not self._is_production_ready(winner):
+                # The chip is backed by the plugin that will run it, so that
+                # plugin's certification status is the one that matters.
+                continue
+            seen_targets.add(target)
+            options.append(
+                self.scorer.build_option(winner, source=source, target=target)
             )
-
-
-        options = [
-
-            self.scorer.build_option(plugin)
-
-            for plugin in plugins
-
-        ]
-
 
         options.sort(
 
@@ -121,31 +227,19 @@ class RecommendationEngine:
 
         )
 
-        # Deduplicate by normalized target format while preserving ranking.
-        deduped: list[object] = []
-        seen_targets: set[str] = set()
-        for opt in options:
-            target = (opt.target or "").strip().lower()
-            if not target:
-                # keep items with no explicit target
-                deduped.append(opt)
-                continue
-            if target in seen_targets:
-                continue
-            seen_targets.add(target)
-            deduped.append(opt)
+        options = self._pin_default(source, options)
 
-        if not deduped:
+        if not options:
             return RecommendationResult(
-                detected_type=source_format.upper(),
+                detected_type=detected,
                 best_choice=None,
                 alternatives=[],
             )
 
         return RecommendationResult(
-            detected_type=source_format.upper(),
-            best_choice=deduped[0],
-            alternatives=deduped[1:],
+            detected_type=detected,
+            best_choice=options[0],
+            alternatives=options[1:],
         )
 
 
