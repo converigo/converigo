@@ -912,3 +912,40 @@ def test_tool_page_is_live_and_matches_a_dispatchable_pair() -> None:
     assert "https://converigo.com/tools/pdf-to-epub" in locs
     assert len(locs) == len(entries), "the sitemap emitted a duplicate URL"
 
+
+
+@pytest.mark.certified
+def test_spent_budget_answers_a_safe_generic_failure_over_http(monkeypatch) -> None:
+    """A resource failure must not be dressed up as an input 422.
+
+    Proves the whole boundary contract for the non-input branch: the router
+    answers with its stable generic code and the generic sentence, the runner's
+    wording is the same literal as the service's (so a client cannot tell which
+    stage gave up), and nothing internal appears in the body.
+    """
+    from app.services.conversion_service import GENERIC_CONVERSION_FAILURE_MESSAGE
+
+    assert PLAIN_MESSAGE == GENERIC_CONVERSION_FAILURE_MESSAGE
+
+    monkeypatch.setattr(settings, "PDF_EPUB_TIME_BUDGET_SECONDS", 0)
+    client = TestClient(app)
+    response = upload(client, "epub_multipage_24p.pdf")
+
+    assert response.status_code == 500, response.text
+    body = response.json()
+    assert body["code"] == "CONVERSION_FAILED", body
+    assert body["message"] == GENERIC_CONVERSION_FAILURE_MESSAGE, body
+    text = json.dumps(body)
+    for marker in (
+        "C:\\",
+        "app/",
+        ".py",
+        "Traceback",
+        "fitz",
+        "pypdf",
+        "MuPDF",
+        "budget",
+        "page",
+    ):
+        assert marker not in text, f"{marker!r} reached the client"
+
