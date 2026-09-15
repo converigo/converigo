@@ -1,0 +1,10 @@
+# Converter fixtures are binary containers whose exact bytes the certified tests
+# assert (page counts, extracted character counts and "is_repaired=False" all
+# depend on it).  With core.autocrlf=true and no rule here, git auto-detects the
+# plain-text-looking PDF streams as text and rewrites their line endings on every
+# fresh checkout: the bytes change, and a fixture MuPDF used to read cleanly can
+# come back as a repaired document.  Pin them as binary.
+#
+# Scoped deliberately to the fixtures this batch adds; existing tracked PDFs keep
+# their current behaviour so this change cannot make another working tree dirty.
+tests/fixtures/pdf_to_epub/*.pdf binary
