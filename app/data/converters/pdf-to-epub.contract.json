@@ -1,0 +1,36 @@
+{
+  "id": "pdf-to-epub",
+  "slug": "pdf-to-epub",
+  "name": "PDF to EPUB",
+  "category": "document",
+  "description": "Convert the text of a PDF into an EPUB 3 ebook with page-grouped chapters.",
+  "input_formats": ["pdf"],
+  "output_formats": ["epub"],
+  "accepted_mime_types": ["application/pdf"],
+  "max_upload_size": 104857600,
+  "conversion_engine": "document",
+  "landing_path": "/tools/pdf-to-epub",
+  "canonical_url": "https://converigo.com/tools/pdf-to-epub",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.pdf",
+  "supported_platforms": ["web"],
+  "lifecycle_status": "active",
+  "processing_limits": {
+    "max_pages": 500,
+    "max_extracted_characters": 2000000,
+    "max_characters_per_page": 10000,
+    "max_package_bytes": 5000000,
+    "max_chapters": 120,
+    "time_budget_seconds": 45
+  },
+  "output_media_type": "application/epub+zip",
+  "not_supported": [
+    "OCR of scanned pages",
+    "layout or column reconstruction",
+    "embedded images, fonts and scripts",
+    "encrypted or access-restricted PDFs",
+    "EPUB as an input format"
+  ]
+}

@@ -1,0 +1,180 @@
+{
+  "_comment": [
+    "Declared contract for the PDF -> EPUB certified fixtures.",
+    "",
+    "The PDFs themselves are NOT committed: the certified suite generates them at",
+    "session start (see \"Fixture generation\" in",
+    "tests/certified/document/test_pdf_to_epub_certified.py).  Committing binary PDFs",
+    "is unsafe on a clone that uses core.autocrlf=true, because git rewrites CRLF pairs",
+    "inside text-looking PDF streams during checkout and MuPDF then reports",
+    "is_repaired=True, which makes the converter refuse its own fixture.  Measured on a",
+    "fresh checkout of the previously committed set: 14 of 21 fixtures came back mangled.",
+    "",
+    "This file is what replaces the frozen bytes as the thing under review.  Every",
+    "property in it is re-measured by",
+    "tests/certified/document/test_pdf_to_epub_certified.py::test_fixtures_manifest_is_still_true,",
+    "so a generated fixture can never drift away from what the tests assume.",
+    "pages/chars are what MuPDF reports for the generated file; encrypted is what pypdf",
+    "reports (the authority for the /Encrypt guard); refusals name the runner's refusal",
+    "kind.  Byte-identity holds for 18 of 21 fixtures across runs; the three encrypted",
+    "ones are claimed by behaviour only, since MuPDF gives encrypted streams a fresh IV."
+  ],
+  "generated_by": "builders inside tests/certified/document/test_pdf_to_epub_certified.py",
+  "engine_of_record": "PyMuPDF 1.26.3 / pypdf 6.16.2 / reportlab (declared)",
+  "fixtures": {
+    "epub_text_1p_minimal.pdf": {
+      "kind": "positive",
+      "pages": 1,
+      "chars": 50,
+      "encrypted": false,
+      "markers": ["MINIMAL MARKER-001", "Single page, single paragraph."]
+    },
+    "epub_text_3p.pdf": {
+      "kind": "positive",
+      "pages": 3,
+      "chars": 276,
+      "encrypted": false,
+      "markers": ["PAGE ONE MARKER-101", "PAGE TWO MARKER-202", "PAGE THREE MARKER-303"],
+      "notes": "Page 1 carries XML-significant text and CP1252-era Latin characters."
+    },
+    "epub_mixed_text_image.pdf": {
+      "kind": "positive",
+      "pages": 3,
+      "chars": 253,
+      "encrypted": false,
+      "markers": ["MIXED PAGE 1 MARKER-1", "MIXED PAGE 3 MARKER-3"],
+      "blank_pages": [2],
+      "notes": "Page 2 is an image with no text layer: it must produce a page block with no paragraphs."
+    },
+    "epub_utf8_cjk.pdf": {
+      "kind": "positive",
+      "pages": 1,
+      "chars": 45,
+      "encrypted": false,
+      "markers": ["CJK MARKER-777"],
+      "unicode_sample": "\u65e5\u672c\u8a9e\u30c6\u30b9\u30c8"
+    },
+    "epub_dense_8p_chars.pdf": {
+      "kind": "positive",
+      "pages": 8,
+      "chars": 42869,
+      "max_page_chars": 5381,
+      "encrypted": false,
+      "markers": ["DENSE PAGE 1 MARKER", "DENSE PAGE 8 MARKER"],
+      "notes": "Used to exercise the cumulative-character ceiling at a lowered limit."
+    },
+    "epub_multipage_24p.pdf": {
+      "kind": "positive",
+      "pages": 24,
+      "chars": 95924,
+      "encrypted": false,
+      "markers": ["PAGE 1 MARKER-0001", "PAGE 24 MARKER-0024"]
+    },
+    "epub_with_outline.pdf": {
+      "kind": "positive",
+      "pages": 12,
+      "chars": 1509,
+      "encrypted": false,
+      "markers": ["OUTLINE PAGE 1 MARKER", "OUTLINE PAGE 12 MARKER"],
+      "notes": "Carries a PDF outline. The MVP does not infer a semantic TOC, so chapters must come from pages only."
+    },
+    "epub_high_entropy_text.pdf": {
+      "kind": "positive",
+      "pages": 8,
+      "chars": 34334,
+      "encrypted": false,
+      "markers": ["575yx8xm5Msl"],
+      "notes": "Random-token text that compresses poorly; proves the package ceiling is measured on real bytes."
+    },
+    "epub_evil_metadata.pdf": {
+      "kind": "positive",
+      "pages": 1,
+      "chars": 53,
+      "encrypted": false,
+      "markers": ["EVIL METADATA BODY MARKER-900"],
+      "metadata_title": "../../../../etc/passwd",
+      "metadata_author": "<script>alert(1)</script>&\"",
+      "notes": "Attacker-shaped metadata: may only appear as escaped XML text, never as a path or entry name."
+    },
+    "epub_over_500pages.pdf": {
+      "kind": "refusal",
+      "refusal": "page_limit",
+      "pages": 501,
+      "chars": 10413,
+      "encrypted": false
+    },
+    "epub_over_page_chars.pdf": {
+      "kind": "refusal",
+      "refusal": "page_chars_limit",
+      "pages": 1,
+      "chars": 81403,
+      "encrypted": false,
+      "notes": "1,990 input bytes amplifying to 81,403 extracted characters: one 400-char line drawn 203 times at 1pt so every run stays inside the page rect MuPDF clips to."
+    },
+    "epub_image_only.pdf": {
+      "kind": "refusal",
+      "refusal": "no_text",
+      "pages": 4,
+      "chars": 0,
+      "encrypted": false
+    },
+    "epub_zero_page.pdf": {
+      "kind": "refusal",
+      "refusal": "no_pages",
+      "pages": 0,
+      "chars": 0,
+      "encrypted": false
+    },
+    "epub_truncated.pdf": {
+      "kind": "refusal",
+      "refusal": "repaired_input",
+      "encrypted": false,
+      "mupdf_is_repaired": true,
+      "notes": "MuPDF can only read it after repairing, so extraction would be partial and is refused."
+    },
+    "epub_garbage_withheader.pdf": {
+      "kind": "refusal",
+      "refusal": "malformed_pdf",
+      "header": "%PDF-1.7",
+      "encrypted": false
+    },
+    "epub_garbage_noheader.pdf": {
+      "kind": "refusal",
+      "refusal": "malformed_pdf",
+      "header": "NOT-A-PDF",
+      "encrypted": false
+    },
+    "epub_header_only.pdf": {
+      "kind": "refusal",
+      "refusal": "malformed_pdf",
+      "header": "%PDF-1.7",
+      "encrypted": false
+    },
+    "epub_empty.pdf": {
+      "kind": "refusal",
+      "refusal": "malformed_pdf",
+      "bytes": 0,
+      "encrypted": false
+    },
+    "epub_encrypted_rc4_userpw.pdf": {
+      "kind": "refusal",
+      "refusal": "encrypted_or_restricted",
+      "encrypted": true,
+      "mupdf_needs_pass": true
+    },
+    "epub_encrypted_userpw_aes256.pdf": {
+      "kind": "refusal",
+      "refusal": "encrypted_or_restricted",
+      "encrypted": true,
+      "mupdf_needs_pass": true
+    },
+    "epub_encrypted_owner_only.pdf": {
+      "kind": "refusal",
+      "refusal": "encrypted_or_restricted",
+      "encrypted": true,
+      "mupdf_needs_pass": false,
+      "mupdf_is_encrypted": false,
+      "notes": "The MuPDF blind spot: owner-restricted, opens without a password, still carries /Encrypt. Only a dictionary-level check refuses it."
+    }
+  }
+}

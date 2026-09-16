@@ -19,6 +19,15 @@ class Settings:
         self.OUTPUT_RETENTION_MINUTES = int(os.getenv("OUTPUT_RETENTION_MINUTES", "60"))
         self.OUTPUT_RETENTION_SECONDS = self.OUTPUT_RETENTION_MINUTES * 60
         self.CONVERSION_TIMEOUT_SECONDS = int(os.getenv("CONVERSION_TIMEOUT_SECONDS", "300"))
+        # PDF -> EPUB ceilings (supervisor-approved implementation gate values).
+        # Every one of them is enforced inside the extraction/packaging loop in
+        # app/factory/pdf_epub_runner.py, not after the output has been built.
+        self.PDF_EPUB_MAX_PAGES = int(os.getenv("PDF_EPUB_MAX_PAGES", "500"))
+        self.PDF_EPUB_MAX_CHARS = int(os.getenv("PDF_EPUB_MAX_CHARS", "2000000"))
+        self.PDF_EPUB_MAX_PAGE_CHARS = int(os.getenv("PDF_EPUB_MAX_PAGE_CHARS", "10000"))
+        self.PDF_EPUB_MAX_PACKAGE_BYTES = int(os.getenv("PDF_EPUB_MAX_PACKAGE_BYTES", "5000000"))
+        self.PDF_EPUB_MAX_CHAPTERS = int(os.getenv("PDF_EPUB_MAX_CHAPTERS", "120"))
+        self.PDF_EPUB_TIME_BUDGET_SECONDS = int(os.getenv("PDF_EPUB_TIME_BUDGET_SECONDS", "45"))
         self.VIDEO_CONVERSION_TIMEOUT_SECONDS = int(os.getenv("VIDEO_CONVERSION_TIMEOUT_SECONDS", str(self.CONVERSION_TIMEOUT_SECONDS)))
         self.AUDIO_CONVERSION_TIMEOUT_SECONDS = int(os.getenv("AUDIO_CONVERSION_TIMEOUT_SECONDS", str(self.CONVERSION_TIMEOUT_SECONDS)))
         self.IMAGE_CONVERSION_TIMEOUT_SECONDS = int(os.getenv("IMAGE_CONVERSION_TIMEOUT_SECONDS", str(self.CONVERSION_TIMEOUT_SECONDS)))

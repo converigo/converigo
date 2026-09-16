@@ -1,0 +1,150 @@
+{
+  "slug": "pdf-to-epub",
+  "title": "PDF to EPUB Converter",
+  "description": "Convert the text of a PDF into an EPUB ebook with page-grouped chapters.",
+  "category": "document",
+  "popular": false,
+  "featured": false,
+  "source": "pdf",
+  "target": "epub",
+  "active": true,
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".pdf",
+    "button_text": "Upload PDF"
+  },
+  "hero": {
+    "eyebrow": "Converter tool",
+    "title": "PDF to EPUB Converter Online Free",
+    "description": "Turn a text PDF into an EPUB ebook you can read on any ereader. Real extracted text, page-grouped chapters and honest limits.",
+    "panel_label": "Ready to convert",
+    "panel_title": "Upload a PDF and receive an EPUB built from its own text."
+  },
+  "features": [
+    {
+      "title": "Genuine text extraction",
+      "text": "The converter reads the text layer of your PDF and puts that text in the ebook. It never invents content and never ships a book that silently lost pages."
+    },
+    {
+      "title": "EPUB 3 with a working table of contents",
+      "text": "The output is a valid EPUB 3 package with a navigation document, an NCX fallback for older readers and minimal CSS."
+    },
+    {
+      "title": "Chapters grouped by page",
+      "text": "Pages become chapters. Short documents get one chapter per page; long documents are grouped so the outline stays usable."
+    },
+    {
+      "title": "Limits stated up front",
+      "text": "Up to 500 pages, 2,000,000 extracted characters, 10,000 characters per page, 120 chapters, a 5 MB package and a 45 second budget. Anything beyond that is refused instead of truncated."
+    }
+  ],
+  "supported_formats": {
+    "input": ["PDF"],
+    "output": ["EPUB"],
+    "description": "PDF input, EPUB 3 output"
+  },
+  "how_to_use": [
+    {
+      "title": "Upload your PDF",
+      "description": "Select a PDF that contains selectable text, such as an ebook export or a report saved from a word processor."
+    },
+    {
+      "title": "Convert to EPUB",
+      "description": "The text layer of every page is extracted and rebuilt as chapters in an EPUB container."
+    },
+    {
+      "title": "Download the EPUB",
+      "description": "Open the result in your ereader app. The download is served as application/epub+zip."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is EPUB?",
+      "text": "EPUB is the reflowable ebook standard: text adapts to the screen and the reader controls the typography."
+    },
+    {
+      "title": "What this converter does not do",
+      "text": "It does not run OCR on scanned pages, rebuild columns or layout, carry embedded images across, or unlock protected PDFs."
+    }
+  ],
+  "faq": [
+    {
+      "question": "Can I convert a scanned PDF to EPUB?",
+      "answer": "No. A scanned page has no text layer, and this converter does not run OCR. If no selectable text is found the job is refused instead of returning an empty book."
+    },
+    {
+      "question": "Will my images and charts appear in the EPUB?",
+      "answer": "No. This converter turns text into an ebook. Embedded images, fonts and scripts are deliberately left out of the output."
+    },
+    {
+      "question": "Is the page layout preserved?",
+      "answer": "No, and that is the point of an ebook. The text is reflowable; page positions, columns and typography are not reproduced."
+    },
+    {
+      "question": "How are chapters created?",
+      "answer": "From pages. Documents up to 120 pages get one chapter per page; longer documents group pages so the outline stays under 120 chapters."
+    },
+    {
+      "question": "Why was my password protected PDF refused?",
+      "answer": "Any PDF that carries an encryption dictionary is refused, whether or not it opens with a blank password. Reading restricted content is out of scope."
+    },
+    {
+      "question": "What happens if my file is too big?",
+      "answer": "The conversion is refused with the reason: 500 pages, 2,000,000 characters in total, 10,000 characters on one page, 120 chapters, a 5 MB package or 45 seconds of processing."
+    },
+    {
+      "question": "Is PDF to EPUB free?",
+      "answer": "Yes. The conversion runs against Converigo from your browser and costs nothing."
+    },
+    {
+      "question": "Can I convert an EPUB back to PDF?",
+      "answer": "Not with this tool. EPUB is an output format on Converigo, not an uploadable input."
+    },
+    {
+      "question": "Are my uploaded files secure?",
+      "answer": "Uploads are processed for the conversion and deleted afterwards. Your file is not used for anything else."
+    }
+  ],
+  "related_tools": [
+    { "slug": "pdf-to-txt", "title": "PDF to TXT" },
+    { "slug": "txt-to-pdf", "title": "TXT to PDF" },
+    { "slug": "pdf-to-odt", "title": "PDF to ODT" }
+  ],
+  "seo": {
+    "title": "PDF to EPUB Converter Online Free | Converigo",
+    "description": "Convert a text PDF into an EPUB 3 ebook online for free. Real extracted text, page-grouped chapters and stated processing limits.",
+    "keywords": "pdf to epub, convert pdf to ebook, epub 3 converter, pdf ebook online",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert PDF to EPUB - Converigo free online converter",
+    "twitter_title": "PDF to EPUB Converter Online Free | Converigo",
+    "twitter_description": "Convert a text PDF into an EPUB 3 ebook online for free with Converigo.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/pdf-to-epub"
+  },
+  "internal_links": {
+    "items": [
+      { "title": "PDF Tools", "href": "/pdf-tools" },
+      { "title": "PDF to TXT", "href": "/tools/pdf-to-txt" }
+    ]
+  },
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Turn a PDF into an ebook",
+    "text": "Upload a text PDF and receive an EPUB built from its own extracted text.",
+    "primary_text": "Convert now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  },
+  "tips": [
+    "Digital PDFs, such as reports saved from a word processor, convert best.",
+    "If your PDF is a scan, extract its text with an OCR tool first."
+  ],
+  "common_problems": [
+    "Scanned pages have no text layer, so they are refused rather than guessed at.",
+    "A PDF that needs repair, or that exceeds one of the stated limits, is refused with the reason."
+  ],
+  "lifecycle_status": "active"
+}
+

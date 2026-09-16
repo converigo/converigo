@@ -43,11 +43,14 @@ CONVERTERS_DIR = Path("app/data/converters")
 # itself never corrected from the original 205 F-2 baseline when mp3-to-aac /
 # wav-to-aac landed -- pre-existing gap, tracked as a separate ticket) plus the
 # 2 new Phase 22 slugs png-to-pdf and pdf-to-png = 209, plus the 1 new
-# html-to-pdf converter page = 210.
+# html-to-pdf converter page = 210, plus the pdf-to-epub converter page and the
+# /formats/epub page that exists because EPUB is now a real output format = 212.
+# Both additions are dispatchable: see
+# tests/certified/document/test_pdf_to_epub_certified.py for the parity proof.
 # Out of scope: VAR Sub-batch C converters (batch-jpg-to-webp, image-compress,
 # image-resize) remain uncommitted in this batch; while their converter JSONs
 # sit in a local working tree the live sitemap measures 213 instead.
-EXPECTED_SITEMAP_COUNT = 210
+EXPECTED_SITEMAP_COUNT = 212
 
 
 @pytest.fixture(scope="module")

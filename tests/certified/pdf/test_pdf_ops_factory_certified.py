@@ -388,8 +388,12 @@ def test_cross_format_targets_and_dropdown_map() -> None:
         if src == "pdf" and tgt != "pdf"
     }
     # Batch 2 adds png (pdf-to-png) alongside the F3 html/md gains.
+    # The pdf-to-epub batch adds epub: the pair is registered by an advertisable
+    # plugin that really converts, so it must show up here - and the certified
+    # suite proves it disappears again if the pair stops dispatching
+    # (tests/certified/document/test_pdf_to_epub_certified.py).
     assert pdf_targets == {
-        "doc", "docx", "html", "jpeg", "jpg", "md", "odt",
+        "doc", "docx", "epub", "html", "jpeg", "jpg", "md", "odt",
         "png", "ppt", "pptx", "txt", "word", "xls", "xlsx",
     }
     assert ("pdf", "pdf") in registry.plugins  # ops live here, off the map
