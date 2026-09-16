@@ -1,0 +1,143 @@
+name: xls-final-evidence
+
+# XLS -> XLSX FINAL EVIDENCE RUN (one controlled CI iteration).
+#
+# Runs spike_kit/evidence/lo_evidence.py INSIDE THE PRODUCTION IMAGE on
+# ubuntu-latest under the exact Railway production envelope:
+#     --memory 1000000000   (1,000,000,000 B)
+#     --pids-limit 1000
+# so G4 (containment), G6 (resource envelope) and the BIFF5/0x0550 decision are
+# measured against a real Linux + real LibreOffice + cgroup v2 runtime.
+#
+# Evidence-only. It changes no application source, plugin, contract, registry,
+# ALLOWED_EXTENSIONS, ACCEPTED_BOF_VERSIONS or converter JSON, touches no
+# Railway service, and enables nothing. Decisions are made by humans from the
+# numbers in the uploaded artifact.
+
+on:
+  workflow_dispatch:
+    inputs:
+      conc:
+        description: "Space-separated worker counts for the G6 concurrency probe, e.g. \"2 4 8\""
+        required: false
+        default: "2 4 8"
+
+permissions:
+  contents: read
+
+jobs:
+  final-evidence:
+    name: G4 + G6 + BIFF5 evidence (production image, capped)
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v4
+
+      - name: "Fixture manifest (SHA-256) - what will actually be tested"
+        run: |
+          set -euo pipefail
+          echo "## Evidence fixture manifest (SHA-256)" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          sha256sum spike_kit/evidence_fixtures/*.xls >> "$GITHUB_STEP_SUMMARY"
+          sha256sum spike_kit/fixtures/sample_legacy_biff8.xls \
+                    spike_kit/fixtures/stress_biff8_120kc.xls >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          echo "::group::fixture listing"
+          ls -l spike_kit/evidence_fixtures/
+          echo "::endgroup::"
+
+      - name: "Run evidence probe (production image, memory=1GB, pids=1000)"
+        env:
+          CONC: ${{ inputs.conc }}
+        run: bash spike_kit/evidence/run_final_evidence.sh
+
+      - name: "Expose final-evidence summary"
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import json, os, pathlib
+          out = pathlib.Path("spike_kit/evidence/out")
+          lines = ["## XLS->XLSX final evidence summary", "",
+                   "Full detail in the **final-evidence** artifact.", ""]
+
+          def load(phase):
+              p = out / f"evidence_{phase}.json"
+              try:
+                  return json.loads(p.read_text(encoding="utf-8"))
+              except Exception:
+                  return None
+
+          env = load("env")
+          if env:
+              cg = env.get("cgroup") or {}
+              lines += [
+                  "| Item | Value |", "|---|---|",
+                  f"| soffice | `{env.get('soffice_version')}` |",
+                  f"| kernel | `{(env.get('kernel') or '')[:70]}` |",
+                  f"| cgroup | `{cg.get('cgroup_version')}` memory.max="
+                  f"`{cg.get('memory.max')}` pids.max=`{cg.get('pids.max')}` |",
+                  f"| in_container | `{cg.get('in_container')}` |", ""]
+
+          g4 = load("g4")
+          if g4 and isinstance(g4.get("results"), dict):
+              r = g4["results"]
+              rows = []
+              for tier in ("g4_sample", "g4_stress", "g4_bulk"):
+                  t = r.get(tier) or {}
+                  rows.append(f"| {tier} | killed={t.get('killed')} "
+                              f"sigkill={t.get('sigkill_sent')} "
+                              f"reaped={t.get('tree_reaped')} "
+                              f"orphans={len(t.get('orphan_leftovers') or [])} |")
+              c = r.get("g4_control") or {}
+              rows.append(f"| g4_control | sigkill={c.get('sigkill_sent')} "
+                          f"outcome=`{c.get('outcome')}` |")
+              lines += ["### G4 containment", "", "| Probe | Result |",
+                        "|---|---|"] + rows + [""]
+
+          s = load("single")
+          if s and isinstance(s.get("results"), dict):
+              rows = []
+              for k in ("sample", "stress", "bulk"):
+                  d = s["results"].get(k) or {}
+                  if d.get("missing"):
+                      continue
+                  cg = (d.get("cgroup_after") or {})
+                  rows.append(f"| {k} | exit={d.get('exit')} "
+                              f"valid={d.get('output_valid_xlsx')} "
+                              f"wall={d.get('wall_s')}s "
+                              f"cgroup_peak={cg.get('memory.peak')} "
+                              f"vmrss_peak={d.get('rss_peak_vmrss_bytes')} |")
+              lines += ["### G6 single conversion", "", "| Fixture | Result |",
+                        "|---|---|"] + rows + [""]
+
+          b = load("biff5")
+          if b and isinstance(b.get("results"), dict):
+              rows = []
+              for k, d in b["results"].items():
+                  if not isinstance(d, dict) or d.get("missing"):
+                      continue
+                  rows.append(f"| {k} | exit={d.get('exit')} "
+                              f"valid_xlsx={d.get('output_valid_xlsx')} "
+                              f"bof={(d.get('container') or {}).get('bof_version')} |")
+              lines += ["### BIFF5 decision evidence", "",
+                        "| Fixture | Result |", "|---|---|"] + rows + [""]
+
+          text = "\n".join(lines) + "\n"
+          print(text)
+          ss = os.environ.get("GITHUB_STEP_SUMMARY")
+          if ss:
+              pathlib.Path(ss).write_text(text, encoding="utf-8")
+          out.mkdir(parents=True, exist_ok=True)
+          out.joinpath("summary.md").write_text(text, encoding="utf-8")
+          PY
+
+      - name: "Upload final evidence"
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: final-evidence
+          path: |
+            spike_kit/evidence/out/evidence_*.json
+            spike_kit/evidence/out/summary.md
+          if-no-files-found: warn
