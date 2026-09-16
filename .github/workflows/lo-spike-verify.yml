@@ -1,0 +1,130 @@
+name: lo-spike-verify
+
+# XLS -> XLSX LibreOffice spike verification (PR A: CI/kit only).
+#
+# Runs the throwaway spike from spike_kit/ on demand, inside a container built
+# from spike_kit/spike/Dockerfile.spike (same LibreOffice apt line as the
+# production Dockerfile at baseline a932341). It executes no application code,
+# needs no secrets, and is the only way to produce measured G1-G6 evidence for
+# this repo. The measured report (spike_report.json/.md) is uploaded as an
+# artifact; enablement decisions are made by humans against the gate criteria in
+# spike_kit/spike/README.md - this workflow never enables anything by itself.
+
+on:
+  workflow_dispatch:
+    inputs:
+      conc:
+        description: "Comma-separated worker counts for the T3/T4 concurrency probes, e.g. 4,8"
+        required: false
+        default: "4,8"
+      stress_timeout:
+        description: "Wall-clock seconds before the T5/T6 stress conversion is killed"
+        required: false
+        default: "15"
+
+permissions:
+  contents: read
+
+jobs:
+  lo-spike:
+    name: LibreOffice XLS->XLSX spike (T1-T8)
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: "[1/4] Checkout"
+        uses: actions/checkout@v4
+
+      - name: "[2/4] Kit presence + fixture manifest (SHA-256)"
+        run: |
+          set -euo pipefail
+          for f in \
+              spike_kit/spike/Dockerfile.spike \
+              spike_kit/spike/lo_spike.py \
+              spike_kit/spike/run_in_docker.sh \
+              spike_kit/spike/run_native_linux.sh \
+              spike_kit/spike/README.md \
+              spike_kit/fixtures/PROVENANCE.md \
+              spike_kit/fixtures/sample_legacy_biff8.xls \
+              spike_kit/fixtures/corrupt_truncated_biff8.xls \
+              spike_kit/fixtures/corrupt_garbage_biff8.xls \
+              spike_kit/fixtures/masquerade_xlsx_named_xls.xls \
+              spike_kit/fixtures/stress_biff8_120kc.xls ; do
+            test -f "$f" || { echo "MISSING: $f"; exit 1; }
+          done
+          echo "## Fixture manifest (SHA-256)" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          sha256sum spike_kit/fixtures/*.xls >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+
+      - name: "[3/4] Build spike image and run T1-T8"
+        run: |
+          bash spike_kit/spike/run_in_docker.sh \
+              --conc "${{ inputs.conc }}" \
+              --stress-timeout "${{ inputs.stress_timeout }}"
+
+      - name: "[4/4] Expose G1-G6 summary"
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import json, os, pathlib
+
+          p = pathlib.Path("spike_kit/spike/spike_report.json")
+          lines = ["## G1-G6 spike summary (lo-spike-verify)", ""]
+
+          if not p.exists():
+              lines += ["**spike_report.json was not produced** - see the build/run step above "
+                        "for the failure before drawing any conclusion.", ""]
+          else:
+              r = json.loads(p.read_text(encoding="utf-8")).get("results", {})
+              t1, t2 = r.get("T1_single", {}), r.get("T2_repeated", {})
+              t3 = r.get("T3_concurrent_unique_profiles", {})
+              t4 = r.get("T4_shared_profile_control", {})
+              t5, t6 = r.get("T5_stress", {}), r.get("T6_timeout_kill", {})
+              t7, t8 = r.get("T7_malformed", {}), r.get("T8_cleanup_residue", {})
+              t3s = "; ".join(f"n={k}: {v.get('successes')}/{v.get('workers')}"
+                              for k, v in sorted(t3.items(), key=lambda kv: str(kv[0]))) or "n/a"
+              t7s = "; ".join(f"{k}: valid={v.get('output_valid_xlsx')}"
+                              for k, v in t7.items()) or "n/a"
+              lines += [
+                  "| Gate | Probe | Measured |",
+                  "|---|---|---|",
+                  f"| G1 conversion | T1 single x5 | {t1.get('successes')}/5 valid XLSX |",
+                  f"| G1 conversion | T2 repeated x20 | {t2.get('successes')}/20 valid XLSX |",
+                  f"| G2 stability | T2 drift (last - first) | {t2.get('drift_last_minus_first_s')} s |",
+                  f"| G3 concurrency | T3 unique profiles | {t3s} |",
+                  f"| G3 concurrency | T4 shared profile | {t4.get('successes')}/{t4.get('workers')} valid, "
+                  f"{t4.get('lock_or_profile_messages')} lock/profile messages |",
+                  f"| G4 timeout/containment | T6 kill under timeout | killed={t6.get('killed')}, "
+                  f"orphans={t6.get('orphans_left')}, zombies={t6.get('zombies')}, "
+                  f"partial_output={t6.get('partial_output_emitted')} |",
+                  f"| G4 timeout/containment | T8 residue | temp_dirs_left={t8.get('temp_dirs_left')}, "
+                  f"profile_dirs_left={t8.get('profile_dirs_still_present')}, "
+                  f"live_soffice={t8.get('live_soffice_procs_at_end')} |",
+                  f"| G5 hostile input | T7 malformed/adversarial | {t7s} |",
+                  f"| G6 resource envelope | T5 stress | peak_rss={t5.get('peak_rss_bytes')} B, "
+                  f"wall={t5.get('wall_s')} s, valid={t5.get('valid_xlsx')} |",
+                  "",
+                  "Full detail in the **spike-report** artifact (spike_report.json/.md). "
+                  "Gate criteria and how to read them: `spike_kit/spike/README.md`. "
+                  "This summary is evidence only - it enables nothing.",
+                  "",
+              ]
+
+          text = "\n".join(lines) + "\n"
+          print(text)
+          ss = os.environ.get("GITHUB_STEP_SUMMARY")
+          if ss:
+              pathlib.Path(ss).write_text(text, encoding="utf-8")
+          p.parent.joinpath("summary.md").write_text(text, encoding="utf-8")
+          PY
+
+      - name: "Upload spike report"
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: spike-report
+          path: |
+            spike_kit/spike/spike_report.json
+            spike_kit/spike/spike_report.md
+            spike_kit/spike/summary.md
+          if-no-files-found: warn

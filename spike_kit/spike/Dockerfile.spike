@@ -1,0 +1,26 @@
+# Throwaway spike image - NOT the app image.
+# Base image and the LibreOffice apt packages are the same lines used by the
+# production Dockerfile at baseline a932341 (python:3.11-slim + libreoffice,
+# libreoffice-calc/writer/impress) so soffice version, profile layout and
+# process model match production. The production image's remaining apt packages
+# (ffmpeg, poppler, archive tooling) and its pip dependencies do not influence
+# LibreOffice conversion behaviour, so they are omitted to keep the spike fast.
+FROM python:3.11-slim
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        libreoffice \
+        libreoffice-calc \
+        libreoffice-writer \
+        libreoffice-impress \
+    && rm -rf /var/lib/apt/lists/*
+
+# fail the build if soffice is not actually present in the runtime
+RUN soffice --version
+
+# the spike is stdlib-only: no application dependencies are installed
+WORKDIR /spike
+COPY spike/lo_spike.py /spike/lo_spike.py
+COPY fixtures/ /spike/fixtures/
+
+CMD ["python3", "/spike/lo_spike.py", "--conc", "4,8"]
+
