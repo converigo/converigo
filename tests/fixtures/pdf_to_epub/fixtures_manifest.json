@@ -1,14 +1,26 @@
 {
   "_comment": [
-    "Committed fixtures for the PDF -> EPUB certified tests.",
-    "Every property in this file is re-measured by",
+    "Declared contract for the PDF -> EPUB certified fixtures.",
+    "",
+    "The PDFs themselves are NOT committed: the certified suite generates them at",
+    "session start (see \"Fixture generation\" in",
+    "tests/certified/document/test_pdf_to_epub_certified.py).  Committing binary PDFs",
+    "is unsafe on a clone that uses core.autocrlf=true, because git rewrites CRLF pairs",
+    "inside text-looking PDF streams during checkout and MuPDF then reports",
+    "is_repaired=True, which makes the converter refuse its own fixture.  Measured on a",
+    "fresh checkout of the previously committed set: 14 of 21 fixtures came back mangled.",
+    "",
+    "This file is what replaces the frozen bytes as the thing under review.  Every",
+    "property in it is re-measured by",
     "tests/certified/document/test_pdf_to_epub_certified.py::test_fixtures_manifest_is_still_true,",
-    "so a fixture can never drift away from what the tests assume.",
-    "pages/chars are what MuPDF reports for the file as committed; encrypted is what pypdf",
-    "reports (the authority for the /Encrypt guard); refusals name the runner's refusal kind."
+    "so a generated fixture can never drift away from what the tests assume.",
+    "pages/chars are what MuPDF reports for the generated file; encrypted is what pypdf",
+    "reports (the authority for the /Encrypt guard); refusals name the runner's refusal",
+    "kind.  Byte-identity holds for 18 of 21 fixtures across runs; the three encrypted",
+    "ones are claimed by behaviour only, since MuPDF gives encrypted streams a fresh IV."
   ],
-  "generated_by": "preparation phase B1-B4 fixtures, promoted for the implementation gate",
-  "engine_of_record": "PyMuPDF 1.26.3 / pypdf 6.16.2",
+  "generated_by": "builders inside tests/certified/document/test_pdf_to_epub_certified.py",
+  "engine_of_record": "PyMuPDF 1.26.3 / pypdf 6.16.2 / reportlab (declared)",
   "fixtures": {
     "epub_text_1p_minimal.pdf": {
       "kind": "positive",
@@ -69,7 +81,7 @@
     "epub_high_entropy_text.pdf": {
       "kind": "positive",
       "pages": 8,
-      "chars": 37440,
+      "chars": 34334,
       "encrypted": false,
       "markers": ["575yx8xm5Msl"],
       "notes": "Random-token text that compresses poorly; proves the package ceiling is measured on real bytes."
@@ -95,9 +107,9 @@
       "kind": "refusal",
       "refusal": "page_chars_limit",
       "pages": 1,
-      "chars": 81200,
+      "chars": 81403,
       "encrypted": false,
-      "notes": "1,973 input bytes amplifying to 81,200 extracted characters through overlapping text runs."
+      "notes": "1,990 input bytes amplifying to 81,403 extracted characters: one 400-char line drawn 203 times at 1pt so every run stays inside the page rect MuPDF clips to."
     },
     "epub_image_only.pdf": {
       "kind": "refusal",

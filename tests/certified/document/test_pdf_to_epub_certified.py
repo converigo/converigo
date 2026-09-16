@@ -7,15 +7,16 @@ app/factory/pdf_epub_runner.py.
 
 Why the tests are shaped like this:
 
-* The fixtures under tests/fixtures/pdf_to_epub are the preparation-phase
-  evidence, promoted and re-measured here: test_fixtures_manifest_is_still_true
-  reads the committed manifest and re-derives every property from the file bytes,
-  so no test can quietly pass against a fixture that stopped being true.
+* The PDF inputs are generated at session start rather than committed (see
+  "Fixture generation" below); every property the tests rely on is frozen in
+  tests/fixtures/pdf_to_epub/fixtures_manifest.json, and
+  test_fixtures_manifest_is_still_true re-measures each claim from the produced
+  bytes, so no test can quietly pass against a fixture that stopped being true.
 * Extraction truth is checked line by line against MuPDF itself, not against a
   hand-written expectation, which is the only assertion that can catch a
   converter that invents, drops or reorders text.
 * Ceilings are proved at the approved production value with a fixture that really
-  exceeds it (501 pages, 81,200 characters on one page), and at a lowered value
+  exceeds it (501 pages, 81,403 characters on one page), and at a lowered value
   for the ceilings no committable file can reach (cumulative characters, package
   bytes).  A lowered ceiling still exercises the real guard code.
 * Refusals are asserted twice: the exact internal refusal kind from the runner,
@@ -25,16 +26,29 @@ Why the tests are shaped like this:
 from __future__ import annotations
 
 import asyncio
+import atexit
+import io
 import json
+import random
+import shutil
+import string
+import struct
+import tempfile
 import threading
 import zipfile
+import zlib
+from collections.abc import Callable
 from pathlib import Path
 
 import fitz
 import pytest
+import reportlab.rl_config
 from fastapi.testclient import TestClient
 from lxml import etree
-from pypdf import PdfReader
+from pypdf import PdfReader, PdfWriter
+from reportlab.lib.pagesizes import letter
+from reportlab.lib.utils import ImageReader
+from reportlab.pdfgen import canvas as rl_canvas
 
 from app.core.settings import settings
 from app.factory.pdf_epub_runner import (
@@ -79,11 +93,67 @@ REFUSALS = sorted(n for n, m in MANIFEST.items() if m["kind"] == "refusal")
 
 
 # ---------------------------------------------------------------------------
+# Fixture generation
+# ---------------------------------------------------------------------------
+# The PDF inputs are built when the suite starts instead of being committed.
+#
+# A checked-in binary PDF is not safe on a clone that uses core.autocrlf=true,
+# which this repo's Windows developers have: git types a PDF whose streams are
+# plain text as a text file and rewrites CRLF pairs inside it during checkout.
+# The bytes change, page counts survive, and MuPDF then reports is_repaired=True -
+# so the converter refuses its own fixture and the suite fails only on the
+# machines that cloned it.  Measured on a fresh checkout of the committed set:
+# 14 of 21 fixtures came back mangled.  Generating the inputs sidesteps the whole
+# class of failure, and it is also what every other certified PDF test here does.
+#
+# What is committed instead is the contract: fixtures_manifest.json states the
+# page counts, extracted character counts, encryption state, refusal kind and text
+# markers each fixture must have, and test_fixtures_manifest_is_still_true
+# re-measures all of it from the produced bytes on every run.  A generated file
+# therefore cannot drift away from what the tests assume, which is the property
+# the committed binaries were really providing.
+#
+# Determinism comes from reportlab.rl_config.invariant (fixed document id and
+# timestamps), fixed random seeds and pinned metadata dates.  The invariant flag is
+# set only around the build and restored afterwards, so no other test module in the
+# session inherits it.  The one thing that is deliberately not byte-stable is the
+# encrypted trio: MuPDF gives each encrypted stream a fresh IV, so only their
+# behaviour (encrypted, needs_pass) is claimed, never their bytes.
+
+PAGE_W, PAGE_H = letter
+_FIXTURE_ROOT: Path | None = None
+
+
+def _generated_root() -> Path:
+    """Build every fixture once per session into a temporary directory."""
+    global _FIXTURE_ROOT
+    if _FIXTURE_ROOT is not None:
+        return _FIXTURE_ROOT
+    root = Path(tempfile.mkdtemp(prefix="converigo-pdf-to-epub-fixtures-"))
+    atexit.register(shutil.rmtree, root, ignore_errors=True)
+    # The scan is handed to reportlab as an ImageReader and never as a path.  For a
+    # path, reportlab names the embedded image XObject FormXob.<md5(path + mask)>, so
+    # a temporary directory that differs every run would change the fixture bytes with
+    # it.  Given a reader it hashes the pixel data instead, which is fixed, so every
+    # run on every machine produces the same bytes.
+    scan = ImageReader(io.BytesIO(_synthetic_scan_png()))
+    previous = reportlab.rl_config.invariant
+    reportlab.rl_config.invariant = 1
+    try:
+        for name, build in _BUILDERS.items():
+            (root / name).write_bytes(build(scan))
+    finally:
+        reportlab.rl_config.invariant = previous
+    _FIXTURE_ROOT = root
+    return root
+
+
+# ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
 def fixture_path(name: str) -> Path:
-    path = FIXTURE_DIR / name
-    assert path.exists(), f"committed fixture is missing: {name}"
+    path = _generated_root() / name
+    assert path.exists(), f"generated fixture is missing: {name}"
     return path
 
 
@@ -158,6 +228,372 @@ def published_output(response) -> Path:
     path = OUTPUT_DIR.joinpath(*parts)
     assert path.exists(), f"expected published output: {download_path}"
     return path
+
+
+# ---------------------------------------------------------------------------
+# Fixture builders
+# ---------------------------------------------------------------------------
+def _synthetic_scan_png(width: int = 120, height: int = 90, seed: int = 7) -> bytes:
+    """A dependency-free "scan": paper-white page with dark text-like bands.
+
+    Random noise is a poor stand-in for a scan and compresses badly (a noise PNG of
+    the same size cost ~32KB and pushed the fixture set past 2MB).  Bands keep the
+    inputs small while still being a real image block that extraction must skip.
+    """
+    def chunk(tag: bytes, data: bytes) -> bytes:
+        return (struct.pack(">I", len(data)) + tag + data
+                + struct.pack(">I", zlib.crc32(tag + data) & 0xFFFFFFFF))
+
+    rng = random.Random(seed)
+    rows = bytearray()
+    for y in range(height):
+        rows.append(0)  # filter type 0
+        banded = (y % 9) < 4 and y > 8
+        for _x in range(width):
+            if banded and rng.random() < 0.55:
+                rows += bytes((40, 38, 35))
+            else:
+                rows += bytes((250, 250, 248))
+    return (b"\x89PNG\r\n\x1a\n"
+            + chunk(b"IHDR", struct.pack(">IIBBBBB", width, height, 8, 2, 0, 0, 0))
+            + chunk(b"IDAT", zlib.compress(bytes(rows), 9))
+            + chunk(b"IEND", b""))
+
+
+def _canvas(buffer: io.BytesIO, metadata: dict | None = None):
+    c = rl_canvas.Canvas(buffer, pagesize=letter, pageCompression=1)
+    md = metadata or {}
+    c.setTitle(md.get("title", "Converigo Fixture"))
+    c.setAuthor(md.get("author", "Converigo Fixture Author"))
+    c.setSubject(md.get("subject", "fixture"))
+    c.setCreator(md.get("creator", "converigo-fixture-builder"))
+    c.setProducer(md.get("producer", "ReportLab"))
+    return c
+
+
+def _draw_page(c, lines: list[str], *, image: ImageReader | None = None) -> None:
+    if image is not None:
+        c.drawImage(image, PAGE_W - 180, PAGE_H - 160, width=140, height=100,
+                    preserveAspectRatio=True, mask="auto")
+    y = PAGE_H - 72
+    for line in lines:
+        c.drawString(72, y, line)
+        y -= 14
+    c.showPage()
+
+
+def _pdf(pages: list[tuple[list[str], bool]], scan: ImageReader,
+         metadata: dict | None = None) -> bytes:
+    """One page per (text lines, stamp the synthetic scan) pair."""
+    buffer = io.BytesIO()
+    c = _canvas(buffer, metadata)
+    for lines, with_image in pages:
+        _draw_page(c, lines, image=scan if with_image else None)
+    c.save()
+    return buffer.getvalue()
+
+
+def _lorem(rng: random.Random, words: int) -> str:
+    vocab = ("alpha bravo charlie delta echo foxtrot golf hotel india juliet kilo "
+             "lima mike november oscar papa quebec romeo sierra tango uniform victor "
+             "whiskey xray yankee zulu").split()
+    return " ".join(rng.choice(vocab) for _ in range(words))
+
+
+def _build_text_1p(scan: ImageReader) -> bytes:
+    """Single short page: the smallest thing that must convert."""
+    return _pdf([(["MINIMAL MARKER-001", "Single page, single paragraph."], False)], scan)
+
+
+def _build_text_3p(scan: ImageReader) -> bytes:
+    """3 pages of known text incl. non-ASCII and XML specials.
+
+    Doubles as the content-truth + escaping fixture: every string asserted here must
+    survive PDF -> text -> XML -> EPUB -> parse unchanged, so the markers are
+    deliberately hostile to naive concatenation.
+    """
+    return _pdf([
+        (["PAGE ONE MARKER-101",
+          "Converigo readiness fixture with plain text.",
+          "XML specials: <tag> &amp; \"quoted\" 'single' </tag>",
+          "CP1252: Ünicode naïve résumé „quotes“ — dash © ½ ¿ × ß"], False),
+        (["PAGE TWO MARKER-202", "Second page body text for chapter split."], False),
+        (["PAGE THREE MARKER-303", "Third page body text."], True),
+    ], scan)
+
+
+def _build_mixed(scan: ImageReader) -> bytes:
+    """Page 1 text+image, page 2 image only, page 3 text only.
+
+    Exercises the partial-text rule: a document that is not wholly scannable but has
+    empty pages must convert (text pages present) and must not emit blank chapters.
+    """
+    rng = random.Random(5)
+    return _pdf([
+        (["MIXED PAGE 1 MARKER-1", _lorem(rng, 60)], True),
+        ([], True),
+        (["MIXED PAGE 3 MARKER-3", _lorem(rng, 60)], False),
+    ], scan)
+
+
+def _build_image_only(scan: ImageReader) -> bytes:
+    """Four pages, image only, zero extractable text -> must be refused.
+
+    The refusal test must be written against stripped text: MuPDF returns whitespace
+    per page, so a naive joined length is non-empty and an empty book could pass.
+    """
+    return _pdf([([], True) for _i in range(4)], scan)
+
+
+def _build_evil_metadata(scan: ImageReader) -> bytes:
+    """Attacker-controlled /Info strings: path traversal, markup, schemes, newline.
+
+    May only ever surface as escaped XML text in the package - never as a path, an
+    entry name or live markup.
+    """
+    return _pdf(
+        [(["EVIL METADATA BODY MARKER-900", "Body text is harmless."], False)],
+        scan,
+        metadata={
+            "title": "../../../../etc/passwd",
+            "author": "<script>alert(1)</script>&\"",
+            "subject": "]]>&<image src=x onerror=alert(1)>",
+            "creator": "evil\nnewline",
+            "producer": "file:///etc/shadow",
+        },
+    )
+
+
+def _build_with_outline(scan: ImageReader) -> bytes:
+    """Embedded bookmark outline (12 pages, 3 entries).
+
+    The MVP does not infer a semantic TOC, so this proves chapters come from page
+    grouping only even when a real outline is present.
+    """
+    rng = random.Random(3)
+    buffer = io.BytesIO()
+    c = _canvas(buffer)
+    for page in range(1, 13):
+        if (page - 1) % 4 == 0:
+            key = f"bm{(page - 1) // 4}"
+            c.bookmarkPage(key)
+            c.addOutlineEntry(f"Outline Chapter {(page - 1) // 4 + 1}", key, level=0)
+        _draw_page(c, [f"OUTLINE PAGE {page} MARKER", _lorem(rng, 40)])
+    c.save()
+    return buffer.getvalue()
+
+
+def _build_multipage_24p(scan: ImageReader) -> bytes:
+    """24 pages, chapter titles at 1/9/17, a unique marker on every page."""
+    rng = random.Random(24)
+    pages: list[tuple[list[str], bool]] = []
+    for page in range(1, 25):
+        lines = [f"PAGE {page} MARKER-{page:04d}"]
+        if (page - 1) % 8 == 0:
+            lines.insert(0, f"CHAPTER {((page - 1) // 8) + 1} TITLE")
+        lines += [_lorem(rng, 14) for _ in range(45)]
+        pages.append((lines, False))
+    return _pdf(pages, scan)
+
+
+def _build_dense_chars(scan: ImageReader) -> bytes:
+    """8 dense pages, used to exercise the cumulative-character ceiling."""
+    rng = random.Random(99)
+    pages: list[tuple[list[str], bool]] = []
+    for page in range(1, 9):
+        lines = [f"DENSE PAGE {page} MARKER"]
+        lines += [_lorem(rng, 18) for _ in range(175)]
+        pages.append((lines, False))
+    return _pdf(pages, scan)
+
+
+def _build_over_500pages(scan: ImageReader) -> bytes:
+    """501 sparse pages: really crosses the approved 500-page ceiling.
+
+    One short line per page, so the ceiling is crossed by page count for a few
+    hundred KB instead of a multi-megabyte document.
+    """
+    return _pdf([([f"BULK PAGE {i} MARKER"], False) for i in range(1, 502)], scan)
+
+
+def _build_cjk(scan: ImageReader) -> bytes:
+    """CJK + Hebrew text.
+
+    reportlab's base-14 fonts cannot encode these, so MuPDF lays the page out
+    instead.  subset_fonts() matters: without it MuPDF embeds a ~1.7MB fallback font
+    and the fixture becomes the largest file in the set.  Metadata dates are pinned so
+    the produced bytes do not move between runs.
+    """
+    doc = fitz.open()
+    doc.new_page().insert_htmlbox(
+        fitz.Rect(72, 72, 540, 700),
+        "<p>CJK MARKER-777</p>"
+        "<p>日本語テスト 中文转换 한국어 테스트 שלום עולם</p>")
+    doc.set_metadata({
+        "title": "CJK/RTL fixture",
+        "author": "Converigo Fixture Author",
+        "creationDate": "D:20200101000000+00'00'",
+        "modDate": "D:20200101000000+00'00'",
+    })
+    try:
+        doc.subset_fonts()
+    except Exception:  # noqa: BLE001 - subsetting is an optimisation, not the claim
+        pass
+    buffer = io.BytesIO()
+    try:
+        doc.save(buffer, deflate=True, garbage=4, no_new_id=True)
+    finally:
+        doc.close()
+    return buffer.getvalue()
+
+
+def _entropy_token(rng: random.Random) -> str:
+    return "".join(rng.choice(string.ascii_letters + string.digits) for _ in range(12))
+
+
+def _build_high_entropy(scan: ImageReader) -> bytes:
+    """8 pages of random tokens, i.e. text that compresses poorly.
+
+    Proves the package-size ceiling is measured on real emitted bytes rather than on
+    an in-memory character estimate.  The marker is a fixed literal, so the claim does
+    not depend on the seed.
+    """
+    rng = random.Random(20240916)
+    pages: list[tuple[list[str], bool]] = []
+    for page in range(1, 9):
+        head = "575yx8xm5Msl" if page == 1 else f"ENTROPY PAGE {page} MARKER"
+        pages.append(([head] + [" ".join(_entropy_token(rng) for _ in range(9))
+                                for _ in range(57)], False))
+    return _pdf(pages, scan)
+
+
+def _build_over_page_chars(scan: ImageReader) -> bytes:
+    """One page whose extracted text is ~40x larger than the file that carries it.
+
+    A 400-character line drawn 203 times at the same coordinate, at 1pt so every run
+    stays inside the page rect.  That detail is the whole fixture: extraction is
+    clipped to the page, so the same draws at 12pt come back as 87 characters per run
+    and the ceiling is never crossed.  The result is ~2KB of PDF that reads back as
+    81,403 characters, which is the text-amplification shape the per-page ceiling
+    exists for and must be refused rather than published as one monstrous chapter.
+    """
+    line = "OVERPAG1" + "z" * 392
+    buffer = io.BytesIO()
+    c = _canvas(buffer)
+    c.setFont("Helvetica", 1)
+    for _i in range(203):
+        c.drawString(72, PAGE_H - 72, line)
+    c.showPage()
+    c.save()
+    return buffer.getvalue()
+
+
+def _secret_pages(scan: ImageReader) -> bytes:
+    """The unencrypted 3-page base the encrypted fixtures are derived from."""
+    rng = random.Random(11)
+    return _pdf([([f"SECRET PAGE {page} MARKER", _lorem(rng, 60)], False)
+                 for page in range(1, 4)], scan)
+
+
+def _encrypted_from(method: int, user_pw: str, scan: ImageReader) -> bytes:
+    """Encrypt with MuPDF, the engine the converter itself would be using.
+
+    pypdf's Writer.encrypt() is not byte-reproducible (it regenerates the file
+    identifier with no way to pin it), so the declared engine is MuPDF here as well.
+    """
+    doc = fitz.open(stream=_secret_pages(scan), filetype="pdf")
+    buffer = io.BytesIO()
+    try:
+        doc.save(buffer, encryption=method, user_pw=user_pw or None,
+                 owner_pw="owner-secret", permissions=4087,  # print bit cleared
+                 no_new_id=True, deflate=True)
+    finally:
+        doc.close()
+    return buffer.getvalue()
+
+
+def _build_encrypted_userpw_aes256(scan: ImageReader) -> bytes:
+    return _encrypted_from(fitz.PDF_ENCRYPT_AES_256, "user-secret", scan)
+
+
+def _build_encrypted_rc4_userpw(scan: ImageReader) -> bytes:
+    return _encrypted_from(fitz.PDF_ENCRYPT_RC4_40, "user-secret", scan)
+
+
+def _build_encrypted_owner_only(scan: ImageReader) -> bytes:
+    """Owner password set, empty user password.
+
+    The decisive case: this opens with no password and MuPDF reports neither
+    needs_pass nor is_encrypted, yet the bytes carry an /Encrypt dictionary and the
+    publisher's restrictions.  A guard built on the two MuPDF flags alone would
+    convert it and silently drop those restrictions, which is why the runner also
+    consults pypdf for the authoritative /Encrypt state.
+    """
+    return _encrypted_from(fitz.PDF_ENCRYPT_AES_256, "", scan)
+
+
+def _build_truncated(scan: ImageReader) -> bytes:
+    """35% of a real file: enough that MuPDF "succeeds" only by repairing it.
+
+    The interesting part is the disagreement - MuPDF rebuilds a partial xref and
+    returns roughly a quarter of the characters while pypdf raises.  A refusal is the
+    only honest answer, because silence here would publish a truncated book.
+    """
+    victim = _build_multipage_24p(scan)
+    return victim[: int(len(victim) * 0.35)]
+
+
+def _junk() -> bytes:
+    return struct.pack(f"<{512}I", *range(512))
+
+
+def _build_header_only(scan: ImageReader) -> bytes:
+    return b"%PDF-1.7\n%%EOF\n"
+
+
+def _build_garbage_noheader(scan: ImageReader) -> bytes:
+    return b"NOT-A-PDF" + _junk()
+
+
+def _build_garbage_withheader(scan: ImageReader) -> bytes:
+    """Valid %PDF- signature, so the upload gate accepts it, unparsable body."""
+    return b"%PDF-1.7\n" + _junk()
+
+
+def _build_empty(scan: ImageReader) -> bytes:
+    return b""
+
+
+def _build_zero_page(scan: ImageReader) -> bytes:
+    """A structurally valid PDF containing no pages at all."""
+    buffer = io.BytesIO()
+    PdfWriter().write(buffer)
+    return buffer.getvalue()
+
+
+_BUILDERS: dict[str, Callable[[ImageReader], bytes]] = {
+    "epub_text_1p_minimal.pdf": _build_text_1p,
+    "epub_text_3p.pdf": _build_text_3p,
+    "epub_mixed_text_image.pdf": _build_mixed,
+    "epub_utf8_cjk.pdf": _build_cjk,
+    "epub_dense_8p_chars.pdf": _build_dense_chars,
+    "epub_multipage_24p.pdf": _build_multipage_24p,
+    "epub_with_outline.pdf": _build_with_outline,
+    "epub_high_entropy_text.pdf": _build_high_entropy,
+    "epub_evil_metadata.pdf": _build_evil_metadata,
+    "epub_over_500pages.pdf": _build_over_500pages,
+    "epub_over_page_chars.pdf": _build_over_page_chars,
+    "epub_image_only.pdf": _build_image_only,
+    "epub_zero_page.pdf": _build_zero_page,
+    "epub_truncated.pdf": _build_truncated,
+    "epub_garbage_withheader.pdf": _build_garbage_withheader,
+    "epub_garbage_noheader.pdf": _build_garbage_noheader,
+    "epub_header_only.pdf": _build_header_only,
+    "epub_empty.pdf": _build_empty,
+    "epub_encrypted_rc4_userpw.pdf": _build_encrypted_rc4_userpw,
+    "epub_encrypted_userpw_aes256.pdf": _build_encrypted_userpw_aes256,
+    "epub_encrypted_owner_only.pdf": _build_encrypted_owner_only,
+}
 
 
 # ---------------------------------------------------------------------------
@@ -506,9 +942,9 @@ def test_page_ceiling_at_the_approved_value(tmp_path: Path) -> None:
 
 @pytest.mark.certified
 def test_per_page_character_ceiling_at_the_approved_value(tmp_path: Path) -> None:
-    """1,973 bytes that amplify to 81,200 characters if allowed to run."""
+    """1,990 bytes that amplify to 81,403 characters if allowed to run."""
     assert settings.PDF_EPUB_MAX_PAGE_CHARS == 10_000
-    assert MANIFEST["epub_over_page_chars.pdf"]["chars"] == 81_200
+    assert MANIFEST["epub_over_page_chars.pdf"]["chars"] == 81_403
     with pytest.raises(PdfToEpubError) as raised:
         build(tmp_path, "epub_over_page_chars.pdf")
     assert raised.value.kind == REFUSE_PAGE_CHARS_LIMIT
@@ -822,6 +1258,13 @@ def test_converter_json_contract_and_plugin_are_atomic() -> None:
     assert contract["accepted_mime_types"] == ["application/pdf"]
     sample = REPO_ROOT / contract["regression_sample"]
     assert sample.exists(), f"declared regression sample is missing: {sample}"
+    # The claim here is existence, in parity with the 20 other pdf-* contracts that all
+    # name tests/sample.pdf; the certified suite deliberately does not convert it.  It
+    # could not honestly: on a clone using core.autocrlf=true the file is checked out
+    # with CRLF pairs inserted (measured: 2,016 bytes stored in git, 2,090 on disk), so
+    # MuPDF reports is_repaired=True and this runner refuses repaired input by design.
+    # That is a repo-wide condition predating this converter, not something the fixture
+    # generation below depends on - the suite builds its own inputs.
 
     data_service = ConverterDataService(data_dir)
     tool = data_service.load_converter_by_slug("pdf-to-epub")

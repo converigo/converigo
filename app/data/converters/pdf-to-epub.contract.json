@@ -14,7 +14,7 @@
   "seo_status": "ready",
   "schema_status": "ready",
   "faq_status": "ready",
-  "regression_sample": "tests/fixtures/pdf_to_epub/epub_text_3p.pdf",
+  "regression_sample": "tests/sample.pdf",
   "supported_platforms": ["web"],
   "lifecycle_status": "active",
   "processing_limits": {
