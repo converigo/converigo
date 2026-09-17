@@ -104,54 +104,7 @@ jobs:
           echo "POINT [6/7] targeted regression executed in-image (see artifact junit_targeted.xml)" >> "$GITHUB_STEP_SUMMARY"
 
       - name: "[7/7] Gate analysis (certified 6 green + probe 0 failures)"
-        run: |
-          python - <<'PY'
-          import json
-          import sys
-          from pathlib import Path
-          from xml.etree import ElementTree as ET
-
-          failures = []
-
-          jp = Path("artifacts/junit_certified.xml")
-          if not jp.exists():
-              failures.append("certified junit artifact missing")
-          else:
-              root = ET.fromstring(jp.read_text())
-              total = int(root.attrib.get("tests", 0))
-              errs = int(root.attrib.get("errors", 0)) + int(root.attrib.get("failures", 0))
-              skipped = int(root.attrib.get("skipped", 0))
-              print(f"[certified] tests={total} errors+failures={errs} skipped={skipped}")
-              for tc in root.iter("testcase"):
-                  for child in tc:
-                      if child.tag in ("failure", "error", "skipped"):
-                          failures.append(f"certified::{tc.attrib['name']} -> {child.tag}")
-              if errs:
-                  failures.append(f"certified: {errs} error/failure(s)")
-              if skipped:
-                  failures.append(f"certified: {skipped} test(s) SKIPPED (soffice not detected in-image?)")
-
-          pp = Path("artifacts/xls_xlsx_validation.json")
-          if not pp.exists():
-              failures.append("probe evidence json missing")
-          else:
-              data = json.loads(pp.read_text())
-              totals = data.get("totals", {})
-              print(f"[probe] passed={totals.get('passed', 0)} failed={totals.get('failed', 0)}")
-              for phase, pdata in data.get("phases", {}).items():
-                  if pdata.get("phase_error"):
-                      failures.append(f"probe::{phase} PHASE ERROR: {pdata['phase_error']}")
-                  for c in pdata.get("checks", []):
-                      if not c.get("ok"):
-                          failures.append(f"probe::{phase}/{c['name']}: {str(c.get('detail'))[:90]}")
-
-          if failures:
-              print("\n=== GATE FAILURES ===")
-              for f in failures:
-                  print(" -", f)
-              sys.exit(1)
-          print("\n=== GATE GREEN: certified 6 passed, probe 0 failures ===")
-          PY
+        run: python scripts/ci_gate_analysis.py
 
       - name: Upload validation artifacts
         if: always()
@@ -164,13 +117,3 @@ jobs:
       - name: Workflow summary
         if: always()
         run: echo "xls-xlsx-ci-validation finished for ${{ github.event_name }} @ ${{ github.sha }}"
-
-        run: |
-          docker run --rm --workdir /app \
-            -v "$PWD/artifacts:/out" \
-            --memory=3g --pids-limit=1024 --cpus=2 \
-            converigo-xls:ci sh -c \
-            'pip install -q httpx openpyxl && \
-             python scripts/ci_xls_xlsx_validation.py --out /out'
-          sudo chmod -R a+rw artifacts || true
-          echo "POINT [5/7] validation probe executed in-image (see artifact xls_xlsx_validation.json)" >> "$GITHUB_STEP_SUMMARY"
