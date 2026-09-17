@@ -74,6 +74,16 @@ jobs:
 
       - name: "[5/7] In-image validation probe (e2e + rejection matrix + safety)"
         continue-on-error: true
+        run: |
+          docker run --rm --workdir /app \
+            -v "$PWD/artifacts:/out" \
+            --memory=3g --pids-limit=1024 --cpus=2 \
+            converigo-xls:ci sh -c \
+            'pip install -q httpx openpyxl && \
+             python scripts/ci_xls_xlsx_validation.py --out /out'
+          sudo chmod -R a+rw artifacts || true
+          echo "POINT [5/7] validation probe executed in-image (see artifact xls_xlsx_validation.json)" >> "$GITHUB_STEP_SUMMARY"
+
       - name: "[6/7] Targeted regression in-image"
         continue-on-error: true
         run: |
