@@ -587,6 +587,7 @@ def phase_conc(binpath: str, fixdir: Path, root: Path, args) -> dict:
         res["pids_peak"] = s.pids_peak
         res["samples"] = s.samples
     res["cgroup_after"] = cgroup_state()
+    return res
 
 # ---------------------------------------------------------------- G4 phases
 def _g4_sigkill_control(root: Path) -> dict:
