@@ -402,7 +402,10 @@ def phase_concurrency() -> None:
 
     saved_qt, plugin._CONVERSION_SEMAPHORE = settings.XLS_CONVERTER_QUEUE_TIMEOUT, None
     settings.XLS_CONVERTER_MAX_CONCURRENT = 1
-    settings.XLS_CONVERTER_QUEUE_TIMEOUT = 2  # shorter than one bulk conversion
+    # Queue timeout deliberately shorter than ONE conversion of the bulk fixture
+    # (a real soffice run holds the guard for ~1s+): a second concurrent request
+    # must therefore be queued out, proving the guard serialises to exactly one.
+    settings.XLS_CONVERTER_QUEUE_TIMEOUT = 0.5
 
     out_dir = Path(tempfile.mkdtemp(prefix="conc_"))
 
