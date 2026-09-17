@@ -402,10 +402,11 @@ def phase_concurrency() -> None:
 
     saved_qt, plugin._CONVERSION_SEMAPHORE = settings.XLS_CONVERTER_QUEUE_TIMEOUT, None
     settings.XLS_CONVERTER_MAX_CONCURRENT = 1
-    # Queue timeout deliberately shorter than ONE conversion of the bulk fixture
-    # (a real soffice run holds the guard for ~1s+): a second concurrent request
-    # must therefore be queued out, proving the guard serialises to exactly one.
-    settings.XLS_CONVERTER_QUEUE_TIMEOUT = 0.5
+    # Queue timeout deliberately far below ONE conversion of the bulk fixture
+    # (a real soffice run holds the guard for ~1s+, even warm): a second
+    # concurrent request must therefore be queued out, proving the guard
+    # serialises to exactly one in flight.
+    settings.XLS_CONVERTER_QUEUE_TIMEOUT = 0.3
 
     out_dir = Path(tempfile.mkdtemp(prefix="conc_"))
 
@@ -452,7 +453,10 @@ def phase_timeout() -> None:
         return
 
     saved_to, saved_grace = settings.XLS_CONVERTER_TIMEOUT, settings.XLS_CONVERTER_SIGTERM_GRACE
-    settings.XLS_CONVERTER_TIMEOUT = 1
+    # Timeout far below any real conversion (soffice startup alone is ~0.5s+), so
+    # the timeout path deterministically fires and exercises SIGTERM -> SIGKILL
+    # containment + profile cleanup, even on a warm/fast runner.
+    settings.XLS_CONVERTER_TIMEOUT = 0.3
     settings.XLS_CONVERTER_SIGTERM_GRACE = 2
     plugin._CONVERSION_SEMAPHORE = None
 
