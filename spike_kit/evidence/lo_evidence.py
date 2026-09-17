@@ -535,7 +535,7 @@ def phase_single(binpath: str, fixdir: Path, root: Path, args) -> dict:
     """G6 baseline: one isolated conversion of each real fixture."""
     out = {}
     for key in ("sample", "stress", "bulk"):
-        f = fixdir / FIXTURES[key]
+        f = _resolve_fixture(fixdir, key)
         if not f.exists():
             out[key] = {"missing": True}
             continue
@@ -555,7 +555,7 @@ def phase_single(binpath: str, fixdir: Path, root: Path, args) -> dict:
 def phase_conc(binpath: str, fixdir: Path, root: Path, args) -> dict:
     """G6 concurrency: N parallel isolated conversions of the sample fixture."""
     n = args.conc
-    f = fixdir / FIXTURES["sample"]
+    f = _resolve_fixture(fixdir, "sample")
     res = {"workers": n, "fixture": FIXTURES["sample"], "runs": [], "successes": 0}
     if not f.exists():
         res["missing"] = True
@@ -648,7 +648,7 @@ def phase_g4(binpath: str, fixdir: Path, root: Path, args) -> dict:
     tiers = [("g4_sample", "sample", 0.12), ("g4_stress", "stress", 0.30),
              ("g4_bulk", "bulk", 1.00)]
     for tag, key, tout in tiers:
-        f = fixdir / FIXTURES[key]
+        f = _resolve_fixture(fixdir, key)
         if not f.exists():
             out[tag] = {"missing": True}
             continue
@@ -663,6 +663,23 @@ def phase_g4(binpath: str, fixdir: Path, root: Path, args) -> dict:
     return out
 
 
+def _resolve_fixture(fixdir: Path, key: str) -> Path:
+    """Locate a fixture by key, checking the given dir then the sibling
+    spike_kit/fixtures directory (the BIFF8 sample/stress fixtures live there).
+
+    This keeps a single logical fixture namespace across the two directories so
+    no probe phase silently runs with a reduced fixture set.
+    """
+    name = FIXTURES[key]
+    cand = [fixdir / name,
+            fixdir.parent / "fixtures" / name,
+            fixdir / "evidence_fixtures" / name]
+    for c in cand:
+        if c.exists():
+            return c
+    return cand[0]                      # non-existent path; caller reports missing
+
+
 # ---------------------------------------------------------------- BIFF5
 def _bof_probe(path: Path) -> dict:
     """Read the OLE2/BOF identity WITHOUT changing any byte. Pure observation.
@@ -670,6 +687,12 @@ def _bof_probe(path: Path) -> dict:
     Reports the container magic, the Workbook/Book stream presence and the BOF
     version field so the 0x0550 decision rests on what the file actually
     contains plus what soffice actually does with it - nothing is rewritten.
+
+    The BOF record is opcode 0x0809 (little-endian bytes 09 08) followed by a
+    2-byte record length, then the 2-byte version field. The earlier regex
+    matched the first 09 08 byte pair anywhere in the file and read one byte,
+    which reported a nonsense version; this anchors on the full record header
+    and reads the version field as a little-endian 16-bit value.
     """
     raw = path.read_bytes()
     d = {"bytes": len(raw),
@@ -681,12 +704,16 @@ def _bof_probe(path: Path) -> dict:
             if raw.find(name.encode("utf-16-le")) >= 0:
                 d["stream_names"].append(name)
         d["workbook_stream"] = d["stream_names"][0] if d["stream_names"] else None
-    m = re.search(rb"\x09\x08(.)", raw, re.S)     # BOF opcode 0x0809
-    if m:
+    # BOF record: opcode 0x0809 (LE: 09 08), then record length 0x0008 (LE: 08 00),
+    # then the 2-byte version field (LE). Anchor on the 4-byte header so a stray
+    # 09 08 elsewhere in the container cannot be mistaken for the BOF.
+    for m in re.finditer(rb"\x09\x08\x08\x00(..)", raw, re.S):
         try:
-            d["bof_version"] = f"0x{int.from_bytes(m.group(1), 'little'):04X}"
+            ver = int.from_bytes(m.group(1), "little")
+            d["bof_version"] = f"0x{ver:04X}"
+            break
         except Exception:  # noqa: BLE001
-            pass
+            continue
     return d
 
 
@@ -700,7 +727,7 @@ def phase_biff5(binpath: str, fixdir: Path, root: Path, args) -> dict:
             "not_ole2_junk", "not_ole2_random", "not_ole2_text", "biff2_raw"]
     out: dict = {}
     for key in keys:
-        f = fixdir / FIXTURES[key]
+        f = _resolve_fixture(fixdir, key)
         if not f.exists():
             out[key] = {"missing": True}
             continue
