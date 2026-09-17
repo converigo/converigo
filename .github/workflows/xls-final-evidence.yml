@@ -111,6 +111,25 @@ jobs:
               lines += ["### G6 single conversion", "", "| Fixture | Result |",
                         "|---|---|"] + rows + [""]
 
+          # G6 concurrency: one JSON per worker count (evidence_conc_N.json)
+          rows = []
+          for p in sorted(out.glob("evidence_conc_*.json")):
+              try:
+                  c = json.loads(p.read_text(encoding="utf-8"))
+              except Exception:
+                  continue
+              r = c.get("results") or {}
+              if not r:
+                  continue
+              cg = r.get("cgroup_after") or {}
+              rows.append(f"| {r.get('workers')} | success={r.get('successes')}"
+                          f"/{r.get('workers')} wall={r.get('wall_total_s')}s "
+                          f"cgroup_peak={cg.get('memory.peak')} "
+                          f"vmrss_peak={r.get('rss_peak_vmrss_bytes')} |")
+          if rows:
+              lines += ["### G6 concurrency", "", "| Workers | Result |",
+                        "|---|---|"] + rows + [""]
+
           b = load("biff5")
           if b and isinstance(b.get("results"), dict):
               rows = []

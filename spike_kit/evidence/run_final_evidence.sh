@@ -37,11 +37,14 @@ docker run --rm --memory 1000000000 --pids-limit 1000 \
   --phase single --out /out --fixtures "$FIX"
 
 # ---- 4. G6 concurrency at the requested worker counts (default 2,4,8)
+# Each container writes evidence_conc.json; preserve a per-N copy so the
+# artifact holds the full 1/2/4/8 series instead of only the last run.
 for N in ${CONC:-2 4 8}; do
   docker run --rm --memory 1000000000 --pids-limit 1000 \
     -v "$PWD/$OUT:/out" \
     --entrypoint python3 "$IMG" "$PROBE" \
     --phase conc --conc "$N" --out /out --fixtures "$FIX"
+  mv "$OUT/evidence_conc.json" "$OUT/evidence_conc_${N}.json"
 done
 
 # ---- 5. G4 containment: forced termination against real soffice
