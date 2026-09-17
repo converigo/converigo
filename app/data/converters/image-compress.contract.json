@@ -1,0 +1,20 @@
+{
+  "id": "image-compress",
+  "slug": "image-compress",
+  "name": "Image Compress",
+  "category": "image",
+  "description": "Compress JPG/JPEG images to reduce file size (lossy).",
+  "input_formats": ["jpg", "jpeg"],
+  "output_formats": ["jpg", "jpeg"],
+  "accepted_mime_types": ["image/jpeg"],
+  "max_upload_size": 104857600,
+  "conversion_engine": "image",
+  "landing_path": "/image-compress",
+  "canonical_url": "https://converigo.com/image-compress",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/assets/regression/sample.jpg",
+  "supported_platforms": ["web"],
+  "lifecycle_status": "active"
+}

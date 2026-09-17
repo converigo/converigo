@@ -1,0 +1,166 @@
+name: xls-xlsx-ci-validation
+
+# CI infrastructure for the XLS -> XLSX converter validation gate.
+# Builds the PRODUCTION image from the branch Dockerfile (same proven pattern as
+# docker-runtime-verify) and executes, all INSIDE the real Linux container:
+#   [1/7] docker build from the branch Dockerfile
+#   [2/7] LibreOffice (soffice) present + version in-image
+#   [3/7] cgroup v2 / memory envelope sanity
+#   [4/7] the 6-test certified XLS->XLSX suite (the gate) + JUnit
+#   [5/7] in-image validation probe: real e2e, full rejection matrix, safety
+#         (per-request profile, guard==1, timeout + process-tree cleanup,
+#          no residue / no orphans / no zombies / no leakage)
+#   [6/7] targeted regression (related spreadsheet converters, PR-1 DOC/PPT
+#         baseline, recommendation endpoint)
+#   [7/7] gate analysis: certified 6 green + probe 0 failures, else fail the job
+#
+# Runs automatically on push to the feature branch and on demand
+# (workflow_dispatch). Evidence is uploaded as an artifact.
+
+on:
+  push:
+    branches: [ feature/xls-to-xlsx-converter ]
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Git ref to validate (defaults to the triggering ref)"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  in-image-validate:
+    name: "[XLS->XLSX] Build image + in-container validation"
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout (dispatch ref / pushed ref)
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref || github.ref }}
+          fetch-depth: 0
+
+      - name: "[1/7] Build image from the branch Dockerfile"
+        run: |
+          docker build -t converigo-xls:ci .
+          docker image ls converigo-xls:ci
+
+      - name: "[2/7] LibreOffice present in the production image"
+        run: |
+          docker run --rm converigo-xls:ci sh -c 'command -v soffice && soffice --version'
+          echo "POINT [2/7] PASS: soffice present in the production image" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: "[3/7] cgroup v2 + Railway-sized envelope sanity"
+        run: |
+          docker run --rm --memory=3g --pids-limit=1024 --cpus=2 converigo-xls:ci sh -c \
+            'cat /sys/fs/cgroup/cgroup.controllers; echo "---"; cat /sys/fs/cgroup/memory.max; echo "---"; cat /sys/fs/cgroup/pids.max'
+          echo "POINT [3/7] PASS: cgroup v2 controllers readable; envelope 3g/1024 pids/2 cpus" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: "[4/7] Certified XLS->XLSX suite in-image (the 6-test gate)"
+        continue-on-error: true
+        run: |
+          mkdir -p artifacts
+          docker run --rm --workdir /app \
+            -v "$PWD/artifacts:/out" \
+            --memory=3g --pids-limit=1024 --cpus=2 \
+            converigo-xls:ci sh -c \
+            'pip install -q pytest pytest-asyncio httpx openpyxl && \
+             python -m pytest tests/certified/office/test_xls_to_xlsx_certified.py \
+               -v --tb=short -p no:cacheprovider --junitxml=/out/junit_certified.xml'
+          sudo chmod -R a+rw artifacts || true
+          echo "POINT [4/7] certified suite executed in-image (see artifact junit_certified.xml)" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: "[5/7] In-image validation probe (e2e + rejection matrix + safety)"
+        continue-on-error: true
+      - name: "[6/7] Targeted regression in-image"
+        continue-on-error: true
+        run: |
+          docker run --rm --workdir /app \
+            -v "$PWD/artifacts:/out" \
+            --memory=3g --pids-limit=1024 --cpus=2 \
+            converigo-xls:ci sh -c \
+            'pip install -q pytest pytest-asyncio httpx openpyxl && \
+             python -m pytest \
+               tests/certified/office/test_docx_to_ppt_certified.py \
+               tests/certified/office/test_ppt_to_docx_certified.py \
+               tests/certified/office/test_ods_to_xlsx_certified.py \
+               tests/certified/office/test_xlsx_to_docx_certified.py \
+               tests/test_recommend_endpoint.py \
+               tests/test_recommendation_certified_only.py \
+               -v --tb=short -p no:cacheprovider --junitxml=/out/junit_targeted.xml'
+          sudo chmod -R a+rw artifacts || true
+          echo "POINT [6/7] targeted regression executed in-image (see artifact junit_targeted.xml)" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: "[7/7] Gate analysis (certified 6 green + probe 0 failures)"
+        run: |
+          python - <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+          from xml.etree import ElementTree as ET
+
+          failures = []
+
+          jp = Path("artifacts/junit_certified.xml")
+          if not jp.exists():
+              failures.append("certified junit artifact missing")
+          else:
+              root = ET.fromstring(jp.read_text())
+              total = int(root.attrib.get("tests", 0))
+              errs = int(root.attrib.get("errors", 0)) + int(root.attrib.get("failures", 0))
+              skipped = int(root.attrib.get("skipped", 0))
+              print(f"[certified] tests={total} errors+failures={errs} skipped={skipped}")
+              for tc in root.iter("testcase"):
+                  for child in tc:
+                      if child.tag in ("failure", "error", "skipped"):
+                          failures.append(f"certified::{tc.attrib['name']} -> {child.tag}")
+              if errs:
+                  failures.append(f"certified: {errs} error/failure(s)")
+              if skipped:
+                  failures.append(f"certified: {skipped} test(s) SKIPPED (soffice not detected in-image?)")
+
+          pp = Path("artifacts/xls_xlsx_validation.json")
+          if not pp.exists():
+              failures.append("probe evidence json missing")
+          else:
+              data = json.loads(pp.read_text())
+              totals = data.get("totals", {})
+              print(f"[probe] passed={totals.get('passed', 0)} failed={totals.get('failed', 0)}")
+              for phase, pdata in data.get("phases", {}).items():
+                  if pdata.get("phase_error"):
+                      failures.append(f"probe::{phase} PHASE ERROR: {pdata['phase_error']}")
+                  for c in pdata.get("checks", []):
+                      if not c.get("ok"):
+                          failures.append(f"probe::{phase}/{c['name']}: {str(c.get('detail'))[:90]}")
+
+          if failures:
+              print("\n=== GATE FAILURES ===")
+              for f in failures:
+                  print(" -", f)
+              sys.exit(1)
+          print("\n=== GATE GREEN: certified 6 passed, probe 0 failures ===")
+          PY
+
+      - name: Upload validation artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: xls-xlsx-validation
+          path: artifacts/
+          if-no-files-found: warn
+
+      - name: Workflow summary
+        if: always()
+        run: echo "xls-xlsx-ci-validation finished for ${{ github.event_name }} @ ${{ github.sha }}"
+
+        run: |
+          docker run --rm --workdir /app \
+            -v "$PWD/artifacts:/out" \
+            --memory=3g --pids-limit=1024 --cpus=2 \
+            converigo-xls:ci sh -c \
+            'pip install -q httpx openpyxl && \
+             python scripts/ci_xls_xlsx_validation.py --out /out'
+          sudo chmod -R a+rw artifacts || true
+          echo "POINT [5/7] validation probe executed in-image (see artifact xls_xlsx_validation.json)" >> "$GITHUB_STEP_SUMMARY"

@@ -1364,9 +1364,9 @@ const CATEGORY = {
    Fallback: array kosong → "tidak ada converter". */
 const STATIC_TARGET_MAP = {
   // image sources
-  jpg:['ICO','PDF','PNG','TIFF','TXT','WEBP'],  jpeg:['ICO','PDF','PNG','TIFF','TXT','WEBP'],  // F8-A: +TXT via image-to-base64
-  png:['BMP','ICO','JPEG','JPG','PDF','TIFF','TXT','WEBP'],  webp:['ICO','JPEG','JPG','PDF','PNG','TIFF','TXT'],  // F8-A: png/webp +TXT via image-to-base64
-  bmp:['JPEG','JPG','PDF','PNG','TXT','WEBP'],  tiff:['JPEG','JPG','PDF','PNG','TXT'],  // F8-A: +TXT via image-to-base64
+  jpg:['BMP','ICO','JPEG','PDF','PNG','TIFF','TXT','WEBP'],  jpeg:['BMP','ICO','JPG','PDF','PNG','TIFF','TXT','WEBP'],  // F8-A: +TXT via image-to-base64
+  png:['BMP','ICO','JPEG','JPG','PDF','TIFF','TXT','WEBP'],  webp:['BMP','ICO','JPEG','JPG','PDF','PNG','TIFF','TXT'],  // F8-A: png/webp +TXT via image-to-base64
+  bmp:['JPEG','JPG','PDF','PNG','TIFF','TXT','WEBP'],  tiff:['BMP','JPEG','JPG','PDF','PNG','TXT','WEBP'],  // F8-A: +TXT via image-to-base64
   ico:['PNG'],  svg:['PNG'],  heic:['JPEG','JPG','PNG'],  heif:['JPEG','JPG'],  avif:['JPEG','JPG'],
   gif:['MP4','PDF','TXT'],  // VAR-10 images-to-pdf (Batch 3) + F4 gif-to-mp4 + F8-A TXT
   // document sources
@@ -1376,7 +1376,7 @@ const STATIC_TARGET_MAP = {
   pptx:['DOC','DOCX','JPEG','JPG','PDF','PNG','SPREADSHEET','WORD','XLS','XLSX'],  // F7: +PNG,+JPG via pptx-to-png / pptx-to-jpg (FIX round)
   ppt:['DOC','DOCX','JPEG','JPG','PDF','SPREADSHEET','WORD','XLS','XLSX'],
   xlsx:['CSV','DOC','DOCX','HTML','JSON','ODS','PDF','POWERPOINT','PPT','PPTX','TSV','WORD'],
-  xls:['DOC','DOCX','PDF','POWERPOINT','PPT','PPTX','WORD'],
+  xls:['DOC','DOCX','PDF','POWERPOINT','PPT','PPTX','WORD','XLSX'],
   txt:['BMP','GIF','JPG','PDF','PNG','TIFF','WEBP'],  csv:['HTML','JSON','PDF','TSV','XLSX'],  tsv:['CSV'],  json:['CSV','XLSX','XML','YAML'],  ods:['XLSX'],  odt:['PDF'],  // F6: json +XML,+YAML; F8-A: txt +raster targets via base64-to-image
   xml:['JSON'],  yaml:['JSON'],  yml:['JSON'],  // F6: XML/YAML data interchange (net-new rows)
   powerpoint:['DOC','DOCX','JPEG','JPG','SPREADSHEET','WORD','XLS','XLSX'],

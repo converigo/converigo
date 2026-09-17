@@ -42,7 +42,7 @@
     pptx:['DOC','DOCX','JPEG','JPG','PDF','SPREADSHEET','WORD','XLS','XLSX'],
     ppt:['DOC','DOCX','JPEG','JPG','PDF','SPREADSHEET','WORD','XLS','XLSX'],
     xlsx:['CSV','DOC','DOCX','HTML','JSON','ODS','PDF','POWERPOINT','PPT','PPTX','WORD'],
-    xls:['DOC','DOCX','PDF','POWERPOINT','PPT','PPTX','WORD'],
+    xls:['DOC','DOCX','PDF','POWERPOINT','PPT','PPTX','WORD','XLSX'],
     txt:['PDF'],  csv:['JSON','PDF','XLSX'],  json:['CSV','XLSX'],  ods:['XLSX'],  odt:['PDF'],
     powerpoint:['DOC','DOCX','JPEG','JPG','SPREADSHEET','WORD','XLS','XLSX'],
     spreadsheet:['DOC','DOCX','POWERPOINT','PPT','PPTX','WORD'],

@@ -1,0 +1,132 @@
+{
+  "slug": "image-compress",
+  "title": "Image Compress Converter",
+  "description": "Compress JPG and JPEG images to reduce file size while keeping quality.",
+  "category": "image",
+  "popular": true,
+  "featured": false,
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".jpg,.jpeg",
+    "button_text": "Upload Image"
+  },
+  "faq": [
+    {
+      "question": "How do I compress an image?",
+      "answer": "Upload your JPG or JPEG and the converter re-encodes it with optimized quality to shrink file size."
+    },
+    {
+      "question": "Is image compression lossy?",
+      "answer": "Yes. This tool uses lossy compression for JPG/JPEG images to reduce file size noticeably."
+    },
+    {
+      "question": "Is image compression free?",
+      "answer": "Yes. Image compression is free and works directly in your browser."
+    },
+    {
+      "question": "Will my image stay readable?",
+      "answer": "Yes. The output keeps a balanced quality level that preserves readability for web and sharing."
+    },
+    {
+      "question": "Can I use this on mobile?",
+      "answer": "Yes. The converter is designed for modern mobile and desktop browsers."
+    },
+    {
+      "question": "How do I download the result?",
+      "answer": "Download the compressed image immediately after the conversion completes."
+    }
+  ],
+  "related_tools": [
+    {
+      "slug": "jpg-to-webp",
+      "title": "JPG to WEBP"
+    },
+    {
+      "slug": "image-resize",
+      "title": "Image Resize"
+    },
+    {
+      "slug": "jpg-to-png",
+      "title": "JPG to PNG"
+    }
+  ],
+  "seo": {
+    "title": "Compress Images Online Free | Converigo",
+    "description": "Compress JPG and JPEG images online for free using Converigo. Fast, secure and browser-based image compression with no installation required.",
+    "keywords": "image compress, compress image, jpg compress, reduce image size",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Compress JPG images - Converigo free online converter",
+    "twitter_title": "Compress Images Online Free | Converigo",
+    "twitter_description": "Compress JPG and JPEG images online for free using Converigo.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/image-compress"
+  },
+  "source": "jpg",
+  "target": "jpg",
+  "active": true,
+  "hero": {
+    "eyebrow": "Converter tool",
+    "title": "Compress Images Online Free",
+    "description": "Reduce JPG file size online for free. Fast, secure browser-based compression with no software installation.",
+    "panel_label": "Ready to compress",
+    "panel_title": "Upload a JPG image and receive a smaller compressed result instantly."
+  },
+  "features": [
+    {
+      "title": "Smaller files",
+      "text": "Reduce image size for faster uploads and lighter storage."
+    },
+    {
+      "title": "Fast compression",
+      "text": "Re-encode images in seconds with our optimized engine."
+    },
+    {
+      "title": "No software installation required",
+      "text": "Compress files directly in your browser without installing anything."
+    },
+    {
+      "title": "Secure image processing",
+      "text": "Your images are encrypted during upload and automatically deleted after conversion."
+    }
+  ],
+  "supported_formats": {
+    "input": ["JPG", "JPEG"],
+    "output": ["JPG", "JPEG"],
+    "description": "JPG input, JPG output"
+  },
+  "how_to_use": [
+    {
+      "title": "Upload your image",
+      "description": "Select a JPG or JPEG file from your device."
+    },
+    {
+      "title": "Compress the file",
+      "description": "The converter re-encodes your image with optimized quality."
+    },
+    {
+      "title": "Download the result",
+      "description": "Get your smaller compressed image immediately."
+    }
+  ],
+  "about_formats": [
+    {
+      "title": "What is JPG?",
+      "text": "JPG is a widely used lossy image format known for good quality with small file sizes."
+    },
+    {
+      "title": "Why compress images?",
+      "text": "Smaller images load faster on the web, save storage, and are easier to share."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to compress",
+    "title": "Shrink your images in seconds",
+    "text": "Upload a JPG and receive a smaller compressed file instantly.",
+    "primary_text": "Compress now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  },
+  "lifecycle_status": "active"
+}

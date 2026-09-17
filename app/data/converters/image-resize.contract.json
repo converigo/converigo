@@ -1,0 +1,20 @@
+{
+  "id": "image-resize",
+  "slug": "image-resize",
+  "name": "Image Resize",
+  "category": "image",
+  "description": "Resize images to reduce dimensions while preserving quality.",
+  "input_formats": ["jpg", "jpeg", "png", "webp", "bmp", "tiff"],
+  "output_formats": ["jpg", "jpeg", "png", "webp", "bmp", "tiff"],
+  "accepted_mime_types": ["image/jpeg", "image/png", "image/webp", "image/bmp", "image/tiff"],
+  "max_upload_size": 104857600,
+  "conversion_engine": "image",
+  "landing_path": "/image-resize",
+  "canonical_url": "https://converigo.com/image-resize",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/assets/regression/sample.jpg",
+  "supported_platforms": ["web"],
+  "lifecycle_status": "active"
+}
