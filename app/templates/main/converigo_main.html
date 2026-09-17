@@ -1364,9 +1364,9 @@ const CATEGORY = {
    Fallback: array kosong → "tidak ada converter". */
 const STATIC_TARGET_MAP = {
   // image sources
-  jpg:['BMP','ICO','JPEG','PDF','PNG','TIFF','TXT','WEBP'],  jpeg:['BMP','ICO','JPG','PDF','PNG','TIFF','TXT','WEBP'],  // F8-A: +TXT via image-to-base64
-  png:['BMP','ICO','JPEG','JPG','PDF','TIFF','TXT','WEBP'],  webp:['BMP','ICO','JPEG','JPG','PDF','PNG','TIFF','TXT'],  // F8-A: png/webp +TXT via image-to-base64
-  bmp:['JPEG','JPG','PDF','PNG','TIFF','TXT','WEBP'],  tiff:['BMP','JPEG','JPG','PDF','PNG','TXT','WEBP'],  // F8-A: +TXT via image-to-base64
+  jpg:['ICO','PDF','PNG','TIFF','TXT','WEBP'],  jpeg:['ICO','PDF','PNG','TIFF','TXT','WEBP'],  // F8-A: +TXT via image-to-base64
+  png:['BMP','ICO','JPEG','JPG','PDF','TIFF','TXT','WEBP'],  webp:['ICO','JPEG','JPG','PDF','PNG','TIFF','TXT'],  // F8-A: png/webp +TXT via image-to-base64
+  bmp:['JPEG','JPG','PDF','PNG','TXT','WEBP'],  tiff:['JPEG','JPG','PDF','PNG','TXT'],  // F8-A: +TXT via image-to-base64
   ico:['PNG'],  svg:['PNG'],  heic:['JPEG','JPG','PNG'],  heif:['JPEG','JPG'],  avif:['JPEG','JPG'],
   gif:['MP4','PDF','TXT'],  // VAR-10 images-to-pdf (Batch 3) + F4 gif-to-mp4 + F8-A TXT
   // document sources

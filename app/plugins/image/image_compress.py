@@ -37,6 +37,16 @@ class ImageCompressPlugin(ConverterPlugin):
     seo_title = "Image Compress Converter | Converigo"
     seo_description = "Compress JPG and JPEG images to reduce file size while keeping quality."
 
+    def registration_pairs(self) -> list[tuple[str, str]]:
+        """Register only the same-format diagonal (jpg->jpg, jpeg->jpeg).
+
+        The default cross product would leak the alias pair jpg -> jpeg into
+        the registry-derived dropdown map; compression preserves the source
+        format, so this keeps registration aligned with the shipped map (the
+        same guard ImageResizePlugin uses).
+        """
+        return [(fmt.lower(), fmt.lower()) for fmt in self.source_formats]
+
     async def convert(
         self,
         source_path: Path,

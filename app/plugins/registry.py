@@ -90,31 +90,49 @@ class PluginRegistry:
         logger.info("Skipped Plugin Count: %s", len(skipped_plugins))
         logger.info("%s", "=" * 60)
 
+    @staticmethod
+    def _registration_pairs(plugin):
+        """The (source, target) pairs a plugin actually registers.
+
+        Most plugins serve the full ``source_formats x target_formats`` cross
+        product, so that is the default. A plugin that only serves a subset of
+        it (e.g. ``ImageResizePlugin``, which preserves the source format and
+        therefore cannot honour cross-format targets such as ``jpg -> bmp``)
+        overrides ``registration_pairs()`` to keep registration aligned with
+        ``supports()``. Honoring that override here keeps unsupported pairs out
+        of the legacy pair index so they neither shadow dedicated converters
+        nor surface as runtime 500s in the UI map.
+        """
+        pairs = getattr(plugin, "registration_pairs", None)
+        if callable(pairs):
+            return [
+                (str(source).lower(), str(target).lower())
+                for source, target in pairs()
+            ]
+        return [
+            (source.lower(), target.lower())
+            for source in plugin.source_formats
+            for target in plugin.target_formats
+        ]
+
     def register(self, plugin):
 
         for source in plugin.source_formats:
 
             self.source_cache[source.lower()].append(plugin)
 
-            for target in plugin.target_formats:
+        for source, target in self._registration_pairs(plugin):
 
-                key = (
-                    source.lower(),
-                    target.lower(),
-                )
-
-                self.plugins[key] = plugin
+            self.plugins[(source, target)] = plugin
 
         # Populate slug index
         slug = getattr(plugin, "slug", None)
         if slug:
             slug = slug.lower().strip()
             self.by_slug[slug] = plugin
-            for source in plugin.source_formats:
-                for target in plugin.target_formats:
-                    self.registered_keys[slug].append(
-                        (source.lower(), target.lower())
-                    )
+            self.registered_keys[slug] = list(
+                self._registration_pairs(plugin)
+            )
 
     def has_slug(self, slug: str) -> bool:
         """Return True when a plugin with the given slug is registered."""

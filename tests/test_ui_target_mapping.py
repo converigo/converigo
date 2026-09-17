@@ -35,13 +35,22 @@ def _build_expected_targets() -> dict[str, list[str]]:
     for cls in result.plugin_classes:
         srcs = getattr(cls, "source_formats", []) or []
         tgts = getattr(cls, "target_formats", []) or []
-        for src in srcs:
-            src = src.lower()
-            for tgt in tgts:
-                tgt = tgt.lower()
-                if src == tgt:
-                    continue  # skip self-conversion
-                raw.setdefault(src, set()).add(tgt.upper())
+        # Plugins that only serve a subset of the source x target cross
+        # product (e.g. ImageResizePlugin, which preserves the source format)
+        # declare the subset via registration_pairs(); it must be honored here
+        # so the expected map never contains a target no converter can serve.
+        pairs = getattr(cls, "registration_pairs", None)
+        if callable(pairs):
+            served = [
+                (str(source).lower(), str(target).lower())
+                for source, target in cls().registration_pairs()
+            ]
+        else:
+            served = [(s.lower(), t.lower()) for s in srcs for t in tgts]
+        for src, tgt in served:
+            if src == tgt:
+                continue  # skip self-conversion
+            raw.setdefault(src, set()).add(tgt.upper())
     return {k: sorted(v) for k, v in sorted(raw.items())}
 
 
