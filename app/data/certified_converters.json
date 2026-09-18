@@ -99,6 +99,13 @@
       "test_files": ["tests/certified/video/test_f4_media_factory_certified.py"]
     },
     {
+      "slug": "wmv-to-mp4",
+      "lifecycle_status": "certified",
+      "name": "WMV to MP4",
+      "locked": true,
+      "test_files": ["tests/certified/video/test_f4_media_factory_certified.py"]
+    },
+    {
       "slug": "mp4-compress",
       "lifecycle_status": "certified",
       "name": "MP4 Compress",
@@ -705,6 +712,13 @@
       "lifecycle_status": "certified",
       "name": "PNG to PDF",
       "test_files": ["tests/certified/document/test_png_to_pdf_certified.py"]
+    },
+    {
+      "slug": "xls-to-xlsx",
+      "lifecycle_status": "certified",
+      "name": "XLS to XLSX",
+      "locked": true,
+      "test_files": ["tests/certified/office/test_xls_to_xlsx_certified.py"]
     },
     {
       "slug": "pdf-to-png",

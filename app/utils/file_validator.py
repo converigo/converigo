@@ -56,6 +56,7 @@ ALLOWED_EXTENSIONS = {
     "avi",
     "mkv",
     "webm",
+    "wmv",
 
     # DOCUMENT
     # PR-1 (OLE2 honest-disable): legacy "doc", "xls" and "ppt" are deliberately
@@ -131,6 +132,7 @@ FILE_SIGNATURES = {
     "avi": [b"RIFF"],
     "mkv": [b"\x1A\x45\xDF\xA3"],
     "webm": [b"\x1A\x45\xDF\xA3"],
+    "wmv": [b"\x30\x26\xB2\x75\x8E\x66\xCF\x11\xA6\xD9\x00\xAA\x00\x62\xCE\x6C"],
     # Documents
     "pdf": [b"%PDF-"],
     "docx": [b"PK\x03\x04", b"PK\x05\x06", b"PK\x07\x08"],  # ZIP-based container
@@ -187,6 +189,7 @@ CONTENT_TYPE_BY_EXTENSION = {
     "avi": ["video/x-msvideo"],
     "mkv": ["video/x-matroska"],
     "webm": ["video/webm"],
+    "wmv": ["video/x-ms-wmv"],
     # Documents
     "pdf": ["application/pdf"],
     "docx": ["application/vnd.openxmlformats-officedocument.wordprocessingml.document"],
@@ -264,7 +267,7 @@ def validate_filename(filename: str) -> None:
         raise FileValidationError("Filename is too long.")
 
 
-def validate_extension(filename: str) -> str:
+def validate_extension(filename: str, operation: str | None = None) -> str:
 
     extension = get_extension(filename)
 
@@ -274,7 +277,10 @@ def validate_extension(filename: str) -> str:
     # PR-1 (OLE2 honest-disable): legacy .xls/.doc/.ppt are refused with explicit
     # re-save guidance rather than the generic allow-list dump, because the only
     # honest outcome for them anywhere in this app is "not convertible".
+    # Exception: operation="xls-to-xlsx" allows XLS source for XLSX target only.
     if extension in LEGACY_OFFICE_REPLACEMENTS:
+        if operation == "xls-to-xlsx" and extension == "xls":
+            return extension
         raise FileValidationError(legacy_guidance(extension))
 
     if extension not in ALLOWED_EXTENSIONS:
@@ -311,6 +317,7 @@ MEDIA_EXTENSIONS = {
     "avi",
     "mkv",
     "webm",
+    "wmv",
 }
 
 # Archive and special formats that don't validate reliably with magic bytes
@@ -543,11 +550,11 @@ def validate_size(file: UploadFile) -> None:
 # Main Validator
 # ==========================================================
 
-def validate_upload_file(file: UploadFile) -> None:
+def validate_upload_file(file: UploadFile, operation: str | None = None) -> None:
 
     validate_filename(file.filename)
 
-    extension = validate_extension(file.filename)
+    extension = validate_extension(file.filename, operation=operation)
 
     validate_size(file)
 

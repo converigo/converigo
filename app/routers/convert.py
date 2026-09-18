@@ -204,7 +204,7 @@ async def convert_file(
             tracker.set_converter("pdf-merge")
             tracker.start("upload")
             for uploaded_file in file:
-                merge_saved = await upload_service.process_upload(uploaded_file)
+                merge_saved = await upload_service.process_upload(uploaded_file, operation=operation)
                 saved_paths.append(merge_saved)
             tracker.finish("upload")
 
@@ -255,7 +255,7 @@ async def convert_file(
             tracker.set_converter("images-to-pdf")
             tracker.start("upload")
             for uploaded_file in file:
-                merge_saved = await upload_service.process_upload(uploaded_file)
+                merge_saved = await upload_service.process_upload(uploaded_file, operation=operation)
                 saved_paths.append(merge_saved)
             tracker.finish("upload")
 
@@ -305,7 +305,7 @@ async def convert_file(
             saved_path: Path | None = None
             try:
                 tracker.start("upload")
-                saved_path = await upload_service.process_upload(uploaded_file)
+                saved_path = await upload_service.process_upload(uploaded_file, operation=operation)
                 tracker.finish("upload")
                 saved_paths.append(saved_path)
 

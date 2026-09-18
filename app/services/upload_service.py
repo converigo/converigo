@@ -45,13 +45,14 @@ class UploadService:
     async def process_upload(
         self,
         file: UploadFile,
+        operation: str | None = None,
     ) -> Path:
 
         target_path = None
 
         try:
 
-            validate_upload_file(file)
+            validate_upload_file(file, operation=operation)
 
             extension = Path(file.filename).suffix.lower()
 
