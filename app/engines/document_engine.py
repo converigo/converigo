@@ -1,4 +1,4 @@
-﻿import datetime
+import datetime
 import logging
 from pathlib import Path
 import tempfile
@@ -290,7 +290,7 @@ class DocumentEngine(BaseEngine):
             workbook.remove(workbook.active)
 
             doc = ods_load(str(source_path))
-            sheets = doc.spreadsheet.getElementsByType(Table)
+            sheets = doc.body.getElementsByType(Table)
             if not sheets:
                 raise RuntimeError("ODS file contains no spreadsheets.")
 
