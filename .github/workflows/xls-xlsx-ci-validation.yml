@@ -19,7 +19,7 @@ name: xls-xlsx-ci-validation
 
 on:
   push:
-    branches: [ feature/xls-to-xlsx-converter ]
+    branches: [ feature/xls-to-xlsx-converter, fix/xls-to-xlsx-clean-implementation ]
   workflow_dispatch:
     inputs:
       ref:
