@@ -43,6 +43,13 @@ class Settings:
         self.RATE_LIMIT_API_REQUESTS_PER_MINUTE = int(os.getenv("RATE_LIMIT_API_REQUESTS_PER_MINUTE", "60"))
         self.RATE_LIMIT_OTHER_REQUESTS_PER_MINUTE = int(os.getenv("RATE_LIMIT_OTHER_REQUESTS_PER_MINUTE", "120"))
         self.FEATURE_FLAGS_PATH = Path(os.getenv("FEATURE_FLAGS_PATH", "app/data/feature_flags.json"))
+        
+        # XLS to XLSX converter settings
+        self.XLS_CONVERTER_SOFFICE_PATH = os.getenv("XLS_CONVERTER_SOFFICE_PATH", "soffice")
+        self.XLS_CONVERTER_TIMEOUT = int(os.getenv("XLS_CONVERTER_TIMEOUT", str(self.DOCUMENT_CONVERSION_TIMEOUT_SECONDS)))
+        self.XLS_CONVERTER_SIGTERM_GRACE = int(os.getenv("XLS_CONVERTER_SIGTERM_GRACE", "5"))
+        self.XLS_CONVERTER_MAX_CONCURRENT = int(os.getenv("XLS_CONVERTER_MAX_CONCURRENT", "1"))
+        self.XLS_CONVERTER_QUEUE_TIMEOUT = int(os.getenv("XLS_CONVERTER_QUEUE_TIMEOUT", "10"))
 
         default_allowed_hosts = [
             "localhost",

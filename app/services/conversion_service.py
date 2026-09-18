@@ -311,6 +311,6 @@ class ConversionService:
             return settings.AUDIO_CONVERSION_TIMEOUT_SECONDS
         if source_format in {"jpg", "jpeg", "png", "gif", "bmp", "webp", "tiff", "ico"}:
             return settings.IMAGE_CONVERSION_TIMEOUT_SECONDS
-        if source_format in {"pdf", "docx", "doc", "txt", "md"}:
+        if source_format in {"pdf", "docx", "doc", "txt", "md", "xls"}:
             return settings.DOCUMENT_CONVERSION_TIMEOUT_SECONDS
         return settings.CONVERSION_TIMEOUT_SECONDS

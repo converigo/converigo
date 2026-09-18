@@ -535,9 +535,10 @@ def phase_single(binpath: str, fixdir: Path, root: Path, args) -> dict:
     """G6 baseline: one isolated conversion of each real fixture."""
     out = {}
     for key in ("sample", "stress", "bulk"):
-        f = _resolve_fixture(fixdir, key)
-        if not f.exists():
-            out[key] = {"missing": True}
+        try:
+            f = _resolve_fixture(fixdir, key)
+        except FileNotFoundError:
+            out[key] = {"missing": True, "fixture_error": "see stderr"}
             continue
         ctx = RunCtx(root, f"single_{key}")
         with Sampler() as s:
@@ -555,11 +556,13 @@ def phase_single(binpath: str, fixdir: Path, root: Path, args) -> dict:
 def phase_conc(binpath: str, fixdir: Path, root: Path, args) -> dict:
     """G6 concurrency: N parallel isolated conversions of the sample fixture."""
     n = args.conc
-    f = _resolve_fixture(fixdir, "sample")
+    try:
+        f = _resolve_fixture(fixdir, "sample")
+    except FileNotFoundError:
+        return {"workers": n, "fixture": FIXTURES["sample"], 
+                "runs": [], "successes": 0, "missing": True, 
+                "fixture_error": "see stderr"}
     res = {"workers": n, "fixture": FIXTURES["sample"], "runs": [], "successes": 0}
-    if not f.exists():
-        res["missing"] = True
-        return res
     ctxs = [RunCtx(root, f"c{n}_{i}") for i in range(n)]
     results: list = [None] * n
     with Sampler() as s:
@@ -584,6 +587,7 @@ def phase_conc(binpath: str, fixdir: Path, root: Path, args) -> dict:
         res["pids_peak"] = s.pids_peak
         res["samples"] = s.samples
     res["cgroup_after"] = cgroup_state()
+    return res
 
 # ---------------------------------------------------------------- G4 phases
 def _g4_sigkill_control(root: Path) -> dict:
@@ -664,20 +668,30 @@ def phase_g4(binpath: str, fixdir: Path, root: Path, args) -> dict:
 
 
 def _resolve_fixture(fixdir: Path, key: str) -> Path:
-    """Locate a fixture by key, checking the given dir then the sibling
-    spike_kit/fixtures directory (the BIFF8 sample/stress fixtures live there).
+    """Locate a fixture by key, checking candidate directories in order.
 
-    This keeps a single logical fixture namespace across the two directories so
-    no probe phase silently runs with a reduced fixture set.
+    Candidate precedence:
+        1. fixdir / name  (directly in the passed fixtures dir)
+        2. fixdir.parent / "fixtures" / name  ( sibling spike_kit/fixtures)
+        3. fixdir / "evidence_fixtures" / name  (legacy nested path)
+
+    If the fixture is absent, raises FileNotFoundError with candidate paths.
     """
     name = FIXTURES[key]
-    cand = [fixdir / name,
-            fixdir.parent / "fixtures" / name,
-            fixdir / "evidence_fixtures" / name]
-    for c in cand:
+    candidates: list[Path] = [
+        fixdir / name,
+        fixdir.parent / "fixtures" / name,
+        fixdir / "evidence_fixtures" / name,
+    ]
+    for c in candidates:
         if c.exists():
             return c
-    return cand[0]                      # non-existent path; caller reports missing
+    # Explicit failure with candidate paths
+    raise FileNotFoundError(
+        f"Fixture not found: {name}\n"
+        f"Candidates checked:\n"
+        + "\n".join(f"  {p}" for p in candidates)
+    )
 
 
 # ---------------------------------------------------------------- BIFF5
