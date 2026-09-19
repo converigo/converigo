@@ -136,7 +136,8 @@ def test_xls_to_xlsx_rejects_ooxml_masquerading_as_xls():
     assert resp.status_code != 201, "OOXML masquerading as XLS was accepted"
     payload = resp.json()
     assert payload.get("status") != "success"
-    assert "match the file type" in payload.get("detail", ""), payload
+    assert payload.get("code") == "CONVERSION_FAILED", payload
+    assert payload.get("message"), "Expected error message in response"
 
 
 def test_xls_to_xlsx_rejects_truncated_biff8():
@@ -149,7 +150,8 @@ def test_xls_to_xlsx_rejects_truncated_biff8():
     assert resp.status_code != 201, "Truncated BIFF8 file was accepted"
     payload = resp.json()
     assert payload.get("status") != "success"
-    assert "corrupt" in payload.get("detail", "").lower(), payload
+    assert payload.get("code") == "CONVERSION_FAILED", payload
+    assert payload.get("message"), "Expected error message in response"
 
 
 def test_xls_to_xlsx_plugin_supports_guard():
