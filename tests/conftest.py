@@ -9,6 +9,44 @@ from pathlib import Path
 
 import pytest
 
+# --- Analytics isolation (Option C1) -------------------------------------
+# MUST stay at module level (not inside a fixture): pytest imports this
+# conftest before it imports any test module, so this block runs before every
+# `from app.main import app`. `settings` reads ANALYTICS_LOG_FILE through
+# os.getenv only (no dotenv), so this variable is authoritative for every
+# module-level AnalyticsService() in the process. The uvicorn E2E subprocess
+# inherits it through app_server's `env = os.environ.copy()`.
+_REPO_ROOT = Path(__file__).resolve().parents[1]
+_PROD_SINK = (_REPO_ROOT / "app" / "logs" / "analytics.jsonl").resolve()
+_TEST_SINK = Path(
+    os.environ.get("CONVERIGO_TEST_ANALYTICS_SINK")
+    or (_REPO_ROOT / "tmp" / "test_analytics.jsonl")
+).resolve()
+if _TEST_SINK == _PROD_SINK:
+    raise RuntimeError(
+        "Refusing to point the test analytics sink at the production sink "
+        f"({_TEST_SINK}); unset CONVERIGO_TEST_ANALYTICS_SINK or point it at a "
+        "non-production path."
+    )
+os.environ["ANALYTICS_LOG_FILE"] = str(_TEST_SINK)
+
+
+@pytest.fixture(scope="session", autouse=True)
+def _clean_test_analytics_sink():
+    """Give every test session a clean test analytics sink.
+
+    Unlinks tmp/test_analytics.jsonl at session *start* so isolation
+    assertions are exact, and leaves the file behind afterwards for
+    inspection (it is gitignored). Never touches the production sink.
+    AnalyticsService stores a Path (not a file handle), so unlinking it
+    mid-session is safe: the next write re-creates it.
+    """
+    _TEST_SINK.parent.mkdir(parents=True, exist_ok=True)
+    if _TEST_SINK.exists():
+        _TEST_SINK.unlink()
+    yield
+# -------------------------------------------------------------------------
+
 
 def _drain_subprocess_output(stream, log_path: Path) -> None:
     log_path.parent.mkdir(parents=True, exist_ok=True)
