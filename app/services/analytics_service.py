@@ -63,21 +63,23 @@ class AnalyticsService:
 
     def build_dashboard_metrics(self) -> dict[str, Any]:
         events = self._load_events()
-        counts = Counter(event.get("event_name", "") for event in events)
-        page_views = [event for event in events if event.get("event_name") == "page_view"]
-        upload_starts = [event for event in events if event.get("event_name") == "upload_start"]
-        upload_successes = [event for event in events if event.get("event_name") == "upload_success"]
-        conversion_starts = [event for event in events if event.get("event_name") == "conversion_start"]
-        conversion_successes = [event for event in events if event.get("event_name") == "conversion_success"]
-        downloads = [event for event in events if event.get("event_name") == "download"]
-        errors = [event for event in events if event.get("event_name") == "error"]
+        # Exclude testclient events from production analytics
+        production_events = [e for e in events if not e.get("is_testclient", False)]
+        counts = Counter(event.get("event_name", "") for event in production_events)
+        page_views = [event for event in production_events if event.get("event_name") == "page_view"]
+        upload_starts = [event for event in production_events if event.get("event_name") == "upload_start"]
+        upload_successes = [event for event in production_events if event.get("event_name") == "upload_success"]
+        conversion_starts = [event for event in production_events if event.get("event_name") == "conversion_start"]
+        conversion_successes = [event for event in production_events if event.get("event_name") == "conversion_success"]
+        downloads = [event for event in production_events if event.get("event_name") == "download"]
+        errors = [event for event in production_events if event.get("event_name") == "error"]
 
         unique_visitors = {event.get("visitor_id") for event in page_views if event.get("visitor_id")}
         processing_times = [float(event.get("processing_ms", 0) or 0) for event in conversion_successes if event.get("processing_ms") is not None]
         category_counts = Counter(self._normalize_token(event.get("category")) for event in conversion_starts if event.get("category"))
         converter_counts = Counter(self._normalize_token(event.get("converter_name")) for event in conversion_starts if event.get("converter_name"))
-        performance = self._build_performance_metrics(events)
-        seo = self._build_seo_metrics(events)
+        performance = self._build_performance_metrics(production_events)
+        seo = self._build_seo_metrics(production_events)
 
         upload_count = len(upload_starts)
         conversion_count = len(conversion_starts)
@@ -134,6 +136,8 @@ class AnalyticsService:
     def _build_event(self, event_name: str, request: Request | None = None, **payload: Any) -> dict[str, Any]:
         request_state = getattr(request, "state", None) if request is not None else None
         path = self._string_value(payload.pop("page_path", None)) or (str(getattr(request, "url", None).path) if request and getattr(request, "url", None) else "")
+        # Get user_agent from request.state first, then from payload as fallback
+        user_agent = self._string_value(getattr(request_state, "user_agent", None)) or self._string_value(payload.pop("user_agent", None))
         event = {
             "timestamp": self._utc_now(),
             "event_name": event_name,
@@ -155,7 +159,8 @@ class AnalyticsService:
             "referrer": self._string_value(payload.pop("referrer", None)),
             "request_id": self._string_value(getattr(request_state, "request_id", None)),
             "conversion_id": self._string_value(getattr(request_state, "conversion_id", None)),
-            "user_agent": self._string_value(getattr(request_state, "user_agent", None)),
+            "user_agent": user_agent,
+            "is_testclient": user_agent.lower() == "testclient" if user_agent else False,
             "ip_hash": self._string_value(getattr(request_state, "ip_hash", None)),
             "visitor_id": self._build_visitor_id(request, payload),
         }

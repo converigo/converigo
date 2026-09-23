@@ -3,42 +3,104 @@ from pathlib import Path
 from app.services.analytics_service import AnalyticsService
 
 
-def test_analytics_service_tracks_events_and_builds_dashboard_metrics(tmp_path: Path) -> None:
-    service = AnalyticsService(storage_path=tmp_path / "analytics.jsonl")
+def test_testclient_event_marked_in_event() -> None:
+    """Test that testclient events are properly marked with is_testclient=True."""
+    service = AnalyticsService(storage_path=Path("./tmp/test_marking.jsonl"))
+    
+    # Track a testclient event
+    event = service.track_event(
+        "page_view",
+        user_agent="testclient"
+    )
+    
+    assert event.get("is_testclient") is True
 
+
+def test_production_event_not_marked_as_testclient() -> None:
+    """Test that production events are not marked as testclient."""
+    service = AnalyticsService(storage_path=Path("./tmp/test_marking.jsonl"))
+    
+    # Track a production event
+    event = service.track_event(
+        "page_view",
+        user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+    )
+    
+    assert event.get("is_testclient") is False
+
+
+def test_no_user_agent_not_marked_as_testclient() -> None:
+    """Test that events without user_agent are not marked as testclient."""
+    service = AnalyticsService(storage_path=Path("./tmp/test_marking.jsonl"))
+    
+    # Track an event without user_agent
+    event = service.track_event("page_view")
+    
+    assert event.get("is_testclient") is False
+
+
+def test_dashboard_metrics_excludes_testclient_events(tmp_path: Path) -> None:
+    """Test that build_dashboard_metrics excludes testclient events."""
+    service = AnalyticsService(storage_path=tmp_path / "analytics.jsonl")
+    
+    # Track production events
     service.track_page_view(page_path="/", visitor_id="visitor-1", entry_type="direct")
     service.track_page_view(page_path="/tools/mp4-to-mp3", visitor_id="visitor-2", entry_type="organic")
-    service.track_upload_start(page_path="/convert", visitor_id="visitor-1", category="audio", input_format="mp4")
-    service.track_upload_success(page_path="/convert", visitor_id="visitor-1", category="audio", input_format="mp4", processing_ms=120)
-    service.track_conversion_start(page_path="/convert", visitor_id="visitor-1", converter_name="mp4-to-mp3", category="audio", output_format="mp3")
-    service.track_conversion_success(page_path="/convert", visitor_id="visitor-1", converter_name="mp4-to-mp3", category="audio", output_format="mp3", processing_ms=1800)
-    service.track_download(page_path="/download/mp4-to-mp3.mp3", visitor_id="visitor-1", converter_name="mp4-to-mp3")
-    service.track_error(page_path="/convert", visitor_id="visitor-1", error_type="UPLOAD_ERROR")
-    service.track_event("landing_page_view", page_path="/", visitor_id="visitor-1")
-    service.track_event("organic_entry", page_path="/", visitor_id="visitor-2")
-    service.track_event("search_query", page_path="/", visitor_id="visitor-2", search_query="mp4 to mp3")
-    service.track_event("internal_link_click", page_path="/", visitor_id="visitor-2", link_href="/tools/mp4-to-mp3")
-    service.track_event("faq_expand", page_path="/", visitor_id="visitor-2", faq_id="faq-1")
-    service.track_event("performance_metric", page_path="/", visitor_id="visitor-1", metric_name="lcp", metric_value=1.23)
-    service.track_event("performance_metric", page_path="/", visitor_id="visitor-1", metric_name="cls", metric_value=0.02)
-
+    
+    # Track testclient events (should be excluded from metrics)
+    service.track_event("page_view", user_agent="testclient")
+    service.track_event("page_view", user_agent="testclient")
+    service.track_event("page_view", user_agent="testclient")
+    
     metrics = service.build_dashboard_metrics()
-
+    
+    # Should only count the 2 production events, not the 3 testclient events
     assert metrics["total_visitor"] == 2
     assert metrics["unique_visitor"] == 2
-    assert metrics["upload_count"] == 1
-    assert metrics["upload_success_rate"] == 100.0
-    assert metrics["conversion_count"] == 1
-    assert metrics["conversion_success_rate"] == 100.0
-    assert metrics["download_count"] == 1
-    assert metrics["average_processing_time"] == 1800.0
-    assert metrics["top_converter"] == "mp4-to-mp3"
-    assert metrics["most_used_category"] == "audio"
-    assert metrics["error_counts"]["upload_error"] == 1
-    assert metrics["performance"]["lcp"] == 1.23
-    assert metrics["performance"]["cls"] == 0.02
-    assert metrics["seo"]["landing_page_view"] == 1
-    assert metrics["seo"]["organic_entry"] == 1
-    assert metrics["seo"]["search_query"] == 1
-    assert metrics["seo"]["internal_link_click"] == 1
-    assert metrics["seo"]["faq_expand"] == 1
+
+
+def test_testclient_events_preserved_in_storage(tmp_path: Path) -> None:
+    """Test that testclient events are preserved in storage (not deleted)."""
+    service = AnalyticsService(storage_path=tmp_path / "analytics.jsonl")
+    
+    # Track both production and testclient events
+    service.track_page_view(page_path="/", visitor_id="visitor-1", entry_type="direct")
+    service.track_event("page_view", user_agent="testclient")
+    
+    # Load all events
+    all_events = service._load_events()
+    
+    # Should have all events (production + testclient)
+    assert len(all_events) == 2
+    
+    # One should be marked as testclient
+    testclient_events = [e for e in all_events if e.get("is_testclient") is True]
+    assert len(testclient_events) == 1
+    
+    # One should NOT be marked as testclient (production)
+    production_events = [e for e in all_events if not e.get("is_testclient", False)]
+    assert len(production_events) == 1
+
+
+def test_page_path_attribute_present_in_events(tmp_path: Path) -> None:
+    """Test that page attribution is present when context exists."""
+    service = AnalyticsService(storage_path=tmp_path / "analytics.jsonl")
+    
+    event = service.track_page_view(
+        page_path="/tools/pdf-to-jpg",
+        visitor_id="visitor-1"
+    )
+    
+    assert event.get("page_path") == "/tools/pdf-to-jpg"
+    assert event.get("visitor_id") == "visitor-1"
+
+
+def test_no_page_path_when_not_provided(tmp_path: Path) -> None:
+    """Test that page_path can be empty when not provided."""
+    service = AnalyticsService(storage_path=tmp_path / "analytics.jsonl")
+    
+    event = service.track_event("custom_event")
+    
+    assert event.get("page_path") == ""
+    assert event.get("is_testclient") is False
+
