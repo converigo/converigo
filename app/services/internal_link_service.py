@@ -576,14 +576,23 @@ class InternalLinkService:
         return specs[slug]
 
     def _score_and_format_converters(self, converters: list[dict[str, Any]], exclude_slug: str = "") -> list[dict[str, Any]]:
-        """Format converters with score for display."""
+        """Format converters with score for display.
+
+        Phase 24L: emit the ``slug`` key alongside ``href``. The tool-page
+        related-tools template renders ``/tools/{{ related.slug }}``, and the
+        previous shape (title/href/description/score only) made every such
+        href collapse to the bare ``/tools/`` index. Empty slugs are skipped
+        so no item can ever produce an empty-slug href.
+        """
         result = []
         for converter in converters:
-            if converter.get("slug") == exclude_slug:
+            slug = str(converter.get("slug") or "").strip()
+            if not slug or slug == exclude_slug:
                 continue
             result.append({
+                "slug": slug,
                 "title": converter.get("name", converter.get("slug", "")),
-                "href": f"/tools/{converter.get('slug', '')}",
+                "href": f"/tools/{slug}",
                 "description": converter.get("description", "Convert files with this tool."),
                 "score": 8,
             })
