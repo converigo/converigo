@@ -42,7 +42,7 @@
     },
     {
       "question": "What if conversion fails?",
-      "answer": "Try re-uploading the PDF file or selecting a different PDF and convert again."
+      "answer": "Check that your upload is a readable PDF file, since only PDF input is accepted. Each PDF page is converted into its own JPG image (page by page), not embedded-image extraction, and output is JPG only. If the file is password-protected or damaged, try a different PDF and convert again."
     }
   ],
   "related_tools": [

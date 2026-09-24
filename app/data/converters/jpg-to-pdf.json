@@ -42,7 +42,7 @@
     },
     {
       "question": "What if conversion fails?",
-      "answer": "Try re-uploading your image files or using a smaller JPG if the upload size is too large."
+      "answer": "Check that your uploads are JPG or JPEG images, since only JPG/JPEG input is accepted (PNG input uses the separate PNG to PDF page). You can combine several images into one PDF; there are no page-size, orientation, or margins controls on this page. If the upload is too large, try a smaller JPG and convert again."
     }
   ],
   "related_tools": [
