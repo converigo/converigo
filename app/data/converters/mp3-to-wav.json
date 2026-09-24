@@ -39,10 +39,7 @@
     }
   ],
   "related_tools": [
-    {
-      "slug": "mp3-to-m4a",
-      "title": "MP3 to M4A"
-    },
+
     {
       "slug": "mp4-to-wav",
       "title": "MP4 to WAV"
