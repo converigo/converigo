@@ -2,8 +2,7 @@
   "result_widget_v2": {
     "enabled": true,
     "scope": [
-      "slug:tar-extract",
-      "slug:zip-extract"
+      "all"
     ]
   }
 }
