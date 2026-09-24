@@ -265,6 +265,51 @@
 
         <section class="section section-white">
             <div class="container section-heading">
+                <span class="eyebrow">Related comparisons</span>
+                <h2>Format Comparisons</h2>
+            </div>
+            <div class="grid cards-grid">
+                {% for item in related_comparisons %}
+                <article class="card">
+                    <h3><a href="{{ item.href }}">{{ item.title }}</a></h3>
+                    <p>{{ item.description }}</p>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container section-heading">
+                <span class="eyebrow">Learn about this format</span>
+                <h2>Knowledge & Guides</h2>
+            </div>
+            <div class="grid cards-grid">
+                {% for item in related_knowledge %}
+                <article class="card">
+                    <h3><a href="{{ item.href }}">{{ item.title }}</a></h3>
+                    <p>{{ item.description }}</p>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="section section-white">
+            <div class="container section-heading">
+                <span class="eyebrow">Related hubs</span>
+                <h2>Explore Related Hubs</h2>
+            </div>
+            <div class="grid cards-grid">
+                {% for item in related_hubs %}
+                <article class="card">
+                    <h3><a href="{{ item.href }}">{{ item.title }}</a></h3>
+                    <p>{{ item.description }}</p>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="section section-white">
+            <div class="container section-heading">
                 <span class="eyebrow">Troubleshooting</span>
                 <h2>Common problems and fixes</h2>
             </div>
