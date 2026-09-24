@@ -77,6 +77,17 @@ class HubService:
                 "keywords": "document conversion hub, word to pdf, pdf to word, office file converter",
                 "all_converters_label": "All document converters",
             },
+            {
+                "slug": "archive-conversion",
+                "path": "/archive-conversion",
+                "title": "Archive Conversion Hub",
+                "eyebrow": "Archive Conversion",
+                "hero_title": "Archive Conversion Hub: Compress and archive files efficiently",
+                "hero_subtitle": "Create, extract, and manage archived files with reliable online compression tools.",
+                "description": "Compress files into ZIP archives or extract archived files to recover their contents with simple online tools.",
+                "keywords": "archive conversion hub, zip compressor, extract zip, file archiver",
+                "all_converters_label": "All archive converters",
+            },
         ]
 
     def get_hub_definition(self, slug: str) -> dict[str, Any]:

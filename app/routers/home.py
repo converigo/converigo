@@ -466,6 +466,11 @@ async def document_hub(request: Request):
     return await _render_hub_page(request, "document-conversion")
 
 
+@router.get("/archive-conversion", response_class=HTMLResponse)
+async def archive_hub(request: Request):
+    return await _render_hub_page(request, "archive-conversion")
+
+
 @router.get("/data-conversion", response_class=HTMLResponse)
 async def data_hub(request: Request):
     return await _render_hub_page(request, "data-conversion")

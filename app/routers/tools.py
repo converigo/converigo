@@ -19,6 +19,7 @@ from app.services.target_capability import capability_json
 from app.services.seo_service import PRODUCTION_BASE_URL, SeoService
 
 router = APIRouter(prefix="/tools", tags=["tools"])
+CONTRACTS_DIR = Path("app/data/converters")
 converter_data_service = ConverterDataService(Path("app/data/converters"))
 seo_service = SeoService(Path("app/data/converters"))
 landing_page_builder = LandingPageBuilder(seo_service, converter_data_service)
