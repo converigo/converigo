@@ -3,11 +3,7 @@
 {% block title %}{{ landing.h1 if landing else hero.title or tool.title }}{% endblock %}
 
 {% block page_css %}
-    {% if result_widget_v2 is defined and result_widget_v2 %}
     <link rel="stylesheet" href="/static/css/components/tool-result-v2.css">
-    {% else %}
-    <link rel="stylesheet" href="/static/css/pages/home.css">
-    {% endif %}
 {% endblock %}
 
 {% block body_class %}tool-page{% endblock %}
@@ -50,7 +46,6 @@
                         <p class="panel-label">{{ hero.panel_label or t('tool_page.panel.label', 'Ready to convert') }}</p>
                         <h2 class="panel-title">{{ hero.panel_title or t('tool_page.panel.title', 'Upload one file and get your converted result.') }}</h2>
                     </div>
-                    {% if result_widget_v2 is defined and result_widget_v2 %}
                     {# Per-slug config for the V2 tool-page widget. `tool.slug` selects the
                        entry; each entry drives data-operation, data-target-format, the
                        file-input `accept` filter, and the per-slug dropzone copy keys. #}
@@ -81,14 +76,21 @@
                             "title_default": "Drag & drop your .gz or .tar.gz file here",
                             "supports_key": "upload.extract_supports_gz",
                             "supports_default": "Supports .gz and .tar.gz archives · max 50 files at once"
+                        },
+                        "default": {
+                            "operation": "{{ tool.slug }}",
+                            "target_format": "{{ tool.target or 'output' }}",
+                            "accept": "*",
+                            "title_key": "",
+                            "title_default": "Drag & drop your file here",
+                            "supports_key": "",
+                            "supports_default": "Supports file conversion"
                         }
                     } %}
                     {% set tv2 = tv2_configs.get(tool.slug) %}
+                    {% set tv2 = tv2 if tv2 else tv2_configs.get("default") %}
                     {% include "components/tool_result_widget_v2.html" %}
                     <script src="/static/js/widgets/tool_result_widget_v2.js"></script>
-                    {% else %}
-                    {% include "components/upload_card.html" %}
-                    {% endif %}
                 </div>
             </div>
         </section>
