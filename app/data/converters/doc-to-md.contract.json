@@ -1,0 +1,20 @@
+{
+  "id": "doc-to-md",
+  "slug": "doc-to-md",
+  "name": "DOC to Markdown",
+  "category": "document",
+  "description": "Convert DOC documents to Markdown format.",
+  "input_formats": ["doc"],
+  "output_formats": ["md"],
+  "accepted_mime_types": ["application/msword"],
+  "max_upload_size": 52428800,
+  "conversion_engine": "document",
+  "landing_path": "/tools/doc-to-md",
+  "canonical_url": "https://converigo.com/tools/doc-to-md",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.doc",
+  "supported_platforms": ["web", "api"],
+  "lifecycle_status": "certified"
+}

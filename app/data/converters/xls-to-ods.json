@@ -1,0 +1,78 @@
+{
+  "slug": "xls-to-ods",
+  "title": "XLS to ODS Converter",
+  "description": "Convert XLS files to ODS spreadsheet format.",
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".xls",
+    "button_text": "Upload XLS"
+  },
+  "faq": [
+    {"question": "How do I convert XLS to ODS?", "answer": "Upload your XLS file to Converigo and the ODS spreadsheet will be ready for download immediately."},
+    {"question": "Is the conversion secure?", "answer": "Yes, files are processed securely on our servers and automatically deleted after conversion."},
+    {"question": "What file sizes are supported?", "answer": "XLS files up to 50MB can be converted instantly on Converigo."},
+    {"question": "Can I convert files on mobile?", "answer": "Yes, Converigo works on all modern browsers and devices."}
+  ],
+  "related_tools": [
+    {"slug": "xls-to-csv", "title": "XLS to CSV Converter"},
+    {"slug": "xls-to-docx", "title": "XLS to DOCX Converter"},
+    {"slug": "xls-to-html", "title": "XLS to HTML Converter"},
+    {"slug": "xlsx-to-ods", "title": "XLSX to ODS Converter"}
+  ],
+  "seo": {
+    "title": "XLS to ODS Converter Online Free | Converigo",
+    "description": "Convert XLS files to ODS spreadsheet format.",
+    "keywords": "xls to ods, xls converter, ods converter, online tool",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert XLS to ODS - Converigo free online converter",
+    "twitter_title": "XLS to ODS Converter Online Free | Converigo",
+    "twitter_description": "Convert XLS files to ODS spreadsheets online for free using Converigo. Fast, secure browser-based conversion with no software installation required.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/xls-to-ods"
+  },
+  "source": "xls",
+  "target": "ods",
+  "category": "spreadsheet",
+  "active": true,
+  "popular": false,
+  "featured": false,
+  "hero": {
+    "eyebrow": "Converter",
+    "title": "Convert XLS to ODS Online Free",
+    "description": "Convert XLS files to ODS spreadsheet format.",
+    "panel_label": "Ready to convert",
+    "panel_title": "Upload a XLS file and receive your ods output instantly.",
+    "text": "Convert xls files to high-quality ods format. This tool processes your files directly in the browser with no upload delays or quality loss."
+  },
+  "features": [
+    {"title": "Instant conversion", "text": "Convert XLS to ODS in seconds without installing any software."},
+    {"title": "Secure processing", "text": "Your files are processed securely and automatically deleted after conversion."},
+    {"title": "Large file support", "text": "Convert XLS files up to 50MB in size instantly."},
+    {"title": "Cross-platform", "text": "Works on Windows, Mac, Linux, and all modern mobile devices."}
+  ],
+  "supported_formats": {
+    "input": ["XLS"],
+    "output": ["ODS"],
+    "description": "Convert XLS files to ODS spreadsheet format."
+  },
+  "how_to_use": [
+    {"title": "Upload your XLS file", "description": "Select a XLS file from your device to begin the conversion."},
+    {"title": "Wait for processing", "description": "Converigo processes the conversion instantly with secure handling."},
+    {"title": "Download your ODS file", "description": "Get the ods output ready to download immediately."}
+  ],
+  "about_formats": [
+    {"title": "What is a XLS file?", "text": "A XLS file is a legacy Microsoft Excel spreadsheet format used before 2007."},
+    {"title": "Why convert XLS to ODS?", "text": "The ods output is an open-source spreadsheet format compatible with LibreOffice Calc, Google Sheets, and other spreadsheet applications."}
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Convert XLS files in seconds",
+    "text": "Upload your XLS file and get the ods output instantly.",
+    "primary_text": "Convert now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  },
+  "lifecycle_status": "certified"
+}
