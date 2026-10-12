@@ -28,11 +28,16 @@ def test_sitemap_contains_homepage_converter_and_trust_pages():
     assert any(loc.endswith("/tools/png-to-jpg") for loc in locations)
     assert any(loc.endswith("/tools/pdf-to-jpg") for loc in locations)
     assert any(loc.endswith("/blog") for loc in locations)
-    assert any(loc.endswith("/blog/how-to-convert-mp4-to-mp3") for loc in locations)
+    # Cross-cluster duplicate (GSC INDEX RECOVERY, root cause #2): the legacy
+    # /blog/how-to-convert-mp4-to-mp3 article is intentionally excluded from the
+    # sitemap; it now canonicalizes to the Learning Center primary at
+    # /learning/how-to-convert-mp4-to-mp3 (asserted below), which stays listed.
+    assert not any(loc.endswith("/blog/how-to-convert-mp4-to-mp3") for loc in locations)
     assert any(loc.endswith("/blog/jpg-to-pdf-guide") for loc in locations)
     assert any(loc.endswith("/blog/png-to-jpg-guide") for loc in locations)
     assert any(loc.endswith("/learning") for loc in locations)
     assert any(loc.endswith("/learning/what-is-file-conversion") for loc in locations)
+    assert any(loc.endswith("/learning/how-to-convert-mp4-to-mp3") for loc in locations)
     assert not any(loc.endswith("/mp4-to-mp3") and "/tools/" not in loc for loc in locations)
     assert not any(loc.endswith("/jpg-to-pdf") and "/tools/" not in loc for loc in locations)
     assert not any(loc.endswith("/png-to-jpg") and "/tools/" not in loc for loc in locations)

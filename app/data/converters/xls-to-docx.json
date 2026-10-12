@@ -1,0 +1,78 @@
+{
+  "slug": "xls-to-docx",
+  "title": "XLS to DOCX Converter",
+  "description": "Convert Excel XLS files to DOCX Word format online for free.",
+  "upload_form": {
+    "action": "/upload",
+    "method": "post",
+    "accept": ".xls",
+    "button_text": "Upload XLS"
+  },
+  "faq": [
+    {"question": "How do I convert XLS to DOCX?", "answer": "Upload your XLS file to Converigo and the DOCX document will be ready for download immediately."},
+    {"question": "Is the conversion secure?", "answer": "Yes, files are processed securely on our servers and automatically deleted after conversion."},
+    {"question": "What file sizes are supported?", "answer": "XLS files up to 500MB can be converted instantly on Converigo."},
+    {"question": "Can I convert files on mobile?", "answer": "Yes, Converigo works on all modern browsers and devices."}
+  ],
+  "related_tools": [
+    {"slug": "xlsx-to-docx", "title": "XLSX to DOCX Converter"},
+    {"slug": "xls-to-pdf", "title": "XLS to PDF Converter"},
+    {"slug": "xls-to-csv", "title": "XLS to CSV Converter"},
+    {"slug": "xls-to-html", "title": "XLS to HTML Converter"}
+  ],
+  "seo": {
+    "title": "XLS to DOCX Converter Online Free | Converigo",
+    "description": "Convert Excel XLS files to DOCX Word format online for free.",
+    "keywords": "xls to docx, xls to word, xls converter, word converter, online tool",
+    "image": "/static/images/og-default.png",
+    "og_image_alt": "Convert XLS to DOCX - Converigo free online converter",
+    "twitter_title": "XLS to DOCX Converter Online Free | Converigo",
+    "twitter_description": "Convert XLS files to DOCX documents online for free using Converigo. Fast, secure browser-based conversion with no software installation required.",
+    "twitter_image": "/static/images/og-default.png",
+    "canonical": "https://converigo.com/tools/xls-to-docx"
+  },
+  "source": "xls",
+  "target": "docx",
+  "category": "document",
+  "active": true,
+  "popular": false,
+  "featured": false,
+  "hero": {
+    "eyebrow": "Converter",
+    "title": "Convert XLS to DOCX Online Free",
+    "description": "Convert Excel XLS files to DOCX Word format online for free.",
+    "panel_label": "Ready to convert",
+    "panel_title": "Upload an XLS file and receive your docx output instantly.",
+    "text": "Convert xls files to high-quality docx format. This tool processes your files directly in the browser with no upload delays or quality loss."
+  },
+  "features": [
+    {"title": "Instant conversion", "text": "Convert XLS to DOCX in seconds without installing any software."},
+    {"title": "Secure processing", "text": "Your files are processed securely and automatically deleted after conversion."},
+    {"title": "Large file support", "text": "Convert XLS files up to 500MB in size instantly."},
+    {"title": "Cross-platform", "text": "Works on Windows, Mac, Linux, and all modern mobile devices."}
+  ],
+  "supported_formats": {
+    "input": ["XLS"],
+    "output": ["DOCX"],
+    "description": "Convert Excel XLS files to DOCX Word format online for free."
+  },
+  "how_to_use": [
+    {"title": "Upload your XLS file", "description": "Convert Excel XLS files to DOCX Word format online for free."},
+    {"title": "Wait for processing", "description": "Convert Excel XLS files to DOCX Word format online for free."},
+    {"title": "Download your DOCX file", "description": "Convert Excel XLS files to DOCX Word format online for free."}
+  ],
+  "about_formats": [
+    {"title": "What is an XLS file?", "text": "An XLS file is a legacy Microsoft Excel spreadsheet format used before 2007."},
+    {"title": "Why convert XLS to DOCX?", "text": "The docx output converts your spreadsheet data into a document format editable in Microsoft Word."}
+  ],
+  "cta": {
+    "eyebrow": "Ready to convert",
+    "title": "Convert XLS files in seconds",
+    "text": "Upload your XLS file and get the docx output instantly.",
+    "primary_text": "Convert now",
+    "secondary_text": "Read FAQs",
+    "primary_href": "#converter",
+    "secondary_href": "#faq"
+  },
+  "lifecycle_status": "certified"
+}

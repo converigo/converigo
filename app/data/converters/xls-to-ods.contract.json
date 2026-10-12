@@ -1,0 +1,28 @@
+{
+  "id": "xls-to-ods",
+  "slug": "xls-to-ods",
+  "name": "XLS to ODS",
+  "category": "spreadsheet",
+  "description": "Convert XLS files to ODS spreadsheet format.",
+  "input_formats": [
+    "xls"
+  ],
+  "output_formats": [
+    "ods"
+  ],
+  "accepted_mime_types": [
+    "application/vnd.ms-excel"
+  ],
+  "max_upload_size": 52428800,
+  "conversion_engine": "spreadsheet",
+  "landing_path": "/tools/xls-to-ods",
+  "canonical_url": "https://converigo.com/tools/xls-to-ods",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.xls",
+  "supported_platforms": [
+    "web"
+  ],
+  "lifecycle_status": "certified"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "xls-to-docx",
+  "slug": "xls-to-docx",
+  "name": "XLS to DOCX",
+  "category": "document",
+  "description": "Convert XLS spreadsheets to DOCX documents.",
+  "input_formats": ["xls"],
+  "output_formats": ["docx"],
+  "accepted_mime_types": ["application/vnd.ms-excel"],
+  "max_upload_size": 52428800,
+  "conversion_engine": "document",
+  "landing_path": "/tools/xls-to-docx",
+  "canonical_url": "https://converigo.com/tools/xls-to-docx",
+  "seo_status": "ready",
+  "schema_status": "ready",
+  "faq_status": "ready",
+  "regression_sample": "tests/sample.xls",
+  "supported_platforms": ["web", "api"],
+  "lifecycle_status": "certified"
+}
