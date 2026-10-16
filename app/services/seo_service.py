@@ -164,9 +164,12 @@ class SeoService:
 
     def _build_blog_entries(self, base_url: str) -> list[dict[str, str]]:
         today = datetime.utcnow().date().isoformat()
+        # /blog/how-to-convert-mp4-to-mp3 is intentionally excluded: it is a
+        # cross-cluster duplicate of /learning/how-to-convert-mp4-to-mp3 and now
+        # canonicalizes to that URL (GSC INDEX RECOVERY, root cause #2). The
+        # primary Learning article is already submitted by _build_learning_entries.
         paths = [
             "/blog",
-            "/blog/how-to-convert-mp4-to-mp3",
             "/blog/jpg-to-pdf-guide",
             "/blog/png-to-jpg-guide",
         ]
