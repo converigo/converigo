@@ -306,9 +306,68 @@ class ConverterDataService:
             )
 
         emitted_slugs: set[str] = set()
-        for tool in self.list_supported_converters():
+
+        # G14 alias dedupe: multiple published converters may declare the same
+        # (source, target) pair, but only a *genuine duplicate* — a second
+        # converter implementation claiming the exact same non-self pair as
+        # another published converter — must be de-indexed. Three carve-outs
+        # keep legitimate same-pair tools in the sitemap:
+        #   1. Self-pairs ((jpg,jpg)/(pdf,pdf)) host several distinct
+        #      operations (jpg-crop, pdf-merge, ...) that the pair alone does
+        #      not identify; they are resolved by operation slug, so every
+        #      owner stays published.
+        #   2. Plugin-less marketing pages that funnel conversions to the pair
+        #      owner (xlsx-to-pdf -> excel-to-pdf, pdf-to-xlsx ->
+        #      pdf-to-excel, pptx-to-pdf -> ppt-to-pdf, pdf-to-pptx ->
+        #      pdf-to-ppt) have no by_slug entry and no pair claim of their
+        #      own, so they are distinct landing pages, not duplicates.
+        #   3. A pair whose runtime owner is published under a different entry
+        #      (images-to-pdf owns (png,pdf) but is published as image->pdf,
+        #      alongside the single-file png-to-pdf product) is not a clash.
+        # The remaining case is two published implementations of one
+        # conversion (pptx-to-jpg vs ppt-to-jpg: both plugins claim
+        # (pptx,jpg)). The single indexable URL is the converter the plugin
+        # registry actually dispatches for that pair; the alias keeps its
+        # reachable page but is not advertised to crawlers.
+        supported = self.list_supported_converters()
+        published_by_pair: dict[tuple[str, str], set[str]] = {}
+        for tool in supported:
+            pair = (
+                str(tool.get("source", "")).strip().lower(),
+                str(tool.get("target", "")).strip().lower(),
+            )
+            if not pair[0] or not pair[1]:
+                continue
+            published_by_pair.setdefault(pair, set()).add(
+                str(tool.get("slug", "")).strip().lower()
+            )
+
+        shadowed_aliases: set[str] = set()
+        for pair, slugs in published_by_pair.items():
+            source, target = pair
+            if source == target:
+                continue  # Carve-out 1: same-format operations.
+            winner = plugin_registry.plugins.get(pair)
+            winner_slug = str(getattr(winner, "slug", "") or "").strip().lower()
+            if winner_slug not in slugs:
+                continue  # Carve-out 3: owner published under another entry.
+            for slug in sorted(slugs):
+                if slug == winner_slug:
+                    continue
+                # Carve-out 2: suppress only a second implementation that
+                # itself registered this pair (a by_slug entry claiming it).
+                if plugin_registry.has_slug(slug) and pair in (
+                    plugin_registry.slug_winner_pairs.get(slug, set())
+                ):
+                    shadowed_aliases.add(slug)
+
+        for tool in supported:
             path = f"/tools/{tool['slug']}"
-            emitted_slugs.add(str(tool.get("slug", "")).strip().lower())
+            slug = str(tool.get("slug", "")).strip().lower()
+            emitted_slugs.add(slug)
+            if slug in shadowed_aliases:
+                # Shadowed alias of the canonical converter for this pair.
+                continue
             entries.append(
                 {
                     "loc": base_url.rstrip("/") + path,

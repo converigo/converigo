@@ -333,11 +333,19 @@ async def blog_index(request: Request):
 @router.get("/blog/{slug}", response_class=HTMLResponse)
 async def blog_article(request: Request, slug: str):
     article_map = {
+        # Cross-cluster duplicate (GSC INDEX RECOVERY, root cause #2): this
+        # legacy hardcoded blog article collides with the richer Learning Center
+        # article at /learning/how-to-convert-mp4-to-mp3 (same slug, same target
+        # query, both previously 200 + self-canonical + in sitemap). The Learning
+        # article is the cluster primary (full English content, FAQ, CTA, dates,
+        # og_image, schema metadata), so this page consolidates to it via canonical
+        # instead of a redirect: the URL keeps resolving so existing internal links
+        # do not break, while Google merges ranking signals onto the primary.
         "how-to-convert-mp4-to-mp3": {
             "title": "How to Convert MP4 to MP3 Online for Free (No Apps Needed)",
             "description": "A complete guide to converting MP4 to MP3 online for free with fast, safe, and practical results.",
-            "canonical": f"{PRODUCTION_BASE_URL}/blog/how-to-convert-mp4-to-mp3",
-            "og_url": f"{PRODUCTION_BASE_URL}/blog/how-to-convert-mp4-to-mp3",
+            "canonical": f"{PRODUCTION_BASE_URL}/learning/how-to-convert-mp4-to-mp3",
+            "og_url": f"{PRODUCTION_BASE_URL}/learning/how-to-convert-mp4-to-mp3",
             "template": "pages/blog_mp4_to_mp3.html",
             "breadcrumb": [
                 {"name": "Home", "url": "/"},

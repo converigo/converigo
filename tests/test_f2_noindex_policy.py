@@ -50,7 +50,12 @@ CONVERTERS_DIR = Path("app/data/converters")
 # Out of scope: VAR Sub-batch C converters (batch-jpg-to-webp, image-compress,
 # image-resize) remain uncommitted in this batch; while their converter JSONs
 # sit in a local working tree the live sitemap measures 213 instead.
-EXPECTED_SITEMAP_COUNT = 212
+# Fix A + G14 changeset (uncommitted, branch fix/FixA-G14-isolated) intentionally
+# removes two locs from the ledger total above: the consolidated duplicate
+# /blog/how-to-convert-mp4-to-mp3 (canonical redirected to
+# /learning/how-to-convert-mp4-to-mp3, Fix A) and the suppressed alias
+# /tools/pptx-to-jpg (G14). Expected live sitemap count on this branch: 210.
+EXPECTED_SITEMAP_COUNT = 210
 
 
 @pytest.fixture(scope="module")
